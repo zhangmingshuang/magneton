@@ -113,6 +113,12 @@ public class Response<T> {
     return ResponseCodesSupplier.getInstance().exception().code().equals(this.code);
   }
 
+  /**
+   * get reponse's message.
+   *
+   * @return message. if response's data is not-null, and instalce of {@link EgoResponseMessage},
+   *     the ego message will be the reply message. otherwise, return the set message info.
+   */
   public String getMessage() {
     if (Objects.nonNull(this.data) && this.data instanceof EgoResponseMessage) {
       return ((EgoResponseMessage) this.data).message();
