@@ -36,36 +36,9 @@
     <maven.compiler.target>8</maven.compiler.target>
     <sonar.host.url>https://builds.apache.org/analysis</sonar.host.url>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <!-- jar versions -->
-    <guava.version>30.0-jre</guava.version>
-    <lombok.version>1.18.12</lombok.version>
-    <spring.version>5.2.9.RELEASE</spring.version>
-    <slf4j-api.version>1.7.30</slf4j-api.version>
-    <spring-boot.version>2.3.4.RELEASE</spring-boot.version>
-    <junit.version>5.7.0</junit.version>
   </properties>
 
   <version>1.0.0</version>
-
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>org.junit</groupId>
-        <artifactId>junit-bom</artifactId>
-        <version>${junit.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
-
-  <dependencies>
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter</artifactId>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
 
   <build>
     <plugins>
