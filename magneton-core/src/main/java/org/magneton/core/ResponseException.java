@@ -1,4 +1,4 @@
-package org.magneton;
+package org.magneton.core;
 
 /**
  * a {@code Response} process in a {@code Exception}.

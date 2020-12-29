@@ -1,11 +1,11 @@
-package org.magneton.spring.exception;
+package org.magneton.exception;
 
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
-import org.magneton.Response;
-import org.magneton.ResponseException;
-import org.magneton.spring.properties.MagnetonProperties;
-import org.magneton.util.MoreCollections;
+import org.magneton.core.Response;
+import org.magneton.core.ResponseException;
+import org.magneton.core.util.MoreCollections;
+import org.magneton.properties.MagnetonProperties;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;

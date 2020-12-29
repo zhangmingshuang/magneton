@@ -1,4 +1,4 @@
-package org.magneton.spring.exception;
+package org.magneton.exception;
 
 import com.google.common.base.Preconditions;
 import com.google.common.base.Verify;

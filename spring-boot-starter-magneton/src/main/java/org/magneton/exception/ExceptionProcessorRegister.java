@@ -1,4 +1,4 @@
-package org.magneton.spring.exception;
+package org.magneton.exception;
 
 import java.util.function.Function;
 

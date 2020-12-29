@@ -1,4 +1,4 @@
-package org.magneton.util;
+package org.magneton.core.util;
 
 import com.google.common.annotations.Beta;
 import com.google.common.base.Strings;
