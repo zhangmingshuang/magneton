@@ -1,12 +1,12 @@
-package org.magneton.spring;
+package org.magneton;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.magneton.Response;
-import org.magneton.spring.exception.DefaultExceptionProcessorContext;
-import org.magneton.spring.exception.ExceptionProcessor;
-import org.magneton.spring.exception.ExceptionProcessorContext;
-import org.magneton.spring.exception.ExceptionProcessorRegister;
+import org.magneton.core.Response;
+import org.magneton.exception.DefaultExceptionProcessorContext;
+import org.magneton.exception.ExceptionProcessorContext;
+import org.magneton.exception.ExceptionProcessor;
+import org.magneton.exception.ExceptionProcessorRegister;
 
 /**
  * .
