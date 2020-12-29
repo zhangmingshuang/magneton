@@ -12,18 +12,38 @@ import lombok.ToString;
 @SuppressWarnings("MissingJavadocType")
 public interface ResponseCodesSupplier {
 
+  /**
+   * response code supplier instance.
+   *
+   * @return instance
+   */
   static ResponseCodesSupplier getInstance() {
     return Instance.responseCodesSupplier;
   }
 
+  /**
+   * get ok code.
+   *
+   * @return ok code
+   */
   default ResponseMessage ok() {
     return Codes.OK;
   }
 
+  /**
+   * get bad code.
+   *
+   * @return bad code
+   */
   default ResponseMessage bad() {
     return Codes.BAD;
   }
 
+  /**
+   * get exception code.
+   *
+   * @return exception code
+   */
   default ResponseMessage exception() {
     return Codes.EXCEPTION;
   }
