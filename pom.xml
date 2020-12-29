@@ -6,7 +6,7 @@
   <packaging>pom</packaging>
   <modules>
     <module>magneton-core</module>
-    <module>spring-magneton</module>
+    <module>spring-boot-starter-magneton</module>
     <module>magneton-parent</module>
   </modules>
 

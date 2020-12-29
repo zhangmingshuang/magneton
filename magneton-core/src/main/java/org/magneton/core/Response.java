@@ -1,4 +1,4 @@
-package org.magneton;
+package org.magneton.core;
 
 import com.google.common.collect.Maps;
 import java.util.Map;
@@ -6,7 +6,6 @@ import java.util.Objects;
 import javax.annotation.Nullable;
 import lombok.Getter;
 import lombok.ToString;
-import org.magneton.ResponseBody.Codes;
 
 /**
  * .
@@ -34,7 +33,7 @@ public class Response<T> {
   }
 
   public static <T> Response<T> ok(@Nullable T t) {
-    return response(Codes.SUCCESS, t);
+    return response(ResponseCodesSupplier.getInstance().ok(), t);
   }
 
   public static Response bad() {
@@ -42,33 +41,30 @@ public class Response<T> {
   }
 
   public static <T> Response<T> bad(T t) {
-    return response(Codes.FAIL, t);
+    return response(ResponseCodesSupplier.getInstance().bad(), t);
   }
 
   public static Response exception() {
-    return response(Codes.EXCEPTION, null);
+    return response(ResponseCodesSupplier.getInstance().exception(), null);
   }
 
-  public static Response response(ResponseBody responseBody) {
-    return response(responseBody, null);
+  public static Response response(ResponseMessage responseMessage) {
+    return response(responseMessage, null);
   }
 
   /**
    * response with body.
    *
-   * @param responseBody {@code ResponseBody}
+   * @param responseMessage {@code ResponseBody}
    * @param data response data.
    * @param <T> T
    * @return {@code Response} of response.
    */
-  public static <T> Response<T> response(ResponseBody responseBody, T data) {
+  public static <T> Response<T> response(ResponseMessage responseMessage, T data) {
     Response<T> response = new Response<>();
-    String message = responseBody.message();
-    if (data instanceof EgoResponseMessage) {
-      message = ((EgoResponseMessage) data).message();
-    }
+    String message = responseMessage.message();
     return response
-        .code(responseBody.code())
+        .code(responseMessage.code())
         .message(message)
         .data(data)
         .timestamp(System.currentTimeMillis());
@@ -110,10 +106,17 @@ public class Response<T> {
   }
 
   public boolean isOk() {
-    return Codes.SUCCESS.code().equals(this.code);
+    return ResponseCodesSupplier.getInstance().ok().code().equals(this.code);
   }
 
   public boolean isException() {
-    return Codes.EXCEPTION.code().equals(this.code);
+    return ResponseCodesSupplier.getInstance().exception().code().equals(this.code);
+  }
+
+  public String getMessage() {
+    if (Objects.nonNull(this.data) && this.data instanceof EgoResponseMessage) {
+      return ((EgoResponseMessage) this.data).message();
+    }
+    return this.message;
   }
 }

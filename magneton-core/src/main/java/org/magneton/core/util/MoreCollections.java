@@ -1,4 +1,4 @@
-package org.magneton.util;
+package org.magneton.core.util;
 
 import java.util.Collection;
 import javax.annotation.Nullable;

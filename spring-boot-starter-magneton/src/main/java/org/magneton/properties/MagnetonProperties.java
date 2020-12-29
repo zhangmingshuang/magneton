@@ -1,4 +1,4 @@
-package org.magneton.spring.properties;
+package org.magneton.properties;
 
 /**
  * .

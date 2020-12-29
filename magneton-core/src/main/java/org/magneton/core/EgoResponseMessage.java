@@ -1,4 +1,4 @@
-package org.magneton;
+package org.magneton.core;
 
 /**
  * tag a response object supports providing its own message.
