@@ -15,6 +15,7 @@ public class ResponseException extends RuntimeException {
 
   private static final long serialVersionUID = 840737242672355742L;
 
+  @SuppressWarnings("java:S1948")
   private final Response response;
 
   public ResponseException(Response response) {
