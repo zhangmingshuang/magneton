@@ -14,18 +14,20 @@ import org.magneton.core.util.Bytes;
 /**
  * AES utils.
  *
+ * <p>Note:AES is not a highly security algorithm.
+ *
  * @author zhangmsh
  * @since 2019-04-27
  */
-@SuppressWarnings({"ALL", "java:S112"})
+@SuppressWarnings({"ALL", "java:S112", "java:S5542"})
 public class Aes {
 
   public static final int LEGAL_AES_KEYSIZES = 16;
 
   /** algorithm/model/padding. */
-  private static final String CIPHERMODE = "AES/GCM/NoPadding";
+  private static final String CIPHERMODE = "AES/CBC/PKCS5Padding";
   /** algorithm/model/padding. */
-  private static final String CIPHERMODE_NOPADDING = "AES/GCM/NOPadding";
+  private static final String CIPHERMODE_NOPADDING = "AES/CBC/NOPadding";
 
   private static final char PADDING = 'x';
 
@@ -226,7 +228,7 @@ public class Aes {
     KeyGenerator kgen = KeyGenerator.getInstance("AES");
     kgen.init(128, new SecureRandom(password.getBytes(charset)));
     byte[] bytes = kgen.generateKey().getEncoded();
-    Cipher cipher = Cipher.getInstance(CIPHERMODE_NOPADDING);
+    Cipher cipher = Cipher.getInstance("AES");
     cipher.init(Cipher.ENCRYPT_MODE, new SecretKeySpec(bytes, "AES"));
     byte[] result = cipher.doFinal(content.getBytes(charset));
     return Bytes.bytes2hex(result);
@@ -258,7 +260,7 @@ public class Aes {
     kgen.init(128, new SecureRandom(password.getBytes()));
     SecretKey secretKey = kgen.generateKey();
     SecretKeySpec secretKeySpec = new SecretKeySpec(secretKey.getEncoded(), "AES");
-    Cipher cipher = Cipher.getInstance(CIPHERMODE_NOPADDING);
+    Cipher cipher = Cipher.getInstance("AES");
     cipher.init(Cipher.DECRYPT_MODE, secretKeySpec);
     byte[] result = cipher.doFinal(bytes);
     return new String(result, charset);
