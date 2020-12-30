@@ -50,7 +50,7 @@ class Sha1SignatureTest {
   @Test
   void setSignatureBodyBuilder() throws SignatureBodyException {
     Sha1Signature sha1Signature = new Sha1Signature("test");
-    sha1Signature.setSignatureBodyBuilder((body, salt) -> "body");
+    sha1Signature.setSignatureContentBuilder((body, salt) -> "body");
     HashMap<String, String> body = Maps.newHashMap();
     body.put("a", "av");
     String bodyContext = sha1Signature.parseSignContent(body);
@@ -63,9 +63,9 @@ class Sha1SignatureTest {
     body.put("a", "av");
 
     Sha1Signature sha1Signature = new Sha1Signature("test");
-    SignatureBodyBuilder signatureBodyBuilder = sha1Signature.getSignatureBodyBuilder();
+    SignatureContentBuilder signatureContentBuilder = sha1Signature.getSignatureContentBuilder();
     String signContent = sha1Signature.parseSignContent(body);
-    String signContent1 = signatureBodyBuilder.build(body, "test");
+    String signContent1 = signatureContentBuilder.build(body, "test");
     Assertions.assertEquals(signContent, signContent1, "sign content generate error");
   }
 
