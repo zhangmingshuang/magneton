@@ -18,7 +18,7 @@ import lombok.Setter;
 public abstract class AbstractSignature implements Signature {
 
   private final String salt;
-  private SignatureBodyBuilder signatureBodyBuilder = new DefaultSignatureBodyBuilder();
+  private SignatureContentBuilder signatureContentBuilder = new DefaultSignatureContentBuilder();
   @Setter @Nullable private SignatureBodyVerifyer signatureBodyVerifyer;
 
   protected AbstractSignature(String salt) {
@@ -58,17 +58,17 @@ public abstract class AbstractSignature implements Signature {
     if (Objects.nonNull(this.signatureBodyVerifyer)) {
       this.signatureBodyVerifyer.validate(body);
     }
-    return this.signatureBodyBuilder.build(body, this.getSalt());
+    return this.signatureContentBuilder.build(body, this.getSalt());
   }
 
   /**
    * set signurate body builder.
    *
-   * @param signatureBodyBuilder the signature body builder.
+   * @param signatureContentBuilder the signature body builder.
    */
-  public void setSignatureBodyBuilder(SignatureBodyBuilder signatureBodyBuilder) {
-    Preconditions.checkNotNull(signatureBodyBuilder, "signatureBodyBuilder must be not null");
+  public void setSignatureContentBuilder(SignatureContentBuilder signatureContentBuilder) {
+    Preconditions.checkNotNull(signatureContentBuilder, "signatureBodyBuilder must be not null");
 
-    this.signatureBodyBuilder = signatureBodyBuilder;
+    this.signatureContentBuilder = signatureContentBuilder;
   }
 }
