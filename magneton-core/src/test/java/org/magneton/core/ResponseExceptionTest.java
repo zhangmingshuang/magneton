@@ -17,7 +17,13 @@ class ResponseExceptionTest {
     ResponseException responseException =
         ResponseException.valueOf(Response.exception().message("error"));
     Assertions.assertEquals(
-        "error", responseException.getMessage(), "exception message does not match");
+        "error", responseException.getMessage(), "exception message does not equals");
+    Response exception = Response.exception();
+    Assertions.assertThrows(
+        ResponseException.class,
+        () -> {
+          throw new ResponseException(exception);
+        });
   }
 
   @Test
