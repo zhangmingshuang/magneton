@@ -22,14 +22,16 @@ class ResponseCodesSupplierTest {
     this.changeresponseCodes();
     ResponseCodesSupplier customizedresponseCodesSupplier = ResponseCodesSupplier.getInstance();
     Assertions.assertNotEquals(
-        responseCodesSupplier, customizedresponseCodesSupplier, "response codes responseCodes change error");
+        responseCodesSupplier,
+        customizedresponseCodesSupplier,
+        "response codes responseCodes change error");
   }
 
   @Test
   void ok() {
     ResponseCodesSupplier responseCodesSupplier = ResponseCodesSupplier.getInstance();
     ResponseMessage ok = responseCodesSupplier.ok();
-    Assertions.assertEquals(ok, Codes.OK, "responseCodes ok error");
+    Assertions.assertEquals(Codes.OK, ok, "responseCodes ok error");
   }
 
   @Test
@@ -45,7 +47,7 @@ class ResponseCodesSupplierTest {
   void exception() {
     ResponseCodesSupplier responseCodesSupplier = ResponseCodesSupplier.getInstance();
     ResponseMessage exception = responseCodesSupplier.exception();
-    Assertions.assertEquals(exception, Codes.EXCEPTION, "responseCodes exception error");
+    Assertions.assertEquals(Codes.EXCEPTION, exception, "responseCodes exception error");
   }
 
   private void changeresponseCodes() {
