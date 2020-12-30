@@ -21,6 +21,7 @@ public class Sha1Signature extends AbstractSignature {
     super(salt);
   }
 
+  @SuppressWarnings("java:S1874")
   @Override
   protected String generateSignature(String signatureContent) {
     //noinspection deprecation

@@ -14,12 +14,31 @@ import org.magneton.core.util.MoreArrays;
  */
 public interface Signature {
 
+  /**
+   * get signature builder.
+   *
+   * @return the builder.
+   */
   static Builder builder() {
     return new Builder();
   }
 
+  /**
+   * do body signature.
+   *
+   * @param body the given body to signature.
+   * @return the signature.
+   * @throws SignatureBodyException if body does not in line with expectations.
+   */
   String sign(Map<String, String> body) throws SignatureBodyException;
 
+  /**
+   * parse the signature body do signature content.
+   *
+   * @param body the given body to signature.
+   * @return the signature content.
+   * @throws SignatureBodyException if body does not in line with expectations.
+   */
   String parseSignContent(Map<String, String> body) throws SignatureBodyException;
 
   class Builder {
