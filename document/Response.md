@@ -1,17 +1,17 @@
 # Global United Response
 
-The frameworl customized a global united response class : `Response`.
+The framework customized a global united response class : `Response`.
 
 ## Use
 
 ```java
   return Response.ok();
-    //or return with data
-    return Response.ok(data);
-    //return fail
-    return Response.bad();
-    //return fail with message
-    return Response.bad().message("It's bad");
+  //or return with data
+  return Response.ok(data);
+  //return fail
+  return Response.bad();
+  //return fail with message
+  return Response.bad().message("It's bad");
 ```
 
 ## Response Code
@@ -32,10 +32,10 @@ default response's code supplier.
 ```java
 ResponseCodesSupplier.Instance.setResponseCodesSupplier(
     new ResponseCodesSupplier(){
-@Override
-public ResponseMessage bad(){
-    return ResponseMessage.valueOf(CODE,BAD);
-    }
+      @Override
+      public ResponseMessage bad(){
+        return ResponseMessage.valueOf("404","Operation Error");
+      }
     });
 ```
 

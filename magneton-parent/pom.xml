@@ -19,6 +19,7 @@
     <lombok.version>1.18.12</lombok.version>
     <spring.version>5.2.9.RELEASE</spring.version>
     <slf4j-api.version>1.7.30</slf4j-api.version>
+    <junit.version>5.7.0</junit.version>
   </properties>
 
   <dependencyManagement>
@@ -38,11 +39,6 @@
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter</artifactId>
       <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.magneton</groupId>
-      <artifactId>magneton-core</artifactId>
-      <version>${project.version}</version>
     </dependency>
   </dependencies>
 </project>
