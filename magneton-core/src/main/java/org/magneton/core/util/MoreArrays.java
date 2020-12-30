@@ -1,6 +1,8 @@
 package org.magneton.core.util;
 
 import java.lang.reflect.Array;
+import java.util.Objects;
+import javax.annotation.Nullable;
 
 /**
  * .
@@ -20,7 +22,7 @@ public class MoreArrays {
    * @return {@code true} if the array is empty or {@code null}
    * @since 2.1
    */
-  public static boolean isNullOrEmpty(boolean[] array) {
+  public static boolean isNullOrEmpty(@Nullable boolean[] array) {
     return getLength(array) == 0;
   }
 
@@ -31,7 +33,7 @@ public class MoreArrays {
    * @return {@code true} if the array is empty or {@code null}
    * @since 2.1
    */
-  public static boolean isNullOrEmpty(byte[] array) {
+  public static boolean isNullOrEmpty(@Nullable byte[] array) {
     return getLength(array) == 0;
   }
 
@@ -42,7 +44,7 @@ public class MoreArrays {
    * @return {@code true} if the array is empty or {@code null}
    * @since 2.1
    */
-  public static boolean isNullOrEmpty(char[] array) {
+  public static boolean isNullOrEmpty(@Nullable char[] array) {
     return getLength(array) == 0;
   }
 
@@ -53,7 +55,7 @@ public class MoreArrays {
    * @return {@code true} if the array is empty or {@code null}
    * @since 2.1
    */
-  public static boolean isNullOrEmpty(double[] array) {
+  public static boolean isNullOrEmpty(@Nullable double[] array) {
     return getLength(array) == 0;
   }
 
@@ -64,7 +66,7 @@ public class MoreArrays {
    * @return {@code true} if the array is empty or {@code null}
    * @since 2.1
    */
-  public static boolean isNullOrEmpty(float[] array) {
+  public static boolean isNullOrEmpty(@Nullable float[] array) {
     return getLength(array) == 0;
   }
 
@@ -75,7 +77,7 @@ public class MoreArrays {
    * @return {@code true} if the array is empty or {@code null}
    * @since 2.1
    */
-  public static boolean isNullOrEmpty(int[] array) {
+  public static boolean isNullOrEmpty(@Nullable int[] array) {
     return getLength(array) == 0;
   }
 
@@ -88,7 +90,7 @@ public class MoreArrays {
    * @param array the array to test
    * @return {@code true} if the array is empty or {@code null}
    */
-  public static boolean isNullOrEmpty(Object[] array) {
+  public static boolean isNullOrEmpty(@Nullable Object[] array) {
     return getLength(array) == 0;
   }
 
@@ -99,11 +101,11 @@ public class MoreArrays {
    * @param join join char sequence.
    * @return the processed string.
    */
-  public static String join(int[] array, CharSequence join) {
+  public static String join(@Nullable int[] array, CharSequence join) {
     if (isNullOrEmpty(array)) {
       return "";
     }
-    StringBuilder builder = new StringBuilder(array.length >> 1);
+    StringBuilder builder = new StringBuilder(Objects.requireNonNull(array).length >> 1);
     for (int i : array) {
       builder.append(i).append(join);
     }
