@@ -11,7 +11,7 @@ import java.util.Map;
  * @version 1.0.0
  * @since 2020/12/29
  */
-public class DefaultSignatureBodyBuilder implements SignatureBodyBuilder {
+public class DefaultSignatureContentBuilder implements SignatureContentBuilder {
 
   private static final int DEFAULT_CAPACITY = 64;
   private static final char APPEND = '&';

@@ -9,7 +9,7 @@ import java.util.Map;
  * @version 1.0.0
  * @since 2020/12/29
  */
-public interface SignatureBodyBuilder {
+public interface SignatureContentBuilder {
 
   /**
    * generate signuration body content.

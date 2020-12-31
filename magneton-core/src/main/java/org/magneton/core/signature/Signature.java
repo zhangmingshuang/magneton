@@ -45,7 +45,7 @@ public interface Signature {
     private AbstractSignature signature;
     private String salt;
     private String[] needBodyKeys;
-    private SignatureBodyBuilder signatureBodyBuilder;
+    private SignatureContentBuilder signatureContentBuilder;
 
     public Builder signature(AbstractSignature signature) {
       Preconditions.checkNotNull(signature, "signature must be not null");
@@ -66,10 +66,10 @@ public interface Signature {
       return this;
     }
 
-    public Builder signatureBodyBuilder(SignatureBodyBuilder signatureBodyBuilder) {
-      Preconditions.checkNotNull(signatureBodyBuilder, "signatureBodyBuilder must be not null");
+    public Builder signatureBodyBuilder(SignatureContentBuilder signatureContentBuilder) {
+      Preconditions.checkNotNull(signatureContentBuilder, "signatureBodyBuilder must be not null");
 
-      this.signatureBodyBuilder = signatureBodyBuilder;
+      this.signatureContentBuilder = signatureContentBuilder;
       return this;
     }
 
@@ -87,8 +87,8 @@ public interface Signature {
         abstractSignature.setSignatureBodyVerifyer(
             new KeysSignatureBodyVerifyer(this.needBodyKeys));
       }
-      if (Objects.nonNull(this.signatureBodyBuilder)) {
-        abstractSignature.setSignatureBodyBuilder(this.signatureBodyBuilder);
+      if (Objects.nonNull(this.signatureContentBuilder)) {
+        abstractSignature.setSignatureContentBuilder(this.signatureContentBuilder);
       }
       return abstractSignature;
     }

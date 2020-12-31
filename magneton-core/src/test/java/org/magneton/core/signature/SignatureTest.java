@@ -23,7 +23,7 @@ class SignatureTest {
             .signatureBodyBuilder((body, salt) -> "body")
             .build();
     Sha1Signature signature1 = new Sha1Signature("test");
-    signature1.setSignatureBodyBuilder((body, salt) -> "body");
+    signature1.setSignatureContentBuilder((body, salt) -> "body");
     signature1.setSignatureBodyVerifyer(new KeysSignatureBodyVerifyer(new String[] {"a", "b"}));
 
     HashMap<String, String> body = Maps.newHashMap();
