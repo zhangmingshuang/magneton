@@ -24,6 +24,7 @@ public interface ExceptionProcessorContext extends ExceptionProcessorRegister {
    * register a expception processor to context.
    *
    * @param exceptionProcessor exception processor.
+   * @throws DuplicateProcessorException if duplication exception type is set.
    */
   void registerExceptionProcessor(ExceptionProcessor exceptionProcessor);
 }
