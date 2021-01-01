@@ -1,7 +1,6 @@
 package org.magneton.exception;
 
 import com.google.common.base.Preconditions;
-import com.google.common.base.Verify;
 import com.google.common.collect.Maps;
 import java.util.Map;
 import java.util.Objects;
@@ -42,6 +41,9 @@ public class DefaultExceptionProcessorContext implements ExceptionProcessorConte
     Preconditions.checkNotNull(handler, "handler must be not null");
 
     Function exist = this.handlers.putIfAbsent(exception, handler);
-    Verify.verify(exist == null, "%s duplicate in %s and %s", exception, handler, exist);
+    if (exist != null) {
+      throw new DuplicateProcessorException(
+          exception + " duplicate in " + handler + " and " + exist);
+    }
   }
 }
