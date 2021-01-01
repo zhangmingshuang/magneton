@@ -1,12 +1,8 @@
-package org.magneton;
+package org.magneton.exception;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.magneton.core.Response;
-import org.magneton.exception.DefaultExceptionProcessorContext;
-import org.magneton.exception.ExceptionProcessorContext;
-import org.magneton.exception.ExceptionProcessor;
-import org.magneton.exception.ExceptionProcessorRegister;
 
 /**
  * .
@@ -18,24 +14,25 @@ import org.magneton.exception.ExceptionProcessorRegister;
 @SuppressWarnings("CyclicClassDependency")
 class ExceptionProcessorTest {
 
-  private static final String NULL_ERROR = "这是空指针";
-
   @Test
   void test() throws Exception {
     ExceptionProcessorContext exceptionProcessorContext = new DefaultExceptionProcessorContext();
-    exceptionProcessorContext.registerExceptionProcessor(new ExceptionProcessorImpl());
+    exceptionProcessorContext.registerExceptionProcessor(new NullPointerExceptionProcessor());
 
     Object test = exceptionProcessorContext.handle(new NullPointerException("test"));
     System.out.println(test);
     Assertions.assertSame(test.getClass(), Response.class, "class not match");
     Response response = (Response) test;
-    Assertions.assertEquals(NULL_ERROR, response.getMessage(), "response message not match");
+    Assertions.assertEquals(
+        NullPointerExceptionProcessor.NULL_ERROR,
+        response.getMessage(),
+        "response message not match");
   }
 
   @Test
   void testException() {
     ExceptionProcessorContext exceptionProcessorContext = new DefaultExceptionProcessorContext();
-    exceptionProcessorContext.registerExceptionProcessor(new ExceptionProcessorImpl());
+    exceptionProcessorContext.registerExceptionProcessor(new NullPointerExceptionProcessor());
     try {
       Object argsError =
           exceptionProcessorContext.handle(new IllegalArgumentException("args error"));
@@ -43,15 +40,6 @@ class ExceptionProcessorTest {
     } catch (Exception e) {
       Assertions.assertSame(e.getClass(), IllegalArgumentException.class, "class not match");
       Assertions.assertEquals("args error", e.getMessage(), "error message not match");
-    }
-  }
-
-  class ExceptionProcessorImpl implements ExceptionProcessor {
-
-    @Override
-    public void registerExceptionProcessor(ExceptionProcessorRegister register) {
-      register.addHandler(
-          NullPointerException.class, e -> Response.exception().message(NULL_ERROR));
     }
   }
 }
