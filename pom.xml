@@ -8,6 +8,7 @@
     <module>magneton-core</module>
     <module>spring-boot-starter-magneton</module>
     <module>magneton-parent</module>
+    <module>magneton-lock</module>
   </modules>
 
   <groupId>org.magneton</groupId>
