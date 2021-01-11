@@ -19,6 +19,7 @@
     <lombok.version>1.18.12</lombok.version>
     <spring.version>5.2.9.RELEASE</spring.version>
     <slf4j-api.version>1.7.30</slf4j-api.version>
+    <redisson.version>3.8.2</redisson.version>
     <junit.version>5.7.0</junit.version>
     <mockito-junit-jupiter.version>3.6.28</mockito-junit-jupiter.version>
   </properties>
@@ -36,6 +37,11 @@
   </dependencyManagement>
 
   <dependencies>
+    <dependency>
+      <artifactId>guava</artifactId>
+      <groupId>com.google.guava</groupId>
+      <version>${guava.version}</version>
+    </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter</artifactId>
