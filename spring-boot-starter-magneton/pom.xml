@@ -23,6 +23,7 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
+
   <properties>
     <spring-boot.version>2.3.4.RELEASE</spring-boot.version>
   </properties>
@@ -44,6 +45,19 @@
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
+    </dependency>
+    <!-- lock -->
+    <dependency>
+      <groupId>org.magneton</groupId>
+      <artifactId>magneton-lock</artifactId>
+      <version>${project.version}</version>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>org.redisson</groupId>
+      <artifactId>redisson</artifactId>
+      <version>${redisson.version}</version>
+      <optional>true</optional>
     </dependency>
   </dependencies>
 </project>
