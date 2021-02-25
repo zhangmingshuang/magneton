@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  org.magneton.lock.MagnetonLockAutoConfiguration,\
+  org.magneton.MagnetonAutoConfiguration

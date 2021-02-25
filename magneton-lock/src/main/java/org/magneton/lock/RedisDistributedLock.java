@@ -26,7 +26,7 @@ import org.redisson.api.RedissonClient;
  * @version 1.0.0
  * @since 2021/1/7
  */
-public class RedisDistributedLock implements DistributedLock {
+public class RedisDistributedLock extends AbstractDistributedLock {
 
   private final RedissonClient redissonClient;
   private final String key;
