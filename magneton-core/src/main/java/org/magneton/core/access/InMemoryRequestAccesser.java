@@ -12,10 +12,17 @@ import javax.annotation.Nullable;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * .
+ * In meory accesser.
+ *
+ * <pre>{@code
+ * RequestAccesser requestAccesser =
+ *         (RequestAccesser)
+ *             AccesserBuilder.of(new InMemoryRequestAccesser<>()).build();
+ * }</pre>
  *
  * @author zhangmsh 2021/2/25
  * @since 4.0.0
+ * @see RequestAccesser
  */
 @Slf4j
 public class InMemoryRequestAccesser<T> extends AbstractAccesser implements RequestAccesser<T> {
@@ -56,7 +63,7 @@ public class InMemoryRequestAccesser<T> extends AbstractAccesser implements Requ
 
   @Override
   public int recordError(String key) {
-    AtomicInteger errorCount = null;
+    AtomicInteger errorCount;
     try {
       errorCount = this.errorRcords.get(Preconditions.checkNotNull(key), AtomicInteger::new);
     } catch (ExecutionException e) {
@@ -82,13 +89,13 @@ public class InMemoryRequestAccesser<T> extends AbstractAccesser implements Requ
     Boolean success = Preconditions.checkNotNull(supplier).get();
     Verify.verifyNotNull(success, "access return must be not null");
     if (success) {
-      return Accessible.access(super.accessConfig.getLockErrorCount());
+      return Accessible.access(true, super.accessConfig.getLockErrorCount());
     }
     int errorRemainCount = this.recordError(key);
     if (errorRemainCount < 1) {
       long ttl = this.ttl(key);
       return Accessible.lock(ttl, key + " is locked");
     }
-    return Accessible.access(errorRemainCount);
+    return Accessible.access(false, errorRemainCount);
   }
 }
