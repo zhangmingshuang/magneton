@@ -62,6 +62,7 @@ class InMemoryRequestAccesserTest {
     Assertions.assertTrue(lockErrorCount >= 2, "lockErrorCount must be more then 2.");
     String key = UUID.randomUUID().toString();
     Accessible access = requestAccesser.access(key, () -> "1".equals(key));
+    Assertions.assertFalse(access.isAccess(), "must be false");
     Assertions.assertFalse(access.isLocked(), "must be unlocked.");
     for (int i = 1; i < lockErrorCount; i++) {
       access = requestAccesser.access(key, () -> "1".equals(key));

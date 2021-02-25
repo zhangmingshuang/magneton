@@ -12,11 +12,16 @@ import lombok.ToString;
 @Getter
 @ToString
 public class Accessible {
+
+  /** {@code false} if the suppliter response is {@code false} or the key is locked. */
+  private boolean access;
+  /** differen from {@code access}, make it clear that it is locked. */
   private boolean locked;
   /** errors count remaining. */
   private int errorRemainCount;
-
+  /** the lock time to live if locekd. */
   private long ttl;
+  /** the refuse message. */
   private String refuseMessage;
 
   private Accessible() {}
@@ -27,8 +32,9 @@ public class Accessible {
    * @param errorRemainCount remaining count of errors.
    * @return accessible.
    */
-  public static Accessible access(int errorRemainCount) {
+  public static Accessible access(boolean access, int errorRemainCount) {
     Accessible accessible = new Accessible();
+    accessible.access = access;
     accessible.errorRemainCount = errorRemainCount;
     return accessible;
   }

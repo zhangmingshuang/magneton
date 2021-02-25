@@ -15,5 +15,6 @@ public abstract class AbstractAccesser implements Accesser {
     this.initialiazation();
   }
 
+  /** initialization. */
   protected abstract void initialiazation();
 }
