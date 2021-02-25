@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 class InMemoryRequestAccesserTest {
 
   private static final int lockErrorCount = 4;
-  private static final int lockTime = 200;
+  private static final int lockTime = 2000;
   private static final int lockSize = 1;
   private static final int errorRecordTime = 200;
   private static final int errorRecordSize = 1;
@@ -44,11 +44,12 @@ class InMemoryRequestAccesserTest {
 
   @Test
   void ttl() {
+    Assertions.assertTrue(lockTime > 1000, "lockTime must be more then 1000");
     String key = UUID.randomUUID().toString();
     this.recordError(key);
     long ttl = requestAccesser.ttl(key);
-    System.out.println(ttl);
-    Assertions.assertTrue(ttl <= lockTime, "lock time error.");
+    Assertions.assertTrue(
+        ttl <= lockTime, "lock time error. ttl :" + ttl + ", lockTime: " + lockTime);
   }
 
   @Test
