@@ -9,11 +9,18 @@ import org.redisson.api.RedissonClient;
 /**
  * {@code Redisson} distributed lock that relies on {@code Redis}.
  *
+ * <p>1. create the redisson client
+ *
  * <pre>{@code
  * Config config = new Config();
  * config.useSingleServer().setAddress("redis://xxxx:xxxx").setPassword("xxxxxx");
  * RedissonClient redissonClient = Redisson.create(config);
- * Lock lock = new RedisLock(client,"lock_key");
+ * }</pre>
+ *
+ * 2. using redis distribute lock
+ *
+ * <pre>{@code
+ * DistributedLock lock = new RedisDistributedLock(client,"lock_key");
  * lock.lock();
  * try {
  *   ...
