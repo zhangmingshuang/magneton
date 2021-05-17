@@ -54,8 +54,11 @@ public class ReturnData implements EgoResponseMessage{
   }
 }
 ```
-Then, the response message:
+
+Now, the response message:
+
 ```java
 Response.ok(new ReturnData());
 ```
+
 is "Autonomous".
