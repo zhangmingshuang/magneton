@@ -2,15 +2,24 @@
 
 `Redisson` distributed lock that relies on `Redis`.
 
+## use
+
+### create the `redisson` client
+
+```java 
+  Config config=new Config();
+  config.useSingleServer().setAddress("redis://xxxx:xxxx").setPassword("xxxxxx");
+  RedissonClient redissonClient=Redisson.create(config);
+```
+
+### using redis distructed lock
+
 ```java
-    Config config=new Config();
-    config.useSingleServer().setAddress("redis://xxxx:xxxx").setPassword("xxxxxx");
-    RedissonClient redissonClient=Redisson.create(config);
-    Lock lock=new RedisLock(client,"lock_key");
+  DistributedLock lock = new RedisDistributedLock(client,"lock_key");
     lock.lock();
-    try{
-        ...
-    }finally{
-        lock.unLock();
-    }
+  try {
+  ...
+  } finally {
+    lock.unLock();
+  }
 ```
