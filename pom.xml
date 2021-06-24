@@ -9,6 +9,7 @@
     <module>spring-boot-starter-magneton</module>
     <module>magneton-parent</module>
     <module>magneton-lock</module>
+    <module>magneton-cache</module>
   </modules>
 
   <groupId>org.magneton</groupId>
