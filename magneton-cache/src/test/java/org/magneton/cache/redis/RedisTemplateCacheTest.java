@@ -19,12 +19,12 @@ import org.springframework.data.redis.core.RedisTemplate;
 public class RedisTemplateCacheTest {
 
   @Autowired private RedisTemplate redisTemplate;
-
+  @Autowired private JsonRedisSerializer jsonRedisSerializer;
   private Cache cache;
 
   @BeforeEach
   void prepare() {
-    this.cache = new RedisTemplateCache(this.redisTemplate);
+    this.cache = new RedisTemplateCache(this.redisTemplate, this.jsonRedisSerializer);
   }
 
   @Test

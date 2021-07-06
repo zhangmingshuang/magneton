@@ -1,5 +1,6 @@
 package org.magneton.cache;
 
+import org.magneton.cache.ops.HashOps;
 import org.magneton.cache.ops.ListOps;
 import org.magneton.cache.ops.ValueOps;
 
@@ -14,6 +15,8 @@ public interface Cache {
   ValueOps opsForValue();
 
   ListOps opsForList();
+
+  HashOps opsForHash();
 
   /**
    * 获取Key的过期时间(秒）

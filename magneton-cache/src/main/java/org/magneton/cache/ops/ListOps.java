@@ -2,6 +2,7 @@ package org.magneton.cache.ops;
 
 import java.util.Arrays;
 import java.util.List;
+import javax.annotation.Nullable;
 
 /**
  * .
@@ -12,7 +13,16 @@ import java.util.List;
 public interface ListOps {
 
   /**
-   * 添加到列表
+   * 添加到列表尾部
+   *
+   * <p>比如：
+   *
+   * <pre>{@code
+   * #add("listName", "a", "b", "c")
+   * 此时，则列表元素为: "a", "b", "c"
+   * 再次调用添加， #add("listName", "d")
+   * 则列表元素为: "a", "b", "c", "d"
+   * }</pre>
    *
    * @param list 列表名称
    * @param values 要添加的数据
@@ -22,13 +32,61 @@ public interface ListOps {
     return this.add(list, Arrays.asList(values));
   }
   /**
-   * 添加到列表
+   * 添加到列表尾部
+   *
+   * <p>比如：
+   *
+   * <pre>{@code
+   * List<String> values = "a", "b", "c"
+   * #add("listName", values)
+   * 此时，则列表元素为: "a", "b", "c"
+   * 再次调用添加， #add("listName", "d")
+   * 则列表元素为: "a", "b", "c", "d"
+   *
+   * }</pre>
    *
    * @param list 列表名称
    * @param values 要添加的数据
    * @return 添加条数
    */
   long add(String list, List<String> values);
+  /**
+   * 添加到列表头部
+   *
+   * <p>比如：
+   *
+   * <pre>{@code
+   * #add("listName", "a", "b", "c")
+   * 此时，则列表元素为: "c", "b", "a"
+   * 再次调用添加， #add("listName", "d")
+   * 则列表元素为: "d", "c", "b", "a"
+   * }</pre>
+   *
+   * @param list 列表名称
+   * @param values 要添加的数据
+   * @return 添加条数
+   */
+  default long addAtHead(String list, String... values) {
+    return this.addAtHead(list, Arrays.asList(values));
+  }
+  /**
+   * 添加到列表头部
+   *
+   * <p>比如：
+   *
+   * <pre>{@code
+   * List<String> values = "a", "b", "c"
+   * #add("listName", values)
+   * 此时，则列表元素为: "c", "b", "a"
+   * 再次调用添加， #add("listName", "d")
+   * 则列表元素为: "d", "c", "b", "a"
+   * }</pre>
+   *
+   * @param list 列表名称
+   * @param values 要添加的数据
+   * @return 添加条数
+   */
+  long addAtHead(String list, List<String> values);
 
   /**
    * 获取列表范围数据
@@ -52,7 +110,35 @@ public interface ListOps {
    * @param list 列表名称
    * @param start 开始位置
    * @param end 结束位置
-   * @return 范围内的数据
+   * @return 在 [{@code start} , {@code end} ]范围内的数据
    */
   List<String> range(String list, long start, long end);
+
+  /**
+   * 获取列表的大小
+   *
+   * @param list 列表名称
+   * @return 列表大小，如果列表不存在返回 {@code 0}
+   */
+  long size(String list);
+
+  /**
+   * 根据下标获取列表中的元素
+   *
+   * @param list 列表名称
+   * @param index 位置下标，从0开始。0表示第一个元素，1表示第2个元素，以此类推。
+   *     <p>可以使用负数下标，-1表示最后一个元素，-2表示最后第二个元素，以此类推。
+   * @return 名称为 {@code list} 的列表中，下标为 {@code index} 的值。如果 {@code index} 不在列表区间，则返回 {@code null}.
+   */
+  @Nullable
+  String get(String list, long index);
+
+  /**
+   * 删除列表中的特定值
+   *
+   * @param list 列表名称
+   * @param value 要删除的值
+   * @return 删除的数量
+   */
+  long remove(String list, String value);
 }
