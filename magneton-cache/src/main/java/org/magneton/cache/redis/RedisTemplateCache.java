@@ -1,6 +1,7 @@
 package org.magneton.cache.redis;
 
 import org.magneton.cache.Cache;
+import org.magneton.cache.ops.HashOps;
 import org.magneton.cache.ops.ListOps;
 import org.magneton.cache.ops.ValueOps;
 import org.magneton.cache.util.Trans;
@@ -19,11 +20,18 @@ public class RedisTemplateCache implements Cache {
   private final RedisTemplate redisTemplate;
   private final ValueOps valueOps;
   private final ListOps listOps;
+  private final HashOps hashOps;
 
-  public RedisTemplateCache(RedisTemplate redisTemplate) {
+  public RedisTemplateCache(RedisTemplate redisTemplate, RedisValueSerializer valueSerializer) {
     this.redisTemplate = redisTemplate;
-    this.valueOps = new RedisTemplateValueOps(redisTemplate);
-    this.listOps = new RedisTemplateListOps(redisTemplate);
+    this.valueOps = new RedisTemplateValueOps(redisTemplate, valueSerializer);
+    this.listOps = new RedisTemplateListOps(redisTemplate, valueSerializer);
+    this.hashOps = new RedisTemplateHashOps(redisTemplate, valueSerializer);
+  }
+
+  @Override
+  public HashOps opsForHash() {
+    return this.hashOps;
   }
 
   @Override
@@ -54,6 +62,6 @@ public class RedisTemplateCache implements Cache {
 
   @Override
   public long del(String... keys) {
-    return (long) this.redisTemplate.execute((RedisCallback) rc -> rc.del(Trans.toBytes(keys)));
+    return (long) this.redisTemplate.execute((RedisCallback) rc -> rc.del(Trans.toByteArray(keys)));
   }
 }

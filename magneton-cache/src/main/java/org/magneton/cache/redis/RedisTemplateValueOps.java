@@ -18,15 +18,16 @@ import org.springframework.data.redis.core.RedisTemplate;
 @SuppressWarnings("ConstantConditions")
 public class RedisTemplateValueOps extends AbstractRedisTemplateOps implements ValueOps {
 
-  public RedisTemplateValueOps(RedisTemplate redisTemplate) {
-    super(redisTemplate);
+  public RedisTemplateValueOps(
+      RedisTemplate redisTemplate, RedisValueSerializer redisValueSerializer) {
+    super(redisTemplate, redisValueSerializer);
   }
 
   @Override
   public boolean set(KV kv) {
     return (boolean)
         this.redisTemplate.execute(
-            (RedisCallback) cb -> cb.set(Trans.toByte(kv.getKey()), Trans.toByte(kv.getValue())));
+            (RedisCallback) cb -> cb.set(this.toByte(kv.getKey()), this.serialize(kv.getValue())));
   }
 
   @Override
@@ -34,7 +35,7 @@ public class RedisTemplateValueOps extends AbstractRedisTemplateOps implements V
     return this.redisTemplate.executePipelined(
         (RedisCallback<Boolean>)
             rc -> {
-              kvs.forEach(kv -> rc.set(Trans.toByte(kv.getKey()), Trans.toByte(kv.getValue())));
+              kvs.forEach(kv -> rc.set(this.toByte(kv.getKey()), this.serialize(kv.getValue())));
               return null;
             });
   }
@@ -43,7 +44,7 @@ public class RedisTemplateValueOps extends AbstractRedisTemplateOps implements V
   public boolean setNx(KV kv) {
     return (boolean)
         this.redisTemplate.execute(
-            (RedisCallback) rc -> rc.setNX(Trans.toByte(kv.getKey()), Trans.toByte(kv.getValue())));
+            (RedisCallback) rc -> rc.setNX(this.toByte(kv.getKey()), this.serialize(kv.getValue())));
   }
 
   @Override
@@ -51,7 +52,7 @@ public class RedisTemplateValueOps extends AbstractRedisTemplateOps implements V
     return this.redisTemplate.executePipelined(
         (RedisCallback<Boolean>)
             rc -> {
-              kvs.forEach(kv -> rc.setNX(Trans.toByte(kv.getKey()), Trans.toByte(kv.getValue())));
+              kvs.forEach(kv -> rc.setNX(this.toByte(kv.getKey()), this.serialize(kv.getValue())));
               return null;
             });
   }
@@ -63,7 +64,7 @@ public class RedisTemplateValueOps extends AbstractRedisTemplateOps implements V
             (RedisCallback)
                 cb ->
                     cb.setEx(
-                        Trans.toByte(ekv.getKey()), ekv.getExpire(), Trans.toByte(ekv.getValue())));
+                        this.toByte(ekv.getKey()), ekv.getExpire(), this.serialize(ekv.getValue())));
   }
 
   @Override
@@ -74,9 +75,7 @@ public class RedisTemplateValueOps extends AbstractRedisTemplateOps implements V
               ekvs.forEach(
                   ekv ->
                       rc.setEx(
-                          Trans.toByte(ekv.getKey()),
-                          ekv.getExpire(),
-                          Trans.toByte(ekv.getValue())));
+                          this.toByte(ekv.getKey()), ekv.getExpire(), this.serialize(ekv.getValue())));
               return null;
             });
   }
@@ -84,7 +83,14 @@ public class RedisTemplateValueOps extends AbstractRedisTemplateOps implements V
   @Override
   public String get(String key) {
     byte[] response =
-        (byte[]) this.redisTemplate.execute((RedisCallback) cb -> cb.get(Trans.toByte(key)));
+        (byte[]) this.redisTemplate.execute((RedisCallback) cb -> cb.get(this.toByte(key)));
     return Datas.isEmpty(response) ? null : Trans.toStr(response);
+  }
+
+  @Override
+  public <T> T get(String key, Class<T> clazz) {
+    byte[] response =
+        (byte[]) this.redisTemplate.execute((RedisCallback) cb -> cb.get(this.toByte(key)));
+    return Datas.isEmpty(response) ? null : this.deserialize(response, clazz);
   }
 }

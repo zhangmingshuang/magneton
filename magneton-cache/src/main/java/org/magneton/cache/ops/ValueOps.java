@@ -21,7 +21,7 @@ public interface ValueOps {
    * @param key 键
    * @param value 值
    */
-  default boolean set(String key, String value) {
+  default boolean set(String key, Object value) {
     return this.set(KV.of(key, value));
   }
 
@@ -40,7 +40,7 @@ public interface ValueOps {
    * @param value Value
    * @return 如果设置成功返回true，否则返回false
    */
-  default boolean setNx(String key, String value) {
+  default boolean setNx(String key, Object value) {
     return this.setNx(KV.of(key, value));
   }
 
@@ -60,7 +60,7 @@ public interface ValueOps {
    * @param value Value
    * @param expire 过期时间（秒）
    */
-  default boolean setEx(String key, String value, long expire) {
+  default boolean setEx(String key, Object value, long expire) {
     return this.setEx(EKV.of(key, value, expire));
   }
 
@@ -78,4 +78,7 @@ public interface ValueOps {
 
   @Nullable
   String get(String key);
+
+  @Nullable
+  <T> T get(String key, Class<T> clazz);
 }
