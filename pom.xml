@@ -10,6 +10,8 @@
     <module>magneton-parent</module>
     <module>magneton-lock</module>
     <module>magneton-cache</module>
+    <module>magneton-test</module>
+    <module>spring-cloud-starter-magneton</module>
   </modules>
 
   <groupId>org.magneton</groupId>
