@@ -37,6 +37,7 @@ public final class MoreStrings {
    * @param args the arguments to be substituted into the message template. The first argument
    *     specified is substituted for the occurrence of {@code "%s0"} in the template, and so forth.
    *     A {@code null} argement is keep the placeholder.
+   * @return
    */
   public static String format(String template, @Nullable Object... args) {
     if (args == null || args.length < 1) {

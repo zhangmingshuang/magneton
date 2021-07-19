@@ -29,6 +29,7 @@ public class Accessible {
   /**
    * access.
    *
+   * @param access
    * @param errorRemainCount remaining count of errors.
    * @return accessible.
    */

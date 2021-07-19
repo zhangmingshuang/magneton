@@ -69,6 +69,7 @@ public class Bytes {
    *
    * @param v value.
    * @param b byte array.
+   * @param off
    */
   public static void short2bytes(short v, byte[] b, int off) {
     b[off + 1] = (byte) v;
@@ -455,6 +456,8 @@ public class Bytes {
    * to base64 string.
    *
    * @param b byte array.
+   * @param offset
+   * @param length
    * @return base64 string.
    */
   public static String bytes2base64(byte[] b, int offset, int length) {
@@ -476,6 +479,8 @@ public class Bytes {
    * to base64 string.
    *
    * @param b byte array.
+   * @param length
+   * @param offset
    * @param code base64 code string(0-63 is base64 char,64 is pad char).
    * @return base64 string.
    */
