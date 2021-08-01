@@ -393,8 +393,8 @@ public final class NoninstanceServiceLoader<S> implements Iterable<Class<S>> {
    * Iterator#remove() remove} method will cause an {@link UnsupportedOperationException} to be
    * thrown.
    *
-   * @implNote When adding providers to the cache, the {@link #iterator Iterator} processes
-   *     resources in the order that the {@link ClassLoader#getResources(String)
+   * @apiNote When adding providers to the cache, the {@link #iterator Iterator} processes resources
+   *     in the order that the {@link ClassLoader#getResources(String)
    *     ClassLoader.getResources(String)} method finds the service configuration files.
    * @return An iterator that lazily loads providers for this loader's service
    */
