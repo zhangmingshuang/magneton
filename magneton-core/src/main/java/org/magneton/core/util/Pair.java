@@ -25,7 +25,7 @@ public final class Pair<S, T> {
    *
    * @param first must not be {@literal null}.
    * @param second must not be {@literal null}.
-   * @return
+   * @return the pair
    */
   public static <S, T> Pair<S, T> of(S first, T second) {
     return new Pair<>(first, second);

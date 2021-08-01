@@ -56,7 +56,7 @@ class RedisTemplateHashOpsTest {
     String key = "test_hash_put_map_key";
     this.cache.del(key);
     try {
-      Map<String, String> map = new HashMap<>();
+      Map<String, Object> map = new HashMap<>();
       map.put("a", "a");
       map.put("b", "b");
       map.put("c", "c");
@@ -73,7 +73,7 @@ class RedisTemplateHashOpsTest {
     String key = "test_hash_get_key";
     this.cache.del(key);
     try {
-      Map<String, String> map = new HashMap<>();
+      Map<String, Object> map = new HashMap<>();
       map.put("a", "a");
       map.put("b", "b");
       map.put("c", "c");
@@ -93,7 +93,7 @@ class RedisTemplateHashOpsTest {
     String key = "test_hash_contains_key";
     this.cache.del(key);
     try {
-      Map<String, String> map = new HashMap<>();
+      Map<String, Object> map = new HashMap<>();
       map.put("a", "a");
       map.put("b", "b");
       map.put("c", "c");
@@ -114,7 +114,7 @@ class RedisTemplateHashOpsTest {
     String key = "test_hash_remove_key";
     this.cache.del(key);
     try {
-      Map<String, String> map = new HashMap<>();
+      Map<String, Object> map = new HashMap<>();
       map.put("a", "a");
       map.put("b", "b");
       map.put("c", "c");
@@ -133,7 +133,7 @@ class RedisTemplateHashOpsTest {
     String key = "test_hash_remove_key";
     this.cache.del(key);
     try {
-      Map<String, String> map = new HashMap<>();
+      Map<String, Object> map = new HashMap<>();
       map.put("a", "a");
       map.put("b", "b");
       map.put("c", "c");
@@ -150,7 +150,7 @@ class RedisTemplateHashOpsTest {
     String key = "test_hash_keys_key";
     this.cache.del(key);
     try {
-      Map<String, String> map = new HashMap<>();
+      Map<String, Object> map = new HashMap<>();
       map.put("a", "a");
       map.put("b", "b");
       map.put("c", "c");
@@ -167,7 +167,7 @@ class RedisTemplateHashOpsTest {
     String key = "test_hash_values_key";
     this.cache.del(key);
     try {
-      Map<String, String> map = new HashMap<>();
+      Map<String, Object> map = new HashMap<>();
       map.put("a", "1a");
       map.put("b", "2b");
       map.put("c", "3c");
@@ -184,7 +184,7 @@ class RedisTemplateHashOpsTest {
     String key = "test_hash_values_key";
     this.cache.del(key);
     try {
-      Map<String, String> map = new HashMap<>();
+      Map<String, Object> map = new HashMap<>();
       map.put("a", "1a");
       map.put("b", "2b");
       map.put("c", "3c");
