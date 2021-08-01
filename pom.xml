@@ -12,6 +12,7 @@
     <module>magneton-cache</module>
     <module>magneton-test</module>
     <module>spring-cloud-starter-magneton</module>
+    <module>magneton-spy</module>
   </modules>
 
   <groupId>org.magneton</groupId>
