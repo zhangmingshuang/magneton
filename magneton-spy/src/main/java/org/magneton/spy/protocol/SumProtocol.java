@@ -1,0 +1,15 @@
+package org.magneton.spy.protocol;
+
+/**
+ * 求合协议 sum:table_name
+ *
+ * @author zhangmsh 2021/7/28
+ * @since 1.0.0
+ */
+public interface SumProtocol extends Protocol {
+
+  @Override
+  default String name() {
+    return "sum";
+  }
+}
