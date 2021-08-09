@@ -17,6 +17,7 @@
     <!-- jar versions -->
     <lombok.version>1.18.12</lombok.version>
     <spring.version>5.2.9.RELEASE</spring.version>
+    <spring-boot.version>2.3.7.RELEASE</spring-boot.version>
     <slf4j-api.version>1.7.30</slf4j-api.version>
     <redisson.version>3.8.2</redisson.version>
     <junit.version>5.7.0</junit.version>
