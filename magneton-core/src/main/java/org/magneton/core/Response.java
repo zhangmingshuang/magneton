@@ -1,5 +1,6 @@
 package org.magneton.core;
 
+import com.google.common.base.Strings;
 import com.google.common.collect.Maps;
 import java.util.Map;
 import java.util.Objects;
@@ -77,6 +78,13 @@ public class Response<T> {
 
   public Response<T> message(String message) {
     this.message = message;
+    return this;
+  }
+
+  public Response<T> messageFormat(Object... args) {
+    if (Strings.isNullOrEmpty(this.message)) {
+      this.message = Strings.lenientFormat(this.message, args);
+    }
     return this;
   }
 
