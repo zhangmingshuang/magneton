@@ -1,202 +1,202 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns="http://maven.apache.org/POM/4.0.0"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <artifactId>magneton</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>magneton-core</module>
-        <module>spring-boot-starter-magneton</module>
-        <module>magneton-parent</module>
-        <module>magneton-lock</module>
-        <module>magneton-cache</module>
-        <module>magneton-test</module>
-        <module>spring-cloud-starter-magneton</module>
-        <module>magneton-spy</module>
-    </modules>
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <artifactId>magneton</artifactId>
+  <packaging>pom</packaging>
+  <modules>
+    <module>magneton-core</module>
+    <module>spring-boot-starter-magneton</module>
+    <module>magneton-parent</module>
+    <module>magneton-lock</module>
+    <module>magneton-cache</module>
+    <module>magneton-test</module>
+    <module>spring-cloud-starter-magneton</module>
+    <module>magneton-spy</module>
+  </modules>
 
-    <groupId>org.magneton</groupId>
-    <modelVersion>4.0.0</modelVersion>
+  <groupId>org.magneton</groupId>
+  <modelVersion>4.0.0</modelVersion>
 
-    <inceptionYear>2020</inceptionYear>
+  <inceptionYear>2020</inceptionYear>
 
-    <contributors>
-        <contributor>
-            <name>caspar</name>
-            <email>zms198983@163.com</email>
-        </contributor>
-    </contributors>
+  <contributors>
+    <contributor>
+      <name>caspar</name>
+      <email>zms198983@163.com</email>
+    </contributor>
+  </contributors>
 
-    <licenses>
-        <license>
-            <name>Apache License, Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
+  <licenses>
+    <license>
+      <name>Apache License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
 
-    <properties>
-        <java.version>1.8</java.version>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
-        <sonar.host.url>https://builds.apache.org/analysis</sonar.host.url>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
+  <properties>
+    <java.version>1.8</java.version>
+    <maven.compiler.source>8</maven.compiler.source>
+    <maven.compiler.target>8</maven.compiler.target>
+    <sonar.host.url>https://builds.apache.org/analysis</sonar.host.url>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
 
-    <version>1.0.0</version>
+  <version>1.0.0</version>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.5.1</version>
-                <configuration>
-                    <source>${maven.compiler.source}</source>
-                    <target>${maven.compiler.target}</target>
-                    <compilerVersion>${maven.compiler.source}</compilerVersion>
-                    <showDeprecation>true</showDeprecation>
-                    <showWarnings>true</showWarnings>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>2.10.4</version>
-                <configuration>
-                    <charset>${project.build.sourceEncoding}</charset>
-                    <skip>true</skip>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>attach-javadocs</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <!-- generate java source -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-                <version>3.0.1</version>
-                <executions>
-                    <execution>
-                        <id>attach-sources</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-site-plugin</artifactId>
-                <version>3.9.1</version>
-                <configuration>
-                    <locales>en,zh_CN</locales>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.6</version>
-                <executions>
-                    <execution>
-                        <id>default-prepare-agent</id>
-                        <goals>
-                            <goal>prepare-agent</goal>
-                        </goals>
-                        <configuration>
-                            <destFile>${project.build.directory}/jacoco.exec</destFile>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>default-prepare-agent-integration</id>
-                        <phase>pre-integration-test</phase>
-                        <goals>
-                            <goal>prepare-agent-integration</goal>
-                        </goals>
-                        <configuration>
-                            <destFile>${project.build.directory}/jacoco-it.exec</destFile>
-                            <propertyName>failsafeArgLine</propertyName>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>default-report</id>
-                        <goals>
-                            <goal>report</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>default-report-integration</id>
-                        <goals>
-                            <goal>report-integration</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>findbugs-maven-plugin</artifactId>
-                <version>3.0.5</version>
-            </plugin>
-            <plugin>
-                <groupId>org.sonarsource.scanner.maven</groupId>
-                <artifactId>sonar-maven-plugin</artifactId>
-                <version>3.7.0.1746</version>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>3.1.1</version>
-                <dependencies>
-                    <dependency>
-                        <artifactId>checkstyle</artifactId>
-                        <groupId>com.puppycrawl.tools</groupId>
-                        <version>8.38</version>
-                    </dependency>
-                </dependencies>
-                <configuration>
-                    <configLocation>src/google_checks.xml</configLocation>
-                    <failsOnError>true</failsOnError>
-                    <failOnViolation>true</failOnViolation>
-                    <consoleOutput>true</consoleOutput>
-                    <encoding>UTF-8</encoding>
-                    <outputEncoding>UTF-8</outputEncoding>
-                </configuration>
-                <executions>
-                    <execution>
-                        <phase>validate</phase>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
-    <reporting>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>3.1.1</version>
-                <configuration>
-                    <configLocation>src/google_checks.xml</configLocation>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.6</version>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jxr-plugin</artifactId>
-                <version>3.0.0</version>
-            </plugin>
-        </plugins>
-    </reporting>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.5.1</version>
+        <configuration>
+          <source>${maven.compiler.source}</source>
+          <target>${maven.compiler.target}</target>
+          <compilerVersion>${maven.compiler.source}</compilerVersion>
+          <showDeprecation>true</showDeprecation>
+          <showWarnings>true</showWarnings>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>2.10.4</version>
+        <configuration>
+          <charset>${project.build.sourceEncoding}</charset>
+          <skip>true</skip>
+        </configuration>
+        <executions>
+          <execution>
+            <id>attach-javadocs</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <!-- generate java source -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>3.0.1</version>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-site-plugin</artifactId>
+        <version>3.9.1</version>
+        <configuration>
+          <locales>en,zh_CN</locales>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>0.8.6</version>
+        <executions>
+          <execution>
+            <id>default-prepare-agent</id>
+            <goals>
+              <goal>prepare-agent</goal>
+            </goals>
+            <configuration>
+              <destFile>${project.build.directory}/jacoco.exec</destFile>
+            </configuration>
+          </execution>
+          <execution>
+            <id>default-prepare-agent-integration</id>
+            <phase>pre-integration-test</phase>
+            <goals>
+              <goal>prepare-agent-integration</goal>
+            </goals>
+            <configuration>
+              <destFile>${project.build.directory}/jacoco-it.exec</destFile>
+              <propertyName>failsafeArgLine</propertyName>
+            </configuration>
+          </execution>
+          <execution>
+            <id>default-report</id>
+            <goals>
+              <goal>report</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>default-report-integration</id>
+            <goals>
+              <goal>report-integration</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>findbugs-maven-plugin</artifactId>
+        <version>3.0.5</version>
+      </plugin>
+      <plugin>
+        <groupId>org.sonarsource.scanner.maven</groupId>
+        <artifactId>sonar-maven-plugin</artifactId>
+        <version>3.7.0.1746</version>
+      </plugin>
+      <!--            <plugin>-->
+      <!--                <groupId>org.apache.maven.plugins</groupId>-->
+      <!--                <artifactId>maven-checkstyle-plugin</artifactId>-->
+      <!--                <version>3.1.1</version>-->
+      <!--                <dependencies>-->
+      <!--                    <dependency>-->
+      <!--                        <artifactId>checkstyle</artifactId>-->
+      <!--                        <groupId>com.puppycrawl.tools</groupId>-->
+      <!--                        <version>8.38</version>-->
+      <!--                    </dependency>-->
+      <!--                </dependencies>-->
+      <!--                <configuration>-->
+      <!--                    <configLocation>src/google_checks.xml</configLocation>-->
+      <!--                    <failsOnError>true</failsOnError>-->
+      <!--                    <failOnViolation>true</failOnViolation>-->
+      <!--                    <consoleOutput>true</consoleOutput>-->
+      <!--                    <encoding>UTF-8</encoding>-->
+      <!--                    <outputEncoding>UTF-8</outputEncoding>-->
+      <!--                </configuration>-->
+      <!--                <executions>-->
+      <!--                    <execution>-->
+      <!--                        <phase>validate</phase>-->
+      <!--                        <goals>-->
+      <!--                            <goal>check</goal>-->
+      <!--                        </goals>-->
+      <!--                    </execution>-->
+      <!--                </executions>-->
+      <!--            </plugin>-->
+    </plugins>
+  </build>
+  <reporting>
+    <plugins>
+      <!--      <plugin>-->
+      <!--        <groupId>org.apache.maven.plugins</groupId>-->
+      <!--        <artifactId>maven-checkstyle-plugin</artifactId>-->
+      <!--        <version>3.1.1</version>-->
+      <!--        <configuration>-->
+      <!--          <configLocation>src/google_checks.xml</configLocation>-->
+      <!--        </configuration>-->
+      <!--      </plugin>-->
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>0.8.6</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jxr-plugin</artifactId>
+        <version>3.0.0</version>
+      </plugin>
+    </plugins>
+  </reporting>
 </project>

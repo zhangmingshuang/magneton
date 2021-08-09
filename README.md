@@ -1,6 +1,6 @@
 # magneton
 
-unification, simply, quickly using spring boot framework.
+unification, simply, quickly working.
 
 # Feature
 
