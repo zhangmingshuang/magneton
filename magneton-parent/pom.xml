@@ -15,13 +15,19 @@
 
   <properties>
     <!-- jar versions -->
-    <guava.version>30.0-jre</guava.version>
     <lombok.version>1.18.12</lombok.version>
     <spring.version>5.2.9.RELEASE</spring.version>
     <slf4j-api.version>1.7.30</slf4j-api.version>
     <redisson.version>3.8.2</redisson.version>
     <junit.version>5.7.0</junit.version>
+    <guava.version>30.1.1-jre</guava.version>
+    <javax.el.version>3.0.1-b12</javax.el.version>
+    <testable.version>0.6.7</testable.version>
+    <joda-time.version>2.10.10</joda-time.version>
+    <fastjson.version>1.2.75</fastjson.version>
     <mockito-junit-jupiter.version>3.6.28</mockito-junit-jupiter.version>
+    <jakarta.validation-api.version>2.0.2</jakarta.validation-api.version>
+    <hibernate-validator.version>6.1.5.Final</hibernate-validator.version>
   </properties>
 
   <dependencyManagement>
