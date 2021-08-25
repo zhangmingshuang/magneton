@@ -21,8 +21,12 @@ public class FieldUtil {
     return fields;
   }
 
+  @SuppressWarnings("OverlyComplexBooleanExpression")
   private static void getFields(Set<Field> fields, Class clazz) {
-    if (clazz == null || clazz == Object.class) {
+    if (clazz == null
+        || clazz == Object.class
+        || clazz.getName().startsWith("java")
+        || clazz.getName().startsWith("javax")) {
       return;
     }
     Field[] declaredFields = clazz.getDeclaredFields();

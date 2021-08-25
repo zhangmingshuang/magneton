@@ -19,8 +19,8 @@ public class SortUtil {
   public static <T> List<T> sort(List<T> list) {
     list.sort(
         (o1, o2) -> {
-          TestSort s1 = AnnotationUtils.findAnnotation(o1.getClass(), TestSort.class);
-          TestSort s2 = AnnotationUtils.findAnnotation(o2.getClass(), TestSort.class);
+          TestSort s1 = AnnotationUtil.findAnnotations(o1.getClass(), TestSort.class);
+          TestSort s2 = AnnotationUtil.findAnnotations(o2.getClass(), TestSort.class);
           return (s1 == null ? 0 : s1.value()) - (s2 == null ? 0 : s2.value());
         });
     return list;

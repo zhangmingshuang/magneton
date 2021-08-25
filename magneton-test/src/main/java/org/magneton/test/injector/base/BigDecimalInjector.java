@@ -1,12 +1,13 @@
 package org.magneton.test.injector.base;
 
 import java.math.BigDecimal;
+import javax.annotation.Nullable;
 import org.magneton.test.annotation.TestComponent;
-import org.magneton.test.core.Config;
+import org.magneton.test.config.Config;
+import org.magneton.test.config.ConfigProcessorFactory;
+import org.magneton.test.core.InjectType;
 import org.magneton.test.injector.AbstractInjector;
-import org.magneton.test.injector.Inject;
-import org.magneton.test.injector.InjectType;
-import org.magneton.test.util.ConfigUtil;
+import org.magneton.test.parser.Definition;
 
 /**
  * .
@@ -18,18 +19,13 @@ import org.magneton.test.util.ConfigUtil;
 public class BigDecimalInjector extends AbstractInjector {
 
   @Override
-  protected Object createValue(Config config, InjectType injectType, Inject inject) {
-    return ConfigUtil.nextBigDecimal(config);
-  }
-
-  @Override
-  protected Object createArray(
-      Config config, InjectType injectType, Inject inject, Integer length) {
-    return new BigDecimal[length];
-  }
-
-  @Override
   public Class[] getTypes() {
     return new Class[] {BigDecimal.class, BigDecimal[].class};
+  }
+
+  @Nullable
+  @Override
+  protected Object createValue(Definition definition, Config config, InjectType injectType) {
+    return ConfigProcessorFactory.of(injectType).nextBigDecimal(config, definition);
   }
 }

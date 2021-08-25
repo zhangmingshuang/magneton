@@ -9,4 +9,7 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface TestAutowired {}
+public @interface TestAutowired {
+
+  boolean required() default true;
+}

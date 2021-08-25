@@ -2,6 +2,7 @@ package org.magneton.test.supplier;
 
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
+import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import java.lang.reflect.Field;
 import java.util.List;
 import javax.annotation.Nullable;
@@ -20,17 +21,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class AbstractSupplier<T> {
 
-  private int status;
-
-  public T print() {
-    this.status = 1;
-    return (T) this;
-  }
-
-  public T log() {
-    this.status = 2;
-    return (T) this;
-  }
+  private boolean print;
 
   private final Object obj;
 
@@ -53,9 +44,10 @@ public class AbstractSupplier<T> {
   }
 
   protected boolean isPrintable() {
-    return this.status > 0;
+    return this.print;
   }
 
+  @CanIgnoreReturnValue
   protected boolean takeErrors() {
     if (this.errors == null || this.errors.isEmpty()) {
       return false;
@@ -91,17 +83,17 @@ public class AbstractSupplier<T> {
     }
   }
 
+  @SuppressWarnings("UseOfSystemOutOrSystemErr")
   protected void doPrint(String msg) {
     if (Strings.isNullOrEmpty(msg)) {
       return;
     }
-    if (this.status == 1) {
-      System.out.println(msg);
-      System.out.println("----");
-    } else {
-      log.warn(msg);
-      log.warn("----");
-    }
+    System.out.println(msg);
+    System.out.println("----");
+  }
+
+  public void setPrint(boolean print) {
+    this.print = print;
   }
 
   @Setter
