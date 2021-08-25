@@ -1,10 +1,6 @@
 package org.magneton.test.core;
 
-import com.google.common.collect.Lists;
-import java.util.List;
-import javax.annotation.Nullable;
 import lombok.Getter;
-import org.magneton.test.injector.Injector;
 
 /**
  * @author zhangmsh 2021/8/9
@@ -15,9 +11,6 @@ public class TraceChain {
   private static final ThreadLocal<TraceChain> THREAD_LOCAL = new ThreadLocal();
 
   private Class root;
-
-  private List<Injector> injectorChain = Lists.newArrayList();
-  private Injector currentInjector;
 
   private TraceChain() {}
 
@@ -36,12 +29,5 @@ public class TraceChain {
 
   public void end() {
     THREAD_LOCAL.remove();
-  }
-
-  public void injector(@Nullable Injector injector) {
-    this.currentInjector = injector;
-    if (injector != null) {
-      this.injectorChain.add(injector);
-    }
   }
 }

@@ -25,7 +25,7 @@ public class TestBooleanSupplier {
    * @return Boolean Supplier.
    */
   public BooleanSupplier notNull(Object obj) {
-    return new NotNullBooleanSupplier(obj).print();
+    return new NotNullBooleanSupplier(obj).sout();
   }
 
   /**
@@ -37,7 +37,7 @@ public class TestBooleanSupplier {
    * @return Boolean Supplier.
    */
   public BooleanSupplier jsr303(Object obj) {
-    return new Jsr303BooleanSupplier(obj).print();
+    return new Jsr303BooleanSupplier(obj).sout();
   }
 
   /**
@@ -52,6 +52,6 @@ public class TestBooleanSupplier {
    * @return Boolean Supplier.
    */
   public <E> BooleanSupplier valueEquals(E element1, E element2) {
-    return new ValueEqualsBooleanSupplier(element1, element2).print();
+    return new ValueEqualsBooleanSupplier(element1, element2).sout();
   }
 }

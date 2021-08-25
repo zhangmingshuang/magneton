@@ -1,14 +1,14 @@
 package org.magneton.test.injector;
 
 import java.lang.reflect.Array;
-import java.util.function.BiFunction;
-import java.util.function.Function;
 import javax.annotation.Nullable;
-import org.magneton.test.core.Config;
-import org.magneton.test.core.TraceChain;
-import org.magneton.test.injector.processor.AnnotationProcessorFactory;
-import org.magneton.test.util.ConfigUtil;
-import org.magneton.test.util.DemonUtil;
+import lombok.extern.slf4j.Slf4j;
+import org.magneton.test.config.Config;
+import org.magneton.test.config.ConfigProcessor;
+import org.magneton.test.config.ConfigProcessorFactory;
+import org.magneton.test.core.InjectType;
+import org.magneton.test.parser.Definition;
+import org.magneton.test.util.PrimitiveUtil;
 
 /**
  * .
@@ -16,74 +16,43 @@ import org.magneton.test.util.DemonUtil;
  * @author zhangmsh 2021/8/2
  * @since 2.0.0
  */
+@Slf4j
 public abstract class AbstractInjector implements Injector {
 
-  private AnnotationProcessorFactory annotationProcessorFactory;
-
   @Override
-  @Nullable
-  public Object inject(Config config, InjectType injectType, Inject inject) {
-    TraceChain.current().injector(this);
-    return this.inject(config, injectType, inject, false);
-  }
-
-  @Override
-  public Object injectRequired(Config config, InjectType injectType, Inject inject) {
-    TraceChain.current().injector(this);
-    return this.inject(config, injectType, inject, true);
-  }
-
-  public Object inject(Config config, InjectType injectType, Inject inject, boolean requried) {
-    if (inject.isArray()) {
-      return this.arrayProcess(
-          config,
-          injectType,
-          length -> this.createArray(config, injectType, inject, length),
-          (i, componentType) -> this.processValue(config, injectType, componentType, requried));
+  public <T> T inject(Definition definition, Config config, InjectType injectType) {
+    Class clazz = definition.getClazz();
+    ConfigProcessor configProcessor = ConfigProcessorFactory.of(injectType);
+    if (configProcessor.nullable(config, definition)) {
+      return (T) PrimitiveUtil.defaultValue(clazz);
     }
-    return this.processValue(config, injectType, inject, requried);
-  }
-
-  private Object processValue(
-      Config config, InjectType injectType, Inject inject, boolean required) {
-    return this.annotationProcessorFactory.process(
-        config, injectType, inject, required, () -> this.createValue(config, injectType, inject));
-  }
-
-  @Nullable
-  protected abstract Object createValue(Config config, InjectType injectType, Inject inject);
-
-  @Nullable
-  protected abstract Object createArray(
-      Config config, InjectType injectType, Inject inject, Integer length);
-
-  @Nullable
-  protected Object arrayProcess(
-      Config config,
-      InjectType injectType,
-      Function<Integer, Object> arrayCreator,
-      BiFunction<Integer, Inject, Object> valueCreator) {
-    int length = DemonUtil.createInt(injectType, ConfigUtil.getRandomSize(config));
-    if (length == 0) {
-      return null;
-    }
-    Object array = arrayCreator.apply(length);
-    if (array == null) {
-      return null;
-    }
-    Class<?> componentType = array.getClass().getComponentType();
-    for (int i = 0; i < length; i++) {
-      Object value = valueCreator.apply(i, Inject.of(componentType, array));
-      if (value == null) {
-        continue;
+    if (clazz.isArray()) {
+      Class<?> componentType = clazz.getComponentType();
+      int length = configProcessor.nextSize(config, definition);
+      if (length < 1) {
+        return null;
       }
-      Array.set(array, i, value);
+      Object array = Array.newInstance(componentType, length);
+      for (int i = 0; i < length; i++) {
+        Object value = this.injectValue(definition.resetClazz(componentType), config, injectType);
+        Array.set(array, i, value);
+      }
+      return (T) array;
     }
-    return array;
+    return (T) this.injectValue(definition, config, injectType);
   }
 
-  @Override
-  public void setProcessorFactory(AnnotationProcessorFactory annotationProcessorFactory) {
-    this.annotationProcessorFactory = annotationProcessorFactory;
+  @Nullable
+  protected Object injectValue(Definition definition, Config config, InjectType injectType) {
+    Class clazz = definition.getClazz();
+    ConfigProcessor configProcessor = ConfigProcessorFactory.of(injectType);
+    if (configProcessor.nullable(config, definition)) {
+      return PrimitiveUtil.defaultValue(clazz);
+    }
+    return this.createValue(definition, config, injectType);
   }
+
+  @Nullable
+  protected abstract Object createValue(
+      Definition definition, Config config, InjectType injectType);
 }

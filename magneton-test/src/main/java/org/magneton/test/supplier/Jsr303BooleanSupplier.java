@@ -36,32 +36,5 @@ public class Jsr303BooleanSupplier extends AbstractJsr303Supplier<Jsr303BooleanS
       super.addError(constraintViolations);
       return constraintViolations.isEmpty();
     }
-    // Class clazz = this.obj.getClass();
-    // Field[] fields = clazz.getDeclaredFields();
-    // boolean response = true;
-    // for (Field field : fields) {
-    // field.setAccessible(true);
-    // Object value = field.get(this.obj);
-    // List<Annotation> annotations = AnnotationUtils.findAnnotations(field);
-    // for (Annotation annotation : annotations) {
-    // Judger judger =
-    // Objects.requireNonNull(ChaosContext.get(JudegerFactory.class))
-    // .getJudeger(annotation.annotationType());
-    // if (judger == null) {
-    // continue;
-    // }
-    // Affirmed affirmed = judger.isAffirmed(annotation, value);
-    // if (!affirmed.isAffirmed()) {
-    // log.error(
-    // "{}#{}的@{}不是期望的:{}",
-    // clazz.getName(),
-    // field.getName(),
-    // annotation.annotationType().getName(),
-    // affirmed.getMsg());
-    // }
-    // response &= affirmed.isAffirmed();
-    // }
-    // }
-    // return response;
   }
 }
