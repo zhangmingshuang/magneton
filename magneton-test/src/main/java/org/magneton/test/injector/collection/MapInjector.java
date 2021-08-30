@@ -15,6 +15,7 @@ import org.magneton.test.exception.UnsupportedTypeCreateException;
 import org.magneton.test.injector.AbstractInjector;
 import org.magneton.test.injector.InjectorFactory;
 import org.magneton.test.parser.Definition;
+import org.magneton.test.parser.ParserFactory;
 
 /**
  * .
@@ -62,8 +63,8 @@ public class MapInjector extends AbstractInjector {
       keyGeneric = generics.get(0);
       valueGeneric = generics.get(1);
     }
-    Definition keyGenericDefinition = Definition.builder().clazz(keyGeneric).build();
-    Definition valueGenericDefinition = Definition.builder().clazz(valueGeneric).build();
+    Definition keyGenericDefinition = ParserFactory.getInstance().parse(keyGeneric);
+    Definition valueGenericDefinition = ParserFactory.getInstance().parse(valueGeneric);
     for (int i = 0; i < size; i++) {
       Object keyValue = this.injectorFactory.inject(keyGenericDefinition, config, injectType);
       Object valueValue = this.injectorFactory.inject(valueGenericDefinition, config, injectType);
