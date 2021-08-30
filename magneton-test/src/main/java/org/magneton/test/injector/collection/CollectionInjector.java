@@ -15,6 +15,7 @@ import org.magneton.test.exception.UnsupportedTypeCreateException;
 import org.magneton.test.injector.AbstractInjector;
 import org.magneton.test.injector.InjectorFactory;
 import org.magneton.test.parser.Definition;
+import org.magneton.test.parser.ParserFactory;
 
 /**
  * .
@@ -61,7 +62,7 @@ public class CollectionInjector extends AbstractInjector {
     } else {
       genericClass = generics.get(0);
     }
-    Definition genericDefinition = Definition.builder().clazz(genericClass).build();
+    Definition genericDefinition = ParserFactory.getInstance().parse(genericClass);
     for (int i = 0; i < size; i++) {
       Object value = this.injectorFactory.inject(genericDefinition, config, injectType);
       if (value == null) {

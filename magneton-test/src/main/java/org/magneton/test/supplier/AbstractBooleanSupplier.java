@@ -25,5 +25,10 @@ public abstract class AbstractBooleanSupplier<T> extends AbstractSupplier<T>
     }
   }
 
+  public BooleanSupplier sout() {
+    this.setPrint(true);
+    return this;
+  }
+
   protected abstract boolean doBooleanJudge();
 }
