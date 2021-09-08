@@ -4,9 +4,11 @@ import java.lang.annotation.Annotation;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Map;
+
 import javax.annotation.Nullable;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.Max;
+
 import org.magneton.test.annotation.TestComponent;
 import org.magneton.test.config.Config;
 import org.magneton.test.parser.Definition;
@@ -36,7 +38,7 @@ public class MaxConfigPostProcessor extends AbstractConfigPostProcessor {
     this.setBigInteger(config, max);
   }
 
-  private void setBigInteger(Config config, long max) {
+  public void setBigInteger(Config config, long max) {
     BigInteger minBigInterger = config.getMinBigInteger();
     if (minBigInterger == null || minBigInterger.longValue() > max) {
       config.setMinBigInteger(BigInteger.valueOf(max));
@@ -47,7 +49,7 @@ public class MaxConfigPostProcessor extends AbstractConfigPostProcessor {
     }
   }
 
-  private void setBigDecimal(Config config, long max) {
+  public void setBigDecimal(Config config, long max) {
     BigDecimal minBigDecimal = config.getMinBigDecimal();
     if (minBigDecimal == null || minBigDecimal.compareTo(BigDecimal.valueOf(max)) > 0) {
       config.setMinBigDecimal(BigDecimal.valueOf(max));
@@ -58,7 +60,7 @@ public class MaxConfigPostProcessor extends AbstractConfigPostProcessor {
     }
   }
 
-  private void setLong(Config config, long max) {
+  public void setLong(Config config, long max) {
     Long minLong = config.getMinLong();
     if (minLong == null || minLong > max) {
       config.setMinLong(max);
@@ -69,7 +71,7 @@ public class MaxConfigPostProcessor extends AbstractConfigPostProcessor {
     }
   }
 
-  private void setInt(Config config, long max) {
+  public void setInt(Config config, long max) {
     Integer minInt = config.getMinInt();
     if (minInt == null || minInt > max) {
       config.setMinInt((int) max);
@@ -80,7 +82,7 @@ public class MaxConfigPostProcessor extends AbstractConfigPostProcessor {
     }
   }
 
-  private void setShort(Config config, long max) {
+  public void setShort(Config config, long max) {
     Short minShort = config.getMinShort();
     if (minShort == null || minShort.intValue() > max) {
       config.setMinShort((short) max);
@@ -91,7 +93,7 @@ public class MaxConfigPostProcessor extends AbstractConfigPostProcessor {
     }
   }
 
-  private void setByte(Config config, long max) {
+  public void setByte(Config config, long max) {
     Byte minByte = config.getMinByte();
     if (minByte == null || minByte.intValue() > max) {
       config.setMinByte((byte) max);

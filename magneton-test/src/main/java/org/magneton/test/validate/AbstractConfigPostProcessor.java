@@ -2,9 +2,12 @@ package org.magneton.test.validate;
 
 import java.lang.annotation.Annotation;
 import java.util.Map;
+
 import javax.annotation.Nullable;
+
 import org.magneton.test.config.Config;
 import org.magneton.test.config.ConfigPostProcessor;
+import org.magneton.test.core.TraceChain;
 import org.magneton.test.parser.Definition;
 
 /**
@@ -21,14 +24,19 @@ public abstract class AbstractConfigPostProcessor implements ConfigPostProcessor
     if (annotations == null || annotations.isEmpty()) {
       return;
     }
-    Class[] classes = this.jsrAnnotations();
-    if (classes == null || classes.length < 1) {
+    Class[] jsrAnnotations = this.jsrAnnotations();
+    if (jsrAnnotations == null || jsrAnnotations.length < 1) {
       return;
     }
-    for (Class clazz : classes) {
-      if (annotations.containsKey(clazz)) {
-        this.doPostProcessor(annotations.get(clazz), config, definition);
+    try {
+      for (Class annotationClass : jsrAnnotations) {
+        Annotation annotation = annotations.get(annotationClass);
+        if (annotation != null) {
+          this.doPostProcessor(annotation, config, definition);
+        }
       }
+    } catch (Throwable e) {
+      throw new RuntimeException(TraceChain.current().toString(), e);
     }
   }
 

@@ -4,9 +4,11 @@ import java.lang.annotation.Annotation;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Map;
+
 import javax.annotation.Nullable;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Min;
+
 import org.magneton.test.annotation.TestComponent;
 import org.magneton.test.config.Config;
 import org.magneton.test.parser.Definition;
@@ -36,7 +38,7 @@ public class MinConfigPostProcessor extends AbstractConfigPostProcessor {
     this.setBigInteger(config, min);
   }
 
-  private void setBigInteger(Config config, long min) {
+  public void setBigInteger(Config config, long min) {
     BigInteger minBigInterger = config.getMinBigInteger();
     if (minBigInterger == null || minBigInterger.longValue() < min) {
       config.setMinBigInteger(BigInteger.valueOf(min));
@@ -47,7 +49,7 @@ public class MinConfigPostProcessor extends AbstractConfigPostProcessor {
     }
   }
 
-  private void setBigDecimal(Config config, long min) {
+  public void setBigDecimal(Config config, long min) {
     BigDecimal minBigDecimal = config.getMinBigDecimal();
     if (minBigDecimal == null || minBigDecimal.compareTo(BigDecimal.valueOf(min)) < 0) {
       // 如果当前设置的最小值比预期的最小值小，则使用该预期的最小值
@@ -60,7 +62,7 @@ public class MinConfigPostProcessor extends AbstractConfigPostProcessor {
     }
   }
 
-  private void setLong(Config config, long min) {
+  public void setLong(Config config, long min) {
     Long minLong = config.getMinLong();
     if (minLong == null || minLong < min) {
       config.setMinLong(min);
@@ -71,7 +73,7 @@ public class MinConfigPostProcessor extends AbstractConfigPostProcessor {
     }
   }
 
-  private void setInt(Config config, long min) {
+  public void setInt(Config config, long min) {
     Integer minInt = config.getMinInt();
     if (minInt == null || minInt < min) {
       config.setMinInt((int) min);
@@ -82,7 +84,7 @@ public class MinConfigPostProcessor extends AbstractConfigPostProcessor {
     }
   }
 
-  private void setShort(Config config, long min) {
+  public void setShort(Config config, long min) {
     Short minShort = config.getMinShort();
     if (minShort == null || minShort.intValue() < min) {
       config.setMinShort((short) min);
@@ -93,7 +95,7 @@ public class MinConfigPostProcessor extends AbstractConfigPostProcessor {
     }
   }
 
-  private void setByte(Config config, long min) {
+  public void setByte(Config config, long min) {
     Byte minByte = config.getMinByte();
     if (minByte == null || minByte.intValue() < min) {
       config.setMinByte((byte) min);
