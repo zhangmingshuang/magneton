@@ -88,7 +88,8 @@ public class InjectorFactory implements AfterAutowrited {
     for (Entry<Class, Injector> entry : entries) {
       if (entry.getKey().isAssignableFrom(clazz)) {
         injector = entry.getValue();
-        if (injector != null) {
+        // fix ObjectInjector 会优先处理其他的类型导致处理错误
+        if (injector != null && injector.getClass() != ObjectInjector.class) {
           if (injector.afterTypes().length > 0) {
             for (Class afterClass : injector.afterTypes()) {
               if (afterClass.isAssignableFrom(clazz)) {

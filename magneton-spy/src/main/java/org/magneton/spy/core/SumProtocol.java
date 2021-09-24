@@ -1,4 +1,4 @@
-package org.magneton.spy.protocol;
+package org.magneton.spy.core;
 
 /**
  * 求合协议 sum:table_name

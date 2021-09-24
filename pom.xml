@@ -13,6 +13,8 @@
     <module>magneton-test</module>
     <module>spring-cloud-starter-magneton</module>
     <module>magneton-spy</module>
+      <module>magneton-modules</module>
+    <module>magneton-modules/magneton-modeul-concurrent</module>
   </modules>
 
   <groupId>org.magneton</groupId>
