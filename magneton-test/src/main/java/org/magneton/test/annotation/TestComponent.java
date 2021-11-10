@@ -15,4 +15,6 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE_USE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface TestComponent {}
+public @interface TestComponent {
+
+}

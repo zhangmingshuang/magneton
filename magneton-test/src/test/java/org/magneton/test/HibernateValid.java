@@ -15,25 +15,26 @@ import javax.validation.ValidatorFactory;
  */
 public class HibernateValid {
 
-  private HibernateValid() {}
+	private HibernateValid() {
+	}
 
-  public static boolean valid(Object obj) {
-    try (ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory()) {
-      Set<ConstraintViolation<Object>> validate = validatorFactory.getValidator().validate(obj);
-      if (!validate.isEmpty()) {
-        for (ConstraintViolation<Object> error : validate) {
-          String errorMsg = error.getMessage();
-          Class<Object> clazz = error.getRootBeanClass();
-          Object rootBean = error.getRootBean();
-          Path propertyPath = error.getPropertyPath();
-          Object invalidValue = error.getInvalidValue();
-          String msg =
-              Strings.lenientFormat(
-                  "类%s#%s值为%s，但是预期：%s", clazz.getName(), propertyPath, invalidValue, errorMsg);
-          System.out.println(msg);
-        }
-      }
-      return validate.isEmpty();
-    }
-  }
+	public static boolean valid(Object obj) {
+		try (ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory()) {
+			Set<ConstraintViolation<Object>> validate = validatorFactory.getValidator().validate(obj);
+			if (!validate.isEmpty()) {
+				for (ConstraintViolation<Object> error : validate) {
+					String errorMsg = error.getMessage();
+					Class<Object> clazz = error.getRootBeanClass();
+					Object rootBean = error.getRootBean();
+					Path propertyPath = error.getPropertyPath();
+					Object invalidValue = error.getInvalidValue();
+					String msg = Strings.lenientFormat("类%s#%s值为%s，但是预期：%s", clazz.getName(), propertyPath,
+							invalidValue, errorMsg);
+					System.out.println(msg);
+				}
+			}
+			return validate.isEmpty();
+		}
+	}
+
 }

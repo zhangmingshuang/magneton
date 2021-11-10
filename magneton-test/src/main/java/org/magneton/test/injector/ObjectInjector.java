@@ -1,12 +1,12 @@
 package org.magneton.test.injector;
 
-import lombok.SneakyThrows;
 import org.magneton.test.annotation.TestAutowired;
 import org.magneton.test.annotation.TestComponent;
 import org.magneton.test.config.Config;
 import org.magneton.test.core.InjectType;
 import org.magneton.test.parser.Definition;
 import org.magneton.test.util.PrimitiveUtil;
+import lombok.SneakyThrows;
 
 /**
  * .
@@ -17,20 +17,22 @@ import org.magneton.test.util.PrimitiveUtil;
 @TestComponent
 public class ObjectInjector extends AbstractInjector {
 
-  @TestAutowired private InjectorFactory injectorFactory;
+	@TestAutowired
+	private InjectorFactory injectorFactory;
 
-  @SneakyThrows
-  @Override
-  protected Object createValue(Definition definition, Config config, InjectType injectType) {
-    Class clazz = definition.getClazz();
-    if (PrimitiveUtil.isPrimitive(clazz)) {
-      return this.injectorFactory.getInjector(clazz).inject(definition, config, injectType);
-    }
-    return clazz.getConstructor().newInstance();
-  }
+	@SneakyThrows
+	@Override
+	protected Object createValue(Definition definition, Config config, InjectType injectType) {
+		Class clazz = definition.getClazz();
+		if (PrimitiveUtil.isPrimitive(clazz)) {
+			return this.injectorFactory.getInjector(clazz).inject(definition, config, injectType);
+		}
+		return clazz.getConstructor().newInstance();
+	}
 
-  @Override
-  public Class[] getTypes() {
-    return new Class[] {Object.class};
-  }
+	@Override
+	public Class[] getTypes() {
+		return new Class[] { Object.class };
+	}
+
 }

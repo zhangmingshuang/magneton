@@ -10,7 +10,10 @@ import org.magneton.test.parser.Definition;
  */
 public interface ConfigPostProcessor {
 
-  default void beforeConfig(Config config, Definition definition) {}
+	default void beforeConfig(Config config, Definition definition) {
+	}
 
-  default void afterConfig(Object result, Config config, Definition definition) {}
+	default void afterConfig(Object result, Config config, Definition definition) {
+	}
+
 }

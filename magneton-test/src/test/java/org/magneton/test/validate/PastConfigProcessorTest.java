@@ -1,5 +1,7 @@
 package org.magneton.test.validate;
 
+import org.magneton.test.HibernateValid;
+import org.magneton.test.config.Config;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -19,8 +21,6 @@ import javax.validation.constraints.Past;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.RepeatedTest;
 import org.magneton.test.ChaosTest;
-import org.magneton.test.HibernateValid;
-import org.magneton.test.config.Config;
 import org.magneton.test.core.InjectType;
 import org.magneton.test.helper.Human;
 
@@ -32,31 +32,65 @@ import org.magneton.test.helper.Human;
  * @see PastConfigPostProcessor
  */
 class PastConfigProcessorTest {
-  private final Config config = new Config();
-  private final InjectType angle = InjectType.EXPECTED;
 
-  public static class TestA {
-    @Past private Date date;
-    @Past private Calendar calendar;
-    @Past private Instant instant;
-    @Past private LocalDate localDate;
-    @Past private LocalDateTime localDateTime;
-    @Past private LocalTime localTime;
-    @Past private MonthDay monthDay;
-    @Past protected OffsetDateTime offsetDateTime;
-    @Past private Year year;
-    @Past private YearMonth yearMonth;
-    @Past private ZonedDateTime zonedDateTime;
-    @Past private HijrahDate hijrahDate;
-    @Past private JapaneseDate japaneseDate;
-    @Past private MinguoDate minguoDate;
-    @Past private ThaiBuddhistDate thaiBuddhistDate;
-  }
+	private final Config config = new Config();
 
-  @RepeatedTest(10)
-  void testA() {
-    TestA testA = ChaosTest.create(TestA.class, this.config, this.angle);
-    Human.sout(testA);
-    Assertions.assertTrue(HibernateValid.valid(testA));
-  }
+	private final InjectType angle = InjectType.EXPECTED;
+
+	public static class TestA {
+
+		@Past
+		private Date date;
+
+		@Past
+		private Calendar calendar;
+
+		@Past
+		private Instant instant;
+
+		@Past
+		private LocalDate localDate;
+
+		@Past
+		private LocalDateTime localDateTime;
+
+		@Past
+		private LocalTime localTime;
+
+		@Past
+		private MonthDay monthDay;
+
+		@Past
+		protected OffsetDateTime offsetDateTime;
+
+		@Past
+		private Year year;
+
+		@Past
+		private YearMonth yearMonth;
+
+		@Past
+		private ZonedDateTime zonedDateTime;
+
+		@Past
+		private HijrahDate hijrahDate;
+
+		@Past
+		private JapaneseDate japaneseDate;
+
+		@Past
+		private MinguoDate minguoDate;
+
+		@Past
+		private ThaiBuddhistDate thaiBuddhistDate;
+
+	}
+
+	@RepeatedTest(10)
+	void testA() {
+		TestA testA = ChaosTest.create(TestA.class, this.config, this.angle);
+		Human.sout(testA);
+		Assertions.assertTrue(HibernateValid.valid(testA));
+	}
+
 }

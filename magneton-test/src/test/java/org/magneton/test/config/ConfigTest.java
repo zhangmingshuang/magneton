@@ -11,13 +11,14 @@ import org.junit.jupiter.api.Test;
  */
 class ConfigTest {
 
-  @Test
-  void copyOf() {
-    Config config = new Config();
-    config.setBooleanTrueProbability(1);
+	@Test
+	void copyOf() {
+		Config config = new Config();
+		config.setBooleanTrueProbability(1);
 
-    Config copied = Config.copyOf(config);
-    System.out.println(copied);
-    Assertions.assertEquals(1, config.getBooleanTrueProbability());
-  }
+		Config copied = Config.copyOf(config);
+		System.out.println(copied);
+		Assertions.assertEquals(1, config.getBooleanTrueProbability());
+	}
+
 }

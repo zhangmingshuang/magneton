@@ -11,5 +11,6 @@ import java.lang.annotation.Target;
 @Documented
 public @interface TestAutowired {
 
-  boolean required() default true;
+	boolean required() default true;
+
 }

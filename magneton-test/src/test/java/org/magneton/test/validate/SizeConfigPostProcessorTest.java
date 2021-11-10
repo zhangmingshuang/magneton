@@ -1,5 +1,7 @@
 package org.magneton.test.validate;
 
+import org.magneton.test.HibernateValid;
+import org.magneton.test.config.Config;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -7,8 +9,6 @@ import javax.validation.constraints.Size;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.magneton.test.ChaosTest;
-import org.magneton.test.HibernateValid;
-import org.magneton.test.config.Config;
 import org.magneton.test.core.InjectType;
 import org.magneton.test.helper.Human;
 
@@ -19,30 +19,35 @@ import org.magneton.test.helper.Human;
  * @since
  */
 class SizeConfigPostProcessorTest {
-  private final Config config = new Config();
-  private final InjectType angle = InjectType.EXPECTED;
 
-  public static class TestA {
-    @Size(min = 1, max = 10)
-    private String str;
+	private final Config config = new Config();
 
-    @Size(min = 2, max = 2)
-    private List list;
+	private final InjectType angle = InjectType.EXPECTED;
 
-    @Size(min = 1, max = 1)
-    private Map map;
+	public static class TestA {
 
-    @Size(min = 1, max = 1)
-    private Set set;
+		@Size(min = 1, max = 10)
+		private String str;
 
-    @Size(min = 1, max = 2)
-    private int[] array;
-  }
+		@Size(min = 2, max = 2)
+		private List list;
 
-  @Test
-  void testA() {
-    TestA testA = ChaosTest.create(TestA.class, this.config, this.angle);
-    Human.sout(testA);
-    Assertions.assertTrue(HibernateValid.valid(testA));
-  }
+		@Size(min = 1, max = 1)
+		private Map map;
+
+		@Size(min = 1, max = 1)
+		private Set set;
+
+		@Size(min = 1, max = 2)
+		private int[] array;
+
+	}
+
+	@Test
+	void testA() {
+		TestA testA = ChaosTest.create(TestA.class, this.config, this.angle);
+		Human.sout(testA);
+		Assertions.assertTrue(HibernateValid.valid(testA));
+	}
+
 }

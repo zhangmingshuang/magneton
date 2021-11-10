@@ -1,13 +1,13 @@
 package org.magneton.test.validate;
 
+import org.magneton.test.HibernateValid;
+import org.magneton.test.config.Config;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import javax.validation.constraints.Negative;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.RepeatedTest;
 import org.magneton.test.ChaosTest;
-import org.magneton.test.HibernateValid;
-import org.magneton.test.config.Config;
 import org.magneton.test.core.InjectType;
 import org.magneton.test.helper.Human;
 
@@ -19,27 +19,38 @@ import org.magneton.test.helper.Human;
  * @see NegativeConfigPostProcessor
  */
 class NegativeConfigPostProcessorTest {
-  private final Config config = new Config();
-  private final InjectType angle = InjectType.EXPECTED;
 
-  public static class TestA {
-    @Negative private byte b;
+	private final Config config = new Config();
 
-    @Negative private short s;
+	private final InjectType angle = InjectType.EXPECTED;
 
-    @Negative private int i;
+	public static class TestA {
 
-    @Negative private long l;
+		@Negative
+		private byte b;
 
-    @Negative private BigDecimal bigDecimal;
+		@Negative
+		private short s;
 
-    @Negative private BigInteger bigInteger;
-  }
+		@Negative
+		private int i;
 
-  @RepeatedTest(10)
-  void testA() {
-    TestA testA = ChaosTest.create(TestA.class, this.config, this.angle);
-    Human.sout(testA);
-    Assertions.assertTrue(HibernateValid.valid(testA));
-  }
+		@Negative
+		private long l;
+
+		@Negative
+		private BigDecimal bigDecimal;
+
+		@Negative
+		private BigInteger bigInteger;
+
+	}
+
+	@RepeatedTest(10)
+	void testA() {
+		TestA testA = ChaosTest.create(TestA.class, this.config, this.angle);
+		Human.sout(testA);
+		Assertions.assertTrue(HibernateValid.valid(testA));
+	}
+
 }

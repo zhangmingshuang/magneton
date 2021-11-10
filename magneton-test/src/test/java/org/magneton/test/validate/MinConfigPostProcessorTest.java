@@ -2,14 +2,17 @@ package org.magneton.test.validate;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+
 import javax.validation.constraints.Min;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.RepeatedTest;
+
 import org.magneton.test.ChaosTest;
 import org.magneton.test.HibernateValid;
 import org.magneton.test.config.Config;
 import org.magneton.test.core.InjectType;
 import org.magneton.test.helper.Human;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.RepeatedTest;
+import org.junit.jupiter.api.Test;
 
 /**
  * .
@@ -20,33 +23,50 @@ import org.magneton.test.helper.Human;
  */
 class MinConfigPostProcessorTest {
 
-  private final Config config = new Config();
-  private final InjectType angle = InjectType.EXPECTED;
+	private final Config config = new Config();
 
-  public static class TestA {
-    @Min(10)
-    private byte b;
+	private final InjectType angle = InjectType.EXPECTED;
 
-    @Min(120)
-    private short s;
+	@RepeatedTest(10)
+	void testA() {
+		TestA testA = ChaosTest.create(TestA.class, this.config, this.angle);
+		Human.sout(testA);
+		Assertions.assertTrue(HibernateValid.valid(testA));
+	}
 
-    @Min(101)
-    private int i;
+	@Test
+	void testB() {
+		TestB test = ChaosTest.createAntiExcepted(TestB.class);
+		Human.sout(test);
+	}
 
-    @Min(1011)
-    private long l;
+	public static class TestA {
 
-    @Min(100)
-    private BigDecimal bigDecimal;
+		@Min(10)
+		private byte b;
 
-    @Min(1000)
-    private BigInteger bigInteger;
-  }
+		@Min(120)
+		private short s;
 
-  @RepeatedTest(10)
-  void testA() {
-    TestA testA = ChaosTest.create(TestA.class, this.config, this.angle);
-    Human.sout(testA);
-    Assertions.assertTrue(HibernateValid.valid(testA));
-  }
+		@Min(101)
+		private int i;
+
+		@Min(1011)
+		private long l;
+
+		@Min(100)
+		private BigDecimal bigDecimal;
+
+		@Min(1000)
+		private BigInteger bigInteger;
+
+	}
+
+	public static class TestB {
+
+		@Min(0)
+		private Integer id;
+
+	}
+
 }

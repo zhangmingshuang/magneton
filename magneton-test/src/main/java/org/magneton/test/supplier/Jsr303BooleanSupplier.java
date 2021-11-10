@@ -17,24 +17,25 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class Jsr303BooleanSupplier extends AbstractJsr303Supplier<Jsr303BooleanSupplier> {
 
-  public Jsr303BooleanSupplier(Object obj) {
-    super(obj);
-  }
+	public Jsr303BooleanSupplier(Object obj) {
+		super(obj);
+	}
 
-  @SneakyThrows
-  @Override
-  protected boolean doBooleanJudge() {
-    if (this.getObj() == null) {
-      return true;
-    }
-    // 实例化一个 validator工厂
-    try (ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory()) {
-      // 获取validator实例
-      Validator validator = validatorFactory.getValidator();
-      // 调用调用，得到校验结果信息 Set
-      Set<ConstraintViolation<Object>> constraintViolations = validator.validate(super.getObj());
-      super.addError(constraintViolations);
-      return constraintViolations.isEmpty();
-    }
-  }
+	@SneakyThrows
+	@Override
+	protected boolean doBooleanJudge() {
+		if (this.getObj() == null) {
+			return true;
+		}
+		// 实例化一个 validator工厂
+		try (ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory()) {
+			// 获取validator实例
+			Validator validator = validatorFactory.getValidator();
+			// 调用调用，得到校验结果信息 Set
+			Set<ConstraintViolation<Object>> constraintViolations = validator.validate(super.getObj());
+			super.addError(constraintViolations);
+			return constraintViolations.isEmpty();
+		}
+	}
+
 }

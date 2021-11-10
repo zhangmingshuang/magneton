@@ -1,9 +1,9 @@
 package org.magneton.test.injector.base;
 
+import org.magneton.test.config.Config;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.magneton.test.ChaosTest;
-import org.magneton.test.config.Config;
 import org.magneton.test.core.InjectType;
 
 /**
@@ -14,26 +14,27 @@ import org.magneton.test.core.InjectType;
  */
 class ByteInjectorTest {
 
-  @Test
-  void test() {
-    InjectType type = InjectType.EXPECTED;
-    Config config = new Config();
+	@Test
+	void test() {
+		InjectType type = InjectType.EXPECTED;
+		Config config = new Config();
 
-    config.setMinByte((byte) 0B1).setMaxByte((byte) 0B1);
-    Byte b = ChaosTest.create(byte.class, config, type);
-    Assertions.assertEquals((byte) 0B1, b);
-    b = ChaosTest.create(Byte.class, config, type);
-    Assertions.assertEquals((byte) 0B1, b);
-  }
+		config.setMinByte((byte) 0B1).setMaxByte((byte) 0B1);
+		Byte b = ChaosTest.create(byte.class, config, type);
+		Assertions.assertEquals((byte) 0B1, b);
+		b = ChaosTest.create(Byte.class, config, type);
+		Assertions.assertEquals((byte) 0B1, b);
+	}
 
-  @Test
-  void testArray() {
-    InjectType type = InjectType.EXPECTED;
-    Config config = new Config();
+	@Test
+	void testArray() {
+		InjectType type = InjectType.EXPECTED;
+		Config config = new Config();
 
-    config.setMinSize(1).setMaxSize(1).setMinByte((byte) 1).setMaxByte((byte) 1);
-    byte[] ints = ChaosTest.create(byte[].class, config, type);
-    Assertions.assertEquals(1, ints.length);
-    Assertions.assertEquals(1, ints[0]);
-  }
+		config.setMinSize(1).setMaxSize(1).setMinByte((byte) 1).setMaxByte((byte) 1);
+		byte[] ints = ChaosTest.create(byte[].class, config, type);
+		Assertions.assertEquals(1, ints.length);
+		Assertions.assertEquals(1, ints[0]);
+	}
+
 }

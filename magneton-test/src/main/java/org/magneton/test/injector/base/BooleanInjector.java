@@ -16,13 +16,14 @@ import org.magneton.test.parser.Definition;
 @TestComponent
 public class BooleanInjector extends AbstractInjector {
 
-  @Override
-  public Class[] getTypes() {
-    return new Class[] {boolean.class, Boolean.class, boolean[].class, Boolean[].class};
-  }
+	@Override
+	public Class[] getTypes() {
+		return new Class[] { boolean.class, Boolean.class, boolean[].class, Boolean[].class };
+	}
 
-  @Override
-  protected Object createValue(Definition definition, Config config, InjectType injectType) {
-    return ConfigProcessorFactory.of(injectType).nextBoolean(config, definition);
-  }
+	@Override
+	protected Object createValue(Definition definition, Config config, InjectType injectType) {
+		return ConfigProcessorFactory.of(injectType).nextBoolean(config, definition);
+	}
+
 }

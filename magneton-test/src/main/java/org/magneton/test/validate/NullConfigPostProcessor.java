@@ -1,11 +1,12 @@
 package org.magneton.test.validate;
 
-import java.lang.annotation.Annotation;
-import javax.annotation.Nullable;
-import javax.validation.constraints.Null;
 import org.magneton.test.annotation.TestComponent;
 import org.magneton.test.config.Config;
 import org.magneton.test.parser.Definition;
+
+import java.lang.annotation.Annotation;
+import javax.annotation.Nullable;
+import javax.validation.constraints.Null;
 
 /**
  * {@link Null} 数据一定是 {@code null}
@@ -16,14 +17,15 @@ import org.magneton.test.parser.Definition;
 @TestComponent
 public class NullConfigPostProcessor extends AbstractConfigPostProcessor {
 
-  @Override
-  protected void doPostProcessor(Annotation annotation, Config config, Definition definition) {
-    config.setMinSize(-1).setMaxSize(-1).setNullableProbability(100);
-  }
+	@Override
+	protected void doPostProcessor(Annotation annotation, Config config, Definition definition) {
+		config.setMinSize(-1).setMaxSize(-1).setNullableProbability(100);
+	}
 
-  @Nullable
-  @Override
-  protected Class[] jsrAnnotations() {
-    return new Class[] {Null.class};
-  }
+	@Nullable
+	@Override
+	protected Class[] jsrAnnotations() {
+		return new Class[] { Null.class };
+	}
+
 }

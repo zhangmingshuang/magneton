@@ -15,76 +15,74 @@ import java.sql.SQLException;
 import java.util.Collections;
 import java.util.List;
 
-/** @author Binary Wang */
+/**
+ * @author Binary Wang
+ */
 public class InsertSQLGenerator {
 
-  private static final Joiner COMMA_JOINER = Joiner.on(", ");
+	private static final Joiner COMMA_JOINER = Joiner.on(", ");
 
-  private Connection con;
+	private Connection con;
 
-  private String tableName;
+	private String tableName;
 
-  public InsertSQLGenerator(String url, String username, String password, String tableName) {
-    try {
-      this.con = DriverManager.getConnection(url, username, password);
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
+	public InsertSQLGenerator(String url, String username, String password, String tableName) {
+		try {
+			this.con = DriverManager.getConnection(url, username, password);
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
 
-    this.tableName = tableName;
-  }
+		this.tableName = tableName;
+	}
 
-  public String generateSQL() {
-    List<String> columns = this.getColumns();
+	public String generateSQL() {
+		List<String> columns = this.getColumns();
 
-    return String.format(
-        "insert into %s(%s) values(%s)",
-        this.tableName,
-        COMMA_JOINER.join(columns),
-        COMMA_JOINER.join(Collections.nCopies(columns.size(), "?")));
-  }
+		return String.format("insert into %s(%s) values(%s)", this.tableName, COMMA_JOINER.join(columns),
+				COMMA_JOINER.join(Collections.nCopies(columns.size(), "?")));
+	}
 
-  public String generateParams() {
-    return COMMA_JOINER.join(
-        transform(
-            this.getColumns(),
-            new Function<String, String>() {
+	public String generateParams() {
+		return COMMA_JOINER.join(transform(this.getColumns(), new Function<String, String>() {
 
-              @Override
-              public String apply(String input) {
-                return "abc.get"
-                    + CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, input)
-                    + "()";
-              }
-            }));
-  }
+			@Override
+			public String apply(String input) {
+				return "abc.get" + CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, input) + "()";
+			}
+		}));
+	}
 
-  private List<String> getColumns() {
-    List<String> columns = Lists.newArrayList();
-    try (PreparedStatement ps = this.con.prepareStatement("select * from " + this.tableName);
-        ResultSet rs = ps.executeQuery(); ) {
+	private List<String> getColumns() {
+		List<String> columns = Lists.newArrayList();
+		try (PreparedStatement ps = this.con.prepareStatement("select * from " + this.tableName);
+				ResultSet rs = ps.executeQuery();) {
 
-      ResultSetMetaData rsm = rs.getMetaData();
-      for (int i = 1; i <= rsm.getColumnCount(); i++) {
-        String columnName = rsm.getColumnName(i);
-        System.out.print("Name: " + columnName);
-        System.out.println(", Type : " + rsm.getColumnClassName(i));
-        columns.add(columnName);
-      }
+			ResultSetMetaData rsm = rs.getMetaData();
+			for (int i = 1; i <= rsm.getColumnCount(); i++) {
+				String columnName = rsm.getColumnName(i);
+				System.out.print("Name: " + columnName);
+				System.out.println(", Type : " + rsm.getColumnClassName(i));
+				columns.add(columnName);
+			}
 
-    } catch (SQLException e) {
-      e.printStackTrace();
-      return null;
-    }
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
 
-    return columns;
-  }
+		return columns;
+	}
 
-  public void close() {
-    try {
-      this.con.close();
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
-  }
+	public void close() {
+		try {
+			this.con.close();
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
 }
