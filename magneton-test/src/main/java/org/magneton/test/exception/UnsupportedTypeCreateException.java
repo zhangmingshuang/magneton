@@ -10,17 +10,18 @@ import com.google.common.base.Strings;
  */
 public class UnsupportedTypeCreateException extends RuntimeException {
 
-  private static final long serialVersionUID = -2070524012863299399L;
+	private static final long serialVersionUID = -2070524012863299399L;
 
-  public UnsupportedTypeCreateException(String message) {
-    super(message);
-  }
+	public UnsupportedTypeCreateException(String message) {
+		super(message);
+	}
 
-  public UnsupportedTypeCreateException(String message, Object... args) {
-    this(Strings.lenientFormat(message, args));
-  }
+	public UnsupportedTypeCreateException(String message, Object... args) {
+		this(Strings.lenientFormat(message, args));
+	}
 
-  public UnsupportedTypeCreateException(Throwable e) {
-    super(e);
-  }
+	public UnsupportedTypeCreateException(Throwable e) {
+		super(e);
+	}
+
 }

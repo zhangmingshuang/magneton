@@ -1,22 +1,30 @@
 package org.magneton.test.model;
 
 import javax.annotation.Nullable;
-import org.magneton.test.model.generate.EmailAddressGenerator;
-import org.magneton.test.model.generate.base.GenericGenerator;
+
+import org.magneton.test.model.generate.EmailAddressGeneratorAbstract;
+import org.magneton.test.model.generate.base.AbstractGenericGenerator;
 
 public enum StringModel {
-  NORMAL(null),
 
-  EMAIL(EmailAddressGenerator.getInstance());
+	/**
+	 * 正常模式
+	 */
+	NORMAL(null),
+	/**
+	 * 邮箱模式
+	 */
+	EMAIL(EmailAddressGeneratorAbstract.getInstance());
 
-  private final GenericGenerator genericGenerator;
+	private final AbstractGenericGenerator abstractGenericGenerator;
 
-  StringModel(GenericGenerator genericGenerator) {
-    this.genericGenerator = genericGenerator;
-  }
+	StringModel(AbstractGenericGenerator abstractGenericGenerator) {
+		this.abstractGenericGenerator = abstractGenericGenerator;
+	}
 
-  @Nullable
-  public GenericGenerator getGenericGenerator() {
-    return this.genericGenerator;
-  }
+	@Nullable
+	public AbstractGenericGenerator getGenericGenerator() {
+		return this.abstractGenericGenerator;
+	}
+
 }

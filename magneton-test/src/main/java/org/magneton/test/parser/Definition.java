@@ -26,14 +26,23 @@ import lombok.ToString;
 @Builder
 public class Definition {
 
-  private Class clazz;
-  @Nullable private Field field;
-  @Nullable private List<Class> generics;
-  @Nullable private Map<Class, Annotation> annotations;
-  @Nullable private List<Definition> childDefinitions;
+	private Class clazz;
 
-  public Definition resetClazz(Class<?> componentType) {
-    this.clazz = componentType;
-    return this;
-  }
+	@Nullable
+	private Field field;
+
+	@Nullable
+	private List<Class> generics;
+
+	@Nullable
+	private Map<Class, Annotation> annotations;
+
+	@Nullable
+	private List<Definition> childDefinitions;
+
+	public Definition resetClazz(Class<?> componentType) {
+		this.clazz = componentType;
+		return this;
+	}
+
 }

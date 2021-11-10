@@ -8,5 +8,6 @@ package org.magneton.test.aware;
  */
 public interface Aware<T> {
 
-  void setInterest(T newInstance);
+	void setInterest(T newInstance);
+
 }

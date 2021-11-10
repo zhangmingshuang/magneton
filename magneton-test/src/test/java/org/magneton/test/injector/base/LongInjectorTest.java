@@ -1,9 +1,9 @@
 package org.magneton.test.injector.base;
 
+import org.magneton.test.config.Config;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.magneton.test.ChaosTest;
-import org.magneton.test.config.Config;
 import org.magneton.test.core.InjectType;
 
 /**
@@ -14,26 +14,27 @@ import org.magneton.test.core.InjectType;
  */
 class LongInjectorTest {
 
-  @Test
-  void test() {
-    InjectType type = InjectType.EXPECTED;
-    Config config = new Config();
+	@Test
+	void test() {
+		InjectType type = InjectType.EXPECTED;
+		Config config = new Config();
 
-    config.setMinLong(1L).setMaxLong(1L);
-    Long l = ChaosTest.create(long.class, config, type);
-    Assertions.assertEquals(1, l);
-    l = ChaosTest.create(Long.class, config, type);
-    Assertions.assertEquals(1, l);
-  }
+		config.setMinLong(1L).setMaxLong(1L);
+		Long l = ChaosTest.create(long.class, config, type);
+		Assertions.assertEquals(1, l);
+		l = ChaosTest.create(Long.class, config, type);
+		Assertions.assertEquals(1, l);
+	}
 
-  @Test
-  void testArray() {
-    InjectType type = InjectType.EXPECTED;
-    Config config = new Config();
+	@Test
+	void testArray() {
+		InjectType type = InjectType.EXPECTED;
+		Config config = new Config();
 
-    config.setMinSize(1).setMaxSize(1).setMinLong(1L).setMaxLong(1L);
-    long[] ints = ChaosTest.create(long[].class, config, type);
-    Assertions.assertEquals(1, ints.length);
-    Assertions.assertEquals(1, ints[0]);
-  }
+		config.setMinSize(1).setMaxSize(1).setMinLong(1L).setMaxLong(1L);
+		long[] ints = ChaosTest.create(long[].class, config, type);
+		Assertions.assertEquals(1, ints.length);
+		Assertions.assertEquals(1, ints[0]);
+	}
+
 }

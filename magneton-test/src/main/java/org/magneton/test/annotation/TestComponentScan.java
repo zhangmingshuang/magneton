@@ -17,5 +17,6 @@ import java.lang.annotation.Target;
 @Documented
 public @interface TestComponentScan {
 
-  String value() default "";
+	String value() default "";
+
 }

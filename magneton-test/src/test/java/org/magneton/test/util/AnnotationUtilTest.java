@@ -15,15 +15,18 @@ import org.junit.jupiter.api.Test;
  */
 class AnnotationUtilTest {
 
-  public static class TestA {
-    @AssertTrue private boolean bool;
-  }
+	public static class TestA {
 
-  @SneakyThrows
-  @Test
-  void testA() {
-    Map<Class, Annotation> bool =
-        AnnotationUtil.findAnnotations(TestA.class.getDeclaredField("bool"));
-    Assertions.assertTrue(bool.containsKey(AssertTrue.class));
-  }
+		@AssertTrue
+		private boolean bool;
+
+	}
+
+	@SneakyThrows
+	@Test
+	void testA() {
+		Map<Class, Annotation> bool = AnnotationUtil.findAnnotations(TestA.class.getDeclaredField("bool"));
+		Assertions.assertTrue(bool.containsKey(AssertTrue.class));
+	}
+
 }

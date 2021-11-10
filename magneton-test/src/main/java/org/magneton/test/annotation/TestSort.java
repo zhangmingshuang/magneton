@@ -17,24 +17,25 @@ import java.lang.annotation.Target;
 @Documented
 public @interface TestSort {
 
-  /**
-   * Useful constant for the highest precedence value.
-   *
-   * <p>See Also: Integer.MIN_VALUE
-   */
-  int HIGHEST_PRECEDENCE = Integer.MIN_VALUE;
+	/**
+	 * Useful constant for the highest precedence value.
+	 *
+	 * <p>
+	 * See Also: Integer.MIN_VALUE
+	 */
+	int HIGHEST_PRECEDENCE = Integer.MIN_VALUE;
 
-  /**
-   * Useful constant for the lowest precedence value.
-   *
-   * @see java.lang.Integer#MAX_VALUE
-   */
-  int LOWEST_PRECEDENCE = Integer.MAX_VALUE;
+	/**
+	 * Useful constant for the lowest precedence value.
+	 *
+	 * @see java.lang.Integer#MAX_VALUE
+	 */
+	int LOWEST_PRECEDENCE = Integer.MAX_VALUE;
 
-  /**
-   * 排序值，值越大越晚执行
-   *
-   * @return
-   */
-  int value() default LOWEST_PRECEDENCE;
+	/**
+	 * 排序值，值越大越晚执行
+	 * @return
+	 */
+	int value() default LOWEST_PRECEDENCE;
+
 }

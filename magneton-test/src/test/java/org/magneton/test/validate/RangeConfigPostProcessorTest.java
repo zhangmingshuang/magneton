@@ -1,13 +1,13 @@
 package org.magneton.test.validate;
 
+import org.magneton.test.HibernateValid;
+import org.magneton.test.config.Config;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import org.hibernate.validator.constraints.Range;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.RepeatedTest;
 import org.magneton.test.ChaosTest;
-import org.magneton.test.HibernateValid;
-import org.magneton.test.config.Config;
 import org.magneton.test.core.InjectType;
 import org.magneton.test.helper.Human;
 
@@ -19,34 +19,39 @@ import org.magneton.test.helper.Human;
  * @see RangeConfigPostProcessor
  */
 class RangeConfigPostProcessorTest {
-  private final Config config = new Config();
-  private final InjectType angle = InjectType.EXPECTED;
 
-  public static class TestB {
-    @Range(min = 8, max = 10)
-    private byte b;
+	private final Config config = new Config();
 
-    @Range(min = 110, max = 120)
-    private short s;
+	private final InjectType angle = InjectType.EXPECTED;
 
-    @Range(min = 100, max = 101)
-    private int i;
+	public static class TestB {
 
-    @Range(min = 1010, max = 1011)
-    private long l;
+		@Range(min = 8, max = 10)
+		private byte b;
 
-    @Range(min = 99, max = 100)
-    private BigDecimal bigDecimal;
+		@Range(min = 110, max = 120)
+		private short s;
 
-    @Range(min = 999, max = 1000)
-    private BigInteger bigInteger;
-  }
+		@Range(min = 100, max = 101)
+		private int i;
 
-  @RepeatedTest(10)
-  void testB() {
-    MaxConfigPostProcessorTest.TestB testB =
-        ChaosTest.create(MaxConfigPostProcessorTest.TestB.class, this.config, this.angle);
-    Human.sout(testB);
-    Assertions.assertTrue(HibernateValid.valid(testB));
-  }
+		@Range(min = 1010, max = 1011)
+		private long l;
+
+		@Range(min = 99, max = 100)
+		private BigDecimal bigDecimal;
+
+		@Range(min = 999, max = 1000)
+		private BigInteger bigInteger;
+
+	}
+
+	@RepeatedTest(10)
+	void testB() {
+		MaxConfigPostProcessorTest.TestB testB = ChaosTest.create(MaxConfigPostProcessorTest.TestB.class, this.config,
+				this.angle);
+		Human.sout(testB);
+		Assertions.assertTrue(HibernateValid.valid(testB));
+	}
+
 }

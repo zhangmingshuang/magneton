@@ -18,77 +18,91 @@ import org.magneton.test.helper.Human;
  */
 class ParserFactoryTest {
 
-  private final ParserFactory parserFactory = new ParserFactory();
+	private final ParserFactory parserFactory = new ParserFactory();
 
-  @Test
-  void parseLong() {
-    Definition definition = this.parserFactory.parse(Long.class);
-    Assertions.assertEquals("java.lang.Long", definition.getClazz().getName());
-    Assertions.assertNull(definition.getChildDefinitions());
-    Assertions.assertNull(definition.getGenerics());
-    Assertions.assertEquals(1, definition.getAnnotations().size());
-    System.out.println(definition);
-  }
+	@Test
+	void parseLong() {
+		Definition definition = this.parserFactory.parse(Long.class);
+		Assertions.assertEquals("java.lang.Long", definition.getClazz().getName());
+		Assertions.assertNull(definition.getChildDefinitions());
+		Assertions.assertNull(definition.getGenerics());
+		Assertions.assertEquals(1, definition.getAnnotations().size());
+		System.out.println(definition);
+	}
 
-  public static class A {
-    @Size(min = 1, max = 12)
-    private long a;
+	public static class A {
 
-    @NotNull private String b;
-  }
+		@Size(min = 1, max = 12)
+		private long a;
 
-  @Test
-  void parseA() {
-    Definition definition = this.parserFactory.parse(A.class);
-    Assertions.assertEquals(2, definition.getChildDefinitions().size());
-    for (Definition childDefinition : definition.getChildDefinitions()) {
-      Assertions.assertEquals(1, childDefinition.getAnnotations().size());
-    }
-    System.out.println(definition);
-  }
+		@NotNull
+		private String b;
 
-  public static class B {
-    private A a;
-    private String str;
-    private B b;
-  }
+	}
 
-  @Test
-  void testB() {
-    Definition definition = this.parserFactory.parse(B.class);
-    Assertions.assertEquals(3, definition.getChildDefinitions().size());
-    for (Definition childDefinition : definition.getChildDefinitions()) {
-      String simpleName = childDefinition.getClazz().getSimpleName();
-      if ("A".equalsIgnoreCase(simpleName)) {
-        Assertions.assertEquals(2, childDefinition.getChildDefinitions().size());
-      } else if ("B".equalsIgnoreCase(simpleName)) {
-        Assertions.assertEquals(3, childDefinition.getChildDefinitions().size());
-      }
-    }
-    System.out.println(definition);
-  }
+	@Test
+	void parseA() {
+		Definition definition = this.parserFactory.parse(A.class);
+		Assertions.assertEquals(2, definition.getChildDefinitions().size());
+		for (Definition childDefinition : definition.getChildDefinitions()) {
+			Assertions.assertEquals(1, childDefinition.getAnnotations().size());
+		}
+		System.out.println(definition);
+	}
 
-  public static class C {
-    private List<String> list;
-  }
+	public static class B {
 
-  @Test
-  void testC() {
-    Definition definition = this.parserFactory.parse(C.class);
-    System.out.println(definition);
-  }
+		private A a;
 
-  public static class D {
-    @AssertTrue private Boolean bool;
-  }
+		private String str;
 
-  @Test
-  void testD() {
-    Definition parse = this.parserFactory.parse(D.class);
-    Assertions.assertEquals(1, parse.getChildDefinitions().size());
-    Definition definition = parse.getChildDefinitions().get(0);
-    Map<Class, Annotation> annotations = definition.getAnnotations();
-    Human.sout(annotations);
-    Assertions.assertNotNull(annotations.get(AssertTrue.class));
-  }
+		private B b;
+
+	}
+
+	@Test
+	void testB() {
+		Definition definition = this.parserFactory.parse(B.class);
+		Assertions.assertEquals(3, definition.getChildDefinitions().size());
+		for (Definition childDefinition : definition.getChildDefinitions()) {
+			String simpleName = childDefinition.getClazz().getSimpleName();
+			if ("A".equalsIgnoreCase(simpleName)) {
+				Assertions.assertEquals(2, childDefinition.getChildDefinitions().size());
+			}
+			else if ("B".equalsIgnoreCase(simpleName)) {
+				Assertions.assertEquals(3, childDefinition.getChildDefinitions().size());
+			}
+		}
+		System.out.println(definition);
+	}
+
+	public static class C {
+
+		private List<String> list;
+
+	}
+
+	@Test
+	void testC() {
+		Definition definition = this.parserFactory.parse(C.class);
+		System.out.println(definition);
+	}
+
+	public static class D {
+
+		@AssertTrue
+		private Boolean bool;
+
+	}
+
+	@Test
+	void testD() {
+		Definition parse = this.parserFactory.parse(D.class);
+		Assertions.assertEquals(1, parse.getChildDefinitions().size());
+		Definition definition = parse.getChildDefinitions().get(0);
+		Map<Class, Annotation> annotations = definition.getAnnotations();
+		Human.sout(annotations);
+		Assertions.assertNotNull(annotations.get(AssertTrue.class));
+	}
+
 }
