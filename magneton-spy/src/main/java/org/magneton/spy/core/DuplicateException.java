@@ -1,4 +1,4 @@
-package org.magneton.spy.protocol;
+package org.magneton.spy.core;
 
 import com.google.common.base.Strings;
 
@@ -6,11 +6,11 @@ import com.google.common.base.Strings;
  * @author zhangmsh 2021/7/28
  * @since 1.0.0
  */
-public class DuplicateProtoclException extends RuntimeException {
+public class DuplicateException extends RuntimeException {
 
   private static final long serialVersionUID = 6767205210590135690L;
 
-  public DuplicateProtoclException(String name, Class a, Class b) {
+  public DuplicateException(String name, Class a, Class b) {
     super(Strings.lenientFormat("the same protocol %s on %s and %s", name, a, b));
   }
 }
