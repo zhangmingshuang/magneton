@@ -13,25 +13,29 @@ import javax.annotation.Nullable;
  */
 public class FieldUtil {
 
-  private FieldUtil() {}
+	private FieldUtil() {
+	}
 
-  public static Set<Field> getFields(@Nullable Class clazz) {
-    Set<Field> fields = Sets.newHashSet();
-    getFields(fields, clazz);
-    return fields;
-  }
+	public static Set<Field> getFields(@Nullable Class clazz) {
+		Set<Field> fields = Sets.newHashSet();
+		getFields(fields, clazz);
+		return fields;
+	}
 
-  private static void getFields(Set<Field> fields, Class clazz) {
-    if (clazz == null || clazz == Object.class) {
-      return;
-    }
-    Field[] declaredFields = clazz.getDeclaredFields();
-    for (Field declaredField : declaredFields) {
-      if (fields.contains(declaredField)) {
-        continue;
-      }
-      fields.add(declaredField);
-    }
-    getFields(fields, clazz.getSuperclass());
-  }
+	@SuppressWarnings("OverlyComplexBooleanExpression")
+	private static void getFields(Set<Field> fields, Class clazz) {
+		if (clazz == null || clazz == Object.class || clazz.getName().startsWith("java")
+				|| clazz.getName().startsWith("javax")) {
+			return;
+		}
+		Field[] declaredFields = clazz.getDeclaredFields();
+		for (Field declaredField : declaredFields) {
+			if (fields.contains(declaredField)) {
+				continue;
+			}
+			fields.add(declaredField);
+		}
+		getFields(fields, clazz.getSuperclass());
+	}
+
 }

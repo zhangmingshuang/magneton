@@ -1,90 +1,89 @@
 package org.magneton.test.injector.collection;
 
-import com.google.common.base.Strings;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import lombok.extern.slf4j.Slf4j;
 import org.magneton.test.annotation.TestAutowired;
 import org.magneton.test.annotation.TestComponent;
-import org.magneton.test.core.Config;
+import org.magneton.test.config.Config;
+import org.magneton.test.config.ConfigProcessorFactory;
+import org.magneton.test.core.InjectType;
+import org.magneton.test.exception.UnsupportedTypeCreateException;
 import org.magneton.test.injector.AbstractInjector;
-import org.magneton.test.injector.Inject;
-import org.magneton.test.injector.InjectType;
 import org.magneton.test.injector.InjectorFactory;
-import org.magneton.test.util.ConfigUtil;
-import org.magneton.test.util.DemonUtil;
-import org.magneton.test.util.InjectUtil;
-import org.magneton.test.util.PrimitiveUtil;
+import org.magneton.test.parser.Definition;
+import org.magneton.test.parser.ParserFactory;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
 
 /**
  * .
  *
- * @author zhangmsh 2021/8/3
+ * @author zhangmsh 2021/8/23
  * @since 2.0.0
  */
 @TestComponent
-@Slf4j
 public class CollectionInjector extends AbstractInjector {
 
-  @TestAutowired private InjectorFactory injectorFactory;
+	@TestAutowired
+	private InjectorFactory injectorFactory;
 
-  @SuppressWarnings("OverlyBroadCatchBlock")
-  @Override
-  protected Object createValue(Config config, InjectType injectType, Inject inject) {
-    Collection collection;
+	@Override
+	protected Object createValue(Definition definition, Config config, InjectType injectType) {
+		Class clazz = definition.getClazz();
+		Collection collection;
+		if (clazz.isInterface()) {
+			if (Set.class.isAssignableFrom(clazz)) {
+				collection = Sets.newHashSet();
+			}
+			else if (Collection.class.isAssignableFrom(clazz) || List.class.isAssignableFrom(clazz)) {
+				collection = Lists.newArrayList();
+			}
+			else {
+				throw new UnsupportedTypeCreateException("集合类型%s暂不支持注入", clazz);
+			}
+		}
+		else {
+			try {
+				collection = (Collection) clazz.getConstructor().newInstance();
+			}
+			catch (Throwable e) {
+				throw new UnsupportedTypeCreateException(e);
+			}
+		}
 
-    Inject genericClass = InjectUtil.getOrElse(inject, 0, PrimitiveUtil.random());
-    if (inject.isInterface()) {
-      if (Set.class.isAssignableFrom(inject.getInectType())) {
-        collection = Sets.newHashSet();
-      } else if (Collection.class.isAssignableFrom(inject.getInectType())
-          || List.class.isAssignableFrom(inject.getInectType())) {
-        collection = Lists.newArrayList();
-      } else {
-        log.warn("不支持的集合类型{}", inject.getInectType());
-        return null;
-      }
-    } else {
-      try {
-        collection = (Collection) inject.getInectType().getConstructor().newInstance();
-      } catch (Throwable e) {
-        throw new RuntimeException(e);
-      }
-    }
-    int size = DemonUtil.createInt(injectType, ConfigUtil.getRandomSize(config));
-    if (size == 0) {
-      return null;
-    }
+		int size = ConfigProcessorFactory.of(injectType).nextSize(config, definition);
+		if (size < 0) {
+			return null;
+		}
+		else if (size == 0) {
+			return Collections.emptyList();
+		}
+		List<Class> generics = definition.getGenerics();
+		Class genericClass;
+		if (generics == null || generics.isEmpty()) {
+			// 没有泛型注明，则是一个Object。 使用Object则统一采用字段串代替
+			genericClass = String.class;
+		}
+		else {
+			genericClass = generics.get(0);
+		}
 
-    for (int i = 0; i < size; i++) {
-      Object value = this.injectorFactory.inject(config, genericClass, injectType);
-      collection.add(value);
-    }
+		Definition genericDefinition = ParserFactory.getInstance().parse(genericClass);
+		for (int i = 0; i < size; i++) {
+			Object value = this.injectorFactory.inject(genericDefinition, config, injectType);
+			if (value == null) {
+				continue;
+			}
+			collection.add(value);
+		}
+		return collection;
+	}
 
-    return collection;
-  }
+	@Override
+	public Class[] getTypes() {
+		return new Class[] { Collection.class, Collection[].class };
+	}
 
-  @Override
-  protected Object createArray(
-      Config config, InjectType injectType, Inject inject, Integer length) {
-
-    if (Collection[].class.isAssignableFrom(inject.getInectType())
-        || List[].class.isAssignableFrom(inject.getInectType())) {
-      return new ArrayList[length];
-    } else if (Set[].class.isAssignableFrom(inject.getInectType())) {
-      return new HashSet[length];
-    }
-    throw new UnsupportedOperationException(
-        Strings.lenientFormat("不支持的集合类型%s", inject.getInectType()));
-  }
-
-  @Override
-  public Class[] getTypes() {
-    return new Class[] {Collection.class, Collection[].class};
-  }
 }

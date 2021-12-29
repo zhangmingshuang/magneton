@@ -1,13 +1,12 @@
 package org.magneton.test.injector.base;
 
-import java.math.BigDecimal;
-import java.util.concurrent.ThreadLocalRandom;
 import org.magneton.test.annotation.TestComponent;
-import org.magneton.test.core.Config;
-import org.magneton.test.exception.NoSupportTypeCreateException;
+import org.magneton.test.config.Config;
+import org.magneton.test.config.ConfigProcessorFactory;
+import org.magneton.test.core.InjectType;
 import org.magneton.test.injector.AbstractInjector;
-import org.magneton.test.injector.Inject;
-import org.magneton.test.injector.InjectType;
+import org.magneton.test.parser.Definition;
+import javax.annotation.Nullable;
 
 /**
  * .
@@ -18,28 +17,15 @@ import org.magneton.test.injector.InjectType;
 @TestComponent
 public class FloatInjector extends AbstractInjector {
 
-  @Override
-  protected Object createValue(Config config, InjectType injectType, Inject inject) {
-    return BigDecimal.valueOf(
-            ThreadLocalRandom.current().nextDouble(config.getMinFloat(), config.getMaxFloat()))
-        .setScale(config.getFloatScale(), config.getFloatRoundingModel())
-        .floatValue();
-  }
+	@Override
+	public Class[] getTypes() {
+		return new Class[] { float.class, Float.class, float[].class, Float[].class };
+	}
 
-  @Override
-  protected Object createArray(
-      Config config, InjectType injectType, Inject inject, Integer length) {
-    if (float[].class.isAssignableFrom(inject.getInectType())) {
-      return new float[length];
-    }
-    if (Float[].class.isAssignableFrom(inject.getInectType())) {
-      return new Float[length];
-    }
-    throw new NoSupportTypeCreateException(inject.getName());
-  }
+	@Nullable
+	@Override
+	protected Object createValue(Definition definition, Config config, InjectType injectType) {
+		return ConfigProcessorFactory.of(injectType).nextFloat(config, definition);
+	}
 
-  @Override
-  public Class[] getTypes() {
-    return new Class[] {float.class, Float.class, float[].class, Float[].class};
-  }
 }

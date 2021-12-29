@@ -8,5 +8,6 @@ package org.magneton.test.core;
  */
 public interface AfterAutowrited {
 
-  void afterAutowrited();
+	void afterAutowrited();
+
 }

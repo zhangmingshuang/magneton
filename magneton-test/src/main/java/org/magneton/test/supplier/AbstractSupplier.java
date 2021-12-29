@@ -2,6 +2,7 @@ package org.magneton.test.supplier;
 
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
+import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import java.lang.reflect.Field;
 import java.util.List;
 import javax.annotation.Nullable;
@@ -20,106 +21,99 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class AbstractSupplier<T> {
 
-  private int status;
+	private boolean print;
 
-  public T print() {
-    this.status = 1;
-    return (T) this;
-  }
+	private final Object obj;
 
-  public T log() {
-    this.status = 2;
-    return (T) this;
-  }
+	private List<ValidateError> errors;
 
-  private final Object obj;
+	public AbstractSupplier(@Nullable Object obj) {
+		this.obj = obj;
+	}
 
-  private List<ValidateError> errors;
+	@Nullable
+	protected Object getObj() {
+		return this.obj;
+	}
 
-  public AbstractSupplier(@Nullable Object obj) {
-    this.obj = obj;
-  }
+	protected void addError(ValidateError error) {
+		if (this.errors == null) {
+			this.errors = Lists.newArrayList();
+		}
+		this.errors.add(error);
+	}
 
-  @Nullable
-  protected Object getObj() {
-    return this.obj;
-  }
+	protected boolean isPrintable() {
+		return this.print;
+	}
 
-  protected void addError(ValidateError error) {
-    if (this.errors == null) {
-      this.errors = Lists.newArrayList();
-    }
-    this.errors.add(error);
-  }
+	@CanIgnoreReturnValue
+	protected boolean takeErrors() {
+		if (this.errors == null || this.errors.isEmpty()) {
+			return false;
+		}
+		if (this.isPrintable()) {
+			this.printErrors();
+		}
+		return true;
+	}
 
-  protected boolean isPrintable() {
-    return this.status > 0;
-  }
+	protected void printErrors() {
+		StringBuilder builder = new StringBuilder(128);
+		for (ValidateError error : this.errors) {
+			String errorMessage = error.getMessage();
+			Object obj = error.getObj();
+			String className = "";
+			String propertyPath = "";
+			Object invalidValue = error.getInvalidValue();
+			if (obj != null) {
+				Class clazz = obj.getClass();
+				className = clazz.getName();
+				builder.append("类").append(className);
+				propertyPath = error.getField() == null ? "" : error.getField().getName();
+				if (!Strings.isNullOrEmpty(propertyPath)) {
+					builder.append("#").append(propertyPath);
+				}
+			}
+			if (invalidValue != null) {
+				builder.append("值为：").append(invalidValue).append("，但是预期：");
+			}
+			builder.append(errorMessage);
+			this.doPrint(builder.toString());
+		}
+	}
 
-  protected boolean takeErrors() {
-    if (this.errors == null || this.errors.isEmpty()) {
-      return false;
-    }
-    if (this.isPrintable()) {
-      this.printErrors();
-    }
-    return true;
-  }
+	@SuppressWarnings("UseOfSystemOutOrSystemErr")
+	protected void doPrint(String msg) {
+		if (Strings.isNullOrEmpty(msg)) {
+			return;
+		}
+		System.out.println(msg);
+		System.out.println("----");
+	}
 
-  protected void printErrors() {
-    StringBuilder builder = new StringBuilder(128);
-    for (ValidateError error : this.errors) {
-      String errorMessage = error.getMessage();
-      Object obj = error.getObj();
-      String className = "";
-      String propertyPath = "";
-      Object invalidValue = error.getInvalidValue();
-      if (obj != null) {
-        Class clazz = obj.getClass();
-        className = clazz.getName();
-        builder.append("类").append(className);
-        propertyPath = error.getField() == null ? "" : error.getField().getName();
-        if (!Strings.isNullOrEmpty(propertyPath)) {
-          builder.append("#").append(propertyPath);
-        }
-      }
-      if (invalidValue != null) {
-        builder.append("值为：").append(invalidValue).append("，但是预期：");
-      }
-      builder.append(errorMessage);
-      this.doPrint(builder.toString());
-    }
-  }
+	public void setPrint(boolean print) {
+		this.print = print;
+	}
 
-  protected void doPrint(String msg) {
-    if (Strings.isNullOrEmpty(msg)) {
-      return;
-    }
-    if (this.status == 1) {
-      System.out.println(msg);
-      System.out.println("----");
-    } else {
-      log.warn(msg);
-      log.warn("----");
-    }
-  }
+	@Setter
+	@Getter
+	@ToString
+	@AllArgsConstructor
+	public static class ValidateError {
 
-  @Setter
-  @Getter
-  @ToString
-  @AllArgsConstructor
-  public static class ValidateError {
+		private Object obj;
 
-    private Object obj;
+		private Field field;
 
-    private Field field;
+		private Object invalidValue;
 
-    private Object invalidValue;
+		private String message;
 
-    private String message;
+		public static ValidateError of(Object obj, Field field, Object invalidValue, String message) {
+			return new ValidateError(obj, field, invalidValue, message);
+		}
 
-    public static ValidateError of(Object obj, Field field, Object invalidValue, String message) {
-      return new ValidateError(obj, field, invalidValue, message);
-    }
-  }
+	}
+
 }

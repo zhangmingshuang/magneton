@@ -1,41 +1,31 @@
 package org.magneton.test.injector.base;
 
-import java.util.concurrent.ThreadLocalRandom;
 import org.magneton.test.annotation.TestComponent;
-import org.magneton.test.core.Config;
-import org.magneton.test.exception.NoSupportTypeCreateException;
+import org.magneton.test.config.Config;
+import org.magneton.test.config.ConfigProcessorFactory;
+import org.magneton.test.core.InjectType;
 import org.magneton.test.injector.AbstractInjector;
-import org.magneton.test.injector.Inject;
-import org.magneton.test.injector.InjectType;
+import org.magneton.test.parser.Definition;
+import javax.annotation.Nullable;
 
 /**
  * .
  *
  * @author zhangmsh 2021/8/2
- * @since
+ * @since 2.0.0
  */
 @TestComponent
 public class ByteInjector extends AbstractInjector {
 
-  @Override
-  protected Object createValue(Config config, InjectType injectType, Inject inject) {
-    return (byte) ThreadLocalRandom.current().nextInt(config.getMinByte(), config.getMaxByte());
-  }
+	@Override
+	public Class[] getTypes() {
+		return new Class[] { byte.class, Byte.class, byte[].class, Byte[].class };
+	}
 
-  @Override
-  protected Object createArray(
-      Config config, InjectType injectType, Inject inject, Integer length) {
-    if (byte[].class.isAssignableFrom(inject.getInectType())) {
-      return new byte[length];
-    }
-    if (Byte[].class.isAssignableFrom(inject.getInectType())) {
-      return new Byte[length];
-    }
-    throw new NoSupportTypeCreateException(inject.getName());
-  }
+	@Nullable
+	@Override
+	protected Object createValue(Definition definition, Config config, InjectType injectType) {
+		return ConfigProcessorFactory.of(injectType).nextByte(config, definition);
+	}
 
-  @Override
-  public Class[] getTypes() {
-    return new Class[] {byte.class, Byte.class, byte[].class, Byte[].class};
-  }
 }
