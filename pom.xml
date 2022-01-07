@@ -17,6 +17,7 @@
 		<module>magneton-lock</module>
 		<module>magneton-cache</module>
 		<module>magneton-test</module>
+		<module>magneton-modules</module>
 		<module>spring-cloud-starter-magneton</module>
 		<module>magneton-spy</module>
 	</modules>
