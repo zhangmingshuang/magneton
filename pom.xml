@@ -2,12 +2,18 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		 xmlns="http://maven.apache.org/POM/4.0.0"
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<groupId>org.magneton</groupId>
 	<artifactId>magneton</artifactId>
 	<packaging>pom</packaging>
+	<version>${revision}</version>
+	<modelVersion>4.0.0</modelVersion>
+	<inceptionYear>2020</inceptionYear>
+
 	<modules>
 		<module>magneton-core</module>
+		<module>spring-boot-magneton-parent</module>
 		<module>spring-boot-starter-magneton</module>
-		<module>magneton-parent</module>
 		<module>magneton-lock</module>
 		<module>magneton-cache</module>
 		<module>magneton-test</module>
@@ -15,10 +21,6 @@
 		<module>magneton-spy</module>
 	</modules>
 
-	<groupId>org.magneton</groupId>
-	<modelVersion>4.0.0</modelVersion>
-
-	<inceptionYear>2020</inceptionYear>
 
 	<contributors>
 		<contributor>
@@ -39,13 +41,63 @@
 		<java.version>1.8</java.version>
 		<maven.compiler.source>8</maven.compiler.source>
 		<maven.compiler.target>8</maven.compiler.target>
+
+		<!-- 版本环境标识-->
+		<changelist>-RC</changelist>
+		<!-- 项目版本 -->
+		<revision>1.2.0${changelist}</revision>
+
 		<sonar.host.url>https://builds.apache.org/analysis</sonar.host.url>
+
+		<spring-boot.version>2.3.4.RELEASE</spring-boot.version>
 		<testable.version>0.6.7</testable.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<commons-lang3.version>3.11</commons-lang3.version>
+		<lombok.version>1.18.12</lombok.version>
+		<spring.version>5.2.9.RELEASE</spring.version>
+		<spring-boot.version>2.3.7.RELEASE</spring-boot.version>
+		<slf4j-api.version>1.7.30</slf4j-api.version>
+		<redisson.version>3.16.1</redisson.version>
+		<junit.version>5.7.0</junit.version>
+		<guava.version>30.1.1-jre</guava.version>
+		<javax.el.version>3.0.1-b12</javax.el.version>
+		<testable.version>0.6.7</testable.version>
+		<joda-time.version>2.10.10</joda-time.version>
+		<fastjson.version>1.2.75</fastjson.version>
+		<mockito-junit-jupiter.version>3.6.28</mockito-junit-jupiter.version>
+		<jakarta.validation-api.version>2.0.2</jakarta.validation-api.version>
+		<hibernate-validator.version>6.1.5.Final</hibernate-validator.version>
+		<auto-service.version>1.0</auto-service.version>
+		<junit-platform-commons.version>1.6.2</junit-platform-commons.version>
+		<junit-jupiter.version>5.6.2</junit-jupiter.version>
+		<junit-jupiter-api.version>5.6.2</junit-jupiter-api.version>
 	</properties>
 
-	<version>1.0.0</version>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.google.auto.service</groupId>
+				<artifactId>auto-service</artifactId>
+				<version>${auto-service.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.projectlombok</groupId>
+				<artifactId>lombok</artifactId>
+				<version>${lombok.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.google.auto.service</groupId>
+			<artifactId>auto-service</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+		</dependency>
+	</dependencies>
 
 	<build>
 		<plugins>
@@ -54,9 +106,9 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.5.1</version>
 				<configuration>
-					<source>${maven.compiler.source}</source>
-					<target>${maven.compiler.target}</target>
-					<compilerVersion>${maven.compiler.source}</compilerVersion>
+					<source>1.8</source>
+					<target>1.8</target>
+					<compilerVersion>1.8</compilerVersion>
 					<showDeprecation>true</showDeprecation>
 					<showWarnings>true</showWarnings>
 				</configuration>
@@ -187,6 +239,60 @@
 			<!--                    </execution>-->
 			<!--                </executions>-->
 			<!--            </plugin>-->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>flatten-maven-plugin</artifactId>
+				<version>1.1.0</version>
+				<configuration>
+					<updatePomFile>true</updatePomFile>
+					<!--
+						minimum	不推荐使用，会展开pluginRepositories。
+						bom	会保留dependencyManagement，展开properties。
+						oss	推荐开源项目使用，会展开
+							ciManagement、contributors、distributionManagement、 inceptionYear、
+							issueManagement、mailingLists、organization、prerequisites
+						ossrh	会展开name、description、url、scm、developers
+						defaults	会展开repositories
+						clean	删除全部可选元素
+					 -->
+					<!-- 如果设置该配置，则只会覆盖主要的配置 -->
+					<flattenMode>defaults</flattenMode>
+					<pomElements>
+						<!--<dependencyManagement>expand</dependencyManagement>-->
+						<!--<dependencies>expand</dependencies>-->
+					</pomElements>
+				</configuration>
+				<executions>
+					<execution>
+						<id>flatten</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>flatten</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>flatten.clean</id>
+						<phase>clean</phase>
+						<goals>
+							<goal>clean</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>io.spring.javaformat</groupId>
+				<artifactId>spring-javaformat-maven-plugin</artifactId>
+				<version>0.0.28</version>
+				<executions>
+					<execution>
+						<phase>validate</phase>
+						<inherited>true</inherited>
+						<goals>
+							<goal>validate</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 	<reporting>

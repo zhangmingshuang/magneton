@@ -1,4 +1,4 @@
-package org.magneton.test.supplier;
+package org.magneton.test.test.supplier;
 
 import java.util.function.BooleanSupplier;
 import javax.annotation.Nullable;
