@@ -28,6 +28,43 @@
 				<artifactId>magneton-cache</artifactId>
 				<version>${project.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>org.magneton</groupId>
+				<artifactId>magneton-core</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.magneton</groupId>
+				<artifactId>magneton-lock</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<!-- magneton-modules -->
+			<dependency>
+				<groupId>org.magneton</groupId>
+				<artifactId>magneton-modeul-concurrent</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<!-- magneton-modules end-->
+			<dependency>
+				<groupId>org.magneton</groupId>
+				<artifactId>magneton-spy</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.magneton</groupId>
+				<artifactId>magneton-test</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.magneton</groupId>
+				<artifactId>spring-boot-starter-magneton</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.magneton</groupId>
+				<artifactId>spring-cloud-starter-magneton</artifactId>
+				<version>${project.version}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 </project>
