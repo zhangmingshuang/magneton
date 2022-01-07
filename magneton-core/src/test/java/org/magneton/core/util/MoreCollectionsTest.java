@@ -13,10 +13,11 @@ import org.junit.jupiter.api.Test;
  */
 class MoreCollectionsTest {
 
-  @Test
-  void isNullOrEmpty() {
-    Assertions.assertTrue(MoreCollections.isNullOrEmpty(Collections.emptyList()), "empty list");
-    Assertions.assertTrue(MoreCollections.isNullOrEmpty(Collections.emptyMap()), "empty map");
-    Assertions.assertFalse(MoreCollections.isNullOrEmpty(Collections.singletonList("1")), "not empty");
-  }
+	@Test
+	void isNullOrEmpty() {
+		Assertions.assertTrue(MoreCollections.isNullOrEmpty(Collections.emptyList()), "empty list");
+		Assertions.assertTrue(MoreCollections.isNullOrEmpty(Collections.emptyMap()), "empty map");
+		Assertions.assertFalse(MoreCollections.isNullOrEmpty(Collections.singletonList("1")), "not empty");
+	}
+
 }

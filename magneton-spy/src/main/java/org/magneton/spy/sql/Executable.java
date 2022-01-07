@@ -6,5 +6,6 @@ package org.magneton.spy.sql;
  */
 public interface Executable {
 
-  ResultSet exec();
+	ResultSet exec();
+
 }

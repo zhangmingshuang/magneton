@@ -11,8 +11,9 @@ import org.magneton.spy.core.SumProtocol;
 @AutoService(Protocol.class)
 public class MySqlSumProtocol implements SumProtocol {
 
-  @Override
-  public String db() {
-    return "mysql";
-  }
+	@Override
+	public String db() {
+		return "mysql";
+	}
+
 }

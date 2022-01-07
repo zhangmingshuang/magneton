@@ -6,5 +6,6 @@ package org.magneton.spy.sql;
  */
 public interface Sql {
 
-  Select select(String table);
+	Select select(String table);
+
 }

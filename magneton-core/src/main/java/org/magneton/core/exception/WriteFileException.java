@@ -7,7 +7,9 @@ package org.magneton.core.exception;
  * @since 2021/09/07
  */
 public class WriteFileException extends RuntimeException {
-  public WriteFileException(String message, Throwable cause) {
-    super(message, cause);
-  }
+
+	public WriteFileException(String message, Throwable cause) {
+		super(message, cause);
+	}
+
 }

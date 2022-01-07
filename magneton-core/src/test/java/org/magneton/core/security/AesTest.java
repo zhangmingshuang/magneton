@@ -16,32 +16,29 @@ import org.junit.jupiter.api.Test;
 @SuppressWarnings("UnsecureRandomNumberGeneration")
 class AesTest {
 
-  @Test
-  void testPassword() throws Exception {
-    for (int i = 0; i < 400; i++) {
-      String data =
-          Math.random() < 0.4
-              ? String.valueOf(ThreadLocalRandom.current().nextLong(1, 99999L))
-              : UUID.randomUUID().toString();
-      String pwd = UUID.randomUUID().toString();
-      String encrypt = Aes.encrypt(pwd, data);
-      String decrypt = Aes.decrypt(pwd, encrypt);
-      Assertions.assertEquals(data, decrypt, "decrypt error");
-    }
-  }
+	@Test
+	void testPassword() throws Exception {
+		for (int i = 0; i < 400; i++) {
+			String data = Math.random() < 0.4 ? String.valueOf(ThreadLocalRandom.current().nextLong(1, 99999L))
+					: UUID.randomUUID().toString();
+			String pwd = UUID.randomUUID().toString();
+			String encrypt = Aes.encrypt(pwd, data);
+			String decrypt = Aes.decrypt(pwd, encrypt);
+			Assertions.assertEquals(data, decrypt, "decrypt error");
+		}
+	}
 
-  @Test
-  void testKey() throws Exception {
-    for (int i = 0; i < 400; i++) {
-      String data =
-          Math.random() < 0.4
-              ? String.valueOf(ThreadLocalRandom.current().nextLong(1, 99999L))
-              : UUID.randomUUID().toString();
+	@Test
+	void testKey() throws Exception {
+		for (int i = 0; i < 400; i++) {
+			String data = Math.random() < 0.4 ? String.valueOf(ThreadLocalRandom.current().nextLong(1, 99999L))
+					: UUID.randomUUID().toString();
 
-      SecretKey secretKey = Aes.generateKey();
-      String encrypt = Aes.encrypt(secretKey, data);
-      String decrypt = Aes.decrypt(secretKey, encrypt);
-      Assertions.assertEquals(data, decrypt, "decrypt error");
-    }
-  }
+			SecretKey secretKey = Aes.generateKey();
+			String encrypt = Aes.encrypt(secretKey, data);
+			String decrypt = Aes.decrypt(secretKey, encrypt);
+			Assertions.assertEquals(data, decrypt, "decrypt error");
+		}
+	}
+
 }

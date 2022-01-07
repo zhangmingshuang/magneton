@@ -9,15 +9,17 @@ import java.util.List;
  * @since 1.0.0
  */
 public class Datas {
-  private Datas() {
-    // private
-  }
 
-  public static boolean isEmpty(byte[] bytes) {
-    return bytes == null || bytes.length < 1;
-  }
+	private Datas() {
+		// private
+	}
 
-  public static boolean isEmpty(List<byte[]> list) {
-    return list == null || list.isEmpty();
-  }
+	public static boolean isEmpty(byte[] bytes) {
+		return bytes == null || bytes.length < 1;
+	}
+
+	public static boolean isEmpty(List<byte[]> list) {
+		return list == null || list.isEmpty();
+	}
+
 }

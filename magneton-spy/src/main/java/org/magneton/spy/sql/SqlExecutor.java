@@ -6,5 +6,6 @@ package org.magneton.spy.sql;
  */
 public interface SqlExecutor {
 
-  Object exec(Select select);
+	Object exec(Select select);
+
 }

@@ -9,9 +9,10 @@ package org.magneton.core.signature;
  */
 public class SignatureBodyException extends Exception {
 
-  private static final long serialVersionUID = 7282648572375190179L;
+	private static final long serialVersionUID = 7282648572375190179L;
 
-  public SignatureBodyException(String message) {
-    super(message);
-  }
+	public SignatureBodyException(String message) {
+		super(message);
+	}
+
 }

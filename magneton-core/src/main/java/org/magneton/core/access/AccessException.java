@@ -8,9 +8,10 @@ package org.magneton.core.access;
  */
 public class AccessException extends RuntimeException {
 
-  private static final long serialVersionUID = 5491169936860052502L;
+	private static final long serialVersionUID = 5491169936860052502L;
 
-  public AccessException(String message, Throwable cause) {
-    super(message, cause);
-  }
+	public AccessException(String message, Throwable cause) {
+		super(message, cause);
+	}
+
 }

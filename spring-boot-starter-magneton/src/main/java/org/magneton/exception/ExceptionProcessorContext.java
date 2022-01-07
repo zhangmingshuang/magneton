@@ -10,21 +10,20 @@ package org.magneton.exception;
 @SuppressWarnings("ProhibitedExceptionDeclared")
 public interface ExceptionProcessorContext extends ExceptionProcessorRegister {
 
-  /**
-   * exception handle.
-   *
-   * @param exception process expcetion.
-   * @return process result.
-   * @throws Exception if the expcetion has not any handler.
-   */
-  @SuppressWarnings("java:S112")
-  Object handle(Exception exception) throws Exception;
+	/**
+	 * exception handle.
+	 * @param exception process expcetion.
+	 * @return process result.
+	 * @throws Exception if the expcetion has not any handler.
+	 */
+	@SuppressWarnings("java:S112")
+	Object handle(Exception exception) throws Exception;
 
-  /**
-   * register a expception processor to context.
-   *
-   * @param exceptionProcessor exception processor.
-   * @throws DuplicateProcessorException if duplication exception type is set.
-   */
-  void registerExceptionProcessor(ExceptionProcessor exceptionProcessor);
+	/**
+	 * register a expception processor to context.
+	 * @param exceptionProcessor exception processor.
+	 * @throws DuplicateProcessorException if duplication exception type is set.
+	 */
+	void registerExceptionProcessor(ExceptionProcessor exceptionProcessor);
+
 }

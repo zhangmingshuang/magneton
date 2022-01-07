@@ -8,15 +8,17 @@ import java.util.List;
  */
 public class JsonDataConverter implements DataConverter {
 
-  public JsonDataConverter(SqlContext sqlContext) {}
+	public JsonDataConverter(SqlContext sqlContext) {
+	}
 
-  @Override
-  public <T> T to(Class clazz) {
-    return null;
-  }
+	@Override
+	public <T> T to(Class clazz) {
+		return null;
+	}
 
-  @Override
-  public <T> List<T> toList(Class<T> clazz) {
-    return null;
-  }
+	@Override
+	public <T> List<T> toList(Class<T> clazz) {
+		return null;
+	}
+
 }

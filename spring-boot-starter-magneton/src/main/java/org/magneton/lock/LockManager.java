@@ -9,11 +9,11 @@ package org.magneton.lock;
  */
 public interface LockManager {
 
-  /**
-   * get distributed lock.
-   *
-   * @param key lock key.
-   * @return the lock.
-   */
-  DistributedLock getLock(String key);
+	/**
+	 * get distributed lock.
+	 * @param key lock key.
+	 * @return the lock.
+	 */
+	DistributedLock getLock(String key);
+
 }

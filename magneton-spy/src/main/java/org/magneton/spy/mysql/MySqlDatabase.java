@@ -12,13 +12,14 @@ import org.magneton.spy.core.Database;
 @AutoService(Database.class)
 public class MySqlDatabase extends AbstractDatabase {
 
-  @Override
-  public DB db() {
-    return DB.MY_SQL;
-  }
+	@Override
+	public DB db() {
+		return DB.MY_SQL;
+	}
 
-  @Override
-  public Database createDatabase() {
-    return new MySqlDatabase();
-  }
+	@Override
+	public Database createDatabase() {
+		return new MySqlDatabase();
+	}
+
 }

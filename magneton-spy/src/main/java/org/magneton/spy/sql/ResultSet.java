@@ -9,24 +9,27 @@ import javax.annotation.Nullable;
  */
 public class ResultSet {
 
-  private final DataConverter dataConverter;
-  @Nullable private final Object data;
+	private final DataConverter dataConverter;
 
-  public ResultSet(DataConverter dataConverter, @Nullable Object data) {
-    this.dataConverter = dataConverter;
-    this.data = data;
-  }
+	@Nullable
+	private final Object data;
 
-  @Nullable
-  public Object getData() {
-    return this.data;
-  }
+	public ResultSet(DataConverter dataConverter, @Nullable Object data) {
+		this.dataConverter = dataConverter;
+		this.data = data;
+	}
 
-  public <T> T to(Class<T> clazz) {
-    return this.dataConverter.to(clazz);
-  }
+	@Nullable
+	public Object getData() {
+		return this.data;
+	}
 
-  public <T> List<T> toList(Class<T> clazz) {
-    return this.dataConverter.toList(clazz);
-  }
+	public <T> T to(Class<T> clazz) {
+		return this.dataConverter.to(clazz);
+	}
+
+	public <T> List<T> toList(Class<T> clazz) {
+		return this.dataConverter.toList(clazz);
+	}
+
 }

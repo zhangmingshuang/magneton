@@ -22,7 +22,6 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
-
 			<dependency>
 				<groupId>org.magneton</groupId>
 				<artifactId>magneton-cache</artifactId>

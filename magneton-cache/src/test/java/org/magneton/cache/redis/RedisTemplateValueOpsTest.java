@@ -21,61 +21,68 @@ import org.springframework.data.redis.core.RedisTemplate;
 @SpringBootTest(classes = CacheTestApplication.class)
 public class RedisTemplateValueOpsTest {
 
-  @Autowired private RedisTemplate redisTemplate;
-  @Autowired private JsonRedisSerializer jsonRedisSerializer;
-  private Cache cache;
-  private ValueOps valueOps;
+	@Autowired
+	private RedisTemplate redisTemplate;
 
-  @BeforeEach
-  void prepare() {
-    this.cache = new RedisTemplateCache(this.redisTemplate, this.jsonRedisSerializer);
-    this.valueOps = this.cache.opsForValue();
-  }
+	@Autowired
+	private JsonRedisSerializer jsonRedisSerializer;
 
-  @Test
-  void testKeyValue() {
-    this.cache.del("key");
-    this.cache.del("a", "b", "c", "d");
-    try {
-      this.valueOps.set("key", "value");
-      String value = this.valueOps.get("key");
-      Assertions.assertEquals("value", value);
-      // 覆盖
-      this.valueOps.set("key", "value2");
-      value = this.valueOps.get("key");
-      Assertions.assertEquals("value2", value);
+	private Cache cache;
 
-      List<Boolean> response = this.valueOps.set(KV.of("a", "b"), KV.of("c", "d"));
-      Assertions.assertEquals(2, response.size());
-      Assertions.assertTrue(
-          () -> {
-            for (Boolean aBoolean : response) {
-              if (!aBoolean) {
-                return false;
-              }
-            }
-            return true;
-          });
-      long del = this.cache.del("a", "c");
-      Assertions.assertEquals(2, del);
-      this.cache.del("a", "b", "c", "d");
-    } finally {
-      this.cache.del("key");
-    }
-  }
+	private ValueOps valueOps;
 
-  @Test
-  void testNx() {
-    this.cache.del("key");
-    try {
-      boolean b = this.valueOps.setNx("key", "value");
-      Assertions.assertTrue(b);
-      b = this.valueOps.setNx("key", "value2");
-      Assertions.assertFalse(b);
-      long num = this.cache.del("key");
-      Assertions.assertTrue(num > 0);
-    } finally {
-      this.cache.del("key");
-    }
-  }
+	@BeforeEach
+	void prepare() {
+		this.cache = new RedisTemplateCache(this.redisTemplate, this.jsonRedisSerializer);
+		this.valueOps = this.cache.opsForValue();
+	}
+
+	@Test
+	void testKeyValue() {
+		this.cache.del("key");
+		this.cache.del("a", "b", "c", "d");
+		try {
+			this.valueOps.set("key", "value");
+			String value = this.valueOps.get("key");
+			Assertions.assertEquals("value", value);
+			// 覆盖
+			this.valueOps.set("key", "value2");
+			value = this.valueOps.get("key");
+			Assertions.assertEquals("value2", value);
+
+			List<Boolean> response = this.valueOps.set(KV.of("a", "b"), KV.of("c", "d"));
+			Assertions.assertEquals(2, response.size());
+			Assertions.assertTrue(() -> {
+				for (Boolean aBoolean : response) {
+					if (!aBoolean) {
+						return false;
+					}
+				}
+				return true;
+			});
+			long del = this.cache.del("a", "c");
+			Assertions.assertEquals(2, del);
+			this.cache.del("a", "b", "c", "d");
+		}
+		finally {
+			this.cache.del("key");
+		}
+	}
+
+	@Test
+	void testNx() {
+		this.cache.del("key");
+		try {
+			boolean b = this.valueOps.setNx("key", "value");
+			Assertions.assertTrue(b);
+			b = this.valueOps.setNx("key", "value2");
+			Assertions.assertFalse(b);
+			long num = this.cache.del("key");
+			Assertions.assertTrue(num > 0);
+		}
+		finally {
+			this.cache.del("key");
+		}
+	}
+
 }

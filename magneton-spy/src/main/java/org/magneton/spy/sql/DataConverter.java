@@ -8,7 +8,8 @@ import java.util.List;
  */
 public interface DataConverter {
 
-  <T> T to(Class clazz);
+	<T> T to(Class clazz);
 
-  <T> List<T> toList(Class<T> clazz);
+	<T> List<T> toList(Class<T> clazz);
+
 }

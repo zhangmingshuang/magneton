@@ -13,72 +13,74 @@ import org.magneton.cache.KV;
  * @since 1.0.0
  */
 public interface ValueOps {
-  /**
-   * 设置键值对
-   *
-   * <p>如果设置的Key已经存在，则会覆盖Value
-   *
-   * @param key 键
-   * @param value 值
-   */
-  default boolean set(String key, Object value) {
-    return this.set(KV.of(key, value));
-  }
 
-  boolean set(KV kv);
+	/**
+	 * 设置键值对
+	 *
+	 * <p>
+	 * 如果设置的Key已经存在，则会覆盖Value
+	 * @param key 键
+	 * @param value 值
+	 */
+	default boolean set(String key, Object value) {
+		return this.set(KV.of(key, value));
+	}
 
-  default List<Boolean> set(KV... kvs) {
-    return this.set(Arrays.asList(kvs));
-  }
+	boolean set(KV kv);
 
-  List<Boolean> set(List<KV> kvs);
+	default List<Boolean> set(KV... kvs) {
+		return this.set(Arrays.asList(kvs));
+	}
 
-  /**
-   * 如果Key不存在则设置Value，如果存在则忽略
-   *
-   * @param key Key
-   * @param value Value
-   * @return 如果设置成功返回true，否则返回false
-   */
-  default boolean setNx(String key, Object value) {
-    return this.setNx(KV.of(key, value));
-  }
+	List<Boolean> set(List<KV> kvs);
 
-  boolean setNx(KV kv);
+	/**
+	 * 如果Key不存在则设置Value，如果存在则忽略
+	 * @param key Key
+	 * @param value Value
+	 * @return 如果设置成功返回true，否则返回false
+	 */
+	default boolean setNx(String key, Object value) {
+		return this.setNx(KV.of(key, value));
+	}
 
-  default List<Boolean> setNx(KV... kvs) {
-    return this.setNx(Arrays.asList(kvs));
-  }
+	boolean setNx(KV kv);
 
-  List<Boolean> setNx(List<KV> kvs);
-  /**
-   * 设置键值对
-   *
-   * <p>如果设置的Key已经存在，则会覆盖Value
-   *
-   * @param key Key
-   * @param value Value
-   * @param expire 过期时间（秒）
-   */
-  default boolean setEx(String key, Object value, long expire) {
-    return this.setEx(EKV.of(key, value, expire));
-  }
+	default List<Boolean> setNx(KV... kvs) {
+		return this.setNx(Arrays.asList(kvs));
+	}
 
-  default boolean setEx(KV kv, long expire) {
-    return this.setEx(EKV.of(kv.getKey(), kv.getValue(), expire));
-  }
+	List<Boolean> setNx(List<KV> kvs);
 
-  default List<Boolean> setEx(EKV... ekvs) {
-    return this.setEx(Arrays.asList(ekvs));
-  }
+	/**
+	 * 设置键值对
+	 *
+	 * <p>
+	 * 如果设置的Key已经存在，则会覆盖Value
+	 * @param key Key
+	 * @param value Value
+	 * @param expire 过期时间（秒）
+	 */
+	default boolean setEx(String key, Object value, long expire) {
+		return this.setEx(EKV.of(key, value, expire));
+	}
 
-  List<Boolean> setEx(List<EKV> ekvs);
+	default boolean setEx(KV kv, long expire) {
+		return this.setEx(EKV.of(kv.getKey(), kv.getValue(), expire));
+	}
 
-  boolean setEx(EKV ekv);
+	default List<Boolean> setEx(EKV... ekvs) {
+		return this.setEx(Arrays.asList(ekvs));
+	}
 
-  @Nullable
-  String get(String key);
+	List<Boolean> setEx(List<EKV> ekvs);
 
-  @Nullable
-  <T> T get(String key, Class<T> clazz);
+	boolean setEx(EKV ekv);
+
+	@Nullable
+	String get(String key);
+
+	@Nullable
+	<T> T get(String key, Class<T> clazz);
+
 }

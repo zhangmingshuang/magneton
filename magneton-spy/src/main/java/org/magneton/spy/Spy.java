@@ -16,36 +16,38 @@ import org.magneton.spy.core.Protocol;
  * @since 1.0.0
  */
 public class Spy {
-  private static final Map<String, Protocol> protocols = Maps.newConcurrentMap();
-  private static final Map<DB, Database> databases = Maps.newConcurrentMap();
 
-  static {
-    ServiceLoader<Protocol> loader = ServiceLoader.load(Protocol.class);
-    loader.forEach(
-        protocol -> {
-          String name = protocol.name().toUpperCase(Locale.ROOT);
-          Protocol exist = protocols.put(name, protocol);
-          if (exist != null) {
-            throw new DuplicateException(name, protocol.getClass(), exist.getClass());
-          }
-        });
+	private static final Map<String, Protocol> protocols = Maps.newConcurrentMap();
 
-    ServiceLoader<Database> databaseLoader = ServiceLoader.load(Database.class);
-    databaseLoader.forEach(
-        database -> {
-          DB db = database.db();
-          Database exist = databases.put(db, database);
-          if (exist != null) {
-            throw new DuplicateException(db.name(), database.getClass(), exist.getClass());
-          }
-        });
-  }
+	private static final Map<DB, Database> databases = Maps.newConcurrentMap();
 
-  private Spy() {}
+	static {
+		ServiceLoader<Protocol> loader = ServiceLoader.load(Protocol.class);
+		loader.forEach(protocol -> {
+			String name = protocol.name().toUpperCase(Locale.ROOT);
+			Protocol exist = protocols.put(name, protocol);
+			if (exist != null) {
+				throw new DuplicateException(name, protocol.getClass(), exist.getClass());
+			}
+		});
 
-  public static Database use(DB db) {
-    Database database = databases.get(Preconditions.checkNotNull(db, "db"));
-    Verify.verifyNotNull(database, "%s database not found", db.name());
-    return database;
-  }
+		ServiceLoader<Database> databaseLoader = ServiceLoader.load(Database.class);
+		databaseLoader.forEach(database -> {
+			DB db = database.db();
+			Database exist = databases.put(db, database);
+			if (exist != null) {
+				throw new DuplicateException(db.name(), database.getClass(), exist.getClass());
+			}
+		});
+	}
+
+	private Spy() {
+	}
+
+	public static Database use(DB db) {
+		Database database = databases.get(Preconditions.checkNotNull(db, "db"));
+		Verify.verifyNotNull(database, "%s database not found", db.name());
+		return database;
+	}
+
 }

@@ -19,14 +19,11 @@ import org.springframework.data.redis.core.RedisTemplate;
 @ConditionalOnClass(Cache.class)
 public class CacheAutoConfiguration {
 
-  @Bean
-  @ConditionalOnBean(RedisTemplate.class)
-  @ConditionalOnProperty(
-      prefix = "magneton.cache",
-      name = "redis",
-      havingValue = "true",
-      matchIfMissing = true)
-  public Cache redisCache(RedisTemplate redisTemplate, RedisValueSerializer redisValueSerializer) {
-    return new RedisTemplateCache(redisTemplate, redisValueSerializer);
-  }
+	@Bean
+	@ConditionalOnBean(RedisTemplate.class)
+	@ConditionalOnProperty(prefix = "magneton.cache", name = "redis", havingValue = "true", matchIfMissing = true)
+	public Cache redisCache(RedisTemplate redisTemplate, RedisValueSerializer redisValueSerializer) {
+		return new RedisTemplateCache(redisTemplate, redisValueSerializer);
+	}
+
 }

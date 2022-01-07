@@ -21,15 +21,13 @@ import org.springframework.context.annotation.Configuration;
 @ConditionalOnClass(DistributedLock.class)
 public class MagnetonLockAutoConfiguration {
 
-  @Bean
-  @ConditionalOnBean(RedissonClient.class)
-  @ConditionalOnMissingBean(DistributedLock.class)
-  @ConditionalOnProperty(
-      prefix = MagnetonProperties.PREFIX_LOCK,
-      value = LockProperties.TYPE,
-      havingValue = LockProperties.REDIS,
-      matchIfMissing = true)
-  public LockManager redisDistributedLock(RedissonClient redissonClient) {
-    return new RedisDistributedLockManager(redissonClient);
-  }
+	@Bean
+	@ConditionalOnBean(RedissonClient.class)
+	@ConditionalOnMissingBean(DistributedLock.class)
+	@ConditionalOnProperty(prefix = MagnetonProperties.PREFIX_LOCK, value = LockProperties.TYPE,
+			havingValue = LockProperties.REDIS, matchIfMissing = true)
+	public LockManager redisDistributedLock(RedissonClient redissonClient) {
+		return new RedisDistributedLockManager(redissonClient);
+	}
+
 }

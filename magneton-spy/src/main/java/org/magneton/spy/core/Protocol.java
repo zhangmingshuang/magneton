@@ -6,7 +6,8 @@ package org.magneton.spy.core;
  */
 public interface Protocol {
 
-  String db();
+	String db();
 
-  String name();
+	String name();
+
 }

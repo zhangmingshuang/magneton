@@ -12,13 +12,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class JsonRedisSerializer implements RedisValueSerializer {
 
-  @Override
-  public byte[] serialize(Object obj) {
-    return JSON.toJSONBytes(obj);
-  }
+	@Override
+	public byte[] serialize(Object obj) {
+		return JSON.toJSONBytes(obj);
+	}
 
-  @Override
-  public <T> T deserialize(byte[] data, Class<T> clazz) {
-    return JSON.parseObject(data, clazz);
-  }
+	@Override
+	public <T> T deserialize(byte[] data, Class<T> clazz) {
+		return JSON.parseObject(data, clazz);
+	}
+
 }
