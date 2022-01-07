@@ -3,13 +3,16 @@ package org.magneton.exception;
 /**
  * customer a expcetion processor.
  *
- * <p>in default, the global exception advice process the {@code ResponseException} only which
- * transit to a {@code Response} message.
+ * <p>
+ * in default, the global exception advice process the {@code ResponseException} only
+ * which transit to a {@code Response} message.
  *
- * <p>if want process other exception, use this {@code ExceptionProcessor} to register the specify
- * {@code Expcetion} processor.
+ * <p>
+ * if want process other exception, use this {@code ExceptionProcessor} to register the
+ * specify {@code Expcetion} processor.
  *
- * <p>to process the {@code NullPointException}:
+ * <p>
+ * to process the {@code NullPointException}:
  *
  * <pre>{@code
  * public class ExceptionProcessorImpl implements ExceptionProcessor {
@@ -31,10 +34,10 @@ package org.magneton.exception;
  */
 public interface ExceptionProcessor {
 
-  /**
-   * register the specify exception processor.
-   *
-   * @param register exception processor register.
-   */
-  void registerExceptionProcessor(ExceptionProcessorRegister register);
+	/**
+	 * register the specify exception processor.
+	 * @param register exception processor register.
+	 */
+	void registerExceptionProcessor(ExceptionProcessorRegister register);
+
 }

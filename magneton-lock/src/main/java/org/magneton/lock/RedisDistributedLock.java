@@ -9,7 +9,8 @@ import org.redisson.api.RedissonClient;
 /**
  * {@code Redisson} distributed lock that relies on {@code Redis}.
  *
- * <p>1. create the redisson client
+ * <p>
+ * 1. create the redisson client
  *
  * <pre>{@code
  * Config config = new Config();
@@ -35,50 +36,51 @@ import org.redisson.api.RedissonClient;
  */
 public class RedisDistributedLock extends AbstractDistributedLock {
 
-  private final RedissonClient redissonClient;
-  private final String key;
+	private final RedissonClient redissonClient;
 
-  /**
-   * Redis Lock.
-   *
-   * @param redissonClient Redisson Client.
-   * @param key the lock key.
-   */
-  public RedisDistributedLock(RedissonClient redissonClient, String key) {
-    Preconditions.checkNotNull(redissonClient, "redissonClient must be not null");
-    Preconditions.checkNotNull(key, "key must be not null");
-    this.redissonClient = redissonClient;
-    this.key = this.reoutchKey(key);
-  }
+	private final String key;
 
-  @Override
-  public void lock() {
-    this.redissonClient.getLock(this.key).lock();
-  }
+	/**
+	 * Redis Lock.
+	 * @param redissonClient Redisson Client.
+	 * @param key the lock key.
+	 */
+	public RedisDistributedLock(RedissonClient redissonClient, String key) {
+		Preconditions.checkNotNull(redissonClient, "redissonClient must be not null");
+		Preconditions.checkNotNull(key, "key must be not null");
+		this.redissonClient = redissonClient;
+		this.key = this.reoutchKey(key);
+	}
 
-  @Override
-  public void lockInterruptibly() throws InterruptedException {
-    this.redissonClient.getLock(this.key).lockInterruptibly();
-  }
+	@Override
+	public void lock() {
+		this.redissonClient.getLock(this.key).lock();
+	}
 
-  @Override
-  public boolean tryLock() {
-    return this.redissonClient.getLock(this.key).tryLock();
-  }
+	@Override
+	public void lockInterruptibly() throws InterruptedException {
+		this.redissonClient.getLock(this.key).lockInterruptibly();
+	}
 
-  @Override
-  public boolean tryLock(long time, @Nonnull TimeUnit unit) throws InterruptedException {
-    return this.redissonClient.getLock(this.key).tryLock(time, unit);
-  }
+	@Override
+	public boolean tryLock() {
+		return this.redissonClient.getLock(this.key).tryLock();
+	}
 
-  @Override
-  public void unlock() {
-    this.redissonClient.getLock(this.key).unlock();
-  }
+	@Override
+	public boolean tryLock(long time, @Nonnull TimeUnit unit) throws InterruptedException {
+		return this.redissonClient.getLock(this.key).tryLock(time, unit);
+	}
 
-  @Override
-  @Nonnull
-  public Condition newCondition() {
-    return this.redissonClient.getLock(this.key).newCondition();
-  }
+	@Override
+	public void unlock() {
+		this.redissonClient.getLock(this.key).unlock();
+	}
+
+	@Override
+	@Nonnull
+	public Condition newCondition() {
+		return this.redissonClient.getLock(this.key).newCondition();
+	}
+
 }

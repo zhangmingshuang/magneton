@@ -13,4 +13,6 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @EnableConfigurationProperties(MagnetonProperties.class)
-public class MagnetonAutoConfiguration {}
+public class MagnetonAutoConfiguration {
+
+}

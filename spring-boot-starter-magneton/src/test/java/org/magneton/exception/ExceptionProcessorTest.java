@@ -14,32 +14,31 @@ import org.magneton.core.Response;
 @SuppressWarnings("CyclicClassDependency")
 class ExceptionProcessorTest {
 
-  @Test
-  void test() throws Exception {
-    ExceptionProcessorContext exceptionProcessorContext = new DefaultExceptionProcessorContext();
-    exceptionProcessorContext.registerExceptionProcessor(new NullPointerExceptionProcessor());
+	@Test
+	void test() throws Exception {
+		ExceptionProcessorContext exceptionProcessorContext = new DefaultExceptionProcessorContext();
+		exceptionProcessorContext.registerExceptionProcessor(new NullPointerExceptionProcessor());
 
-    Object test = exceptionProcessorContext.handle(new NullPointerException("test"));
-    System.out.println(test);
-    Assertions.assertSame(test.getClass(), Response.class, "class not match");
-    Response response = (Response) test;
-    Assertions.assertEquals(
-        NullPointerExceptionProcessor.NULL_ERROR,
-        response.getMessage(),
-        "response message not match");
-  }
+		Object test = exceptionProcessorContext.handle(new NullPointerException("test"));
+		System.out.println(test);
+		Assertions.assertSame(test.getClass(), Response.class, "class not match");
+		Response response = (Response) test;
+		Assertions.assertEquals(NullPointerExceptionProcessor.NULL_ERROR, response.getMessage(),
+				"response message not match");
+	}
 
-  @Test
-  void testException() {
-    ExceptionProcessorContext exceptionProcessorContext = new DefaultExceptionProcessorContext();
-    exceptionProcessorContext.registerExceptionProcessor(new NullPointerExceptionProcessor());
-    try {
-      Object argsError =
-          exceptionProcessorContext.handle(new IllegalArgumentException("args error"));
-      Assertions.fail("this should always not touch");
-    } catch (Exception e) {
-      Assertions.assertSame(e.getClass(), IllegalArgumentException.class, "class not match");
-      Assertions.assertEquals("args error", e.getMessage(), "error message not match");
-    }
-  }
+	@Test
+	void testException() {
+		ExceptionProcessorContext exceptionProcessorContext = new DefaultExceptionProcessorContext();
+		exceptionProcessorContext.registerExceptionProcessor(new NullPointerExceptionProcessor());
+		try {
+			Object argsError = exceptionProcessorContext.handle(new IllegalArgumentException("args error"));
+			Assertions.fail("this should always not touch");
+		}
+		catch (Exception e) {
+			Assertions.assertSame(e.getClass(), IllegalArgumentException.class, "class not match");
+			Assertions.assertEquals("args error", e.getMessage(), "error message not match");
+		}
+	}
+
 }

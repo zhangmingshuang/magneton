@@ -8,8 +8,9 @@ package org.magneton.spy.core;
  */
 public interface SumProtocol extends Protocol {
 
-  @Override
-  default String name() {
-    return "sum";
-  }
+	@Override
+	default String name() {
+		return "sum";
+	}
+
 }

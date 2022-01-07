@@ -12,29 +12,30 @@ import org.junit.jupiter.api.Test;
  */
 class ResponseMessageTest {
 
-  @Test
-  void code() {
-    Response response = Response.response(new CustomizedResponseMessage());
-    Assertions.assertEquals("100", response.getCode(), "response code not equals");
-  }
+	@Test
+	void code() {
+		Response response = Response.response(new CustomizedResponseMessage());
+		Assertions.assertEquals("100", response.getCode(), "response code not equals");
+	}
 
-  @Test
-  void message() {
-    Response response = Response.response(new CustomizedResponseMessage());
-    Assertions.assertEquals(
-        "customized error", response.getMessage(), "response message not equals");
-  }
+	@Test
+	void message() {
+		Response response = Response.response(new CustomizedResponseMessage());
+		Assertions.assertEquals("customized error", response.getMessage(), "response message not equals");
+	}
 
-  class CustomizedResponseMessage implements ResponseMessage {
+	class CustomizedResponseMessage implements ResponseMessage {
 
-    @Override
-    public String code() {
-      return "100";
-    }
+		@Override
+		public String code() {
+			return "100";
+		}
 
-    @Override
-    public String message() {
-      return "customized error";
-    }
-  }
+		@Override
+		public String message() {
+			return "customized error";
+		}
+
+	}
+
 }

@@ -11,12 +11,12 @@ import java.util.Map;
  */
 public interface SignatureContentBuilder {
 
-  /**
-   * generate signuration body content.
-   *
-   * @param body the generate body
-   * @param salt the generate body salt
-   * @return signuration body content
-   */
-  String build(Map<String, String> body, String salt);
+	/**
+	 * generate signuration body content.
+	 * @param body the generate body
+	 * @param salt the generate body salt
+	 * @return signuration body content
+	 */
+	String build(Map<String, String> body, String salt);
+
 }

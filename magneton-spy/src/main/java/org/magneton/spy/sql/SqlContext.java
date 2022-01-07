@@ -12,6 +12,9 @@ import lombok.ToString;
 @Getter
 @ToString
 public class SqlContext {
-  private SqlExecutor sqlExecutor = new JdbcTemplateSqlExecutor(this);
-  private DataConverter dataConverter = new JsonDataConverter(this);
+
+	private SqlExecutor sqlExecutor = new JdbcTemplateSqlExecutor(this);
+
+	private DataConverter dataConverter = new JsonDataConverter(this);
+
 }

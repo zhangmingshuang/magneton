@@ -12,15 +12,16 @@ import org.redisson.api.RedissonClient;
  */
 public class RedisDistributedLockManager implements LockManager {
 
-  private final RedissonClient redissonClient;
+	private final RedissonClient redissonClient;
 
-  public RedisDistributedLockManager(RedissonClient redissonClient) {
-    this.redissonClient = redissonClient;
-  }
+	public RedisDistributedLockManager(RedissonClient redissonClient) {
+		this.redissonClient = redissonClient;
+	}
 
-  @Override
-  public DistributedLock getLock(String key) {
-    Preconditions.checkNotNull(key, "key must be not null");
-    return new RedisDistributedLock(this.redissonClient, key);
-  }
+	@Override
+	public DistributedLock getLock(String key) {
+		Preconditions.checkNotNull(key, "key must be not null");
+		return new RedisDistributedLock(this.redissonClient, key);
+	}
+
 }

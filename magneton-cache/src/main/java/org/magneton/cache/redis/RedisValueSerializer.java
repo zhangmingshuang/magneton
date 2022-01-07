@@ -8,7 +8,8 @@ package org.magneton.cache.redis;
  */
 public interface RedisValueSerializer {
 
-  byte[] serialize(Object obj);
+	byte[] serialize(Object obj);
 
-  <T> T deserialize(byte[] data, Class<T> clazz);
+	<T> T deserialize(byte[] data, Class<T> clazz);
+
 }

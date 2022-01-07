@@ -8044,9 +8044,9 @@ public class ArrayUtils {
 	// To map
 	// -----------------------------------------------------------------------
 	/**
-	 * Converts the given array into a {@link Map}. Each element of the array
-	 * must be either a {@link Map.Entry} or an Array, containing at least two
-	 * elements, where the first element is used as key and the second as value.
+	 * Converts the given array into a {@link Map}. Each element of the array must be
+	 * either a {@link Map.Entry} or an Array, containing at least two elements, where the
+	 * first element is used as key and the second as value.
 	 *
 	 * <p>
 	 * This method can be used to initialize:
@@ -8061,8 +8061,8 @@ public class ArrayUtils {
 	 *
 	 * <p>
 	 * This method returns {@code null} for a {@code null} input array.
-	 * @param array an array whose elements are either a {@link Map.Entry} or an
-	 * Array containing at least two elements, may be {@code null}
+	 * @param array an array whose elements are either a {@link Map.Entry} or an Array
+	 * containing at least two elements, may be {@code null}
 	 * @return a {@code Map} that was created from the array
 	 * @throws IllegalArgumentException if one element of this Array is itself an Array
 	 * containing less then two elements

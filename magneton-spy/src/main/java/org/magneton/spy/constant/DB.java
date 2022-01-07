@@ -5,5 +5,7 @@ package org.magneton.spy.constant;
  * @since 1.0.0
  */
 public enum DB {
-  MY_SQL
+
+	MY_SQL
+
 }

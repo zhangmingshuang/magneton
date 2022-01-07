@@ -6,10 +6,12 @@ package org.magneton.spy.sql;
  */
 public class JdbcTemplateSqlExecutor implements SqlExecutor {
 
-  public JdbcTemplateSqlExecutor(SqlContext sqlContext) {}
+	public JdbcTemplateSqlExecutor(SqlContext sqlContext) {
+	}
 
-  @Override
-  public Object exec(Select select) {
-    return null;
-  }
+	@Override
+	public Object exec(Select select) {
+		return null;
+	}
+
 }

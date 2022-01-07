@@ -24,12 +24,15 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 /**
  * global exception processor.
  *
- * <p>this use to process all the {@code Exception}s if throwed. but, in default is only {@link
- * ResponseException} processed . if want process other {@code Exception}s, using {@link
- * ExceptionProcessor} to register a processor to process a specify {@code Exception}.
+ * <p>
+ * this use to process all the {@code Exception}s if throwed. but, in default is only
+ * {@link ResponseException} processed . if want process other {@code Exception}s, using
+ * {@link ExceptionProcessor} to register a processor to process a specify
+ * {@code Exception}.
  *
- * <p>simultaneously, customize a new {@code RestControllerAdvice} extend other exception processor
- * is also feasable.
+ * <p>
+ * simultaneously, customize a new {@code RestControllerAdvice} extend other exception
+ * processor is also feasable.
  *
  * @author zhangmsh
  * @version 1.0.0
@@ -38,85 +41,82 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
  */
 @RestControllerAdvice
 @Slf4j
-@ConditionalOnProperty(
-    prefix = MagnetonProperties.PREFIX,
-    value = "exception.advice.enable",
-    havingValue = "true",
-    matchIfMissing = true)
+@ConditionalOnProperty(prefix = MagnetonProperties.PREFIX, value = "exception.advice.enable", havingValue = "true",
+		matchIfMissing = true)
 public class ControllerExceptionProcessor implements InitializingBean {
 
-  @Getter
-  private final ExceptionProcessorContext exceptionProcessorContext =
-      new DefaultExceptionProcessorContext();
+	@Getter
+	private final ExceptionProcessorContext exceptionProcessorContext = new DefaultExceptionProcessorContext();
 
-  private final AtomicBoolean exceptionProcessorsAddable = new AtomicBoolean(true);
-  private final ReentrantLock lock = new ReentrantLock();
-  /** the expcetion processor in spring bean context. */
-  @Autowired(required = false)
-  @Nullable
-  private List<ExceptionProcessor> exceptionProcessors;
+	private final AtomicBoolean exceptionProcessorsAddable = new AtomicBoolean(true);
 
-  /**
-   * the default processor.
-   *
-   * @param exception {@code ResponseException}
-   * @return {@code Response}
-   * @see ResponseException
-   */
-  @ExceptionHandler(ResponseException.class)
-  public Response onResponseException(ResponseException exception) {
-    Response response = exception.getResponse();
-    log.error(response.getMessage(), exception);
-    return response;
-  }
+	private final ReentrantLock lock = new ReentrantLock();
 
-  @SuppressWarnings("ProhibitedExceptionDeclared")
-  @ExceptionHandler(Exception.class)
-  public Object onException(Exception exception) throws Exception {
-    return this.exceptionProcessorContext.handle(exception);
-  }
+	/** the expcetion processor in spring bean context. */
+	@Autowired(required = false)
+	@Nullable
+	private List<ExceptionProcessor> exceptionProcessors;
 
-  /**
-   * add a exception processor.
-   *
-   * @param exceptionProcessor the exception processor.
-   * @throws UnsupportedOperationException if after {@code afterPropertiesSet} method.
-   */
-  public void addExceptionProcessors(ExceptionProcessor exceptionProcessor) {
-    Preconditions.checkNotNull(exceptionProcessor, "exceptionProcessor must be not null");
-    this.lock.lock();
-    try {
-      if (!this.exceptionProcessorsAddable.get()) {
-        throw new UnsupportedOperationException(
-            "addExceptionProcessors shoud be before afterPropertiesSet");
-      }
-      if (this.exceptionProcessors == null) {
-        this.exceptionProcessors = new ArrayList<>(4);
-      }
-      this.exceptionProcessors.add(exceptionProcessor);
-    } finally {
-      this.lock.unlock();
-    }
-  }
+	/**
+	 * the default processor.
+	 * @param exception {@code ResponseException}
+	 * @return {@code Response}
+	 * @see ResponseException
+	 */
+	@ExceptionHandler(ResponseException.class)
+	public Response onResponseException(ResponseException exception) {
+		Response response = exception.getResponse();
+		log.error(response.getMessage(), exception);
+		return response;
+	}
 
-  @Override
-  public void afterPropertiesSet() {
-    this.lock.lock();
-    try {
-      if (this.exceptionProcessorsAddable.compareAndSet(true, false)) {
-        if (!MoreCollections.isNullOrEmpty(this.exceptionProcessors)) {
-          this.exceptionProcessors.sort(
-              Comparator.comparingInt(
-                  e -> OrderUtils.getOrder(e.getClass(), Ordered.LOWEST_PRECEDENCE)));
-          this.exceptionProcessors.forEach(
-              this.exceptionProcessorContext::registerExceptionProcessor);
-        }
-      } else {
-        throw new UnsupportedOperationException(
-            "afterPropertiesSet can only be called once or after addExceptionProcessor finished");
-      }
-    } finally {
-      this.lock.unlock();
-    }
-  }
+	@SuppressWarnings("ProhibitedExceptionDeclared")
+	@ExceptionHandler(Exception.class)
+	public Object onException(Exception exception) throws Exception {
+		return this.exceptionProcessorContext.handle(exception);
+	}
+
+	/**
+	 * add a exception processor.
+	 * @param exceptionProcessor the exception processor.
+	 * @throws UnsupportedOperationException if after {@code afterPropertiesSet} method.
+	 */
+	public void addExceptionProcessors(ExceptionProcessor exceptionProcessor) {
+		Preconditions.checkNotNull(exceptionProcessor, "exceptionProcessor must be not null");
+		this.lock.lock();
+		try {
+			if (!this.exceptionProcessorsAddable.get()) {
+				throw new UnsupportedOperationException("addExceptionProcessors shoud be before afterPropertiesSet");
+			}
+			if (this.exceptionProcessors == null) {
+				this.exceptionProcessors = new ArrayList<>(4);
+			}
+			this.exceptionProcessors.add(exceptionProcessor);
+		}
+		finally {
+			this.lock.unlock();
+		}
+	}
+
+	@Override
+	public void afterPropertiesSet() {
+		this.lock.lock();
+		try {
+			if (this.exceptionProcessorsAddable.compareAndSet(true, false)) {
+				if (!MoreCollections.isNullOrEmpty(this.exceptionProcessors)) {
+					this.exceptionProcessors.sort(
+							Comparator.comparingInt(e -> OrderUtils.getOrder(e.getClass(), Ordered.LOWEST_PRECEDENCE)));
+					this.exceptionProcessors.forEach(this.exceptionProcessorContext::registerExceptionProcessor);
+				}
+			}
+			else {
+				throw new UnsupportedOperationException(
+						"afterPropertiesSet can only be called once or after addExceptionProcessor finished");
+			}
+		}
+		finally {
+			this.lock.unlock();
+		}
+	}
+
 }

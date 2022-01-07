@@ -5,5 +5,7 @@ package org.magneton.spy.constant;
  * @since 1.0.0
  */
 public enum Protocols {
-  SUM
+
+	SUM
+
 }

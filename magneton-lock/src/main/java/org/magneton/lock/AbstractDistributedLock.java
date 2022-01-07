@@ -9,15 +9,15 @@ package org.magneton.lock;
  */
 public abstract class AbstractDistributedLock implements DistributedLock {
 
-  private static final String LOCK_KEY_PREFIX = "dl_";
+	private static final String LOCK_KEY_PREFIX = "dl_";
 
-  /**
-   * reoutch key.
-   *
-   * @param key the given lock key.
-   * @return decorated lock key.
-   */
-  protected final String reoutchKey(String key) {
-    return LOCK_KEY_PREFIX + key;
-  }
+	/**
+	 * reoutch key.
+	 * @param key the given lock key.
+	 * @return decorated lock key.
+	 */
+	protected final String reoutchKey(String key) {
+		return LOCK_KEY_PREFIX + key;
+	}
+
 }

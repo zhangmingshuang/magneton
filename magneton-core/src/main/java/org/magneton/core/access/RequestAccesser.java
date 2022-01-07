@@ -24,13 +24,14 @@ import java.util.function.Supplier;
  */
 public interface RequestAccesser<T> extends Accesser {
 
-  /**
-   * request accessible judgement.
-   *
-   * @param key the key.
-   * @param supplier supply the operation that is compliance or not. if {@code false} is returned,
-   *     it will record a error. and lock if the errors out of error count limit from configuration.
-   * @return the accessible.
-   */
-  Accessible access(String key, Supplier<Boolean> supplier);
+	/**
+	 * request accessible judgement.
+	 * @param key the key.
+	 * @param supplier supply the operation that is compliance or not. if {@code false} is
+	 * returned, it will record a error. and lock if the errors out of error count limit
+	 * from configuration.
+	 * @return the accessible.
+	 */
+	Accessible access(String key, Supplier<Boolean> supplier);
+
 }

@@ -16,16 +16,20 @@ import lombok.ToString;
 @ToString
 public class LockProperties {
 
-  public static final String REDIS = "redis";
-  public static final String TYPE = "type";
-  /**
-   * lock type. default is {@code redis}.
-   *
-   * <p>support list:
-   *
-   * <ul>
-   *   <li>redis(default)
-   * </ul>
-   */
-  private String type = "redis";
+	public static final String REDIS = "redis";
+
+	public static final String TYPE = "type";
+
+	/**
+	 * lock type. default is {@code redis}.
+	 *
+	 * <p>
+	 * support list:
+	 *
+	 * <ul>
+	 * <li>redis(default)
+	 * </ul>
+	 */
+	private String type = "redis";
+
 }

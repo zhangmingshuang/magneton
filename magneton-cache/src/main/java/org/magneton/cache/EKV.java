@@ -8,29 +8,32 @@ package org.magneton.cache;
  */
 public class EKV<T> {
 
-  private final long expire;
-  private final String key;
-  private final T value;
+	private final long expire;
 
-  public EKV(String key, T value, long expire) {
-    this.key = key;
-    this.value = value;
-    this.expire = expire;
-  }
+	private final String key;
 
-  public static <T> EKV of(String key, T value, long expire) {
-    return new EKV(key, value, expire);
-  }
+	private final T value;
 
-  public String getKey() {
-    return this.key;
-  }
+	public EKV(String key, T value, long expire) {
+		this.key = key;
+		this.value = value;
+		this.expire = expire;
+	}
 
-  public T getValue() {
-    return this.value;
-  }
+	public static <T> EKV of(String key, T value, long expire) {
+		return new EKV(key, value, expire);
+	}
 
-  public long getExpire() {
-    return this.expire;
-  }
+	public String getKey() {
+		return this.key;
+	}
+
+	public T getValue() {
+		return this.value;
+	}
+
+	public long getExpire() {
+		return this.expire;
+	}
+
 }

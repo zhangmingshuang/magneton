@@ -13,10 +13,14 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = MagnetonProperties.PREFIX)
 public class MagnetonProperties {
 
-  public static final String PREFIX = "magneton";
-  public static final String PREFIX_LOCK = "magneton.lock";
-  /** lock properties. */
-  private LockProperties lock;
+	public static final String PREFIX = "magneton";
 
-  private MagnetonProperties() {}
+	public static final String PREFIX_LOCK = "magneton.lock";
+
+	/** lock properties. */
+	private LockProperties lock;
+
+	private MagnetonProperties() {
+	}
+
 }

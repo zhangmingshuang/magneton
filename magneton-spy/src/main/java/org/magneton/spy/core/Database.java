@@ -8,7 +8,8 @@ import org.magneton.spy.constant.DB;
  */
 public interface Database {
 
-  DB db();
+	DB db();
 
-  Select select();
+	Select select();
+
 }

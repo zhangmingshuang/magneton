@@ -8,13 +8,14 @@ package org.magneton.core.access;
  */
 public abstract class AbstractAccesser implements Accesser {
 
-  protected AccessConfig accessConfig;
+	protected AccessConfig accessConfig;
 
-  public void afterConfigSet(AccessConfig config) {
-    this.accessConfig = config;
-    this.initialiazation();
-  }
+	public void afterConfigSet(AccessConfig config) {
+		this.accessConfig = config;
+		this.initialiazation();
+	}
 
-  /** initialization. */
-  protected abstract void initialiazation();
+	/** initialization. */
+	protected abstract void initialiazation();
+
 }

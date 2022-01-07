@@ -10,17 +10,19 @@ import lombok.ToString;
 @ToString
 public class Select implements Executable {
 
-  private final String table;
-  private final SqlContext sqlContext;
+	private final String table;
 
-  public Select(String table, SqlContext sqlContext) {
-    this.table = Preconditions.checkNotNull(table, "table");
-    this.sqlContext = Preconditions.checkNotNull(sqlContext, "sqlContext");
-  }
+	private final SqlContext sqlContext;
 
-  @Override
-  public ResultSet exec() {
-    Object object = this.sqlContext.getSqlExecutor().exec(this);
-    return new ResultSet(this.sqlContext.getDataConverter(), object);
-  }
+	public Select(String table, SqlContext sqlContext) {
+		this.table = Preconditions.checkNotNull(table, "table");
+		this.sqlContext = Preconditions.checkNotNull(sqlContext, "sqlContext");
+	}
+
+	@Override
+	public ResultSet exec() {
+		Object object = this.sqlContext.getSqlExecutor().exec(this);
+		return new ResultSet(this.sqlContext.getDataConverter(), object);
+	}
+
 }

@@ -15,9 +15,14 @@ import lombok.ToString;
 @ToString
 public class AccessConfig {
 
-  private int lockTime;
-  private int lockSize;
-  private int lockErrorCount;
-  private int errorRecordTime;
-  private int errorRecordSize;
+	private int lockTime;
+
+	private int lockSize;
+
+	private int lockErrorCount;
+
+	private int errorRecordTime;
+
+	private int errorRecordSize;
+
 }
