@@ -11,6 +11,7 @@ package org.magneton.core;
  * @version 1.0.0
  * @since 2020/10/29
  */
+@SuppressWarnings("rawtypes")
 public class ResponseException extends RuntimeException {
 
   private static final long serialVersionUID = 840737242672355742L;
