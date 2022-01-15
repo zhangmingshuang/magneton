@@ -12,11 +12,11 @@ public abstract class AbstractDistributedLock implements DistributedLock {
 	private static final String LOCK_KEY_PREFIX = "dl_";
 
 	/**
-	 * reoutch key.
+	 * retouch key.
 	 * @param key the given lock key.
 	 * @return decorated lock key.
 	 */
-	protected final String reoutchKey(String key) {
+	protected final String retouchKey(String key) {
 		return LOCK_KEY_PREFIX + key;
 	}
 

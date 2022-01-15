@@ -6,12 +6,12 @@ The framework customized a global united response class : `Response`.
 
 ```java
   return Response.ok();
-  //or return with data
-  return Response.ok(data);
-  //return fail
-  return Response.bad();
-  //return fail with message
-  return Response.bad().message("It's bad");
+		//or return with data
+		return Response.ok(data);
+		//return fail
+		return Response.bad();
+		//return fail with message
+		return Response.bad().message("It's bad");
 ```
 
 ## Response Code
@@ -26,17 +26,16 @@ In default, response code table below:
 
 ### Change default response's code rule.
 
-The inner class `Instance` in `ResponseCodes` exposed the entrance `setResponseCodes` to change the
-default response's code supplier.
+The inner class `Instance` in `ResponseCodes` exposed the entrance `setResponseCodes` to change the default response's
+code supplier.
 
 ```java
 ResponseCodesSupplier.Instance.setResponseCodesSupplier(
-    new ResponseCodesSupplier(){
-      @Override
-      public ResponseMessage bad(){
-        return ResponseMessage.valueOf("404","Operation Error");
-      }
-    });
+		new ResponseCodesSupplier(){
+@Override public ResponseMessage bad(){
+		return ResponseMessage.valueOf("404","Operation Error");
+		}
+		});
 ```
 
 ## Use Resonse's Data Message: EgoResponseMessage
@@ -46,12 +45,12 @@ In some cases, you may want uses the response's data object to control the respo
 At this time, you can implement the `EgoResponseMessage` to customize the resonse's message.
 
 ```java
-public class ReturnData implements EgoResponseMessage{
-  
-  @Override
-  public String message(){
-    return "Autonomous";  
-  }
+public class ReturnData implements EgoResponseMessage {
+
+	@Override
+	public String message() {
+		return "Autonomous";
+	}
 }
 ```
 

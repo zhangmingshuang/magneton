@@ -1,4 +1,4 @@
-package org.magneton.core.security;
+package org.magneton.core.secure;
 
 import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;

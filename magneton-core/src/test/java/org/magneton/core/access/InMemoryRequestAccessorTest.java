@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
  * @author zhangmsh 2021/2/25
  * @since 4.0.0
  */
-class InMemoryRequestAccesserTest {
+class InMemoryRequestAccessorTest {
 
 	private static final int lockErrorCount = 4;
 
@@ -23,11 +23,11 @@ class InMemoryRequestAccesserTest {
 
 	private static final int errorRecordSize = 1;
 
-	private static RequestAccesser requestAccesser = null;
+	private static RequestAccessor requestAccesser = null;
 
 	@BeforeAll
 	static void beforeAll() {
-		requestAccesser = (RequestAccesser) AccesserBuilder.of(new InMemoryRequestAccesser<>()).lockSize(lockSize)
+		requestAccesser = (RequestAccessor) AccesserBuilder.of(new InMemoryRequestAccessor<>()).lockSize(lockSize)
 				.lockErrorCount(lockErrorCount).lockTime(lockTime).lockErrorCount(lockErrorCount)
 				.errorRecordTime(errorRecordTime).errorRecordSize(errorRecordSize).build();
 	}

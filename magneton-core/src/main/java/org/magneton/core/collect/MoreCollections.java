@@ -1,4 +1,4 @@
-package org.magneton.core.util;
+package org.magneton.core.collect;
 
 import java.util.Collection;
 import java.util.Map;
@@ -10,6 +10,7 @@ import javax.annotation.Nullable;
  * @author zhangmsh
  * @version 1.0.0
  * @since 2020/12/25
+ * @see java.util.Collections
  */
 public class MoreCollections {
 

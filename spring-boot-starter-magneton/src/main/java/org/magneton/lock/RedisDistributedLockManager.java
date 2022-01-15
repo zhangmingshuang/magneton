@@ -21,7 +21,7 @@ public class RedisDistributedLockManager implements LockManager {
 	@Override
 	public DistributedLock getLock(String key) {
 		Preconditions.checkNotNull(key, "key must be not null");
-		return new RedisDistributedLock(this.redissonClient, key);
+		return new RedissonDistributedLock(this.redissonClient, key);
 	}
 
 }

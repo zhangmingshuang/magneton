@@ -72,6 +72,7 @@
 		<junit-platform-commons.version>1.6.2</junit-platform-commons.version>
 		<junit-jupiter.version>5.6.2</junit-jupiter.version>
 		<junit-jupiter-api.version>5.6.2</junit-jupiter-api.version>
+		<hutool-all.version>5.7.17</hutool-all.version>
 	</properties>
 
 	<dependencyManagement>
