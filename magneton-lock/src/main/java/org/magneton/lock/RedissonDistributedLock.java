@@ -1,9 +1,11 @@
 package org.magneton.lock;
 
-import com.google.common.base.Preconditions;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;
+
 import javax.annotation.Nonnull;
+
+import com.google.common.base.Preconditions;
 import org.redisson.api.RedissonClient;
 
 /**
@@ -34,7 +36,7 @@ import org.redisson.api.RedissonClient;
  * @version 1.0.0
  * @since 2021/1/7
  */
-public class RedisDistributedLock extends AbstractDistributedLock {
+public class RedissonDistributedLock extends AbstractDistributedLock {
 
 	private final RedissonClient redissonClient;
 
@@ -45,11 +47,11 @@ public class RedisDistributedLock extends AbstractDistributedLock {
 	 * @param redissonClient Redisson Client.
 	 * @param key the lock key.
 	 */
-	public RedisDistributedLock(RedissonClient redissonClient, String key) {
+	public RedissonDistributedLock(RedissonClient redissonClient, String key) {
 		Preconditions.checkNotNull(redissonClient, "redissonClient must be not null");
 		Preconditions.checkNotNull(key, "key must be not null");
 		this.redissonClient = redissonClient;
-		this.key = this.reoutchKey(key);
+		this.key = this.retouchKey(key);
 	}
 
 	@Override

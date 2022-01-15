@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
  * @version 1.0.0
  * @since 2020/12/30
  */
-class MoreStringsTest {
+class MoreUStringTest {
 
 	@Test
 	void format() {

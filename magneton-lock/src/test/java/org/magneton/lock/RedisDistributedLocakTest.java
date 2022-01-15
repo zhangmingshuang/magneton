@@ -30,7 +30,7 @@ class RedisDistributedLocakTest {
 		Config config = new Config();
 		config.useSingleServer().setAddress("redis://127.0.0.1:6379");
 		redissonClient = Redisson.create(config);
-		distributedLock = new RedisDistributedLock(redissonClient, LOCK_KEY);
+		distributedLock = new RedissonDistributedLock(redissonClient, LOCK_KEY);
 	}
 
 	@AfterAll

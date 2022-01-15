@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
  * @since 2020/12/30
  */
 @SuppressWarnings({ "ALL" })
-class MoreArraysTest {
+class MoreUArrayTest {
 
 	@Test
 	void isNullOrEmpty() {
