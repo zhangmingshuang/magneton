@@ -20,9 +20,9 @@ import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.NoSuchElementException;
 
+import javax.annotation.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
 
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import org.magneton.core.base.Preconditions;
 import org.magneton.core.primitives.Ints;
 

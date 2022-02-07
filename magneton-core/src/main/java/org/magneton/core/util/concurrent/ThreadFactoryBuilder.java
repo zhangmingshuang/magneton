@@ -23,7 +23,7 @@ import java.util.concurrent.atomic.AtomicLong;
 import javax.annotation.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
 
-import com.google.errorprone.annotations.CheckReturnValue;
+import javax.annotation.CheckReturnValue;
 
 import static java.util.Objects.requireNonNull;
 import static org.magneton.core.base.Preconditions.checkArgument;

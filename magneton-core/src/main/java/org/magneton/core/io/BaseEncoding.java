@@ -23,8 +23,7 @@ import java.util.Arrays;
 
 import javax.annotation.CheckForNull;
 
-import com.google.errorprone.annotations.concurrent.LazyInit;
-
+import javax.annotation.concurrent.LazyInit;
 import org.magneton.core.base.Ascii;
 import org.magneton.core.base.Objects;
 import org.magneton.core.base.Preconditions;

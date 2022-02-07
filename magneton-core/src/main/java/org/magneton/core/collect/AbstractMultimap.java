@@ -27,9 +27,9 @@ import java.util.Spliterators;
 
 import javax.annotation.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
+import javax.annotation.WeakOuter;
+import javax.annotation.concurrent.LazyInit;
 
-import com.google.errorprone.annotations.concurrent.LazyInit;
-import com.google.j2objc.annotations.WeakOuter;
 import org.magneton.core.base.Preconditions;
 
 /**

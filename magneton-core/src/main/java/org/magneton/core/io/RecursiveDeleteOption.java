@@ -18,8 +18,6 @@ package org.magneton.core.io;
 
 import java.nio.file.SecureDirectoryStream;
 
-import com.google.j2objc.annotations.J2ObjCIncompatible;
-
 /**
  * Options for use with recursive delete methods
  * ({@link org.magneton.core.io.MoreFiles#deleteRecursively} and
@@ -29,7 +27,6 @@ import com.google.j2objc.annotations.J2ObjCIncompatible;
  * @author Colin Decker
  */
 
-@J2ObjCIncompatible // java.nio.file
 @ElementTypesAreNonnullByDefault
 public enum RecursiveDeleteOption {
 

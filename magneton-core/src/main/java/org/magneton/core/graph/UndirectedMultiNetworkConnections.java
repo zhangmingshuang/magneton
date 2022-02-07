@@ -25,7 +25,7 @@ import java.util.Set;
 
 import javax.annotation.CheckForNull;
 
-import com.google.errorprone.annotations.concurrent.LazyInit;
+import javax.annotation.concurrent.LazyInit;
 import org.magneton.core.collect.HashMultiset;
 import org.magneton.core.collect.ImmutableMap;
 import org.magneton.core.collect.Multiset;

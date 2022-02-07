@@ -19,9 +19,8 @@ package org.magneton.core.collect;
 import java.util.function.BiConsumer;
 
 import javax.annotation.CheckForNull;
+import javax.annotation.concurrent.LazyInit;
 
-import com.google.errorprone.annotations.concurrent.LazyInit;
-import com.google.j2objc.annotations.RetainedWith;
 import org.magneton.core.base.Preconditions;
 
 import static org.magneton.core.collect.CollectPreconditions.checkEntryNotNull;
@@ -45,7 +44,6 @@ final class SingletonImmutableBiMap<K, V> extends org.magneton.core.collect.Immu
 	private final transient org.magneton.core.collect.ImmutableBiMap<V, K> inverse;
 
 	@LazyInit
-	@RetainedWith
 	@CheckForNull
 	private transient org.magneton.core.collect.ImmutableBiMap<V, K> lazyInverse;
 

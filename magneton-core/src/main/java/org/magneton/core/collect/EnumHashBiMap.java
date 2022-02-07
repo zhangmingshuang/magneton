@@ -23,9 +23,9 @@ import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.annotation.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
 
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import org.magneton.core.base.Preconditions;
 
 /**

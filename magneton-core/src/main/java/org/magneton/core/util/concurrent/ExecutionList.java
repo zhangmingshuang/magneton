@@ -19,8 +19,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.annotation.CheckForNull;
-
-import com.google.errorprone.annotations.concurrent.GuardedBy;
+import javax.annotation.GuardedBy;
 
 import static org.magneton.core.base.Preconditions.checkNotNull;
 

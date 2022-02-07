@@ -21,8 +21,6 @@ import java.nio.file.SecureDirectoryStream;
 
 import javax.annotation.CheckForNull;
 
-import com.google.j2objc.annotations.J2ObjCIncompatible;
-
 /**
  * Exception indicating that a recursive delete can't be performed because the file system
  * does not have the support necessary to guarantee that it is not vulnerable to race
@@ -37,7 +35,6 @@ import com.google.j2objc.annotations.J2ObjCIncompatible;
  * @author Colin Decker
  */
 
-@J2ObjCIncompatible // java.nio.file
 @ElementTypesAreNonnullByDefault
 public final class InsecureRecursiveDeleteException extends FileSystemException {
 

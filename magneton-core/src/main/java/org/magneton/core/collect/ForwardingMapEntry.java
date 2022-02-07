@@ -20,7 +20,6 @@ import java.util.Map.Entry;
 
 import javax.annotation.CheckForNull;
 
-import com.google.common.annotations.Beta;
 import org.magneton.core.base.Objects;
 
 /**

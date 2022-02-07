@@ -20,14 +20,8 @@ import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-import com.google.errorprone.annotations.IncompatibleModifiers;
-
 import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.RetentionPolicy.CLASS;
-import static javax.lang.model.element.Modifier.FINAL;
-import static javax.lang.model.element.Modifier.PRIVATE;
-import static javax.lang.model.element.Modifier.PUBLIC;
-import static javax.lang.model.element.Modifier.STATIC;
 
 /**
  * Indicates that the annotated method is provided only to be overridden: it should not be
@@ -44,7 +38,6 @@ import static javax.lang.model.element.Modifier.STATIC;
  * visibility is actually "none".
  */
 @Documented
-@IncompatibleModifiers({ PUBLIC, PRIVATE, STATIC, FINAL })
 @Retention(CLASS) // Parent source might not be available while compiling subclass
 @Target(METHOD)
 public @interface ForOverride {

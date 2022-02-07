@@ -27,7 +27,6 @@ import javax.annotation.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 
-import com.google.common.annotations.Beta;
 import org.magneton.core.base.Function;
 import org.magneton.core.base.Joiner;
 import org.magneton.core.base.Optional;

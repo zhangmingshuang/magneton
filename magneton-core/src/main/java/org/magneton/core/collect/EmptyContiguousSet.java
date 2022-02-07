@@ -19,8 +19,6 @@ import java.util.Set;
 
 import javax.annotation.CheckForNull;
 
-import com.google.common.annotations.GwtIncompatible;
-
 /**
  * An empty contiguous set.
  *

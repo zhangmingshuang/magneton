@@ -18,10 +18,10 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 
 import javax.annotation.CheckForNull;
+import javax.annotation.ForOverride;
 
 import com.google.common.util.concurrent.internal.InternalFutureFailureAccess;
 import com.google.common.util.concurrent.internal.InternalFutures;
-import com.google.errorprone.annotations.ForOverride;
 import org.magneton.core.base.Function;
 
 import static org.magneton.core.base.Preconditions.checkNotNull;

@@ -29,15 +29,15 @@ import java.util.stream.Stream;
 
 import javax.annotation.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
+import javax.annotation.MustBeClosed;
 
-import com.google.common.collect.Lists;
-import com.google.errorprone.annotations.MustBeClosed;
 import org.magneton.core.base.Ascii;
 import org.magneton.core.base.Optional;
 import org.magneton.core.base.Preconditions;
 import org.magneton.core.base.Splitter;
 import org.magneton.core.collect.AbstractIterator;
 import org.magneton.core.collect.ImmutableList;
+import org.magneton.core.collect.Lists;
 import org.magneton.core.collect.Streams;
 
 /**

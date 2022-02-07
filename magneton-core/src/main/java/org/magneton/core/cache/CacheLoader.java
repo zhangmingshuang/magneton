@@ -19,14 +19,14 @@ import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executor;
 
-import com.google.errorprone.annotations.CheckReturnValue;
+import javax.annotation.CheckReturnValue;
+
 import org.magneton.core.base.Function;
+import org.magneton.core.base.Preconditions;
 import org.magneton.core.base.Supplier;
 import org.magneton.core.util.concurrent.Futures;
 import org.magneton.core.util.concurrent.ListenableFuture;
 import org.magneton.core.util.concurrent.ListenableFutureTask;
-
-import static org.magneton.core.base.Preconditions.checkNotNull;
 
 /**
  * Computes or retrieves values, based on a key, for use in populating a
@@ -105,8 +105,8 @@ public abstract class CacheLoader<K, V> {
 	 */
 	@CheckReturnValue
 	public static <K, V> CacheLoader<K, V> asyncReloading(CacheLoader<K, V> loader, Executor executor) {
-		checkNotNull(loader);
-		checkNotNull(executor);
+		Preconditions.checkNotNull(loader);
+		Preconditions.checkNotNull(executor);
 		return new CacheLoader<K, V>() {
 			@Override
 			public V load(K key) throws Exception {
@@ -168,8 +168,8 @@ public abstract class CacheLoader<K, V> {
 	 * @since 11.0
 	 */
 	public ListenableFuture<V> reload(K key, V oldValue) throws Exception {
-		checkNotNull(key);
-		checkNotNull(oldValue);
+		Preconditions.checkNotNull(key);
+		Preconditions.checkNotNull(oldValue);
 		return Futures.immediateFuture(load(key));
 	}
 
@@ -211,12 +211,12 @@ public abstract class CacheLoader<K, V> {
 		private final Function<K, V> computingFunction;
 
 		public FunctionToCacheLoader(Function<K, V> computingFunction) {
-			this.computingFunction = checkNotNull(computingFunction);
+			this.computingFunction = Preconditions.checkNotNull(computingFunction);
 		}
 
 		@Override
 		public V load(K key) {
-			return computingFunction.apply(checkNotNull(key));
+			return computingFunction.apply(Preconditions.checkNotNull(key));
 		}
 
 	}
@@ -228,12 +228,12 @@ public abstract class CacheLoader<K, V> {
 		private final Supplier<V> computingSupplier;
 
 		public SupplierToCacheLoader(Supplier<V> computingSupplier) {
-			this.computingSupplier = checkNotNull(computingSupplier);
+			this.computingSupplier = Preconditions.checkNotNull(computingSupplier);
 		}
 
 		@Override
 		public V load(Object key) {
-			checkNotNull(key);
+			Preconditions.checkNotNull(key);
 			return computingSupplier.get();
 		}
 

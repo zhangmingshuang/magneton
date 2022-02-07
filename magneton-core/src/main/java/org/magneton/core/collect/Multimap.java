@@ -27,8 +27,6 @@ import javax.annotation.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
 import javax.annotation.DoNotMock;
 
-import com.google.errorprone.annotations.CompatibleWith;
-
 import static org.magneton.core.base.Preconditions.checkNotNull;
 
 /**
@@ -204,21 +202,20 @@ public interface Multimap<K extends Object, V extends Object> {
 	 * key {@code
 	 * key}.
 	 */
-	boolean containsKey(@CompatibleWith("K") @CheckForNull Object key);
+	boolean containsKey(@CheckForNull Object key);
 
 	/**
 	 * Returns {@code true} if this multimap contains at least one key-value pair with the
 	 * value {@code value}.
 	 */
-	boolean containsValue(@CompatibleWith("V") @CheckForNull Object value);
+	boolean containsValue(@CheckForNull Object value);
 
 	/**
 	 * Returns {@code true} if this multimap contains at least one key-value pair with the
 	 * key {@code
 	 * key} and the value {@code value}.
 	 */
-	boolean containsEntry(@CompatibleWith("K") @CheckForNull Object key,
-			@CompatibleWith("V") @CheckForNull Object value);
+	boolean containsEntry(@CheckForNull Object key, @CheckForNull Object value);
 
 	// Modification Operations
 
@@ -244,7 +241,7 @@ public interface Multimap<K extends Object, V extends Object> {
 	 * @return {@code true} if the multimap changed
 	 */
 	@CanIgnoreReturnValue
-	boolean remove(@CompatibleWith("K") @CheckForNull Object key, @CompatibleWith("V") @CheckForNull Object value);
+	boolean remove(@CheckForNull Object key, @CheckForNull Object value);
 
 	// Bulk Operations
 
@@ -297,7 +294,7 @@ public interface Multimap<K extends Object, V extends Object> {
 	 * <i>may</i> be modifiable, but updating it will have no effect on the multimap.
 	 */
 	@CanIgnoreReturnValue
-	Collection<V> removeAll(@CompatibleWith("K") @CheckForNull Object key);
+	Collection<V> removeAll(@CheckForNull Object key);
 
 	/**
 	 * Removes all key-value pairs from the multimap, leaving it {@linkplain #isEmpty

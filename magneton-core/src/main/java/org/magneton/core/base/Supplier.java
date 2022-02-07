@@ -14,7 +14,7 @@
 
 package org.magneton.core.base;
 
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
+import javax.annotation.CanIgnoreReturnValue;
 
 /**
  * Legacy version of {@link java.util.function.Supplier java.util.function.Supplier}.

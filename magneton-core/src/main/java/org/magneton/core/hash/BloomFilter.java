@@ -26,7 +26,7 @@ import java.util.stream.Collector;
 import javax.annotation.CheckForNull;
 import javax.annotation.VisibleForTesting;
 
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
+import javax.annotation.CanIgnoreReturnValue;
 import org.magneton.core.base.Objects;
 import org.magneton.core.base.Predicate;
 import org.magneton.core.math.DoubleMath;

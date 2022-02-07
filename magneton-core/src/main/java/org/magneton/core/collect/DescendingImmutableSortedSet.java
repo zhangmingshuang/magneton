@@ -18,8 +18,6 @@ package org.magneton.core.collect;
 
 import javax.annotation.CheckForNull;
 
-import com.google.common.annotations.GwtIncompatible;
-
 /**
  * Skeletal implementation of
  * {@link org.magneton.core.collect.ImmutableSortedSet#descendingSet()}.

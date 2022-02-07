@@ -31,9 +31,7 @@ import javax.annotation.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
 import javax.annotation.DoNotCall;
 import javax.annotation.Nullable;
-
-import com.google.errorprone.annotations.concurrent.LazyInit;
-import com.google.j2objc.annotations.RetainedWith;
+import javax.annotation.concurrent.LazyInit;
 
 /**
  * A {@link org.magneton.core.collect.ListMultimap} whose contents will never change, with
@@ -54,7 +52,6 @@ public class ImmutableListMultimap<K, V> extends org.magneton.core.collect.Immut
 	private static final long serialVersionUID = 0;
 
 	@LazyInit
-	@RetainedWith
 	@CheckForNull
 	private transient ImmutableListMultimap<V, K> inverse;
 

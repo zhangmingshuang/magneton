@@ -34,7 +34,7 @@ import java.util.stream.Collector;
 import javax.annotation.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
 import javax.annotation.DoNotCall;
-import javax.annotation.LazyInit;
+import javax.annotation.concurrent.LazyInit;
 
 import org.magneton.core.base.Preconditions;
 

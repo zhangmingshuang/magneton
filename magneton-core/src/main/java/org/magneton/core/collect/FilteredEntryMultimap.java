@@ -26,7 +26,7 @@ import java.util.Set;
 
 import javax.annotation.CheckForNull;
 
-import com.google.j2objc.annotations.WeakOuter;
+import javax.annotation.WeakOuter;
 import org.magneton.core.base.MoreObjects;
 import org.magneton.core.base.Preconditions;
 import org.magneton.core.base.Predicate;

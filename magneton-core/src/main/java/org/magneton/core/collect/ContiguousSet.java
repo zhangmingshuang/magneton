@@ -18,8 +18,8 @@ import java.util.Collections;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
-import com.google.common.annotations.Beta;
-import com.google.errorprone.annotations.DoNotCall;
+import javax.annotation.DoNotCall;
+
 import org.magneton.core.base.Preconditions;
 
 import static java.util.Objects.requireNonNull;

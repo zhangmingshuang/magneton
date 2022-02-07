@@ -2,7 +2,7 @@ package org.magneton.test.test.supplier;
 
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
+import javax.annotation.CanIgnoreReturnValue;
 import java.lang.reflect.Field;
 import java.util.List;
 import javax.annotation.Nullable;

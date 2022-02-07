@@ -17,8 +17,8 @@
 package org.magneton.core.graph;
 
 import javax.annotation.CheckForNull;
+import javax.annotation.concurrent.Immutable;
 
-import com.google.errorprone.annotations.Immutable;
 import org.magneton.core.base.Objects;
 import org.magneton.core.collect.Iterators;
 import org.magneton.core.collect.UnmodifiableIterator;

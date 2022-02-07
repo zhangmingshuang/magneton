@@ -18,7 +18,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import com.google.errorprone.annotations.Immutable;
+import javax.annotation.concurrent.Immutable;
 
 import static java.util.Objects.requireNonNull;
 

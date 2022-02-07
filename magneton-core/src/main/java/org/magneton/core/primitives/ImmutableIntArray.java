@@ -27,9 +27,9 @@ import java.util.stream.IntStream;
 
 import javax.annotation.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
+import javax.annotation.CheckReturnValue;
+import javax.annotation.concurrent.Immutable;
 
-import com.google.errorprone.annotations.CheckReturnValue;
-import com.google.errorprone.annotations.Immutable;
 import org.magneton.core.collect.ImmutableList;
 
 /**

@@ -19,8 +19,8 @@ import java.util.Iterator;
 import java.util.NavigableSet;
 
 import javax.annotation.CheckForNull;
+import javax.annotation.WeakOuter;
 
-import com.google.j2objc.annotations.WeakOuter;
 import org.magneton.core.base.Preconditions;
 
 /**

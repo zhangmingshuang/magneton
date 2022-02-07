@@ -33,7 +33,7 @@ import javax.annotation.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
 import javax.annotation.VisibleForTesting;
 
-import com.google.j2objc.annotations.WeakOuter;
+import javax.annotation.WeakOuter;
 import org.magneton.core.base.Preconditions;
 import org.magneton.core.collect.Serialization.FieldSetter;
 import org.magneton.core.math.IntMath;

@@ -27,10 +27,10 @@ import java.util.Spliterator;
 
 import javax.annotation.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
+import javax.annotation.DoNotCall;
 import javax.annotation.Nullable;
+import javax.annotation.WeakOuter;
 
-import com.google.errorprone.annotations.DoNotCall;
-import com.google.j2objc.annotations.WeakOuter;
 import org.magneton.core.base.Objects;
 import org.magneton.core.base.Preconditions;
 

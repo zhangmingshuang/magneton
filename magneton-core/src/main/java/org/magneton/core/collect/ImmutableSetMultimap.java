@@ -31,10 +31,9 @@ import java.util.stream.Stream;
 import javax.annotation.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
 import javax.annotation.DoNotCall;
+import javax.annotation.Weak;
+import javax.annotation.concurrent.LazyInit;
 
-import com.google.errorprone.annotations.concurrent.LazyInit;
-import com.google.j2objc.annotations.RetainedWith;
-import com.google.j2objc.annotations.Weak;
 import org.magneton.core.base.MoreObjects;
 import org.magneton.core.base.Preconditions;
 
@@ -68,12 +67,10 @@ public class ImmutableSetMultimap<K, V> extends org.magneton.core.collect.Immuta
 	private final transient org.magneton.core.collect.ImmutableSet<V> emptySet;
 
 	@LazyInit
-	@RetainedWith
 	@CheckForNull
 	private transient ImmutableSetMultimap<V, K> inverse;
 
 	@LazyInit
-	@RetainedWith
 	@CheckForNull
 	private transient org.magneton.core.collect.ImmutableSet<Entry<K, V>> entries;
 

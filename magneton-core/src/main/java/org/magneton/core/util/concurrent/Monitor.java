@@ -21,9 +21,9 @@ import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.BooleanSupplier;
 
 import javax.annotation.CheckForNull;
+import javax.annotation.GuardedBy;
+import javax.annotation.Weak;
 
-import com.google.errorprone.annotations.concurrent.GuardedBy;
-import com.google.j2objc.annotations.Weak;
 import org.magneton.core.primitives.Longs;
 
 import static org.magneton.core.base.Preconditions.checkNotNull;

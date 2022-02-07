@@ -46,7 +46,6 @@ import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import javax.annotation.VisibleForTesting;
 
-import com.google.j2objc.annotations.RetainedWith;
 import org.magneton.core.base.Preconditions;
 
 /**
@@ -1422,7 +1421,6 @@ final class Synchronized {
 		@CheckForNull
 		private transient Set<V> valueSet;
 
-		@RetainedWith
 		@CheckForNull
 		private transient BiMap<V, K> inverse;
 

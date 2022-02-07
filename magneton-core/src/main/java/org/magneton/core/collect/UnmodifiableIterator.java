@@ -18,7 +18,7 @@ package org.magneton.core.collect;
 
 import java.util.Iterator;
 
-import com.google.errorprone.annotations.DoNotCall;
+import javax.annotation.DoNotCall;
 
 /**
  * An iterator that does not support {@link #remove}.

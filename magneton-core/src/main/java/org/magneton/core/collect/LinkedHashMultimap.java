@@ -35,7 +35,7 @@ import javax.annotation.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
 import javax.annotation.VisibleForTesting;
 
-import com.google.j2objc.annotations.WeakOuter;
+import javax.annotation.WeakOuter;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.magneton.core.base.Objects;
 import org.magneton.core.base.Preconditions;

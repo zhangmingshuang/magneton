@@ -24,7 +24,6 @@ import javax.annotation.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
 import javax.annotation.DoNotMock;
 
-import com.google.errorprone.annotations.CompatibleWith;
 import org.magneton.core.base.Objects;
 
 /**
@@ -73,26 +72,25 @@ public interface Table<R extends Object, C extends Object, V extends Object> {
 	 * @param rowKey key of row to search for
 	 * @param columnKey key of column to search for
 	 */
-	boolean contains(@CompatibleWith("R") @CheckForNull Object rowKey,
-			@CompatibleWith("C") @CheckForNull Object columnKey);
+	boolean contains(@CheckForNull Object rowKey, @CheckForNull Object columnKey);
 
 	/**
 	 * Returns {@code true} if the table contains a mapping with the specified row key.
 	 * @param rowKey key of row to search for
 	 */
-	boolean containsRow(@CompatibleWith("R") @CheckForNull Object rowKey);
+	boolean containsRow(@CheckForNull Object rowKey);
 
 	/**
 	 * Returns {@code true} if the table contains a mapping with the specified column.
 	 * @param columnKey key of column to search for
 	 */
-	boolean containsColumn(@CompatibleWith("C") @CheckForNull Object columnKey);
+	boolean containsColumn(@CheckForNull Object columnKey);
 
 	/**
 	 * Returns {@code true} if the table contains a mapping with the specified value.
 	 * @param value value to search for
 	 */
-	boolean containsValue(@CompatibleWith("V") @CheckForNull Object value);
+	boolean containsValue(@CheckForNull Object value);
 
 	/**
 	 * Returns the value corresponding to the given row and column keys, or {@code null}
@@ -101,7 +99,7 @@ public interface Table<R extends Object, C extends Object, V extends Object> {
 	 * @param columnKey key of column to search for
 	 */
 	@CheckForNull
-	V get(@CompatibleWith("R") @CheckForNull Object rowKey, @CompatibleWith("C") @CheckForNull Object columnKey);
+	V get(@CheckForNull Object rowKey, @CheckForNull Object columnKey);
 
 	/** Returns {@code true} if the table contains no mappings. */
 	boolean isEmpty();
@@ -159,7 +157,7 @@ public interface Table<R extends Object, C extends Object, V extends Object> {
 	 */
 	@CanIgnoreReturnValue
 	@CheckForNull
-	V remove(@CompatibleWith("R") @CheckForNull Object rowKey, @CompatibleWith("C") @CheckForNull Object columnKey);
+	V remove(@CheckForNull Object rowKey, @CheckForNull Object columnKey);
 
 	// Views
 

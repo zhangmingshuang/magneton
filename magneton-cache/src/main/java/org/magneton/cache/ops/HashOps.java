@@ -1,11 +1,13 @@
 package org.magneton.cache.ops;
 
-import com.google.common.collect.Maps;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
 import javax.annotation.Nullable;
+
 import org.magneton.cache.KV;
+import org.magneton.core.collect.Maps;
 
 /**
  * .
@@ -23,7 +25,7 @@ public interface HashOps {
 	 * @return 是否设置成功
 	 */
 	default boolean put(String hash, String key, Object value) {
-		return this.put(hash, KV.of(key, value));
+		return put(hash, KV.of(key, value));
 	}
 
 	boolean put(String hash, KV kv);
@@ -33,7 +35,7 @@ public interface HashOps {
 	default boolean put(String hash, List<KV> values) {
 		Map<String, Object> mapValues = Maps.newHashMapWithExpectedSize(values.size());
 		values.forEach(kv -> mapValues.put(kv.getKey(), kv.getValue()));
-		return this.put(hash, mapValues);
+		return put(hash, mapValues);
 	}
 
 	@Nullable

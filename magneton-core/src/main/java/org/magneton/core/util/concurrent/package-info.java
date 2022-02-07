@@ -34,4 +34,4 @@ package org.magneton.core.util.concurrent;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import com.google.errorprone.annotations.CheckReturnValue;
+import javax.annotation.CheckReturnValue;

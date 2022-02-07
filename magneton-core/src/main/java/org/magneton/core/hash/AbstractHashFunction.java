@@ -17,7 +17,7 @@ package org.magneton.core.hash;
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 
-import com.google.errorprone.annotations.Immutable;
+import javax.annotation.concurrent.Immutable;
 
 import static org.magneton.core.base.Preconditions.checkArgument;
 import static org.magneton.core.base.Preconditions.checkPositionIndexes;

@@ -47,12 +47,11 @@ import java.util.function.Predicate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.annotation.GuardedBy;
 import javax.annotation.Nullable;
 import javax.annotation.VisibleForTesting;
+import javax.annotation.Weak;
 
-import com.google.errorprone.annotations.concurrent.GuardedBy;
-import com.google.j2objc.annotations.RetainedWith;
-import com.google.j2objc.annotations.Weak;
 import org.magneton.core.base.Equivalence;
 import org.magneton.core.base.Stopwatch;
 import org.magneton.core.base.Ticker;
@@ -303,15 +302,12 @@ class LocalCache<K, V> extends AbstractMap<K, V> implements ConcurrentMap<K, V> 
 	/** The default cache loader to use on loading operations. */
 	final @Nullable CacheLoader<? super K, V> defaultLoader;
 
-	@RetainedWith
 	@Nullable
 	Set<K> keySet;
 
-	@RetainedWith
 	@Nullable
 	Collection<V> values;
 
-	@RetainedWith
 	@Nullable
 	Set<Entry<K, V>> entrySet;
 

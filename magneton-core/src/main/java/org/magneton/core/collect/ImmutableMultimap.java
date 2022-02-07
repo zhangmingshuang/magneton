@@ -33,9 +33,9 @@ import javax.annotation.CheckForNull;
 import javax.annotation.DoNotCall;
 import javax.annotation.DoNotMock;
 import javax.annotation.Nullable;
+import javax.annotation.WeakOuter;
 
-import com.google.j2objc.annotations.Weak;
-import com.google.j2objc.annotations.WeakOuter;
+import javax.annotation.Weak;
 import org.magneton.core.base.Preconditions;
 
 import static java.util.Objects.requireNonNull;

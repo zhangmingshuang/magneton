@@ -33,7 +33,7 @@ import java.nio.charset.Charset;
 import javax.annotation.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
 
-import com.google.errorprone.annotations.Immutable;
+import javax.annotation.concurrent.Immutable;
 import org.magneton.core.base.Charsets;
 import org.magneton.core.primitives.Chars;
 import org.magneton.core.primitives.Ints;

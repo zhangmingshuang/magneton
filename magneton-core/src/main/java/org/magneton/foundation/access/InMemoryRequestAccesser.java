@@ -7,11 +7,11 @@ import java.util.function.Supplier;
 
 import javax.annotation.Nullable;
 
-import com.google.common.base.Preconditions;
-import com.google.common.base.Verify;
-import com.google.common.cache.Cache;
-import com.google.common.cache.CacheBuilder;
 import lombok.extern.slf4j.Slf4j;
+import org.magneton.core.base.Preconditions;
+import org.magneton.core.base.Verify;
+import org.magneton.core.cache.Cache;
+import org.magneton.core.cache.CacheBuilder;
 
 /**
  * In meory accesser.
@@ -35,8 +35,7 @@ public class InMemoryRequestAccesser<T> extends AbstractAccesser implements Requ
 
 	@Override
 	protected void initialiazation() {
-		locked = CacheBuilder.newBuilder()
-				.expireAfterWrite(super.accessConfig.getLockTime(), TimeUnit.MILLISECONDS)
+		locked = CacheBuilder.newBuilder().expireAfterWrite(super.accessConfig.getLockTime(), TimeUnit.MILLISECONDS)
 				.maximumSize(super.accessConfig.getLockSize()).build();
 		errorRcords = CacheBuilder.newBuilder()
 				.expireAfterAccess(super.accessConfig.getErrorRecordTime(), TimeUnit.MILLISECONDS)

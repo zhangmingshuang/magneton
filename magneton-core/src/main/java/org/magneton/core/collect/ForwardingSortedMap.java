@@ -22,7 +22,6 @@ import java.util.SortedMap;
 
 import javax.annotation.CheckForNull;
 
-import com.google.common.annotations.Beta;
 import org.magneton.core.base.Preconditions;
 
 /**

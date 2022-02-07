@@ -37,8 +37,8 @@ import java.util.Spliterator;
 import java.util.function.BiConsumer;
 
 import javax.annotation.CheckForNull;
+import javax.annotation.WeakOuter;
 
-import com.google.j2objc.annotations.WeakOuter;
 import org.magneton.core.base.Preconditions;
 
 import static java.util.Objects.requireNonNull;

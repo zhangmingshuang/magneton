@@ -32,11 +32,10 @@ import java.util.logging.Logger;
 
 import javax.annotation.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
+import javax.annotation.ForOverride;
 
 import com.google.common.util.concurrent.internal.InternalFutureFailureAccess;
 import com.google.common.util.concurrent.internal.InternalFutures;
-import com.google.errorprone.annotations.ForOverride;
-import com.google.j2objc.annotations.ReflectionSupport;
 import org.magneton.core.base.Function;
 import org.magneton.core.base.Strings;
 
@@ -69,7 +68,6 @@ import static org.magneton.core.base.Throwables.throwIfUnchecked;
  * @since 1.0
  */
 
-@ReflectionSupport(value = ReflectionSupport.Level.FULL)
 @ElementTypesAreNonnullByDefault
 public abstract class AbstractFuture<V extends Object> extends InternalFutureFailureAccess
 		implements ListenableFuture<V> {

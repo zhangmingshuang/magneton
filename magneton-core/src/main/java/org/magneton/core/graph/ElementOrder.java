@@ -20,8 +20,8 @@ import java.util.Comparator;
 import java.util.Map;
 
 import javax.annotation.CheckForNull;
+import javax.annotation.concurrent.Immutable;
 
-import com.google.errorprone.annotations.Immutable;
 import org.magneton.core.base.MoreObjects;
 import org.magneton.core.base.MoreObjects.ToStringHelper;
 import org.magneton.core.base.Objects;

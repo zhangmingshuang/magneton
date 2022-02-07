@@ -34,6 +34,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.Predicate;
 
 import javax.annotation.CheckForNull;
+import javax.annotation.Nullable;
 import javax.annotation.VisibleForTesting;
 
 import org.magneton.core.base.Function;
@@ -84,8 +85,12 @@ public final class Lists {
 	 * Instead, use the {@code ArrayList} {@linkplain ArrayList#ArrayList() constructor}
 	 * directly, taking advantage of <a href="http://goo.gl/iz2Wi">"diamond" syntax</a>.
 	 */
-	public static <E extends Object> ArrayList<E> newArrayList() {
+	public static <E> ArrayList<E> newArrayList() {
 		return new ArrayList<>();
+	}
+
+	public static <E> boolean isNullOrEmpty(@Nullable List<E> list) {
+		return list == null || list.isEmpty();
 	}
 
 	/**
@@ -108,7 +113,7 @@ public final class Lists {
 	 * future.
 	 */
 	@SafeVarargs
-	public static <E extends Object> ArrayList<E> newArrayList(E... elements) {
+	public static <E> ArrayList<E> newArrayList(E... elements) {
 		checkNotNull(elements); // for GWT
 		// Avoid integer overflow when a large array is passed in
 		int capacity = computeArrayListCapacity(elements.length);
@@ -134,7 +139,7 @@ public final class Lists {
 	 * constructor} directly, taking advantage of <a href="http://goo.gl/iz2Wi">"diamond"
 	 * syntax</a>.
 	 */
-	public static <E extends Object> ArrayList<E> newArrayList(Iterable<? extends E> elements) {
+	public static <E> ArrayList<E> newArrayList(Iterable<? extends E> elements) {
 		checkNotNull(elements); // for GWT
 		// Let ArrayList's sizing logic work, if possible
 		return (elements instanceof Collection) ? new ArrayList<>((Collection<? extends E>) elements)

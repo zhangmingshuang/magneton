@@ -22,7 +22,8 @@ import java.util.concurrent.Executor;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.google.errorprone.annotations.concurrent.GuardedBy;
+import javax.annotation.GuardedBy;
+
 import org.magneton.core.base.Preconditions;
 import org.magneton.core.collect.Queues;
 

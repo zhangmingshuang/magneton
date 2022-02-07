@@ -20,10 +20,9 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.Set;
 
+import javax.annotation.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
 
-import com.google.common.annotations.Beta;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import org.magneton.core.base.Objects;
 
 /**

@@ -21,7 +21,7 @@ import java.util.Map.Entry;
 
 import javax.annotation.CheckForNull;
 
-import com.google.j2objc.annotations.Weak;
+import javax.annotation.Weak;
 import org.magneton.core.base.Objects;
 import org.magneton.core.base.Preconditions;
 import org.magneton.core.base.Predicate;

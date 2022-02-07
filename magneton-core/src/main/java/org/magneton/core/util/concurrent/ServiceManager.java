@@ -28,10 +28,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.annotation.CanIgnoreReturnValue;
+import javax.annotation.GuardedBy;
+import javax.annotation.WeakOuter;
 
-import com.google.errorprone.annotations.concurrent.GuardedBy;
-import com.google.j2objc.annotations.J2ObjCIncompatible;
-import com.google.j2objc.annotations.WeakOuter;
 import org.magneton.core.base.Function;
 import org.magneton.core.base.MoreObjects;
 import org.magneton.core.base.Stopwatch;
@@ -402,7 +401,6 @@ public final class ServiceManager implements ServiceManagerBridge {
 	 * be ordered by startup time.
 	 * @since 31.0
 	 */
-	@J2ObjCIncompatible
 	public ImmutableMap<org.magneton.core.util.concurrent.Service, Duration> startupDurations() {
 		return ImmutableMap.copyOf(
 				org.magneton.core.collect.Maps.<org.magneton.core.util.concurrent.Service, Long, Duration>transformValues(startupTimes(), Duration::ofMillis));

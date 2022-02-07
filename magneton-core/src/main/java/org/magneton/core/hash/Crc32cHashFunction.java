@@ -16,7 +16,7 @@ package org.magneton.core.hash;
 
 import java.nio.ByteBuffer;
 
-import com.google.errorprone.annotations.Immutable;
+import javax.annotation.concurrent.Immutable;
 
 /**
  * This class generates a CRC32C checksum, defined by RFC 3720, Section 12.1. The

@@ -42,10 +42,9 @@ import javax.annotation.DoNotCall;
 import javax.annotation.DoNotMock;
 import javax.annotation.Nullable;
 import javax.annotation.VisibleForTesting;
+import javax.annotation.WeakOuter;
+import javax.annotation.concurrent.LazyInit;
 
-import com.google.errorprone.annotations.concurrent.LazyInit;
-import com.google.j2objc.annotations.RetainedWith;
-import com.google.j2objc.annotations.WeakOuter;
 import org.magneton.core.base.Preconditions;
 
 import static java.util.Objects.requireNonNull;
@@ -71,17 +70,14 @@ public abstract class ImmutableMap<K, V> implements Map<K, V>, Serializable {
 	static final Entry<?, ?>[] EMPTY_ENTRY_ARRAY = new Entry<?, ?>[0];
 
 	@LazyInit
-	@RetainedWith
 	@CheckForNull
 	private transient ImmutableSet<Entry<K, V>> entrySet;
 
 	@LazyInit
-	@RetainedWith
 	@CheckForNull
 	private transient ImmutableSet<K> keySet;
 
 	@LazyInit
-	@RetainedWith
 	@CheckForNull
 	private transient ImmutableCollection<V> values;
 

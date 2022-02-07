@@ -17,10 +17,7 @@ package org.magneton.core.net;
 import java.util.List;
 
 import javax.annotation.CheckForNull;
-
-import com.google.errorprone.annotations.Immutable;
-import com.google.thirdparty.publicsuffix.PublicSuffixPatterns;
-import com.google.thirdparty.publicsuffix.PublicSuffixType;
+import javax.annotation.concurrent.Immutable;
 
 import org.magneton.core.base.Ascii;
 import org.magneton.core.base.CharMatcher;
@@ -29,6 +26,8 @@ import org.magneton.core.base.Optional;
 import org.magneton.core.base.Preconditions;
 import org.magneton.core.base.Splitter;
 import org.magneton.core.collect.ImmutableList;
+import org.magneton.thirdparty.publicsuffix.PublicSuffixPatterns;
+import org.magneton.thirdparty.publicsuffix.PublicSuffixType;
 
 /**
  * An immutable well-formed internet domain name, such as {@code com} or
@@ -318,8 +317,8 @@ public final class InternetDomainName {
 	private static boolean matchesWildcardSuffixType(org.magneton.core.base.Optional<PublicSuffixType> desiredType,
 			String domain) {
 		List<String> pieces = DOT_SPLITTER.limit(2).splitToList(domain);
-		return pieces.size() == 2 && matchesType(desiredType,
-				org.magneton.core.base.Optional.fromNullable(PublicSuffixPatterns.UNDER.get(pieces.get(1))));
+		return pieces.size() == 2
+				&& matchesType(desiredType, Optional.fromNullable(PublicSuffixPatterns.UNDER.get(pieces.get(1))));
 	}
 
 	/**

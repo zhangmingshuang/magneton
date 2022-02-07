@@ -26,7 +26,7 @@ import java.util.Spliterator;
 
 import javax.annotation.CheckForNull;
 
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
+import javax.annotation.CanIgnoreReturnValue;
 import org.magneton.core.base.Preconditions;
 import org.magneton.core.primitives.Primitives;
 
