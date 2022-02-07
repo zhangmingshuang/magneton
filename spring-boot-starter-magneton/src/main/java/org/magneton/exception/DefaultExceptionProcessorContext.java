@@ -1,7 +1,7 @@
 package org.magneton.exception;
 
-import com.google.common.base.Preconditions;
-import com.google.common.collect.Maps;
+import com.google.core.base.Preconditions;
+import com.google.core.collect.Maps;
 import java.util.Map;
 import java.util.Objects;
 import java.util.function.Function;

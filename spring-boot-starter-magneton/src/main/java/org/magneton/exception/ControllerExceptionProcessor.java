@@ -1,18 +1,20 @@
 package org.magneton.exception;
 
-import com.google.common.base.Preconditions;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.ReentrantLock;
+
 import javax.annotation.Nullable;
+
+import com.google.core.base.Preconditions;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.magneton.core.Response;
 import org.magneton.core.ResponseException;
-import org.magneton.core.collect.MoreCollections;
 import org.magneton.properties.MagnetonProperties;
+
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -70,10 +72,9 @@ public class ControllerExceptionProcessor implements InitializingBean {
 		return response;
 	}
 
-	@SuppressWarnings("ProhibitedExceptionDeclared")
 	@ExceptionHandler(Exception.class)
 	public Object onException(Exception exception) throws Exception {
-		return this.exceptionProcessorContext.handle(exception);
+		return exceptionProcessorContext.handle(exception);
 	}
 
 	/**
@@ -83,30 +84,30 @@ public class ControllerExceptionProcessor implements InitializingBean {
 	 */
 	public void addExceptionProcessors(ExceptionProcessor exceptionProcessor) {
 		Preconditions.checkNotNull(exceptionProcessor, "exceptionProcessor must be not null");
-		this.lock.lock();
+		lock.lock();
 		try {
-			if (!this.exceptionProcessorsAddable.get()) {
+			if (!exceptionProcessorsAddable.get()) {
 				throw new UnsupportedOperationException("addExceptionProcessors shoud be before afterPropertiesSet");
 			}
-			if (this.exceptionProcessors == null) {
-				this.exceptionProcessors = new ArrayList<>(4);
+			if (exceptionProcessors == null) {
+				exceptionProcessors = new ArrayList<>(4);
 			}
-			this.exceptionProcessors.add(exceptionProcessor);
+			exceptionProcessors.add(exceptionProcessor);
 		}
 		finally {
-			this.lock.unlock();
+			lock.unlock();
 		}
 	}
 
 	@Override
 	public void afterPropertiesSet() {
-		this.lock.lock();
+		lock.lock();
 		try {
-			if (this.exceptionProcessorsAddable.compareAndSet(true, false)) {
-				if (!MoreCollections.isNullOrEmpty(this.exceptionProcessors)) {
-					this.exceptionProcessors.sort(
+			if (exceptionProcessorsAddable.compareAndSet(true, false)) {
+				if (!MoreCollections.isNullOrEmpty(exceptionProcessors)) {
+					exceptionProcessors.sort(
 							Comparator.comparingInt(e -> OrderUtils.getOrder(e.getClass(), Ordered.LOWEST_PRECEDENCE)));
-					this.exceptionProcessors.forEach(this.exceptionProcessorContext::registerExceptionProcessor);
+					exceptionProcessors.forEach(exceptionProcessorContext::registerExceptionProcessor);
 				}
 			}
 			else {
@@ -115,7 +116,7 @@ public class ControllerExceptionProcessor implements InitializingBean {
 			}
 		}
 		finally {
-			this.lock.unlock();
+			lock.unlock();
 		}
 	}
 

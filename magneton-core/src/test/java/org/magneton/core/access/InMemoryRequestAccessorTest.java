@@ -1,6 +1,7 @@
 package org.magneton.core.access;
 
 import java.util.UUID;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -27,15 +28,15 @@ class InMemoryRequestAccessorTest {
 
 	@BeforeAll
 	static void beforeAll() {
-		requestAccesser = (RequestAccessor) AccesserBuilder.of(new InMemoryRequestAccessor<>()).lockSize(lockSize)
-				.lockErrorCount(lockErrorCount).lockTime(lockTime).lockErrorCount(lockErrorCount)
+		Access requestAccesser = (RequestAccessor) AccesserBuilder.of(new InMemoryRequestAccessor<>())
+				.lockSize(lockSize).lockErrorCount(lockErrorCount).lockTime(lockTime).lockErrorCount(lockErrorCount)
 				.errorRecordTime(errorRecordTime).errorRecordSize(errorRecordSize).build();
 	}
 
 	@Test
 	void locked() {
 		String key = UUID.randomUUID().toString();
-		this.recordError(key);
+		recordError(key);
 		boolean locked = requestAccesser.locked(key);
 		Assertions.assertTrue(locked, "must be locker.");
 	}
@@ -44,7 +45,7 @@ class InMemoryRequestAccessorTest {
 	void ttl() {
 		Assertions.assertTrue(lockTime > 1000, "lockTime must be more then 1000");
 		String key = UUID.randomUUID().toString();
-		this.recordError(key);
+		recordError(key);
 		long ttl = requestAccesser.ttl(key);
 		Assertions.assertTrue(ttl <= lockTime, "lock time error. ttl :" + ttl + ", lockTime: " + lockTime);
 	}
@@ -52,7 +53,7 @@ class InMemoryRequestAccessorTest {
 	@Test
 	void recordError() {
 		String key = UUID.randomUUID().toString();
-		this.recordError(key);
+		recordError(key);
 	}
 
 	@Test

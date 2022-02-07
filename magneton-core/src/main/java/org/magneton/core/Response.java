@@ -1,12 +1,14 @@
 package org.magneton.core;
 
-import com.google.common.base.Strings;
-import com.google.common.collect.Maps;
 import java.util.Map;
 import java.util.Objects;
+
 import javax.annotation.Nullable;
+
 import lombok.Getter;
 import lombok.ToString;
+import org.magneton.core.base.Strings;
+import org.magneton.core.collect.Maps;
 
 /**
  * .
@@ -15,7 +17,6 @@ import lombok.ToString;
  * @version 1.0.0
  * @since 2020/10/19
  */
-@SuppressWarnings({ "rawtypes", "UnusedReturnValue" })
 @Getter
 @ToString
 public class Response<T> {
@@ -82,8 +83,8 @@ public class Response<T> {
 	}
 
 	public Response<T> messageFormat(Object... args) {
-		if (Strings.isNullOrEmpty(this.message)) {
-			this.message = Strings.lenientFormat(this.message, args);
+		if (Strings.isNullOrEmpty(message)) {
+			message = Strings.lenientFormat(message, args);
 		}
 		return this;
 	}
@@ -105,19 +106,19 @@ public class Response<T> {
 	 * @return {@code Response} of response.
 	 */
 	public Response<T> addition(String key, String value) {
-		if (Objects.isNull(this.additions)) {
-			this.additions = Maps.newHashMapWithExpectedSize(2);
+		if (Objects.isNull(additions)) {
+			additions = Maps.newHashMapWithExpectedSize(2);
 		}
-		this.additions.put(key, value);
+		additions.put(key, value);
 		return this;
 	}
 
 	public boolean isOk() {
-		return ResponseCodesSupplier.getInstance().ok().code().equals(this.code);
+		return ResponseCodesSupplier.getInstance().ok().code().equals(code);
 	}
 
 	public boolean isException() {
-		return ResponseCodesSupplier.getInstance().exception().code().equals(this.code);
+		return ResponseCodesSupplier.getInstance().exception().code().equals(code);
 	}
 
 	/**
@@ -127,10 +128,10 @@ public class Response<T> {
 	 * return the set message info.
 	 */
 	public String getMessage() {
-		if (Objects.nonNull(this.data) && this.data instanceof EgoResponseMessage) {
-			return ((EgoResponseMessage) this.data).message();
+		if (Objects.nonNull(data) && data instanceof EgoResponseMessage) {
+			return ((EgoResponseMessage) data).message();
 		}
-		return this.message;
+		return message;
 	}
 
 }

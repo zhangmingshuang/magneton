@@ -1,7 +1,7 @@
 package org.magneton.core.util;
 
-import com.google.common.base.Preconditions;
-import com.google.common.base.Strings;
+import org.magneton.core.base.Preconditions;
+import org.magneton.core.base.Strings;
 
 /**
  * @author zhangmsh 2021/7/17
@@ -37,11 +37,11 @@ public final class Pair<S, T> {
 	 * @return
 	 */
 	public S getFirst() {
-		return this.first;
+		return first;
 	}
 
 	public S getKey() {
-		return this.first;
+		return first;
 	}
 
 	/**
@@ -49,11 +49,11 @@ public final class Pair<S, T> {
 	 * @return
 	 */
 	public T getSecond() {
-		return this.second;
+		return second;
 	}
 
 	public T getValue() {
-		return this.second;
+		return second;
 	}
 
 	/*
@@ -63,7 +63,7 @@ public final class Pair<S, T> {
 	 */
 	@Override
 	public String toString() {
-		return Strings.lenientFormat("%s->%s", this.first, this.second);
+		return Strings.lenientFormat("%s->%s", first, second);
 	}
 
 }

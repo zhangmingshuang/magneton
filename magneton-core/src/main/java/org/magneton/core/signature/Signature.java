@@ -1,8 +1,9 @@
 package org.magneton.core.signature;
 
-import com.google.common.base.Preconditions;
 import java.util.Map;
 import java.util.Objects;
+
+import org.magneton.core.base.Preconditions;
 import org.magneton.core.util.MoreArrays;
 
 /**
@@ -79,15 +80,14 @@ public interface Signature {
 		 * @return the signature.
 		 */
 		public Signature build() {
-			Preconditions.checkNotNull(this.salt, "salt must be not null");
+			Preconditions.checkNotNull(salt, "salt must be not null");
 
-			AbstractSignature abstractSignature = Objects.isNull(this.signature) ? new Sha1Signature(this.salt)
-					: this.signature;
-			if (!MoreArrays.isNullOrEmpty(this.needBodyKeys)) {
-				abstractSignature.setSignatureBodyVerifyer(new KeysSignatureBodyVerifyer(this.needBodyKeys));
+			AbstractSignature abstractSignature = Objects.isNull(signature) ? new Sha1Signature(salt) : signature;
+			if (!MoreArrays.isNullOrEmpty(needBodyKeys)) {
+				abstractSignature.setSignatureBodyVerifyer(new KeysSignatureBodyVerifyer(needBodyKeys));
 			}
-			if (Objects.nonNull(this.signatureContentBuilder)) {
-				abstractSignature.setSignatureContentBuilder(this.signatureContentBuilder);
+			if (Objects.nonNull(signatureContentBuilder)) {
+				abstractSignature.setSignatureContentBuilder(signatureContentBuilder);
 			}
 			return abstractSignature;
 		}
