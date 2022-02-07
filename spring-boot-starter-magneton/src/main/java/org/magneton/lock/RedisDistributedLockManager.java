@@ -1,6 +1,6 @@
 package org.magneton.lock;
 
-import com.google.common.base.Preconditions;
+import com.google.core.base.Preconditions;
 import org.redisson.api.RedissonClient;
 
 /**

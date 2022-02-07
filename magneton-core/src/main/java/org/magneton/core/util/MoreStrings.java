@@ -1,8 +1,9 @@
 package org.magneton.core.util;
 
-import com.google.common.annotations.Beta;
-import com.google.common.base.Strings;
 import javax.annotation.Nullable;
+
+
+import org.magneton.core.base.Strings;
 
 /**
  * .
@@ -11,7 +12,7 @@ import javax.annotation.Nullable;
  * @version 1.0.0
  * @since 2020/11/13
  */
-@Beta
+
 public final class MoreStrings {
 
 	private static final char ZERO = '0';
@@ -46,7 +47,6 @@ public final class MoreStrings {
 		}
 		int argsLength = args.length;
 		// start substituting the arguments into the '%sx' placeholders
-		@SuppressWarnings("MagicNumber")
 		StringBuilder builder = new StringBuilder(template.length() + 16 * argsLength);
 		int templateStart = 0;
 		int maxTemplatePosition = template.length() - 1;

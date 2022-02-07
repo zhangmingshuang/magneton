@@ -1,11 +1,9 @@
 package org.magneton.core.pool;
 
-import cn.hutool.core.text.StrPool;
-
 /**
  * 常用字符常量
  *
- * @see StrPool
+ * @see StringPool
  * @author looly
  * @since 5.6.3
  */

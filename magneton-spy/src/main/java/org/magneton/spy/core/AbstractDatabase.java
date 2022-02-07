@@ -1,7 +1,5 @@
 package org.magneton.spy.core;
 
-import com.google.common.base.Verify;
-
 /**
  * @author zhangmsh 2021/9/22
  * @since 1.0.0
@@ -15,7 +13,7 @@ public abstract class AbstractDatabase implements Database {
 	public Database self() {
 		Database database = THREAD_DATABASES.get();
 		if (database == null) {
-			database = this.createDatabase();
+			database = createDatabase();
 			Verify.verifyNotNull(database, "database");
 			THREAD_DATABASES.set(database);
 		}
@@ -24,10 +22,10 @@ public abstract class AbstractDatabase implements Database {
 
 	@Override
 	public Select select() {
-		if (this.select == null) {
-			this.select = this.createSelect();
+		if (select == null) {
+			select = createSelect();
 		}
-		return this.select;
+		return select;
 	}
 
 	protected Select createSelect() {
