@@ -17,7 +17,7 @@ package org.magneton.core.hash;
 import java.io.Serializable;
 import java.util.zip.Checksum;
 
-import javax.annotation.concurrent.Immutable;
+import javax.annotations.Immutable;
 
 import static org.magneton.core.base.Preconditions.checkArgument;
 import static org.magneton.core.base.Preconditions.checkNotNull;

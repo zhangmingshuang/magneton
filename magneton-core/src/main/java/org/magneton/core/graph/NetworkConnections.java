@@ -20,7 +20,7 @@ import java.util.Set;
 
 import javax.annotation.CheckForNull;
 
-import javax.annotation.CanIgnoreReturnValue;
+import javax.annotations.CanIgnoreReturnValue;
 
 /**
  * An interface for representing and manipulating an origin node's adjacent nodes and

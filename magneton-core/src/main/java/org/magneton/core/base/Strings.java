@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
-import javax.annotation.VisibleForTesting;
+import javax.annotations.VisibleForTesting;
 
 import static java.util.logging.Level.WARNING;
 

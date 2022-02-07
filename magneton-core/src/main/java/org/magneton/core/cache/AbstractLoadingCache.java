@@ -20,7 +20,7 @@ import java.util.concurrent.ExecutionException;
 
 import org.magneton.core.collect.ImmutableMap;
 import org.magneton.core.collect.Maps;
-import org.magneton.core.util.concurrent.UncheckedExecutionException;
+import org.magneton.foundation.util.concurrent.UncheckedExecutionException;
 
 /**
  * This class provides a skeletal implementation of the {@code Cache} interface to

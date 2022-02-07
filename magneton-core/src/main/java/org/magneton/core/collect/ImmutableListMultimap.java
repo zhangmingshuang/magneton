@@ -27,11 +27,11 @@ import java.util.function.Function;
 import java.util.stream.Collector;
 import java.util.stream.Stream;
 
-import javax.annotation.CanIgnoreReturnValue;
+import javax.annotations.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
-import javax.annotation.DoNotCall;
+import javax.annotations.DoNotCall;
+import javax.annotations.LazyInit;
 import javax.annotation.Nullable;
-import javax.annotation.concurrent.LazyInit;
 
 /**
  * A {@link org.magneton.core.collect.ListMultimap} whose contents will never change, with

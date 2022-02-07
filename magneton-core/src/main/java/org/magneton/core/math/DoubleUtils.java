@@ -16,7 +16,7 @@ package org.magneton.core.math;
 
 import java.math.BigInteger;
 
-import javax.annotation.VisibleForTesting;
+import javax.annotations.VisibleForTesting;
 
 import static java.lang.Double.MAX_EXPONENT;
 import static java.lang.Double.MIN_EXPONENT;

@@ -18,7 +18,7 @@ package org.magneton.core.collect;
 
 import java.util.ListIterator;
 
-import javax.annotation.DoNotCall;
+import javax.annotations.DoNotCall;
 
 /**
  * A list iterator that does not support {@link #remove}, {@link #add}, or {@link #set}.

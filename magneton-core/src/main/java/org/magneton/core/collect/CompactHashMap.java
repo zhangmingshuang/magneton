@@ -36,12 +36,12 @@ import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
 
-import javax.annotation.CanIgnoreReturnValue;
+import javax.annotations.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
-import javax.annotation.VisibleForTesting;
+import javax.annotations.VisibleForTesting;
 
-import javax.annotation.WeakOuter;
+import javax.annotations.WeakOuter;
 import org.magneton.core.base.Objects;
 import org.magneton.core.primitives.Ints;
 

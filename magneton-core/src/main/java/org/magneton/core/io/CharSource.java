@@ -27,9 +27,9 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 
-import javax.annotation.CanIgnoreReturnValue;
+import javax.annotations.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
-import javax.annotation.MustBeClosed;
+import javax.annotations.MustBeClosed;
 
 import org.magneton.core.base.Ascii;
 import org.magneton.core.base.Optional;

@@ -32,7 +32,7 @@ import javax.annotation.CheckForNull;
 
 import org.magneton.core.base.Preconditions;
 import org.magneton.core.collect.ImmutableList;
-import javax.annotation.CanIgnoreReturnValue;
+import javax.annotations.CanIgnoreReturnValue;
 import javax.annotation.Nullable;
 
 /**

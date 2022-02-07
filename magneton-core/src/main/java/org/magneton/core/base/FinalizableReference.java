@@ -14,7 +14,7 @@
 
 package org.magneton.core.base;
 
-import javax.annotation.DoNotMock;
+import javax.annotations.DoNotMock;
 
 /**
  * Implemented by references that have code to run after garbage collection of their

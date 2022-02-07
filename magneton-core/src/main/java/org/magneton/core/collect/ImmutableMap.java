@@ -36,14 +36,14 @@ import java.util.function.Function;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
-import javax.annotation.CanIgnoreReturnValue;
+import javax.annotations.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
-import javax.annotation.DoNotCall;
-import javax.annotation.DoNotMock;
+import javax.annotations.DoNotCall;
+import javax.annotations.DoNotMock;
+import javax.annotations.LazyInit;
 import javax.annotation.Nullable;
-import javax.annotation.VisibleForTesting;
-import javax.annotation.WeakOuter;
-import javax.annotation.concurrent.LazyInit;
+import javax.annotations.VisibleForTesting;
+import javax.annotations.WeakOuter;
 
 import org.magneton.core.base.Preconditions;
 

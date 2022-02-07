@@ -18,10 +18,10 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-import javax.annotation.CanIgnoreReturnValue;
+import javax.annotations.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
 
-import javax.annotation.DoNotCall;
+import javax.annotations.DoNotCall;
 import org.magneton.core.base.Preconditions;
 import org.magneton.core.collect.ForwardingMap;
 import org.magneton.core.collect.ForwardingMapEntry;

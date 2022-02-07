@@ -23,7 +23,7 @@ import java.util.Iterator;
 import java.util.Set;
 
 import javax.annotation.CheckForNull;
-import javax.annotation.DoNotMock;
+import javax.annotations.DoNotMock;
 
 import org.magneton.core.collect.AbstractIterator;
 import org.magneton.core.collect.ImmutableSet;

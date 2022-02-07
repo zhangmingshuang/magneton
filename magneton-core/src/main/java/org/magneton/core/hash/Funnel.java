@@ -16,7 +16,7 @@ package org.magneton.core.hash;
 
 import java.io.Serializable;
 
-import javax.annotation.DoNotMock;
+import javax.annotations.DoNotMock;
 
 /**
  * An object which can send data from an object of type {@code T} into a

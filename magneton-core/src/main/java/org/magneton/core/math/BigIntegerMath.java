@@ -20,7 +20,7 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.VisibleForTesting;
+import javax.annotations.VisibleForTesting;
 
 import static java.math.RoundingMode.CEILING;
 import static java.math.RoundingMode.FLOOR;

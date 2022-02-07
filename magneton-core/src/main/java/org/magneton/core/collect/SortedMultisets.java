@@ -24,7 +24,7 @@ import java.util.SortedSet;
 
 import javax.annotation.CheckForNull;
 
-import javax.annotation.Weak;
+import javax.annotations.Weak;
 
 import static org.magneton.core.collect.BoundType.CLOSED;
 import static org.magneton.core.collect.BoundType.OPEN;

@@ -34,10 +34,10 @@ import java.util.Spliterator;
 import java.util.Spliterators;
 import java.util.function.Consumer;
 
-import javax.annotation.CanIgnoreReturnValue;
+import javax.annotations.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
-import javax.annotation.VisibleForTesting;
+import javax.annotations.VisibleForTesting;
 
 import org.magneton.core.base.Objects;
 import org.magneton.core.primitives.Ints;

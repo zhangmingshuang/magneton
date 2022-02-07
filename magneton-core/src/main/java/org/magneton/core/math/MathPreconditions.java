@@ -17,7 +17,7 @@ package org.magneton.core.math;
 import java.math.BigInteger;
 import java.math.RoundingMode;
 
-import javax.annotation.CanIgnoreReturnValue;
+import javax.annotations.CanIgnoreReturnValue;
 
 /**
  * A collection of preconditions for math functions.

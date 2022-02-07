@@ -27,7 +27,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.annotation.CheckForNull;
-import javax.annotation.VisibleForTesting;
+import javax.annotations.VisibleForTesting;
 
 /**
  * A reference queue with an associated background thread that dequeues references and

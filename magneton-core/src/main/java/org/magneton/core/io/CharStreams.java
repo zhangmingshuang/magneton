@@ -23,7 +23,7 @@ import java.nio.CharBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.CanIgnoreReturnValue;
+import javax.annotations.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
 
 

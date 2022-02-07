@@ -27,10 +27,10 @@ import java.util.Set;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 
-import javax.annotation.CanIgnoreReturnValue;
+import javax.annotations.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
-import javax.annotation.Weak;
-import javax.annotation.concurrent.LazyInit;
+import javax.annotations.LazyInit;
+import javax.annotations.Weak;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.magneton.core.base.Objects;

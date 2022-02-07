@@ -1,7 +1,7 @@
 package org.magneton.test.test.util;
 
 import org.magneton.test.test.annotation.TestSort;
-import javax.annotation.CanIgnoreReturnValue;
+import javax.annotations.CanIgnoreReturnValue;
 import java.util.List;
 
 /**

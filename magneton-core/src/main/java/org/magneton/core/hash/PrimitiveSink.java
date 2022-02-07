@@ -17,7 +17,7 @@ package org.magneton.core.hash;
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 
-import javax.annotation.CanIgnoreReturnValue;
+import javax.annotations.CanIgnoreReturnValue;
 
 /**
  * An object which can receive a stream of primitive values.

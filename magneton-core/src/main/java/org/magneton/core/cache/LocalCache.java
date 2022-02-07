@@ -47,10 +47,10 @@ import java.util.function.Predicate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.annotation.GuardedBy;
+import javax.annotations.GuardedBy;
 import javax.annotation.Nullable;
-import javax.annotation.VisibleForTesting;
-import javax.annotation.Weak;
+import javax.annotations.VisibleForTesting;
+import javax.annotations.Weak;
 
 import org.magneton.core.base.Equivalence;
 import org.magneton.core.base.Stopwatch;
@@ -64,12 +64,12 @@ import org.magneton.core.collect.Iterators;
 import org.magneton.core.collect.Maps;
 import org.magneton.core.collect.Sets;
 import org.magneton.core.primitives.Ints;
-import org.magneton.core.util.concurrent.ExecutionError;
-import org.magneton.core.util.concurrent.Futures;
-import org.magneton.core.util.concurrent.ListenableFuture;
-import org.magneton.core.util.concurrent.SettableFuture;
-import org.magneton.core.util.concurrent.UncheckedExecutionException;
-import org.magneton.core.util.concurrent.Uninterruptibles;
+import org.magneton.foundation.util.concurrent.ExecutionError;
+import org.magneton.foundation.util.concurrent.Futures;
+import org.magneton.foundation.util.concurrent.ListenableFuture;
+import org.magneton.foundation.util.concurrent.SettableFuture;
+import org.magneton.foundation.util.concurrent.UncheckedExecutionException;
+import org.magneton.foundation.util.concurrent.Uninterruptibles;
 
 import static java.util.Collections.unmodifiableSet;
 import static java.util.concurrent.TimeUnit.NANOSECONDS;
@@ -77,9 +77,9 @@ import static org.magneton.core.base.Preconditions.checkNotNull;
 import static org.magneton.core.base.Preconditions.checkState;
 import static org.magneton.core.cache.CacheBuilder.NULL_TICKER;
 import static org.magneton.core.cache.CacheBuilder.UNSET_INT;
-import static org.magneton.core.util.concurrent.Futures.transform;
-import static org.magneton.core.util.concurrent.MoreExecutors.directExecutor;
-import static org.magneton.core.util.concurrent.Uninterruptibles.getUninterruptibly;
+import static org.magneton.foundation.util.concurrent.Futures.transform;
+import static org.magneton.foundation.util.concurrent.MoreExecutors.directExecutor;
+import static org.magneton.foundation.util.concurrent.Uninterruptibles.getUninterruptibly;
 
 /**
  * The concurrent hash map implementation built by

@@ -20,7 +20,7 @@ import java.util.Set;
 
 import javax.annotation.CheckForNull;
 
-import javax.annotation.DoNotMock;
+import javax.annotations.DoNotMock;
 
 /**
  * An immutable object that may contain a non-null reference to another object. Each

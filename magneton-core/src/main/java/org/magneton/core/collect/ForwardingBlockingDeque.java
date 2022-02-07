@@ -50,7 +50,7 @@ import javax.annotation.CheckForNull;
  * @author Emily Soldal
  * @since 14.0
  * @deprecated This class has moved to {@code com.google.common.util.concurrent}. Please
- * use {@link org.magneton.core.util.concurrent.ForwardingBlockingDeque} instead.
+ * use {@link org.magneton.foundation.util.concurrent.ForwardingBlockingDeque} instead.
  */
 @Deprecated
 @ElementTypesAreNonnullByDefault

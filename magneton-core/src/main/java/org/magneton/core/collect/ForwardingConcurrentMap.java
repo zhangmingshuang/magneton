@@ -18,7 +18,7 @@ package org.magneton.core.collect;
 
 import java.util.concurrent.ConcurrentMap;
 
-import javax.annotation.CanIgnoreReturnValue;
+import javax.annotations.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
 
 /**

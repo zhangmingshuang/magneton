@@ -20,7 +20,7 @@ import java.util.function.BinaryOperator;
 import java.util.function.Function;
 import java.util.stream.Collector;
 
-import javax.annotation.DoNotCall;
+import javax.annotations.DoNotCall;
 
 /**
  * "Overrides" the {@link org.magneton.core.collect.ImmutableMap} static methods that lack

@@ -31,11 +31,11 @@ import java.util.Spliterator;
 import java.util.Spliterators;
 import java.util.function.Consumer;
 
-import javax.annotation.CanIgnoreReturnValue;
+import javax.annotations.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
-import javax.annotation.VisibleForTesting;
+import javax.annotations.VisibleForTesting;
 
-import javax.annotation.WeakOuter;
+import javax.annotations.WeakOuter;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.magneton.core.base.Objects;
 import org.magneton.core.base.Preconditions;
@@ -95,7 +95,7 @@ import static java.util.Objects.requireNonNull;
 public final class LinkedHashMultimap<K extends Object, V extends Object>
 		extends LinkedHashMultimapGwtSerializationDependencies<K, V> {
 
-	@javax.annotation.VisibleForTesting
+	@VisibleForTesting
 	static final double VALUE_SET_LOAD_FACTOR = 1.0;
 
 	private static final int DEFAULT_KEY_CAPACITY = 16;
@@ -104,7 +104,7 @@ public final class LinkedHashMultimap<K extends Object, V extends Object>
 
 	private static final long serialVersionUID = 1;
 
-	@javax.annotation.VisibleForTesting
+	@VisibleForTesting
 	transient int valueSetCapacity = DEFAULT_VALUE_SET_CAPACITY;
 
 	private transient ValueEntry<K, V> multimapHeaderEntry;
@@ -379,7 +379,7 @@ public final class LinkedHashMultimap<K extends Object, V extends Object>
 	 * list of insertion-ordered entries in that {@code Set<V>}, and the linked list of
 	 * entries in the LinkedHashMultimap as a whole.
 	 */
-	@javax.annotation.VisibleForTesting
+	@VisibleForTesting
 	static final class ValueEntry<K extends Object, V extends Object>
 			extends org.magneton.core.collect.ImmutableEntry<K, V> implements ValueSetLink<K, V> {
 
@@ -487,7 +487,7 @@ public final class LinkedHashMultimap<K extends Object, V extends Object>
 
 	}
 
-	@javax.annotation.VisibleForTesting
+	@VisibleForTesting
 	@WeakOuter
 	final class ValueSet extends Sets.ImprovedAbstractSet<V> implements ValueSetLink<K, V> {
 

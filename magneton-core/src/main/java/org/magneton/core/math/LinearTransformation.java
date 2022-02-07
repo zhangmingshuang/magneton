@@ -15,8 +15,7 @@
 package org.magneton.core.math;
 
 import javax.annotation.CheckForNull;
-
-import javax.annotation.concurrent.LazyInit;
+import javax.annotations.LazyInit;
 
 import static java.lang.Double.NaN;
 import static org.magneton.core.base.Preconditions.checkArgument;

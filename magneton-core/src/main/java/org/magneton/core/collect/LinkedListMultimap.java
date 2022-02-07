@@ -32,10 +32,10 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.function.Consumer;
 
-import javax.annotation.CanIgnoreReturnValue;
+import javax.annotations.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
-import javax.annotation.WeakOuter;
+import javax.annotations.WeakOuter;
 
 import org.magneton.core.base.Preconditions;
 

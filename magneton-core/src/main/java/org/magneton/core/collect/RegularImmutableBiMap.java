@@ -21,9 +21,9 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 import javax.annotation.CheckForNull;
+import javax.annotations.LazyInit;
 import javax.annotation.Nullable;
-import javax.annotation.VisibleForTesting;
-import javax.annotation.concurrent.LazyInit;
+import javax.annotations.VisibleForTesting;
 
 import org.magneton.core.base.Preconditions;
 import org.magneton.core.collect.ImmutableMapEntry.NonTerminalImmutableBiMapEntry;

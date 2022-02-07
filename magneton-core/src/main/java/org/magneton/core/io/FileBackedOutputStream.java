@@ -24,8 +24,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import javax.annotation.CheckForNull;
-import javax.annotation.GuardedBy;
-import javax.annotation.VisibleForTesting;
+import javax.annotations.GuardedBy;
+import javax.annotations.VisibleForTesting;
 
 import static java.util.Objects.requireNonNull;
 

@@ -25,10 +25,10 @@ import java.util.Set;
 import java.util.Spliterator;
 import java.util.Spliterators;
 
-import javax.annotation.CanIgnoreReturnValue;
+import javax.annotations.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
-import javax.annotation.WeakOuter;
-import javax.annotation.concurrent.LazyInit;
+import javax.annotations.LazyInit;
+import javax.annotations.WeakOuter;
 
 import org.magneton.core.base.Preconditions;
 

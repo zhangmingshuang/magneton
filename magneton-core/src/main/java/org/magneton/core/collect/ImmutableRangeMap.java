@@ -24,10 +24,10 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.stream.Collector;
 
-import javax.annotation.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
-import javax.annotation.DoNotCall;
-import javax.annotation.DoNotMock;
+import javax.annotations.CanIgnoreReturnValue;
+import javax.annotations.DoNotCall;
+import javax.annotations.DoNotMock;
 
 import org.magneton.core.base.Preconditions;
 import org.magneton.core.collect.SortedLists.KeyAbsentBehavior;
@@ -113,38 +113,38 @@ public class ImmutableRangeMap<K extends Comparable<?>, V>
 	@Override
 	@CheckForNull
 	public V get(K key) {
-		int index = org.magneton.core.collect.SortedLists.binarySearch(ranges, Range.<K>lowerBoundFn(),
+		int index = org.magneton.core.collect.SortedLists.binarySearch(this.ranges, Range.<K>lowerBoundFn(),
 				Cut.belowValue(key), KeyPresentBehavior.ANY_PRESENT, KeyAbsentBehavior.NEXT_LOWER);
 		if (index == -1) {
 			return null;
 		}
 		else {
-			Range<K> range = ranges.get(index);
-			return range.contains(key) ? values.get(index) : null;
+			Range<K> range = this.ranges.get(index);
+			return range.contains(key) ? this.values.get(index) : null;
 		}
 	}
 
 	@Override
 	@CheckForNull
 	public Entry<Range<K>, V> getEntry(K key) {
-		int index = org.magneton.core.collect.SortedLists.binarySearch(ranges, Range.<K>lowerBoundFn(),
+		int index = org.magneton.core.collect.SortedLists.binarySearch(this.ranges, Range.<K>lowerBoundFn(),
 				Cut.belowValue(key), KeyPresentBehavior.ANY_PRESENT, KeyAbsentBehavior.NEXT_LOWER);
 		if (index == -1) {
 			return null;
 		}
 		else {
-			Range<K> range = ranges.get(index);
-			return range.contains(key) ? Maps.immutableEntry(range, values.get(index)) : null;
+			Range<K> range = this.ranges.get(index);
+			return range.contains(key) ? Maps.immutableEntry(range, this.values.get(index)) : null;
 		}
 	}
 
 	@Override
 	public Range<K> span() {
-		if (ranges.isEmpty()) {
+		if (this.ranges.isEmpty()) {
 			throw new NoSuchElementException();
 		}
-		Range<K> firstRange = ranges.get(0);
-		Range<K> lastRange = ranges.get(ranges.size() - 1);
+		Range<K> firstRange = this.ranges.get(0);
+		Range<K> lastRange = this.ranges.get(this.ranges.size() - 1);
 		return Range.create(firstRange.lowerBound, lastRange.upperBound);
 	}
 
@@ -217,28 +217,28 @@ public class ImmutableRangeMap<K extends Comparable<?>, V>
 	@Override
 	@DoNotCall("Always throws UnsupportedOperationException")
 	public final void merge(Range<K> range, @CheckForNull V value,
-			BiFunction<? super V, ? super @Nullable V, ? extends V> remappingFunction) {
+			BiFunction<? super V, ? super V, ? extends V> remappingFunction) {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public org.magneton.core.collect.ImmutableMap<Range<K>, V> asMapOfRanges() {
-		if (ranges.isEmpty()) {
+		if (this.ranges.isEmpty()) {
 			return org.magneton.core.collect.ImmutableMap.of();
 		}
-		RegularImmutableSortedSet<Range<K>> rangeSet = new RegularImmutableSortedSet<>(ranges,
+		RegularImmutableSortedSet<Range<K>> rangeSet = new RegularImmutableSortedSet<>(this.ranges,
 				Range.<K>rangeLexOrdering());
-		return new ImmutableSortedMap<>(rangeSet, values);
+		return new ImmutableSortedMap<>(rangeSet, this.values);
 	}
 
 	@Override
 	public org.magneton.core.collect.ImmutableMap<Range<K>, V> asDescendingMapOfRanges() {
-		if (ranges.isEmpty()) {
+		if (this.ranges.isEmpty()) {
 			return org.magneton.core.collect.ImmutableMap.of();
 		}
-		RegularImmutableSortedSet<Range<K>> rangeSet = new RegularImmutableSortedSet<>(ranges.reverse(),
+		RegularImmutableSortedSet<Range<K>> rangeSet = new RegularImmutableSortedSet<>(this.ranges.reverse(),
 				Range.<K>rangeLexOrdering().reverse());
-		return new ImmutableSortedMap<>(rangeSet, values.reverse());
+		return new ImmutableSortedMap<>(rangeSet, this.values.reverse());
 	}
 
 	@Override
@@ -246,12 +246,12 @@ public class ImmutableRangeMap<K extends Comparable<?>, V>
 		if (Preconditions.checkNotNull(range).isEmpty()) {
 			return ImmutableRangeMap.of();
 		}
-		else if (ranges.isEmpty() || range.encloses(span())) {
+		else if (this.ranges.isEmpty() || range.encloses(this.span())) {
 			return this;
 		}
-		int lowerIndex = org.magneton.core.collect.SortedLists.binarySearch(ranges, Range.<K>upperBoundFn(),
+		int lowerIndex = org.magneton.core.collect.SortedLists.binarySearch(this.ranges, Range.<K>upperBoundFn(),
 				range.lowerBound, KeyPresentBehavior.FIRST_AFTER, KeyAbsentBehavior.NEXT_HIGHER);
-		int upperIndex = org.magneton.core.collect.SortedLists.binarySearch(ranges, Range.<K>lowerBoundFn(),
+		int upperIndex = org.magneton.core.collect.SortedLists.binarySearch(this.ranges, Range.<K>lowerBoundFn(),
 				range.upperBound, KeyPresentBehavior.ANY_PRESENT, KeyAbsentBehavior.NEXT_HIGHER);
 		if (lowerIndex >= upperIndex) {
 			return ImmutableRangeMap.of();
@@ -268,10 +268,10 @@ public class ImmutableRangeMap<K extends Comparable<?>, V>
 			public Range<K> get(int index) {
 				Preconditions.checkElementIndex(index, len);
 				if (index == 0 || index == len - 1) {
-					return ranges.get(index + off).intersection(range);
+					return ImmutableRangeMap.this.ranges.get(index + off).intersection(range);
 				}
 				else {
-					return ranges.get(index + off);
+					return ImmutableRangeMap.this.ranges.get(index + off);
 				}
 			}
 
@@ -281,7 +281,7 @@ public class ImmutableRangeMap<K extends Comparable<?>, V>
 			}
 		};
 		ImmutableRangeMap<K, V> outer = this;
-		return new ImmutableRangeMap<K, V>(subRanges, values.subList(lowerIndex, upperIndex)) {
+		return new ImmutableRangeMap<K, V>(subRanges, this.values.subList(lowerIndex, upperIndex)) {
 			@Override
 			public ImmutableRangeMap<K, V> subRangeMap(Range<K> subRange) {
 				if (range.isConnected(subRange)) {
@@ -296,25 +296,25 @@ public class ImmutableRangeMap<K extends Comparable<?>, V>
 
 	@Override
 	public int hashCode() {
-		return asMapOfRanges().hashCode();
+		return this.asMapOfRanges().hashCode();
 	}
 
 	@Override
 	public boolean equals(@CheckForNull Object o) {
 		if (o instanceof org.magneton.core.collect.RangeMap) {
 			org.magneton.core.collect.RangeMap<?, ?> rangeMap = (RangeMap<?, ?>) o;
-			return asMapOfRanges().equals(rangeMap.asMapOfRanges());
+			return this.asMapOfRanges().equals(rangeMap.asMapOfRanges());
 		}
 		return false;
 	}
 
 	@Override
 	public String toString() {
-		return asMapOfRanges().toString();
+		return this.asMapOfRanges().toString();
 	}
 
 	Object writeReplace() {
-		return new SerializedForm<>(asMapOfRanges());
+		return new SerializedForm<>(this.asMapOfRanges());
 	}
 
 	/**
@@ -328,7 +328,7 @@ public class ImmutableRangeMap<K extends Comparable<?>, V>
 		private final List<Entry<Range<K>, V>> entries;
 
 		public Builder() {
-			entries = Lists.newArrayList();
+			this.entries = Lists.newArrayList();
 		}
 
 		/**
@@ -340,7 +340,7 @@ public class ImmutableRangeMap<K extends Comparable<?>, V>
 			Preconditions.checkNotNull(range);
 			Preconditions.checkNotNull(value);
 			Preconditions.checkArgument(!range.isEmpty(), "Range must not be empty, but was %s", range);
-			entries.add(Maps.immutableEntry(range, value));
+			this.entries.add(Maps.immutableEntry(range, value));
 			return this;
 		}
 
@@ -348,14 +348,14 @@ public class ImmutableRangeMap<K extends Comparable<?>, V>
 		@CanIgnoreReturnValue
 		public Builder<K, V> putAll(org.magneton.core.collect.RangeMap<K, ? extends V> rangeMap) {
 			for (Entry<Range<K>, ? extends V> entry : rangeMap.asMapOfRanges().entrySet()) {
-				put(entry.getKey(), entry.getValue());
+				this.put(entry.getKey(), entry.getValue());
 			}
 			return this;
 		}
 
 		@CanIgnoreReturnValue
 		Builder<K, V> combine(Builder<K, V> builder) {
-			entries.addAll(builder.entries);
+			this.entries.addAll(builder.entries);
 			return this;
 		}
 
@@ -366,20 +366,20 @@ public class ImmutableRangeMap<K extends Comparable<?>, V>
 		 * overlap
 		 */
 		public ImmutableRangeMap<K, V> build() {
-			Collections.sort(entries, Range.<K>rangeLexOrdering().onKeys());
-			org.magneton.core.collect.ImmutableList.Builder<Range<K>> rangesBuilder = new org.magneton.core.collect.ImmutableList.Builder<>(entries.size());
-			org.magneton.core.collect.ImmutableList.Builder<V> valuesBuilder = new org.magneton.core.collect.ImmutableList.Builder<V>(entries.size());
-			for (int i = 0; i < entries.size(); i++) {
-				Range<K> range = entries.get(i).getKey();
+			Collections.sort(this.entries, Range.<K>rangeLexOrdering().onKeys());
+			org.magneton.core.collect.ImmutableList.Builder<Range<K>> rangesBuilder = new org.magneton.core.collect.ImmutableList.Builder<>(this.entries.size());
+			org.magneton.core.collect.ImmutableList.Builder<V> valuesBuilder = new org.magneton.core.collect.ImmutableList.Builder<V>(this.entries.size());
+			for (int i = 0; i < this.entries.size(); i++) {
+				Range<K> range = this.entries.get(i).getKey();
 				if (i > 0) {
-					Range<K> prevRange = entries.get(i - 1).getKey();
+					Range<K> prevRange = this.entries.get(i - 1).getKey();
 					if (range.isConnected(prevRange) && !range.intersection(prevRange).isEmpty()) {
 						throw new IllegalArgumentException(
 								"Overlapping ranges: range " + prevRange + " overlaps with entry " + range);
 					}
 				}
 				rangesBuilder.add(range);
-				valuesBuilder.add(entries.get(i).getValue());
+				valuesBuilder.add(this.entries.get(i).getValue());
 			}
 			return new ImmutableRangeMap<>(rangesBuilder.build(), valuesBuilder.build());
 		}
@@ -401,17 +401,17 @@ public class ImmutableRangeMap<K extends Comparable<?>, V>
 		}
 
 		Object readResolve() {
-			if (mapOfRanges.isEmpty()) {
+			if (this.mapOfRanges.isEmpty()) {
 				return of();
 			}
 			else {
-				return createRangeMap();
+				return this.createRangeMap();
 			}
 		}
 
 		Object createRangeMap() {
 			Builder<K, V> builder = new Builder<>();
-			for (Entry<Range<K>, V> entry : mapOfRanges.entrySet()) {
+			for (Entry<Range<K>, V> entry : this.mapOfRanges.entrySet()) {
 				builder.put(entry.getKey(), entry.getValue());
 			}
 			return builder.build();

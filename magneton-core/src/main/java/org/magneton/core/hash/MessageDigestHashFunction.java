@@ -20,7 +20,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 
-import javax.annotation.concurrent.Immutable;
+import javax.annotations.Immutable;
 
 import static org.magneton.core.base.Preconditions.checkArgument;
 import static org.magneton.core.base.Preconditions.checkNotNull;

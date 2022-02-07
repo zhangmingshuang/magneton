@@ -17,7 +17,7 @@ package org.magneton.core.net;
 import java.util.List;
 
 import javax.annotation.CheckForNull;
-import javax.annotation.concurrent.Immutable;
+import javax.annotations.Immutable;
 
 import org.magneton.core.base.Ascii;
 import org.magneton.core.base.CharMatcher;

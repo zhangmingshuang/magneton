@@ -14,7 +14,7 @@
 
 package org.magneton.core.base;
 
-import javax.annotation.CanIgnoreReturnValue;
+import javax.annotations.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 

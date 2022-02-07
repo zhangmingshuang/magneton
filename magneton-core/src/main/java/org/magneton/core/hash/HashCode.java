@@ -16,7 +16,7 @@ package org.magneton.core.hash;
 
 import java.io.Serializable;
 
-import javax.annotation.CanIgnoreReturnValue;
+import javax.annotations.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
 
 import org.magneton.core.base.Preconditions;

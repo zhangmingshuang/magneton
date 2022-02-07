@@ -19,10 +19,10 @@ package org.magneton.core.collect;
 import java.io.Serializable;
 import java.util.Map;
 
-import javax.annotation.CanIgnoreReturnValue;
+import javax.annotations.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
-import javax.annotation.DoNotCall;
-import javax.annotation.concurrent.Immutable;
+import javax.annotations.DoNotCall;
+import javax.annotations.Immutable;
 
 import org.magneton.core.base.Preconditions;
 import org.magneton.core.primitives.Primitives;

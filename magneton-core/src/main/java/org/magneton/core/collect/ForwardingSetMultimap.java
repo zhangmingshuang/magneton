@@ -21,7 +21,7 @@ import java.util.Set;
 
 import javax.annotation.CheckForNull;
 
-import javax.annotation.CanIgnoreReturnValue;
+import javax.annotations.CanIgnoreReturnValue;
 
 /**
  * A set multimap which forwards all its method calls to another set multimap. Subclasses

@@ -17,7 +17,7 @@ package org.magneton.core.primitives;
 import java.io.Serializable;
 import java.math.BigInteger;
 
-import javax.annotation.CanIgnoreReturnValue;
+import javax.annotations.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
 
 import org.magneton.core.base.Preconditions;

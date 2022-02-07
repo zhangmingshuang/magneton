@@ -17,7 +17,7 @@ package org.magneton.core.base;
 import java.util.Arrays;
 import java.util.BitSet;
 
-import javax.annotation.VisibleForTesting;
+import javax.annotations.VisibleForTesting;
 
 /**
  * Determines a true or false value for any Java {@code char} value, just as

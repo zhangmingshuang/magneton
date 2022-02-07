@@ -24,7 +24,7 @@ import java.util.SortedSet;
 
 import javax.annotation.CheckForNull;
 
-import javax.annotation.WeakOuter;
+import javax.annotations.WeakOuter;
 import org.magneton.core.base.Preconditions;
 import org.magneton.core.base.Supplier;
 

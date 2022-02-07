@@ -23,7 +23,7 @@ import java.util.logging.Logger;
 
 import org.magneton.core.base.MoreObjects;
 import org.magneton.core.base.Preconditions;
-import org.magneton.core.util.concurrent.MoreExecutors;
+import org.magneton.foundation.util.concurrent.MoreExecutors;
 
 /**
  * Dispatches events to listeners, and provides ways for listeners to register themselves.
@@ -199,7 +199,7 @@ public class EventBus {
 	 * valid Java identifier.
 	 */
 	public EventBus(String identifier) {
-		this(identifier, org.magneton.core.util.concurrent.MoreExecutors.directExecutor(),
+		this(identifier, MoreExecutors.directExecutor(),
 				Dispatcher.perThreadDispatchQueue(), LoggingHandler.INSTANCE);
 	}
 

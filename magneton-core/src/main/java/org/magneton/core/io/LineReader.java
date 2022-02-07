@@ -20,7 +20,7 @@ import java.nio.CharBuffer;
 import java.util.ArrayDeque;
 import java.util.Queue;
 
-import javax.annotation.CanIgnoreReturnValue;
+import javax.annotations.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
 
 

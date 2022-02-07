@@ -20,12 +20,12 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ExecutionException;
 
 import javax.annotation.CheckForNull;
-import javax.annotation.CheckReturnValue;
-import javax.annotation.DoNotMock;
+import javax.annotations.CheckReturnValue;
+import javax.annotations.DoNotMock;
 
 import org.magneton.core.collect.ImmutableMap;
-import org.magneton.core.util.concurrent.ExecutionError;
-import org.magneton.core.util.concurrent.UncheckedExecutionException;
+import org.magneton.foundation.util.concurrent.ExecutionError;
+import org.magneton.foundation.util.concurrent.UncheckedExecutionException;
 
 /**
  * A semi-persistent mapping from keys to values. Cache entries are manually added using

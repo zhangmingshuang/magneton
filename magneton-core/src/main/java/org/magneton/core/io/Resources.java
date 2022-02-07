@@ -21,7 +21,7 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.List;
 
-import javax.annotation.CanIgnoreReturnValue;
+import javax.annotations.CanIgnoreReturnValue;
 
 
 import org.magneton.core.base.Charsets;

@@ -17,7 +17,7 @@ package org.magneton.core.hash;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
-import javax.annotation.CanIgnoreReturnValue;
+import javax.annotations.CanIgnoreReturnValue;
 
 import static org.magneton.core.base.Preconditions.checkArgument;
 

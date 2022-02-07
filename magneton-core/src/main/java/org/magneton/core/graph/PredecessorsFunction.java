@@ -16,7 +16,7 @@
 
 package org.magneton.core.graph;
 
-import javax.annotation.DoNotMock;
+import javax.annotations.DoNotMock;
 
 /**
  * A functional interface for <a href=

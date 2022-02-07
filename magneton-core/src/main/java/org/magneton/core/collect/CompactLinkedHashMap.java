@@ -24,12 +24,12 @@ import java.util.Set;
 import java.util.Spliterator;
 import java.util.Spliterators;
 
-import javax.annotation.CanIgnoreReturnValue;
+import javax.annotations.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
-import javax.annotation.VisibleForTesting;
+import javax.annotations.VisibleForTesting;
 
-import javax.annotation.WeakOuter;
+import javax.annotations.WeakOuter;
 
 import static java.util.Objects.requireNonNull;
 

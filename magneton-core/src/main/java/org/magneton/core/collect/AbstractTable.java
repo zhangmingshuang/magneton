@@ -22,10 +22,10 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Spliterator;
 
-import javax.annotation.CanIgnoreReturnValue;
+import javax.annotations.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
-import javax.annotation.WeakOuter;
-import javax.annotation.concurrent.LazyInit;
+import javax.annotations.LazyInit;
+import javax.annotations.WeakOuter;
 
 /**
  * Skeletal, implementation-agnostic implementation of the {@link Table} interface.

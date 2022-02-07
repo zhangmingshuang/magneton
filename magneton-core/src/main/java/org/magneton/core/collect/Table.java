@@ -20,9 +20,9 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 
-import javax.annotation.CanIgnoreReturnValue;
+import javax.annotations.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
-import javax.annotation.DoNotMock;
+import javax.annotations.DoNotMock;
 
 import org.magneton.core.base.Objects;
 

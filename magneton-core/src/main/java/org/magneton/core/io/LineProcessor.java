@@ -16,7 +16,7 @@ package org.magneton.core.io;
 
 import java.io.IOException;
 
-import javax.annotation.CanIgnoreReturnValue;
+import javax.annotations.CanIgnoreReturnValue;
 
 
 

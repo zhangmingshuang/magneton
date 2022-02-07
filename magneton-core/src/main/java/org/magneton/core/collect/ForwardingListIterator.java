@@ -18,7 +18,7 @@ package org.magneton.core.collect;
 
 import java.util.ListIterator;
 
-import javax.annotation.CanIgnoreReturnValue;
+import javax.annotations.CanIgnoreReturnValue;
 
 /**
  * A list iterator which forwards all its method calls to another list iterator.

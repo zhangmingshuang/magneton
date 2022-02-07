@@ -21,10 +21,10 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.Set;
 
-import javax.annotation.CanIgnoreReturnValue;
+import javax.annotations.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
-import javax.annotation.WeakOuter;
-import javax.annotation.concurrent.LazyInit;
+import javax.annotations.LazyInit;
+import javax.annotations.WeakOuter;
 
 /**
  * This class provides a skeletal implementation of the {@link Multiset} interface. A new

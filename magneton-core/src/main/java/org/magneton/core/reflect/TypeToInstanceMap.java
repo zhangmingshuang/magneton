@@ -16,10 +16,10 @@ package org.magneton.core.reflect;
 
 import java.util.Map;
 
-import javax.annotation.CanIgnoreReturnValue;
+import javax.annotations.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
 
-import javax.annotation.DoNotMock;
+import javax.annotations.DoNotMock;
 
 /**
  * A map, each entry of which maps a {@link TypeToken} to an instance of that type. In

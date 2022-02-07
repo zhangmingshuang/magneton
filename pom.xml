@@ -12,14 +12,15 @@
 
 	<modules>
 		<module>magneton-core</module>
-		<module>spring-boot-magneton-parent</module>
-		<module>spring-boot-starter-magneton</module>
 		<module>magneton-lock</module>
 		<module>magneton-cache</module>
 		<module>magneton-test</module>
 		<module>magneton-modules</module>
-		<module>spring-cloud-starter-magneton</module>
 		<module>magneton-spy</module>
+		<module>spring-boot-magneton</module>
+		<module>spring-boot-magneton-parent</module>
+		<module>spring-boot-starter-magneton</module>
+		<module>spring-cloud-starter-magneton</module>
 	</modules>
 
 
@@ -51,7 +52,7 @@
 		<sonar.host.url>https://builds.apache.org/analysis</sonar.host.url>
 
 		<spring-boot.version>2.3.4.RELEASE</spring-boot.version>
-		<testable.version>0.6.7</testable.version>
+		<testable.version>0.7.4</testable.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<commons-lang3.version>3.11</commons-lang3.version>
 		<lombok.version>1.18.12</lombok.version>
@@ -62,7 +63,6 @@
 		<junit.version>5.7.0</junit.version>
 		<guava.version>30.1.1-jre</guava.version>
 		<javax.el.version>3.0.1-b12</javax.el.version>
-		<testable.version>0.6.7</testable.version>
 		<joda-time.version>2.10.10</joda-time.version>
 		<fastjson.version>1.2.75</fastjson.version>
 		<mockito-junit-jupiter.version>3.6.28</mockito-junit-jupiter.version>
@@ -87,9 +87,21 @@
 				<artifactId>lombok</artifactId>
 				<version>${lombok.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>com.alibaba.testable</groupId>
+				<artifactId>testable-all</artifactId>
+				<version>${testable.version}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
+	<dependencies>
+		<dependency>
+			<groupId>com.alibaba.testable</groupId>
+			<artifactId>testable-all</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
 	<build>
 		<plugins>
 			<plugin>

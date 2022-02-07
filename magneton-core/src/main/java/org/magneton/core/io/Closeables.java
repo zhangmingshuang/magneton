@@ -25,7 +25,7 @@ import javax.annotation.CheckForNull;
 
 
 
-import javax.annotation.VisibleForTesting;
+import javax.annotations.VisibleForTesting;
 
 /**
  * Utility methods for working with {@link Closeable} objects.

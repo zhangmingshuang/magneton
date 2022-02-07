@@ -18,9 +18,9 @@ package org.magneton.core.graph;
 
 import java.util.Map;
 
-import javax.annotation.CanIgnoreReturnValue;
+import javax.annotations.CanIgnoreReturnValue;
+import javax.annotations.Immutable;
 
-import javax.annotation.concurrent.Immutable;
 import org.magneton.core.base.Function;
 import org.magneton.core.collect.ImmutableMap;
 import org.magneton.core.collect.Maps;

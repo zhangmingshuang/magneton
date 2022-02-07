@@ -25,9 +25,9 @@ import java.util.zip.CRC32;
 import java.util.zip.Checksum;
 
 import javax.annotation.CheckForNull;
+import javax.annotations.Immutable;
 import javax.crypto.spec.SecretKeySpec;
 
-import javax.annotation.concurrent.Immutable;
 import org.magneton.core.primitives.UnsignedInts;
 import org.magneton.core.primitives.UnsignedLongs;
 

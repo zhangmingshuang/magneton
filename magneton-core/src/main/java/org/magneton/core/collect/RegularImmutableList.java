@@ -20,7 +20,7 @@ import java.util.Spliterator;
 import java.util.Spliterators;
 
 import javax.annotation.Nullable;
-import javax.annotation.VisibleForTesting;
+import javax.annotations.VisibleForTesting;
 
 /**
  * Implementation of {@link org.magneton.core.collect.ImmutableList} backed by a simple

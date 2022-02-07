@@ -31,9 +31,9 @@ import java.util.function.Function;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
-import javax.annotation.CanIgnoreReturnValue;
+import javax.annotations.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
-import javax.annotation.DoNotCall;
+import javax.annotations.DoNotCall;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.magneton.core.base.Preconditions;

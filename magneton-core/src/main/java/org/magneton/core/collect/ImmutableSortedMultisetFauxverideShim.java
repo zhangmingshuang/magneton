@@ -18,7 +18,7 @@ import java.util.function.Function;
 import java.util.function.ToIntFunction;
 import java.util.stream.Collector;
 
-import javax.annotation.DoNotCall;
+import javax.annotations.DoNotCall;
 
 /**
  * "Overrides" the {@link org.magneton.core.collect.ImmutableMultiset} static methods that

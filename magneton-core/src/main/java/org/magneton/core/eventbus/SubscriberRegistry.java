@@ -26,9 +26,9 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.CopyOnWriteArraySet;
 
 import javax.annotation.CheckForNull;
-import javax.annotation.VisibleForTesting;
+import javax.annotations.VisibleForTesting;
 
-import javax.annotation.Weak;
+import javax.annotations.Weak;
 import org.magneton.core.base.MoreObjects;
 import org.magneton.core.base.Objects;
 import org.magneton.core.base.Preconditions;
@@ -44,7 +44,7 @@ import org.magneton.core.collect.Maps;
 import org.magneton.core.collect.Multimap;
 import org.magneton.core.primitives.Primitives;
 import org.magneton.core.reflect.TypeToken;
-import org.magneton.core.util.concurrent.UncheckedExecutionException;
+import org.magneton.foundation.util.concurrent.UncheckedExecutionException;
 
 /**
  * Registry of subscribers to a single event bus.
@@ -102,7 +102,7 @@ final class SubscriberRegistry {
 		try {
 			return subscriberMethodsCache.getUnchecked(clazz);
 		}
-		catch (org.magneton.core.util.concurrent.UncheckedExecutionException e) {
+		catch (UncheckedExecutionException e) {
 			org.magneton.core.base.Throwables.throwIfUnchecked(e.getCause());
 			throw e;
 		}
@@ -199,7 +199,7 @@ final class SubscriberRegistry {
 		}
 	}
 
-	@javax.annotation.VisibleForTesting
+	@VisibleForTesting
 	Set<Subscriber> getSubscribersForTesting(Class<?> eventType) {
 		return MoreObjects.firstNonNull(subscribers.get(eventType), ImmutableSet.<Subscriber>of());
 	}

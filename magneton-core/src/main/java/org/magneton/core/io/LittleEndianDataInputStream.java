@@ -21,9 +21,9 @@ import java.io.FilterInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import javax.annotation.CanIgnoreReturnValue;
+import javax.annotations.CanIgnoreReturnValue;
 
-import javax.annotation.DoNotCall;
+import javax.annotations.DoNotCall;
 
 
 import org.magneton.core.base.Preconditions;

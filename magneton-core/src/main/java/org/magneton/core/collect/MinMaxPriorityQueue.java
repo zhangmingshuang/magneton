@@ -29,12 +29,12 @@ import java.util.NoSuchElementException;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
-import javax.annotation.CanIgnoreReturnValue;
+import javax.annotations.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
-import javax.annotation.VisibleForTesting;
-import javax.annotation.WeakOuter;
+import javax.annotations.VisibleForTesting;
+import javax.annotations.WeakOuter;
 
-import javax.annotation.Weak;
+import javax.annotations.Weak;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.magneton.core.base.Preconditions;
 import org.magneton.core.math.IntMath;
@@ -112,7 +112,7 @@ public final class MinMaxPriorityQueue<E> extends AbstractQueue<E> {
 
 	private static final int DEFAULT_CAPACITY = 11;
 
-	@javax.annotation.VisibleForTesting
+	@VisibleForTesting
 	final int maximumSize;
 
 	private final Heap minHeap;
@@ -185,7 +185,7 @@ public final class MinMaxPriorityQueue<E> extends AbstractQueue<E> {
 		return new Builder<Comparable>(Ordering.natural()).maximumSize(maximumSize);
 	}
 
-	@javax.annotation.VisibleForTesting
+	@VisibleForTesting
 	static boolean isEvenLevel(int index) {
 		int oneBased = ~~(index + 1); // for GWT
 		Preconditions.checkState(oneBased > 0, "negative index");
@@ -375,7 +375,7 @@ public final class MinMaxPriorityQueue<E> extends AbstractQueue<E> {
 	 * {@code index}. This fact is used by iterator.remove so as to visit elements during
 	 * a traversal once and only once.
 	 */
-	@javax.annotation.VisibleForTesting
+	@VisibleForTesting
 	@CanIgnoreReturnValue
 	@CheckForNull
 	MoveDesc<E> removeAt(int index) {
@@ -459,7 +459,7 @@ public final class MinMaxPriorityQueue<E> extends AbstractQueue<E> {
 	 * <p>
 	 * TODO(kevinb): move to the test class?
 	 */
-	@javax.annotation.VisibleForTesting
+	@VisibleForTesting
 	boolean isIntact() {
 		for (int i = 1; i < size; i++) {
 			if (!heapForIndex(i).verifyIndex(i)) {
@@ -519,7 +519,7 @@ public final class MinMaxPriorityQueue<E> extends AbstractQueue<E> {
 		return minHeap.ordering;
 	}
 
-	@javax.annotation.VisibleForTesting
+	@VisibleForTesting
 	int capacity() {
 		return queue.length;
 	}

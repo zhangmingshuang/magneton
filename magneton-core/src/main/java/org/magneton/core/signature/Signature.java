@@ -4,7 +4,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import org.magneton.core.base.Preconditions;
-import org.magneton.core.util.MoreArrays;
+import org.magneton.foundation.util.MoreArrays;
 
 /**
  * .

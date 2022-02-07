@@ -25,7 +25,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.VisibleForTesting;
+import javax.annotations.VisibleForTesting;
 
 /**
  * Implementation of {@code Multimap} that uses an {@code ArrayList} to store the values

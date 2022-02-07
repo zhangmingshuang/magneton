@@ -20,7 +20,7 @@ import java.util.Collection;
 import java.util.Set;
 
 import javax.annotation.CheckForNull;
-import javax.annotation.DoNotMock;
+import javax.annotations.DoNotMock;
 
 /**
  * An interface for <a href=

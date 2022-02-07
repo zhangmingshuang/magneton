@@ -20,10 +20,10 @@ import java.io.Serializable;
 import java.util.IdentityHashMap;
 import java.util.function.BiConsumer;
 
-import javax.annotation.CanIgnoreReturnValue;
+import javax.annotations.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
-import javax.annotation.VisibleForTesting;
+import javax.annotations.VisibleForTesting;
 
 import org.magneton.core.base.Preconditions;
 import org.magneton.core.collect.ImmutableMapEntry.NonTerminalImmutableMapEntry;
@@ -50,21 +50,21 @@ final class RegularImmutableMap<K, V> extends org.magneton.core.collect.Immutabl
 	 * conservative here ensures that the table is still likely to be relatively sparse
 	 * (hence it misses fast) while saving space.
 	 */
-	@javax.annotation.VisibleForTesting
+	@VisibleForTesting
 	static final double MAX_LOAD_FACTOR = 1.2;
 
 	/**
 	 * Maximum allowed false positive probability of detecting a hash flooding attack
 	 * given random input.
 	 */
-	@javax.annotation.VisibleForTesting
+	@VisibleForTesting
 	static final double HASH_FLOODING_FPP = 0.001;
 
 	/**
 	 * Maximum allowed length of a hash table bucket before falling back to a j.u.HashMap
 	 * based implementation. Experimentally determined.
 	 */
-	@javax.annotation.VisibleForTesting
+	@VisibleForTesting
 	static final int MAX_HASH_BUCKET_LENGTH = 8;
 
 	// This class is never actually serialized directly, but we have to make the

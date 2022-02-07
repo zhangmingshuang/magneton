@@ -18,7 +18,7 @@ import java.io.Serializable;
 import java.util.concurrent.TimeUnit;
 
 import javax.annotation.CheckForNull;
-import javax.annotation.VisibleForTesting;
+import javax.annotations.VisibleForTesting;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
 

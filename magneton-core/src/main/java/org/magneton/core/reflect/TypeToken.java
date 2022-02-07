@@ -30,9 +30,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javax.annotation.CanIgnoreReturnValue;
+import javax.annotations.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
-import javax.annotation.VisibleForTesting;
+import javax.annotations.VisibleForTesting;
 
 import org.magneton.core.base.Joiner;
 import org.magneton.core.base.Preconditions;

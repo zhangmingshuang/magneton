@@ -18,7 +18,7 @@ import java.util.Collections;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
-import javax.annotation.DoNotCall;
+import javax.annotations.DoNotCall;
 
 import org.magneton.core.base.Preconditions;
 

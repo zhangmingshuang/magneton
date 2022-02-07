@@ -69,4 +69,4 @@ package org.magneton.core.primitives;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import javax.annotation.CheckReturnValue;
+import javax.annotations.CheckReturnValue;

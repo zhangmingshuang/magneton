@@ -21,7 +21,7 @@ import java.util.Spliterators;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
-import javax.annotation.VisibleForTesting;
+import javax.annotations.VisibleForTesting;
 
 /**
  * Implementation of {@link org.magneton.core.collect.ImmutableSet} with two or more

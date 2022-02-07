@@ -26,13 +26,13 @@ import java.util.function.Function;
 import java.util.function.ToIntFunction;
 import java.util.stream.Collector;
 
-import javax.annotation.CanIgnoreReturnValue;
+import javax.annotations.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
-import javax.annotation.DoNotCall;
-import javax.annotation.VisibleForTesting;
-import javax.annotation.WeakOuter;
+import javax.annotations.DoNotCall;
+import javax.annotations.LazyInit;
+import javax.annotations.VisibleForTesting;
+import javax.annotations.WeakOuter;
 
-import javax.annotation.concurrent.LazyInit;
 import org.magneton.core.base.Preconditions;
 
 import static java.util.Objects.requireNonNull;

@@ -16,7 +16,7 @@ package org.magneton.core.base;
 
 import java.util.BitSet;
 
-import javax.annotation.VisibleForTesting;
+import javax.annotations.VisibleForTesting;
 
 import org.magneton.core.base.CharMatcher.NamedFastMatcher;
 

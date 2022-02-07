@@ -21,8 +21,8 @@ import java.util.ArrayDeque;
 import java.util.Collection;
 import java.util.Queue;
 
-import javax.annotation.CanIgnoreReturnValue;
-import javax.annotation.VisibleForTesting;
+import javax.annotations.CanIgnoreReturnValue;
+import javax.annotations.VisibleForTesting;
 
 import org.magneton.core.base.Preconditions;
 

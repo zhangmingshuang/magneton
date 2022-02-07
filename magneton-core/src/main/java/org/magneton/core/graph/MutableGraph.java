@@ -16,7 +16,7 @@
 
 package org.magneton.core.graph;
 
-import javax.annotation.CanIgnoreReturnValue;
+import javax.annotations.CanIgnoreReturnValue;
 
 /**
  * A subinterface of {@link org.magneton.core.graph.Graph} which adds mutation methods.

@@ -19,8 +19,8 @@ import java.lang.reflect.Method;
 import java.util.concurrent.Executor;
 
 import javax.annotation.CheckForNull;
-import javax.annotation.VisibleForTesting;
-import javax.annotation.Weak;
+import javax.annotations.VisibleForTesting;
+import javax.annotations.Weak;
 
 import org.magneton.core.base.Preconditions;
 
@@ -39,7 +39,7 @@ import org.magneton.core.base.Preconditions;
 class Subscriber {
 
 	/** The object with the subscriber method. */
-	@javax.annotation.VisibleForTesting
+	@VisibleForTesting
 	final Object target;
 
 	/** Subscriber method. */
@@ -91,7 +91,7 @@ class Subscriber {
 	 * Invokes the subscriber method. This method can be overridden to make the invocation
 	 * synchronized.
 	 */
-	@javax.annotation.VisibleForTesting
+	@VisibleForTesting
 	void invokeSubscriberMethod(Object event) throws InvocationTargetException {
 		try {
 			method.invoke(target, Preconditions.checkNotNull(event));

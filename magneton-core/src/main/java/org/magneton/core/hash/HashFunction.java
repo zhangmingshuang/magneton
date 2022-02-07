@@ -17,7 +17,7 @@ package org.magneton.core.hash;
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 
-import javax.annotation.concurrent.Immutable;
+import javax.annotations.Immutable;
 
 import org.magneton.core.primitives.Ints;
 
