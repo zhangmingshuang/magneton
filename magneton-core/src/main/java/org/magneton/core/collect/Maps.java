@@ -47,11 +47,11 @@ import java.util.function.BinaryOperator;
 import java.util.function.Consumer;
 import java.util.stream.Collector;
 
-import javax.annotation.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
-import javax.annotation.Weak;
-import javax.annotation.WeakOuter;
+import javax.annotations.CanIgnoreReturnValue;
+import javax.annotations.Weak;
+import javax.annotations.WeakOuter;
 
 import org.magneton.core.base.Converter;
 import org.magneton.core.base.Equivalence;
@@ -258,6 +258,10 @@ public final class Maps {
 	 */
 	public static <K extends Object, V extends Object> HashMap<K, V> newHashMapWithExpectedSize(int expectedSize) {
 		return new HashMap<>(capacity(expectedSize));
+	}
+
+	public static <K, V> boolean isNullOrEmpty(@Nullable Map<K, V> map) {
+		return map == null || map.isEmpty();
 	}
 
 	/**

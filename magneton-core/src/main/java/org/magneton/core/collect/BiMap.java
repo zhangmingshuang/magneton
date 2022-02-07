@@ -19,7 +19,7 @@ package org.magneton.core.collect;
 import java.util.Map;
 import java.util.Set;
 
-import javax.annotation.CanIgnoreReturnValue;
+import javax.annotations.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
 
 /**

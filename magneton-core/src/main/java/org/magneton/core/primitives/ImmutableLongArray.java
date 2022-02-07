@@ -25,10 +25,10 @@ import java.util.Spliterators;
 import java.util.function.LongConsumer;
 import java.util.stream.LongStream;
 
-import javax.annotation.CanIgnoreReturnValue;
+import javax.annotations.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
-import javax.annotation.CheckReturnValue;
-import javax.annotation.concurrent.Immutable;
+import javax.annotations.CheckReturnValue;
+import javax.annotations.Immutable;
 
 import org.magneton.core.collect.ImmutableList;
 

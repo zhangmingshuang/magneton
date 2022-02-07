@@ -18,7 +18,7 @@ import java.util.Comparator;
 import java.util.function.ObjIntConsumer;
 
 import javax.annotation.CheckForNull;
-import javax.annotation.VisibleForTesting;
+import javax.annotations.VisibleForTesting;
 
 import org.magneton.core.base.Preconditions;
 import org.magneton.core.primitives.Ints;

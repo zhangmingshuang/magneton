@@ -23,8 +23,7 @@ import java.io.Serializable;
 import java.nio.ByteBuffer;
 
 import javax.annotation.CheckForNull;
-
-import javax.annotation.concurrent.Immutable;
+import javax.annotations.Immutable;
 
 import static org.magneton.core.base.Preconditions.checkArgument;
 

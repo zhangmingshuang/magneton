@@ -19,7 +19,7 @@ import java.util.function.BiPredicate;
 
 import javax.annotation.CheckForNull;
 
-import javax.annotation.ForOverride;
+import javax.annotations.ForOverride;
 import org.magneton.core.collect.Ordering;
 
 /**

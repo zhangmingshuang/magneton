@@ -19,9 +19,8 @@ import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
 
+import javax.annotations.Immutable;
 import javax.crypto.Mac;
-
-import javax.annotation.concurrent.Immutable;
 
 import static org.magneton.core.base.Preconditions.checkNotNull;
 import static org.magneton.core.base.Preconditions.checkState;

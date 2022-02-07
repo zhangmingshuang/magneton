@@ -20,7 +20,7 @@ import java.util.Map;
 
 import javax.annotation.CheckForNull;
 
-import javax.annotation.DoNotMock;
+import javax.annotations.DoNotMock;
 
 /**
  * An object representing the differences between two maps.

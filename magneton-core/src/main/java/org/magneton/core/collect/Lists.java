@@ -35,7 +35,7 @@ import java.util.function.Predicate;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
-import javax.annotation.VisibleForTesting;
+import javax.annotations.VisibleForTesting;
 
 import org.magneton.core.base.Function;
 import org.magneton.core.base.Objects;

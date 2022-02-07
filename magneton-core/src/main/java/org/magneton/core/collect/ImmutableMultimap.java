@@ -28,14 +28,14 @@ import java.util.Set;
 import java.util.Spliterator;
 import java.util.function.BiConsumer;
 
-import javax.annotation.CanIgnoreReturnValue;
+import javax.annotations.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
-import javax.annotation.DoNotCall;
-import javax.annotation.DoNotMock;
+import javax.annotations.DoNotCall;
+import javax.annotations.DoNotMock;
 import javax.annotation.Nullable;
-import javax.annotation.WeakOuter;
+import javax.annotations.WeakOuter;
 
-import javax.annotation.Weak;
+import javax.annotations.Weak;
 import org.magneton.core.base.Preconditions;
 
 import static java.util.Objects.requireNonNull;

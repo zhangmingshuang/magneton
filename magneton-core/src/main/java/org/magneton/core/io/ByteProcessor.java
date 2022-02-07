@@ -16,8 +16,8 @@ package org.magneton.core.io;
 
 import java.io.IOException;
 
-import javax.annotation.CanIgnoreReturnValue;
-import javax.annotation.DoNotMock;
+import javax.annotations.CanIgnoreReturnValue;
+import javax.annotations.DoNotMock;
 
 /**
  * A callback interface to process bytes from a stream.

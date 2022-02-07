@@ -14,9 +14,8 @@
 
 package org.magneton.core.base;
 
-import javax.annotation.CanIgnoreReturnValue;
+import javax.annotations.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
-import javax.annotation.Nullable;
 
 /**
  * Legacy version of {@link java.util.function.Function java.util.function.Function}.

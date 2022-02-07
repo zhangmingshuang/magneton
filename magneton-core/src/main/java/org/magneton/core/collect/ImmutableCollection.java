@@ -27,10 +27,10 @@ import java.util.Spliterator;
 import java.util.Spliterators;
 import java.util.function.Predicate;
 
-import javax.annotation.CanIgnoreReturnValue;
+import javax.annotations.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
-import javax.annotation.DoNotCall;
-import javax.annotation.DoNotMock;
+import javax.annotations.DoNotCall;
+import javax.annotations.DoNotMock;
 import javax.annotation.Nullable;
 
 import org.magneton.core.base.Preconditions;

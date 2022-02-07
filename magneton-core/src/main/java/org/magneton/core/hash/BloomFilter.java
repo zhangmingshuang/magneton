@@ -24,9 +24,9 @@ import java.math.RoundingMode;
 import java.util.stream.Collector;
 
 import javax.annotation.CheckForNull;
-import javax.annotation.VisibleForTesting;
+import javax.annotations.VisibleForTesting;
 
-import javax.annotation.CanIgnoreReturnValue;
+import javax.annotations.CanIgnoreReturnValue;
 import org.magneton.core.base.Objects;
 import org.magneton.core.base.Predicate;
 import org.magneton.core.math.DoubleMath;

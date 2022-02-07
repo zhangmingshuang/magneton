@@ -2,7 +2,7 @@
 
 package org.magneton.core.hash;
 
-import javax.annotation.VisibleForTesting;
+import javax.annotations.VisibleForTesting;
 
 import static java.lang.Long.rotateRight;
 import static org.magneton.core.base.Preconditions.checkPositionIndexes;

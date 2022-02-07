@@ -25,10 +25,10 @@ import java.util.Spliterator;
 import java.util.function.Consumer;
 import java.util.function.ObjIntConsumer;
 
-import javax.annotation.CanIgnoreReturnValue;
+import javax.annotations.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
 
-import org.magneton.core.util.concurrent.AtomicLongMap;
+import org.magneton.foundation.util.concurrent.AtomicLongMap;
 
 import static org.magneton.core.base.Preconditions.checkNotNull;
 

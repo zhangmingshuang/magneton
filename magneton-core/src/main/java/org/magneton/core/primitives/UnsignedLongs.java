@@ -18,7 +18,7 @@ import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.Comparator;
 
-import javax.annotation.CanIgnoreReturnValue;
+import javax.annotations.CanIgnoreReturnValue;
 
 import org.magneton.core.base.Preconditions;
 

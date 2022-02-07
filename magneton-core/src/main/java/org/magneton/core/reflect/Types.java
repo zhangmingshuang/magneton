@@ -35,7 +35,7 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
-import javax.annotation.VisibleForTesting;
+import javax.annotations.VisibleForTesting;
 
 import org.magneton.core.base.Joiner;
 import org.magneton.core.base.Objects;
@@ -111,7 +111,7 @@ final class Types {
 	}
 
 	/** Returns a new {@link WildcardType} with {@code upperBound}. */
-	@javax.annotation.VisibleForTesting
+	@VisibleForTesting
 	static WildcardType subtypeOf(Type upperBound) {
 		return new WildcardTypeImpl(new Type[0], new Type[] { upperBound });
 	}

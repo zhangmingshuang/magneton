@@ -40,11 +40,11 @@ import java.util.function.Consumer;
 import java.util.stream.Collector;
 import java.util.stream.Stream;
 
-import javax.annotation.CanIgnoreReturnValue;
+import javax.annotations.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 
-import javax.annotation.DoNotCall;
+import javax.annotations.DoNotCall;
 import org.magneton.core.base.Predicate;
 import org.magneton.core.base.Predicates;
 import org.magneton.core.collect.Collections2.FilteredCollection;

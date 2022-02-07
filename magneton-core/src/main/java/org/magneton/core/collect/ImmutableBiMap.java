@@ -23,10 +23,10 @@ import java.util.function.Function;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
-import javax.annotation.CanIgnoreReturnValue;
+import javax.annotations.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
-import javax.annotation.DoNotCall;
-import javax.annotation.VisibleForTesting;
+import javax.annotations.DoNotCall;
+import javax.annotations.VisibleForTesting;
 
 import org.magneton.core.base.Preconditions;
 

@@ -16,7 +16,7 @@
 
 package org.magneton.core.graph;
 
-import javax.annotation.CanIgnoreReturnValue;
+import javax.annotations.CanIgnoreReturnValue;
 
 import org.magneton.core.collect.ImmutableList;
 

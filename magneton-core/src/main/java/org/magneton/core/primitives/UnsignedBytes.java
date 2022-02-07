@@ -18,8 +18,8 @@ import java.nio.ByteOrder;
 import java.util.Arrays;
 import java.util.Comparator;
 
-import javax.annotation.CanIgnoreReturnValue;
-import javax.annotation.VisibleForTesting;
+import javax.annotations.CanIgnoreReturnValue;
+import javax.annotations.VisibleForTesting;
 
 import org.magneton.core.base.Preconditions;
 import sun.misc.Unsafe;
@@ -277,7 +277,7 @@ public final class UnsignedBytes {
 		return LexicographicalComparatorHolder.BEST_COMPARATOR;
 	}
 
-	@javax.annotation.VisibleForTesting
+	@VisibleForTesting
 	static Comparator<byte[]> lexicographicalComparatorJavaImpl() {
 		return LexicographicalComparatorHolder.PureJavaComparator.INSTANCE;
 	}
@@ -352,7 +352,7 @@ public final class UnsignedBytes {
 	 * Uses reflection to gracefully fall back to the Java implementation if
 	 * {@code Unsafe} isn't available.
 	 */
-	@javax.annotation.VisibleForTesting
+	@VisibleForTesting
 	static class LexicographicalComparatorHolder {
 
 		static final String UNSAFE_COMPARATOR_NAME = LexicographicalComparatorHolder.class.getName()

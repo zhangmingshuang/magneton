@@ -22,7 +22,7 @@ import java.util.Map;
 import java.util.NavigableSet;
 import java.util.SortedSet;
 
-import javax.annotation.CanIgnoreReturnValue;
+import javax.annotations.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
 
 /**

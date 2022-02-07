@@ -35,7 +35,7 @@ import java.util.logging.Logger;
 
 import javax.annotation.CheckForNull;
 
-import javax.annotation.VisibleForTesting;
+import javax.annotations.VisibleForTesting;
 import org.magneton.core.base.CharMatcher;
 import org.magneton.core.base.Preconditions;
 import org.magneton.core.base.Splitter;
@@ -172,7 +172,7 @@ public final class ClassPath {
 	 * File Specification</a>. If {@code manifest} is null, it means the jar file has no
 	 * manifest, and an empty set will be returned.
 	 */
-	@javax.annotation.VisibleForTesting
+	@VisibleForTesting
 	static ImmutableSet<File> getClassPathFromManifest(File jarFile, @CheckForNull Manifest manifest) {
 		if (manifest == null) {
 			return ImmutableSet.of();
@@ -198,7 +198,7 @@ public final class ClassPath {
 		return builder.build();
 	}
 
-	@javax.annotation.VisibleForTesting
+	@VisibleForTesting
 	static ImmutableMap<File, ClassLoader> getClassPathEntries(ClassLoader classloader) {
 		LinkedHashMap<File, ClassLoader> entries = Maps.newLinkedHashMap();
 		// Search parent first, since it's the order ClassLoader#loadClass() uses.
@@ -231,7 +231,7 @@ public final class ClassPath {
 	 * Returns the URLs in the class path specified by the {@code java.class.path}
 	 * {@linkplain System#getProperty system property}.
 	 */
-	@javax.annotation.VisibleForTesting // TODO(b/65488446): Make this a
+	@VisibleForTesting // TODO(b/65488446): Make this a
 										// public
 										// API.
 	static ImmutableList<URL> parseJavaClassPath() {
@@ -261,12 +261,12 @@ public final class ClassPath {
 	 * urls, absolute urls are actually supported too (for example, in Maven surefire
 	 * plugin).
 	 */
-	@javax.annotation.VisibleForTesting
+	@VisibleForTesting
 	static URL getClassPathEntry(File jarFile, String path) throws MalformedURLException {
 		return new URL(jarFile.toURI().toURL(), path);
 	}
 
-	@javax.annotation.VisibleForTesting
+	@VisibleForTesting
 	static String getClassName(String filename) {
 		int classNameEnd = filename.length() - CLASS_FILE_NAME_EXTENSION.length();
 		return filename.substring(0, classNameEnd).replace('/', '.');

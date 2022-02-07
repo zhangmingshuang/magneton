@@ -25,7 +25,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.annotation.CheckReturnValue;
+import javax.annotations.CheckReturnValue;
 import javax.annotation.Nullable;
 
 import org.magneton.core.base.Ascii;
@@ -34,7 +34,7 @@ import org.magneton.core.base.MoreObjects;
 import org.magneton.core.base.Supplier;
 import org.magneton.core.base.Suppliers;
 import org.magneton.core.base.Ticker;
-import org.magneton.core.util.concurrent.ListenableFuture;
+import org.magneton.foundation.util.concurrent.ListenableFuture;
 
 import static org.magneton.core.base.Preconditions.checkArgument;
 import static org.magneton.core.base.Preconditions.checkNotNull;

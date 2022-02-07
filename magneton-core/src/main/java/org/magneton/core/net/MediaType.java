@@ -21,8 +21,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.annotation.CheckForNull;
-import javax.annotation.concurrent.Immutable;
-import javax.annotation.concurrent.LazyInit;
+import javax.annotations.Immutable;
+import javax.annotations.LazyInit;
 
 import org.magneton.core.base.Ascii;
 import org.magneton.core.base.Charsets;

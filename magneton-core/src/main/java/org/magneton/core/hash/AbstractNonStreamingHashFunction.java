@@ -20,7 +20,8 @@ import java.nio.ByteOrder;
 import java.nio.charset.Charset;
 import java.util.Arrays;
 
-import javax.annotation.concurrent.Immutable;
+import javax.annotations.Immutable;
+
 import org.magneton.core.base.Preconditions;
 
 /**

@@ -18,8 +18,8 @@ import java.math.BigInteger;
 import java.math.RoundingMode;
 import java.util.Iterator;
 
-import javax.annotation.CanIgnoreReturnValue;
-import javax.annotation.VisibleForTesting;
+import javax.annotations.CanIgnoreReturnValue;
+import javax.annotations.VisibleForTesting;
 
 import org.magneton.core.primitives.Booleans;
 

@@ -18,9 +18,9 @@ import java.util.Arrays;
 import java.util.Collection;
 
 import javax.annotation.CheckForNull;
+import javax.annotations.LazyInit;
 import javax.annotation.Nullable;
-import javax.annotation.VisibleForTesting;
-import javax.annotation.concurrent.LazyInit;
+import javax.annotations.VisibleForTesting;
 
 import org.magneton.core.base.Objects;
 import org.magneton.core.base.Preconditions;
@@ -43,14 +43,14 @@ class RegularImmutableMultiset<E> extends org.magneton.core.collect.ImmutableMul
 	 * conservative here ensures that the table is still likely to be relatively sparse
 	 * (hence it misses fast) while saving space.
 	 */
-	@javax.annotation.VisibleForTesting
+	@VisibleForTesting
 	static final double MAX_LOAD_FACTOR = 1.0;
 
 	/**
 	 * Maximum allowed false positive probability of detecting a hash flooding attack
 	 * given random input.
 	 */
-	@javax.annotation.VisibleForTesting
+	@VisibleForTesting
 	static final double HASH_FLOODING_FPP = 0.001;
 
 	/**

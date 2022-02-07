@@ -17,10 +17,10 @@ package org.magneton.core.base;
 import java.io.Serializable;
 import java.util.Iterator;
 
-import javax.annotation.CanIgnoreReturnValue;
+import javax.annotations.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
-import javax.annotation.ForOverride;
-import javax.annotation.concurrent.LazyInit;
+import javax.annotations.ForOverride;
+import javax.annotations.LazyInit;
 
 import org.magneton.core.collect.Maps;
 import org.magneton.core.primitives.Doubles;

@@ -17,7 +17,7 @@ package org.magneton.core.escape;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.annotation.CanIgnoreReturnValue;
+import javax.annotations.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 

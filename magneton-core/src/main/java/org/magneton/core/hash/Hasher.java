@@ -17,7 +17,7 @@ package org.magneton.core.hash;
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 
-import javax.annotation.CanIgnoreReturnValue;
+import javax.annotations.CanIgnoreReturnValue;
 
 /**
  * A {@link PrimitiveSink} that can compute a hash code after reading the input. Each

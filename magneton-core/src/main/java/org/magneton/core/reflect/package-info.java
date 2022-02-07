@@ -22,4 +22,4 @@ package org.magneton.core.reflect;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import javax.annotation.CheckReturnValue;
+import javax.annotations.CheckReturnValue;

@@ -30,7 +30,7 @@ import java.util.stream.Stream;
 
 import javax.annotation.CheckForNull;
 
-import javax.annotation.Weak;
+import javax.annotations.Weak;
 import org.magneton.core.base.Preconditions;
 
 import static java.lang.Math.max;

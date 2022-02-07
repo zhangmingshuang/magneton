@@ -17,7 +17,7 @@ package org.magneton.core.base;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import javax.annotation.CanIgnoreReturnValue;
+import javax.annotations.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
 
 /**

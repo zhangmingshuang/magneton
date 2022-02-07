@@ -16,8 +16,8 @@
 
 package org.magneton.core.collect;
 
-import javax.annotation.CanIgnoreReturnValue;
-import javax.annotation.DoNotMock;
+import javax.annotations.CanIgnoreReturnValue;
+import javax.annotations.DoNotMock;
 
 /**
  * Provides similar behavior to {@link String#intern} for any immutable type. Common

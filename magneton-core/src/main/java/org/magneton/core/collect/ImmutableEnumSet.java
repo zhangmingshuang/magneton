@@ -23,8 +23,7 @@ import java.util.Spliterator;
 import java.util.function.Consumer;
 
 import javax.annotation.CheckForNull;
-
-import javax.annotation.concurrent.LazyInit;
+import javax.annotations.LazyInit;
 
 /**
  * Implementation of {@link org.magneton.core.collect.ImmutableSet} backed by a non-empty

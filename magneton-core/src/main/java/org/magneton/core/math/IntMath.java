@@ -17,7 +17,7 @@ package org.magneton.core.math;
 import java.math.BigInteger;
 import java.math.RoundingMode;
 
-import javax.annotation.VisibleForTesting;
+import javax.annotations.VisibleForTesting;
 
 import org.magneton.core.primitives.Ints;
 

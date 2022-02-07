@@ -19,7 +19,7 @@ package org.magneton.core.collect;
 import java.util.function.BiConsumer;
 
 import javax.annotation.CheckForNull;
-import javax.annotation.concurrent.LazyInit;
+import javax.annotations.LazyInit;
 
 import org.magneton.core.base.Preconditions;
 

@@ -22,8 +22,8 @@ import java.io.Writer;
 import java.util.Arrays;
 
 import javax.annotation.CheckForNull;
+import javax.annotations.LazyInit;
 
-import javax.annotation.concurrent.LazyInit;
 import org.magneton.core.base.Ascii;
 import org.magneton.core.base.Objects;
 import org.magneton.core.base.Preconditions;

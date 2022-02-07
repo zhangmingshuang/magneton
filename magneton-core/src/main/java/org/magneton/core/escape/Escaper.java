@@ -14,7 +14,7 @@
 
 package org.magneton.core.escape;
 
-import javax.annotation.DoNotMock;
+import javax.annotations.DoNotMock;
 
 import org.magneton.core.base.Function;
 import org.magneton.core.html.HtmlEscapers;

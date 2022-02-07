@@ -19,9 +19,9 @@ package org.magneton.core.collect;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import javax.annotation.CanIgnoreReturnValue;
+import javax.annotations.CanIgnoreReturnValue;
 
-import javax.annotation.DoNotMock;
+import javax.annotations.DoNotMock;
 
 /**
  * An iterator that supports a one-element lookahead while iterating.

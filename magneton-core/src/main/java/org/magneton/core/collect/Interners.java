@@ -15,7 +15,7 @@
 package org.magneton.core.collect;
 
 import javax.annotation.CheckForNull;
-import javax.annotation.VisibleForTesting;
+import javax.annotations.VisibleForTesting;
 
 import org.magneton.core.base.Equivalence;
 import org.magneton.core.base.Function;
@@ -126,7 +126,7 @@ public final class Interners {
 
 	}
 
-	@javax.annotation.VisibleForTesting
+	@VisibleForTesting
 	static final class InternerImpl<E> implements Interner<E> {
 
 		// MapMaker is our friend, we know about this type

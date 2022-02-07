@@ -20,7 +20,7 @@ import java.util.Comparator;
 import java.util.Map;
 
 import javax.annotation.CheckForNull;
-import javax.annotation.concurrent.Immutable;
+import javax.annotations.Immutable;
 
 import org.magneton.core.base.MoreObjects;
 import org.magneton.core.base.MoreObjects.ToStringHelper;

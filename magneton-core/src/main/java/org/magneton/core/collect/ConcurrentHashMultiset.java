@@ -29,11 +29,11 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import javax.annotation.CanIgnoreReturnValue;
+import javax.annotations.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
-import javax.annotation.VisibleForTesting;
+import javax.annotations.VisibleForTesting;
 
-import javax.annotation.WeakOuter;
+import javax.annotations.WeakOuter;
 import org.magneton.core.base.Preconditions;
 import org.magneton.core.collect.Serialization.FieldSetter;
 import org.magneton.core.math.IntMath;

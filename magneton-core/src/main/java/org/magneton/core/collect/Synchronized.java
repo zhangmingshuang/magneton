@@ -44,7 +44,7 @@ import java.util.stream.Stream;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
-import javax.annotation.VisibleForTesting;
+import javax.annotations.VisibleForTesting;
 
 import org.magneton.core.base.Preconditions;
 
@@ -84,7 +84,7 @@ final class Synchronized {
 		return new SynchronizedCollection<E>(collection, mutex);
 	}
 
-	@javax.annotation.VisibleForTesting
+	@VisibleForTesting
 	static <E extends Object> Set<E> set(Set<E> set, @CheckForNull Object mutex) {
 		return new SynchronizedSet<E>(set, mutex);
 	}
@@ -160,7 +160,7 @@ final class Synchronized {
 		}
 	}
 
-	@javax.annotation.VisibleForTesting
+	@VisibleForTesting
 	static <K extends Object, V extends Object> Map<K, V> map(Map<K, V> map, @CheckForNull Object mutex) {
 		return new SynchronizedMap<>(map, mutex);
 	}
@@ -256,7 +256,7 @@ final class Synchronized {
 
 	}
 
-	@javax.annotation.VisibleForTesting
+	@VisibleForTesting
 	static class SynchronizedCollection<E extends Object> extends SynchronizedObject implements Collection<E> {
 
 		private static final long serialVersionUID = 0;
@@ -1412,7 +1412,7 @@ final class Synchronized {
 
 	}
 
-	@javax.annotation.VisibleForTesting
+	@VisibleForTesting
 	static class SynchronizedBiMap<K extends Object, V extends Object> extends SynchronizedMap<K, V>
 			implements BiMap<K, V>, Serializable {
 
@@ -1537,7 +1537,7 @@ final class Synchronized {
 
 	}
 
-	@javax.annotation.VisibleForTesting
+	@VisibleForTesting
 	static class SynchronizedNavigableSet<E extends Object> extends SynchronizedSortedSet<E>
 			implements NavigableSet<E> {
 

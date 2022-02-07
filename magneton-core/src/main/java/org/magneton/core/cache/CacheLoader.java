@@ -19,14 +19,14 @@ import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executor;
 
-import javax.annotation.CheckReturnValue;
+import javax.annotations.CheckReturnValue;
 
 import org.magneton.core.base.Function;
 import org.magneton.core.base.Preconditions;
 import org.magneton.core.base.Supplier;
-import org.magneton.core.util.concurrent.Futures;
-import org.magneton.core.util.concurrent.ListenableFuture;
-import org.magneton.core.util.concurrent.ListenableFutureTask;
+import org.magneton.foundation.util.concurrent.Futures;
+import org.magneton.foundation.util.concurrent.ListenableFuture;
+import org.magneton.foundation.util.concurrent.ListenableFutureTask;
 
 /**
  * Computes or retrieves values, based on a key, for use in populating a

@@ -36,12 +36,12 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReferenceArray;
 import java.util.concurrent.locks.ReentrantLock;
 
-import javax.annotation.CanIgnoreReturnValue;
-import javax.annotation.GuardedBy;
+import javax.annotations.CanIgnoreReturnValue;
+import javax.annotations.GuardedBy;
 import javax.annotation.Nullable;
-import javax.annotation.VisibleForTesting;
-import javax.annotation.Weak;
-import javax.annotation.WeakOuter;
+import javax.annotations.VisibleForTesting;
+import javax.annotations.Weak;
+import javax.annotations.WeakOuter;
 
 import org.magneton.core.base.Equivalence;
 import org.magneton.core.base.Preconditions;
@@ -315,7 +315,7 @@ class MapMakerInternalMap<K, V, E extends MapMakerInternalMap.InternalEntry<K, V
 	 * {@link Segment#copyEntry} directly.
 	 */
 	// Guarded By Segment.this
-	@javax.annotation.VisibleForTesting
+	@VisibleForTesting
 	E copyEntry(E original, E newNext) {
 		int hash = original.getHash();
 		return segmentFor(hash).copyEntry(original, newNext);
@@ -341,7 +341,7 @@ class MapMakerInternalMap<K, V, E extends MapMakerInternalMap.InternalEntry<K, V
 	 * This method is a convenience for testing. Code should call
 	 * {@link Segment#getLiveValue} instead.
 	 */
-	@javax.annotation.VisibleForTesting
+	@VisibleForTesting
 	boolean isLiveForTesting(InternalEntry<K, V, ?> entry) {
 		return segmentFor(entry.getHash()).getLiveValueForTesting(entry) != null;
 	}
@@ -375,17 +375,17 @@ class MapMakerInternalMap<K, V, E extends MapMakerInternalMap.InternalEntry<K, V
 		return new Segment[ssize];
 	}
 
-	@javax.annotation.VisibleForTesting
+	@VisibleForTesting
 	Strength keyStrength() {
 		return entryHelper.keyStrength();
 	}
 
-	@javax.annotation.VisibleForTesting
+	@VisibleForTesting
 	Strength valueStrength() {
 		return entryHelper.valueStrength();
 	}
 
-	@javax.annotation.VisibleForTesting
+	@VisibleForTesting
 	org.magneton.core.base.Equivalence<Object> valueEquivalence() {
 		return entryHelper.valueStrength().defaultEquivalence();
 	}

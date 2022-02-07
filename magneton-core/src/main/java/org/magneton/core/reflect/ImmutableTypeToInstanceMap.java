@@ -16,10 +16,10 @@ package org.magneton.core.reflect;
 
 import java.util.Map;
 
-import javax.annotation.CanIgnoreReturnValue;
+import javax.annotations.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
 
-import javax.annotation.DoNotCall;
+import javax.annotations.DoNotCall;
 import org.magneton.core.collect.ForwardingMap;
 import org.magneton.core.collect.ImmutableMap;
 

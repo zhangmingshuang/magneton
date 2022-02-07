@@ -18,10 +18,10 @@ package org.magneton.core.collect;
 
 import java.util.Map;
 
-import javax.annotation.CanIgnoreReturnValue;
+import javax.annotations.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
 
-import javax.annotation.DoNotMock;
+import javax.annotations.DoNotMock;
 import org.magneton.core.reflect.TypeToInstanceMap;
 
 /**

@@ -30,8 +30,7 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
 import javax.annotation.CheckForNull;
-
-import javax.annotation.concurrent.Immutable;
+import javax.annotations.Immutable;
 
 import static org.magneton.core.primitives.UnsignedBytes.toInt;
 

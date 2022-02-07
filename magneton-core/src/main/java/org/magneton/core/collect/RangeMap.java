@@ -23,7 +23,7 @@ import java.util.NoSuchElementException;
 import java.util.function.BiFunction;
 
 import javax.annotation.CheckForNull;
-import javax.annotation.DoNotMock;
+import javax.annotations.DoNotMock;
 
 /**
  * A mapping from disjoint nonempty ranges to non-null values. Queries look up the value

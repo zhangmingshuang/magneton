@@ -17,7 +17,7 @@ package org.magneton.core.escape;
 import java.util.Collections;
 import java.util.Map;
 
-import javax.annotation.VisibleForTesting;
+import javax.annotations.VisibleForTesting;
 
 import static org.magneton.core.base.Preconditions.checkNotNull;
 

@@ -22,6 +22,7 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
+
 			<dependency>
 				<groupId>org.magneton</groupId>
 				<artifactId>magneton-cache</artifactId>
@@ -52,6 +53,11 @@
 			<dependency>
 				<groupId>org.magneton</groupId>
 				<artifactId>magneton-test</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.magneton</groupId>
+				<artifactId>spring-boot-magneton</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>

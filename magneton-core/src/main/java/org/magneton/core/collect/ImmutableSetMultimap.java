@@ -28,11 +28,11 @@ import java.util.function.Function;
 import java.util.stream.Collector;
 import java.util.stream.Stream;
 
-import javax.annotation.CanIgnoreReturnValue;
+import javax.annotations.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
-import javax.annotation.DoNotCall;
-import javax.annotation.Weak;
-import javax.annotation.concurrent.LazyInit;
+import javax.annotations.DoNotCall;
+import javax.annotations.LazyInit;
+import javax.annotations.Weak;
 
 import org.magneton.core.base.MoreObjects;
 import org.magneton.core.base.Preconditions;

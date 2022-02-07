@@ -25,7 +25,7 @@ import java.util.Set;
 import java.util.TreeMap;
 
 import javax.annotation.CheckForNull;
-import javax.annotation.VisibleForTesting;
+import javax.annotations.VisibleForTesting;
 
 import org.magneton.core.base.MoreObjects;
 import org.magneton.core.base.Preconditions;
@@ -41,7 +41,7 @@ import org.magneton.core.base.Preconditions;
 @ElementTypesAreNonnullByDefault
 public class TreeRangeSet<C extends Comparable<?>> extends AbstractRangeSet<C> implements Serializable {
 
-	@javax.annotation.VisibleForTesting
+	@VisibleForTesting
 	final NavigableMap<Cut<C>, Range<C>> rangesByLowerBound;
 
 	@CheckForNull

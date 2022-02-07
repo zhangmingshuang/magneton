@@ -23,7 +23,7 @@ import java.util.Set;
 import java.util.Spliterator;
 import java.util.Spliterators;
 
-import javax.annotation.CanIgnoreReturnValue;
+import javax.annotations.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 
