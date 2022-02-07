@@ -1,4 +1,4 @@
-package org.magneton.core.access;
+package org.magneton.foundation.access;
 
 import java.util.UUID;
 
@@ -24,12 +24,12 @@ class InMemoryRequestAccessorTest {
 
 	private static final int errorRecordSize = 1;
 
-	private static RequestAccessor requestAccesser = null;
+	private static RequestAccesser requestAccesser = null;
 
 	@BeforeAll
 	static void beforeAll() {
-		Access requestAccesser = (RequestAccessor) AccesserBuilder.of(new InMemoryRequestAccessor<>())
-				.lockSize(lockSize).lockErrorCount(lockErrorCount).lockTime(lockTime).lockErrorCount(lockErrorCount)
+		requestAccesser = (RequestAccesser) AccesserBuilder.of(new InMemoryRequestAccesser<>()).lockSize(lockSize)
+				.lockErrorCount(lockErrorCount).lockTime(lockTime).lockErrorCount(lockErrorCount)
 				.errorRecordTime(errorRecordTime).errorRecordSize(errorRecordSize).build();
 	}
 
