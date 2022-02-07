@@ -18,7 +18,7 @@ package org.magneton.core.collect;
 
 import java.util.stream.Collector;
 
-import com.google.errorprone.annotations.DoNotCall;
+import javax.annotation.DoNotCall;
 
 /**
  * "Overrides" the {@link org.magneton.core.collect.ImmutableSet} static methods that lack

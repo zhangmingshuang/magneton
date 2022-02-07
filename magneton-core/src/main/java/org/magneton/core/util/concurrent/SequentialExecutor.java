@@ -22,9 +22,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.annotation.CheckForNull;
+import javax.annotation.GuardedBy;
 
-import com.google.errorprone.annotations.concurrent.GuardedBy;
-import com.google.j2objc.annotations.RetainedWith;
 import org.magneton.core.base.Preconditions;
 
 import static java.lang.System.identityHashCode;
@@ -64,7 +63,6 @@ final class SequentialExecutor implements Executor {
 	@GuardedBy("queue")
 	private final Deque<Runnable> queue = new ArrayDeque<>();
 
-	@RetainedWith
 	private final QueueWorker worker = new QueueWorker();
 
 	/** see {@link WorkerRunningState} */

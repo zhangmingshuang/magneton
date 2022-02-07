@@ -8,11 +8,12 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import javax.annotation.Nullable;
 
-import com.google.core.base.Preconditions;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.magneton.core.Response;
 import org.magneton.core.ResponseException;
+import org.magneton.core.base.Preconditions;
+import org.magneton.core.collect.Lists;
 import org.magneton.properties.MagnetonProperties;
 
 import org.springframework.beans.factory.InitializingBean;
@@ -104,7 +105,7 @@ public class ControllerExceptionProcessor implements InitializingBean {
 		lock.lock();
 		try {
 			if (exceptionProcessorsAddable.compareAndSet(true, false)) {
-				if (!MoreCollections.isNullOrEmpty(exceptionProcessors)) {
+				if (!Lists.isNullOrEmpty(exceptionProcessors)) {
 					exceptionProcessors.sort(
 							Comparator.comparingInt(e -> OrderUtils.getOrder(e.getClass(), Ordered.LOWEST_PRECEDENCE)));
 					exceptionProcessors.forEach(exceptionProcessorContext::registerExceptionProcessor);

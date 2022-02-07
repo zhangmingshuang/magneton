@@ -24,10 +24,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import javax.annotation.CheckForNull;
-
-import com.google.errorprone.annotations.concurrent.GuardedBy;
-
-
+import javax.annotation.GuardedBy;
 import javax.annotation.VisibleForTesting;
 
 import static java.util.Objects.requireNonNull;

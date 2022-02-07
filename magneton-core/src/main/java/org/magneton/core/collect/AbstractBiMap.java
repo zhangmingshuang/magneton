@@ -29,9 +29,8 @@ import java.util.function.BiFunction;
 import javax.annotation.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
+import javax.annotation.WeakOuter;
 
-import com.google.j2objc.annotations.RetainedWith;
-import com.google.j2objc.annotations.WeakOuter;
 import org.magneton.core.base.Objects;
 import org.magneton.core.base.Preconditions;
 
@@ -52,7 +51,6 @@ abstract class AbstractBiMap<K extends Object, V extends Object> extends Forward
 
 	private static final long serialVersionUID = 0;
 
-	@RetainedWith
 	transient AbstractBiMap<V, K> inverse;
 
 	private transient Map<K, V> delegate;

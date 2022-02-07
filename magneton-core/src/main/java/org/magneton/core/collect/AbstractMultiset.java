@@ -21,11 +21,10 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.Set;
 
+import javax.annotation.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
-
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import com.google.errorprone.annotations.concurrent.LazyInit;
-import com.google.j2objc.annotations.WeakOuter;
+import javax.annotation.WeakOuter;
+import javax.annotation.concurrent.LazyInit;
 
 /**
  * This class provides a skeletal implementation of the {@link Multiset} interface. A new

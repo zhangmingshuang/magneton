@@ -26,7 +26,7 @@ import javax.annotation.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
 import javax.annotation.DoNotCall;
 
-import com.google.errorprone.annotations.concurrent.LazyInit;
+import javax.annotation.concurrent.LazyInit;
 import org.magneton.core.base.Preconditions;
 import org.magneton.core.collect.SortedLists.KeyAbsentBehavior;
 import org.magneton.core.collect.SortedLists.KeyPresentBehavior;

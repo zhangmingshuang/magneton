@@ -23,7 +23,6 @@ import java.util.regex.Pattern;
 
 import javax.annotation.CheckForNull;
 
-import com.google.common.annotations.GwtIncompatible;
 import org.magneton.core.collect.Iterables;
 
 /**

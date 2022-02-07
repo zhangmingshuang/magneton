@@ -20,7 +20,7 @@ import java.util.concurrent.Executor;
 
 import javax.annotation.CheckForNull;
 
-import com.google.errorprone.annotations.ForOverride;
+import javax.annotation.ForOverride;
 import org.magneton.core.base.Function;
 
 import static org.magneton.core.base.Preconditions.checkNotNull;

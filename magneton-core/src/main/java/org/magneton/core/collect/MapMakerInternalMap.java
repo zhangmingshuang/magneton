@@ -37,12 +37,12 @@ import java.util.concurrent.atomic.AtomicReferenceArray;
 import java.util.concurrent.locks.ReentrantLock;
 
 import javax.annotation.CanIgnoreReturnValue;
+import javax.annotation.GuardedBy;
 import javax.annotation.Nullable;
 import javax.annotation.VisibleForTesting;
+import javax.annotation.Weak;
+import javax.annotation.WeakOuter;
 
-import com.google.errorprone.annotations.concurrent.GuardedBy;
-import com.google.j2objc.annotations.Weak;
-import com.google.j2objc.annotations.WeakOuter;
 import org.magneton.core.base.Equivalence;
 import org.magneton.core.base.Preconditions;
 import org.magneton.core.primitives.Ints;
@@ -597,8 +597,7 @@ class MapMakerInternalMap<K, V, E extends MapMakerInternalMap.InternalEntry<K, V
 	}
 
 	Object writeReplace() {
-		return new SerializationProxy<>(entryHelper.keyStrength(), entryHelper.valueStrength(), keyEquivalence,
-				entryHelper.valueStrength().defaultEquivalence(), concurrencyLevel, this);
+		return new SerializationProxy<>(entryHelper.keyStrength(), entryHelper.valueStrength(), keyEquivalence, entryHelper.valueStrength().defaultEquivalence(), concurrencyLevel, this);
 	}
 
 	enum Strength {

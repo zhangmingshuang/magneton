@@ -29,10 +29,9 @@ import java.util.function.BiFunction;
 
 import javax.annotation.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
+import javax.annotation.Weak;
+import javax.annotation.concurrent.LazyInit;
 
-import com.google.errorprone.annotations.concurrent.LazyInit;
-import com.google.j2objc.annotations.RetainedWith;
-import com.google.j2objc.annotations.Weak;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.magneton.core.base.Objects;
 import org.magneton.core.base.Preconditions;
@@ -87,7 +86,6 @@ public final class HashBiMap<K extends Object, V extends Object> extends Maps.It
 	private transient int modCount;
 
 	@LazyInit
-	@RetainedWith
 	@CheckForNull
 	private transient BiMap<V, K> inverse;
 

@@ -23,8 +23,6 @@ import java.util.SortedSet;
 
 import javax.annotation.CheckForNull;
 
-import com.google.common.annotations.Beta;
-
 import static org.magneton.core.collect.ForwardingSortedMap.unsafeCompare;
 
 /**

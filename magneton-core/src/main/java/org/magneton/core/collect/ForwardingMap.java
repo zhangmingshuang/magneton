@@ -24,7 +24,6 @@ import java.util.Set;
 import javax.annotation.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
 
-import com.google.common.annotations.Beta;
 import org.magneton.core.base.Objects;
 
 /**

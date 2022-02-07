@@ -22,7 +22,7 @@ import java.util.concurrent.RejectedExecutionException;
 
 import javax.annotation.CheckForNull;
 
-import com.google.j2objc.annotations.WeakOuter;
+import javax.annotation.WeakOuter;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.magneton.core.collect.ImmutableCollection;
 

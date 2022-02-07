@@ -27,7 +27,7 @@ import java.util.zip.Checksum;
 import javax.annotation.CheckForNull;
 import javax.crypto.spec.SecretKeySpec;
 
-import com.google.errorprone.annotations.Immutable;
+import javax.annotation.concurrent.Immutable;
 import org.magneton.core.primitives.UnsignedInts;
 import org.magneton.core.primitives.UnsignedLongs;
 

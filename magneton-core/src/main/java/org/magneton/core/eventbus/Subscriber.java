@@ -19,9 +19,9 @@ import java.lang.reflect.Method;
 import java.util.concurrent.Executor;
 
 import javax.annotation.CheckForNull;
-
-import com.google.j2objc.annotations.Weak;
 import javax.annotation.VisibleForTesting;
+import javax.annotation.Weak;
+
 import org.magneton.core.base.Preconditions;
 
 /**
@@ -50,9 +50,9 @@ class Subscriber {
 
 	/** The event bus this subscriber belongs to. */
 	@Weak
-	private org.magneton.core.eventbus.EventBus bus;
+	private EventBus bus;
 
-	private Subscriber(org.magneton.core.eventbus.EventBus bus, Object target, Method method) {
+	private Subscriber(EventBus bus, Object target, Method method) {
 		this.bus = bus;
 		this.target = Preconditions.checkNotNull(target);
 		this.method = method;
@@ -62,7 +62,7 @@ class Subscriber {
 	}
 
 	/** Creates a {@code Subscriber} for {@code method} on {@code listener}. */
-	static Subscriber create(org.magneton.core.eventbus.EventBus bus, Object listener, Method method) {
+	static Subscriber create(EventBus bus, Object listener, Method method) {
 		return isDeclaredThreadSafe(method) ? new Subscriber(bus, listener, method)
 				: new SynchronizedSubscriber(bus, listener, method);
 	}

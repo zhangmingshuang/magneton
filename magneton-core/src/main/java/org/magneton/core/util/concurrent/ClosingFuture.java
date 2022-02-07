@@ -33,7 +33,6 @@ import javax.annotation.CheckForNull;
 import javax.annotation.DoNotMock;
 import javax.annotation.VisibleForTesting;
 
-import com.google.j2objc.annotations.RetainedWith;
 import org.magneton.core.base.Function;
 import org.magneton.core.collect.FluentIterable;
 import org.magneton.core.collect.ImmutableList;
@@ -1203,7 +1202,6 @@ public final class ClosingFuture<V extends Object> {
 	 */
 	public static final class DeferredCloser {
 
-		@RetainedWith
 		private final CloseableList list;
 
 		DeferredCloser(CloseableList list) {

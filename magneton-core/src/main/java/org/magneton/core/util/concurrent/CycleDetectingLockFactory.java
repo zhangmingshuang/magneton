@@ -33,7 +33,7 @@ import javax.annotation.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
 import javax.annotation.VisibleForTesting;
 
-import com.google.j2objc.annotations.Weak;
+import javax.annotation.Weak;
 import org.magneton.core.base.MoreObjects;
 import org.magneton.core.base.Preconditions;
 import org.magneton.core.collect.ImmutableSet;

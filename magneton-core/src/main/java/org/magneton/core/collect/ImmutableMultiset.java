@@ -30,9 +30,9 @@ import javax.annotation.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
 import javax.annotation.DoNotCall;
 import javax.annotation.VisibleForTesting;
+import javax.annotation.WeakOuter;
 
-import com.google.errorprone.annotations.concurrent.LazyInit;
-import com.google.j2objc.annotations.WeakOuter;
+import javax.annotation.concurrent.LazyInit;
 import org.magneton.core.base.Preconditions;
 
 import static java.util.Objects.requireNonNull;

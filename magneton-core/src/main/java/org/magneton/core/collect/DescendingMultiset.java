@@ -24,7 +24,7 @@ import java.util.Set;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 
-import com.google.j2objc.annotations.WeakOuter;
+import javax.annotation.WeakOuter;
 
 /**
  * A skeleton implementation of a descending multiset. Only needs

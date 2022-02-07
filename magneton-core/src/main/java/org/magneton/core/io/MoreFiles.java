@@ -45,9 +45,6 @@ import java.util.stream.Stream;
 
 import javax.annotation.CheckForNull;
 
-import com.google.j2objc.annotations.J2ObjCIncompatible;
-
-
 import org.magneton.core.base.Optional;
 import org.magneton.core.base.Preconditions;
 import org.magneton.core.base.Predicate;
@@ -72,7 +69,6 @@ import static org.magneton.core.collect.Iterables.getOnlyElement;
  * @author Colin Decker
  */
 
-@J2ObjCIncompatible // java.nio.file
 @ElementTypesAreNonnullByDefault
 public final class MoreFiles {
 
@@ -852,8 +848,7 @@ public final class MoreFiles {
 		}
 
 		private BasicFileAttributes readAttributes() throws IOException {
-			return Files.readAttributes(path, BasicFileAttributes.class,
-					followLinks ? FOLLOW_LINKS : new LinkOption[] { NOFOLLOW_LINKS });
+			return Files.readAttributes(path, BasicFileAttributes.class, followLinks ? FOLLOW_LINKS : new LinkOption[] { NOFOLLOW_LINKS });
 		}
 
 		@Override

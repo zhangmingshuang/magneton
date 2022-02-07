@@ -31,7 +31,7 @@ import java.nio.ByteOrder;
 
 import javax.annotation.CheckForNull;
 
-import com.google.errorprone.annotations.Immutable;
+import javax.annotation.concurrent.Immutable;
 
 import static org.magneton.core.primitives.UnsignedBytes.toInt;
 

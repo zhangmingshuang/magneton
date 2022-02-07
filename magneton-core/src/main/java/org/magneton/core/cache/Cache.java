@@ -20,10 +20,9 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ExecutionException;
 
 import javax.annotation.CheckForNull;
-
-import com.google.errorprone.annotations.CheckReturnValue;
-import com.google.errorprone.annotations.CompatibleWith;
+import javax.annotation.CheckReturnValue;
 import javax.annotation.DoNotMock;
+
 import org.magneton.core.collect.ImmutableMap;
 import org.magneton.core.util.concurrent.ExecutionError;
 import org.magneton.core.util.concurrent.UncheckedExecutionException;
@@ -54,7 +53,7 @@ public interface Cache<K, V> {
 	 * @since 11.0
 	 */
 	@CheckForNull
-	V getIfPresent(@CompatibleWith("K") Object key);
+	V getIfPresent(Object key);
 
 	/**
 	 * Returns the value associated with {@code key} in this cache, obtaining that value
@@ -130,7 +129,7 @@ public interface Cache<K, V> {
 	 * checkers, they differ: <? extends Object> means "non-null types," while <?> means
 	 * "all types."
 	 */
-	ImmutableMap<K, V> getAllPresent(Iterable<? extends Object> keys);
+	ImmutableMap<K, V> getAllPresent(Iterable<?> keys);
 
 	/**
 	 * Associates {@code value} with {@code key} in this cache. If the cache previously
@@ -157,7 +156,7 @@ public interface Cache<K, V> {
 	void putAll(Map<? extends K, ? extends V> m);
 
 	/** Discards any cached value for key {@code key}. */
-	void invalidate(@CompatibleWith("K") Object key);
+	void invalidate(Object key);
 
 	/**
 	 * Discards any cached values for keys {@code keys}.
@@ -165,7 +164,7 @@ public interface Cache<K, V> {
 	 * @since 11.0
 	 */
 	// For discussion of <? extends Object>, see getAllPresent.
-	void invalidateAll(Iterable<? extends Object> keys);
+	void invalidateAll(Iterable<?> keys);
 
 	/** Discards all entries in the cache. */
 	void invalidateAll();

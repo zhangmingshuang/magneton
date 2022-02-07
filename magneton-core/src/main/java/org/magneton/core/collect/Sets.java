@@ -44,7 +44,7 @@ import javax.annotation.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 
-import com.google.errorprone.annotations.DoNotCall;
+import javax.annotation.DoNotCall;
 import org.magneton.core.base.Predicate;
 import org.magneton.core.base.Predicates;
 import org.magneton.core.collect.Collections2.FilteredCollection;

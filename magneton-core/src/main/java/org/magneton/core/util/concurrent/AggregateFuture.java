@@ -20,9 +20,9 @@ import java.util.concurrent.Future;
 import java.util.logging.Logger;
 
 import javax.annotation.CheckForNull;
+import javax.annotation.ForOverride;
+import javax.annotation.OverridingMethodsMustInvokeSuper;
 
-import com.google.errorprone.annotations.ForOverride;
-import com.google.errorprone.annotations.OverridingMethodsMustInvokeSuper;
 import org.magneton.core.collect.ImmutableCollection;
 
 import static java.util.Objects.requireNonNull;

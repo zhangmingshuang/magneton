@@ -1,6 +1,6 @@
 package org.magneton.lock;
 
-import com.google.core.base.Preconditions;
+import org.magneton.core.base.Preconditions;
 import org.redisson.api.RedissonClient;
 
 /**
@@ -21,7 +21,7 @@ public class RedisDistributedLockManager implements LockManager {
 	@Override
 	public DistributedLock getLock(String key) {
 		Preconditions.checkNotNull(key, "key must be not null");
-		return new RedissonDistributedLock(this.redissonClient, key);
+		return new RedissonDistributedLock(redissonClient, key);
 	}
 
 }

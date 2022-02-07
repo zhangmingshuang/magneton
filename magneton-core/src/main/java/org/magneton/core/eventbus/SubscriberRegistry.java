@@ -26,9 +26,9 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.CopyOnWriteArraySet;
 
 import javax.annotation.CheckForNull;
-
-import com.google.j2objc.annotations.Weak;
 import javax.annotation.VisibleForTesting;
+
+import javax.annotation.Weak;
 import org.magneton.core.base.MoreObjects;
 import org.magneton.core.base.Objects;
 import org.magneton.core.base.Preconditions;

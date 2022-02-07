@@ -18,9 +18,9 @@ package org.magneton.core.collect;
 
 import java.util.NoSuchElementException;
 
+import javax.annotation.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
 
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import org.magneton.core.base.Preconditions;
 
 import static org.magneton.core.collect.NullnessCasts.uncheckedCastNullableTToT;

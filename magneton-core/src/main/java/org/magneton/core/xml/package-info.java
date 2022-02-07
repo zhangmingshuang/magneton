@@ -25,4 +25,4 @@ package org.magneton.core.xml;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import com.google.errorprone.annotations.CheckReturnValue;
+import javax.annotation.CheckReturnValue;

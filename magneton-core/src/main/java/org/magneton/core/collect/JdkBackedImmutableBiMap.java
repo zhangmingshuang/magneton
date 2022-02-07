@@ -19,11 +19,9 @@ import java.util.Map;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
-
-import com.google.errorprone.annotations.concurrent.LazyInit;
-import com.google.j2objc.annotations.RetainedWith;
-import com.google.j2objc.annotations.WeakOuter;
 import javax.annotation.VisibleForTesting;
+import javax.annotation.WeakOuter;
+import javax.annotation.concurrent.LazyInit;
 
 import static java.util.Objects.requireNonNull;
 
@@ -41,7 +39,6 @@ final class JdkBackedImmutableBiMap<K, V> extends org.magneton.core.collect.Immu
 	private final Map<V, K> backwardDelegate;
 
 	@LazyInit
-	@RetainedWith
 	@CheckForNull
 	private transient JdkBackedImmutableBiMap<V, K> inverse;
 

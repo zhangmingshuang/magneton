@@ -32,9 +32,9 @@ import java.util.Queue;
 import javax.annotation.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
 import javax.annotation.VisibleForTesting;
+import javax.annotation.WeakOuter;
 
-import com.google.j2objc.annotations.Weak;
-import com.google.j2objc.annotations.WeakOuter;
+import javax.annotation.Weak;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.magneton.core.base.Preconditions;
 import org.magneton.core.math.IntMath;

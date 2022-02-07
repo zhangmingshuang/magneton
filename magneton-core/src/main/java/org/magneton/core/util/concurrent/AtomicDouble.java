@@ -20,8 +20,6 @@ import java.util.function.DoubleUnaryOperator;
 
 import javax.annotation.CanIgnoreReturnValue;
 
-import com.google.j2objc.annotations.ReflectionSupport;
-
 import static java.lang.Double.doubleToRawLongBits;
 import static java.lang.Double.longBitsToDouble;
 import static org.magneton.core.base.Preconditions.checkNotNull;
@@ -60,7 +58,6 @@ import static org.magneton.core.base.Preconditions.checkNotNull;
  * @since 11.0
  */
 
-@ReflectionSupport(value = ReflectionSupport.Level.FULL)
 @ElementTypesAreNonnullByDefault
 public class AtomicDouble extends Number implements java.io.Serializable {
 

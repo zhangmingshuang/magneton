@@ -1,10 +1,11 @@
 package org.magneton.exception;
 
-import com.google.core.base.Preconditions;
-import com.google.core.collect.Maps;
 import java.util.Map;
 import java.util.Objects;
 import java.util.function.Function;
+
+import org.magneton.core.base.Preconditions;
+import org.magneton.core.collect.Maps;
 
 /**
  * exception processor context.
@@ -17,11 +18,10 @@ public class DefaultExceptionProcessorContext implements ExceptionProcessorConte
 
 	private final Map<Class<? extends Exception>, Function> handlers = Maps.newConcurrentMap();
 
-	@SuppressWarnings({ "ProhibitedExceptionDeclared", "unchecked" })
 	@Override
 	public Object handle(Exception exception) throws Exception {
 		Preconditions.checkNotNull(exception, "exception must be not null");
-		Function handler = this.handlers.get(exception.getClass());
+		Function handler = handlers.get(exception.getClass());
 		if (Objects.isNull(handler)) {
 			throw exception;
 		}
@@ -40,7 +40,7 @@ public class DefaultExceptionProcessorContext implements ExceptionProcessorConte
 		Preconditions.checkNotNull(exception, "throwable class must be not null");
 		Preconditions.checkNotNull(handler, "handler must be not null");
 
-		Function exist = this.handlers.putIfAbsent(exception, handler);
+		Function exist = handlers.putIfAbsent(exception, handler);
 		if (exist != null) {
 			throw new DuplicateProcessorException(exception + " duplicate in " + handler + " and " + exist);
 		}

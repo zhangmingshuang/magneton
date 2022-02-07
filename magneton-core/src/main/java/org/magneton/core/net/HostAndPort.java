@@ -18,7 +18,7 @@ import java.io.Serializable;
 
 import javax.annotation.CheckForNull;
 
-import com.google.errorprone.annotations.Immutable;
+import javax.annotation.concurrent.Immutable;
 import org.magneton.core.base.CharMatcher;
 import org.magneton.core.base.Objects;
 import org.magneton.core.base.Preconditions;

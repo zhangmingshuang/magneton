@@ -18,9 +18,9 @@ import java.util.Arrays;
 import java.util.Collection;
 
 import javax.annotation.CheckForNull;
-import javax.annotation.LazyInit;
 import javax.annotation.Nullable;
 import javax.annotation.VisibleForTesting;
+import javax.annotation.concurrent.LazyInit;
 
 import org.magneton.core.base.Objects;
 import org.magneton.core.base.Preconditions;

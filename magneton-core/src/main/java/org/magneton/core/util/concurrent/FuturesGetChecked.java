@@ -28,9 +28,8 @@ import java.util.concurrent.TimeoutException;
 
 import javax.annotation.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
-
-import com.google.j2objc.annotations.J2ObjCIncompatible;
 import javax.annotation.VisibleForTesting;
+
 import org.magneton.core.base.Function;
 import org.magneton.core.collect.Ordering;
 
@@ -119,7 +118,6 @@ final class FuturesGetChecked {
 		return GetCheckedTypeValidatorHolder.WeakSetValidator.INSTANCE;
 	}
 
-	@J2ObjCIncompatible // ClassValue
 	@VisibleForTesting
 	static GetCheckedTypeValidator classValueValidator() {
 		return GetCheckedTypeValidatorHolder.ClassValueValidator.INSTANCE;
@@ -250,7 +248,6 @@ final class FuturesGetChecked {
 			}
 		}
 
-		@J2ObjCIncompatible // ClassValue
 		enum ClassValueValidator implements GetCheckedTypeValidator {
 
 			INSTANCE;

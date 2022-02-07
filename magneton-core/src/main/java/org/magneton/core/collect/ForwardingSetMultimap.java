@@ -21,7 +21,7 @@ import java.util.Set;
 
 import javax.annotation.CheckForNull;
 
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
+import javax.annotation.CanIgnoreReturnValue;
 
 /**
  * A set multimap which forwards all its method calls to another set multimap. Subclasses

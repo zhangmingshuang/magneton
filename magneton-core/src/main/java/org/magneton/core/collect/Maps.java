@@ -50,10 +50,9 @@ import java.util.stream.Collector;
 import javax.annotation.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
+import javax.annotation.Weak;
+import javax.annotation.WeakOuter;
 
-import com.google.j2objc.annotations.RetainedWith;
-import com.google.j2objc.annotations.Weak;
-import com.google.j2objc.annotations.WeakOuter;
 import org.magneton.core.base.Converter;
 import org.magneton.core.base.Equivalence;
 import org.magneton.core.base.Function;
@@ -2980,7 +2979,6 @@ public final class Maps {
 
 		final BiMap<? extends K, ? extends V> delegate;
 
-		@RetainedWith
 		@CheckForNull
 		BiMap<V, K> inverse;
 
@@ -3823,7 +3821,6 @@ public final class Maps {
 	static final class FilteredEntryBiMap<K extends Object, V extends Object> extends FilteredEntryMap<K, V>
 			implements BiMap<K, V> {
 
-		@RetainedWith
 		private final BiMap<V, K> inverse;
 
 		FilteredEntryBiMap(BiMap<K, V> delegate, Predicate<? super Entry<K, V>> predicate) {

@@ -12,7 +12,7 @@
  * the License.
  */
 
-package com.google.thirdparty.publicsuffix;
+package org.magneton.thirdparty.publicsuffix;
 
 import java.util.Deque;
 

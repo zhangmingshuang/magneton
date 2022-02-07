@@ -22,7 +22,6 @@ import java.util.logging.Logger;
 
 import javax.annotation.CheckForNull;
 
-import com.google.j2objc.annotations.ReflectionSupport;
 import org.magneton.core.collect.Sets;
 
 import static java.util.Objects.requireNonNull;
@@ -39,7 +38,6 @@ import static java.util.concurrent.atomic.AtomicReferenceFieldUpdater.newUpdater
  * </ul>
  */
 
-@ReflectionSupport(value = ReflectionSupport.Level.FULL)
 @ElementTypesAreNonnullByDefault
 abstract class AggregateFutureState<OutputT extends Object> extends AbstractFuture.TrustedFuture<OutputT> {
 

@@ -24,7 +24,7 @@ import java.util.SortedSet;
 
 import javax.annotation.CheckForNull;
 
-import com.google.j2objc.annotations.Weak;
+import javax.annotation.Weak;
 
 import static org.magneton.core.collect.BoundType.CLOSED;
 import static org.magneton.core.collect.BoundType.OPEN;

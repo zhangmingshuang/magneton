@@ -1,11 +1,12 @@
 package org.magneton.spy;
 
-import com.google.common.base.Preconditions;
-import com.google.common.base.Verify;
-import com.google.common.collect.Maps;
 import java.util.Locale;
 import java.util.Map;
 import java.util.ServiceLoader;
+
+import org.magneton.core.base.Preconditions;
+import org.magneton.core.base.Verify;
+import org.magneton.core.collect.Maps;
 import org.magneton.spy.constant.DB;
 import org.magneton.spy.core.Database;
 import org.magneton.spy.core.DuplicateException;

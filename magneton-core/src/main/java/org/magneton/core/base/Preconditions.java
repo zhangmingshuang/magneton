@@ -14,10 +14,9 @@
 
 package org.magneton.core.base;
 
+import javax.annotation.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
-
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
 
 import static org.magneton.core.base.Strings.lenientFormat;
 

@@ -30,9 +30,9 @@ import java.util.logging.Logger;
 
 import javax.annotation.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
+import javax.annotation.GuardedBy;
+import javax.annotation.WeakOuter;
 
-import com.google.errorprone.annotations.concurrent.GuardedBy;
-import com.google.j2objc.annotations.WeakOuter;
 import org.magneton.core.base.Supplier;
 
 import static java.util.Objects.requireNonNull;

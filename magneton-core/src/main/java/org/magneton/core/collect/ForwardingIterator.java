@@ -18,7 +18,7 @@ package org.magneton.core.collect;
 
 import java.util.Iterator;
 
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
+import javax.annotation.CanIgnoreReturnValue;
 
 /**
  * An iterator which forwards all its method calls to another iterator. Subclasses should

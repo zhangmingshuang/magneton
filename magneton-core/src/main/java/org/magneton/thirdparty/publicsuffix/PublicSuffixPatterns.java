@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package com.google.thirdparty.publicsuffix;
+package org.magneton.thirdparty.publicsuffix;
 
 import org.magneton.core.collect.ImmutableMap;
 import org.magneton.core.net.InternetDomainName;

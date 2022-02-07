@@ -14,7 +14,7 @@
 
 package org.magneton.core.hash;
 
-import com.google.errorprone.annotations.Immutable;
+import javax.annotation.concurrent.Immutable;
 import org.magneton.core.base.Supplier;
 
 /**

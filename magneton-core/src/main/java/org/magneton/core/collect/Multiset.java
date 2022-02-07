@@ -28,7 +28,6 @@ import java.util.function.ObjIntConsumer;
 import javax.annotation.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
 
-import com.google.errorprone.annotations.CompatibleWith;
 import org.magneton.core.util.concurrent.AtomicLongMap;
 
 import static org.magneton.core.base.Preconditions.checkNotNull;
@@ -128,7 +127,7 @@ public interface Multiset<E extends Object> extends Collection<E> {
 	 * @return the number of occurrences of the element in this multiset; possibly zero
 	 * but never negative
 	 */
-	int count(@CompatibleWith("E") @CheckForNull Object element);
+	int count(@CheckForNull Object element);
 
 	// Bulk Operations
 
@@ -191,7 +190,7 @@ public interface Multiset<E extends Object> extends Collection<E> {
 	 * @throws IllegalArgumentException if {@code occurrences} is negative
 	 */
 	@CanIgnoreReturnValue
-	int remove(@CompatibleWith("E") @CheckForNull Object element, int occurrences);
+	int remove(@CheckForNull Object element, int occurrences);
 
 	/**
 	 * Removes a <i>single</i> occurrence of the specified element from this multiset, if

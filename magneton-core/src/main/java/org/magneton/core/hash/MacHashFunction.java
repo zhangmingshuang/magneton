@@ -21,7 +21,7 @@ import java.security.NoSuchAlgorithmException;
 
 import javax.crypto.Mac;
 
-import com.google.errorprone.annotations.Immutable;
+import javax.annotation.concurrent.Immutable;
 
 import static org.magneton.core.base.Preconditions.checkNotNull;
 import static org.magneton.core.base.Preconditions.checkState;

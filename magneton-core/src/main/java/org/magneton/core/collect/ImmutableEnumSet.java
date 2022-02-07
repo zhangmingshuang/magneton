@@ -24,7 +24,7 @@ import java.util.function.Consumer;
 
 import javax.annotation.CheckForNull;
 
-import com.google.errorprone.annotations.concurrent.LazyInit;
+import javax.annotation.concurrent.LazyInit;
 
 /**
  * Implementation of {@link org.magneton.core.collect.ImmutableSet} backed by a non-empty

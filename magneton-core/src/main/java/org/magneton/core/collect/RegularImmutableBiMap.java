@@ -23,9 +23,8 @@ import java.util.function.Consumer;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import javax.annotation.VisibleForTesting;
+import javax.annotation.concurrent.LazyInit;
 
-import com.google.errorprone.annotations.concurrent.LazyInit;
-import com.google.j2objc.annotations.RetainedWith;
 import org.magneton.core.base.Preconditions;
 import org.magneton.core.collect.ImmutableMapEntry.NonTerminalImmutableBiMapEntry;
 import org.magneton.core.collect.RegularImmutableMap.BucketOverflowException;
@@ -65,7 +64,6 @@ class RegularImmutableBiMap<K, V> extends org.magneton.core.collect.ImmutableBiM
 	private final transient int hashCode;
 
 	@LazyInit
-	@RetainedWith
 	@CheckForNull
 	private transient org.magneton.core.collect.ImmutableBiMap<V, K> inverse;
 

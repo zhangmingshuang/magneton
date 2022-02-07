@@ -1,7 +1,7 @@
 package org.magneton.spy.sql;
 
-import com.google.common.base.Preconditions;
 import lombok.ToString;
+import org.magneton.core.base.Preconditions;
 
 /**
  * @author zhangmsh 2021/9/22
@@ -21,8 +21,8 @@ public class Select implements Executable {
 
 	@Override
 	public ResultSet exec() {
-		Object object = this.sqlContext.getSqlExecutor().exec(this);
-		return new ResultSet(this.sqlContext.getDataConverter(), object);
+		Object object = sqlContext.getSqlExecutor().exec(this);
+		return new ResultSet(sqlContext.getDataConverter(), object);
 	}
 
 }

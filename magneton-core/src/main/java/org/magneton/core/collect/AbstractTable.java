@@ -24,9 +24,8 @@ import java.util.Spliterator;
 
 import javax.annotation.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
-
-import com.google.errorprone.annotations.concurrent.LazyInit;
-import com.google.j2objc.annotations.WeakOuter;
+import javax.annotation.WeakOuter;
+import javax.annotation.concurrent.LazyInit;
 
 /**
  * Skeletal, implementation-agnostic implementation of the {@link Table} interface.

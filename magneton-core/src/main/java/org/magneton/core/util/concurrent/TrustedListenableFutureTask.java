@@ -20,7 +20,7 @@ import java.util.concurrent.RunnableFuture;
 
 import javax.annotation.CheckForNull;
 
-import com.google.j2objc.annotations.WeakOuter;
+import javax.annotation.WeakOuter;
 
 import static org.magneton.core.base.Preconditions.checkNotNull;
 

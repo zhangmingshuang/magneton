@@ -24,8 +24,6 @@ import java.util.ListIterator;
 import javax.annotation.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
 
-import com.google.common.annotations.Beta;
-
 /**
  * A list which forwards all its method calls to another list. Subclasses should override
  * one or more methods to modify the behavior of the backing list as desired per the

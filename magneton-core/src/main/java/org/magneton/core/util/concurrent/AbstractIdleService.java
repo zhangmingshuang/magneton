@@ -21,7 +21,7 @@ import java.util.concurrent.TimeoutException;
 
 import javax.annotation.CanIgnoreReturnValue;
 
-import com.google.j2objc.annotations.WeakOuter;
+import javax.annotation.WeakOuter;
 import org.magneton.core.base.Supplier;
 
 /**

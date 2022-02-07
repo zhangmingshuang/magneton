@@ -20,12 +20,10 @@ import java.util.concurrent.locks.LockSupport;
 
 import javax.annotation.VisibleForTesting;
 
-import com.google.j2objc.annotations.ReflectionSupport;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 import static org.magneton.core.util.concurrent.NullnessCasts.uncheckedCastNullableTToT;
 
-@ReflectionSupport(value = ReflectionSupport.Level.FULL)
 @ElementTypesAreNonnullByDefault
 // Some Android 5.0.x Samsung devices have bugs in JDK reflection APIs that cause
 // getDeclaredField to throw a NoSuchFieldException when the field is definitely there.

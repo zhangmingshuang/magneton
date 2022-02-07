@@ -19,10 +19,9 @@ import java.util.Iterator;
 
 import javax.annotation.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
+import javax.annotation.ForOverride;
+import javax.annotation.concurrent.LazyInit;
 
-import com.google.errorprone.annotations.ForOverride;
-import com.google.errorprone.annotations.concurrent.LazyInit;
-import com.google.j2objc.annotations.RetainedWith;
 import org.magneton.core.collect.Maps;
 import org.magneton.core.primitives.Doubles;
 import org.magneton.core.primitives.Ints;
@@ -156,7 +155,6 @@ public abstract class Converter<A, B> implements org.magneton.core.base.Function
 
 	// We lazily cache the reverse view to avoid allocating on every call to reverse().
 	@LazyInit
-	@RetainedWith
 	@CheckForNull
 	private transient Converter<B, A> reverse;
 

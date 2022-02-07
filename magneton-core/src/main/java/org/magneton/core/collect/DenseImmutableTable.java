@@ -18,9 +18,9 @@ import java.util.Map;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
+import javax.annotation.WeakOuter;
+import javax.annotation.concurrent.Immutable;
 
-import com.google.errorprone.annotations.Immutable;
-import com.google.j2objc.annotations.WeakOuter;
 import org.magneton.core.collect.ImmutableMap.IteratorBasedImmutableMap;
 
 import static java.util.Objects.requireNonNull;

@@ -41,9 +41,9 @@ import java.util.stream.Stream;
 
 import javax.annotation.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
-import javax.annotation.LazyInit;
 import javax.annotation.Weak;
 import javax.annotation.WeakOuter;
+import javax.annotation.concurrent.LazyInit;
 
 import org.magneton.core.base.Function;
 import org.magneton.core.base.Preconditions;
