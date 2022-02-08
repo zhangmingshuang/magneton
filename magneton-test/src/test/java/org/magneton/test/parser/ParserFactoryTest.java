@@ -3,9 +3,11 @@ package org.magneton.test.parser;
 import java.lang.annotation.Annotation;
 import java.util.List;
 import java.util.Map;
+
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.magneton.test.helper.Human;
@@ -100,7 +102,7 @@ class ParserFactoryTest {
 		Definition parse = this.parserFactory.parse(D.class);
 		Assertions.assertEquals(1, parse.getChildDefinitions().size());
 		Definition definition = parse.getChildDefinitions().get(0);
-		Map<Class, Annotation> annotations = definition.getAnnotations();
+		Map<Class<?>, Annotation> annotations = definition.getAnnotations();
 		Human.sout(annotations);
 		Assertions.assertNotNull(annotations.get(AssertTrue.class));
 	}

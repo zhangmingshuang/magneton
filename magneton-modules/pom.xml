@@ -12,7 +12,19 @@
 	<artifactId>magneton-modules</artifactId>
 	<packaging>pom</packaging>
 
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-dependencies</artifactId>
+				<version>${spring-boot.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
 	<modules>
-		<module>magneton-modeul-concurrent</module>
+		<module>magneton-module-distributed-cache</module>
 	</modules>
 </project>

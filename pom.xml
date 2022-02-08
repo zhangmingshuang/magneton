@@ -13,7 +13,6 @@
 	<modules>
 		<module>magneton-core</module>
 		<module>magneton-lock</module>
-		<module>magneton-cache</module>
 		<module>magneton-test</module>
 		<module>magneton-modules</module>
 		<module>magneton-spy</module>
@@ -50,14 +49,14 @@
 		<revision>1.2.0${changelist}</revision>
 
 		<sonar.host.url>https://builds.apache.org/analysis</sonar.host.url>
-
-		<spring-boot.version>2.3.4.RELEASE</spring-boot.version>
-		<testable.version>0.7.4</testable.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<commons-lang3.version>3.11</commons-lang3.version>
-		<lombok.version>1.18.12</lombok.version>
+
 		<spring.version>5.2.9.RELEASE</spring.version>
 		<spring-boot.version>2.3.7.RELEASE</spring-boot.version>
+
+		<testable.version>0.7.4</testable.version>
+		<commons-lang3.version>3.11</commons-lang3.version>
+		<lombok.version>1.18.12</lombok.version>
 		<slf4j-api.version>1.7.30</slf4j-api.version>
 		<redisson.version>3.16.1</redisson.version>
 		<junit.version>5.7.0</junit.version>
@@ -92,16 +91,14 @@
 				<artifactId>testable-all</artifactId>
 				<version>${testable.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>fastjson</artifactId>
+				<version>${fastjson.version}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
-	<dependencies>
-		<dependency>
-			<groupId>com.alibaba.testable</groupId>
-			<artifactId>testable-all</artifactId>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
 	<build>
 		<plugins>
 			<plugin>
@@ -259,9 +256,9 @@
 						clean	删除全部可选元素
 					 -->
 					<!-- 如果设置该配置，则只会覆盖主要的配置 -->
-					<flattenMode>defaults</flattenMode>
+					<flattenMode>oss</flattenMode>
 					<pomElements>
-						<!--<dependencyManagement>expand</dependencyManagement>-->
+						<dependencyManagement>flatten</dependencyManagement>
 						<!--<dependencies>expand</dependencies>-->
 					</pomElements>
 				</configuration>

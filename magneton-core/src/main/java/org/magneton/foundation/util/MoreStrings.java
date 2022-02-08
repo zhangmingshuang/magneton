@@ -2,7 +2,6 @@ package org.magneton.foundation.util;
 
 import javax.annotation.Nullable;
 
-
 import org.magneton.core.base.Strings;
 
 /**
@@ -84,7 +83,7 @@ public final class MoreStrings {
 	 *     false} it all the strings is not {@code null} and empty.
 	 */
 	public static boolean isAnyNullOrEmpty(String... css) {
-		if (MoreArrays.isNullOrEmpty(css)) {
+		if (Arrays.isNullOrEmpty(css)) {
 			return true;
 		}
 		for (String cs : css) {
