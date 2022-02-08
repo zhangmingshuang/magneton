@@ -3,6 +3,7 @@ package org.magneton.test.mock.redisson;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
+import org.magneton.core.base.Preconditions;
 import org.magneton.test.mock.UnsupportedException;
 import org.redisson.api.ObjectListener;
 import org.redisson.api.RCountDownLatch;
@@ -28,46 +29,46 @@ public class MockRCountDownLatch implements RCountDownLatch {
 
 	@Override
 	public void await() throws InterruptedException {
-		if (countDownLatch == null) {
+		if (this.countDownLatch == null) {
 			return;
 		}
-		countDownLatch.await();
+		this.countDownLatch.await();
 	}
 
 	@Override
 	public boolean await(long timeout, TimeUnit unit) throws InterruptedException {
-		if (countDownLatch == null) {
+		if (this.countDownLatch == null) {
 			return false;
 		}
-		return countDownLatch.await(timeout, unit);
+		return this.countDownLatch.await(timeout, unit);
 	}
 
 	@Override
 	public void countDown() {
-		if (countDownLatch == null) {
+		if (this.countDownLatch == null) {
 			return;
 		}
-		countDownLatch.countDown();
+		this.countDownLatch.countDown();
 	}
 
 	@Override
 	public long getCount() {
-		if (countDownLatch == null) {
+		if (this.countDownLatch == null) {
 			return 0;
 		}
-		return countDownLatch.getCount();
+		return this.countDownLatch.getCount();
 	}
 
 	@Override
 	public boolean trySetCount(long count) {
 		Preconditions.checkArgument(count > 0 && count < Integer.MAX_VALUE, "count必须大于0小于Int最大值");
-		if (countDownLatch == null) {
-			countDownLatch = new CountDownLatch((int) count);
+		if (this.countDownLatch == null) {
+			this.countDownLatch = new CountDownLatch((int) count);
 		}
-		else if (countDownLatch.getCount() != 0) {
+		else if (this.countDownLatch.getCount() != 0) {
 			return false;
 		}
-		countDownLatch = new CountDownLatch((int) count);
+		this.countDownLatch = new CountDownLatch((int) count);
 		return true;
 	}
 
@@ -83,18 +84,18 @@ public class MockRCountDownLatch implements RCountDownLatch {
 
 	@Override
 	public RFuture<Void> countDownAsync() {
-		countDown();
+		this.countDown();
 		return RedissonPromise.newSucceededFuture(null);
 	}
 
 	@Override
 	public RFuture<Long> getCountAsync() {
-		return RedissonPromise.newSucceededFuture(getCount());
+		return RedissonPromise.newSucceededFuture(this.getCount());
 	}
 
 	@Override
 	public RFuture<Boolean> trySetCountAsync(long count) {
-		return RedissonPromise.newSucceededFuture(trySetCount(count));
+		return RedissonPromise.newSucceededFuture(this.trySetCount(count));
 	}
 
 	@Override
@@ -154,12 +155,12 @@ public class MockRCountDownLatch implements RCountDownLatch {
 
 	@Override
 	public String getName() {
-		return name;
+		return this.name;
 	}
 
 	@Override
 	public boolean delete() {
-		countDownLatch = null;
+		this.countDownLatch = null;
 		return true;
 	}
 
@@ -180,7 +181,7 @@ public class MockRCountDownLatch implements RCountDownLatch {
 
 	@Override
 	public boolean isExists() {
-		return countDownLatch != null;
+		return this.countDownLatch != null;
 	}
 
 	@Override
@@ -255,7 +256,7 @@ public class MockRCountDownLatch implements RCountDownLatch {
 
 	@Override
 	public RFuture<Boolean> deleteAsync() {
-		return RedissonPromise.newSucceededFuture(delete());
+		return RedissonPromise.newSucceededFuture(this.delete());
 	}
 
 	@Override
@@ -275,7 +276,7 @@ public class MockRCountDownLatch implements RCountDownLatch {
 
 	@Override
 	public RFuture<Boolean> isExistsAsync() {
-		return RedissonPromise.newSucceededFuture(isExists());
+		return RedissonPromise.newSucceededFuture(this.isExists());
 	}
 
 	@Override

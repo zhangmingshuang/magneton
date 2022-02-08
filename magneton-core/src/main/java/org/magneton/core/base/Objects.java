@@ -88,4 +88,8 @@ public final class Objects extends ExtraObjectsMethodsForWeb {
 		return Arrays.hashCode(objects);
 	}
 
+	public static Object nullable(@Nullable Object obj) {
+		return obj == null ? "null" : obj;
+	}
+
 }

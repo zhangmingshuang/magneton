@@ -47,7 +47,6 @@
 		<dependency>
 			<groupId>com.alibaba.testable</groupId>
 			<artifactId>testable-all</artifactId>
-			<version>${testable.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>joda-time</groupId>
@@ -69,6 +68,12 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
 			<version>${commons-lang3.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<version>${spring-boot.version}</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 </project>

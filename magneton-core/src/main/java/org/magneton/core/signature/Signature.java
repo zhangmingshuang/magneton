@@ -4,7 +4,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import org.magneton.core.base.Preconditions;
-import org.magneton.foundation.util.MoreArrays;
+import org.magneton.foundation.util.Arrays;
 
 /**
  * .
@@ -83,7 +83,7 @@ public interface Signature {
 			Preconditions.checkNotNull(salt, "salt must be not null");
 
 			AbstractSignature abstractSignature = Objects.isNull(signature) ? new Sha1Signature(salt) : signature;
-			if (!MoreArrays.isNullOrEmpty(needBodyKeys)) {
+			if (!Arrays.isNullOrEmpty(needBodyKeys)) {
 				abstractSignature.setSignatureBodyVerifyer(new KeysSignatureBodyVerifyer(needBodyKeys));
 			}
 			if (Objects.nonNull(signatureContentBuilder)) {
