@@ -1,0 +1,6 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  org.magneton.spring.MagnetonSpringAutoConfiguration
+org.springframework.context.ApplicationContextInitializer=\
+  org.magneton.spring.launcher.RunLauncherContextInitializer
+org.springframework.boot.SpringApplicationRunListener=\
+  org.magneton.spring.launcher.RunLauncherRunListener
