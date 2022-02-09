@@ -46,6 +46,8 @@ public interface HashOps {
 
 	Map<String, String> get(String hash, String... keys);
 
+	<V> Map<String, V> get(String hash, String[] keys, Class<V> clazz);
+
 	/**
 	 * 判断Hash表是否存在Key
 	 * @param hash Hash表名称
@@ -68,6 +70,10 @@ public interface HashOps {
 
 	List<String> values(String hash);
 
+	<V> List<V> values(String hash, Class<V> clazz);
+
 	Map<String, String> all(String hash);
+
+	<V> Map<String, V> all(String hash, Class<V> clazz);
 
 }

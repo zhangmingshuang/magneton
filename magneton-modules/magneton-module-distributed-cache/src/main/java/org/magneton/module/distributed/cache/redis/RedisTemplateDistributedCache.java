@@ -82,6 +82,7 @@ public class RedisTemplateDistributedCache<V> implements DistributedCache {
 
 	@Override
 	public void select(int dbIndex) {
+		Preconditions.checkArgument(dbIndex > 0 && dbIndex < 17, "dbIndex must be between 0 and 16(include)");
 		this.redisTemplate.execute((RedisCallback<? extends Object>) rc -> {
 			rc.select(dbIndex);
 			return null;

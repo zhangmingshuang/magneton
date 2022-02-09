@@ -9,6 +9,7 @@ import org.magneton.module.distributed.cache.EKV;
 import org.magneton.module.distributed.cache.KV;
 import org.magneton.module.distributed.cache.TestA;
 import org.magneton.module.distributed.cache.TestRedisTemplate;
+import org.magneton.module.distributed.cache.ops.ValueOps;
 import org.magneton.test.ChaosTest;
 import org.magneton.test.helper.Human;
 
@@ -20,7 +21,7 @@ import org.magneton.test.helper.Human;
  */
 class RedisTemplateValueOpsTest extends TestRedisTemplate {
 
-	private RedisTemplateValueOps ops = new RedisTemplateValueOps(redisTemplate, redisValueSerializer);
+	private ValueOps ops = distributedCache.opsForValue();
 
 	@Test
 	void set() {
