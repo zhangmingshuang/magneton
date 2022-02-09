@@ -1,11 +1,15 @@
 package org.magneton.module.distributed.cache.redis;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.magneton.core.base.Stopwatch;
 import org.magneton.module.distributed.cache.TestRedisTemplate;
 import org.magneton.module.distributed.cache.ops.HashOps;
 import org.magneton.module.distributed.cache.ops.ListOps;
 import org.magneton.module.distributed.cache.ops.ValueOps;
+import org.magneton.test.helper.Human;
 
 /**
  * .
@@ -104,6 +108,22 @@ class RedisTemplateDistributedCacheTest extends TestRedisTemplate {
 
 		boolean exist = distributedCache.exists("flushDb");
 		Assertions.assertFalse(exist);
+	}
+
+	@Test
+	void keys() {
+		ValueOps valueOps = distributedCache.opsForValue();
+		Stopwatch sw = Stopwatch.createStarted();
+		for (int i = 0; i < 10_000; i++) {
+			valueOps.set(String.valueOf(i), "keys");
+		}
+		System.out.println("set:" + sw.stop());
+
+		sw = Stopwatch.createStarted();
+		List<String> keys = distributedCache.keys("1*1");
+		System.out.println("keys:" + sw.stop());
+		Human.sout(keys);
+		Assertions.assertEquals(111, keys.size());
 	}
 
 }

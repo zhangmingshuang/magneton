@@ -1,14 +1,22 @@
 package org.magneton.module.distributed.cache.redis;
 
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.List;
+
 import org.magneton.core.base.Preconditions;
+import org.magneton.core.base.Strings;
+import org.magneton.core.collect.Lists;
 import org.magneton.module.distributed.cache.DistributedCache;
 import org.magneton.module.distributed.cache.ops.HashOps;
 import org.magneton.module.distributed.cache.ops.ListOps;
 import org.magneton.module.distributed.cache.ops.ValueOps;
 import org.magneton.module.distributed.cache.util.Trans;
 
+import org.springframework.data.redis.core.Cursor;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ScanOptions;
 
 /**
  * .
@@ -86,6 +94,24 @@ public class RedisTemplateDistributedCache<V> implements DistributedCache {
 		this.redisTemplate.execute((RedisCallback<? extends Object>) rc -> {
 			rc.select(dbIndex);
 			return null;
+		});
+	}
+
+	@Override
+	public List<String> keys(String pattern) {
+		pattern = Strings.defaultIfNullOrEmpty(pattern, "*");
+		ScanOptions scanOptions = ScanOptions.scanOptions().match(pattern).count(10).build();
+		return (List<String>) this.redisTemplate.execute((RedisCallback) rc -> {
+			List<String> keys = Lists.newArrayListWithCapacity(64);
+			try (Cursor<byte[]> cursor = rc.scan(scanOptions)) {
+				while (cursor.hasNext()) {
+					keys.add(new String(cursor.next(), StandardCharsets.UTF_8));
+				}
+			}
+			catch (IOException e) {
+				// ignore
+			}
+			return keys;
 		});
 	}
 

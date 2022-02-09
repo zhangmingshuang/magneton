@@ -44,6 +44,30 @@ public final class Strings {
 	}
 
 	/**
+	 * <p>
+	 * Returns either the passed in CharSequence, or if the CharSequence is empty or
+	 * {@code null}, the value of {@code defaultStr}.
+	 * </p>
+	 *
+	 * <pre>
+	 * StringUtils.defaultIfEmpty(null, "NULL")  = "NULL"
+	 * StringUtils.defaultIfEmpty("", "NULL")    = "NULL"
+	 * StringUtils.defaultIfEmpty(" ", "NULL")   = " "
+	 * StringUtils.defaultIfEmpty("bat", "NULL") = "bat"
+	 * StringUtils.defaultIfEmpty("", null)      = null
+	 * </pre>
+	 * @param <T> the specific kind of CharSequence
+	 * @param str the CharSequence to check, may be null
+	 * @param defaultStr the default CharSequence to return if the input is empty ("") or
+	 * {@code null}, may be null
+	 * @return the passed in CharSequence, or the default
+	 * @see StringUtils#defaultString(String, String)
+	 */
+	public static String defaultIfNullOrEmpty(String str, String defaultStr) {
+		return isNullOrEmpty(str) ? defaultStr : str;
+	}
+
+	/**
 	 * Returns the given string if it is nonempty; {@code null} otherwise.
 	 * @param string the string to test and possibly return
 	 * @return {@code string} itself if it is nonempty; {@code null} if it is empty or
