@@ -4,7 +4,9 @@ import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Date;
+import java.util.Map;
 import java.util.Set;
 
 import lombok.SneakyThrows;
@@ -52,19 +54,27 @@ public class Human {
 		builder.append(clazz.getSimpleName()).append("(");
 		Set<Field> fields = FieldUtil.getFields(clazz);
 		if (fields.isEmpty()) {
-			return builder.append(humanValue(object)).append(")").toString();
+			builder.append(humanValue(object)).append(")");
 		}
-		for (Field field : fields) {
-			field.setAccessible(true);
-			String name = field.getName();
-			Object value = field.get(object);
-			String body = value == null ? "null"
-					: PrimitiveUtil.isPrimitive(field.getType()) ? humanValue(value) : getSoutBody(value);
-
-			builder.append(name).append("=").append(body).append(",");
+		else {
+			for (Field field : fields) {
+				field.setAccessible(true);
+				String name = field.getName();
+				Object value = field.get(object);
+				String body = value == null ? "null"
+						: PrimitiveUtil.isPrimitive(field.getType()) ? humanValue(value) : getSoutBody(value);
+				builder.append(name).append("=").append(body).append(",");
+			}
+			builder.setLength(builder.length() - 1);
+			builder.append(")");
 		}
-		builder.setLength(builder.length() - 1);
-		return builder.append(")").toString();
+		if (object instanceof Collection) {
+			builder.append(", size=").append(((Collection) object).size());
+		}
+		else if (object instanceof Map) {
+			builder.append(", size=").append(((Map) object).size());
+		}
+		return builder.toString();
 	}
 
 	private static String humanValue(Object object) {

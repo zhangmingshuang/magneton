@@ -1,5 +1,9 @@
 package org.magneton.module.distributed.cache;
 
+import java.util.List;
+
+import javax.annotations.Underperforming;
+
 import org.magneton.module.distributed.cache.ops.HashOps;
 import org.magneton.module.distributed.cache.ops.ListOps;
 import org.magneton.module.distributed.cache.ops.ValueOps;
@@ -51,5 +55,21 @@ public interface DistributedCache {
 	void flushDb();
 
 	void select(int dbIndex);
+
+	/**
+	 * 查找Key列表
+	 *
+	 * <pre>
+	 *    	h?llo matches hello, hallo and hxllo
+	 * 		h*llo matches hllo and heeeello
+	 * 		h[ae]llo matches hello and hallo, but not hillo
+	 * 		h[^e]llo matches hallo, hbllo, ... but not hello
+	 * 		h[a-b]llo matches hallo and hbllo
+	 * </pre>
+	 * @param pattern Key表达式
+	 * @return 查找到的列表
+	 */
+	@Underperforming
+	List<String> keys(String pattern);
 
 }
