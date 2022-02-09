@@ -25,8 +25,20 @@ public interface DistributedCache {
 	 */
 	long ttl(String key);
 
+	/**
+	 * 设置过期
+	 * @param key 要过期的Key
+	 * @param expire 设置过期时间，单位秒
+	 * @return 是否设置成功。如果key不存在则返回 {@code false}，如果已存在，不管Key是否已经有过期策略，只要设置成功，则返回
+	 * {@code true}
+	 */
 	boolean expire(String key, long expire);
 
+	/**
+	 * 判断是否存在
+	 * @param key 要判断的Key
+	 * @return 如果存在则返回 {@code true}，否则返回 {@code false}
+	 */
 	boolean exists(String key);
 
 	/**

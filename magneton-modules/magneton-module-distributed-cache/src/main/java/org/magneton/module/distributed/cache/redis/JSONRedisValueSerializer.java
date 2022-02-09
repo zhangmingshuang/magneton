@@ -2,12 +2,14 @@ package org.magneton.module.distributed.cache.redis;
 
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.Map;
 
 import com.alibaba.fastjson.JSON;
 import org.magneton.core.base.Objects;
 import org.magneton.core.base.Preconditions;
 import org.magneton.core.collect.Collections;
 import org.magneton.core.collect.Lists;
+import org.magneton.core.collect.Maps;
 
 /**
  * .
@@ -41,6 +43,18 @@ public class JSONRedisValueSerializer implements RedisValueSerializer {
 			list.add(JSON.parseObject(bytes, clazz));
 		}
 		return list;
+	}
+
+	@Override
+	public <V> Map<String, V> deserialize(Map<byte[], byte[]> data, Class<V> clazz) {
+		if (Maps.isNullOrEmpty(data)) {
+			return Collections.emptyMap();
+		}
+		Map<String, V> map = Maps.newHashMapWithExpectedSize(data.size());
+		data.forEach((k, v) -> {
+			map.put(new String(k), JSON.parseObject(v, clazz));
+		});
+		return map;
 	}
 
 }

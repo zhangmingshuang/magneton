@@ -20,7 +20,7 @@ import org.magneton.test.helper.Human;
  */
 class RedisTemplateListOpsTest extends TestRedisTemplate {
 
-	private ListOps ops = new RedisTemplateListOps(redisTemplate, redisValueSerializer);
+	private ListOps ops = distributedCache.opsForList();
 
 	@Test
 	void add() {

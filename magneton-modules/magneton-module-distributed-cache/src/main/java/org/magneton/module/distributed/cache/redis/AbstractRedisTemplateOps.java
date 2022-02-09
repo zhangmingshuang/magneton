@@ -54,6 +54,10 @@ public abstract class AbstractRedisTemplateOps {
 		return map;
 	}
 
+	protected <V> Map<String, V> deserialize(Map<byte[], byte[]> responses, Class<V> clazz) {
+		return this.redisValueSerializer.deserialize(responses, clazz);
+	}
+
 	protected byte[] toByte(String str) {
 		return Trans.toByte(str);
 	}
