@@ -1,6 +1,8 @@
 package org.magneton.foundation.util;
 
 import java.lang.reflect.Array;
+import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
 import javax.annotation.Nullable;
@@ -109,6 +111,33 @@ public class Arrays {
 
 	private static int getLength(Object array) {
 		return array == null ? 0 : Array.getLength(array);
+	}
+
+	/**
+	 * 将集合转为数组
+	 * @param <T> 数组元素类型
+	 * @param collection 集合
+	 * @param componentType 集合元素类型
+	 * @return 数组
+	 * @since 3.0.9
+	 */
+	public static <T> T[] toArray(Collection<T> collection, Class<?> componentType) {
+		return collection.toArray(newArray(componentType, 0));
+	}
+
+	/**
+	 * 新建一个空数组
+	 * @param <T> 数组元素类型
+	 * @param componentType 元素类型
+	 * @param newSize 大小
+	 * @return 空数组
+	 */
+	public static <T> T[] newArray(Class<?> componentType, int newSize) {
+		return (T[]) Array.newInstance(componentType, newSize);
+	}
+
+	public static <T> List<T> asList(T... values) {
+		return java.util.Arrays.asList(values);
 	}
 
 }

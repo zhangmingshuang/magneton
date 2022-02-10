@@ -54,8 +54,6 @@ public interface DistributedCache {
 
 	void flushDb();
 
-	void select(int dbIndex);
-
 	/**
 	 * 查找Key列表
 	 *

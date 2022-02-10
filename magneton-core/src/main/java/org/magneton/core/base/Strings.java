@@ -56,12 +56,10 @@ public final class Strings {
 	 * StringUtils.defaultIfEmpty("bat", "NULL") = "bat"
 	 * StringUtils.defaultIfEmpty("", null)      = null
 	 * </pre>
-	 * @param <T> the specific kind of CharSequence
 	 * @param str the CharSequence to check, may be null
 	 * @param defaultStr the default CharSequence to return if the input is empty ("") or
 	 * {@code null}, may be null
 	 * @return the passed in CharSequence, or the default
-	 * @see StringUtils#defaultString(String, String)
 	 */
 	public static String defaultIfNullOrEmpty(String str, String defaultStr) {
 		return isNullOrEmpty(str) ? defaultStr : str;
@@ -92,6 +90,41 @@ public final class Strings {
 	 */
 	public static boolean isNullOrEmpty(@CheckForNull String string) {
 		return Platform.stringIsNullOrEmpty(string);
+	}
+
+	/**
+	 * Check that the given {@code CharSequence} is neither {@code null} nor of length 0.
+	 * <p>
+	 * Note: this method returns {@code true} for a {@code CharSequence} that purely
+	 * consists of whitespace.
+	 * <p>
+	 * <pre class="code">
+	 * StringUtils.hasLength(null) = false
+	 * StringUtils.hasLength("") = false
+	 * StringUtils.hasLength(" ") = true
+	 * StringUtils.hasLength("Hello") = true
+	 * </pre>
+	 * @param str the {@code CharSequence} to check (may be {@code null})
+	 * @return {@code true} if the {@code CharSequence} is not {@code null} and has length
+	 * @see #hasLength(String)
+	 * @see #hasText(CharSequence)
+	 */
+	public static boolean hasLength(@Nullable CharSequence str) {
+		return (str != null && str.length() > 0);
+	}
+
+	/**
+	 * Check that the given {@code String} is neither {@code null} nor of length 0.
+	 * <p>
+	 * Note: this method returns {@code true} for a {@code String} that purely consists of
+	 * whitespace.
+	 * @param str the {@code String} to check (may be {@code null})
+	 * @return {@code true} if the {@code String} is not {@code null} and has length
+	 * @see #hasLength(CharSequence)
+	 * @see #hasText(String)
+	 */
+	public static boolean hasLength(@Nullable String str) {
+		return (str != null && !str.isEmpty());
 	}
 
 	/**
@@ -331,6 +364,85 @@ public final class Strings {
 		}
 
 		return builder.toString();
+	}
+
+	/**
+	 * Capitalize a {@code String}, changing the first letter to upper case as per
+	 * {@link Character#toUpperCase(char)}. No other letters are changed.
+	 * @param str the {@code String} to capitalize
+	 * @return the capitalized {@code String}
+	 */
+	public static String capitalize(String str) {
+		return changeFirstCharacterCase(str, true);
+	}
+
+	/**
+	 * Uncapitalize a {@code String}, changing the first letter to lower case as per
+	 * {@link Character#toLowerCase(char)}. No other letters are changed.
+	 * @param str the {@code String} to uncapitalize
+	 * @return the uncapitalized {@code String}
+	 */
+	public static String uncapitalize(String str) {
+		return changeFirstCharacterCase(str, false);
+	}
+
+	/**
+	 * Replace all occurrences of a substring within a string with another string.
+	 * @param inString {@code String} to examine
+	 * @param oldPattern {@code String} to replace
+	 * @param newPattern {@code String} to insert
+	 * @return a {@code String} with the replacements
+	 */
+	public static String replace(String inString, String oldPattern, @Nullable String newPattern) {
+		if (!Strings.isNullOrEmpty(inString) || !hasLength(oldPattern) || newPattern == null) {
+			return inString;
+		}
+		int index = inString.indexOf(oldPattern);
+		if (index == -1) {
+			// no occurrence -> can return input as-is
+			return inString;
+		}
+
+		int capacity = inString.length();
+		if (newPattern.length() > oldPattern.length()) {
+			capacity += 16;
+		}
+		StringBuilder sb = new StringBuilder(capacity);
+
+		int pos = 0; // our position in the old string
+		int patLen = oldPattern.length();
+		while (index >= 0) {
+			sb.append(inString, pos, index);
+			sb.append(newPattern);
+			pos = index + patLen;
+			index = inString.indexOf(oldPattern, pos);
+		}
+
+		// append any characters to the right of a match
+		sb.append(inString, pos, inString.length());
+		return sb.toString();
+	}
+
+	private static String changeFirstCharacterCase(String str, boolean capitalize) {
+		if (!isNullOrEmpty(str)) {
+			return str;
+		}
+
+		char baseChar = str.charAt(0);
+		char updatedChar;
+		if (capitalize) {
+			updatedChar = Character.toUpperCase(baseChar);
+		}
+		else {
+			updatedChar = Character.toLowerCase(baseChar);
+		}
+		if (baseChar == updatedChar) {
+			return str;
+		}
+
+		char[] chars = str.toCharArray();
+		chars[0] = updatedChar;
+		return new String(chars, 0, chars.length);
 	}
 
 	private static String lenientToString(@CheckForNull Object o) {
