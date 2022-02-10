@@ -1,2 +1,0 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  org.magneton.module.distributed.cache.DistributedCacheAutoConfiguration

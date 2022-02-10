@@ -7,6 +7,7 @@ import java.util.Set;
 import javax.annotation.Nullable;
 
 import org.magneton.core.collect.Maps;
+import org.magneton.core.collect.Sets;
 import org.magneton.module.distributed.cache.KV;
 
 /**
@@ -24,29 +25,34 @@ public interface HashOps {
 	 * @param value Value
 	 * @return 是否设置成功
 	 */
-	default <V> boolean put(String hash, String key, V value) {
-		return this.put(hash, KV.of(key, value));
+	@Nullable
+	default <V> V put(String hash, String key, V value) {
+		return (V) this.put(hash, KV.of(key, value));
 	}
 
-	<V> boolean put(String hash, KV<V> kv);
+	@Nullable
+	<V> V put(String hash, KV<V> kv);
 
-	<V> boolean put(String hash, Map<String, V> values);
+	<V> void put(String hash, Map<String, V> values);
 
-	default <V> boolean put(String hash, List<KV<V>> values) {
+	default <V> void put(String hash, List<KV<V>> values) {
 		Map<String, V> mapValues = Maps.newHashMapWithExpectedSize(values.size());
 		values.forEach(kv -> mapValues.put(kv.getKey(), kv.getValue()));
-		return this.put(hash, mapValues);
+		this.put(hash, mapValues);
 	}
 
 	@Nullable
-	String get(String hash, String key);
+	<V> V get(String hash, String key);
 
-	@Nullable
-	<V> V get(String hash, String key, Class<V> clazz);
+	<V> Map<String, V> get(String hash, Set<String> keys);
 
-	Map<String, String> get(String hash, String... keys);
+	default <V> Map<String, V> get(String hash, String... keys) {
+		return this.get(hash, Sets.newHashSet(keys));
+	}
 
-	<V> Map<String, V> get(String hash, String[] keys, Class<V> clazz);
+	default <V> Map<String, V> get(String hash, List<String> keys) {
+		return this.get(hash, Sets.newHashSet(keys));
+	}
 
 	/**
 	 * 判断Hash表是否存在Key
@@ -68,12 +74,8 @@ public interface HashOps {
 
 	Set<String> keys(String hash);
 
-	List<String> values(String hash);
+	<V> List<V> values(String hash);
 
-	<V> List<V> values(String hash, Class<V> clazz);
-
-	Map<String, String> all(String hash);
-
-	<V> Map<String, V> all(String hash, Class<V> clazz);
+	<V> Set<Map.Entry<String, V>> entrySet(String hash);
 
 }

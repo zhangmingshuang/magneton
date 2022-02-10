@@ -3,6 +3,7 @@ package org.magneton.core.collect;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.annotation.Nullable;
 
@@ -56,6 +57,18 @@ public class Collections {
 
 	public static <T> List<T> emptyList() {
 		return java.util.Collections.emptyList();
+	}
+
+	public static <K, V> boolean isNullOrEmpty(Map<K, V> map) {
+		return map == null || map.isEmpty();
+	}
+
+	public static <T> boolean addAll(Collection<? super T> c, T... elements) {
+		return java.util.Collections.addAll(c, elements);
+	}
+
+	public static Set<Class<?>> singleton(Class<?> clazz) {
+		return Collections.singleton(clazz);
 	}
 
 }

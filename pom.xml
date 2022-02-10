@@ -12,14 +12,12 @@
 
 	<modules>
 		<module>magneton-core</module>
-		<module>magneton-lock</module>
 		<module>magneton-test</module>
 		<module>magneton-modules</module>
 		<module>magneton-spy</module>
-		<module>spring-boot-magneton</module>
-		<module>spring-boot-magneton-parent</module>
-		<module>spring-boot-starter-magneton</module>
-		<module>spring-cloud-starter-magneton</module>
+		<module>magneton-parent</module>
+		<module>magneton-spring-boot-starter</module>
+		<module>magneton-adaptive</module>
 	</modules>
 
 
@@ -58,20 +56,17 @@
 		<commons-lang3.version>3.11</commons-lang3.version>
 		<lombok.version>1.18.12</lombok.version>
 		<slf4j-api.version>1.7.30</slf4j-api.version>
-		<redisson.version>3.16.1</redisson.version>
+		<redisson.version>3.16.8</redisson.version>
 		<junit.version>5.7.0</junit.version>
 		<guava.version>30.1.1-jre</guava.version>
 		<javax.el.version>3.0.1-b12</javax.el.version>
 		<joda-time.version>2.10.10</joda-time.version>
 		<fastjson.version>1.2.75</fastjson.version>
-		<mockito-junit-jupiter.version>3.6.28</mockito-junit-jupiter.version>
 		<jakarta.validation-api.version>2.0.2</jakarta.validation-api.version>
 		<hibernate-validator.version>6.1.5.Final</hibernate-validator.version>
 		<auto-service.version>1.0</auto-service.version>
-		<junit-platform-commons.version>1.6.2</junit-platform-commons.version>
-		<junit-jupiter.version>5.6.2</junit-jupiter.version>
-		<junit-jupiter-api.version>5.6.2</junit-jupiter-api.version>
 		<hutool-all.version>5.7.17</hutool-all.version>
+		<redisson-spring-boot-starter.version>3.16.8</redisson-spring-boot-starter.version>
 	</properties>
 
 	<dependencyManagement>

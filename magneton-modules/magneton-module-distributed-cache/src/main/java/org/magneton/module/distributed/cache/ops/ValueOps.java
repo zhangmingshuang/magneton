@@ -2,9 +2,12 @@ package org.magneton.module.distributed.cache.ops;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Nullable;
 
+import org.magneton.core.base.Preconditions;
+import org.magneton.core.collect.Maps;
 import org.magneton.module.distributed.cache.EKV;
 import org.magneton.module.distributed.cache.KV;
 
@@ -24,17 +27,26 @@ public interface ValueOps {
 	 * @param key 键
 	 * @param value 值
 	 */
-	default <V> boolean set(String key, V value) {
-		return this.set(KV.of(key, value));
+	default <V> void set(String key, V value) {
+		this.set(KV.of(key, value));
 	}
 
-	<V> boolean set(KV<V> kv);
+	<V> void set(KV<V> kv);
 
-	default <V> List<Boolean> set(KV<V>... kvs) {
-		return this.set(Arrays.asList(kvs));
+	<V> void set(Map<String, V> map);
+
+	default <V> void set(KV<V>... kvs) {
+		this.set(Arrays.asList(kvs));
 	}
 
-	<V> List<Boolean> set(List<KV<V>> kvs);
+	default <V> void set(List<KV<V>> kvs) {
+		Preconditions.checkNotNull(kvs);
+		Map<String, V> map = Maps.newHashMapWithExpectedSize(kvs.size());
+		kvs.forEach(kv -> {
+			map.put(kv.getKey(), kv.getValue());
+		});
+		this.set(map);
+	}
 
 	/**
 	 * 如果Key不存在则设置Value，如果存在则忽略
@@ -48,11 +60,20 @@ public interface ValueOps {
 
 	<V> boolean setNx(KV<V> kv);
 
-	default <V> List<Boolean> setNx(KV<V>... kvs) {
+	<V> boolean setNx(Map<String, V> map);
+
+	default <V> boolean setNx(KV<V>... kvs) {
 		return this.setNx(Arrays.asList(kvs));
 	}
 
-	<V> List<Boolean> setNx(List<KV<V>> kvs);
+	default <V> boolean setNx(List<KV<V>> kvs) {
+		Preconditions.checkNotNull(kvs);
+		Map<String, V> map = Maps.newHashMapWithExpectedSize(kvs.size());
+		kvs.forEach(kv -> {
+			map.put(kv.getKey(), kv.getValue());
+		});
+		return this.setNx(map);
+	}
 
 	/**
 	 * 设置键值对
@@ -63,26 +84,23 @@ public interface ValueOps {
 	 * @param value Value
 	 * @param expire 过期时间（秒）
 	 */
-	default <V> boolean setEx(String key, V value, long expire) {
-		return this.setEx(EKV.of(key, value, expire));
+	default <V> void setEx(String key, V value, long expire) {
+		this.setEx(EKV.of(key, value, expire));
 	}
 
-	default <V> boolean setEx(KV<V> kv, long expire) {
-		return this.setEx(EKV.of(kv.getKey(), kv.getValue(), expire));
+	default <V> void setEx(KV<V> kv, long expire) {
+		this.setEx(EKV.of(kv.getKey(), kv.getValue(), expire));
 	}
 
-	default <V> List<Boolean> setEx(EKV<V>... ekvs) {
-		return this.setEx(Arrays.asList(ekvs));
+	default <V> void setEx(EKV<V>... ekvs) {
+		this.setEx(Arrays.asList(ekvs));
 	}
 
-	<V> List<Boolean> setEx(List<EKV<V>> ekvs);
+	<V> void setEx(List<EKV<V>> ekvs);
 
-	<V> boolean setEx(EKV<V> ekv);
+	<V> void setEx(EKV<V> ekv);
 
 	@Nullable
-	String get(String key);
-
-	@Nullable
-	<V> V get(String key, Class<V> clazz);
+	<V> V get(String key);
 
 }
