@@ -1,4 +1,4 @@
-package org.magneton.module.distributed.lock.redisson;
+package org.magneton.module.distributed.lock.redis;
 
 import org.magneton.module.distributed.lock.DistributedLock;
 
@@ -11,7 +11,7 @@ import org.magneton.module.distributed.lock.DistributedLock;
  */
 public abstract class AbstractDistributedLock implements DistributedLock {
 
-	private static final String LOCK_KEY_PREFIX = "dl_";
+	private static final String LOCK_KEY_PREFIX = "magneton:dl:";
 
 	/**
 	 * retouch key.

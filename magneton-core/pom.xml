@@ -34,15 +34,8 @@
 		<!-- 单元测试 -->
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
-			<artifactId>junit-jupiter</artifactId>
-			<version>${junit-jupiter.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-junit-jupiter</artifactId>
-			<version>${mockito-junit-jupiter.version}</version>
-			<scope>test</scope>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<version>${junit.version}</version>
 		</dependency>
 	</dependencies>
 </project>
