@@ -9,7 +9,7 @@
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>magneton-spy</artifactId>
+	<artifactId>magneton-db-spy</artifactId>
 
 	<dependencies>
 		<dependency>
