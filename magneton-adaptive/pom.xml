@@ -9,24 +9,12 @@
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>magneton-modules</artifactId>
+	<artifactId>magneton-adaptive</artifactId>
 	<packaging>pom</packaging>
-
+	<description>适配器</description>
 	<modules>
-		<module>magneton-module-distributed-cache</module>
-		<module>magneton-module-distributed-lock</module>
+		<module>magneton-adaptive-redis</module>
 	</modules>
 
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-dependencies</artifactId>
-				<version>${spring-boot.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
 
 </project>
