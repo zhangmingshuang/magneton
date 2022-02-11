@@ -14,7 +14,7 @@
 		<module>magneton-core</module>
 		<module>magneton-test</module>
 		<module>magneton-modules</module>
-		<module>magneton-spy</module>
+		<module>magneton-db-spy</module>
 		<module>magneton-parent</module>
 		<module>magneton-spring-boot-starter</module>
 		<module>magneton-adaptive</module>
