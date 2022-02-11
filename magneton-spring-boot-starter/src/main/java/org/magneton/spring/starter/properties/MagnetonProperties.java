@@ -1,7 +1,5 @@
 package org.magneton.spring.starter.properties;
 
-import org.magneton.spring.starter.lock.LockProperties;
-
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
@@ -15,11 +13,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class MagnetonProperties {
 
 	public static final String PREFIX = "magneton";
-
-	public static final String PREFIX_LOCK = "magneton.lock";
-
-	/** lock properties. */
-	private LockProperties lock;
 
 	private MagnetonProperties() {
 	}

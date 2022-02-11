@@ -29,12 +29,18 @@
 			<artifactId>magneton-core</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		<!-- 可选功能依赖项 -->
 		<dependency>
-			<groupId>org.redisson</groupId>
-			<artifactId>redisson</artifactId>
-			<version>${redisson.version}</version>
-			<optional>true</optional>
+			<groupId>org.magneton</groupId>
+			<artifactId>magneton-module-distributed-cache</artifactId>
+			<version>${project.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.magneton</groupId>
+			<artifactId>magneton-module-distributed-lock</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<!-- 可选功能依赖项 end -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-redis</artifactId>

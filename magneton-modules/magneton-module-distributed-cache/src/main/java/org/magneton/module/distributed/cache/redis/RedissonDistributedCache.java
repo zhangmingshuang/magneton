@@ -18,7 +18,7 @@ import org.redisson.api.RedissonClient;
  * @author zhangmsh 2021/6/24
  * @since 1.0.0
  */
-public class RedissonDistributedCache<V> implements DistributedCache {
+public class RedissonDistributedCache implements DistributedCache {
 
 	private final RedissonClient redissonClient;
 
