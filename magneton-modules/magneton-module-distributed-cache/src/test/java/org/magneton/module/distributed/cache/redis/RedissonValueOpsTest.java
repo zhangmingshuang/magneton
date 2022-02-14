@@ -2,8 +2,8 @@ package org.magneton.module.distributed.cache.redis;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.magneton.module.distributed.cache.EKV;
-import org.magneton.module.distributed.cache.KV;
+import org.magneton.module.distributed.cache.Entry;
+import org.magneton.module.distributed.cache.ExpireEntry;
 import org.magneton.module.distributed.cache.TestA;
 import org.magneton.module.distributed.cache.TestRedisson;
 import org.magneton.module.distributed.cache.ops.ValueOps;
@@ -31,7 +31,7 @@ class RedissonValueOpsTest extends TestRedisson {
 	@Test
 	void set_kv() {
 		TestA a = ChaosTest.createExcepted(TestA.class);
-		this.ops.set(KV.of("a-kv", a));
+		this.ops.set(Entry.of("a-kv", a));
 		TestA b = this.ops.get("a-kv");
 		Assertions.assertTrue(ChaosTest.booleanSupplier().valueEquals(a, b));
 	}
@@ -39,10 +39,10 @@ class RedissonValueOpsTest extends TestRedisson {
 	@Test
 	void set_kv_list_array() {
 		TestA a = ChaosTest.createExcepted(TestA.class);
-		this.ops.set(KV.of("a-kv-list-array-0", ChaosTest.createExcepted(TestA.class)),
-				KV.of("a-kv-list-array-1", ChaosTest.createExcepted(TestA.class)), KV.of("a-kv-list-array-2", a),
-				KV.of("a-kv-list-array-3", ChaosTest.createExcepted(TestA.class)),
-				KV.of("a-kv-list-array-4", ChaosTest.createExcepted(TestA.class)));
+		this.ops.set(Entry.of("a-kv-list-array-0", ChaosTest.createExcepted(TestA.class)),
+				Entry.of("a-kv-list-array-1", ChaosTest.createExcepted(TestA.class)), Entry.of("a-kv-list-array-2", a),
+				Entry.of("a-kv-list-array-3", ChaosTest.createExcepted(TestA.class)),
+				Entry.of("a-kv-list-array-4", ChaosTest.createExcepted(TestA.class)));
 		TestA b = this.ops.get("a-kv-list-array-2");
 		Assertions.assertTrue(ChaosTest.booleanSupplier().valueEquals(a, b));
 	}
@@ -51,7 +51,7 @@ class RedissonValueOpsTest extends TestRedisson {
 	void setNx() {
 		boolean setNx = this.ops.setNx("nx", "nx");
 		Assertions.assertTrue(setNx, "first set must be true");
-		boolean setNx2 = this.ops.setNx(KV.of("nx", "nx"));
+		boolean setNx2 = this.ops.setNx(Entry.of("nx", "nx"));
 		Assertions.assertFalse(setNx2, "duplicate set must be false.");
 	}
 
@@ -60,11 +60,11 @@ class RedissonValueOpsTest extends TestRedisson {
 		boolean setNx = this.ops.setNx("a-nx-list-array-2", "a-nx-list-array-2");
 		Assertions.assertTrue(setNx, "first set must be true");
 
-		this.ops.setNx(KV.of("a-nx-list-array-0", ChaosTest.createExcepted(TestA.class)),
-				KV.of("a-nx-list-array-1", ChaosTest.createExcepted(TestA.class)),
-				KV.of("a-nx-list-array-2", ChaosTest.createExcepted(TestA.class)),
-				KV.of("a-nx-list-array-3", ChaosTest.createExcepted(TestA.class)),
-				KV.of("a-nx-list-array-4", ChaosTest.createExcepted(TestA.class)));
+		this.ops.setNx(Entry.of("a-nx-list-array-0", ChaosTest.createExcepted(TestA.class)),
+				Entry.of("a-nx-list-array-1", ChaosTest.createExcepted(TestA.class)),
+				Entry.of("a-nx-list-array-2", ChaosTest.createExcepted(TestA.class)),
+				Entry.of("a-nx-list-array-3", ChaosTest.createExcepted(TestA.class)),
+				Entry.of("a-nx-list-array-4", ChaosTest.createExcepted(TestA.class)));
 		String b = this.ops.get("a-nx-list-array-2");
 		Assertions.assertEquals("a-nx-list-array-2", b);
 	}
@@ -80,11 +80,11 @@ class RedissonValueOpsTest extends TestRedisson {
 	@Test
 	void setEx_list_array() {
 		int ttl = 300;
-		this.ops.setEx(EKV.of("a-ex-list-array-0", ChaosTest.createExcepted(TestA.class), ttl),
-				EKV.of("a-ex-list-array-1", ChaosTest.createExcepted(TestA.class), ttl),
-				EKV.of("a-ex-list-array-2", ChaosTest.createExcepted(TestA.class), ttl),
-				EKV.of("a-ex-list-array-3", ChaosTest.createExcepted(TestA.class), ttl),
-				EKV.of("a-ex-list-array-4", ChaosTest.createExcepted(TestA.class), ttl));
+		this.ops.setEx(ExpireEntry.of("a-ex-list-array-0", ChaosTest.createExcepted(TestA.class), ttl),
+				ExpireEntry.of("a-ex-list-array-1", ChaosTest.createExcepted(TestA.class), ttl),
+				ExpireEntry.of("a-ex-list-array-2", ChaosTest.createExcepted(TestA.class), ttl),
+				ExpireEntry.of("a-ex-list-array-3", ChaosTest.createExcepted(TestA.class), ttl),
+				ExpireEntry.of("a-ex-list-array-4", ChaosTest.createExcepted(TestA.class), ttl));
 		long t = distributedCache.ttl("a-ex-list-array-3");
 		Assertions.assertTrue(t > 0 && t <= 300);
 	}

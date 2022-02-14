@@ -8,7 +8,7 @@ import javax.annotation.Nullable;
 
 import org.magneton.core.collect.Maps;
 import org.magneton.core.collect.Sets;
-import org.magneton.module.distributed.cache.KV;
+import org.magneton.module.distributed.cache.Entry;
 
 /**
  * .
@@ -27,15 +27,15 @@ public interface HashOps {
 	 */
 	@Nullable
 	default <V> V put(String hash, String key, V value) {
-		return (V) this.put(hash, KV.of(key, value));
+		return (V) this.put(hash, Entry.of(key, value));
 	}
 
 	@Nullable
-	<V> V put(String hash, KV<V> kv);
+	<V> V put(String hash, Entry<V> entry);
 
 	<V> void put(String hash, Map<String, V> values);
 
-	default <V> void put(String hash, List<KV<V>> values) {
+	default <V> void put(String hash, List<Entry<V>> values) {
 		Map<String, V> mapValues = Maps.newHashMapWithExpectedSize(values.size());
 		values.forEach(kv -> mapValues.put(kv.getKey(), kv.getValue()));
 		this.put(hash, mapValues);

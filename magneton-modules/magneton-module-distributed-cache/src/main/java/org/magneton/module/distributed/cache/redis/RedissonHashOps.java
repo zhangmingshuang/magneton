@@ -8,7 +8,7 @@ import org.magneton.core.base.Preconditions;
 import org.magneton.core.collect.Collections;
 import org.magneton.core.collect.Lists;
 import org.magneton.foundation.util.Arrays;
-import org.magneton.module.distributed.cache.KV;
+import org.magneton.module.distributed.cache.Entry;
 import org.magneton.module.distributed.cache.ops.HashOps;
 import org.redisson.api.RMap;
 import org.redisson.api.RedissonClient;
@@ -26,10 +26,10 @@ public class RedissonHashOps extends AbstractRedissonOps implements HashOps {
 	}
 
 	@Override
-	public <V> V put(String hash, KV<V> kv) {
+	public <V> V put(String hash, Entry<V> entry) {
 		Preconditions.checkNotNull(hash);
-		Preconditions.checkNotNull(kv);
-		return (V) this.redissonClient.getMap(hash).put(kv.getKey(), kv.getValue());
+		Preconditions.checkNotNull(entry);
+		return (V) this.redissonClient.getMap(hash).put(entry.getKey(), entry.getValue());
 	}
 
 	@Override
