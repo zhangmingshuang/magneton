@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.magneton.core.collect.Lists;
 import org.magneton.core.collect.Maps;
-import org.magneton.module.distributed.cache.KV;
+import org.magneton.module.distributed.cache.Entry;
 import org.magneton.module.distributed.cache.TestA;
 import org.magneton.module.distributed.cache.TestRedisson;
 import org.magneton.module.distributed.cache.ops.HashOps;
@@ -55,9 +55,9 @@ class RedissonHashOpsTest extends TestRedisson {
 
 	@Test
 	void put_list() {
-		List<KV<TestA>> list = Lists.newArrayListWithCapacity(10);
+		List<Entry<TestA>> list = Lists.newArrayListWithCapacity(10);
 		for (int i = 0; i < 10; i++) {
-			list.add(KV.of(String.valueOf(i), ChaosTest.createExcepted(TestA.class)));
+			list.add(Entry.of(String.valueOf(i), ChaosTest.createExcepted(TestA.class)));
 		}
 		this.ops.put("hash-map", list);
 	}

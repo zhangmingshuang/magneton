@@ -1,8 +1,7 @@
-package org.magneton.module.distributed.cache;
+package org.magneton.module.distributed.lock.redis;
 
 import org.junit.jupiter.api.AfterAll;
 import org.magneton.adaptive.redis.RedissonAdapter;
-import org.magneton.module.distributed.cache.redis.RedissonDistributedCache;
 import org.redisson.api.RedissonClient;
 
 /**
@@ -15,15 +14,9 @@ public class TestRedisson {
 
 	public static final RedissonClient redissonClient = RedissonAdapter.createSingleServerClient();
 
-	public static final DistributedCache distributedCache;
-
-	static {
-		distributedCache = new RedissonDistributedCache(TestRedisson.redissonClient);
-	}
-
 	@AfterAll
 	static void afterAll() {
-		distributedCache.flushDb();
+		redissonClient.getKeys().flushdb();
 	}
 
 }

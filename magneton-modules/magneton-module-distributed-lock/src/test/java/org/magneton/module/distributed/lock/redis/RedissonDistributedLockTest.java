@@ -6,7 +6,6 @@ import java.util.concurrent.locks.Lock;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.magneton.adaptive.redis.RedissonAdapter;
 import org.magneton.module.distributed.lock.DistributedLock;
 
 /**
@@ -15,9 +14,9 @@ import org.magneton.module.distributed.lock.DistributedLock;
  * @author zhangmsh 2022/2/11
  * @since 1.2.0
  */
-class RedissonDistributedLockTest {
+class RedissonDistributedLockTest extends TestRedisson {
 
-	private DistributedLock lock = new RedissonDistributedLock(RedissonAdapter.createSingleServerClient());
+	private final DistributedLock lock = new RedissonDistributedLock(redissonClient);
 
 	@Test
 	void getLock() throws InterruptedException {
