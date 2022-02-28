@@ -30,10 +30,9 @@ import java.util.function.Supplier;
 import java.util.function.ToIntFunction;
 import java.util.stream.Collector;
 
-import javax.annotations.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
+import javax.annotations.CanIgnoreReturnValue;
 
-import org.checkerframework.checker.nullness.qual.Nullable;
 import org.magneton.core.base.Objects;
 import org.magneton.core.base.Preconditions;
 import org.magneton.core.base.Predicate;
@@ -280,7 +279,7 @@ public final class Multisets {
 								return immutableEntry(element, entry2.getCount());
 							}
 						}
-						return endOfData();
+						return this.endOfData();
 					}
 				};
 			}
@@ -339,7 +338,7 @@ public final class Multisets {
 								return immutableEntry(element, count);
 							}
 						}
-						return endOfData();
+						return this.endOfData();
 					}
 				};
 			}
@@ -419,7 +418,7 @@ public final class Multisets {
 								return immutableEntry(element, entry2.getCount());
 							}
 						}
-						return endOfData();
+						return this.endOfData();
 					}
 				};
 			}
@@ -474,7 +473,7 @@ public final class Multisets {
 								return element;
 							}
 						}
-						return endOfData();
+						return this.endOfData();
 					}
 				};
 			}
@@ -494,14 +493,14 @@ public final class Multisets {
 								return immutableEntry(element, count);
 							}
 						}
-						return endOfData();
+						return this.endOfData();
 					}
 				};
 			}
 
 			@Override
 			int distinctElements() {
-				return Iterators.size(entryIterator());
+				return Iterators.size(this.entryIterator());
 			}
 		};
 	}
@@ -837,31 +836,31 @@ public final class Multisets {
 		@Override
 		protected Multiset<E> delegate() {
 			// This is safe because all non-covariant methods are overridden
-			return (Multiset<E>) delegate;
+			return (Multiset<E>) this.delegate;
 		}
 
 		Set<E> createElementSet() {
-			return Collections.<E>unmodifiableSet(delegate.elementSet());
+			return Collections.<E>unmodifiableSet(this.delegate.elementSet());
 		}
 
 		@Override
 		public Set<E> elementSet() {
-			Set<E> es = elementSet;
-			return (es == null) ? elementSet = createElementSet() : es;
+			Set<E> es = this.elementSet;
+			return (es == null) ? this.elementSet = this.createElementSet() : es;
 		}
 
 		@Override
 		public Set<Entry<E>> entrySet() {
-			Set<Entry<E>> es = entrySet;
+			Set<Entry<E>> es = this.entrySet;
 			return (es == null)
 					// Safe because the returned set is made unmodifiable and Entry
 					// itself is readonly
-					? entrySet = (Set) Collections.unmodifiableSet(delegate.entrySet()) : es;
+					? this.entrySet = (Set) Collections.unmodifiableSet(this.delegate.entrySet()) : es;
 		}
 
 		@Override
 		public Iterator<E> iterator() {
-			return Iterators.<E>unmodifiableIterator(delegate.iterator());
+			return Iterators.<E>unmodifiableIterator(this.delegate.iterator());
 		}
 
 		@Override
@@ -934,12 +933,12 @@ public final class Multisets {
 		@Override
 		@ParametricNullness
 		public final E getElement() {
-			return element;
+			return this.element;
 		}
 
 		@Override
 		public final int getCount() {
-			return count;
+			return this.count;
 		}
 
 		@CheckForNull
@@ -962,12 +961,12 @@ public final class Multisets {
 
 		@Override
 		public UnmodifiableIterator<E> iterator() {
-			return Iterators.filter(unfiltered.iterator(), predicate);
+			return Iterators.filter(this.unfiltered.iterator(), this.predicate);
 		}
 
 		@Override
 		Set<E> createElementSet() {
-			return Sets.filter(unfiltered.elementSet(), predicate);
+			return Sets.filter(this.unfiltered.elementSet(), this.predicate);
 		}
 
 		@Override
@@ -977,10 +976,10 @@ public final class Multisets {
 
 		@Override
 		Set<Entry<E>> createEntrySet() {
-			return Sets.filter(unfiltered.entrySet(), new Predicate<Entry<E>>() {
+			return Sets.filter(this.unfiltered.entrySet(), new Predicate<Entry<E>>() {
 				@Override
 				public boolean apply(Entry<E> entry) {
-					return predicate.apply(entry.getElement());
+					return FilteredMultiset.this.predicate.apply(entry.getElement());
 				}
 			});
 		}
@@ -992,29 +991,30 @@ public final class Multisets {
 
 		@Override
 		public int count(@CheckForNull Object element) {
-			int count = unfiltered.count(element);
+			int count = this.unfiltered.count(element);
 			if (count > 0) {
 				// element is equal to an E
 				E e = (E) element;
-				return predicate.apply(e) ? count : 0;
+				return this.predicate.apply(e) ? count : 0;
 			}
 			return 0;
 		}
 
 		@Override
 		public int add(@ParametricNullness E element, int occurrences) {
-			Preconditions.checkArgument(predicate.apply(element), "Element %s does not match predicate %s", element, predicate);
-			return unfiltered.add(element, occurrences);
+			Preconditions.checkArgument(this.predicate.apply(element), "Element %s does not match predicate %s",
+					element, this.predicate);
+			return this.unfiltered.add(element, occurrences);
 		}
 
 		@Override
 		public int remove(@CheckForNull Object element, int occurrences) {
 			CollectPreconditions.checkNonnegative(occurrences, "occurrences");
 			if (occurrences == 0) {
-				return count(element);
+				return this.count(element);
 			}
 			else {
-				return contains(element) ? unfiltered.remove(element, occurrences) : 0;
+				return this.contains(element) ? this.unfiltered.remove(element, occurrences) : 0;
 			}
 		}
 
@@ -1034,7 +1034,7 @@ public final class Multisets {
 		public boolean equals(@CheckForNull Object object) {
 			if (object instanceof Multiset.Entry) {
 				Multiset.Entry<?> that = (Multiset.Entry<?>) object;
-				return getCount() == that.getCount() && Objects.equal(getElement(), that.getElement());
+				return this.getCount() == that.getCount() && Objects.equal(this.getElement(), that.getElement());
 			}
 			return false;
 		}
@@ -1045,8 +1045,8 @@ public final class Multisets {
 		 */
 		@Override
 		public int hashCode() {
-			E e = getElement();
-			return ((e == null) ? 0 : e.hashCode()) ^ getCount();
+			E e = this.getElement();
+			return ((e == null) ? 0 : e.hashCode()) ^ this.getCount();
 		}
 
 		/**
@@ -1058,8 +1058,8 @@ public final class Multisets {
 		 */
 		@Override
 		public String toString() {
-			String text = String.valueOf(getElement());
-			int n = getCount();
+			String text = String.valueOf(this.getElement());
+			int n = this.getCount();
 			return (n == 1) ? text : (text + " x " + n);
 		}
 
@@ -1071,22 +1071,22 @@ public final class Multisets {
 
 		@Override
 		public void clear() {
-			multiset().clear();
+			this.multiset().clear();
 		}
 
 		@Override
 		public boolean contains(@CheckForNull Object o) {
-			return multiset().contains(o);
+			return this.multiset().contains(o);
 		}
 
 		@Override
 		public boolean containsAll(Collection<?> c) {
-			return multiset().containsAll(c);
+			return this.multiset().containsAll(c);
 		}
 
 		@Override
 		public boolean isEmpty() {
-			return multiset().isEmpty();
+			return this.multiset().isEmpty();
 		}
 
 		@Override
@@ -1094,12 +1094,12 @@ public final class Multisets {
 
 		@Override
 		public boolean remove(@CheckForNull Object o) {
-			return multiset().remove(o, Integer.MAX_VALUE) > 0;
+			return this.multiset().remove(o, Integer.MAX_VALUE) > 0;
 		}
 
 		@Override
 		public int size() {
-			return multiset().entrySet().size();
+			return this.multiset().entrySet().size();
 		}
 
 	}
@@ -1118,7 +1118,7 @@ public final class Multisets {
 				if (entry.getCount() <= 0) {
 					return false;
 				}
-				int count = multiset().count(entry.getElement());
+				int count = this.multiset().count(entry.getElement());
 				return count == entry.getCount();
 			}
 			return false;
@@ -1135,7 +1135,7 @@ public final class Multisets {
 					// Safe as long as we never add a new entry, which we won't.
 					// (Presumably it can still throw CCE/NPE but only if the underlying
 					// Multiset does.)
-					Multiset<@Nullable Object> multiset = (Multiset<@Nullable Object>) multiset();
+					Multiset<Object> multiset = (Multiset<Object>) this.multiset();
 					return multiset.setCount(element, entryCount, 0);
 				}
 			}
@@ -1144,7 +1144,7 @@ public final class Multisets {
 
 		@Override
 		public void clear() {
-			multiset().clear();
+			this.multiset().clear();
 		}
 
 	}
@@ -1173,43 +1173,43 @@ public final class Multisets {
 
 		@Override
 		public boolean hasNext() {
-			return laterCount > 0 || entryIterator.hasNext();
+			return this.laterCount > 0 || this.entryIterator.hasNext();
 		}
 
 		@Override
 		@ParametricNullness
 		public E next() {
-			if (!hasNext()) {
+			if (!this.hasNext()) {
 				throw new NoSuchElementException();
 			}
-			if (laterCount == 0) {
-				currentEntry = entryIterator.next();
-				totalCount = laterCount = currentEntry.getCount();
+			if (this.laterCount == 0) {
+				this.currentEntry = this.entryIterator.next();
+				this.totalCount = this.laterCount = this.currentEntry.getCount();
 			}
-			laterCount--;
-			canRemove = true;
+			this.laterCount--;
+			this.canRemove = true;
 			/*
 			 * requireNonNull is safe because laterCount starts at 0, forcing us to
 			 * initialize currentEntry above. After that, we never clear it.
 			 */
-			return requireNonNull(currentEntry).getElement();
+			return requireNonNull(this.currentEntry).getElement();
 		}
 
 		@Override
 		public void remove() {
-			CollectPreconditions.checkRemove(canRemove);
-			if (totalCount == 1) {
-				entryIterator.remove();
+			CollectPreconditions.checkRemove(this.canRemove);
+			if (this.totalCount == 1) {
+				this.entryIterator.remove();
 			}
 			else {
 				/*
 				 * requireNonNull is safe because canRemove is set to true only after we
 				 * initialize currentEntry (which we never subsequently clear).
 				 */
-				multiset.remove(requireNonNull(currentEntry).getElement());
+				this.multiset.remove(requireNonNull(this.currentEntry).getElement());
 			}
-			totalCount--;
-			canRemove = false;
+			this.totalCount--;
+			this.canRemove = false;
 		}
 
 	}
@@ -1239,7 +1239,7 @@ public final class Multisets {
 
 		@Override
 		public void clear() {
-			elementSet().clear();
+			this.elementSet().clear();
 		}
 
 		@Override
@@ -1249,7 +1249,7 @@ public final class Multisets {
 
 		@Override
 		int distinctElements() {
-			return elementSet().size();
+			return this.elementSet().size();
 		}
 
 	}

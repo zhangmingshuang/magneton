@@ -24,8 +24,8 @@ import javax.annotations.CheckReturnValue;
 import javax.annotations.DoNotMock;
 
 import org.magneton.core.collect.ImmutableMap;
-import org.magneton.foundation.util.concurrent.ExecutionError;
-import org.magneton.foundation.util.concurrent.UncheckedExecutionException;
+import org.magneton.core.concurrent.ExecutionError;
+import org.magneton.core.concurrent.UncheckedExecutionException;
 
 /**
  * A semi-persistent mapping from keys to values. Cache entries are manually added using

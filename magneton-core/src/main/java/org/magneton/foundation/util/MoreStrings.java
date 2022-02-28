@@ -2,6 +2,7 @@ package org.magneton.foundation.util;
 
 import javax.annotation.Nullable;
 
+import org.magneton.core.base.Arrays;
 import org.magneton.core.base.Strings;
 
 /**

@@ -2,7 +2,7 @@ package org.magneton.core.util;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.magneton.foundation.util.Arrays;
+import org.magneton.core.base.Arrays;
 
 /**
  * .

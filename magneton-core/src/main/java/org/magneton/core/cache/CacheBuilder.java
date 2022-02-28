@@ -25,8 +25,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.annotations.CheckReturnValue;
 import javax.annotation.Nullable;
+import javax.annotations.CheckReturnValue;
 
 import org.magneton.core.base.Ascii;
 import org.magneton.core.base.Equivalence;
@@ -34,7 +34,7 @@ import org.magneton.core.base.MoreObjects;
 import org.magneton.core.base.Supplier;
 import org.magneton.core.base.Suppliers;
 import org.magneton.core.base.Ticker;
-import org.magneton.foundation.util.concurrent.ListenableFuture;
+import org.magneton.core.concurrent.ListenableFuture;
 
 import static org.magneton.core.base.Preconditions.checkArgument;
 import static org.magneton.core.base.Preconditions.checkNotNull;
@@ -382,7 +382,7 @@ public final class CacheBuilder<K, V> {
 	 * @return this {@code CacheBuilder} instance (for chaining)
 	 */
 	CacheBuilder<K, V> lenientParsing() {
-		strictParsing = false;
+		this.strictParsing = false;
 		return this;
 	}
 
@@ -395,13 +395,13 @@ public final class CacheBuilder<K, V> {
 	 * @return this {@code CacheBuilder} instance (for chaining)
 	 */
 	CacheBuilder<K, V> keyEquivalence(Equivalence<Object> equivalence) {
-		checkState(keyEquivalence == null, "key equivalence was already set to %s", keyEquivalence);
-		keyEquivalence = checkNotNull(equivalence);
+		checkState(this.keyEquivalence == null, "key equivalence was already set to %s", this.keyEquivalence);
+		this.keyEquivalence = checkNotNull(equivalence);
 		return this;
 	}
 
 	Equivalence<Object> getKeyEquivalence() {
-		return MoreObjects.firstNonNull(keyEquivalence, getKeyStrength().defaultEquivalence());
+		return MoreObjects.firstNonNull(this.keyEquivalence, this.getKeyStrength().defaultEquivalence());
 	}
 
 	/**
@@ -414,13 +414,13 @@ public final class CacheBuilder<K, V> {
 	 * @return this {@code CacheBuilder} instance (for chaining)
 	 */
 	CacheBuilder<K, V> valueEquivalence(Equivalence<Object> equivalence) {
-		checkState(valueEquivalence == null, "value equivalence was already set to %s", valueEquivalence);
-		valueEquivalence = checkNotNull(equivalence);
+		checkState(this.valueEquivalence == null, "value equivalence was already set to %s", this.valueEquivalence);
+		this.valueEquivalence = checkNotNull(equivalence);
 		return this;
 	}
 
 	Equivalence<Object> getValueEquivalence() {
-		return MoreObjects.firstNonNull(valueEquivalence, getValueStrength().defaultEquivalence());
+		return MoreObjects.firstNonNull(this.valueEquivalence, this.getValueStrength().defaultEquivalence());
 	}
 
 	/**
@@ -441,7 +441,7 @@ public final class CacheBuilder<K, V> {
 	}
 
 	int getInitialCapacity() {
-		return (initialCapacity == UNSET_INT) ? DEFAULT_INITIAL_CAPACITY : initialCapacity;
+		return (this.initialCapacity == UNSET_INT) ? DEFAULT_INITIAL_CAPACITY : this.initialCapacity;
 	}
 
 	/**
@@ -489,7 +489,7 @@ public final class CacheBuilder<K, V> {
 	}
 
 	int getConcurrencyLevel() {
-		return (concurrencyLevel == UNSET_INT) ? DEFAULT_CONCURRENCY_LEVEL : concurrencyLevel;
+		return (this.concurrencyLevel == UNSET_INT) ? DEFAULT_CONCURRENCY_LEVEL : this.concurrencyLevel;
 	}
 
 	/**
@@ -520,8 +520,8 @@ public final class CacheBuilder<K, V> {
 	 */
 	public CacheBuilder<K, V> maximumSize(long maximumSize) {
 		checkState(this.maximumSize == UNSET_INT, "maximum size was already set to %s", this.maximumSize);
-		checkState(maximumWeight == UNSET_INT, "maximum weight was already set to %s", maximumWeight);
-		checkState(weigher == null, "maximum size can not be combined with weigher");
+		checkState(this.maximumWeight == UNSET_INT, "maximum weight was already set to %s", this.maximumWeight);
+		checkState(this.weigher == null, "maximum size can not be combined with weigher");
 		checkArgument(maximumSize >= 0, "maximum size must not be negative");
 		this.maximumSize = maximumSize;
 		return this;
@@ -562,7 +562,7 @@ public final class CacheBuilder<K, V> {
 	 */
 	public CacheBuilder<K, V> maximumWeight(long maximumWeight) {
 		checkState(this.maximumWeight == UNSET_INT, "maximum weight was already set to %s", this.maximumWeight);
-		checkState(maximumSize == UNSET_INT, "maximum size was already set to %s", maximumSize);
+		checkState(this.maximumSize == UNSET_INT, "maximum size was already set to %s", this.maximumSize);
 		checkArgument(maximumWeight >= 0, "maximum weight must not be negative");
 		this.maximumWeight = maximumWeight;
 		return this;
@@ -604,8 +604,8 @@ public final class CacheBuilder<K, V> {
 	 */
 	public <K1 extends K, V1 extends V> CacheBuilder<K1, V1> weigher(Weigher<? super K1, ? super V1> weigher) {
 		checkState(this.weigher == null);
-		if (strictParsing) {
-			checkState(maximumSize == UNSET_INT, "weigher can not be combined with maximum size", maximumSize);
+		if (this.strictParsing) {
+			checkState(this.maximumSize == UNSET_INT, "weigher can not be combined with maximum size", this.maximumSize);
 		}
 
 		// safely limiting the kinds of caches this can produce
@@ -615,15 +615,15 @@ public final class CacheBuilder<K, V> {
 	}
 
 	long getMaximumWeight() {
-		if (expireAfterWriteNanos == 0 || expireAfterAccessNanos == 0) {
+		if (this.expireAfterWriteNanos == 0 || this.expireAfterAccessNanos == 0) {
 			return 0;
 		}
-		return (weigher == null) ? maximumSize : maximumWeight;
+		return (this.weigher == null) ? this.maximumSize : this.maximumWeight;
 	}
 
 	// Make a safe contravariant cast now so we don't have to do it over and over.
 	<K1 extends K, V1 extends V> Weigher<K1, V1> getWeigher() {
-		return (Weigher<K1, V1>) MoreObjects.firstNonNull(weigher, OneWeigher.INSTANCE);
+		return (Weigher<K1, V1>) MoreObjects.firstNonNull(this.weigher, OneWeigher.INSTANCE);
 	}
 
 	/**
@@ -645,16 +645,16 @@ public final class CacheBuilder<K, V> {
 	 * @throws IllegalStateException if the key strength was already set
 	 */
 	public CacheBuilder<K, V> weakKeys() {
-		return setKeyStrength(LocalCache.Strength.WEAK);
+		return this.setKeyStrength(LocalCache.Strength.WEAK);
 	}
 
 	LocalCache.Strength getKeyStrength() {
-		return MoreObjects.firstNonNull(keyStrength, LocalCache.Strength.STRONG);
+		return MoreObjects.firstNonNull(this.keyStrength, LocalCache.Strength.STRONG);
 	}
 
 	CacheBuilder<K, V> setKeyStrength(LocalCache.Strength strength) {
-		checkState(keyStrength == null, "Key strength was already set to %s", keyStrength);
-		keyStrength = checkNotNull(strength);
+		checkState(this.keyStrength == null, "Key strength was already set to %s", this.keyStrength);
+		this.keyStrength = checkNotNull(strength);
 		return this;
 	}
 
@@ -679,7 +679,7 @@ public final class CacheBuilder<K, V> {
 	 * @throws IllegalStateException if the value strength was already set
 	 */
 	public CacheBuilder<K, V> weakValues() {
-		return setValueStrength(LocalCache.Strength.WEAK);
+		return this.setValueStrength(LocalCache.Strength.WEAK);
 	}
 
 	/**
@@ -707,16 +707,16 @@ public final class CacheBuilder<K, V> {
 	 * @throws IllegalStateException if the value strength was already set
 	 */
 	public CacheBuilder<K, V> softValues() {
-		return setValueStrength(LocalCache.Strength.SOFT);
+		return this.setValueStrength(LocalCache.Strength.SOFT);
 	}
 
 	LocalCache.Strength getValueStrength() {
-		return MoreObjects.firstNonNull(valueStrength, LocalCache.Strength.STRONG);
+		return MoreObjects.firstNonNull(this.valueStrength, LocalCache.Strength.STRONG);
 	}
 
 	CacheBuilder<K, V> setValueStrength(LocalCache.Strength strength) {
-		checkState(valueStrength == null, "Value strength was already set to %s", valueStrength);
-		valueStrength = checkNotNull(strength);
+		checkState(this.valueStrength == null, "Value strength was already set to %s", this.valueStrength);
+		this.valueStrength = checkNotNull(strength);
 		return this;
 	}
 
@@ -745,7 +745,7 @@ public final class CacheBuilder<K, V> {
 	 */
 	// Duration decomposition
 	public CacheBuilder<K, V> expireAfterWrite(Duration duration) {
-		return expireAfterWrite(toNanosSaturated(duration), TimeUnit.NANOSECONDS);
+		return this.expireAfterWrite(toNanosSaturated(duration), TimeUnit.NANOSECONDS);
 	}
 
 	/**
@@ -776,16 +776,15 @@ public final class CacheBuilder<K, V> {
 	 */
 	// should accept a Duration
 	public CacheBuilder<K, V> expireAfterWrite(long duration, TimeUnit unit) {
-		checkState(expireAfterWriteNanos == UNSET_INT, "expireAfterWrite was already set to %s ns",
-				expireAfterWriteNanos);
+		checkState(this.expireAfterWriteNanos == UNSET_INT, "expireAfterWrite was already set to %s ns", this.expireAfterWriteNanos);
 		checkArgument(duration >= 0, "duration cannot be negative: %s %s", duration, unit);
-		expireAfterWriteNanos = unit.toNanos(duration);
+		this.expireAfterWriteNanos = unit.toNanos(duration);
 		return this;
 	}
 
 	// nanos internally, should be Duration
 	long getExpireAfterWriteNanos() {
-		return (expireAfterWriteNanos == UNSET_INT) ? DEFAULT_EXPIRATION_NANOS : expireAfterWriteNanos;
+		return (this.expireAfterWriteNanos == UNSET_INT) ? DEFAULT_EXPIRATION_NANOS : this.expireAfterWriteNanos;
 	}
 
 	/**
@@ -819,7 +818,7 @@ public final class CacheBuilder<K, V> {
 	 */
 	// Duration decomposition
 	public CacheBuilder<K, V> expireAfterAccess(Duration duration) {
-		return expireAfterAccess(toNanosSaturated(duration), TimeUnit.NANOSECONDS);
+		return this.expireAfterAccess(toNanosSaturated(duration), TimeUnit.NANOSECONDS);
 	}
 
 	/**
@@ -856,16 +855,15 @@ public final class CacheBuilder<K, V> {
 	 */
 	// should accept a Duration
 	public CacheBuilder<K, V> expireAfterAccess(long duration, TimeUnit unit) {
-		checkState(expireAfterAccessNanos == UNSET_INT, "expireAfterAccess was already set to %s ns",
-				expireAfterAccessNanos);
+		checkState(this.expireAfterAccessNanos == UNSET_INT, "expireAfterAccess was already set to %s ns", this.expireAfterAccessNanos);
 		checkArgument(duration >= 0, "duration cannot be negative: %s %s", duration, unit);
-		expireAfterAccessNanos = unit.toNanos(duration);
+		this.expireAfterAccessNanos = unit.toNanos(duration);
 		return this;
 	}
 
 	// nanos internally, should be Duration
 	long getExpireAfterAccessNanos() {
-		return (expireAfterAccessNanos == UNSET_INT) ? DEFAULT_EXPIRATION_NANOS : expireAfterAccessNanos;
+		return (this.expireAfterAccessNanos == UNSET_INT) ? DEFAULT_EXPIRATION_NANOS : this.expireAfterAccessNanos;
 	}
 
 	/**
@@ -901,7 +899,7 @@ public final class CacheBuilder<K, V> {
 	 */
 	// Duration decomposition
 	public CacheBuilder<K, V> refreshAfterWrite(Duration duration) {
-		return refreshAfterWrite(toNanosSaturated(duration), TimeUnit.NANOSECONDS);
+		return this.refreshAfterWrite(toNanosSaturated(duration), TimeUnit.NANOSECONDS);
 	}
 
 	/**
@@ -941,15 +939,15 @@ public final class CacheBuilder<K, V> {
 	// should accept a Duration
 	public CacheBuilder<K, V> refreshAfterWrite(long duration, TimeUnit unit) {
 		checkNotNull(unit);
-		checkState(refreshNanos == UNSET_INT, "refresh was already set to %s ns", refreshNanos);
+		checkState(this.refreshNanos == UNSET_INT, "refresh was already set to %s ns", this.refreshNanos);
 		checkArgument(duration > 0, "duration must be positive: %s %s", duration, unit);
-		refreshNanos = unit.toNanos(duration);
+		this.refreshNanos = unit.toNanos(duration);
 		return this;
 	}
 
 	// nanos internally, should be Duration
 	long getRefreshNanos() {
-		return (refreshNanos == UNSET_INT) ? DEFAULT_REFRESH_NANOS : refreshNanos;
+		return (this.refreshNanos == UNSET_INT) ? DEFAULT_REFRESH_NANOS : this.refreshNanos;
 	}
 
 	/**
@@ -969,8 +967,8 @@ public final class CacheBuilder<K, V> {
 	}
 
 	Ticker getTicker(boolean recordsTime) {
-		if (ticker != null) {
-			return ticker;
+		if (this.ticker != null) {
+			return this.ticker;
 		}
 		return recordsTime ? Ticker.systemTicker() : NULL_TICKER;
 	}
@@ -1002,7 +1000,7 @@ public final class CacheBuilder<K, V> {
 	@CheckReturnValue
 	public <K1 extends K, V1 extends V> CacheBuilder<K1, V1> removalListener(
 			RemovalListener<? super K1, ? super V1> listener) {
-		checkState(removalListener == null);
+		checkState(this.removalListener == null);
 
 		// safely limiting the kinds of caches this can produce
 		CacheBuilder<K1, V1> me = (CacheBuilder<K1, V1>) this;
@@ -1012,7 +1010,7 @@ public final class CacheBuilder<K, V> {
 
 	// Make a safe contravariant cast now so we don't have to do it over and over.
 	<K1 extends K, V1 extends V> RemovalListener<K1, V1> getRemovalListener() {
-		return (RemovalListener<K1, V1>) MoreObjects.firstNonNull(removalListener, NullListener.INSTANCE);
+		return (RemovalListener<K1, V1>) MoreObjects.firstNonNull(this.removalListener, NullListener.INSTANCE);
 	}
 
 	/**
@@ -1024,16 +1022,16 @@ public final class CacheBuilder<K, V> {
 	 * @since 12.0 (previously, stats collection was automatic)
 	 */
 	public CacheBuilder<K, V> recordStats() {
-		statsCounterSupplier = CACHE_STATS_COUNTER;
+		this.statsCounterSupplier = CACHE_STATS_COUNTER;
 		return this;
 	}
 
 	boolean isRecordingStats() {
-		return statsCounterSupplier == CACHE_STATS_COUNTER;
+		return this.statsCounterSupplier == CACHE_STATS_COUNTER;
 	}
 
 	Supplier<? extends AbstractCache.StatsCounter> getStatsCounterSupplier() {
-		return statsCounterSupplier;
+		return this.statsCounterSupplier;
 	}
 
 	/**
@@ -1051,7 +1049,7 @@ public final class CacheBuilder<K, V> {
 	 */
 	@CheckReturnValue
 	public <K1 extends K, V1 extends V> LoadingCache<K1, V1> build(CacheLoader<? super K1, V1> loader) {
-		checkWeightWithWeigher();
+		this.checkWeightWithWeigher();
 		return new LocalCache.LocalLoadingCache<>(this, loader);
 	}
 
@@ -1071,25 +1069,25 @@ public final class CacheBuilder<K, V> {
 	 */
 	@CheckReturnValue
 	public <K1 extends K, V1 extends V> Cache<K1, V1> build() {
-		checkWeightWithWeigher();
-		checkNonLoadingCache();
+		this.checkWeightWithWeigher();
+		this.checkNonLoadingCache();
 		return new LocalCache.LocalManualCache<>(this);
 	}
 
 	private void checkNonLoadingCache() {
-		checkState(refreshNanos == UNSET_INT, "refreshAfterWrite requires a LoadingCache");
+		checkState(this.refreshNanos == UNSET_INT, "refreshAfterWrite requires a LoadingCache");
 	}
 
 	private void checkWeightWithWeigher() {
-		if (weigher == null) {
-			checkState(maximumWeight == UNSET_INT, "maximumWeight requires weigher");
+		if (this.weigher == null) {
+			checkState(this.maximumWeight == UNSET_INT, "maximumWeight requires weigher");
 		}
 		else {
-			if (strictParsing) {
-				checkState(maximumWeight != UNSET_INT, "weigher requires maximumWeight");
+			if (this.strictParsing) {
+				checkState(this.maximumWeight != UNSET_INT, "weigher requires maximumWeight");
 			}
 			else {
-				if (maximumWeight == UNSET_INT) {
+				if (this.maximumWeight == UNSET_INT) {
 					logger.log(Level.WARNING, "ignoring weigher specified without maximumWeight");
 				}
 			}
@@ -1103,37 +1101,37 @@ public final class CacheBuilder<K, V> {
 	@Override
 	public String toString() {
 		MoreObjects.ToStringHelper s = MoreObjects.toStringHelper(this);
-		if (initialCapacity != UNSET_INT) {
-			s.add("initialCapacity", initialCapacity);
+		if (this.initialCapacity != UNSET_INT) {
+			s.add("initialCapacity", this.initialCapacity);
 		}
-		if (concurrencyLevel != UNSET_INT) {
-			s.add("concurrencyLevel", concurrencyLevel);
+		if (this.concurrencyLevel != UNSET_INT) {
+			s.add("concurrencyLevel", this.concurrencyLevel);
 		}
-		if (maximumSize != UNSET_INT) {
-			s.add("maximumSize", maximumSize);
+		if (this.maximumSize != UNSET_INT) {
+			s.add("maximumSize", this.maximumSize);
 		}
-		if (maximumWeight != UNSET_INT) {
-			s.add("maximumWeight", maximumWeight);
+		if (this.maximumWeight != UNSET_INT) {
+			s.add("maximumWeight", this.maximumWeight);
 		}
-		if (expireAfterWriteNanos != UNSET_INT) {
-			s.add("expireAfterWrite", expireAfterWriteNanos + "ns");
+		if (this.expireAfterWriteNanos != UNSET_INT) {
+			s.add("expireAfterWrite", this.expireAfterWriteNanos + "ns");
 		}
-		if (expireAfterAccessNanos != UNSET_INT) {
-			s.add("expireAfterAccess", expireAfterAccessNanos + "ns");
+		if (this.expireAfterAccessNanos != UNSET_INT) {
+			s.add("expireAfterAccess", this.expireAfterAccessNanos + "ns");
 		}
-		if (keyStrength != null) {
-			s.add("keyStrength", Ascii.toLowerCase(keyStrength.toString()));
+		if (this.keyStrength != null) {
+			s.add("keyStrength", Ascii.toLowerCase(this.keyStrength.toString()));
 		}
-		if (valueStrength != null) {
-			s.add("valueStrength", Ascii.toLowerCase(valueStrength.toString()));
+		if (this.valueStrength != null) {
+			s.add("valueStrength", Ascii.toLowerCase(this.valueStrength.toString()));
 		}
-		if (keyEquivalence != null) {
+		if (this.keyEquivalence != null) {
 			s.addValue("keyEquivalence");
 		}
-		if (valueEquivalence != null) {
+		if (this.valueEquivalence != null) {
 			s.addValue("valueEquivalence");
 		}
-		if (removalListener != null) {
+		if (this.removalListener != null) {
 			s.addValue("removalListener");
 		}
 		return s.toString();

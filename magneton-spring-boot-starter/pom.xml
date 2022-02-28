@@ -29,6 +29,10 @@
 			<artifactId>magneton-core</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
 		<!-- 可选功能依赖项 -->
 		<dependency>
 			<groupId>org.magneton</groupId>

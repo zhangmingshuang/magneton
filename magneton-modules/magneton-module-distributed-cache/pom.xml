@@ -10,7 +10,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<artifactId>magneton-module-distributed-cache</artifactId>
-	<description>分布式缓存模块</description>
+	<description>功能模块:分布式缓存</description>
 
 	<dependencies>
 		<dependency>

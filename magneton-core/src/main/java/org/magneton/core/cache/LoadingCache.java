@@ -19,8 +19,8 @@ import java.util.concurrent.ExecutionException;
 
 import org.magneton.core.base.Function;
 import org.magneton.core.collect.ImmutableMap;
-import org.magneton.foundation.util.concurrent.ExecutionError;
-import org.magneton.foundation.util.concurrent.UncheckedExecutionException;
+import org.magneton.core.concurrent.ExecutionError;
+import org.magneton.core.concurrent.UncheckedExecutionException;
 
 /**
  * A semi-persistent mapping from keys to values. Values are automatically loaded by the

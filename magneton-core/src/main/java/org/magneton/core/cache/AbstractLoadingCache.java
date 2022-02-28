@@ -20,7 +20,7 @@ import java.util.concurrent.ExecutionException;
 
 import org.magneton.core.collect.ImmutableMap;
 import org.magneton.core.collect.Maps;
-import org.magneton.foundation.util.concurrent.UncheckedExecutionException;
+import org.magneton.core.concurrent.UncheckedExecutionException;
 
 /**
  * This class provides a skeletal implementation of the {@code Cache} interface to
@@ -49,7 +49,7 @@ public abstract class AbstractLoadingCache<K, V> extends AbstractCache<K, V> imp
 	@Override
 	public V getUnchecked(K key) {
 		try {
-			return get(key);
+			return this.get(key);
 		}
 		catch (ExecutionException e) {
 			throw new UncheckedExecutionException(e.getCause());
@@ -61,7 +61,7 @@ public abstract class AbstractLoadingCache<K, V> extends AbstractCache<K, V> imp
 		Map<K, V> result = Maps.newLinkedHashMap();
 		for (K key : keys) {
 			if (!result.containsKey(key)) {
-				result.put(key, get(key));
+				result.put(key, this.get(key));
 			}
 		}
 		return ImmutableMap.copyOf(result);
@@ -69,7 +69,7 @@ public abstract class AbstractLoadingCache<K, V> extends AbstractCache<K, V> imp
 
 	@Override
 	public final V apply(K key) {
-		return getUnchecked(key);
+		return this.getUnchecked(key);
 	}
 
 	@Override
