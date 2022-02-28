@@ -27,12 +27,12 @@ import java.util.Set;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 
-import javax.annotations.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
+import javax.annotation.Nullable;
+import javax.annotations.CanIgnoreReturnValue;
 import javax.annotations.LazyInit;
 import javax.annotations.Weak;
 
-import org.checkerframework.checker.nullness.qual.Nullable;
 import org.magneton.core.base.Objects;
 import org.magneton.core.base.Preconditions;
 
@@ -90,7 +90,7 @@ public final class HashBiMap<K extends Object, V extends Object> extends Maps.It
 	private transient BiMap<V, K> inverse;
 
 	private HashBiMap(int expectedSize) {
-		init(expectedSize);
+		this.init(expectedSize);
 	}
 
 	/** Returns a new, empty {@code HashBiMap} with the default initial capacity (16). */
@@ -121,13 +121,13 @@ public final class HashBiMap<K extends Object, V extends Object> extends Maps.It
 	private void init(int expectedSize) {
 		CollectPreconditions.checkNonnegative(expectedSize, "expectedSize");
 		int tableSize = Hashing.closedTableSize(expectedSize, LOAD_FACTOR);
-		hashTableKToV = createTable(tableSize);
-		hashTableVToK = createTable(tableSize);
-		firstInKeyInsertionOrder = null;
-		lastInKeyInsertionOrder = null;
-		size = 0;
-		mask = tableSize - 1;
-		modCount = 0;
+		this.hashTableKToV = this.createTable(tableSize);
+		this.hashTableVToK = this.createTable(tableSize);
+		this.firstInKeyInsertionOrder = null;
+		this.lastInKeyInsertionOrder = null;
+		this.size = 0;
+		this.mask = tableSize - 1;
+		this.modCount = 0;
 	}
 
 	/**
@@ -135,12 +135,12 @@ public final class HashBiMap<K extends Object, V extends Object> extends Maps.It
 	 * key-to-value direction and the value-to-key direction.
 	 */
 	private void delete(BiEntry<K, V> entry) {
-		int keyBucket = entry.keyHash & mask;
+		int keyBucket = entry.keyHash & this.mask;
 		BiEntry<K, V> prevBucketEntry = null;
-		for (BiEntry<K, V> bucketEntry = hashTableKToV[keyBucket]; true; bucketEntry = bucketEntry.nextInKToVBucket) {
+		for (BiEntry<K, V> bucketEntry = this.hashTableKToV[keyBucket]; true; bucketEntry = bucketEntry.nextInKToVBucket) {
 			if (bucketEntry == entry) {
 				if (prevBucketEntry == null) {
-					hashTableKToV[keyBucket] = entry.nextInKToVBucket;
+					this.hashTableKToV[keyBucket] = entry.nextInKToVBucket;
 				}
 				else {
 					prevBucketEntry.nextInKToVBucket = entry.nextInKToVBucket;
@@ -150,12 +150,12 @@ public final class HashBiMap<K extends Object, V extends Object> extends Maps.It
 			prevBucketEntry = bucketEntry;
 		}
 
-		int valueBucket = entry.valueHash & mask;
+		int valueBucket = entry.valueHash & this.mask;
 		prevBucketEntry = null;
-		for (BiEntry<K, V> bucketEntry = hashTableVToK[valueBucket]; true; bucketEntry = bucketEntry.nextInVToKBucket) {
+		for (BiEntry<K, V> bucketEntry = this.hashTableVToK[valueBucket]; true; bucketEntry = bucketEntry.nextInVToKBucket) {
 			if (bucketEntry == entry) {
 				if (prevBucketEntry == null) {
-					hashTableVToK[valueBucket] = entry.nextInVToKBucket;
+					this.hashTableVToK[valueBucket] = entry.nextInVToKBucket;
 				}
 				else {
 					prevBucketEntry.nextInVToKBucket = entry.nextInVToKBucket;
@@ -166,67 +166,68 @@ public final class HashBiMap<K extends Object, V extends Object> extends Maps.It
 		}
 
 		if (entry.prevInKeyInsertionOrder == null) {
-			firstInKeyInsertionOrder = entry.nextInKeyInsertionOrder;
+			this.firstInKeyInsertionOrder = entry.nextInKeyInsertionOrder;
 		}
 		else {
 			entry.prevInKeyInsertionOrder.nextInKeyInsertionOrder = entry.nextInKeyInsertionOrder;
 		}
 
 		if (entry.nextInKeyInsertionOrder == null) {
-			lastInKeyInsertionOrder = entry.prevInKeyInsertionOrder;
+			this.lastInKeyInsertionOrder = entry.prevInKeyInsertionOrder;
 		}
 		else {
 			entry.nextInKeyInsertionOrder.prevInKeyInsertionOrder = entry.prevInKeyInsertionOrder;
 		}
 
-		size--;
-		modCount++;
+		this.size--;
+		this.modCount++;
 	}
 
 	private void insert(BiEntry<K, V> entry, @CheckForNull BiEntry<K, V> oldEntryForKey) {
-		int keyBucket = entry.keyHash & mask;
-		entry.nextInKToVBucket = hashTableKToV[keyBucket];
-		hashTableKToV[keyBucket] = entry;
+		int keyBucket = entry.keyHash & this.mask;
+		entry.nextInKToVBucket = this.hashTableKToV[keyBucket];
+		this.hashTableKToV[keyBucket] = entry;
 
-		int valueBucket = entry.valueHash & mask;
-		entry.nextInVToKBucket = hashTableVToK[valueBucket];
-		hashTableVToK[valueBucket] = entry;
+		int valueBucket = entry.valueHash & this.mask;
+		entry.nextInVToKBucket = this.hashTableVToK[valueBucket];
+		this.hashTableVToK[valueBucket] = entry;
 
 		if (oldEntryForKey == null) {
-			entry.prevInKeyInsertionOrder = lastInKeyInsertionOrder;
+			entry.prevInKeyInsertionOrder = this.lastInKeyInsertionOrder;
 			entry.nextInKeyInsertionOrder = null;
-			if (lastInKeyInsertionOrder == null) {
-				firstInKeyInsertionOrder = entry;
+			if (this.lastInKeyInsertionOrder == null) {
+				this.firstInKeyInsertionOrder = entry;
 			}
 			else {
-				lastInKeyInsertionOrder.nextInKeyInsertionOrder = entry;
+				this.lastInKeyInsertionOrder.nextInKeyInsertionOrder = entry;
 			}
-			lastInKeyInsertionOrder = entry;
+			this.lastInKeyInsertionOrder = entry;
 		}
 		else {
 			entry.prevInKeyInsertionOrder = oldEntryForKey.prevInKeyInsertionOrder;
 			if (entry.prevInKeyInsertionOrder == null) {
-				firstInKeyInsertionOrder = entry;
+				this.firstInKeyInsertionOrder = entry;
 			}
 			else {
 				entry.prevInKeyInsertionOrder.nextInKeyInsertionOrder = entry;
 			}
 			entry.nextInKeyInsertionOrder = oldEntryForKey.nextInKeyInsertionOrder;
 			if (entry.nextInKeyInsertionOrder == null) {
-				lastInKeyInsertionOrder = entry;
+				this.lastInKeyInsertionOrder = entry;
 			}
 			else {
 				entry.nextInKeyInsertionOrder.prevInKeyInsertionOrder = entry;
 			}
 		}
 
-		size++;
-		modCount++;
+		this.size++;
+		this.modCount++;
 	}
 
 	@CheckForNull
 	private BiEntry<K, V> seekByKey(@CheckForNull Object key, int keyHash) {
-		for (BiEntry<K, V> entry = hashTableKToV[keyHash & mask]; entry != null; entry = entry.nextInKToVBucket) {
+		for (BiEntry<K, V> entry = this.hashTableKToV[keyHash
+				& this.mask]; entry != null; entry = entry.nextInKToVBucket) {
 			if (keyHash == entry.keyHash && org.magneton.core.base.Objects.equal(key, entry.key)) {
 				return entry;
 			}
@@ -236,7 +237,8 @@ public final class HashBiMap<K extends Object, V extends Object> extends Maps.It
 
 	@CheckForNull
 	private BiEntry<K, V> seekByValue(@CheckForNull Object value, int valueHash) {
-		for (BiEntry<K, V> entry = hashTableVToK[valueHash & mask]; entry != null; entry = entry.nextInVToKBucket) {
+		for (BiEntry<K, V> entry = this.hashTableVToK[valueHash
+				& this.mask]; entry != null; entry = entry.nextInVToKBucket) {
 			if (valueHash == entry.valueHash && org.magneton.core.base.Objects.equal(value, entry.value)) {
 				return entry;
 			}
@@ -246,7 +248,7 @@ public final class HashBiMap<K extends Object, V extends Object> extends Maps.It
 
 	@Override
 	public boolean containsKey(@CheckForNull Object key) {
-		return seekByKey(key, Hashing.smearedHash(key)) != null;
+		return this.seekByKey(key, Hashing.smearedHash(key)) != null;
 	}
 
 	/**
@@ -262,20 +264,20 @@ public final class HashBiMap<K extends Object, V extends Object> extends Maps.It
 	 */
 	@Override
 	public boolean containsValue(@CheckForNull Object value) {
-		return seekByValue(value, Hashing.smearedHash(value)) != null;
+		return this.seekByValue(value, Hashing.smearedHash(value)) != null;
 	}
 
 	@Override
 	@CheckForNull
 	public V get(@CheckForNull Object key) {
-		return Maps.valueOrNull(seekByKey(key, Hashing.smearedHash(key)));
+		return Maps.valueOrNull(this.seekByKey(key, Hashing.smearedHash(key)));
 	}
 
 	@CanIgnoreReturnValue
 	@Override
 	@CheckForNull
 	public V put(@ParametricNullness K key, @ParametricNullness V value) {
-		return put(key, value, false);
+		return this.put(key, value, false);
 	}
 
 	@CheckForNull
@@ -283,16 +285,16 @@ public final class HashBiMap<K extends Object, V extends Object> extends Maps.It
 		int keyHash = Hashing.smearedHash(key);
 		int valueHash = Hashing.smearedHash(value);
 
-		BiEntry<K, V> oldEntryForKey = seekByKey(key, keyHash);
+		BiEntry<K, V> oldEntryForKey = this.seekByKey(key, keyHash);
 		if (oldEntryForKey != null && valueHash == oldEntryForKey.valueHash
 				&& org.magneton.core.base.Objects.equal(value, oldEntryForKey.value)) {
 			return value;
 		}
 
-		BiEntry<K, V> oldEntryForValue = seekByValue(value, valueHash);
+		BiEntry<K, V> oldEntryForValue = this.seekByValue(value, valueHash);
 		if (oldEntryForValue != null) {
 			if (force) {
-				delete(oldEntryForValue);
+				this.delete(oldEntryForValue);
 			}
 			else {
 				throw new IllegalArgumentException("value already present: " + value);
@@ -301,15 +303,15 @@ public final class HashBiMap<K extends Object, V extends Object> extends Maps.It
 
 		BiEntry<K, V> newEntry = new BiEntry<>(key, keyHash, value, valueHash);
 		if (oldEntryForKey != null) {
-			delete(oldEntryForKey);
-			insert(newEntry, oldEntryForKey);
+			this.delete(oldEntryForKey);
+			this.insert(newEntry, oldEntryForKey);
 			oldEntryForKey.prevInKeyInsertionOrder = null;
 			oldEntryForKey.nextInKeyInsertionOrder = null;
 			return oldEntryForKey.value;
 		}
 		else {
-			insert(newEntry, null);
-			rehashIfNecessary();
+			this.insert(newEntry, null);
+			this.rehashIfNecessary();
 			return null;
 		}
 	}
@@ -318,7 +320,7 @@ public final class HashBiMap<K extends Object, V extends Object> extends Maps.It
 	@Override
 	@CheckForNull
 	public V forcePut(@ParametricNullness K key, @ParametricNullness V value) {
-		return put(key, value, true);
+		return this.put(key, value, true);
 	}
 
 	@CheckForNull
@@ -326,8 +328,8 @@ public final class HashBiMap<K extends Object, V extends Object> extends Maps.It
 		int valueHash = Hashing.smearedHash(value);
 		int keyHash = Hashing.smearedHash(key);
 
-		BiEntry<K, V> oldEntryForValue = seekByValue(value, valueHash);
-		BiEntry<K, V> oldEntryForKey = seekByKey(key, keyHash);
+		BiEntry<K, V> oldEntryForValue = this.seekByValue(value, valueHash);
+		BiEntry<K, V> oldEntryForKey = this.seekByKey(key, keyHash);
 		if (oldEntryForValue != null && keyHash == oldEntryForValue.keyHash
 				&& org.magneton.core.base.Objects.equal(key, oldEntryForValue.key)) {
 			return key;
@@ -344,15 +346,15 @@ public final class HashBiMap<K extends Object, V extends Object> extends Maps.It
 		 */
 
 		if (oldEntryForValue != null) {
-			delete(oldEntryForValue);
+			this.delete(oldEntryForValue);
 		}
 
 		if (oldEntryForKey != null) {
-			delete(oldEntryForKey);
+			this.delete(oldEntryForKey);
 		}
 
 		BiEntry<K, V> newEntry = new BiEntry<>(key, keyHash, value, valueHash);
-		insert(newEntry, oldEntryForKey);
+		this.insert(newEntry, oldEntryForKey);
 
 		if (oldEntryForKey != null) {
 			oldEntryForKey.prevInKeyInsertionOrder = null;
@@ -362,42 +364,42 @@ public final class HashBiMap<K extends Object, V extends Object> extends Maps.It
 			oldEntryForValue.prevInKeyInsertionOrder = null;
 			oldEntryForValue.nextInKeyInsertionOrder = null;
 		}
-		rehashIfNecessary();
+		this.rehashIfNecessary();
 		return Maps.keyOrNull(oldEntryForValue);
 	}
 
 	private void rehashIfNecessary() {
 		@Nullable
-		BiEntry<K, V>[] oldKToV = hashTableKToV;
-		if (Hashing.needsResizing(size, oldKToV.length, LOAD_FACTOR)) {
+		BiEntry<K, V>[] oldKToV = this.hashTableKToV;
+		if (Hashing.needsResizing(this.size, oldKToV.length, LOAD_FACTOR)) {
 			int newTableSize = oldKToV.length * 2;
 
-			hashTableKToV = createTable(newTableSize);
-			hashTableVToK = createTable(newTableSize);
-			mask = newTableSize - 1;
-			size = 0;
+			this.hashTableKToV = this.createTable(newTableSize);
+			this.hashTableVToK = this.createTable(newTableSize);
+			this.mask = newTableSize - 1;
+			this.size = 0;
 
-			for (BiEntry<K, V> entry = firstInKeyInsertionOrder; entry != null; entry = entry.nextInKeyInsertionOrder) {
-				insert(entry, entry);
+			for (BiEntry<K, V> entry = this.firstInKeyInsertionOrder; entry != null; entry = entry.nextInKeyInsertionOrder) {
+				this.insert(entry, entry);
 			}
-			modCount++;
+			this.modCount++;
 		}
 	}
 
-	private @Nullable BiEntry<K, V>[] createTable(int length) {
-		return new @Nullable BiEntry[length];
+	private BiEntry<K, V>[] createTable(int length) {
+		return new BiEntry[length];
 	}
 
 	@CanIgnoreReturnValue
 	@Override
 	@CheckForNull
 	public V remove(@CheckForNull Object key) {
-		BiEntry<K, V> entry = seekByKey(key, Hashing.smearedHash(key));
+		BiEntry<K, V> entry = this.seekByKey(key, Hashing.smearedHash(key));
 		if (entry == null) {
 			return null;
 		}
 		else {
-			delete(entry);
+			this.delete(entry);
 			entry.prevInKeyInsertionOrder = null;
 			entry.nextInKeyInsertionOrder = null;
 			return entry.value;
@@ -406,17 +408,17 @@ public final class HashBiMap<K extends Object, V extends Object> extends Maps.It
 
 	@Override
 	public void clear() {
-		size = 0;
-		Arrays.fill(hashTableKToV, null);
-		Arrays.fill(hashTableVToK, null);
-		firstInKeyInsertionOrder = null;
-		lastInKeyInsertionOrder = null;
-		modCount++;
+		this.size = 0;
+		Arrays.fill(this.hashTableKToV, null);
+		Arrays.fill(this.hashTableVToK, null);
+		this.firstInKeyInsertionOrder = null;
+		this.lastInKeyInsertionOrder = null;
+		this.modCount++;
 	}
 
 	@Override
 	public int size() {
-		return size;
+		return this.size;
 	}
 
 	@Override
@@ -426,7 +428,7 @@ public final class HashBiMap<K extends Object, V extends Object> extends Maps.It
 
 	@Override
 	public Set<V> values() {
-		return inverse().keySet();
+		return this.inverse().keySet();
 	}
 
 	@Override
@@ -442,38 +444,38 @@ public final class HashBiMap<K extends Object, V extends Object> extends Maps.It
 				BiEntry<K, V> delegate;
 
 				MapEntry(BiEntry<K, V> entry) {
-					delegate = entry;
+					this.delegate = entry;
 				}
 
 				@Override
 				public K getKey() {
-					return delegate.key;
+					return this.delegate.key;
 				}
 
 				@Override
 				public V getValue() {
-					return delegate.value;
+					return this.delegate.value;
 				}
 
 				@Override
 				public V setValue(V value) {
-					V oldValue = delegate.value;
+					V oldValue = this.delegate.value;
 					int valueHash = Hashing.smearedHash(value);
-					if (valueHash == delegate.valueHash && org.magneton.core.base.Objects.equal(value, oldValue)) {
+					if (valueHash == this.delegate.valueHash && org.magneton.core.base.Objects.equal(value, oldValue)) {
 						return value;
 					}
-					Preconditions.checkArgument(seekByValue(value, valueHash) == null, "value already present: %s",
-							value);
-					delete(delegate);
-					BiEntry<K, V> newEntry = new BiEntry<>(delegate.key, delegate.keyHash, value, valueHash);
-					insert(newEntry, delegate);
-					delegate.prevInKeyInsertionOrder = null;
-					delegate.nextInKeyInsertionOrder = null;
-					expectedModCount = modCount;
-					if (toRemove == delegate) {
+					Preconditions.checkArgument(HashBiMap.this.seekByValue(value, valueHash) == null,
+							"value already present: %s", value);
+					HashBiMap.this.delete(this.delegate);
+					BiEntry<K, V> newEntry = new BiEntry<>(this.delegate.key, this.delegate.keyHash, value, valueHash);
+					HashBiMap.this.insert(newEntry, this.delegate);
+					this.delegate.prevInKeyInsertionOrder = null;
+					this.delegate.nextInKeyInsertionOrder = null;
+					expectedModCount = HashBiMap.this.modCount;
+					if (toRemove == this.delegate) {
 						toRemove = newEntry;
 					}
-					delegate = newEntry;
+					this.delegate = newEntry;
 					return oldValue;
 				}
 
@@ -484,7 +486,7 @@ public final class HashBiMap<K extends Object, V extends Object> extends Maps.It
 	@Override
 	public void forEach(BiConsumer<? super K, ? super V> action) {
 		Preconditions.checkNotNull(action);
-		for (BiEntry<K, V> entry = firstInKeyInsertionOrder; entry != null; entry = entry.nextInKeyInsertionOrder) {
+		for (BiEntry<K, V> entry = this.firstInKeyInsertionOrder; entry != null; entry = entry.nextInKeyInsertionOrder) {
 			action.accept(entry.key, entry.value);
 		}
 	}
@@ -492,17 +494,17 @@ public final class HashBiMap<K extends Object, V extends Object> extends Maps.It
 	@Override
 	public void replaceAll(BiFunction<? super K, ? super V, ? extends V> function) {
 		Preconditions.checkNotNull(function);
-		BiEntry<K, V> oldFirst = firstInKeyInsertionOrder;
-		clear();
+		BiEntry<K, V> oldFirst = this.firstInKeyInsertionOrder;
+		this.clear();
 		for (BiEntry<K, V> entry = oldFirst; entry != null; entry = entry.nextInKeyInsertionOrder) {
-			put(entry.key, function.apply(entry.key, entry.value));
+			this.put(entry.key, function.apply(entry.key, entry.value));
 		}
 	}
 
 	@Override
 	public BiMap<V, K> inverse() {
-		BiMap<V, K> result = inverse;
-		return (result == null) ? inverse = new Inverse() : result;
+		BiMap<V, K> result = this.inverse;
+		return (result == null) ? this.inverse = new Inverse() : result;
 	}
 
 	/**
@@ -518,7 +520,7 @@ public final class HashBiMap<K extends Object, V extends Object> extends Maps.It
 	private void readObject(ObjectInputStream stream) throws IOException, ClassNotFoundException {
 		stream.defaultReadObject();
 		int size = Serialization.readCount(stream);
-		init(16); // resist hostile attempts to allocate gratuitous heap
+		this.init(16); // resist hostile attempts to allocate gratuitous heap
 		Serialization.populateMap(this, stream, size);
 	}
 
@@ -567,7 +569,7 @@ public final class HashBiMap<K extends Object, V extends Object> extends Maps.It
 		}
 
 		Object readResolve() {
-			return bimap.inverse();
+			return this.bimap.inverse();
 		}
 
 	}
@@ -575,48 +577,48 @@ public final class HashBiMap<K extends Object, V extends Object> extends Maps.It
 	abstract class Itr<T> implements Iterator<T> {
 
 		@CheckForNull
-		BiEntry<K, V> next = firstInKeyInsertionOrder;
+		BiEntry<K, V> next = HashBiMap.this.firstInKeyInsertionOrder;
 
 		@CheckForNull
 		BiEntry<K, V> toRemove = null;
 
-		int expectedModCount = modCount;
+		int expectedModCount = HashBiMap.this.modCount;
 
-		int remaining = size();
+		int remaining = HashBiMap.this.size();
 
 		@Override
 		public boolean hasNext() {
-			if (modCount != expectedModCount) {
+			if (HashBiMap.this.modCount != this.expectedModCount) {
 				throw new ConcurrentModificationException();
 			}
-			return next != null && remaining > 0;
+			return this.next != null && this.remaining > 0;
 		}
 
 		@Override
 		public T next() {
-			if (!hasNext()) {
+			if (!this.hasNext()) {
 				throw new NoSuchElementException();
 			}
 
 			// requireNonNull is safe because of the hasNext check.
-			BiEntry<K, V> entry = requireNonNull(next);
-			next = entry.nextInKeyInsertionOrder;
-			toRemove = entry;
-			remaining--;
-			return output(entry);
+			BiEntry<K, V> entry = requireNonNull(this.next);
+			this.next = entry.nextInKeyInsertionOrder;
+			this.toRemove = entry;
+			this.remaining--;
+			return this.output(entry);
 		}
 
 		@Override
 		public void remove() {
-			if (modCount != expectedModCount) {
+			if (HashBiMap.this.modCount != this.expectedModCount) {
 				throw new ConcurrentModificationException();
 			}
-			if (toRemove == null) {
+			if (this.toRemove == null) {
 				throw new IllegalStateException("no calls to next() since the last call to remove()");
 			}
-			delete(toRemove);
-			expectedModCount = modCount;
-			toRemove = null;
+			HashBiMap.this.delete(this.toRemove);
+			this.expectedModCount = HashBiMap.this.modCount;
+			this.toRemove = null;
 		}
 
 		abstract T output(BiEntry<K, V> entry);
@@ -641,12 +643,12 @@ public final class HashBiMap<K extends Object, V extends Object> extends Maps.It
 
 		@Override
 		public boolean remove(@CheckForNull Object o) {
-			BiEntry<K, V> entry = seekByKey(o, Hashing.smearedHash(o));
+			BiEntry<K, V> entry = HashBiMap.this.seekByKey(o, Hashing.smearedHash(o));
 			if (entry == null) {
 				return false;
 			}
 			else {
-				delete(entry);
+				HashBiMap.this.delete(entry);
 				entry.prevInKeyInsertionOrder = null;
 				entry.nextInKeyInsertionOrder = null;
 				return true;
@@ -663,47 +665,47 @@ public final class HashBiMap<K extends Object, V extends Object> extends Maps.It
 
 		@Override
 		public int size() {
-			return size;
+			return HashBiMap.this.size;
 		}
 
 		@Override
 		public void clear() {
-			forward().clear();
+			this.forward().clear();
 		}
 
 		@Override
 		public boolean containsKey(@CheckForNull Object value) {
-			return forward().containsValue(value);
+			return this.forward().containsValue(value);
 		}
 
 		@Override
 		@CheckForNull
 		public K get(@CheckForNull Object value) {
-			return Maps.keyOrNull(seekByValue(value, Hashing.smearedHash(value)));
+			return Maps.keyOrNull(HashBiMap.this.seekByValue(value, Hashing.smearedHash(value)));
 		}
 
 		@CanIgnoreReturnValue
 		@Override
 		@CheckForNull
 		public K put(@ParametricNullness V value, @ParametricNullness K key) {
-			return putInverse(value, key, false);
+			return HashBiMap.this.putInverse(value, key, false);
 		}
 
 		@Override
 		@CheckForNull
 		public K forcePut(@ParametricNullness V value, @ParametricNullness K key) {
-			return putInverse(value, key, true);
+			return HashBiMap.this.putInverse(value, key, true);
 		}
 
 		@Override
 		@CheckForNull
 		public K remove(@CheckForNull Object value) {
-			BiEntry<K, V> entry = seekByValue(value, Hashing.smearedHash(value));
+			BiEntry<K, V> entry = HashBiMap.this.seekByValue(value, Hashing.smearedHash(value));
 			if (entry == null) {
 				return null;
 			}
 			else {
-				delete(entry);
+				HashBiMap.this.delete(entry);
 				entry.prevInKeyInsertionOrder = null;
 				entry.nextInKeyInsertionOrder = null;
 				return entry.key;
@@ -712,7 +714,7 @@ public final class HashBiMap<K extends Object, V extends Object> extends Maps.It
 
 		@Override
 		public BiMap<K, V> inverse() {
-			return forward();
+			return this.forward();
 		}
 
 		@Override
@@ -722,7 +724,7 @@ public final class HashBiMap<K extends Object, V extends Object> extends Maps.It
 
 		@Override
 		public Set<K> values() {
-			return forward().keySet();
+			return this.forward().keySet();
 		}
 
 		@Override
@@ -738,32 +740,34 @@ public final class HashBiMap<K extends Object, V extends Object> extends Maps.It
 					BiEntry<K, V> delegate;
 
 					InverseEntry(BiEntry<K, V> entry) {
-						delegate = entry;
+						this.delegate = entry;
 					}
 
 					@Override
 					public V getKey() {
-						return delegate.value;
+						return this.delegate.value;
 					}
 
 					@Override
 					public K getValue() {
-						return delegate.key;
+						return this.delegate.key;
 					}
 
 					@Override
 					public K setValue(K key) {
-						K oldKey = delegate.key;
+						K oldKey = this.delegate.key;
 						int keyHash = Hashing.smearedHash(key);
-						if (keyHash == delegate.keyHash && Objects.equal(key, oldKey)) {
+						if (keyHash == this.delegate.keyHash && Objects.equal(key, oldKey)) {
 							return key;
 						}
-						Preconditions.checkArgument(seekByKey(key, keyHash) == null, "value already present: %s", key);
-						delete(delegate);
-						BiEntry<K, V> newEntry = new BiEntry<>(key, keyHash, delegate.value, delegate.valueHash);
-						delegate = newEntry;
-						insert(newEntry, null);
-						expectedModCount = modCount;
+						Preconditions.checkArgument(HashBiMap.this.seekByKey(key, keyHash) == null,
+								"value already present: %s", key);
+						HashBiMap.this.delete(this.delegate);
+						BiEntry<K, V> newEntry = new BiEntry<>(key, keyHash, this.delegate.value,
+								this.delegate.valueHash);
+						this.delegate = newEntry;
+						HashBiMap.this.insert(newEntry, null);
+						expectedModCount = HashBiMap.this.modCount;
 						return oldKey;
 					}
 
@@ -780,10 +784,10 @@ public final class HashBiMap<K extends Object, V extends Object> extends Maps.It
 		@Override
 		public void replaceAll(BiFunction<? super V, ? super K, ? extends K> function) {
 			Preconditions.checkNotNull(function);
-			BiEntry<K, V> oldFirst = firstInKeyInsertionOrder;
-			clear();
+			BiEntry<K, V> oldFirst = HashBiMap.this.firstInKeyInsertionOrder;
+			this.clear();
 			for (BiEntry<K, V> entry = oldFirst; entry != null; entry = entry.nextInKeyInsertionOrder) {
-				put(entry.value, function.apply(entry.value, entry.key));
+				this.put(entry.value, function.apply(entry.value, entry.key));
 			}
 		}
 
@@ -799,12 +803,12 @@ public final class HashBiMap<K extends Object, V extends Object> extends Maps.It
 
 			@Override
 			public boolean remove(@CheckForNull Object o) {
-				BiEntry<K, V> entry = seekByValue(o, Hashing.smearedHash(o));
+				BiEntry<K, V> entry = HashBiMap.this.seekByValue(o, Hashing.smearedHash(o));
 				if (entry == null) {
 					return false;
 				}
 				else {
-					delete(entry);
+					HashBiMap.this.delete(entry);
 					return true;
 				}
 			}

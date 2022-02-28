@@ -22,8 +22,6 @@ import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import javax.annotations.VisibleForTesting;
 
-import org.magneton.foundation.util.Arrays;
-
 import static java.util.logging.Level.WARNING;
 
 /**

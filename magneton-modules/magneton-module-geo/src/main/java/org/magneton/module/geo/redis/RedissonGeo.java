@@ -5,10 +5,10 @@ import java.util.Map;
 import javax.annotation.Nullable;
 import javax.annotations.Versielimiet;
 
+import org.magneton.core.base.Arrays;
 import org.magneton.core.base.Preconditions;
 import org.magneton.core.collect.Collections;
 import org.magneton.core.collect.Maps;
-import org.magneton.foundation.util.Arrays;
 import org.magneton.module.geo.Geo;
 import org.magneton.module.geo.GeoEntry;
 import org.magneton.module.geo.GeoPosition;

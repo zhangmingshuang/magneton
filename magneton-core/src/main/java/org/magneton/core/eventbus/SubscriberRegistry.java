@@ -27,8 +27,8 @@ import java.util.concurrent.CopyOnWriteArraySet;
 
 import javax.annotation.CheckForNull;
 import javax.annotations.VisibleForTesting;
-
 import javax.annotations.Weak;
+
 import org.magneton.core.base.MoreObjects;
 import org.magneton.core.base.Objects;
 import org.magneton.core.base.Preconditions;
@@ -42,9 +42,9 @@ import org.magneton.core.collect.Iterators;
 import org.magneton.core.collect.Lists;
 import org.magneton.core.collect.Maps;
 import org.magneton.core.collect.Multimap;
+import org.magneton.core.concurrent.UncheckedExecutionException;
 import org.magneton.core.primitives.Primitives;
 import org.magneton.core.reflect.TypeToken;
-import org.magneton.foundation.util.concurrent.UncheckedExecutionException;
 
 /**
  * Registry of subscribers to a single event bus.
@@ -153,18 +153,18 @@ final class SubscriberRegistry {
 
 	/** Registers all subscriber methods on the given listener object. */
 	void register(Object listener) {
-		org.magneton.core.collect.Multimap<Class<?>, Subscriber> listenerMethods = findAllSubscribers(listener);
+		org.magneton.core.collect.Multimap<Class<?>, Subscriber> listenerMethods = this.findAllSubscribers(listener);
 
 		for (Entry<Class<?>, Collection<Subscriber>> entry : listenerMethods.asMap().entrySet()) {
 			Class<?> eventType = entry.getKey();
 			Collection<Subscriber> eventMethodsInListener = entry.getValue();
 
-			CopyOnWriteArraySet<Subscriber> eventSubscribers = subscribers.get(eventType);
+			CopyOnWriteArraySet<Subscriber> eventSubscribers = this.subscribers.get(eventType);
 
 			if (eventSubscribers == null) {
 				CopyOnWriteArraySet<Subscriber> newSet = new CopyOnWriteArraySet<>();
 				eventSubscribers = org.magneton.core.base.MoreObjects
-						.firstNonNull(subscribers.putIfAbsent(eventType, newSet), newSet);
+						.firstNonNull(this.subscribers.putIfAbsent(eventType, newSet), newSet);
 			}
 
 			eventSubscribers.addAll(eventMethodsInListener);
@@ -173,13 +173,13 @@ final class SubscriberRegistry {
 
 	/** Unregisters all subscribers on the given listener object. */
 	void unregister(Object listener) {
-		org.magneton.core.collect.Multimap<Class<?>, Subscriber> listenerMethods = findAllSubscribers(listener);
+		org.magneton.core.collect.Multimap<Class<?>, Subscriber> listenerMethods = this.findAllSubscribers(listener);
 
 		for (Entry<Class<?>, Collection<Subscriber>> entry : listenerMethods.asMap().entrySet()) {
 			Class<?> eventType = entry.getKey();
 			Collection<Subscriber> listenerMethodsForType = entry.getValue();
 
-			CopyOnWriteArraySet<Subscriber> currentSubscribers = subscribers.get(eventType);
+			CopyOnWriteArraySet<Subscriber> currentSubscribers = this.subscribers.get(eventType);
 			if (currentSubscribers == null || !currentSubscribers.removeAll(listenerMethodsForType)) {
 				// if removeAll returns true, all we really know is that at least one
 				// subscriber was
@@ -201,7 +201,7 @@ final class SubscriberRegistry {
 
 	@VisibleForTesting
 	Set<Subscriber> getSubscribersForTesting(Class<?> eventType) {
-		return MoreObjects.firstNonNull(subscribers.get(eventType), ImmutableSet.<Subscriber>of());
+		return MoreObjects.firstNonNull(this.subscribers.get(eventType), ImmutableSet.<Subscriber>of());
 	}
 
 	/**
@@ -214,7 +214,7 @@ final class SubscriberRegistry {
 		List<Iterator<Subscriber>> subscriberIterators = Lists.newArrayListWithCapacity(eventTypes.size());
 
 		for (Class<?> eventType : eventTypes) {
-			CopyOnWriteArraySet<Subscriber> eventSubscribers = subscribers.get(eventType);
+			CopyOnWriteArraySet<Subscriber> eventSubscribers = this.subscribers.get(eventType);
 			if (eventSubscribers != null) {
 				// eager no-copy snapshot
 				subscriberIterators.add(eventSubscribers.iterator());
@@ -234,7 +234,7 @@ final class SubscriberRegistry {
 		for (Method method : getAnnotatedMethods(clazz)) {
 			Class<?>[] parameterTypes = method.getParameterTypes();
 			Class<?> eventType = parameterTypes[0];
-			methodsInListener.put(eventType, Subscriber.create(bus, listener, method));
+			methodsInListener.put(eventType, Subscriber.create(this.bus, listener, method));
 		}
 		return methodsInListener;
 	}
@@ -246,20 +246,20 @@ final class SubscriberRegistry {
 		private final List<Class<?>> parameterTypes;
 
 		MethodIdentifier(Method method) {
-			name = method.getName();
-			parameterTypes = Arrays.asList(method.getParameterTypes());
+			this.name = method.getName();
+			this.parameterTypes = Arrays.asList(method.getParameterTypes());
 		}
 
 		@Override
 		public int hashCode() {
-			return Objects.hashCode(name, parameterTypes);
+			return Objects.hashCode(this.name, this.parameterTypes);
 		}
 
 		@Override
 		public boolean equals(@CheckForNull Object o) {
 			if (o instanceof MethodIdentifier) {
 				MethodIdentifier ident = (MethodIdentifier) o;
-				return name.equals(ident.name) && parameterTypes.equals(ident.parameterTypes);
+				return this.name.equals(ident.name) && this.parameterTypes.equals(ident.parameterTypes);
 			}
 			return false;
 		}

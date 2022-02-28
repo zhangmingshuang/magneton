@@ -5,8 +5,8 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
+import org.magneton.core.base.Arrays;
 import org.magneton.core.collect.Collections;
-import org.magneton.foundation.util.Arrays;
 
 /**
  * .
@@ -96,7 +96,7 @@ public interface ListOps {
 			return;
 		}
 		V obj = (V) values.stream().findFirst();
-		addAtHead(list, Arrays.toArray(values, obj.getClass()));
+		this.addAtHead(list, Arrays.toArray(values, obj.getClass()));
 	}
 
 	/**

@@ -31,11 +31,11 @@ import java.util.function.Function;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
-import javax.annotations.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
+import javax.annotation.Nullable;
+import javax.annotations.CanIgnoreReturnValue;
 import javax.annotations.DoNotCall;
 
-import org.checkerframework.checker.nullness.qual.Nullable;
 import org.magneton.core.base.Preconditions;
 
 import static java.util.Objects.requireNonNull;
@@ -448,7 +448,7 @@ public final class ImmutableSortedMap<K, V> extends ImmutableSortedMapFauxveride
 				// Inline the Comparator implementation rather than transforming with a
 				// Function
 				// to save code size.
-				Arrays.sort(entryArray, 0, size, new Comparator<@Nullable Entry<K, V>>() {
+				Arrays.sort(entryArray, 0, size, new Comparator<Entry<K, V>>() {
 					@Override
 					public int compare(@CheckForNull Entry<K, V> e1, @CheckForNull Entry<K, V> e2) {
 						// requireNonNull is safe because the first `size` elements have
@@ -516,28 +516,28 @@ public final class ImmutableSortedMap<K, V> extends ImmutableSortedMapFauxveride
 
 	@Override
 	public int size() {
-		return valueList.size();
+		return this.valueList.size();
 	}
 
 	@Override
 	public void forEach(BiConsumer<? super K, ? super V> action) {
 		Preconditions.checkNotNull(action);
-		org.magneton.core.collect.ImmutableList<K> keyList = keySet.asList();
-		for (int i = 0; i < size(); i++) {
-			action.accept(keyList.get(i), valueList.get(i));
+		org.magneton.core.collect.ImmutableList<K> keyList = this.keySet.asList();
+		for (int i = 0; i < this.size(); i++) {
+			action.accept(keyList.get(i), this.valueList.get(i));
 		}
 	}
 
 	@Override
 	@CheckForNull
 	public V get(@CheckForNull Object key) {
-		int index = keySet.indexOf(key);
-		return (index == -1) ? null : valueList.get(index);
+		int index = this.keySet.indexOf(key);
+		return (index == -1) ? null : this.valueList.get(index);
 	}
 
 	@Override
 	boolean isPartialView() {
-		return keySet.isPartialView() || valueList.isPartialView();
+		return this.keySet.isPartialView() || this.valueList.isPartialView();
 	}
 
 	/**
@@ -554,17 +554,17 @@ public final class ImmutableSortedMap<K, V> extends ImmutableSortedMapFauxveride
 
 			@Override
 			public UnmodifiableIterator<Entry<K, V>> iterator() {
-				return asList().iterator();
+				return this.asList().iterator();
 			}
 
 			@Override
 			public Spliterator<Entry<K, V>> spliterator() {
-				return asList().spliterator();
+				return this.asList().spliterator();
 			}
 
 			@Override
 			public void forEach(Consumer<? super Entry<K, V>> action) {
-				asList().forEach(action);
+				this.asList().forEach(action);
 			}
 
 			@Override
@@ -572,12 +572,12 @@ public final class ImmutableSortedMap<K, V> extends ImmutableSortedMapFauxveride
 				return new org.magneton.core.collect.ImmutableAsList<Entry<K, V>>() {
 					@Override
 					public Entry<K, V> get(int index) {
-						return new AbstractMap.SimpleImmutableEntry<>(keySet.asList().get(index), valueList.get(index));
+						return new AbstractMap.SimpleImmutableEntry<>(ImmutableSortedMap.this.keySet.asList().get(index), ImmutableSortedMap.this.valueList.get(index));
 					}
 
 					@Override
 					public Spliterator<Entry<K, V>> spliterator() {
-						return CollectSpliterators.indexed(size(),
+						return CollectSpliterators.indexed(this.size(),
 								org.magneton.core.collect.ImmutableSet.SPLITERATOR_CHARACTERISTICS, this::get);
 					}
 
@@ -594,13 +594,13 @@ public final class ImmutableSortedMap<K, V> extends ImmutableSortedMapFauxveride
 			}
 
 		}
-		return isEmpty() ? org.magneton.core.collect.ImmutableSet.<Entry<K, V>>of() : new EntrySet();
+		return this.isEmpty() ? org.magneton.core.collect.ImmutableSet.<Entry<K, V>>of() : new EntrySet();
 	}
 
 	/** Returns an immutable sorted set of the keys in this map. */
 	@Override
 	public ImmutableSortedSet<K> keySet() {
-		return keySet;
+		return this.keySet;
 	}
 
 	@Override
@@ -614,7 +614,7 @@ public final class ImmutableSortedMap<K, V> extends ImmutableSortedMapFauxveride
 	 */
 	@Override
 	public ImmutableCollection<V> values() {
-		return valueList;
+		return this.valueList;
 	}
 
 	@Override
@@ -630,29 +630,28 @@ public final class ImmutableSortedMap<K, V> extends ImmutableSortedMapFauxveride
 	 */
 	@Override
 	public Comparator<? super K> comparator() {
-		return keySet().comparator();
+		return this.keySet().comparator();
 	}
 
 	@Override
 	public K firstKey() {
-		return keySet().first();
+		return this.keySet().first();
 	}
 
 	@Override
 	public K lastKey() {
-		return keySet().last();
+		return this.keySet().last();
 	}
 
 	private ImmutableSortedMap<K, V> getSubMap(int fromIndex, int toIndex) {
-		if (fromIndex == 0 && toIndex == size()) {
+		if (fromIndex == 0 && toIndex == this.size()) {
 			return this;
 		}
 		else if (fromIndex == toIndex) {
-			return emptyMap(comparator());
+			return emptyMap(this.comparator());
 		}
 		else {
-			return new ImmutableSortedMap<>(keySet.getSubSet(fromIndex, toIndex),
-					valueList.subList(fromIndex, toIndex));
+			return new ImmutableSortedMap<>(this.keySet.getSubSet(fromIndex, toIndex), this.valueList.subList(fromIndex, toIndex));
 		}
 	}
 
@@ -669,7 +668,7 @@ public final class ImmutableSortedMap<K, V> extends ImmutableSortedMapFauxveride
 	 */
 	@Override
 	public ImmutableSortedMap<K, V> headMap(K toKey) {
-		return headMap(toKey, false);
+		return this.headMap(toKey, false);
 	}
 
 	/**
@@ -687,7 +686,7 @@ public final class ImmutableSortedMap<K, V> extends ImmutableSortedMapFauxveride
 	 */
 	@Override
 	public ImmutableSortedMap<K, V> headMap(K toKey, boolean inclusive) {
-		return getSubMap(0, keySet.headIndex(Preconditions.checkNotNull(toKey), inclusive));
+		return this.getSubMap(0, this.keySet.headIndex(Preconditions.checkNotNull(toKey), inclusive));
 	}
 
 	/**
@@ -704,7 +703,7 @@ public final class ImmutableSortedMap<K, V> extends ImmutableSortedMapFauxveride
 	 */
 	@Override
 	public ImmutableSortedMap<K, V> subMap(K fromKey, K toKey) {
-		return subMap(fromKey, true, toKey, false);
+		return this.subMap(fromKey, true, toKey, false);
 	}
 
 	/**
@@ -726,9 +725,9 @@ public final class ImmutableSortedMap<K, V> extends ImmutableSortedMapFauxveride
 	public ImmutableSortedMap<K, V> subMap(K fromKey, boolean fromInclusive, K toKey, boolean toInclusive) {
 		Preconditions.checkNotNull(fromKey);
 		Preconditions.checkNotNull(toKey);
-		Preconditions.checkArgument(comparator().compare(fromKey, toKey) <= 0, "expected fromKey <= toKey but %s > %s",
+		Preconditions.checkArgument(this.comparator().compare(fromKey, toKey) <= 0, "expected fromKey <= toKey but %s > %s",
 				fromKey, toKey);
-		return headMap(toKey, toInclusive).tailMap(fromKey, fromInclusive);
+		return this.headMap(toKey, toInclusive).tailMap(fromKey, fromInclusive);
 	}
 
 	/**
@@ -744,7 +743,7 @@ public final class ImmutableSortedMap<K, V> extends ImmutableSortedMapFauxveride
 	 */
 	@Override
 	public ImmutableSortedMap<K, V> tailMap(K fromKey) {
-		return tailMap(fromKey, true);
+		return this.tailMap(fromKey, true);
 	}
 
 	/**
@@ -762,67 +761,67 @@ public final class ImmutableSortedMap<K, V> extends ImmutableSortedMapFauxveride
 	 */
 	@Override
 	public ImmutableSortedMap<K, V> tailMap(K fromKey, boolean inclusive) {
-		return getSubMap(keySet.tailIndex(Preconditions.checkNotNull(fromKey), inclusive), size());
+		return this.getSubMap(this.keySet.tailIndex(Preconditions.checkNotNull(fromKey), inclusive), this.size());
 	}
 
 	@Override
 	@CheckForNull
 	public Entry<K, V> lowerEntry(K key) {
-		return headMap(key, false).lastEntry();
+		return this.headMap(key, false).lastEntry();
 	}
 
 	@Override
 	@CheckForNull
 	public K lowerKey(K key) {
-		return Maps.keyOrNull(lowerEntry(key));
+		return Maps.keyOrNull(this.lowerEntry(key));
 	}
 
 	@Override
 	@CheckForNull
 	public Entry<K, V> floorEntry(K key) {
-		return headMap(key, true).lastEntry();
+		return this.headMap(key, true).lastEntry();
 	}
 
 	@Override
 	@CheckForNull
 	public K floorKey(K key) {
-		return Maps.keyOrNull(floorEntry(key));
+		return Maps.keyOrNull(this.floorEntry(key));
 	}
 
 	@Override
 	@CheckForNull
 	public Entry<K, V> ceilingEntry(K key) {
-		return tailMap(key, true).firstEntry();
+		return this.tailMap(key, true).firstEntry();
 	}
 
 	@Override
 	@CheckForNull
 	public K ceilingKey(K key) {
-		return Maps.keyOrNull(ceilingEntry(key));
+		return Maps.keyOrNull(this.ceilingEntry(key));
 	}
 
 	@Override
 	@CheckForNull
 	public Entry<K, V> higherEntry(K key) {
-		return tailMap(key, false).firstEntry();
+		return this.tailMap(key, false).firstEntry();
 	}
 
 	@Override
 	@CheckForNull
 	public K higherKey(K key) {
-		return Maps.keyOrNull(higherEntry(key));
+		return Maps.keyOrNull(this.higherEntry(key));
 	}
 
 	@Override
 	@CheckForNull
 	public Entry<K, V> firstEntry() {
-		return isEmpty() ? null : entrySet().asList().get(0);
+		return this.isEmpty() ? null : this.entrySet().asList().get(0);
 	}
 
 	@Override
 	@CheckForNull
 	public Entry<K, V> lastEntry() {
-		return isEmpty() ? null : entrySet().asList().get(size() - 1);
+		return this.isEmpty() ? null : this.entrySet().asList().get(this.size() - 1);
 	}
 
 	/**
@@ -858,14 +857,13 @@ public final class ImmutableSortedMap<K, V> extends ImmutableSortedMapFauxveride
 		// TODO(kevinb): the descendingMap is never actually cached at all. Either it
 		// should be or the
 		// code below simplified.
-		ImmutableSortedMap<K, V> result = descendingMap;
+		ImmutableSortedMap<K, V> result = this.descendingMap;
 		if (result == null) {
-			if (isEmpty()) {
-				return result = emptyMap(Ordering.from(comparator()).reverse());
+			if (this.isEmpty()) {
+				return result = emptyMap(Ordering.from(this.comparator()).reverse());
 			}
 			else {
-				return result = new ImmutableSortedMap<>((RegularImmutableSortedSet<K>) keySet.descendingSet(),
-						valueList.reverse(), this);
+				return result = new ImmutableSortedMap<>((RegularImmutableSortedSet<K>) this.keySet.descendingSet(), this.valueList.reverse(), this);
 			}
 		}
 		return result;
@@ -873,12 +871,12 @@ public final class ImmutableSortedMap<K, V> extends ImmutableSortedMapFauxveride
 
 	@Override
 	public ImmutableSortedSet<K> navigableKeySet() {
-		return keySet;
+		return this.keySet;
 	}
 
 	@Override
 	public ImmutableSortedSet<K> descendingKeySet() {
-		return keySet.descendingSet();
+		return this.keySet.descendingSet();
 	}
 
 	@Override
@@ -1009,7 +1007,7 @@ public final class ImmutableSortedMap<K, V> extends ImmutableSortedMapFauxveride
 		 */
 		@Override
 		public ImmutableSortedMap<K, V> build() {
-			return buildOrThrow();
+			return this.buildOrThrow();
 		}
 
 		/**
@@ -1021,16 +1019,16 @@ public final class ImmutableSortedMap<K, V> extends ImmutableSortedMapFauxveride
 		 */
 		@Override
 		public ImmutableSortedMap<K, V> buildOrThrow() {
-			switch (size) {
+			switch (this.size) {
 			case 0:
-				return emptyMap(comparator);
+				return emptyMap(this.comparator);
 			case 1:
 				// requireNonNull is safe because the first `size` elements have been
 				// filled in.
-				Entry<K, V> onlyEntry = requireNonNull(entries[0]);
-				return of(comparator, onlyEntry.getKey(), onlyEntry.getValue());
+				Entry<K, V> onlyEntry = requireNonNull(this.entries[0]);
+				return of(this.comparator, onlyEntry.getKey(), onlyEntry.getValue());
 			default:
-				return fromEntries(comparator, false, entries, size);
+				return fromEntries(this.comparator, false, this.entries, this.size);
 			}
 		}
 
@@ -1066,12 +1064,12 @@ public final class ImmutableSortedMap<K, V> extends ImmutableSortedMapFauxveride
 
 		SerializedForm(ImmutableSortedMap<K, V> sortedMap) {
 			super(sortedMap);
-			comparator = sortedMap.comparator();
+			this.comparator = sortedMap.comparator();
 		}
 
 		@Override
 		Builder<K, V> makeBuilder(int size) {
-			return new Builder<>(comparator);
+			return new Builder<>(this.comparator);
 		}
 
 	}

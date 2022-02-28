@@ -20,8 +20,6 @@ import java.util.concurrent.TimeUnit;
 import javax.annotation.CheckForNull;
 import javax.annotations.VisibleForTesting;
 
-import org.checkerframework.checker.nullness.qual.Nullable;
-
 import static java.util.Objects.requireNonNull;
 
 /**
@@ -137,14 +135,14 @@ public final class Suppliers {
 		return sf;
 	}
 
-	private enum SupplierFunctionImpl implements SupplierFunction<@Nullable Object> {
+	private enum SupplierFunctionImpl implements SupplierFunction<Object> {
 
 		INSTANCE;
 
 		// Note: This makes T a "pass-through type"
 		@Override
 		@CheckForNull
-		public Object apply(Supplier<@Nullable Object> input) {
+		public Object apply(Supplier<Object> input) {
 			return input.get();
 		}
 
@@ -177,26 +175,26 @@ public final class Suppliers {
 		@Override
 		@ParametricNullness
 		public T get() {
-			return function.apply(supplier.get());
+			return this.function.apply(this.supplier.get());
 		}
 
 		@Override
 		public boolean equals(@CheckForNull Object obj) {
 			if (obj instanceof SupplierComposition) {
 				SupplierComposition<?, ?> that = (SupplierComposition<?, ?>) obj;
-				return function.equals(that.function) && supplier.equals(that.supplier);
+				return this.function.equals(that.function) && this.supplier.equals(that.supplier);
 			}
 			return false;
 		}
 
 		@Override
 		public int hashCode() {
-			return org.magneton.core.base.Objects.hashCode(function, supplier);
+			return org.magneton.core.base.Objects.hashCode(this.function, this.supplier);
 		}
 
 		@Override
 		public String toString() {
-			return "Suppliers.compose(" + function + ", " + supplier + ")";
+			return "Suppliers.compose(" + this.function + ", " + this.supplier + ")";
 		}
 
 	}
@@ -223,23 +221,24 @@ public final class Suppliers {
 		@ParametricNullness
 		public T get() {
 			// A 2-field variant of Double Checked Locking.
-			if (!initialized) {
+			if (!this.initialized) {
 				synchronized (this) {
-					if (!initialized) {
-						T t = delegate.get();
-						value = t;
-						initialized = true;
+					if (!this.initialized) {
+						T t = this.delegate.get();
+						this.value = t;
+						this.initialized = true;
 						return t;
 					}
 				}
 			}
 			// This is safe because we checked `initialized.`
-			return NullnessCasts.uncheckedCastNullableTToT(value);
+			return NullnessCasts.uncheckedCastNullableTToT(this.value);
 		}
 
 		@Override
 		public String toString() {
-			return "Suppliers.memoize(" + (initialized ? "<supplier that returned " + value + ">" : delegate) + ")";
+			return "Suppliers.memoize("
+					+ (this.initialized ? "<supplier that returned " + this.value + ">" : this.delegate) + ")";
 		}
 
 	}
@@ -265,9 +264,9 @@ public final class Suppliers {
 		@ParametricNullness
 		public T get() {
 			// A 2-field variant of Double Checked Locking.
-			if (!initialized) {
+			if (!this.initialized) {
 				synchronized (this) {
-					if (!initialized) {
+					if (!this.initialized) {
 						/*
 						 * requireNonNull is safe because we read and write `delegate`
 						 * under synchronization.
@@ -276,23 +275,23 @@ public final class Suppliers {
 						 * `delegate` with a singleton `Supplier` that always throws an
 						 * exception.
 						 */
-						T t = requireNonNull(delegate).get();
-						value = t;
-						initialized = true;
+						T t = requireNonNull(this.delegate).get();
+						this.value = t;
+						this.initialized = true;
 						// Release the delegate to GC.
-						delegate = null;
+						this.delegate = null;
 						return t;
 					}
 				}
 			}
 			// This is safe because we checked `initialized.`
-			return NullnessCasts.uncheckedCastNullableTToT(value);
+			return NullnessCasts.uncheckedCastNullableTToT(this.value);
 		}
 
 		@Override
 		public String toString() {
 			org.magneton.core.base.Supplier<T> delegate = this.delegate;
-			return "Suppliers.memoize(" + (delegate == null ? "<supplier that returned " + value + ">" : delegate)
+			return "Suppliers.memoize(" + (delegate == null ? "<supplier that returned " + this.value + ">" : delegate)
 					+ ")";
 		}
 
@@ -316,7 +315,7 @@ public final class Suppliers {
 
 		ExpiringMemoizingSupplier(org.magneton.core.base.Supplier<T> delegate, long duration, TimeUnit unit) {
 			this.delegate = Preconditions.checkNotNull(delegate);
-			durationNanos = unit.toNanos(duration);
+			this.durationNanos = unit.toNanos(duration);
 			Preconditions.checkArgument(duration > 0, "duration (%s %s) must be > 0", duration, unit);
 		}
 
@@ -329,30 +328,30 @@ public final class Suppliers {
 			// putting our fields into a holder class, but (at least on x86)
 			// the extra memory consumption and indirection are more
 			// expensive than the extra volatile reads.
-			long nanos = expirationNanos;
+			long nanos = this.expirationNanos;
 			long now = org.magneton.core.base.Platform.systemNanoTime();
 			if (nanos == 0 || now - nanos >= 0) {
 				synchronized (this) {
-					if (nanos == expirationNanos) { // recheck for lost race
-						T t = delegate.get();
-						value = t;
-						nanos = now + durationNanos;
+					if (nanos == this.expirationNanos) { // recheck for lost race
+						T t = this.delegate.get();
+						this.value = t;
+						nanos = now + this.durationNanos;
 						// In the very unlikely event that nanos is 0, set it to 1;
 						// no one will notice 1 ns of tardiness.
-						expirationNanos = (nanos == 0) ? 1 : nanos;
+						this.expirationNanos = (nanos == 0) ? 1 : nanos;
 						return t;
 					}
 				}
 			}
 			// This is safe because we checked `expirationNanos.`
-			return NullnessCasts.uncheckedCastNullableTToT(value);
+			return NullnessCasts.uncheckedCastNullableTToT(this.value);
 		}
 
 		@Override
 		public String toString() {
 			// This is a little strange if the unit the user provided was not NANOS,
 			// but we don't want to store the unit just for toString
-			return "Suppliers.memoizeWithExpiration(" + delegate + ", " + durationNanos + ", NANOS)";
+			return "Suppliers.memoizeWithExpiration(" + this.delegate + ", " + this.durationNanos + ", NANOS)";
 		}
 
 	}
@@ -371,26 +370,26 @@ public final class Suppliers {
 		@Override
 		@ParametricNullness
 		public T get() {
-			return instance;
+			return this.instance;
 		}
 
 		@Override
 		public boolean equals(@CheckForNull Object obj) {
 			if (obj instanceof SupplierOfInstance) {
 				SupplierOfInstance<?> that = (SupplierOfInstance<?>) obj;
-				return org.magneton.core.base.Objects.equal(instance, that.instance);
+				return org.magneton.core.base.Objects.equal(this.instance, that.instance);
 			}
 			return false;
 		}
 
 		@Override
 		public int hashCode() {
-			return Objects.hashCode(instance);
+			return Objects.hashCode(this.instance);
 		}
 
 		@Override
 		public String toString() {
-			return "Suppliers.ofInstance(" + instance + ")";
+			return "Suppliers.ofInstance(" + this.instance + ")";
 		}
 
 	}
@@ -408,14 +407,14 @@ public final class Suppliers {
 		@Override
 		@ParametricNullness
 		public T get() {
-			synchronized (delegate) {
-				return delegate.get();
+			synchronized (this.delegate) {
+				return this.delegate.get();
 			}
 		}
 
 		@Override
 		public String toString() {
-			return "Suppliers.synchronizedSupplier(" + delegate + ")";
+			return "Suppliers.synchronizedSupplier(" + this.delegate + ")";
 		}
 
 	}

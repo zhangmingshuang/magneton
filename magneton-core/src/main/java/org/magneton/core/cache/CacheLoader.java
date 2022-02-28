@@ -24,9 +24,9 @@ import javax.annotations.CheckReturnValue;
 import org.magneton.core.base.Function;
 import org.magneton.core.base.Preconditions;
 import org.magneton.core.base.Supplier;
-import org.magneton.foundation.util.concurrent.Futures;
-import org.magneton.foundation.util.concurrent.ListenableFuture;
-import org.magneton.foundation.util.concurrent.ListenableFutureTask;
+import org.magneton.core.concurrent.Futures;
+import org.magneton.core.concurrent.ListenableFuture;
+import org.magneton.core.concurrent.ListenableFutureTask;
 
 /**
  * Computes or retrieves values, based on a key, for use in populating a
@@ -170,7 +170,7 @@ public abstract class CacheLoader<K, V> {
 	public ListenableFuture<V> reload(K key, V oldValue) throws Exception {
 		Preconditions.checkNotNull(key);
 		Preconditions.checkNotNull(oldValue);
-		return Futures.immediateFuture(load(key));
+		return Futures.immediateFuture(this.load(key));
 	}
 
 	/**
@@ -216,7 +216,7 @@ public abstract class CacheLoader<K, V> {
 
 		@Override
 		public V load(K key) {
-			return computingFunction.apply(Preconditions.checkNotNull(key));
+			return this.computingFunction.apply(Preconditions.checkNotNull(key));
 		}
 
 	}
@@ -234,7 +234,7 @@ public abstract class CacheLoader<K, V> {
 		@Override
 		public V load(Object key) {
 			Preconditions.checkNotNull(key);
-			return computingSupplier.get();
+			return this.computingSupplier.get();
 		}
 
 	}

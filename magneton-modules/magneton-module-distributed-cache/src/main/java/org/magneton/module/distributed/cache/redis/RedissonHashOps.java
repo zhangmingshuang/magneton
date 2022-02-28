@@ -4,10 +4,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.magneton.core.base.Arrays;
 import org.magneton.core.base.Preconditions;
 import org.magneton.core.collect.Collections;
 import org.magneton.core.collect.Lists;
-import org.magneton.foundation.util.Arrays;
 import org.magneton.module.distributed.cache.Entry;
 import org.magneton.module.distributed.cache.ops.HashOps;
 import org.redisson.api.RMap;

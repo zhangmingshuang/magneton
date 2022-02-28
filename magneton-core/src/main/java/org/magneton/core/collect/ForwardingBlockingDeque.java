@@ -50,7 +50,7 @@ import javax.annotation.CheckForNull;
  * @author Emily Soldal
  * @since 14.0
  * @deprecated This class has moved to {@code com.google.common.util.concurrent}. Please
- * use {@link org.magneton.foundation.util.concurrent.ForwardingBlockingDeque} instead.
+ * use {@link org.magneton.core.concurrent.ForwardingBlockingDeque} instead.
  */
 @Deprecated
 @ElementTypesAreNonnullByDefault
@@ -65,80 +65,80 @@ public abstract class ForwardingBlockingDeque<E> extends ForwardingDeque<E> impl
 
 	@Override
 	public int remainingCapacity() {
-		return delegate().remainingCapacity();
+		return this.delegate().remainingCapacity();
 	}
 
 	@Override
 	public void putFirst(E e) throws InterruptedException {
-		delegate().putFirst(e);
+		this.delegate().putFirst(e);
 	}
 
 	@Override
 	public void putLast(E e) throws InterruptedException {
-		delegate().putLast(e);
+		this.delegate().putLast(e);
 	}
 
 	@Override
 	public boolean offerFirst(E e, long timeout, TimeUnit unit) throws InterruptedException {
-		return delegate().offerFirst(e, timeout, unit);
+		return this.delegate().offerFirst(e, timeout, unit);
 	}
 
 	@Override
 	public boolean offerLast(E e, long timeout, TimeUnit unit) throws InterruptedException {
-		return delegate().offerLast(e, timeout, unit);
+		return this.delegate().offerLast(e, timeout, unit);
 	}
 
 	@Override
 	public E takeFirst() throws InterruptedException {
-		return delegate().takeFirst();
+		return this.delegate().takeFirst();
 	}
 
 	@Override
 	public E takeLast() throws InterruptedException {
-		return delegate().takeLast();
+		return this.delegate().takeLast();
 	}
 
 	@Override
 	@CheckForNull
 	public E pollFirst(long timeout, TimeUnit unit) throws InterruptedException {
-		return delegate().pollFirst(timeout, unit);
+		return this.delegate().pollFirst(timeout, unit);
 	}
 
 	@Override
 	@CheckForNull
 	public E pollLast(long timeout, TimeUnit unit) throws InterruptedException {
-		return delegate().pollLast(timeout, unit);
+		return this.delegate().pollLast(timeout, unit);
 	}
 
 	@Override
 	public void put(E e) throws InterruptedException {
-		delegate().put(e);
+		this.delegate().put(e);
 	}
 
 	@Override
 	public boolean offer(E e, long timeout, TimeUnit unit) throws InterruptedException {
-		return delegate().offer(e, timeout, unit);
+		return this.delegate().offer(e, timeout, unit);
 	}
 
 	@Override
 	public E take() throws InterruptedException {
-		return delegate().take();
+		return this.delegate().take();
 	}
 
 	@Override
 	@CheckForNull
 	public E poll(long timeout, TimeUnit unit) throws InterruptedException {
-		return delegate().poll(timeout, unit);
+		return this.delegate().poll(timeout, unit);
 	}
 
 	@Override
 	public int drainTo(Collection<? super E> c) {
-		return delegate().drainTo(c);
+		return this.delegate().drainTo(c);
 	}
 
 	@Override
 	public int drainTo(Collection<? super E> c, int maxElements) {
-		return delegate().drainTo(c, maxElements);
+		return this.delegate().drainTo(c, maxElements);
 	}
 
 }

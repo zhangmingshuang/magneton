@@ -26,7 +26,7 @@ import java.util.stream.Stream;
 
 import javax.annotation.CheckForNull;
 
-import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jetbrains.annotations.Nullable;
 import org.magneton.core.base.Preconditions;
 import org.magneton.core.math.IntMath;
 
@@ -86,9 +86,9 @@ final class TopKSelector<T> {
 		this.k = k;
 		Preconditions.checkArgument(k >= 0, "k (%s) must be >= 0", k);
 		Preconditions.checkArgument(k <= Integer.MAX_VALUE / 2, "k (%s) must be <= Integer.MAX_VALUE / 2", k);
-		buffer = (T[]) new Object[org.magneton.core.math.IntMath.checkedMultiply(k, 2)];
-		bufferSize = 0;
-		threshold = null;
+		this.buffer = (T[]) new Object[org.magneton.core.math.IntMath.checkedMultiply(k, 2)];
+		this.bufferSize = 0;
+		this.threshold = null;
 	}
 
 	/**
@@ -140,27 +140,27 @@ final class TopKSelector<T> {
 	 * takes amortized O(1) time.
 	 */
 	public void offer(@ParametricNullness T elem) {
-		if (k == 0) {
+		if (this.k == 0) {
 			return;
 		}
-		else if (bufferSize == 0) {
-			buffer[0] = elem;
-			threshold = elem;
-			bufferSize = 1;
+		else if (this.bufferSize == 0) {
+			this.buffer[0] = elem;
+			this.threshold = elem;
+			this.bufferSize = 1;
 		}
-		else if (bufferSize < k) {
-			buffer[bufferSize++] = elem;
+		else if (this.bufferSize < this.k) {
+			this.buffer[this.bufferSize++] = elem;
 			// uncheckedCastNullableTToT is safe because bufferSize > 0.
-			if (comparator.compare(elem, NullnessCasts.uncheckedCastNullableTToT(threshold)) > 0) {
-				threshold = elem;
+			if (this.comparator.compare(elem, NullnessCasts.uncheckedCastNullableTToT(this.threshold)) > 0) {
+				this.threshold = elem;
 			}
 			// uncheckedCastNullableTToT is safe because bufferSize > 0.
 		}
-		else if (comparator.compare(elem, NullnessCasts.uncheckedCastNullableTToT(threshold)) < 0) {
+		else if (this.comparator.compare(elem, NullnessCasts.uncheckedCastNullableTToT(this.threshold)) < 0) {
 			// Otherwise, we can ignore elem; we've seen k better elements.
-			buffer[bufferSize++] = elem;
-			if (bufferSize == 2 * k) {
-				trim();
+			this.buffer[this.bufferSize++] = elem;
+			if (this.bufferSize == 2 * this.k) {
+				this.trim();
 			}
 		}
 	}
@@ -171,7 +171,7 @@ final class TopKSelector<T> {
 	 */
 	private void trim() {
 		int left = 0;
-		int right = 2 * k - 1;
+		int right = 2 * this.k - 1;
 
 		int minThresholdPosition = 0;
 		// The leftmost position at which the greatest of the k lower elements
@@ -182,12 +182,12 @@ final class TopKSelector<T> {
 		while (left < right) {
 			int pivotIndex = (left + right + 1) >>> 1;
 
-			int pivotNewIndex = partition(left, right, pivotIndex);
+			int pivotNewIndex = this.partition(left, right, pivotIndex);
 
-			if (pivotNewIndex > k) {
+			if (pivotNewIndex > this.k) {
 				right = pivotNewIndex - 1;
 			}
-			else if (pivotNewIndex < k) {
+			else if (pivotNewIndex < this.k) {
 				left = Math.max(pivotNewIndex, left + 1);
 				minThresholdPosition = pivotNewIndex;
 			}
@@ -198,17 +198,17 @@ final class TopKSelector<T> {
 			if (iterations >= maxIterations) {
 				// We've already taken O(k log k), let's make sure we don't take longer
 				// than O(k log k).
-				Arrays.sort(buffer, left, right + 1, comparator);
+				Arrays.sort(this.buffer, left, right + 1, this.comparator);
 				break;
 			}
 		}
-		bufferSize = k;
+		this.bufferSize = this.k;
 
-		threshold = NullnessCasts.uncheckedCastNullableTToT(buffer[minThresholdPosition]);
-		for (int i = minThresholdPosition + 1; i < k; i++) {
-			if (comparator.compare(NullnessCasts.uncheckedCastNullableTToT(buffer[i]),
-					NullnessCasts.uncheckedCastNullableTToT(threshold)) > 0) {
-				threshold = buffer[i];
+		this.threshold = NullnessCasts.uncheckedCastNullableTToT(this.buffer[minThresholdPosition]);
+		for (int i = minThresholdPosition + 1; i < this.k; i++) {
+			if (this.comparator.compare(NullnessCasts.uncheckedCastNullableTToT(this.buffer[i]),
+					NullnessCasts.uncheckedCastNullableTToT(this.threshold)) > 0) {
+				this.threshold = this.buffer[i];
 			}
 		}
 	}
@@ -220,30 +220,30 @@ final class TopKSelector<T> {
 	 * and everything in (pivotNewIndex, right] is greater than pivotValue.
 	 */
 	private int partition(int left, int right, int pivotIndex) {
-		T pivotValue = NullnessCasts.uncheckedCastNullableTToT(buffer[pivotIndex]);
-		buffer[pivotIndex] = buffer[right];
+		T pivotValue = NullnessCasts.uncheckedCastNullableTToT(this.buffer[pivotIndex]);
+		this.buffer[pivotIndex] = this.buffer[right];
 
 		int pivotNewIndex = left;
 		for (int i = left; i < right; i++) {
-			if (comparator.compare(NullnessCasts.uncheckedCastNullableTToT(buffer[i]), pivotValue) < 0) {
-				swap(pivotNewIndex, i);
+			if (this.comparator.compare(NullnessCasts.uncheckedCastNullableTToT(this.buffer[i]), pivotValue) < 0) {
+				this.swap(pivotNewIndex, i);
 				pivotNewIndex++;
 			}
 		}
-		buffer[right] = buffer[pivotNewIndex];
-		buffer[pivotNewIndex] = pivotValue;
+		this.buffer[right] = this.buffer[pivotNewIndex];
+		this.buffer[pivotNewIndex] = pivotValue;
 		return pivotNewIndex;
 	}
 
 	private void swap(int i, int j) {
-		T tmp = buffer[i];
-		buffer[i] = buffer[j];
-		buffer[j] = tmp;
+		T tmp = this.buffer[i];
+		this.buffer[i] = this.buffer[j];
+		this.buffer[j] = tmp;
 	}
 
 	TopKSelector<T> combine(TopKSelector<T> other) {
 		for (int i = 0; i < other.bufferSize; i++) {
-			offer(NullnessCasts.uncheckedCastNullableTToT(other.buffer[i]));
+			this.offer(NullnessCasts.uncheckedCastNullableTToT(other.buffer[i]));
 		}
 		return this;
 	}
@@ -258,7 +258,7 @@ final class TopKSelector<T> {
 	 * that use case.
 	 */
 	public void offerAll(Iterable<? extends T> elements) {
-		offerAll(elements.iterator());
+		this.offerAll(elements.iterator());
 	}
 
 	/**
@@ -273,7 +273,7 @@ final class TopKSelector<T> {
 	 */
 	public void offerAll(Iterator<? extends T> elements) {
 		while (elements.hasNext()) {
-			offer(elements.next());
+			this.offer(elements.next());
 		}
 	}
 
@@ -287,14 +287,14 @@ final class TopKSelector<T> {
 	 * changes to this {@code TopKSelector}. This method returns in O(k log k) time.
 	 */
 	public List<T> topK() {
-		Arrays.sort(buffer, 0, bufferSize, comparator);
-		if (bufferSize > k) {
-			Arrays.fill(buffer, k, buffer.length, null);
-			bufferSize = k;
-			threshold = buffer[k - 1];
+		Arrays.sort(this.buffer, 0, this.bufferSize, this.comparator);
+		if (this.bufferSize > this.k) {
+			Arrays.fill(this.buffer, this.k, this.buffer.length, null);
+			this.bufferSize = this.k;
+			this.threshold = this.buffer[this.k - 1];
 		}
 		// we have to support null elements, so no ImmutableList for us
-		return Collections.unmodifiableList(Arrays.asList(Arrays.copyOf(buffer, bufferSize)));
+		return Collections.unmodifiableList(Arrays.asList(Arrays.copyOf(this.buffer, this.bufferSize)));
 	}
 
 }

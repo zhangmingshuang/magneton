@@ -23,7 +23,7 @@ import java.util.logging.Logger;
 
 import org.magneton.core.base.MoreObjects;
 import org.magneton.core.base.Preconditions;
-import org.magneton.foundation.util.concurrent.MoreExecutors;
+import org.magneton.core.concurrent.MoreExecutors;
 
 /**
  * Dispatches events to listeners, and provides ways for listeners to register themselves.
@@ -199,8 +199,7 @@ public class EventBus {
 	 * valid Java identifier.
 	 */
 	public EventBus(String identifier) {
-		this(identifier, MoreExecutors.directExecutor(),
-				Dispatcher.perThreadDispatchQueue(), LoggingHandler.INSTANCE);
+		this(identifier, MoreExecutors.directExecutor(), Dispatcher.perThreadDispatchQueue(), LoggingHandler.INSTANCE);
 	}
 
 	/**
@@ -227,7 +226,7 @@ public class EventBus {
 	 * @since 19.0
 	 */
 	public final String identifier() {
-		return identifier;
+		return this.identifier;
 	}
 
 	/**
@@ -235,7 +234,7 @@ public class EventBus {
 	 * subscribers.
 	 */
 	final Executor executor() {
-		return executor;
+		return this.executor;
 	}
 
 	/** Handles the given exception thrown by a subscriber with the given context. */
@@ -243,7 +242,7 @@ public class EventBus {
 		Preconditions.checkNotNull(e);
 		Preconditions.checkNotNull(context);
 		try {
-			exceptionHandler.handleException(e, context);
+			this.exceptionHandler.handleException(e, context);
 		}
 		catch (Throwable e2) {
 			// if the handler threw an exception... well, just log it
@@ -257,7 +256,7 @@ public class EventBus {
 	 * @param object object whose subscriber methods should be registered.
 	 */
 	public void register(Object object) {
-		subscribers.register(object);
+		this.subscribers.register(object);
 	}
 
 	/**
@@ -266,7 +265,7 @@ public class EventBus {
 	 * @throws IllegalArgumentException if the object was not previously registered.
 	 */
 	public void unregister(Object object) {
-		subscribers.unregister(object);
+		this.subscribers.unregister(object);
 	}
 
 	/**
@@ -280,19 +279,19 @@ public class EventBus {
 	 * @param event event to post.
 	 */
 	public void post(Object event) {
-		Iterator<Subscriber> eventSubscribers = subscribers.getSubscribers(event);
+		Iterator<Subscriber> eventSubscribers = this.subscribers.getSubscribers(event);
 		if (eventSubscribers.hasNext()) {
-			dispatcher.dispatch(event, eventSubscribers);
+			this.dispatcher.dispatch(event, eventSubscribers);
 		}
 		else if (!(event instanceof DeadEvent)) {
 			// the event had no subscribers and was not itself a DeadEvent
-			post(new DeadEvent(this, event));
+			this.post(new DeadEvent(this, event));
 		}
 	}
 
 	@Override
 	public String toString() {
-		return MoreObjects.toStringHelper(this).addValue(identifier).toString();
+		return MoreObjects.toStringHelper(this).addValue(this.identifier).toString();
 	}
 
 	/** Simple logging handler for subscriber exceptions. */

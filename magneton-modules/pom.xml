@@ -11,6 +11,7 @@
 
 	<artifactId>magneton-modules</artifactId>
 	<packaging>pom</packaging>
+	<description>功能模块</description>
 
 	<modules>
 		<module>magneton-module-distributed-cache</module>

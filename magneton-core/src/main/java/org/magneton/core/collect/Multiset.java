@@ -25,10 +25,10 @@ import java.util.Spliterator;
 import java.util.function.Consumer;
 import java.util.function.ObjIntConsumer;
 
-import javax.annotations.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
+import javax.annotations.CanIgnoreReturnValue;
 
-import org.magneton.foundation.util.concurrent.AtomicLongMap;
+import org.magneton.core.concurrent.AtomicLongMap;
 
 import static org.magneton.core.base.Preconditions.checkNotNull;
 
@@ -297,7 +297,7 @@ public interface Multiset<E extends Object> extends Collection<E> {
 
 	default void forEachEntry(ObjIntConsumer<? super E> action) {
 		checkNotNull(action);
-		entrySet().forEach(entry -> action.accept(entry.getElement(), entry.getCount()));
+		this.entrySet().forEach(entry -> action.accept(entry.getElement(), entry.getCount()));
 	}
 
 	/**
@@ -435,7 +435,7 @@ public interface Multiset<E extends Object> extends Collection<E> {
 	@Override
 	default void forEach(Consumer<? super E> action) {
 		checkNotNull(action);
-		entrySet().forEach(entry -> {
+		this.entrySet().forEach(entry -> {
 			E elem = entry.getElement();
 			int count = entry.getCount();
 			for (int i = 0; i < count; i++) {
