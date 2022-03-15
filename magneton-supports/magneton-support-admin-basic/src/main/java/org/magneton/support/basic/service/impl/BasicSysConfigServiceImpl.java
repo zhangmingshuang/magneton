@@ -10,6 +10,7 @@ import org.magneton.support.basic.dao.intf.BasicSysConfigDao;
 import org.magneton.support.basic.entity.BasicSysConfigDO;
 import org.magneton.support.basic.service.BasicSysConfigService;
 import org.magneton.support.basic.wrapper.BasicSysConfigQuery;
+import org.magneton.support.constant.CacheConstant;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
@@ -24,14 +25,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class BasicSysConfigServiceImpl implements BasicSysConfigService {
 
-	private static final String CACHE_KEY = "magneton:basic:sysConfig";
-
 	@Autowired
 	private BasicSysConfigDao basicSysConfigDao;
 
 	@Nullable
 	@Override
-	@Cacheable(cacheNames = CACHE_KEY, key = "#key", condition = "#key != null")
+	@Cacheable(cacheNames = CacheConstant.BASIC_SYS_CONFIG, key = "#key", condition = "#key != null")
 	public String getValue(String key) {
 		return this.getValueFromDb(key);
 	}
