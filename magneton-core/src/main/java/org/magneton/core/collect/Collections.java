@@ -39,7 +39,7 @@ public class Collections {
 	 * @see #EMPTY_MAP
 	 * @since 1.5
 	 */
-	public static final <K, V> Map<K, V> emptyMap() {
+	public static <K, V> Map<K, V> emptyMap() {
 		return java.util.Collections.emptyMap();
 	}
 
@@ -69,6 +69,10 @@ public class Collections {
 
 	public static Set<Class<?>> singleton(Class<?> clazz) {
 		return Collections.singleton(clazz);
+	}
+
+	public static <E> Set<E> newSetFromMap(Map<E, Boolean> map) {
+		return java.util.Collections.newSetFromMap(map);
 	}
 
 }
