@@ -24,7 +24,7 @@ import org.springframework.context.annotation.Configuration;
 public class SupportAutoConfiguration implements InitializingBean {
 
 	@Override
-	public void afterPropertiesSet() throws Exception {
+	public void afterPropertiesSet() {
 		log.info("--------support-auto-configuration----------");
 	}
 

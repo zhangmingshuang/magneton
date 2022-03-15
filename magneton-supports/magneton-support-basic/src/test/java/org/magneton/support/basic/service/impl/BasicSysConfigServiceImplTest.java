@@ -11,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
  *
  * @author zhangmsh 2022/2/16
  * @since 1.2.0
+ * @see BasicSysConfigServiceImpl
  */
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
 class BasicSysConfigServiceImplTest {
