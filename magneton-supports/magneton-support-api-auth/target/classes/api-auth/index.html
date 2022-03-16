@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="smart-doc" name="generator">
+    <title>api-auth</title>
+    <link href="font.css" rel="stylesheet">
+    <link href="AllInOne.css?v=1647410582567" rel="stylesheet"/>
+    <link href="xt256.min.css" rel="stylesheet">
+    <style>.literalblock pre, .listingblock pre:not(.highlight), .listingblock pre[class="highlight"], .listingblock pre[class^="highlight "], .listingblock pre.CodeRay, .listingblock pre.prettyprint {
+        background: #000
+    }
+
+    .hljs {
+        padding: 0
+    }</style>
+    <script src="highlight.min.js"></script>
+    <script src="jquery.min.js"></script>
+</head>
+<body class="book toc2 toc-left">
+<div id="header"><h1>api-auth</h1>
+    <div class="toc2" id="toc">
+        <div id="book-search-input"><input id="search" placeholder="Type to search" type="text"></div>
+        <div id="toctitle"><span>API Reference</span></div>
+        <ul class="sectlevel1" id="accordion">            <li class="open"><a class="dd" href="#_短信注册登录模式.">1.短信注册登录模式.</a>
+                <ul class="sectlevel2">
+                    <li><a
+                            href="#_1_1_1_发送短信">1.1.发送短信</a>
+                    </li>
+                </ul>
+            </li>
+            <li><a href="#_错误码列表">2.错误码列表</a></li>
+        </ul>
+    </div>
+</div>
+<div id="content">
+    <div id="preamble">
+        <div class="sectionbody">
+            <table class="tableblock frame-all grid-all spread">
+                <colgroup>
+                    <col style="width: 20%;">
+                    <col style="width: 20%;">
+                    <col style="width: 20%;">
+                    <col style="width: 20%;">
+                    <col style="width: 20%;">
+                </colgroup>
+                <thead>
+                <tr>
+                    <th class="tableblock halign-left valign-top">Version</th>
+                    <th class="tableblock halign-left valign-top">Update Time</th>
+                    <th class="tableblock halign-left valign-top">Status</th>
+                    <th class="tableblock halign-left valign-top">Author</th>
+                    <th class="tableblock halign-left valign-top">Description</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">1.0</p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">2020-12-31 10:30</p>
+                    </td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">update</p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">author</p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">desc</p></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div class="sect1"><h2 id="_短信注册登录模式."><a class="anchor" href="#_短信注册登录模式."></a><a class="link"
+                                                                                           href="#_短信注册登录模式.">1.短信注册登录模式.</a>
+    </h2>
+        <div class="sectionbody">
+            <div class="sect2" id="6ba6cad22d923c21ade4235eb93101e8"><h3 id="_1_1_1_发送短信"><a
+                    class="anchor" href="#_1_1_1_发送短信"></a><a class="link"
+                                                                                        href="#_1_1_1_发送短信">1.1.发送短信</a>
+            </h3>
+                <div class="paragraph" data-download="false" data-page="" data-url="/${magneton.api.prefix:api}/auth/sms/send"
+                     id="6ba6cad22d923c21ade4235eb93101e8-url"><p><strong>URL:</strong><a class="bare"
+                                                                         href="/${magneton.api.prefix:api}/auth/sms/send">/${magneton.api.prefix:api}/auth/sms/send</a></p>
+                </div>
+                <div class="paragraph" data-method="POST" id="6ba6cad22d923c21ade4235eb93101e8-method"><p><strong>Type:</strong>POST
+                </p></div>
+                <div class="paragraph"><p><strong>Author:</strong>zhangmsh 15/03/2022</p></div>
+                <div class="paragraph" data-content-type="application/x-www-form-urlencoded;charset=utf-8" id="6ba6cad22d923c21ade4235eb93101e8-content-type"><p>
+                    <strong>Content-Type:</strong>application/x-www-form-urlencoded;charset=utf-8</p></div>
+                <div class="paragraph"><p><strong>Description:</strong>发送短信有对应的风控模块，如果返回{@link SmsError#MOBILE_RISK}的状态码， 调用方需要进行风险控制流程的接入。</p></div>
+                <div class="paragraph"><p><strong>Query-parameters:</strong></p></div>
+                <table class="tableblock frame-all grid-all spread">
+                    <colgroup>
+                        <col style="width: 20%;">
+                        <col style="width: 20%;">
+                        <col style="width: 20%;">
+                        <col style="width: 20%;">
+                        <col style="width: 20%;">
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th class="tableblock halign-left valign-top">Parameter</th>
+                        <th class="tableblock halign-left valign-top">Type</th>
+                        <th class="tableblock halign-left valign-top">Description</th>
+                        <th class="tableblock halign-left valign-top">Required</th>
+                        <th class="tableblock halign-left valign-top">Since</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">mobile</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">
+                            手机号</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">risk_type</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">
+                            风控类型，可选值：code</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">risk_value</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">
+                            风控值</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="paragraph"><p><strong>Response-fields:</strong></p></div>
+                <table class="tableblock frame-all grid-all spread">
+                    <colgroup>
+                        <col style="width: 25%;">
+                        <col style="width: 25%;">
+                        <col style="width: 25%;">
+                        <col style="width: 25%;">
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th class="tableblock halign-left valign-top">Field</th>
+                        <th class="tableblock halign-left valign-top">Type</th>
+                        <th class="tableblock halign-left valign-top">Description</th>
+                        <th class="tableblock halign-left valign-top">Since</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">code</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">
+                            No comments found.</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">data</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">object</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">
+                            No comments found. (ActualType: SmsSendReq)</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─mobile</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">
+                            手机号</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─risk_type</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">
+                            风控类型，可选值：code</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─risk_value</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">
+                            风控值</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">message</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">
+                            No comments found.</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">timestamp</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int64</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">
+                            No comments found.</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">additions</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">map</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">
+                            No comments found. (ActualType: SmsSendReq)</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─any object</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">object</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">
+                            any object.</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="paragraph"><p><strong>Response-example:</strong></p></div>
+                <div class="listingblock">
+                    <div class="content">
+                        <pre><code class="json">{
+  "code": "13762",
+  "data": {
+    "mobile": "206.817.1594",
+    "risk_type": "7dufii",
+    "risk_value": "fbekcf"
+  },
+  "message": "success",
+  "timestamp": 1647410587039,
+  "additions": {
+    "mapKey": {}
+  }
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="sect1"><h2 id="_错误码列表"><a class="anchor" href="#_错误码列表"></a><a class="link"
+                                                                                                       href="#_错误码列表">2.错误码列表</a>
+    </h2>
+        <div class="sectionbody">
+            <table class="tableblock frame-all grid-all spread">
+                <colgroup>
+                    <col style="width: 50%;">
+                    <col style="width: 50%;">
+                </colgroup>
+                <thead>
+                <tr>
+                    <th class="tableblock halign-left valign-top">Error code</th>
+                    <th class="tableblock halign-left valign-top">Description</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">1000001</p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">PARAM_MOBILE_BLANK 手机号不能为空</p>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">1000002</p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">PARAM_MOBILE_ERROR 手机号格式不正确</p>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">1000900</p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">MOBILE_RISK 手机号存在风险</p>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <footer class="page-footer"><span class="copyright">Generated by smart-doc at 2022-03-16 14:03:02</span><span
+            class="footer-modification">Suggestions,contact,support and error reporting on<a
+            href="https://gitee.com/smart-doc-team/smart-doc" target="_blank">Gitee</a>or<a
+            href="https://github.com/smart-doc-group/smart-doc.git" target="_blank">Github</a></span>
+    </footer>
+    <div href="javascript:void(0)" id="toTop"><img id="upArrow"
+                                                   src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAABlUlEQVRIS+2UvUvDQBiH398Rly4udnARwUXs4qAIOigI4iL30dTZ2T9AcNPVvUsXF7uYttdScNDFRRAnB11cFFwKxcXBJTQnJ6lEbRI/CIiY9e6e5/e+9+ZAGX/ImE9/QKCU2jfGbGTQqq4xZgtSyisiKmQgIAAVCCFWAGxnIOhqrdd/xyUrpRZsP40xSwA6AI57vd5eq9W6T6s8tQIppSKi+gDQNREprfVNkiRRwDlfY4xZ+FAIuSOi8Qjw0nEc5XnebZwkViClXA2T5+xhY8xus9ncEUJMAziITN5FEARuXLsGCoQQywBs8uEovJ+Scz7FGDuMSM4cx3E9z+u8r+SDQEq5SEQ1IhoZBE+QnBKRq7V+iEreCDjn84wxCx9NgidITnK5nFutVh/7e14FSqnZIAhqAMY+A4+TADjyfb/Ubref7J4XQXhxNvnEV+AJlbTy+XypUqn4KBaLBZuciCa/A0+opN5oNFz7FpUBbP4EHicxxsyAcz7HGDvvz3nar5+2Ho5wOQwsU5+KNGDa+r8grUP0DBLjtRtNKEliAAAAAElFTkSuQmCC"><span
+            id="upText">Top</span></div>
+</div>
+<script src="search.js?v=1647410582567"></script>
+<script>
+    $(function(){const Accordion=function(el,multiple){this.el=el||{};this.multiple=multiple||false;const links=this.el.find(".dd");links.on("click",{el:this.el,multiple:this.multiple},this.dropdown)};Accordion.prototype.dropdown=function(e){const $el=e.data.el;const $this=$(this),$next=$this.next();$next.slideToggle();$this.parent().toggleClass("open");if(!e.data.multiple){$el.find(".submenu").not($next).slideUp("20").parent().removeClass("open")}};new Accordion($("#accordion"),false);hljs.highlightAll();$(window).scroll(function(){if($(window).scrollTop()>100){$("#toTop").fadeIn(1500);$("#toTop").hover(function(){$("#upArrow").hide();$("#upText").show()},function(){$("#upArrow").show();$("#upText").hide()})}else{$("#toTop").fadeOut(1500)}});$("#toTop").click(function(){$("body, html").animate({scrollTop:0},1000);return false})});
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>
