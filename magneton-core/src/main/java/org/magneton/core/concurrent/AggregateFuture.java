@@ -222,7 +222,8 @@ abstract class AggregateFuture<InputT extends Object, OutputT extends Object> ex
 			 * longer be necessary. The optimization could actually hurt in some cases, as
 			 * it forces us to keep all inputs in memory until the final input completes.
 			 */
-			ImmutableCollection<? extends Future<? extends InputT>> localFutures = this.collectsValues ? this.futures : null;
+			ImmutableCollection<? extends Future<? extends InputT>> localFutures = this.collectsValues ? this.futures
+					: null;
 			Runnable listener = () -> this.decrementCountAndMaybeComplete(localFutures);
 			for (ListenableFuture<? extends InputT> future : this.futures) {
 				future.addListener(listener, directExecutor());

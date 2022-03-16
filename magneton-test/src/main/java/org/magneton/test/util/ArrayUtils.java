@@ -1923,8 +1923,7 @@ public class ArrayUtils {
 	 * not found or {@code null} array input
 	 * @since 3.10
 	 */
-	public static BitSet indexesOf(double[] array, double valueToFind, int startIndex,
-			double tolerance) {
+	public static BitSet indexesOf(double[] array, double valueToFind, int startIndex, double tolerance) {
 		BitSet bitSet = new BitSet();
 
 		if (array == null) {
@@ -3765,8 +3764,7 @@ public class ArrayUtils {
 	 * @return the last index of the value within the array, {@link #INDEX_NOT_FOUND}
 	 * ({@code -1}) if not found or {@code null} array input
 	 */
-	public static int lastIndexOf(double[] array, double valueToFind, int startIndex,
-			double tolerance) {
+	public static int lastIndexOf(double[] array, double valueToFind, int startIndex, double tolerance) {
 		if (isEmpty(array)) {
 			return INDEX_NOT_FOUND;
 		}

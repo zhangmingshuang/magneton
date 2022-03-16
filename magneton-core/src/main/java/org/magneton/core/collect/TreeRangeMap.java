@@ -523,7 +523,8 @@ public final class TreeRangeMap<K extends Comparable, V> implements org.magneton
 
 		@Override
 		public void put(Range<K> range, V value) {
-			Preconditions.checkArgument(subRange.encloses(range), "Cannot put range %s into a subRangeMap(%s)", range, subRange);
+			Preconditions.checkArgument(subRange.encloses(range), "Cannot put range %s into a subRangeMap(%s)", range,
+					subRange);
 			TreeRangeMap.this.put(range, value);
 		}
 
@@ -565,7 +566,8 @@ public final class TreeRangeMap<K extends Comparable, V> implements org.magneton
 		@Override
 		public void merge(Range<K> range, @CheckForNull V value,
 				BiFunction<? super V, ? super V, ? extends V> remappingFunction) {
-			Preconditions.checkArgument(subRange.encloses(range), "Cannot merge range %s into a subRangeMap(%s)", range, subRange);
+			Preconditions.checkArgument(subRange.encloses(range), "Cannot merge range %s into a subRangeMap(%s)", range,
+					subRange);
 			TreeRangeMap.this.merge(range, value, remappingFunction);
 		}
 
@@ -755,7 +757,8 @@ public final class TreeRangeMap<K extends Comparable, V> implements org.magneton
 				if (subRange.isEmpty()) {
 					return Iterators.emptyIterator();
 				}
-				Cut<K> cutToStart = MoreObjects.firstNonNull(entriesByLowerBound.floorKey(subRange.lowerBound), subRange.lowerBound);
+				Cut<K> cutToStart = MoreObjects.firstNonNull(entriesByLowerBound.floorKey(subRange.lowerBound),
+						subRange.lowerBound);
 				Iterator<RangeMapEntry<K, V>> backingItr = entriesByLowerBound.tailMap(cutToStart, true).values()
 						.iterator();
 				return new AbstractIterator<Entry<Range<K>, V>>() {

@@ -17,6 +17,7 @@
 		<module>magneton-module-distributed-cache</module>
 		<module>magneton-module-distributed-lock</module>
 		<module>magneton-module-geo</module>
+		<module>magneton-module-auth</module>
 	</modules>
 
 	<dependencyManagement>

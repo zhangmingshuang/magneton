@@ -524,7 +524,8 @@ public final class ClosingFuture<V extends Object> {
 	 * statusFuture} alone does not provide a way to close the pipeline.
 	 */
 	public ListenableFuture<?> statusFuture() {
-		return Futures.nonCancellationPropagating(this.future.transform(constant(null), MoreExecutors.directExecutor()));
+		return Futures
+				.nonCancellationPropagating(this.future.transform(constant(null), MoreExecutors.directExecutor()));
 	}
 
 	/**
@@ -1517,7 +1518,8 @@ public final class ClosingFuture<V extends Object> {
 		}
 
 		private Futures.FutureCombiner<Object> futureCombiner() {
-			return this.allMustSucceed ? Futures.whenAllSucceed(this.inputFutures()) : Futures.whenAllComplete(this.inputFutures());
+			return this.allMustSucceed ? Futures.whenAllSucceed(this.inputFutures())
+					: Futures.whenAllComplete(this.inputFutures());
 		}
 
 		private ImmutableList<FluentFuture<?>> inputFutures() {
@@ -1621,7 +1623,8 @@ public final class ClosingFuture<V extends Object> {
 				@Override
 				@ParametricNullness
 				public U call(DeferredCloser closer, Peeker peeker) throws Exception {
-					return function.apply(closer, peeker.getDone(Combiner2.this.future1), peeker.getDone(Combiner2.this.future2));
+					return function.apply(closer, peeker.getDone(Combiner2.this.future1),
+							peeker.getDone(Combiner2.this.future2));
 				}
 
 				@Override
@@ -1688,7 +1691,8 @@ public final class ClosingFuture<V extends Object> {
 			return this.callAsync(new AsyncCombiningCallable<U>() {
 				@Override
 				public ClosingFuture<U> call(DeferredCloser closer, Peeker peeker) throws Exception {
-					return function.apply(closer, peeker.getDone(Combiner2.this.future1), peeker.getDone(Combiner2.this.future2));
+					return function.apply(closer, peeker.getDone(Combiner2.this.future1),
+							peeker.getDone(Combiner2.this.future2));
 				}
 
 				@Override
@@ -1807,8 +1811,8 @@ public final class ClosingFuture<V extends Object> {
 				@Override
 				@ParametricNullness
 				public U call(DeferredCloser closer, Peeker peeker) throws Exception {
-					return function.apply(closer, peeker.getDone(Combiner3.this.future1), peeker.getDone(Combiner3.this.future2),
-							peeker.getDone(Combiner3.this.future3));
+					return function.apply(closer, peeker.getDone(Combiner3.this.future1),
+							peeker.getDone(Combiner3.this.future2), peeker.getDone(Combiner3.this.future3));
 				}
 
 				@Override
@@ -1875,8 +1879,8 @@ public final class ClosingFuture<V extends Object> {
 			return this.callAsync(new AsyncCombiningCallable<U>() {
 				@Override
 				public ClosingFuture<U> call(DeferredCloser closer, Peeker peeker) throws Exception {
-					return function.apply(closer, peeker.getDone(Combiner3.this.future1), peeker.getDone(Combiner3.this.future2),
-							peeker.getDone(Combiner3.this.future3));
+					return function.apply(closer, peeker.getDone(Combiner3.this.future1),
+							peeker.getDone(Combiner3.this.future2), peeker.getDone(Combiner3.this.future3));
 				}
 
 				@Override
@@ -2004,8 +2008,9 @@ public final class ClosingFuture<V extends Object> {
 				@Override
 				@ParametricNullness
 				public U call(DeferredCloser closer, Peeker peeker) throws Exception {
-					return function.apply(closer, peeker.getDone(Combiner4.this.future1), peeker.getDone(Combiner4.this.future2),
-							peeker.getDone(Combiner4.this.future3), peeker.getDone(Combiner4.this.future4));
+					return function.apply(closer, peeker.getDone(Combiner4.this.future1),
+							peeker.getDone(Combiner4.this.future2), peeker.getDone(Combiner4.this.future3),
+							peeker.getDone(Combiner4.this.future4));
 				}
 
 				@Override
@@ -2072,8 +2077,9 @@ public final class ClosingFuture<V extends Object> {
 			return this.callAsync(new AsyncCombiningCallable<U>() {
 				@Override
 				public ClosingFuture<U> call(DeferredCloser closer, Peeker peeker) throws Exception {
-					return function.apply(closer, peeker.getDone(Combiner4.this.future1), peeker.getDone(Combiner4.this.future2),
-							peeker.getDone(Combiner4.this.future3), peeker.getDone(Combiner4.this.future4));
+					return function.apply(closer, peeker.getDone(Combiner4.this.future1),
+							peeker.getDone(Combiner4.this.future2), peeker.getDone(Combiner4.this.future3),
+							peeker.getDone(Combiner4.this.future4));
 				}
 
 				@Override
@@ -2208,8 +2214,9 @@ public final class ClosingFuture<V extends Object> {
 				@Override
 				@ParametricNullness
 				public U call(DeferredCloser closer, Peeker peeker) throws Exception {
-					return function.apply(closer, peeker.getDone(Combiner5.this.future1), peeker.getDone(Combiner5.this.future2),
-							peeker.getDone(Combiner5.this.future3), peeker.getDone(Combiner5.this.future4), peeker.getDone(Combiner5.this.future5));
+					return function.apply(closer, peeker.getDone(Combiner5.this.future1),
+							peeker.getDone(Combiner5.this.future2), peeker.getDone(Combiner5.this.future3),
+							peeker.getDone(Combiner5.this.future4), peeker.getDone(Combiner5.this.future5));
 				}
 
 				@Override
@@ -2276,8 +2283,9 @@ public final class ClosingFuture<V extends Object> {
 			return this.callAsync(new AsyncCombiningCallable<U>() {
 				@Override
 				public ClosingFuture<U> call(DeferredCloser closer, Peeker peeker) throws Exception {
-					return function.apply(closer, peeker.getDone(Combiner5.this.future1), peeker.getDone(Combiner5.this.future2),
-							peeker.getDone(Combiner5.this.future3), peeker.getDone(Combiner5.this.future4), peeker.getDone(Combiner5.this.future5));
+					return function.apply(closer, peeker.getDone(Combiner5.this.future1),
+							peeker.getDone(Combiner5.this.future2), peeker.getDone(Combiner5.this.future3),
+							peeker.getDone(Combiner5.this.future4), peeker.getDone(Combiner5.this.future5));
 				}
 
 				@Override

@@ -161,7 +161,8 @@ public final class AtomicLongMap<K> implements Serializable {
 	@CanIgnoreReturnValue
 	public long updateAndGet(K key, LongUnaryOperator updaterFunction) {
 		checkNotNull(updaterFunction);
-		return this.map.compute(key, (k, value) -> updaterFunction.applyAsLong((value == null) ? 0L : value.longValue()));
+		return this.map.compute(key,
+				(k, value) -> updaterFunction.applyAsLong((value == null) ? 0L : value.longValue()));
 	}
 
 	/**

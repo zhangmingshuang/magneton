@@ -25,7 +25,6 @@ import java.util.Locale;
 
 import javax.annotation.CheckForNull;
 
-
 import org.magneton.core.base.CharMatcher;
 import org.magneton.core.base.MoreObjects;
 import org.magneton.core.base.Preconditions;

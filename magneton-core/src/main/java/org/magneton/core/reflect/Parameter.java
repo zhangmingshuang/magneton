@@ -21,7 +21,6 @@ import java.lang.reflect.AnnotatedType;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 
-
 import org.magneton.core.base.Preconditions;
 import org.magneton.core.collect.FluentIterable;
 import org.magneton.core.collect.ImmutableList;

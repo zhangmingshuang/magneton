@@ -19,7 +19,6 @@ import java.text.ParseException;
 
 import javax.annotation.CheckForNull;
 
-
 import org.magneton.core.base.Preconditions;
 
 /**

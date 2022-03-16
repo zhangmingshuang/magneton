@@ -25,7 +25,6 @@ import javax.annotations.CanIgnoreReturnValue;
 
 import javax.annotations.DoNotCall;
 
-
 import org.magneton.core.base.Preconditions;
 import org.magneton.core.primitives.Ints;
 import org.magneton.core.primitives.Longs;

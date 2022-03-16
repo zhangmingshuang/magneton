@@ -24,7 +24,6 @@ import java.util.logging.Level;
 import javax.annotations.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
 
-
 import javax.annotations.VisibleForTesting;
 import org.magneton.core.base.Preconditions;
 import org.magneton.core.base.Throwables;

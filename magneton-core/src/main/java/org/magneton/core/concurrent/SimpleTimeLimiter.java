@@ -146,7 +146,8 @@ public final class SimpleTimeLimiter implements TimeLimiter {
 						throw throwCause(e, false /* combineStackTraces */);
 					}
 				};
-				return SimpleTimeLimiter.this.callWithTimeout(callable, timeoutDuration, timeoutUnit, interruptibleMethods.contains(method));
+				return SimpleTimeLimiter.this.callWithTimeout(callable, timeoutDuration, timeoutUnit,
+						interruptibleMethods.contains(method));
 			}
 		};
 		return newProxy(interfaceType, handler);

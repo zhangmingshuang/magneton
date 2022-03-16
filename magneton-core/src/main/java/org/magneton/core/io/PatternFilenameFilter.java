@@ -19,8 +19,6 @@ import java.io.FilenameFilter;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
-
-
 import org.magneton.core.base.Preconditions;
 
 /**

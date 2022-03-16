@@ -17,7 +17,7 @@ import org.springframework.context.annotation.Configuration;
  * @since 1.2.0
  */
 @ComponentScan("org.magneton.support")
-@MapperScan(basePackages = "org.magneton.support.*.mapper")
+@MapperScan(basePackages = "org.magneton.support.**.mapper")
 @EnableCaching
 @Configuration
 @Slf4j

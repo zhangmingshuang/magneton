@@ -144,8 +144,9 @@ public final class ExecutionList {
 			}
 			this.executed = true;
 			list = this.runnables;
-			this.runnables = null; // allow GC to free listeners even if this stays around for
-								// a while.
+			this.runnables = null; // allow GC to free listeners even if this stays around
+									// for
+									// a while.
 		}
 		// If we succeeded then list holds all the runnables we to execute. The pairs in
 		// the stack are

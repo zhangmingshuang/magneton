@@ -20,8 +20,6 @@ import java.io.IOException;
 import javax.annotations.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
 
-
-
 /**
  * An extension of {@code DataInput} for reading from in-memory byte arrays; its methods
  * offer identical functionality but do not throw {@link IOException}.

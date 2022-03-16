@@ -3513,7 +3513,8 @@ public final class Maps {
 
 			@Override
 			public Iterator<Entry<K, V>> iterator() {
-				return new org.magneton.core.collect.TransformedIterator<Entry<K, V>, Entry<K, V>>(filteredEntrySet.iterator()) {
+				return new org.magneton.core.collect.TransformedIterator<Entry<K, V>, Entry<K, V>>(
+						filteredEntrySet.iterator()) {
 					@Override
 					Entry<K, V> transform(Entry<K, V> entry) {
 						return new ForwardingMapEntry<K, V>() {
@@ -3736,7 +3737,8 @@ public final class Maps {
 
 		@Override
 		Iterator<Entry<K, V>> descendingEntryIterator() {
-			return org.magneton.core.collect.Iterators.filter(unfiltered.descendingMap().entrySet().iterator(), entryPredicate);
+			return org.magneton.core.collect.Iterators.filter(unfiltered.descendingMap().entrySet().iterator(),
+					entryPredicate);
 		}
 
 		@Override

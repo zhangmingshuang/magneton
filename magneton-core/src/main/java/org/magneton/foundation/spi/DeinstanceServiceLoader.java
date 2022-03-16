@@ -453,8 +453,7 @@ public final class DeinstanceServiceLoader<S> implements Iterable<Class<S>> {
 	public Iterator<Class<S>> iterator() {
 		return new Iterator<Class<S>>() {
 
-			Iterator<Map.Entry<String, Class<S>>> knownProviders = providers.entrySet()
-					.iterator();
+			Iterator<Map.Entry<String, Class<S>>> knownProviders = providers.entrySet().iterator();
 
 			@Override
 			public boolean hasNext() {

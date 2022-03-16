@@ -6,6 +6,7 @@
   <artifactId>magneton-modules</artifactId>
   <version>1.2.0-RC</version>
   <packaging>pom</packaging>
+  <description>功能模块</description>
   <inceptionYear>2020</inceptionYear>
   <licenses>
     <license>

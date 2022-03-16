@@ -232,8 +232,8 @@ public final class ClassPath {
 	 * {@linkplain System#getProperty system property}.
 	 */
 	@VisibleForTesting // TODO(b/65488446): Make this a
-										// public
-										// API.
+						// public
+						// API.
 	static ImmutableList<URL> parseJavaClassPath() {
 		ImmutableList.Builder<URL> urls = ImmutableList.builder();
 		for (String entry : Splitter.on(StandardSystemProperty.PATH_SEPARATOR.value())

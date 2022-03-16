@@ -1,8 +1,5 @@
 package org.magneton.core.pool;
 
-import cn.hutool.core.text.CharPool;
-import cn.hutool.core.util.XmlUtil;
-
 /**
  * 常用字符串常量定义
  *
@@ -176,34 +173,34 @@ public interface StringPool {
 	String AT = "@";
 
 	/**
-	 * 字符串常量：HTML 空格转义 {@code "&nbsp;" -> " "}
+	 * 字符串常量：XML 空格转义 {@code "&nbsp;" -> " "}
 	 */
-	String HTML_NBSP = XmlUtil.NBSP;
+	String NBSP = "&nbsp;";
 
 	/**
-	 * 字符串常量：HTML And 符转义 {@code "&amp;" -> "&"}
+	 * 字符串常量：XML And 符转义 {@code "&amp;" -> "&"}
 	 */
-	String HTML_AMP = XmlUtil.AMP;
+	String AMP = "&amp;";
 
 	/**
-	 * 字符串常量：HTML 双引号转义 {@code "&quot;" -> "\""}
+	 * 字符串常量：XML 双引号转义 {@code "&quot;" -> "\""}
 	 */
-	String HTML_QUOTE = XmlUtil.QUOTE;
+	String QUOTE = "&quot;";
 
 	/**
-	 * 字符串常量：HTML 单引号转义 {@code "&apos" -> "'"}
+	 * 字符串常量：XML 单引号转义 {@code "&apos" -> "'"}
 	 */
-	String HTML_APOS = XmlUtil.APOS;
+	String APOS = "&apos;";
 
 	/**
-	 * 字符串常量：HTML 小于号转义 {@code "&lt;" -> "<"}
+	 * 字符串常量：XML 小于号转义 {@code "&lt;" -> "<"}
 	 */
-	String HTML_LT = XmlUtil.LT;
+	String LT = "&lt;";
 
 	/**
-	 * 字符串常量：HTML 大于号转义 {@code "&gt;" -> ">"}
+	 * 字符串常量：XML 大于号转义 {@code "&gt;" -> ">"}
 	 */
-	String HTML_GT = XmlUtil.GT;
+	String GT = "&gt;";
 
 	/**
 	 * 字符串常量：空 JSON {@code "{}"}

@@ -19,7 +19,6 @@ import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-
 import org.magneton.core.primitives.Doubles;
 import org.magneton.core.primitives.Ints;
 

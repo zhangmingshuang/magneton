@@ -1,0 +1,95 @@
+{
+  "serverUrl": "http://127.0.0.1",
+  "pathPrefix": "",
+  "isStrict": false,
+  "allInOne": true,
+  "outPath": "D://md2",
+  "coverOld": true,
+  "createDebugPage": true,
+  "packageFilters": "",
+  "md5EncryptedHtmlName": false,
+  "style": "xt256",
+  "projectName": "smart-doc",
+  "framework": "spring",
+  "skipTransientField": true,
+  "sortByTitle": false,
+  "showAuthor": true,
+  "requestFieldToUnderline": true,
+  "responseFieldToUnderline": true,
+  "inlineEnum": true,
+  "recursionLimit": 7,
+  "allInOneDocFileName": "index.html",
+  "requestExample": "true",
+  "responseExample": "true",
+  "urlSuffix": "",
+  "displayActualType": false,
+  "appKey": "",
+  "appToken": "",
+  "secret": "",
+  "openUrl": "",
+  "debugEnvName": "",
+  "debugEnvUrl": "",
+  "tornaDebug": false,
+  "ignoreRequestParams": [
+    "org.springframework.ui.ModelMap"
+  ],
+  "dataDictionaries": [
+  ],
+  "errorCodeDictionaries": [
+    {
+      "enumClassName": "org.magneton.support.api.auth.constant.SmsError",
+      "codeField": "code",
+      "descField": "message"
+    }
+  ],
+  "revisionLogs": [
+    {
+      "version": "1.0",
+      "revisionTime": "2020-12-31 10:30",
+      "status": "update",
+      "author": "author",
+      "remarks": "desc"
+    }
+  ],
+  "customResponseFields": [
+  ],
+  "customRequestFields": [
+  ],
+  "requestHeaders": [
+    {
+      "name": "token",
+      "type": "string",
+      "desc": "desc",
+      "value": "token请求头的值",
+      "required": true,
+      "pathPatterns": "/app/test/**",
+      "excludePathPatterns": "/app/page/**"
+    }
+  ],
+  "requestParams": [
+    {
+      "name": "configPathParam",
+      "type": "string",
+      "desc": "desc",
+      "paramIn": "path",
+      "value": "testPath",
+      "required": false,
+      "since": "-",
+      "pathPatterns": "*",
+      "excludePathPatterns": "/app/page/**"
+    }
+  ],
+  "rpcApiDependencies": [
+  ],
+  "responseBodyAdvice": {
+    "className": "org.magneton.code.Response"
+  },
+  "groups": [
+    {
+      "name": "测试分组",
+      "apis": "com.power.doc.controller.app.*"
+    }
+  ],
+  "requestParamsTable": true,
+  "responseParamsTable": true
+}

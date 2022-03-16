@@ -367,8 +367,10 @@ public class ImmutableRangeMap<K extends Comparable<?>, V>
 		 */
 		public ImmutableRangeMap<K, V> build() {
 			Collections.sort(this.entries, Range.<K>rangeLexOrdering().onKeys());
-			org.magneton.core.collect.ImmutableList.Builder<Range<K>> rangesBuilder = new org.magneton.core.collect.ImmutableList.Builder<>(this.entries.size());
-			org.magneton.core.collect.ImmutableList.Builder<V> valuesBuilder = new org.magneton.core.collect.ImmutableList.Builder<V>(this.entries.size());
+			org.magneton.core.collect.ImmutableList.Builder<Range<K>> rangesBuilder = new org.magneton.core.collect.ImmutableList.Builder<>(
+					this.entries.size());
+			org.magneton.core.collect.ImmutableList.Builder<V> valuesBuilder = new org.magneton.core.collect.ImmutableList.Builder<V>(
+					this.entries.size());
 			for (int i = 0; i < this.entries.size(); i++) {
 				Range<K> range = this.entries.get(i).getKey();
 				if (i > 0) {

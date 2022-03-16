@@ -329,15 +329,18 @@ abstract class SmoothRateLimiter extends RateLimiter {
 			double oldMaxPermits = this.maxPermits;
 			double coldIntervalMicros = stableIntervalMicros * this.coldFactor;
 			this.thresholdPermits = 0.5 * this.warmupPeriodMicros / stableIntervalMicros;
-			this.maxPermits = this.thresholdPermits + 2.0 * this.warmupPeriodMicros / (stableIntervalMicros + coldIntervalMicros);
+			this.maxPermits = this.thresholdPermits
+					+ 2.0 * this.warmupPeriodMicros / (stableIntervalMicros + coldIntervalMicros);
 			this.slope = (coldIntervalMicros - stableIntervalMicros) / (this.maxPermits - this.thresholdPermits);
 			if (oldMaxPermits == Double.POSITIVE_INFINITY) {
 				// if we don't special-case this, we would get storedPermits == NaN, below
 				this.storedPermits = 0.0;
 			}
 			else {
-				this.storedPermits = (oldMaxPermits == 0.0) ? this.maxPermits // initial state is
-																	// cold
+				this.storedPermits = (oldMaxPermits == 0.0) ? this.maxPermits // initial
+																				// state
+																				// is
+						// cold
 						: this.storedPermits * this.maxPermits / oldMaxPermits;
 			}
 		}

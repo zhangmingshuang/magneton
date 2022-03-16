@@ -174,13 +174,15 @@ final class SortedMultisets {
 		@Override
 		public NavigableSet<E> subSet(@ParametricNullness E fromElement, boolean fromInclusive,
 				@ParametricNullness E toElement, boolean toInclusive) {
-			return new NavigableElementSet<>(multiset().subMultiset(fromElement, org.magneton.core.collect.BoundType.forBoolean(fromInclusive),
+			return new NavigableElementSet<>(
+					multiset().subMultiset(fromElement, org.magneton.core.collect.BoundType.forBoolean(fromInclusive),
 							toElement, org.magneton.core.collect.BoundType.forBoolean(toInclusive)));
 		}
 
 		@Override
 		public NavigableSet<E> headSet(@ParametricNullness E toElement, boolean inclusive) {
-			return new NavigableElementSet<>(multiset().headMultiset(toElement, org.magneton.core.collect.BoundType.forBoolean(inclusive)));
+			return new NavigableElementSet<>(
+					multiset().headMultiset(toElement, org.magneton.core.collect.BoundType.forBoolean(inclusive)));
 		}
 
 		@Override

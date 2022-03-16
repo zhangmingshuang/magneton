@@ -23,7 +23,6 @@ import java.util.List;
 
 import javax.annotations.CanIgnoreReturnValue;
 
-
 import org.magneton.core.base.Charsets;
 import org.magneton.core.base.MoreObjects;
 import org.magneton.core.base.Preconditions;

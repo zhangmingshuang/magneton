@@ -1741,13 +1741,15 @@ public final class Sets {
 		@Override
 		@CheckForNull
 		public E lower(@ParametricNullness E e) {
-			return org.magneton.core.collect.Iterators.find(unfiltered().headSet(e, false).descendingIterator(), predicate, null);
+			return org.magneton.core.collect.Iterators.find(unfiltered().headSet(e, false).descendingIterator(),
+					predicate, null);
 		}
 
 		@Override
 		@CheckForNull
 		public E floor(@ParametricNullness E e) {
-			return org.magneton.core.collect.Iterators.find(unfiltered().headSet(e, true).descendingIterator(), predicate, null);
+			return org.magneton.core.collect.Iterators.find(unfiltered().headSet(e, true).descendingIterator(),
+					predicate, null);
 		}
 
 		@Override

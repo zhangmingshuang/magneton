@@ -581,7 +581,8 @@ public final class ImmutableRangeSet<C extends Comparable> extends org.magneton.
 		 * @throws IllegalArgumentException if any input ranges have nonempty overlap
 		 */
 		public ImmutableRangeSet<C> build() {
-			org.magneton.core.collect.ImmutableList.Builder<Range<C>> mergedRangesBuilder = new org.magneton.core.collect.ImmutableList.Builder<>(ranges.size());
+			org.magneton.core.collect.ImmutableList.Builder<Range<C>> mergedRangesBuilder = new org.magneton.core.collect.ImmutableList.Builder<>(
+					ranges.size());
 			Collections.sort(ranges, Range.<C>rangeLexOrdering());
 			PeekingIterator<Range<C>> peekingItr = org.magneton.core.collect.Iterators
 					.peekingIterator(ranges.iterator());

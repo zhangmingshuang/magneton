@@ -100,12 +100,13 @@ public abstract class AbstractExecutionThreadService implements Service {
 	private final Service delegate = new AbstractService() {
 		@Override
 		protected final void doStart() {
-			Executor executor = MoreExecutors.renamingDecorator(AbstractExecutionThreadService.this.executor(), new Supplier<String>() {
-				@Override
-				public String get() {
-					return AbstractExecutionThreadService.this.serviceName();
-				}
-			});
+			Executor executor = MoreExecutors.renamingDecorator(AbstractExecutionThreadService.this.executor(),
+					new Supplier<String>() {
+						@Override
+						public String get() {
+							return AbstractExecutionThreadService.this.serviceName();
+						}
+					});
 			executor.execute(new Runnable() {
 				@Override
 				public void run() {

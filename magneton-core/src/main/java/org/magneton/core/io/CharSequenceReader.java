@@ -20,7 +20,6 @@ import java.nio.CharBuffer;
 
 import javax.annotation.CheckForNull;
 
-
 import org.magneton.core.base.Preconditions;
 
 import static java.util.Objects.requireNonNull;

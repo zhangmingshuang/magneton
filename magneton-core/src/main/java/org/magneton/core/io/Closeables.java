@@ -23,8 +23,6 @@ import java.util.logging.Logger;
 
 import javax.annotation.CheckForNull;
 
-
-
 import javax.annotations.VisibleForTesting;
 
 /**

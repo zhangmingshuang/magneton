@@ -848,7 +848,8 @@ public final class MoreFiles {
 		}
 
 		private BasicFileAttributes readAttributes() throws IOException {
-			return Files.readAttributes(path, BasicFileAttributes.class, followLinks ? FOLLOW_LINKS : new LinkOption[] { NOFOLLOW_LINKS });
+			return Files.readAttributes(path, BasicFileAttributes.class,
+					followLinks ? FOLLOW_LINKS : new LinkOption[] { NOFOLLOW_LINKS });
 		}
 
 		@Override
