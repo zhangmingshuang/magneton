@@ -1,0 +1,7 @@
+org\magneton\support\properties\SupportProperty.class
+org\magneton\support\doc\HtmlDoc.class
+org\magneton\support\SupportAutoConfiguration.class
+org\magneton\support\constant\CacheConstant.class
+org\magneton\support\core\DbTableGenerator.class
+org\magneton\support\core\MySqlDbTableGenerator.class
+org\magneton\support\controller\ApiDocController.class

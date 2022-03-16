@@ -21,14 +21,30 @@ import org.magneton.core.collect.Maps;
 @ToString
 public class Response<T> {
 
+	/**
+	 * 响应码
+	 */
 	private String code;
 
+	/**
+	 * 响应数据
+	 */
+	@Nullable
 	private T data;
 
+	/**
+	 * 响应消息
+	 */
 	private String message;
 
+	/**
+	 * 响应时间
+	 */
 	private long timestamp;
 
+	/**
+	 * 附加信息
+	 */
 	private Map<String, String> additions;
 
 	private Response() {
@@ -83,8 +99,8 @@ public class Response<T> {
 	}
 
 	public Response<T> messageFormat(Object... args) {
-		if (Strings.isNullOrEmpty(message)) {
-			message = Strings.lenientFormat(message, args);
+		if (Strings.isNullOrEmpty(this.message)) {
+			this.message = Strings.lenientFormat(this.message, args);
 		}
 		return this;
 	}
@@ -106,19 +122,19 @@ public class Response<T> {
 	 * @return {@code Response} of response.
 	 */
 	public Response<T> addition(String key, String value) {
-		if (Objects.isNull(additions)) {
-			additions = Maps.newHashMapWithExpectedSize(2);
+		if (Objects.isNull(this.additions)) {
+			this.additions = Maps.newHashMapWithExpectedSize(2);
 		}
-		additions.put(key, value);
+		this.additions.put(key, value);
 		return this;
 	}
 
 	public boolean isOk() {
-		return ResponseCodesSupplier.getInstance().ok().code().equals(code);
+		return ResponseCodesSupplier.getInstance().ok().code().equals(this.code);
 	}
 
 	public boolean isException() {
-		return ResponseCodesSupplier.getInstance().exception().code().equals(code);
+		return ResponseCodesSupplier.getInstance().exception().code().equals(this.code);
 	}
 
 	/**
@@ -128,10 +144,10 @@ public class Response<T> {
 	 * return the set message info.
 	 */
 	public String getMessage() {
-		if (Objects.nonNull(data) && data instanceof EgoResponseMessage) {
-			return ((EgoResponseMessage) data).message();
+		if (Objects.nonNull(this.data) && this.data instanceof EgoResponseMessage) {
+			return ((EgoResponseMessage) this.data).message();
 		}
-		return message;
+		return this.message;
 	}
 
 }

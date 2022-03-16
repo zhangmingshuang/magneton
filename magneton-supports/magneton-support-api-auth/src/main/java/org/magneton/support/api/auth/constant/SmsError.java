@@ -35,4 +35,14 @@ public enum SmsError implements ResponseMessage {
 		return this.message;
 	}
 
+	// for smart-doc
+	public String getCode() {
+		return this.code;
+	}
+
+	// for smart-doc
+	public String getMessage() {
+		return this.name() + " " + this.message;
+	}
+
 }
