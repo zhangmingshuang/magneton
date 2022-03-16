@@ -41,7 +41,6 @@ import java.util.StringJoiner;
 
 import javax.annotation.Nullable;
 
-import cn.hutool.core.lang.Assert;
 import org.magneton.core.collect.Collections;
 import org.magneton.core.collect.ConcurrentReferenceHashMap;
 import org.magneton.core.reflect.Reflection;
@@ -787,7 +786,7 @@ public abstract class Classes {
 	 */
 	// on JDK 9
 	public static Class<?> createCompositeInterface(Class<?>[] interfaces, @Nullable ClassLoader classLoader) {
-		Assert.notEmpty(interfaces, "Interface array must not be empty");
+		Preconditions.checkNotNull(interfaces, "Interface array must not be empty");
 		return Proxy.getProxyClass(classLoader, interfaces);
 	}
 

@@ -188,8 +188,8 @@ final class ListenerCallQueue<L> {
 						this.isThreadScheduled = false;
 					}
 					// Log it and keep going.
-					logger.log(Level.SEVERE, "Exception while running callbacks for " + this.listener + " on " + this.executor,
-							e);
+					logger.log(Level.SEVERE,
+							"Exception while running callbacks for " + this.listener + " on " + this.executor, e);
 					throw e;
 				}
 			}
@@ -219,8 +219,8 @@ final class ListenerCallQueue<L> {
 					}
 					catch (RuntimeException e) {
 						// Log it and keep going.
-						logger.log(Level.SEVERE, "Exception while executing callback: " + this.listener + " " + nextLabel,
-								e);
+						logger.log(Level.SEVERE,
+								"Exception while executing callback: " + this.listener + " " + nextLabel, e);
 					}
 				}
 			}

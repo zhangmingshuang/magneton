@@ -29,7 +29,6 @@ import java.util.Arrays;
 
 import javax.annotation.CheckForNull;
 
-
 import org.magneton.core.base.Preconditions;
 import org.magneton.core.collect.ImmutableList;
 import javax.annotations.CanIgnoreReturnValue;

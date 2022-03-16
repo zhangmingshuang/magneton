@@ -20,8 +20,6 @@ import java.io.FilterOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
-
-
 import org.magneton.core.base.Preconditions;
 import org.magneton.core.primitives.Longs;
 

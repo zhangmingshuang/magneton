@@ -601,9 +601,9 @@ public final class ServiceManager implements ServiceManagerBridge {
 			this.monitor.enter();
 			try {
 				if (!this.monitor.waitForUninterruptibly(this.stoppedGuard, timeout, unit)) {
-					throw new TimeoutException(
-							"Timeout waiting for the services to stop. The following " + "services have not stopped: "
-									+ Multimaps.filterKeys(this.servicesByState, not(in(EnumSet.of(TERMINATED, FAILED)))));
+					throw new TimeoutException("Timeout waiting for the services to stop. The following "
+							+ "services have not stopped: "
+							+ Multimaps.filterKeys(this.servicesByState, not(in(EnumSet.of(TERMINATED, FAILED)))));
 				}
 			}
 			finally {
@@ -678,8 +678,8 @@ public final class ServiceManager implements ServiceManagerBridge {
 				// Update state.
 				checkState(this.servicesByState.remove(from, service),
 						"Service %s not at the expected location in the state map %s", service, from);
-				checkState(this.servicesByState.put(to, service), "Service %s in the state map unexpectedly at %s", service,
-						to);
+				checkState(this.servicesByState.put(to, service), "Service %s in the state map unexpectedly at %s",
+						service, to);
 				// Update the timer
 				Stopwatch stopwatch = this.startupTimers.get(service);
 				if (stopwatch == null) {
@@ -774,8 +774,10 @@ public final class ServiceManager implements ServiceManagerBridge {
 			@GuardedBy("ServiceManagerState.this.monitor")
 			public boolean isSatisfied() {
 				// All services have started or some service has terminated/failed.
-				return ServiceManagerState.this.states.count(RUNNING) == ServiceManagerState.this.numberOfServices || ServiceManagerState.this.states.contains(STOPPING)
-						|| ServiceManagerState.this.states.contains(TERMINATED) || ServiceManagerState.this.states.contains(FAILED);
+				return ServiceManagerState.this.states.count(RUNNING) == ServiceManagerState.this.numberOfServices
+						|| ServiceManagerState.this.states.contains(STOPPING)
+						|| ServiceManagerState.this.states.contains(TERMINATED)
+						|| ServiceManagerState.this.states.contains(FAILED);
 			}
 
 		}
@@ -790,7 +792,8 @@ public final class ServiceManager implements ServiceManagerBridge {
 			@Override
 			@GuardedBy("ServiceManagerState.this.monitor")
 			public boolean isSatisfied() {
-				return ServiceManagerState.this.states.count(TERMINATED) + ServiceManagerState.this.states.count(FAILED) == ServiceManagerState.this.numberOfServices;
+				return ServiceManagerState.this.states.count(TERMINATED)
+						+ ServiceManagerState.this.states.count(FAILED) == ServiceManagerState.this.numberOfServices;
 			}
 
 		}
@@ -850,7 +853,7 @@ public final class ServiceManager implements ServiceManagerBridge {
 			if (state != null) {
 				if (!(this.service instanceof NoOpService)) {
 					logger.log(Level.FINE, "Service {0} has terminated. Previous state was: {1}",
-							new Object[] {this.service, from });
+							new Object[] { this.service, from });
 				}
 				state.transitionService(this.service, from, TERMINATED);
 			}
@@ -870,7 +873,8 @@ public final class ServiceManager implements ServiceManagerBridge {
 				 */
 				log &= from != State.STARTING;
 				if (log) {
-					logger.log(Level.SEVERE, "Service " + this.service + " has failed in the " + from + " state.", failure);
+					logger.log(Level.SEVERE, "Service " + this.service + " has failed in the " + from + " state.",
+							failure);
 				}
 				state.transitionService(this.service, from, FAILED);
 			}

@@ -16,8 +16,6 @@ package org.magneton.core.hash;
 
 import java.nio.Buffer;
 
-
-
 /**
  * Wrappers around {@link Buffer} methods that are covariantly overridden in Java 9+. See
  * https://github.com/google/guava/issues/3990

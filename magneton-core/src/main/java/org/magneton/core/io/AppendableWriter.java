@@ -21,7 +21,6 @@ import java.io.Writer;
 
 import javax.annotation.CheckForNull;
 
-
 import org.magneton.core.base.Preconditions;
 
 /**

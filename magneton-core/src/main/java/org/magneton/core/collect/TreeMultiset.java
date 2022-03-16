@@ -554,12 +554,14 @@ public final class TreeMultiset<E extends Object> extends AbstractSortedMultiset
 	@Override
 	public SortedMultiset<E> headMultiset(@ParametricNullness E upperBound,
 			org.magneton.core.collect.BoundType boundType) {
-		return new TreeMultiset<E>(rootReference, range.intersect(GeneralRange.upTo(comparator(), upperBound, boundType)), header);
+		return new TreeMultiset<E>(rootReference,
+				range.intersect(GeneralRange.upTo(comparator(), upperBound, boundType)), header);
 	}
 
 	@Override
 	public SortedMultiset<E> tailMultiset(@ParametricNullness E lowerBound, BoundType boundType) {
-		return new TreeMultiset<E>(rootReference, range.intersect(GeneralRange.downTo(comparator(), lowerBound, boundType)), header);
+		return new TreeMultiset<E>(rootReference,
+				range.intersect(GeneralRange.downTo(comparator(), lowerBound, boundType)), header);
 	}
 
 	/**

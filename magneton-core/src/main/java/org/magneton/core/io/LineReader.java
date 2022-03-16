@@ -23,8 +23,6 @@ import java.util.Queue;
 import javax.annotations.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
 
-
-
 import org.magneton.core.base.Preconditions;
 
 import static org.magneton.core.io.CharStreams.createBuffer;

@@ -20,7 +20,6 @@ import java.util.Iterator;
 
 import javax.annotation.CheckForNull;
 
-
 import org.magneton.core.base.Preconditions;
 
 /**

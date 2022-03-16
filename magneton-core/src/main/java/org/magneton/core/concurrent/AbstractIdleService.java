@@ -173,34 +173,38 @@ public abstract class AbstractIdleService implements Service {
 
 		@Override
 		protected final void doStart() {
-			MoreExecutors.renamingDecorator(AbstractIdleService.this.executor(), AbstractIdleService.this.threadNameSupplier).execute(new Runnable() {
-				@Override
-				public void run() {
-					try {
-						AbstractIdleService.this.startUp();
-						DelegateService.this.notifyStarted();
-					}
-					catch (Throwable t) {
-						DelegateService.this.notifyFailed(t);
-					}
-				}
-			});
+			MoreExecutors
+					.renamingDecorator(AbstractIdleService.this.executor(), AbstractIdleService.this.threadNameSupplier)
+					.execute(new Runnable() {
+						@Override
+						public void run() {
+							try {
+								AbstractIdleService.this.startUp();
+								DelegateService.this.notifyStarted();
+							}
+							catch (Throwable t) {
+								DelegateService.this.notifyFailed(t);
+							}
+						}
+					});
 		}
 
 		@Override
 		protected final void doStop() {
-			MoreExecutors.renamingDecorator(AbstractIdleService.this.executor(), AbstractIdleService.this.threadNameSupplier).execute(new Runnable() {
-				@Override
-				public void run() {
-					try {
-						AbstractIdleService.this.shutDown();
-						DelegateService.this.notifyStopped();
-					}
-					catch (Throwable t) {
-						DelegateService.this.notifyFailed(t);
-					}
-				}
-			});
+			MoreExecutors
+					.renamingDecorator(AbstractIdleService.this.executor(), AbstractIdleService.this.threadNameSupplier)
+					.execute(new Runnable() {
+						@Override
+						public void run() {
+							try {
+								AbstractIdleService.this.shutDown();
+								DelegateService.this.notifyStopped();
+							}
+							catch (Throwable t) {
+								DelegateService.this.notifyFailed(t);
+							}
+						}
+					});
 		}
 
 		@Override

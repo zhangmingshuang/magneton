@@ -20,7 +20,6 @@ import java.nio.ByteOrder;
 
 import javax.annotation.CheckForNull;
 
-
 import org.magneton.core.base.MoreObjects;
 import org.magneton.core.base.Objects;
 

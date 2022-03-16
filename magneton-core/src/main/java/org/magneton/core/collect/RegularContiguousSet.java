@@ -202,7 +202,8 @@ final class RegularContiguousSet<C extends Comparable> extends org.magneton.core
 
 	@Override
 	public Range<C> range(org.magneton.core.collect.BoundType lowerBoundType, BoundType upperBoundType) {
-		return Range.create(range.lowerBound.withLowerBoundType(lowerBoundType, domain), range.upperBound.withUpperBoundType(upperBoundType, domain));
+		return Range.create(range.lowerBound.withLowerBoundType(lowerBoundType, domain),
+				range.upperBound.withUpperBoundType(upperBoundType, domain));
 	}
 
 	@Override

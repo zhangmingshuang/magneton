@@ -26,7 +26,6 @@ import java.nio.charset.CoderResult;
 import java.nio.charset.CodingErrorAction;
 import java.util.Arrays;
 
-
 import org.magneton.core.base.Preconditions;
 import org.magneton.core.primitives.UnsignedBytes;
 

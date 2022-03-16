@@ -14,7 +14,6 @@
 
 package org.magneton.core.math;
 
-
 import org.magneton.core.primitives.Doubles;
 
 import static java.lang.Double.NaN;

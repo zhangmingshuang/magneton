@@ -337,7 +337,8 @@ class LocalCache<K, V> extends AbstractMap<K, V> implements ConcurrentMap<K, V> 
 				: new ConcurrentLinkedQueue<RemovalNotification<K, V>>();
 
 		this.ticker = builder.getTicker(this.recordsTime());
-		this.entryFactory = EntryFactory.getFactory(this.keyStrength, this.usesAccessEntries(), this.usesWriteEntries());
+		this.entryFactory = EntryFactory.getFactory(this.keyStrength, this.usesAccessEntries(),
+				this.usesWriteEntries());
 		this.globalStatsCounter = builder.getStatsCounterSupplier().get();
 		this.defaultLoader = loader;
 
@@ -383,7 +384,8 @@ class LocalCache<K, V> extends AbstractMap<K, V> implements ConcurrentMap<K, V> 
 				if (i == remainder) {
 					maxSegmentWeight--;
 				}
-				this.segments[i] = this.createSegment(segmentSize, maxSegmentWeight, builder.getStatsCounterSupplier().get());
+				this.segments[i] = this.createSegment(segmentSize, maxSegmentWeight,
+						builder.getStatsCounterSupplier().get());
 			}
 		}
 		else {
@@ -2772,7 +2774,8 @@ class LocalCache<K, V> extends AbstractMap<K, V> implements ConcurrentMap<K, V> 
 						return newValue;
 					}
 					try {
-						return this.getAndRecordStats(key, hash, computingValueReference, Futures.immediateFuture(newValue));
+						return this.getAndRecordStats(key, hash, computingValueReference,
+								Futures.immediateFuture(newValue));
 					}
 					catch (ExecutionException exception) {
 						throw new AssertionError("impossible; Futures.immediateFuture can't throw");
@@ -2904,7 +2907,8 @@ class LocalCache<K, V> extends AbstractMap<K, V> implements ConcurrentMap<K, V> 
 						// We found an existing entry.
 
 						ValueReference<K, V> valueReference = e.getValueReference();
-						if (valueReference.isLoading() || (checkTime && (now - e.getWriteTime() < this.map.refreshNanos))) {
+						if (valueReference.isLoading()
+								|| (checkTime && (now - e.getWriteTime() < this.map.refreshNanos))) {
 							// refresh is a no-op if loading is pending
 							// if checkTime, we want to check *after* acquiring the lock
 							// if refresh still needs
@@ -3522,7 +3526,8 @@ class LocalCache<K, V> extends AbstractMap<K, V> implements ConcurrentMap<K, V> 
 						}
 
 						++this.modCount;
-						this.enqueueNotification(key, hash, entryValue, valueReference.getWeight(), RemovalCause.REPLACED);
+						this.enqueueNotification(key, hash, entryValue, valueReference.getWeight(),
+								RemovalCause.REPLACED);
 						this.setValue(e, key, newValue, now);
 						this.evictEntries(e);
 						return entryValue;
@@ -3705,7 +3710,8 @@ class LocalCache<K, V> extends AbstractMap<K, V> implements ConcurrentMap<K, V> 
 								V value = e.getValueReference().get();
 								RemovalCause cause = (key == null || value == null) ? RemovalCause.COLLECTED
 										: RemovalCause.EXPLICIT;
-								this.enqueueNotification(key, e.getHash(), value, e.getValueReference().getWeight(), cause);
+								this.enqueueNotification(key, e.getHash(), value, e.getValueReference().getWeight(),
+										cause);
 							}
 						}
 					}
@@ -4219,7 +4225,8 @@ class LocalCache<K, V> extends AbstractMap<K, V> implements ConcurrentMap<K, V> 
 		@Override
 		public int size() {
 			int size = 0;
-			for (ReferenceEntry<K, V> e = this.head.getNextInWriteQueue(); e != this.head; e = e.getNextInWriteQueue()) {
+			for (ReferenceEntry<K, V> e = this.head.getNextInWriteQueue(); e != this.head; e = e
+					.getNextInWriteQueue()) {
 				size++;
 			}
 			return size;
@@ -4362,7 +4369,8 @@ class LocalCache<K, V> extends AbstractMap<K, V> implements ConcurrentMap<K, V> 
 		@Override
 		public int size() {
 			int size = 0;
-			for (ReferenceEntry<K, V> e = this.head.getNextInAccessQueue(); e != this.head; e = e.getNextInAccessQueue()) {
+			for (ReferenceEntry<K, V> e = this.head.getNextInAccessQueue(); e != this.head; e = e
+					.getNextInAccessQueue()) {
 				size++;
 			}
 			return size;
@@ -4460,9 +4468,9 @@ class LocalCache<K, V> extends AbstractMap<K, V> implements ConcurrentMap<K, V> 
 
 		org.magneton.core.cache.CacheBuilder<K, V> recreateCacheBuilder() {
 			org.magneton.core.cache.CacheBuilder<K, V> builder = org.magneton.core.cache.CacheBuilder.newBuilder()
-					.setKeyStrength(this.keyStrength).setValueStrength(this.valueStrength).keyEquivalence(this.keyEquivalence)
-					.valueEquivalence(this.valueEquivalence).concurrencyLevel(this.concurrencyLevel)
-					.removalListener(this.removalListener);
+					.setKeyStrength(this.keyStrength).setValueStrength(this.valueStrength)
+					.keyEquivalence(this.keyEquivalence).valueEquivalence(this.valueEquivalence)
+					.concurrencyLevel(this.concurrencyLevel).removalListener(this.removalListener);
 			builder.strictParsing = false;
 			if (this.expireAfterWriteNanos > 0) {
 				builder.expireAfterWrite(this.expireAfterWriteNanos, TimeUnit.NANOSECONDS);
@@ -4764,7 +4772,8 @@ class LocalCache<K, V> extends AbstractMap<K, V> implements ConcurrentMap<K, V> 
 		 */
 		boolean nextInChain() {
 			if (this.nextEntry != null) {
-				for (this.nextEntry = this.nextEntry.getNext(); this.nextEntry != null; this.nextEntry = this.nextEntry.getNext()) {
+				for (this.nextEntry = this.nextEntry.getNext(); this.nextEntry != null; this.nextEntry = this.nextEntry
+						.getNext()) {
 					if (this.advanceTo(this.nextEntry)) {
 						return true;
 					}

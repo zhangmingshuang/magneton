@@ -19,8 +19,6 @@ import java.util.stream.DoubleStream;
 import java.util.stream.IntStream;
 import java.util.stream.LongStream;
 
-
-
 import static java.lang.Double.NaN;
 import static java.lang.Double.isNaN;
 import static org.magneton.core.base.Preconditions.checkState;

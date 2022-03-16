@@ -17,8 +17,6 @@ package org.magneton.core.math;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-
-
 /**
  * A class for arithmetic on {@link BigDecimal} that is not covered by its built-in
  * methods.

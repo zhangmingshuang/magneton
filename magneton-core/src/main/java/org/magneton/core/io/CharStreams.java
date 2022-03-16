@@ -26,8 +26,6 @@ import java.util.List;
 import javax.annotations.CanIgnoreReturnValue;
 import javax.annotation.CheckForNull;
 
-
-
 import org.magneton.core.base.Preconditions;
 
 /**

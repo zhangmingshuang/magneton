@@ -597,7 +597,8 @@ class MapMakerInternalMap<K, V, E extends MapMakerInternalMap.InternalEntry<K, V
 	}
 
 	Object writeReplace() {
-		return new SerializationProxy<>(entryHelper.keyStrength(), entryHelper.valueStrength(), keyEquivalence, entryHelper.valueStrength().defaultEquivalence(), concurrencyLevel, this);
+		return new SerializationProxy<>(entryHelper.keyStrength(), entryHelper.valueStrength(), keyEquivalence,
+				entryHelper.valueStrength().defaultEquivalence(), concurrencyLevel, this);
 	}
 
 	enum Strength {

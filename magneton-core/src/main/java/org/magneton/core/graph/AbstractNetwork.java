@@ -182,7 +182,8 @@ public abstract class AbstractNetwork<N, E> implements org.magneton.core.graph.N
 	public Set<E> adjacentEdges(E edge) {
 		EndpointPair<N> endpointPair = incidentNodes(edge); // Verifies that edge is in
 															// this network.
-		Set<E> endpointPairIncidentEdges = org.magneton.core.collect.Sets.union(incidentEdges(endpointPair.nodeU()), incidentEdges(endpointPair.nodeV()));
+		Set<E> endpointPairIncidentEdges = org.magneton.core.collect.Sets.union(incidentEdges(endpointPair.nodeU()),
+				incidentEdges(endpointPair.nodeV()));
 		return org.magneton.core.collect.Sets.difference(endpointPairIncidentEdges, ImmutableSet.of(edge));
 	}
 

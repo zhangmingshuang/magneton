@@ -338,8 +338,8 @@ public abstract class AbstractService implements Service {
 			// even check the guard. I don't think we care too much about this use case
 			// but it could lead
 			// to a confusing error message.
-			throw new TimeoutException(
-					"Timed out waiting for " + this + " to reach a terminal state. " + "Current state: " + this.state());
+			throw new TimeoutException("Timed out waiting for " + this + " to reach a terminal state. "
+					+ "Current state: " + this.state());
 		}
 	}
 
@@ -352,7 +352,8 @@ public abstract class AbstractService implements Service {
 				// Handle this specially so that we can include the failureCause, if there
 				// is one.
 				throw new IllegalStateException(
-						"Expected the service " + this + " to be " + expected + ", but the service has FAILED", this.failureCause());
+						"Expected the service " + this + " to be " + expected + ", but the service has FAILED",
+						this.failureCause());
 			}
 			throw new IllegalStateException(
 					"Expected the service " + this + " to be " + expected + ", but was " + actual);
@@ -604,7 +605,8 @@ public abstract class AbstractService implements Service {
 
 		/** @see Service#failureCause() */
 		Throwable failureCause() {
-			checkState(this.state == FAILED, "failureCause() is only valid if the service has failed, service is %s", this.state);
+			checkState(this.state == FAILED, "failureCause() is only valid if the service has failed, service is %s",
+					this.state);
 			// requireNonNull is safe because the constructor requires a non-null cause
 			// with state=FAILED.
 			return requireNonNull(this.failure);

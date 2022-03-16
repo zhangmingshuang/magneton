@@ -572,7 +572,9 @@ public final class ImmutableSortedMap<K, V> extends ImmutableSortedMapFauxveride
 				return new org.magneton.core.collect.ImmutableAsList<Entry<K, V>>() {
 					@Override
 					public Entry<K, V> get(int index) {
-						return new AbstractMap.SimpleImmutableEntry<>(ImmutableSortedMap.this.keySet.asList().get(index), ImmutableSortedMap.this.valueList.get(index));
+						return new AbstractMap.SimpleImmutableEntry<>(
+								ImmutableSortedMap.this.keySet.asList().get(index),
+								ImmutableSortedMap.this.valueList.get(index));
 					}
 
 					@Override
@@ -651,7 +653,8 @@ public final class ImmutableSortedMap<K, V> extends ImmutableSortedMapFauxveride
 			return emptyMap(this.comparator());
 		}
 		else {
-			return new ImmutableSortedMap<>(this.keySet.getSubSet(fromIndex, toIndex), this.valueList.subList(fromIndex, toIndex));
+			return new ImmutableSortedMap<>(this.keySet.getSubSet(fromIndex, toIndex),
+					this.valueList.subList(fromIndex, toIndex));
 		}
 	}
 
@@ -725,8 +728,8 @@ public final class ImmutableSortedMap<K, V> extends ImmutableSortedMapFauxveride
 	public ImmutableSortedMap<K, V> subMap(K fromKey, boolean fromInclusive, K toKey, boolean toInclusive) {
 		Preconditions.checkNotNull(fromKey);
 		Preconditions.checkNotNull(toKey);
-		Preconditions.checkArgument(this.comparator().compare(fromKey, toKey) <= 0, "expected fromKey <= toKey but %s > %s",
-				fromKey, toKey);
+		Preconditions.checkArgument(this.comparator().compare(fromKey, toKey) <= 0,
+				"expected fromKey <= toKey but %s > %s", fromKey, toKey);
 		return this.headMap(toKey, toInclusive).tailMap(fromKey, fromInclusive);
 	}
 
@@ -863,7 +866,8 @@ public final class ImmutableSortedMap<K, V> extends ImmutableSortedMapFauxveride
 				return result = emptyMap(Ordering.from(this.comparator()).reverse());
 			}
 			else {
-				return result = new ImmutableSortedMap<>((RegularImmutableSortedSet<K>) this.keySet.descendingSet(), this.valueList.reverse(), this);
+				return result = new ImmutableSortedMap<>((RegularImmutableSortedSet<K>) this.keySet.descendingSet(),
+						this.valueList.reverse(), this);
 			}
 		}
 		return result;

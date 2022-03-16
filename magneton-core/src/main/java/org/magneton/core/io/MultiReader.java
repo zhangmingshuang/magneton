@@ -20,8 +20,6 @@ import java.util.Iterator;
 
 import javax.annotation.CheckForNull;
 
-
-
 /**
  * A {@link Reader} that concatenates multiple readers.
  *

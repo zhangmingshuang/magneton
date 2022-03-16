@@ -16,8 +16,6 @@ package org.magneton.core.math;
 
 import java.math.RoundingMode;
 
-
-
 import static org.magneton.core.base.Preconditions.checkNotNull;
 import static org.magneton.core.math.MathPreconditions.checkRoundingUnnecessary;
 

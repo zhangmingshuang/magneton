@@ -111,7 +111,8 @@ final class UnmodifiableSortedMultiset<E extends Object> extends UnmodifiableMul
 	public org.magneton.core.collect.SortedMultiset<E> subMultiset(@ParametricNullness E lowerBound,
 			org.magneton.core.collect.BoundType lowerBoundType, @ParametricNullness E upperBound,
 			org.magneton.core.collect.BoundType upperBoundType) {
-		return org.magneton.core.collect.Multisets.unmodifiableSortedMultiset(delegate().subMultiset(lowerBound, lowerBoundType, upperBound, upperBoundType));
+		return org.magneton.core.collect.Multisets.unmodifiableSortedMultiset(
+				delegate().subMultiset(lowerBound, lowerBoundType, upperBound, upperBoundType));
 	}
 
 	@Override

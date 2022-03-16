@@ -1,8 +1,8 @@
 -- ----------------------------
 -- 13、参数配置表
 -- ----------------------------
-drop table if exists basic_sys_config;
-create table basic_sys_config
+drop table if exists admin_sys_config;
+create table admin_sys_config
 (
     id           int(5)       not null auto_increment comment '主键',
     config_name  varchar(100) not null default '' comment '参数名称',

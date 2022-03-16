@@ -1635,7 +1635,8 @@ final class Synchronized {
 		@Override
 		public NavigableSet<E> subSet(E fromElement, boolean fromInclusive, E toElement, boolean toInclusive) {
 			synchronized (mutex) {
-				return Synchronized.navigableSet(delegate().subSet(fromElement, fromInclusive, toElement, toInclusive), mutex);
+				return Synchronized.navigableSet(delegate().subSet(fromElement, fromInclusive, toElement, toInclusive),
+						mutex);
 			}
 		}
 

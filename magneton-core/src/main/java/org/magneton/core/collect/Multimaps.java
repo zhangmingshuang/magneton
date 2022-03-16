@@ -2177,7 +2177,8 @@ public final class Multimaps {
 
 		@Override
 		Iterator<Entry<K>> entryIterator() {
-			return new TransformedIterator<Map.Entry<K, Collection<V>>, Entry<K>>(multimap.asMap().entrySet().iterator()) {
+			return new TransformedIterator<Map.Entry<K, Collection<V>>, Entry<K>>(
+					multimap.asMap().entrySet().iterator()) {
 				@Override
 				Entry<K> transform(Map.Entry<K, Collection<V>> backingEntry) {
 					return new Multisets.AbstractEntry<K>() {

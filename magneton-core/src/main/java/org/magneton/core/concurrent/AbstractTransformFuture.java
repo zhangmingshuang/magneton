@@ -78,9 +78,9 @@ abstract class AbstractTransformFuture<I extends Object, O extends Object, F, T 
 
 		if (localInputFuture.isCancelled()) {
 			boolean unused = this.setFuture((ListenableFuture<O>) localInputFuture); // Respects
-																				// cancellation
-																				// cause
-																				// setting
+			// cancellation
+			// cause
+			// setting
 			return;
 		}
 

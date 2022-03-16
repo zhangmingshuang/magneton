@@ -82,7 +82,8 @@ public interface Signature {
 		public Signature build() {
 			Preconditions.checkNotNull(this.salt, "salt must be not null");
 
-			AbstractSignature abstractSignature = Objects.isNull(this.signature) ? new Sha1Signature(this.salt) : this.signature;
+			AbstractSignature abstractSignature = Objects.isNull(this.signature) ? new Sha1Signature(this.salt)
+					: this.signature;
 			if (!Arrays.isNullOrEmpty(this.needBodyKeys)) {
 				abstractSignature.setSignatureBodyVerifyer(new KeysSignatureBodyVerifyer(this.needBodyKeys));
 			}

@@ -14,8 +14,6 @@
 
 package org.magneton.core.escape;
 
-
-
 /**
  * Methods factored out so that they can be emulated differently in GWT.
  *

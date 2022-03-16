@@ -658,7 +658,8 @@ public final class MinMaxPriorityQueue<E> extends AbstractQueue<E> {
 		}
 
 		int compareElements(int a, int b) {
-			return this.ordering.compare(MinMaxPriorityQueue.this.elementData(a), MinMaxPriorityQueue.this.elementData(b));
+			return this.ordering.compare(MinMaxPriorityQueue.this.elementData(a),
+					MinMaxPriorityQueue.this.elementData(b));
 		}
 
 		/**
@@ -836,7 +837,8 @@ public final class MinMaxPriorityQueue<E> extends AbstractQueue<E> {
 			int minChildIndex = this.findMinChild(index);
 			// TODO(kevinb): split the && into two if's and move crossOverUp so it's
 			// only called when there's no child.
-			if ((minChildIndex > 0) && (this.ordering.compare(MinMaxPriorityQueue.this.elementData(minChildIndex), x) < 0)) {
+			if ((minChildIndex > 0)
+					&& (this.ordering.compare(MinMaxPriorityQueue.this.elementData(minChildIndex), x) < 0)) {
 				MinMaxPriorityQueue.this.queue[index] = MinMaxPriorityQueue.this.elementData(minChildIndex);
 				MinMaxPriorityQueue.this.queue[minChildIndex] = x;
 				return minChildIndex;
@@ -860,10 +862,12 @@ public final class MinMaxPriorityQueue<E> extends AbstractQueue<E> {
 		}
 
 		private boolean verifyIndex(int i) {
-			if ((this.getLeftChildIndex(i) < MinMaxPriorityQueue.this.size) && (this.compareElements(i, this.getLeftChildIndex(i)) > 0)) {
+			if ((this.getLeftChildIndex(i) < MinMaxPriorityQueue.this.size)
+					&& (this.compareElements(i, this.getLeftChildIndex(i)) > 0)) {
 				return false;
 			}
-			if ((this.getRightChildIndex(i) < MinMaxPriorityQueue.this.size) && (this.compareElements(i, this.getRightChildIndex(i)) > 0)) {
+			if ((this.getRightChildIndex(i) < MinMaxPriorityQueue.this.size)
+					&& (this.compareElements(i, this.getRightChildIndex(i)) > 0)) {
 				return false;
 			}
 			if ((i > 0) && (this.compareElements(i, this.getParentIndex(i)) > 0)) {
@@ -927,7 +931,8 @@ public final class MinMaxPriorityQueue<E> extends AbstractQueue<E> {
 		public boolean hasNext() {
 			this.checkModCount();
 			this.nextNotInSkipMe(this.cursor + 1);
-			return (this.nextCursor < MinMaxPriorityQueue.this.size()) || ((this.forgetMeNot != null) && !this.forgetMeNot.isEmpty());
+			return (this.nextCursor < MinMaxPriorityQueue.this.size())
+					|| ((this.forgetMeNot != null) && !this.forgetMeNot.isEmpty());
 		}
 
 		@Override
@@ -1021,7 +1026,8 @@ public final class MinMaxPriorityQueue<E> extends AbstractQueue<E> {
 		private void nextNotInSkipMe(int c) {
 			if (this.nextCursor < c) {
 				if (this.skipMe != null) {
-					while (c < MinMaxPriorityQueue.this.size() && this.foundAndRemovedExactReference(this.skipMe, MinMaxPriorityQueue.this.elementData(c))) {
+					while (c < MinMaxPriorityQueue.this.size() && this.foundAndRemovedExactReference(this.skipMe,
+							MinMaxPriorityQueue.this.elementData(c))) {
 						c++;
 					}
 				}

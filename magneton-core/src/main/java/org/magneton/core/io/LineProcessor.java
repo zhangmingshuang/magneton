@@ -18,8 +18,6 @@ import java.io.IOException;
 
 import javax.annotations.CanIgnoreReturnValue;
 
-
-
 /**
  * A callback to be used with the streaming {@code readLines} methods.
  *

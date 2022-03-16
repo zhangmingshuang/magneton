@@ -605,7 +605,8 @@ public final class CacheBuilder<K, V> {
 	public <K1 extends K, V1 extends V> CacheBuilder<K1, V1> weigher(Weigher<? super K1, ? super V1> weigher) {
 		checkState(this.weigher == null);
 		if (this.strictParsing) {
-			checkState(this.maximumSize == UNSET_INT, "weigher can not be combined with maximum size", this.maximumSize);
+			checkState(this.maximumSize == UNSET_INT, "weigher can not be combined with maximum size",
+					this.maximumSize);
 		}
 
 		// safely limiting the kinds of caches this can produce
@@ -776,7 +777,8 @@ public final class CacheBuilder<K, V> {
 	 */
 	// should accept a Duration
 	public CacheBuilder<K, V> expireAfterWrite(long duration, TimeUnit unit) {
-		checkState(this.expireAfterWriteNanos == UNSET_INT, "expireAfterWrite was already set to %s ns", this.expireAfterWriteNanos);
+		checkState(this.expireAfterWriteNanos == UNSET_INT, "expireAfterWrite was already set to %s ns",
+				this.expireAfterWriteNanos);
 		checkArgument(duration >= 0, "duration cannot be negative: %s %s", duration, unit);
 		this.expireAfterWriteNanos = unit.toNanos(duration);
 		return this;
@@ -855,7 +857,8 @@ public final class CacheBuilder<K, V> {
 	 */
 	// should accept a Duration
 	public CacheBuilder<K, V> expireAfterAccess(long duration, TimeUnit unit) {
-		checkState(this.expireAfterAccessNanos == UNSET_INT, "expireAfterAccess was already set to %s ns", this.expireAfterAccessNanos);
+		checkState(this.expireAfterAccessNanos == UNSET_INT, "expireAfterAccess was already set to %s ns",
+				this.expireAfterAccessNanos);
 		checkArgument(duration >= 0, "duration cannot be negative: %s %s", duration, unit);
 		this.expireAfterAccessNanos = unit.toNanos(duration);
 		return this;

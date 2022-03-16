@@ -641,7 +641,8 @@ public final class BloomFilter<T> implements Predicate<T>, Serializable {
 		}
 
 		Object readResolve() {
-			return new BloomFilter<T>(new BloomFilterStrategies.LockFreeBitArray(data), numHashFunctions, funnel, strategy);
+			return new BloomFilter<T>(new BloomFilterStrategies.LockFreeBitArray(data), numHashFunctions, funnel,
+					strategy);
 		}
 
 	}

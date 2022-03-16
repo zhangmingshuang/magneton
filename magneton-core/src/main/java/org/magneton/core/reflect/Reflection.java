@@ -28,7 +28,6 @@ import java.util.Map;
 
 import javax.annotation.Nullable;
 
-import cn.hutool.core.lang.Assert;
 import org.magneton.core.base.Preconditions;
 import org.magneton.core.collect.ConcurrentReferenceHashMap;
 
@@ -246,8 +245,8 @@ public final class Reflection {
 	 */
 	@Nullable
 	public static Field findField(Class<?> clazz, @Nullable String name, @Nullable Class<?> type) {
-		Assert.notNull(clazz, "Class must not be null");
-		Assert.isTrue(name != null || type != null, "Either name or type of the field must be specified");
+		Preconditions.checkNotNull(clazz, "Class must not be null");
+		Preconditions.checkArgument(name != null || type != null, "Either name or type of the field must be specified");
 		Class<?> searchType = clazz;
 		while (Object.class != searchType && searchType != null) {
 			Field[] fields = getDeclaredFields(searchType);
@@ -448,7 +447,7 @@ public final class Reflection {
 	 * @see Class#getDeclaredFields()
 	 */
 	private static Field[] getDeclaredFields(Class<?> clazz) {
-		Assert.notNull(clazz, "Class must not be null");
+		Preconditions.checkNotNull(clazz, "Class must not be null");
 		Field[] result = declaredFieldsCache.get(clazz);
 		if (result == null) {
 			try {

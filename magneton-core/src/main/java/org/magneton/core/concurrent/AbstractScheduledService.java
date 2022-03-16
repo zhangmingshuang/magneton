@@ -655,7 +655,8 @@ public abstract class AbstractScheduledService implements Service {
 			 * to `new SupplantableFuture` below.)
 			 */ private Cancellable initializeOrUpdateCancellationDelegate(Schedule schedule) {
 				if (this.cancellationDelegate == null) {
-					return this.cancellationDelegate = new SupplantableFuture(this.lock, this.submitToExecutor(schedule));
+					return this.cancellationDelegate = new SupplantableFuture(this.lock,
+							this.submitToExecutor(schedule));
 				}
 				if (!this.cancellationDelegate.currentFuture.isCancelled()) {
 					this.cancellationDelegate.currentFuture = this.submitToExecutor(schedule);
@@ -696,19 +697,22 @@ public abstract class AbstractScheduledService implements Service {
 
 		@Override
 		protected final void doStart() {
-			this.executorService = MoreExecutors.renamingDecorator(AbstractScheduledService.this.executor(), new Supplier<String>() {
-				@Override
-				public String get() {
-					return AbstractScheduledService.this.serviceName() + " " + ServiceDelegate.this.state();
-				}
-			});
+			this.executorService = MoreExecutors.renamingDecorator(AbstractScheduledService.this.executor(),
+					new Supplier<String>() {
+						@Override
+						public String get() {
+							return AbstractScheduledService.this.serviceName() + " " + ServiceDelegate.this.state();
+						}
+					});
 			this.executorService.execute(new Runnable() {
 				@Override
 				public void run() {
 					ServiceDelegate.this.lock.lock();
 					try {
 						AbstractScheduledService.this.startUp();
-						ServiceDelegate.this.runningTask = AbstractScheduledService.this.scheduler().schedule(AbstractScheduledService.this.delegate, ServiceDelegate.this.executorService, ServiceDelegate.this.task);
+						ServiceDelegate.this.runningTask = AbstractScheduledService.this.scheduler().schedule(
+								AbstractScheduledService.this.delegate, ServiceDelegate.this.executorService,
+								ServiceDelegate.this.task);
 						ServiceDelegate.this.notifyStarted();
 					}
 					catch (Throwable t) {
@@ -795,8 +799,9 @@ public abstract class AbstractScheduledService implements Service {
 					}
 					ServiceDelegate.this.notifyFailed(t);
 					// requireNonNull is safe now, just as it was above.
-					requireNonNull(ServiceDelegate.this.runningTask).cancel(false); // prevent future
-																// invocations.
+					requireNonNull(ServiceDelegate.this.runningTask).cancel(false); // prevent
+																					// future
+					// invocations.
 				}
 				finally {
 					ServiceDelegate.this.lock.unlock();
