@@ -18,6 +18,7 @@
 		<module>magneton-module-distributed-lock</module>
 		<module>magneton-module-geo</module>
 		<module>magneton-module-auth</module>
+		<module>magneton-module-sms</module>
 	</modules>
 
 	<dependencyManagement>
