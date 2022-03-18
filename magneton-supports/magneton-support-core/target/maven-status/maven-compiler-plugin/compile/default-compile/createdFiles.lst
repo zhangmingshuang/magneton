@@ -1,10 +1,12 @@
 org\magneton\support\properties\SupportProperty.class
-org\magneton\support\doc\HtmlDoc.class
 org\magneton\support\SupportAutoConfiguration.class
+org\magneton\support\adapter\MvcAdapter.class
+org\magneton\support\controller\ApiDocController.class
+org\magneton\support\adapter\WebMvcConfigurerAdapter.class
+org\magneton\support\doc\HtmlDoc.class
 org\magneton\support\constant\CacheConstant.class
 org\magneton\support\core\DbTableGenerator.class
 org\magneton\support\core\MySqlDbTableGenerator.class
-org\magneton\support\controller\ApiDocController.class
 org\magneton\support\util\IpUtil.class
 org\magneton\support\constant\Removed.class
 org\magneton\support\constant\Status.class

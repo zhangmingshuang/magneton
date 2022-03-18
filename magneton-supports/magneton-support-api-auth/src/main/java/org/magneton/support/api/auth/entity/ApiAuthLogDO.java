@@ -16,48 +16,33 @@ import lombok.experimental.Accessors;
  *
  * @author Powered By Fluent Mybatis
  */
-@SuppressWarnings({"rawtypes", "unchecked"})
+@SuppressWarnings({ "rawtypes", "unchecked" })
 @Data
-@Accessors(
-    chain = true
-)
-@EqualsAndHashCode(
-    callSuper = false
-)
+@Accessors(chain = true)
+@EqualsAndHashCode(callSuper = false)
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@FluentMybatis(
-    table = "api_auth_log",
-    schema = "magneton",
-    suffix = "DO"
-)
+@FluentMybatis(table = "api_auth_log", schema = "magneton", suffix = "DO")
 public class ApiAuthLogDO extends RichEntity {
-  private static final long serialVersionUID = 1L;
 
-  @TableId("id")
-  private Integer id;
+	private static final long serialVersionUID = 1L;
 
-  @TableField(
-      value = "create_additional",
-      desc = "创建附加信息"
-  )
-  private String createAdditional;
+	@TableId("id")
+	private Integer id;
 
-  @TableField(
-      value = "create_time",
-      desc = "创建时间"
-  )
-  private Long createTime;
+	@TableField(value = "create_additional", desc = "创建附加信息")
+	private String createAdditional;
 
-  @TableField(
-      value = "user_id",
-      desc = "授权用户"
-  )
-  private Integer userId;
+	@TableField(value = "create_time", desc = "创建时间")
+	private Long createTime;
 
-  @Override
-  public final Class entityClass() {
-    return ApiAuthLogDO.class;
-  }
+	@TableField(value = "user_id", desc = "授权用户")
+	private Integer userId;
+
+	@Override
+	public final Class entityClass() {
+		return ApiAuthLogDO.class;
+	}
+
 }
