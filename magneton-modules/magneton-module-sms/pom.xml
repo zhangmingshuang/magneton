@@ -30,6 +30,10 @@
 			<version>${aliyun.dysmsapi.version}</version>
 			<optional>true</optional>
 		</dependency>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+		</dependency>
 		<!-- test -->
 		<dependency>
 			<groupId>org.magneton</groupId>

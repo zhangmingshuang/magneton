@@ -3,7 +3,9 @@ package org.magneton.adaptive.redis;
 import java.io.File;
 import java.io.IOException;
 
+import lombok.extern.slf4j.Slf4j;
 import org.magneton.core.base.Preconditions;
+import org.magneton.core.base.Strings;
 import org.magneton.foundation.resource.Resources;
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;
@@ -15,6 +17,7 @@ import org.redisson.config.Config;
  * @author zhangmsh 2022/2/10
  * @since 1.2.0
  */
+@Slf4j
 public class RedissonAdapter {
 
 	private RedissonAdapter() {
@@ -39,7 +42,7 @@ public class RedissonAdapter {
 	 * @return 默认的集群模式设置
 	 */
 	public static Config getDefaultClusterServersConfig() {
-		return createConfig("classpath:adaptive-redisson-clusterServersConfig.yaml");
+		return createConfig("%sredisson-clusterServersConfig.yaml");
 	}
 
 	public static RedissonClient createClusterServersClient() {
@@ -54,7 +57,7 @@ public class RedissonAdapter {
 	 * @return 默认的主从模式配置
 	 */
 	public static Config getDefaultMasterSlaveServersConfig() {
-		return createConfig("classpath:adaptive-redisson-masterSlaveServersConfig.yaml");
+		return createConfig("%sredisson-masterSlaveServersConfig.yaml");
 	}
 
 	public static RedissonClient createMasterSlaveServersClient() {
@@ -71,7 +74,7 @@ public class RedissonAdapter {
 	 * @return 默认的云托管模式配置
 	 */
 	public static Config getDefaultReplicatedServersConfig() {
-		return createConfig("classpath:adaptive-redisson-replicatedServersConfig.yaml");
+		return createConfig("%sredisson-replicatedServersConfig.yaml");
 	}
 
 	public static RedissonClient createReplicatedServersClient() {
@@ -92,7 +95,7 @@ public class RedissonAdapter {
 	 * @return 默认的哨兵模式配置
 	 */
 	public static Config getDefaultSentinelServersConfig() {
-		return createConfig("classpath:adaptive-redisson-sentinelServersConfig.yaml");
+		return createConfig("%sredisson-sentinelServersConfig.yaml");
 	}
 
 	public static RedissonClient createSentinelServersClient() {
@@ -104,7 +107,7 @@ public class RedissonAdapter {
 	 * @return 默认的单节点模式配置
 	 */
 	public static Config getDefaultSingleServerConfig() {
-		return createConfig("classpath:adaptive-redisson-singleServerConfig.yaml");
+		return createConfig("%sredisson-singleServerConfig.yaml");
 	}
 
 	public static RedissonClient createSingleServerClient() {
@@ -117,11 +120,17 @@ public class RedissonAdapter {
 
 	private static Config createConfig(String path) {
 		try {
-			File file = Resources.getFile(path);
+			File file = Resources.getFile(Strings.lenientFormat(path, ""));
 			return Config.fromYAML(file);
 		}
 		catch (IOException e) {
-			throw new RedissonConfigParseException(e);
+			try {
+				File file = Resources.getFile(Strings.lenientFormat(path, "classpath:adaptive-"));
+				return Config.fromYAML(file);
+			}
+			catch (IOException e1) {
+				throw new RedissonConfigParseException(e1);
+			}
 		}
 	}
 

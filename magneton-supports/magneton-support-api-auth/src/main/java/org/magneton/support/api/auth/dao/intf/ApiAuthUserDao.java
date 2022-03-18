@@ -1,7 +1,11 @@
 package org.magneton.support.api.auth.dao.intf;
 
+import javax.annotation.Nullable;
+
 import cn.org.atool.fluent.mybatis.base.IBaseDao;
+import org.magneton.core.base.Preconditions;
 import org.magneton.support.api.auth.entity.ApiAuthUserDO;
+import org.magneton.support.api.auth.wrapper.ApiAuthUserQuery;
 
 /**
  * ApiAuthUserDao: 数据操作接口
@@ -12,5 +16,12 @@ import org.magneton.support.api.auth.entity.ApiAuthUserDO;
  * @author Powered By Fluent Mybatis
  */
 public interface ApiAuthUserDao extends IBaseDao<ApiAuthUserDO> {
+
+	@Nullable
+	default ApiAuthUserDO getByMobile(String mobile) {
+		Preconditions.checkNotNull(mobile);
+		ApiAuthUserQuery query = new ApiAuthUserQuery().where().account().eq(mobile).end();
+		return (ApiAuthUserDO) this.mapper().findOne(ApiAuthUserDO.class, query).orElse(null);
+	}
 
 }

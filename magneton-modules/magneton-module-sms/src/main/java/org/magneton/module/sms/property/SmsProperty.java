@@ -53,4 +53,9 @@ public class SmsProperty {
 	 */
 	private int groupRiskInSeconds = 24 * 60 * 60;
 
+	/**
+	 * 每条短信的有效期限
+	 */
+	private int periodSecond = 5 * 60;
+
 }

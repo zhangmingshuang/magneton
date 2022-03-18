@@ -13,11 +13,11 @@ Version |  Update Time  | Status | Author |  Description
 
 **Author:** zhangmsh 15/03/2022
 
-**Content-Type:** application/x-www-form-urlencoded;charset=utf-8
+**Content-Type:** application/json; charset=utf-8
 
 **Description:** 发送短信有对应的风控模块，如果返回{@link SmsError#MOBILE_RISK}的状态码， 调用方需要进行风险控制流程的接入。
 
-**Query-parameters:**
+**Body-parameters:**
 
 Parameter | Type|Description|Required|Since
 ---|---|---|---|---
@@ -42,14 +42,14 @@ additions|map|No comments found. (ActualType: SmsSendReq)|-
 **Response-example:**
 ```
 {
-  "code": "13762",
+  "code": "30764",
   "data": {
-    "mobile": "206.817.1594",
-    "risk_type": "zww0zy",
-    "risk_value": "91p7nz"
+    "mobile": "970.559.4865",
+    "risk_type": "ul4x1p",
+    "risk_value": "o14grs"
   },
   "message": "success",
-  "timestamp": 1647410587039,
+  "timestamp": 1647411829633,
   "additions": {
     "mapKey": {}
   }

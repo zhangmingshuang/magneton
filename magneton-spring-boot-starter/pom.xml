@@ -11,17 +11,6 @@
 
 	<artifactId>magneton-spring-boot-starter</artifactId>
 
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-dependencies</artifactId>
-				<version>${spring-boot.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
 
 	<dependencies>
 		<dependency>
@@ -32,6 +21,7 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+			<version>${spring-boot.version}</version>
 		</dependency>
 		<!-- 可选功能依赖项 -->
 		<dependency>
@@ -52,16 +42,34 @@
 			<version>${project.version}</version>
 			<optional>true</optional>
 		</dependency>
+		<dependency>
+			<groupId>org.magneton</groupId>
+			<artifactId>magneton-module-sms</artifactId>
+			<version>${project.version}</version>
+			<optional>true</optional>
+		</dependency>
 		<!-- 可选功能依赖项 end -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-redis</artifactId>
+			<version>${spring-boot.version}</version>
 			<optional>true</optional>
 		</dependency>
-
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-autoconfigure</artifactId>
+			<version>${spring-boot.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<version>${spring-boot.version}</version>
+			<optional>true</optional>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
+			<version>${spring-boot.version}</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

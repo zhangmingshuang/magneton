@@ -263,7 +263,7 @@
 					<!-- 如果设置该配置，则只会覆盖主要的配置 -->
 					<flattenMode>oss</flattenMode>
 					<pomElements>
-						<dependencyManagement>flatten</dependencyManagement>
+						<dependencyManagement>expand</dependencyManagement>
 						<!--<dependencies>expand</dependencies>-->
 					</pomElements>
 				</configuration>

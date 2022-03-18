@@ -17,6 +17,21 @@
 			<artifactId>magneton-support-core</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.magneton</groupId>
+			<artifactId>magneton-module-distributed-lock</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.magneton</groupId>
+			<artifactId>magneton-module-distributed-cache</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.magneton</groupId>
+			<artifactId>magneton-module-sms</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 		<!-- 引入fluent-mybatis-processor, scope设置为provider 编译需要，运行时不需要 -->
 		<dependency>
 			<groupId>com.github.atool</groupId>
