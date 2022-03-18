@@ -62,7 +62,10 @@ public abstract class AbstractAliyunSmsProcessor implements SendProcessor {
 		try {
 			AliyunSmsTemplate aliyunSmsTemplate = this.createTemplate(mobile);
 			SendSmsRequest sendSmsRequest = this.createSendSmsRequest(mobile, aliyunSmsTemplate);
-			SendSmsResponse sendSmsResponse = this.client.sendSms(sendSmsRequest);
+			SendSmsResponse sendSmsResponse = this.doSend(sendSmsRequest);
+			if (log.isDebugEnabled()) {
+				log.debug("send to {}, response: {}", mobile, sendSmsResponse);
+			}
 			SendSmsResponseBody body = sendSmsResponse.getBody();
 			return this.doSendResponseProcess(aliyunSmsTemplate.getCode(), sendSmsResponse,
 					"ok".equalsIgnoreCase(body.getCode()));
@@ -71,6 +74,10 @@ public abstract class AbstractAliyunSmsProcessor implements SendProcessor {
 			this.onSendException(e, mobile);
 		}
 		return Consequences.fail();
+	}
+
+	protected SendSmsResponse doSend(SendSmsRequest sendSmsRequest) throws Exception {
+		return this.client.sendSms(sendSmsRequest);
 	}
 
 	/**

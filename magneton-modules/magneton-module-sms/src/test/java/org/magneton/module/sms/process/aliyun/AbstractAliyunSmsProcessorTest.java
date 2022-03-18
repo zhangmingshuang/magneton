@@ -1,5 +1,8 @@
 package org.magneton.module.sms.process.aliyun;
 
+import com.aliyun.dysmsapi20170525.models.SendSmsRequest;
+import com.aliyun.dysmsapi20170525.models.SendSmsResponse;
+import com.aliyun.dysmsapi20170525.models.SendSmsResponseBody;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.magneton.adaptive.redis.RedissonAdapter;
@@ -23,8 +26,8 @@ class AbstractAliyunSmsProcessorTest {
 	@BeforeAll
 	public static void init() {
 		AliyunSmsProperty aliyunSmsProperty = new AliyunSmsProperty();
-		aliyunSmsProperty.setAccessKeyId("LTAI5tPDtZRbxzNiJNgtmugQ");
-		aliyunSmsProperty.setAccessKeySecret("iLNTjQeryeXpw3LGFy1EeUQVWnC0QL");
+		aliyunSmsProperty.setAccessKeyId("test");
+		aliyunSmsProperty.setAccessKeySecret("test");
 		aliyunSmsProperty.setSignName("阿里云短信测试");
 		aliyunSmsProperty.setTemplateCode("SMS_154950909");
 
@@ -33,6 +36,15 @@ class AbstractAliyunSmsProcessorTest {
 			protected AliyunSmsTemplate createTemplate(String mobile) {
 				return new AliyunSmsTemplate("123456");
 			}
+
+			@Override
+			protected SendSmsResponse doSend(SendSmsRequest sendSmsRequest) throws Exception {
+				SendSmsResponse response = new SendSmsResponse();
+				SendSmsResponseBody body = new SendSmsResponseBody();
+				body.setCode("ok");
+				response.setBody(body);
+				return response;
+			}
 		};
 		SmsProperty smsProperty = new SmsProperty();
 		sms = new RedissonSms(RedissonAdapter.createSingleServerClient(), sendProcessor, smsProperty);
@@ -40,8 +52,21 @@ class AbstractAliyunSmsProcessorTest {
 
 	@Test
 	void send() {
-		Consequences<SendStatus> response = sms.trySend("13860132592");
+		String mobile = "13860132592";
+		Consequences<SendStatus> response = sms.trySend(mobile);
 		System.out.println(response);
+
+		long ttl = sms.ttl(mobile);
+		System.out.println(ttl);
+
+		String token = sms.token(mobile);
+		System.out.println(token);
+
+		boolean error = sms.validate(token, mobile, "error");
+		System.out.println(error);
+
+		boolean success = sms.validate(token, mobile, "123456");
+		System.out.println(success);
 	}
 
 }

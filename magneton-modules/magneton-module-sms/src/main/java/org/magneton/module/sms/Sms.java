@@ -40,6 +40,11 @@ public interface Sms {
 	 */
 	long ttl(String mobile);
 
+	@Nullable
+	default String token(String mobile) {
+		return this.token(mobile, DEFAULT_GROUP);
+	}
+
 	/**
 	 * 获取最后发送成功的Token
 	 * @param mobile 手机号
