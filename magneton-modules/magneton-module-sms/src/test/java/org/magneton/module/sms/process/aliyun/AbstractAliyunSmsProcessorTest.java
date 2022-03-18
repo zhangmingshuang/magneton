@@ -3,6 +3,7 @@ package org.magneton.module.sms.process.aliyun;
 import com.aliyun.dysmsapi20170525.models.SendSmsRequest;
 import com.aliyun.dysmsapi20170525.models.SendSmsResponse;
 import com.aliyun.dysmsapi20170525.models.SendSmsResponseBody;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.magneton.adaptive.redis.RedissonAdapter;
@@ -54,19 +55,19 @@ class AbstractAliyunSmsProcessorTest {
 	void send() {
 		String mobile = "13860132592";
 		Consequences<SendStatus> response = sms.trySend(mobile);
-		System.out.println(response);
+		Assertions.assertTrue(response.isSuccess());
 
 		long ttl = sms.ttl(mobile);
-		System.out.println(ttl);
+		Assertions.assertTrue(ttl > 0, String.valueOf(ttl));
 
 		String token = sms.token(mobile);
-		System.out.println(token);
+		Assertions.assertNotNull(token);
 
 		boolean error = sms.validate(token, mobile, "error");
-		System.out.println(error);
+		Assertions.assertFalse(error);
 
 		boolean success = sms.validate(token, mobile, "123456");
-		System.out.println(success);
+		Assertions.assertTrue(success);
 	}
 
 }
