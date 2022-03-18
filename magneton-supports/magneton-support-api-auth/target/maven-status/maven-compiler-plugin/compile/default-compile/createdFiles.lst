@@ -1,10 +1,10 @@
 org\magneton\support\api\auth\helper\ApiAuthStatisticsSegment$Having.class
-org\magneton\support\api\auth\service\SmsService.class
 org\magneton\support\api\auth\helper\ApiAuthStatisticsSegment$Selector.class
 org\magneton\support\api\auth\helper\ApiAuthUserSegment$ASegment.class
 org\magneton\support\api\auth\dao\base\ApiAuthStatisticsBaseDao.class
 org\magneton\support\api\auth\entity\ApiAuthUserDO.class
 org\magneton\support\api\auth\helper\ApiAuthLogSegment.class
+org\magneton\support\api\auth\service\impl\AuthServiceImpl.class
 org\magneton\support\api\auth\helper\ApiAuthUserSegment$Selector.class
 org\magneton\support\api\auth\helper\ApiAuthStatisticsSegment$UpdateWhere.class
 org\magneton\support\api\auth\wrapper\ApiAuthLogUpdate.class
@@ -28,7 +28,6 @@ org\magneton\support\api\auth\helper\ApiAuthLogSegment$QueryOrderBy.class
 org\magneton\support\api\auth\helper\ApiAuthUserSegment$EntityWhere.class
 org\magneton\support\api\auth\helper\ApiAuthStatisticsMapping$1.class
 org\magneton\support\api\auth\entity\ApiAuthStatisticsDO$ApiAuthStatisticsDOBuilder.class
-org\magneton\support\api\auth\properties\ApiAuthProperty$Sms.class
 org\magneton\support\api\auth\dao\impl\ApiAuthLogDaoImpl.class
 org\magneton\support\api\auth\entity\ApiAuthLogDO$ApiAuthLogDOBuilder.class
 org\magneton\support\api\auth\helper\ApiAuthUserSegment$UpdateOrderBy.class
@@ -50,13 +49,14 @@ org\magneton\support\api\auth\helper\ApiAuthUserSegment$Having.class
 org\magneton\support\api\auth\mapper\ApiAuthStatisticsMapper.class
 org\magneton\support\api\auth\dao\intf\ApiAuthUserDao.class
 org\magneton\support\api\auth\Ref$Field$ApiAuthUser.class
+org\magneton\support\api\auth\service\AuthService.class
 org\magneton\support\api\auth\helper\ApiAuthUserMapping$1.class
 org\magneton\support\api\auth\dao\impl\ApiAuthStatisticsDaoImpl.class
 org\magneton\support\api\auth\helper\ApiAuthLogSegment$Having.class
 org\magneton\support\api\auth\helper\ApiAuthUserSegment$QueryWhere.class
+org\magneton\support\api\auth\pojo\SmsLoginReq.class
 org\magneton\support\api\auth\helper\ApiAuthUserSegment$GroupBy.class
 org\magneton\support\api\auth\helper\ApiAuthLogSegment$UpdateSetter.class
-org\magneton\support\api\auth\properties\ApiAuthProperty.class
 org\magneton\support\api\auth\helper\ApiAuthUserSegment$UpdateWhere.class
 org\magneton\support\api\auth\helper\ApiAuthStatisticsSegment$QueryOrderBy.class
 org\magneton\support\api\auth\wrapper\ApiAuthStatisticsUpdate.class

@@ -2,6 +2,7 @@ package org.magneton.module.sms.process.aliyun;
 
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.ThreadLocalRandom;
 
 import com.alibaba.fastjson.JSON;
 import com.aliyun.dysmsapi20170525.Client;
@@ -60,7 +61,8 @@ public abstract class AbstractAliyunSmsProcessor implements SendProcessor {
 	@Override
 	public Consequences<SmsToken> send(String mobile) {
 		try {
-			AliyunSmsTemplate aliyunSmsTemplate = this.createTemplate(mobile);
+			AliyunSmsTemplate aliyunSmsTemplate = this.createTemplate(mobile,
+					this.getAliyunSmsProperty().getTemplateCode());
 			SendSmsRequest sendSmsRequest = this.createSendSmsRequest(mobile, aliyunSmsTemplate);
 			SendSmsResponse sendSmsResponse = this.doSend(sendSmsRequest);
 			if (log.isDebugEnabled()) {
@@ -93,7 +95,9 @@ public abstract class AbstractAliyunSmsProcessor implements SendProcessor {
 		return Consequences.fail();
 	}
 
-	protected abstract AliyunSmsTemplate createTemplate(String mobile);
+	protected AliyunSmsTemplate createTemplate(String mobile, String templateCode) {
+		return new AliyunSmsTemplate(String.valueOf(ThreadLocalRandom.current().nextInt(1000, 9999)));
+	}
 
 	/**
 	 * 发送短信异常

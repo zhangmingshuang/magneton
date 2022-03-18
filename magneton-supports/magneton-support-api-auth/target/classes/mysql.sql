@@ -9,6 +9,7 @@ create table api_auth_user
     create_additional varchar(32) not null comment '创建附加信息',
     removed           tinyint     not null comment '是否已删除',
     additional        varchar(64) not null comment '附加信息',
+    unique index idx_account (account),
     primary key (id)
 ) comment '用户';
 

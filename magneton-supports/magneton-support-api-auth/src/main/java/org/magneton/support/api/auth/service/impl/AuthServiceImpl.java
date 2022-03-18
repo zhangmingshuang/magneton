@@ -1,16 +1,36 @@
 package org.magneton.support.api.auth.service.impl;
 
+import java.nio.charset.StandardCharsets;
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.UUID;
+
 import javax.servlet.http.HttpServletRequest;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 import org.magneton.core.Consequences;
 import org.magneton.core.Response;
+import org.magneton.core.base.Objects;
+import org.magneton.core.hash.Hashing;
+import org.magneton.module.distributed.cache.DistributedCache;
 import org.magneton.module.distributed.lock.DistributedLock;
 import org.magneton.module.sms.SendStatus;
 import org.magneton.module.sms.Sms;
+import org.magneton.module.statistics.Statistics;
+import org.magneton.support.api.auth.constant.LoginError;
 import org.magneton.support.api.auth.constant.SmsError;
+import org.magneton.support.api.auth.dao.intf.ApiAuthLogDao;
+import org.magneton.support.api.auth.dao.intf.ApiAuthStatisticsDao;
 import org.magneton.support.api.auth.dao.intf.ApiAuthUserDao;
+import org.magneton.support.api.auth.entity.ApiAuthLogDO;
+import org.magneton.support.api.auth.entity.ApiAuthStatisticsDO;
 import org.magneton.support.api.auth.entity.ApiAuthUserDO;
+import org.magneton.support.api.auth.pojo.SmsAutoLoginReq;
 import org.magneton.support.api.auth.pojo.SmsLoginReq;
+import org.magneton.support.api.auth.pojo.SmsLoginRes;
 import org.magneton.support.api.auth.pojo.SmsSendReq;
 import org.magneton.support.api.auth.service.AuthService;
 import org.magneton.support.constant.Removed;
@@ -19,7 +39,7 @@ import org.magneton.support.util.IpUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionTemplate;
 
 /**
  * .
@@ -37,7 +57,22 @@ public class AuthServiceImpl implements AuthService {
 	private DistributedLock distributedLock;
 
 	@Autowired
+	private DistributedCache distributedCache;
+
+	@Autowired
+	private Statistics statistics;
+
+	@Autowired
 	private ApiAuthUserDao apiAuthUserDao;
+
+	@Autowired
+	private ApiAuthLogDao apiAuthLogDao;
+
+	@Autowired
+	private ApiAuthStatisticsDao apiAuthStatisticsDao;
+
+	@Autowired
+	private TransactionTemplate transactionTemplate;
 
 	@Override
 	public Response<String> sendSms(HttpServletRequest request, SmsSendReq smsSendReq) {
@@ -62,36 +97,100 @@ public class AuthServiceImpl implements AuthService {
 	}
 
 	@Override
-	@Transactional(rollbackFor = Exception.class)
-	public Response<String> login(HttpServletRequest request, SmsLoginReq smsLoginReq) {
+	public Response<SmsLoginRes> login(HttpServletRequest request, SmsLoginReq smsLoginReq) {
 		String smsToken = smsLoginReq.getSmsToken();
 		String mobile = smsLoginReq.getMobile();
 		String smsCode = smsLoginReq.getSmsCode();
 		if (!this.sms.validate(smsToken, mobile, smsCode)) {
 			return Response.response(SmsError.SMS_CODE_ERROR);
 		}
-		this.distributedLock.lock(mobile);
-		try {
-			ApiAuthUserDO apiAuthUser = this.apiAuthUserDao.getByMobile(mobile);
-			if (apiAuthUser == null) {
-				apiAuthUser = this.newApiAuthUser(mobile);
-				this.apiAuthUserDao.save(apiAuthUser);
+
+		ApiAuthUserDO apiAuthUser = this.apiAuthUserDao.getByMobile(mobile);
+		if (apiAuthUser == null) {
+			this.distributedLock.lock(mobile);
+			try {
+				apiAuthUser = this.apiAuthUserDao.getByMobile(mobile);
+				if (apiAuthUser == null) {
+					apiAuthUser = this.newApiAuthUser(mobile);
+					apiAuthUser.setCreateAdditional(IpUtil.getRealIp(request));
+					this.apiAuthUserDao.save(apiAuthUser);
+				}
 			}
-			else {
-				// 已存在
+			finally {
+				this.distributedLock.unlock(mobile);
 			}
 		}
-		finally {
-			this.distributedLock.unlock(mobile);
+		if (apiAuthUser.getStatus() != Status.ENABLE) {
+			return Response.response(LoginError.ACCOUNT_DISABLE);
 		}
-		return null;
+		return this.onLoginSuccessProcess(request, smsLoginReq.getIdentification(), mobile, apiAuthUser.getId());
+	}
+
+	@Override
+	public Response<SmsLoginRes> autoLogin(HttpServletRequest request, SmsAutoLoginReq smsAutoLoginReq) {
+		String identification = smsAutoLoginReq.getIdentification();
+		CacheUser cacheUser = this.distributedCache.opsForValue().get("alogin:" + identification);
+		if (cacheUser == null || !Objects.equal(cacheUser.getAutoLoginToken(), smsAutoLoginReq.getAutoLoginToken())) {
+			return Response.response(LoginError.AUTO_LOGIN_ERROR);
+		}
+		return this.onLoginSuccessProcess(request, identification, cacheUser.getMobile(), cacheUser.getUserId());
+	}
+
+	private Response<SmsLoginRes> onLoginSuccessProcess(HttpServletRequest request, String identification,
+			String mobile, int useId) {
+		String today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+		// log
+		ApiAuthLogDO apiAuthLog = new ApiAuthLogDO();
+		apiAuthLog.setUserId(useId);
+		apiAuthLog.setCreateAdditional(IpUtil.getRealIp(request));
+		apiAuthLog.setCreateTime(System.currentTimeMillis());
+		this.apiAuthLogDao.save(apiAuthLog);
+
+		// pv uv
+		boolean isUv = this.statistics.pvUv().isUv(today, useId, Duration.ofDays(1).getSeconds());
+		ApiAuthStatisticsDO authStatistics = this.apiAuthStatisticsDao.getByToday(today);
+		if (authStatistics == null) {
+			authStatistics = new ApiAuthStatisticsDO();
+			authStatistics.setPv(1);
+			authStatistics.setToday(Integer.valueOf(today));
+			authStatistics.setUv(1);
+			try {
+				this.apiAuthStatisticsDao.save(authStatistics);
+			}
+			catch (Throwable e) {
+				// ignore.
+			}
+		}
+		this.apiAuthStatisticsDao.increPvUv(today, isUv);
+
+		// 缓存自动登录信息
+		String token = Hashing.sha256().hashString(UUID.randomUUID() + mobile, StandardCharsets.UTF_8).toString();
+		String autoLoginToken = Hashing.sha256().hashString(UUID.randomUUID() + mobile, StandardCharsets.UTF_8)
+				.toString();
+		CacheUser cacheUser = new CacheUser().setUserId(useId).setAutoLoginToken(autoLoginToken).setMobile(mobile);
+		this.distributedCache.opsForValue().setEx("alogin:" + identification, cacheUser, 5 * 24 * 60 * 60);
+		this.distributedCache.opsForValue().setEx("clogin:" + token, cacheUser, 24 * 60 * 60);
+		return Response.ok(new SmsLoginRes().setAutoLoginToken(autoLoginToken).setToken(token));
+	}
+
+	@Setter
+	@Getter
+	@Accessors(chain = true)
+	public static class CacheUser {
+
+		private String autoLoginToken;
+
+		private int userId;
+
+		private String mobile;
+
 	}
 
 	private ApiAuthUserDO newApiAuthUser(String mobile) {
 		ApiAuthUserDO apiAuthUser = new ApiAuthUserDO();
 		apiAuthUser.setAccount(mobile);
-		apiAuthUser.setAdditional("");
-		apiAuthUser.setCreateAdditional("");
+		apiAuthUser.setAdditional("-");
+		apiAuthUser.setCreateAdditional("-");
 		apiAuthUser.setCreateTime(System.currentTimeMillis());
 		apiAuthUser.setPwd("-");
 		apiAuthUser.setPwdSalt("-");

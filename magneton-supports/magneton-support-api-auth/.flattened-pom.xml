@@ -5263,6 +5263,24 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
+      <groupId>org.magneton</groupId>
+      <artifactId>magneton-module-distributed-lock</artifactId>
+      <version>1.2.0.RELEASE</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.magneton</groupId>
+      <artifactId>magneton-module-distributed-cache</artifactId>
+      <version>1.2.0.RELEASE</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.magneton</groupId>
+      <artifactId>magneton-module-sms</artifactId>
+      <version>1.2.0.RELEASE</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
       <groupId>com.github.atool</groupId>
       <artifactId>fluent-mybatis-processor</artifactId>
       <version>1.9.4</version>

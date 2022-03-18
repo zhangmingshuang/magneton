@@ -33,10 +33,6 @@ class AbstractAliyunSmsProcessorTest {
 		aliyunSmsProperty.setTemplateCode("SMS_154950909");
 
 		SendProcessor sendProcessor = new AbstractAliyunSmsProcessor(aliyunSmsProperty) {
-			@Override
-			protected AliyunSmsTemplate createTemplate(String mobile) {
-				return new AliyunSmsTemplate("123456");
-			}
 
 			@Override
 			protected SendSmsResponse doSend(SendSmsRequest sendSmsRequest) throws Exception {

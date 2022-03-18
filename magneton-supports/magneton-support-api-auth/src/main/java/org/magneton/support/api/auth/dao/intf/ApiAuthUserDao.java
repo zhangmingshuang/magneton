@@ -6,6 +6,7 @@ import cn.org.atool.fluent.mybatis.base.IBaseDao;
 import org.magneton.core.base.Preconditions;
 import org.magneton.support.api.auth.entity.ApiAuthUserDO;
 import org.magneton.support.api.auth.wrapper.ApiAuthUserQuery;
+import org.magneton.support.constant.Removed;
 
 /**
  * ApiAuthUserDao: 数据操作接口
@@ -20,7 +21,7 @@ public interface ApiAuthUserDao extends IBaseDao<ApiAuthUserDO> {
 	@Nullable
 	default ApiAuthUserDO getByMobile(String mobile) {
 		Preconditions.checkNotNull(mobile);
-		ApiAuthUserQuery query = new ApiAuthUserQuery().where().account().eq(mobile).end();
+		ApiAuthUserQuery query = new ApiAuthUserQuery().where().removed().eq(Removed.NOT).account().eq(mobile).end();
 		return (ApiAuthUserDO) this.mapper().findOne(ApiAuthUserDO.class, query).orElse(null);
 	}
 

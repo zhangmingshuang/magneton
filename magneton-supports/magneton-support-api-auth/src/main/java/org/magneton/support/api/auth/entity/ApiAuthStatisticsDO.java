@@ -16,33 +16,48 @@ import lombok.experimental.Accessors;
  *
  * @author Powered By Fluent Mybatis
  */
-@SuppressWarnings({ "rawtypes", "unchecked" })
+@SuppressWarnings({"rawtypes", "unchecked"})
 @Data
-@Accessors(chain = true)
-@EqualsAndHashCode(callSuper = false)
+@Accessors(
+    chain = true
+)
+@EqualsAndHashCode(
+    callSuper = false
+)
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@FluentMybatis(table = "api_auth_statistics", schema = "magneton", suffix = "DO")
+@FluentMybatis(
+    table = "api_auth_statistics",
+    schema = "magneton",
+    suffix = "DO"
+)
 public class ApiAuthStatisticsDO extends RichEntity {
+  private static final long serialVersionUID = 1L;
 
-	private static final long serialVersionUID = 1L;
+  @TableId("id")
+  private Integer id;
 
-	@TableId("id")
-	private Integer id;
+  @TableField(
+      value = "pv",
+      desc = "pv"
+  )
+  private Integer pv;
 
-	@TableField(value = "pv", desc = "pv")
-	private Integer pv;
+  @TableField(
+      value = "today",
+      desc = "天，yyyyMMdd"
+  )
+  private Integer today;
 
-	@TableField(value = "today", desc = "天，yyyyMMdd")
-	private Integer today;
+  @TableField(
+      value = "uv",
+      desc = "uv"
+  )
+  private Integer uv;
 
-	@TableField(value = "uv", desc = "uv")
-	private Integer uv;
-
-	@Override
-	public final Class entityClass() {
-		return ApiAuthStatisticsDO.class;
-	}
-
+  @Override
+  public final Class entityClass() {
+    return ApiAuthStatisticsDO.class;
+  }
 }

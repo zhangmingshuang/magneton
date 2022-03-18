@@ -4,6 +4,7 @@ import java.util.regex.Pattern;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.magneton.module.sms.property.SmsProperty;
 
 /**
  * .
@@ -13,12 +14,10 @@ import org.junit.jupiter.api.Test;
  */
 class ApiAuthPropertyTest {
 
-	ApiAuthProperty apiAuthProperty = new ApiAuthProperty();
-
 	@Test
 	void test() {
-		ApiAuthProperty.Sms sms = new ApiAuthProperty.Sms();
-		Pattern mobileRegex = sms.getMobileRegex();
+		SmsProperty smsProperty = new SmsProperty();
+		Pattern mobileRegex = smsProperty.getMobileRegex();
 		Assertions.assertTrue(mobileRegex.matcher("13860132592").matches());
 
 		Assertions.assertFalse(mobileRegex.matcher("23888888888").matches());
