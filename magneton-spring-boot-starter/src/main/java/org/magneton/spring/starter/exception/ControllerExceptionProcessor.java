@@ -14,7 +14,6 @@ import org.magneton.core.Response;
 import org.magneton.core.ResponseException;
 import org.magneton.core.base.Preconditions;
 import org.magneton.core.collect.Lists;
-import org.magneton.spring.starter.properties.MagnetonProperties;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +43,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
  */
 @RestControllerAdvice
 @Slf4j
-@ConditionalOnProperty(prefix = MagnetonProperties.PREFIX, value = "exception.advice.enable", havingValue = "true",
+@ConditionalOnProperty(prefix = "magneton", value = "exception.advice.enable", havingValue = "true",
 		matchIfMissing = true)
 public class ControllerExceptionProcessor implements InitializingBean {
 

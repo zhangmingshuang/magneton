@@ -1,7 +1,9 @@
 package org.magneton.module.sms;
 
+import lombok.Getter;
 import org.magneton.core.Consequences;
 import org.magneton.core.base.Preconditions;
+import org.magneton.module.sms.entity.SmsToken;
 import org.magneton.module.sms.process.SendProcessor;
 import org.magneton.module.sms.property.SmsProperty;
 
@@ -15,6 +17,7 @@ public abstract class AbstractSms implements Sms {
 
 	private final SendProcessor sendProcessor;
 
+	@Getter
 	private final SmsProperty smsProperty;
 
 	public AbstractSms(SendProcessor sendProcessor, SmsProperty smsProperty) {
@@ -29,10 +32,9 @@ public abstract class AbstractSms implements Sms {
 	}
 
 	@Override
-	public Consequences<SendStatus> trySend(String mobile, String group, String context) {
+	public Consequences<SendStatus> trySend(String mobile, String group) {
 		Preconditions.checkNotNull(mobile);
 		Preconditions.checkNotNull(group);
-		Preconditions.checkNotNull(context);
 		if (!this.isMobile(mobile)) {
 			return Consequences.fail(SendStatus.FAILURE, "手机号正则匹配错误");
 		}
@@ -51,18 +53,19 @@ public abstract class AbstractSms implements Sms {
 		if (!this.mobileCountCapsOpinion(mobile, this.smsProperty.getDayCount(), this.smsProperty.getHourCount())) {
 			return Consequences.fail(SendStatus.COUNT_CAPS, "发送次数达到上限");
 		}
-		Consequences<SendStatus> sendResponse = this.getSendProcessor().send(mobile, context);
+		Consequences<SmsToken> sendResponse = this.getSendProcessor().send(mobile);
 		if (sendResponse.isSuccess()) {
-			this.mobileSendSuccess(mobile);
+			this.mobileSendSuccess(mobile, sendResponse.getData());
 		}
-		return this.getSendProcessor().send(mobile, context);
+		return Consequences.success(SendStatus.SUCCESS, "短信发送成功");
 	}
 
 	/**
 	 * 发送统计
 	 * @param mobile 手机号
+	 * @param smsToken 此次发送成功的对应Token
 	 */
-	protected abstract void mobileSendSuccess(String mobile);
+	protected abstract void mobileSendSuccess(String mobile, SmsToken smsToken);
 
 	/**
 	 * 判断是否在发送冷却时间间隔内

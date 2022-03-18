@@ -6,8 +6,12 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.concurrent.TimeUnit;
 
+import javax.annotation.Nullable;
+
+import org.magneton.core.base.Objects;
 import org.magneton.core.base.Preconditions;
 import org.magneton.module.sms.AbstractSms;
+import org.magneton.module.sms.entity.SmsToken;
 import org.magneton.module.sms.process.SendProcessor;
 import org.magneton.module.sms.property.SmsProperty;
 import org.redisson.api.RAtomicLong;
@@ -62,6 +66,51 @@ public class RedissonSms extends AbstractSms {
 	}
 
 	@Override
+	protected void mobileSendSuccess(String mobile, SmsToken smsToken) {
+		String token = Preconditions.checkNotNull(smsToken.getToken());
+		CacheToken cacheToken = new CacheToken().setMobile(Preconditions.checkNotNull(mobile))
+				.setCode(Preconditions.checkNotNull(smsToken.getCode())).setTime(System.currentTimeMillis());
+		int periodSecond = super.getSmsProperty().getPeriodSecond();
+		this.redissonClient.getBucket(KEY + ":token:" + token).set(cacheToken, periodSecond, TimeUnit.SECONDS);
+		this.redissonClient.getBucket(KEY + ":token:" + mobile).set(token, periodSecond, TimeUnit.SECONDS);
+	}
+
+	@Nullable
+	@Override
+	public String token(String mobile, String group) {
+		RBucket<String> mobileTokenBucket = this.redissonClient.getBucket(KEY + ":token:" + mobile);
+		return mobileTokenBucket.get();
+	}
+
+	@Override
+	public boolean validate(String token, String mobile, String code) {
+		Preconditions.checkNotNull(token);
+		Preconditions.checkNotNull(code);
+		Preconditions.checkNotNull(mobile);
+		RBucket<CacheToken> tokenBucket = this.redissonClient.getBucket(KEY + ":token:" + token);
+		CacheToken cacheToken = tokenBucket.get();
+		if (cacheToken == null) {
+			return false;
+		}
+		if (!Objects.equal(cacheToken.getMobile(), mobile)) {
+			return false;
+		}
+		long time = cacheToken.getTime();
+		if (time + super.getSmsProperty().getPeriodSecond() * 1000L < System.currentTimeMillis()) {
+			// 已过期
+			this.redissonClient.getBucket(KEY + ":token:" + mobile).deleteAsync();
+			tokenBucket.deleteAsync();
+			return false;
+		}
+		if (!Objects.equal(cacheToken.getCode(), code)) {
+			return false;
+		}
+		this.redissonClient.getBucket(KEY + ":token:" + mobile).deleteAsync();
+		tokenBucket.deleteAsync();
+		return true;
+	}
+
+	@Override
 	protected boolean groupRiskOpinion(String group, int groupRiskCount, int groupRiskInSeconds) {
 		RAtomicLong groupAtomic = this.redissonClient.getAtomicLong(KEY + ":" + group);
 		long currentGroupCount = groupAtomic.incrementAndGet();
@@ -90,11 +139,6 @@ public class RedissonSms extends AbstractSms {
 			dayAtomic.expire(gapSeconds, TimeUnit.SECONDS);
 		}
 		return currentDayCount <= dayCount;
-	}
-
-	@Override
-	protected void mobileSendSuccess(String mobile) {
-
 	}
 
 }

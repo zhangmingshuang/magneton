@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.magneton</groupId>
   <artifactId>magneton</artifactId>
-  <version>1.2.0-RC</version>
+  <version>1.2.0.RELEASE</version>
   <packaging>pom</packaging>
   <inceptionYear>2020</inceptionYear>
   <licenses>
@@ -20,4 +20,28 @@
       <email>zms198983@163.com</email>
     </contributor>
   </contributors>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>com.google.auto.service</groupId>
+        <artifactId>auto-service</artifactId>
+        <version>1.0</version>
+      </dependency>
+      <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>1.18.12</version>
+      </dependency>
+      <dependency>
+        <groupId>com.alibaba.testable</groupId>
+        <artifactId>testable-all</artifactId>
+        <version>0.7.4</version>
+      </dependency>
+      <dependency>
+        <groupId>com.alibaba</groupId>
+        <artifactId>fastjson</artifactId>
+        <version>1.2.75</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 </project>
