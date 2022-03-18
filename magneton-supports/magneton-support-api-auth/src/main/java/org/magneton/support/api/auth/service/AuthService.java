@@ -40,4 +40,6 @@ public interface AuthService {
 	 */
 	Response<SmsLoginRes> autoLogin(HttpServletRequest request, SmsAutoLoginReq smsAutoLoginReq);
 
+	boolean validateToken(String token, String identification);
+
 }

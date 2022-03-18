@@ -14,6 +14,7 @@ import lombok.experimental.Accessors;
 import org.magneton.core.Consequences;
 import org.magneton.core.Response;
 import org.magneton.core.base.Objects;
+import org.magneton.core.base.Preconditions;
 import org.magneton.core.hash.Hashing;
 import org.magneton.module.distributed.cache.DistributedCache;
 import org.magneton.module.distributed.lock.DistributedLock;
@@ -136,6 +137,17 @@ public class AuthServiceImpl implements AuthService {
 		return this.onLoginSuccessProcess(request, identification, cacheUser.getMobile(), cacheUser.getUserId());
 	}
 
+	@Override
+	public boolean validateToken(String token, String identification) {
+		Preconditions.checkNotNull(token);
+		Preconditions.checkNotNull(identification);
+		CacheUser cacheUser = this.distributedCache.opsForValue().get("clogin:" + token);
+		if (cacheUser == null) {
+			return false;
+		}
+		return Objects.equal(cacheUser.getIdentification(), identification);
+	}
+
 	private Response<SmsLoginRes> onLoginSuccessProcess(HttpServletRequest request, String identification,
 			String mobile, int useId) {
 		String today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
@@ -167,7 +179,8 @@ public class AuthServiceImpl implements AuthService {
 		String token = Hashing.sha256().hashString(UUID.randomUUID() + mobile, StandardCharsets.UTF_8).toString();
 		String autoLoginToken = Hashing.sha256().hashString(UUID.randomUUID() + mobile, StandardCharsets.UTF_8)
 				.toString();
-		CacheUser cacheUser = new CacheUser().setUserId(useId).setAutoLoginToken(autoLoginToken).setMobile(mobile);
+		CacheUser cacheUser = new CacheUser().setUserId(useId).setAutoLoginToken(autoLoginToken).setMobile(mobile)
+				.setIdentification(identification);
 		this.distributedCache.opsForValue().setEx("alogin:" + identification, cacheUser, 5 * 24 * 60 * 60);
 		this.distributedCache.opsForValue().setEx("clogin:" + token, cacheUser, 24 * 60 * 60);
 		return Response.ok(new SmsLoginRes().setAutoLoginToken(autoLoginToken).setToken(token));
@@ -183,6 +196,8 @@ public class AuthServiceImpl implements AuthService {
 		private int userId;
 
 		private String mobile;
+
+		private String identification;
 
 	}
 
