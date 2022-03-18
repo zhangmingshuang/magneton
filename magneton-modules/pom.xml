@@ -19,6 +19,7 @@
 		<module>magneton-module-geo</module>
 		<module>magneton-module-auth</module>
 		<module>magneton-module-sms</module>
+		<module>magneton-module-statistics</module>
 	</modules>
 
 	<dependencyManagement>

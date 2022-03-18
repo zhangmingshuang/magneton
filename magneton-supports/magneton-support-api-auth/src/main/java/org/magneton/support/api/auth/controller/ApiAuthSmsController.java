@@ -4,8 +4,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.magneton.core.Response;
+import org.magneton.support.api.auth.constant.LoginError;
 import org.magneton.support.api.auth.constant.SmsError;
+import org.magneton.support.api.auth.pojo.SmsAutoLoginReq;
 import org.magneton.support.api.auth.pojo.SmsLoginReq;
+import org.magneton.support.api.auth.pojo.SmsLoginRes;
 import org.magneton.support.api.auth.pojo.SmsSendReq;
 import org.magneton.support.api.auth.service.AuthService;
 import org.magneton.support.doc.HtmlDoc;
@@ -66,8 +69,22 @@ public class ApiAuthSmsController {
 	 * @return 自动登录授权，可以用来调用自动登录流程。
 	 */
 	@PostMapping("/login")
-	public Response<String> login(HttpServletRequest request, @Valid @RequestBody SmsLoginReq smsLoginReq) {
+	public Response<SmsLoginRes> login(HttpServletRequest request, @Valid @RequestBody SmsLoginReq smsLoginReq) {
 		return this.authService.login(request, smsLoginReq);
+	}
+
+	/**
+	 * 自动登录
+	 * @apiNote 需要有登录成功之后才可以使用自动登录授权进行自动登录。该接口用来用户在一定时间内可以通过直接打开手机而无须每次都手动登录。如果自动登录不被允许，
+	 * 则自动登录授权过期或者其他原因，则返回的失败码为{@link LoginError#AUTO_LOGIN_ERROR}，此时调用端应该使用手动登录{@link #login(HttpServletRequest, SmsLoginReq)}。
+	 * @param request 请求
+	 * @param smsAutoLoginReq 自动登录请求
+	 * @return 自动登录授权，可以用来调用自动登录流程。
+	 */
+	@PostMapping("/autoLogin")
+	public Response<SmsLoginRes> autoLogin(HttpServletRequest request,
+			@Valid @RequestBody SmsAutoLoginReq smsAutoLoginReq) {
+		return this.authService.autoLogin(request, smsAutoLoginReq);
 	}
 
 }

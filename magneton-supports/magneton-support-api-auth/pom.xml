@@ -32,6 +32,11 @@
 			<artifactId>magneton-module-sms</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.magneton</groupId>
+			<artifactId>magneton-module-statistics</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 		<!-- 引入fluent-mybatis-processor, scope设置为provider 编译需要，运行时不需要 -->
 		<dependency>
 			<groupId>com.github.atool</groupId>

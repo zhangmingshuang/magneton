@@ -18,6 +18,12 @@ api[0].list[0].list.push({
     url: '/${magneton.api.prefix:api}/auth/sms/send',
     desc: '发送短信',
 });
+api[0].list[0].list.push({
+    order: '2',
+    deprecated: 'false',
+    url: '/${magneton.api.prefix:api}/auth/sms/login',
+    desc: '登录',
+});
 api[0].list.push({
     alias: 'error',
     order: '2',

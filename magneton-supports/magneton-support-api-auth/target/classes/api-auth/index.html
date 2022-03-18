@@ -28,6 +28,10 @@
                     <li><a
                             href="#_1_1_1_发送短信">1.1.发送短信</a>
                     </li>
+
+                    <li><a
+                            href="#_1_1_2_登录">1.2.登录</a>
+                    </li>
                 </ul>
             </li>
             <li><a href="#_错误码列表">2.错误码列表</a></li>
@@ -85,7 +89,7 @@
                 <div class="paragraph"><p><strong>Author:</strong>zhangmsh 15/03/2022</p></div>
                 <div class="paragraph" data-content-type="application/json; charset=utf-8" id="6ba6cad22d923c21ade4235eb93101e8-content-type"><p>
                     <strong>Content-Type:</strong>application/json; charset=utf-8</p></div>
-                <div class="paragraph"><p><strong>Description:</strong>发送短信有对应的风控模块，如果返回{@link SmsError#MOBILE_RISK}的状态码， 调用方需要进行风险控制流程的接入。</p></div>
+                <div class="paragraph"><p><strong>Description:</strong>发送短信有对应的风控模块，如果返回{@link SmsError#MOBILE_RISK}的状态码， 调用方需要进行风险控制流程的接入。<br>如果发送短信返回<br>{@link SmsError#MOBIL_SEND_GAP}的状态码，调用方需要等待要的时间之后才可以继续调用。在该状态码时，返回的数据{@code data}中表示为需要等待的秒数。</p></div>
                 <div class="paragraph"><p><strong>Body-parameters:</strong></p></div>
                 <table class="tableblock frame-all grid-all spread">
                     <colgroup>
@@ -162,31 +166,7 @@
                         <td class="tableblock halign-left valign-top"><p class="tableblock">data</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">object</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">
-                            No comments found. (ActualType: SmsSendReq)</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
-                    </tr>
-
-                    <tr>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─mobile</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">
-                            手机号</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
-                    </tr>
-
-                    <tr>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─risk_type</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">
-                            风控类型，可选值：code</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
-                    </tr>
-
-                    <tr>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─risk_value</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">
-                            风控值</p></td>
+                            No comments found. (ActualType: String)</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
                     </tr>
 
@@ -210,7 +190,7 @@
                         <td class="tableblock halign-left valign-top"><p class="tableblock">additions</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">map</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">
-                            No comments found. (ActualType: SmsSendReq)</p></td>
+                            No comments found. (ActualType: String)</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
                     </tr>
 
@@ -228,11 +208,150 @@
                     <div class="content">
                         <pre><code class="json">{
   "code": "34670",
-  "data": {
-    "mobile": "(626) 906-6612",
-    "risk_type": "wql5bq",
-    "risk_value": "cvro0v"
-  },
+  "data": "anr3xf",
+  "message": "success",
+  "timestamp": 1647567097120,
+  "additions": {
+    "mapKey": {}
+  }
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sect2" id="637b03ce97c69fbee92e1ce0986df7d4"><h3 id="_1_1_2_登录"><a
+                    class="anchor" href="#_1_1_2_登录"></a><a class="link"
+                                                                                        href="#_1_1_2_登录">1.2.登录</a>
+            </h3>
+                <div class="paragraph" data-download="false" data-page="" data-url="/${magneton.api.prefix:api}/auth/sms/login"
+                     id="637b03ce97c69fbee92e1ce0986df7d4-url"><p><strong>URL:</strong><a class="bare"
+                                                                         href="/${magneton.api.prefix:api}/auth/sms/login">/${magneton.api.prefix:api}/auth/sms/login</a></p>
+                </div>
+                <div class="paragraph" data-method="POST" id="637b03ce97c69fbee92e1ce0986df7d4-method"><p><strong>Type:</strong>POST
+                </p></div>
+                <div class="paragraph"><p><strong>Author:</strong>zhangmsh 15/03/2022</p></div>
+                <div class="paragraph" data-content-type="application/json; charset=utf-8" id="637b03ce97c69fbee92e1ce0986df7d4-content-type"><p>
+                    <strong>Content-Type:</strong>application/json; charset=utf-8</p></div>
+                <div class="paragraph"><p><strong>Description:</strong>该流程为第二步流程，需要先获取验证码之后才可以进行登录。</p></div>
+                <div class="paragraph"><p><strong>Body-parameters:</strong></p></div>
+                <table class="tableblock frame-all grid-all spread">
+                    <colgroup>
+                        <col style="width: 20%;">
+                        <col style="width: 20%;">
+                        <col style="width: 20%;">
+                        <col style="width: 20%;">
+                        <col style="width: 20%;">
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th class="tableblock halign-left valign-top">Parameter</th>
+                        <th class="tableblock halign-left valign-top">Type</th>
+                        <th class="tableblock halign-left valign-top">Description</th>
+                        <th class="tableblock halign-left valign-top">Required</th>
+                        <th class="tableblock halign-left valign-top">Since</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">sms_token</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">
+                            短信授权码</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">mobile</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">
+                            手机号</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">sms_code</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">
+                            短信验证码</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="paragraph"><p><strong>Response-fields:</strong></p></div>
+                <table class="tableblock frame-all grid-all spread">
+                    <colgroup>
+                        <col style="width: 25%;">
+                        <col style="width: 25%;">
+                        <col style="width: 25%;">
+                        <col style="width: 25%;">
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th class="tableblock halign-left valign-top">Field</th>
+                        <th class="tableblock halign-left valign-top">Type</th>
+                        <th class="tableblock halign-left valign-top">Description</th>
+                        <th class="tableblock halign-left valign-top">Since</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">code</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">
+                            No comments found.</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">data</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">object</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">
+                            No comments found. (ActualType: String)</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">message</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">
+                            No comments found.</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">timestamp</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int64</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">
+                            No comments found.</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">additions</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">map</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">
+                            No comments found. (ActualType: String)</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─any object</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">object</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">
+                            any object.</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="paragraph"><p><strong>Response-example:</strong></p></div>
+                <div class="listingblock">
+                    <div class="content">
+                        <pre><code class="json">{
+  "code": "34670",
+  "data": "nxtw7s",
   "message": "success",
   "timestamp": 1647567097120,
   "additions": {
@@ -273,8 +392,20 @@
                 </tr>
 
                 <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">1000800</p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">SMS_CODE_ERROR 验证码有误，请重新输入</p>
+                    </td>
+                </tr>
+
+                <tr>
                     <td class="tableblock halign-left valign-top"><p class="tableblock">1000900</p></td>
                     <td class="tableblock halign-left valign-top"><p class="tableblock">MOBILE_RISK 手机号存在风险</p>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">1000901</p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">MOBIL_SEND_GAP 两次短信发送时间间隔太短</p>
                     </td>
                 </tr>
                 </tbody>

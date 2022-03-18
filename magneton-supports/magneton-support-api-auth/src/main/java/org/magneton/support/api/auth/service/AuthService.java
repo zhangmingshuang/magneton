@@ -3,7 +3,9 @@ package org.magneton.support.api.auth.service;
 import javax.servlet.http.HttpServletRequest;
 
 import org.magneton.core.Response;
+import org.magneton.support.api.auth.pojo.SmsAutoLoginReq;
 import org.magneton.support.api.auth.pojo.SmsLoginReq;
+import org.magneton.support.api.auth.pojo.SmsLoginRes;
 import org.magneton.support.api.auth.pojo.SmsSendReq;
 
 /**
@@ -28,6 +30,14 @@ public interface AuthService {
 	 * @param smsLoginReq 登录请求
 	 * @return 登录授权，用来自动登录
 	 */
-	Response<String> login(HttpServletRequest request, SmsLoginReq smsLoginReq);
+	Response<SmsLoginRes> login(HttpServletRequest request, SmsLoginReq smsLoginReq);
+
+	/**
+	 * 自动登录
+	 * @param request 请求
+	 * @param smsAutoLoginReq 自动登录请求
+	 * @return 新的自动登录授权
+	 */
+	Response<SmsLoginRes> autoLogin(HttpServletRequest request, SmsAutoLoginReq smsAutoLoginReq);
 
 }

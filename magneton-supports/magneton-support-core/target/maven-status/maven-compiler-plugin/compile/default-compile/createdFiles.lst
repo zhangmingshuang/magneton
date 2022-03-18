@@ -5,3 +5,6 @@ org\magneton\support\constant\CacheConstant.class
 org\magneton\support\core\DbTableGenerator.class
 org\magneton\support\core\MySqlDbTableGenerator.class
 org\magneton\support\controller\ApiDocController.class
+org\magneton\support\util\IpUtil.class
+org\magneton\support\constant\Removed.class
+org\magneton\support\constant\Status.class

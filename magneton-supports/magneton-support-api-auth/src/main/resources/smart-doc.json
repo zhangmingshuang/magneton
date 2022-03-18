@@ -31,6 +31,11 @@
       "enumClassName": "org.magneton.support.api.auth.constant.SmsError",
       "codeField": "code",
       "descField": "message"
+    },
+    {
+      "enumClassName": "org.magneton.support.api.auth.constant.LoginError",
+      "codeField": "code",
+      "descField": "message"
     }
   ],
   "revisionLogs": [
