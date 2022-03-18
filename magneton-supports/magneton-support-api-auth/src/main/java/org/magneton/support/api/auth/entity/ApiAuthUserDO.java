@@ -16,78 +16,48 @@ import lombok.experimental.Accessors;
  *
  * @author Powered By Fluent Mybatis
  */
-@SuppressWarnings({"rawtypes", "unchecked"})
+@SuppressWarnings({ "rawtypes", "unchecked" })
 @Data
-@Accessors(
-    chain = true
-)
-@EqualsAndHashCode(
-    callSuper = false
-)
+@Accessors(chain = true)
+@EqualsAndHashCode(callSuper = false)
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@FluentMybatis(
-    table = "api_auth_user",
-    schema = "magneton",
-    suffix = "DO"
-)
+@FluentMybatis(table = "api_auth_user", schema = "magneton", suffix = "DO")
 public class ApiAuthUserDO extends RichEntity {
-  private static final long serialVersionUID = 1L;
 
-  @TableId("id")
-  private Integer id;
+	private static final long serialVersionUID = 1L;
 
-  @TableField(
-      value = "account",
-      desc = "授权账号"
-  )
-  private String account;
+	@TableId("id")
+	private Integer id;
 
-  @TableField(
-      value = "additional",
-      desc = "附加信息"
-  )
-  private String additional;
+	@TableField(value = "account", desc = "授权账号")
+	private String account;
 
-  @TableField(
-      value = "create_additional",
-      desc = "创建附加信息"
-  )
-  private String createAdditional;
+	@TableField(value = "additional", desc = "附加信息")
+	private String additional;
 
-  @TableField(
-      value = "create_time",
-      desc = "创建时间"
-  )
-  private Long createTime;
+	@TableField(value = "create_additional", desc = "创建附加信息")
+	private String createAdditional;
 
-  @TableField(
-      value = "pwd",
-      desc = "密码"
-  )
-  private String pwd;
+	@TableField(value = "create_time", desc = "创建时间")
+	private Long createTime;
 
-  @TableField(
-      value = "pwd_salt",
-      desc = "密码盐"
-  )
-  private String pwdSalt;
+	@TableField(value = "pwd", desc = "密码")
+	private String pwd;
 
-  @TableField(
-      value = "removed",
-      desc = "是否已删除"
-  )
-  private Integer removed;
+	@TableField(value = "pwd_salt", desc = "密码盐")
+	private String pwdSalt;
 
-  @TableField(
-      value = "status",
-      desc = "状态"
-  )
-  private Integer status;
+	@TableField(value = "removed", desc = "是否已删除")
+	private Integer removed;
 
-  @Override
-  public final Class entityClass() {
-    return ApiAuthUserDO.class;
-  }
+	@TableField(value = "status", desc = "状态")
+	private Integer status;
+
+	@Override
+	public final Class entityClass() {
+		return ApiAuthUserDO.class;
+	}
+
 }
