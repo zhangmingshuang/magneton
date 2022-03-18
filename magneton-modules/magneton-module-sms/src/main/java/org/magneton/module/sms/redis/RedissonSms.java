@@ -134,8 +134,8 @@ public class RedissonSms extends AbstractSms {
 		long currentDayCount = dayAtomic.incrementAndGet();
 		if (currentDayCount <= 1) {
 			LocalDateTime now = LocalDateTime.now();
-			LocalDateTime tomorrow = LocalDateTime.of(LocalDate.now(), LocalTime.MIN);
-			long gapSeconds = Duration.between(tomorrow, now).getSeconds();
+			LocalDateTime tomorrow = LocalDateTime.of(LocalDate.now(), LocalTime.MIN).plusDays(1);
+			long gapSeconds = Duration.between(now, tomorrow).getSeconds();
 			dayAtomic.expire(gapSeconds, TimeUnit.SECONDS);
 		}
 		return currentDayCount <= dayCount;
