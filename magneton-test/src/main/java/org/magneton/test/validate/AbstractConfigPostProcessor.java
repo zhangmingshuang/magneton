@@ -8,6 +8,7 @@ import javax.annotation.Nullable;
 import org.magneton.test.config.Config;
 import org.magneton.test.config.ConfigPostProcessor;
 import org.magneton.test.core.TraceChain;
+import org.magneton.test.exception.ConfigPostProcessException;
 import org.magneton.test.parser.Definition;
 
 /**
@@ -20,7 +21,7 @@ public abstract class AbstractConfigPostProcessor implements ConfigPostProcessor
 
 	@Override
 	public void beforeConfig(Config config, Definition definition) {
-		Map<Class, Annotation> annotations = definition.getAnnotations();
+		Map<Class<?>, Annotation> annotations = definition.getAnnotations();
 		if (annotations == null || annotations.isEmpty()) {
 			return;
 		}
@@ -29,7 +30,7 @@ public abstract class AbstractConfigPostProcessor implements ConfigPostProcessor
 			return;
 		}
 		try {
-			for (Class annotationClass : jsrAnnotations) {
+			for (Class<?> annotationClass : jsrAnnotations) {
 				Annotation annotation = annotations.get(annotationClass);
 				if (annotation != null) {
 					this.doPostProcessor(annotation, config, definition);
@@ -37,7 +38,7 @@ public abstract class AbstractConfigPostProcessor implements ConfigPostProcessor
 			}
 		}
 		catch (Throwable e) {
-			throw new RuntimeException(TraceChain.current().toString(), e);
+			throw new ConfigPostProcessException(TraceChain.current().toString(), e);
 		}
 	}
 

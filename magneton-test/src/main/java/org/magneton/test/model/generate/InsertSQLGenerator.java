@@ -1,11 +1,5 @@
 package org.magneton.test.model.generate;
 
-import static com.google.common.collect.Collections2.transform;
-
-import com.google.common.base.CaseFormat;
-import com.google.common.base.Function;
-import com.google.common.base.Joiner;
-import com.google.common.collect.Lists;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -14,6 +8,13 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.Collections;
 import java.util.List;
+
+import com.google.common.base.CaseFormat;
+import com.google.common.base.Function;
+import com.google.common.base.Joiner;
+import com.google.common.collect.Lists;
+
+import static com.google.common.collect.Collections2.transform;
 
 /**
  * @author Binary Wang

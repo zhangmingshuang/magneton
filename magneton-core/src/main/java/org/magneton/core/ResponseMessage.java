@@ -1,6 +1,6 @@
 package org.magneton.core;
 
-import com.google.common.base.Preconditions;
+import org.magneton.core.base.Preconditions;
 
 /**
  * .
@@ -11,41 +11,39 @@ import com.google.common.base.Preconditions;
  */
 public interface ResponseMessage {
 
-  /**
-   * simply to create a {@code ResponseBody}.
-   *
-   * @param code response code.
-   * @param message response message.
-   * @return response body.
-   */
-  static ResponseMessage valueOf(String code, String message) {
-    Preconditions.checkNotNull(code, "code must be not null");
-    Preconditions.checkNotNull(message, "message must be not null");
+	/**
+	 * simply to create a {@code ResponseBody}.
+	 * @param code response code.
+	 * @param message response message.
+	 * @return response body.
+	 */
+	static ResponseMessage valueOf(String code, String message) {
+		Preconditions.checkNotNull(code, "code must be not null");
+		Preconditions.checkNotNull(message, "message must be not null");
 
-    return new ResponseMessage() {
-      @Override
-      public String code() {
-        return code;
-      }
+		return new ResponseMessage() {
+			@Override
+			public String code() {
+				return code;
+			}
 
-      @Override
-      public String message() {
-        return message;
-      }
-    };
-  }
+			@Override
+			public String message() {
+				return message;
+			}
+		};
+	}
 
-  /**
-   * response code.
-   *
-   * @return code.
-   */
-  String code();
+	/**
+	 * response code.
+	 * @return code.
+	 */
+	String code();
 
-  /**
-   * response message.
-   *
-   * @return message.
-   */
-  String message();
+	/**
+	 * response message.
+	 * @return message.
+	 */
+	String message();
+
 }

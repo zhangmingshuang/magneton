@@ -5,34 +5,24 @@
 	<parent>
 		<artifactId>magneton</artifactId>
 		<groupId>org.magneton</groupId>
-		<version>1.0.0</version>
-		<relativePath>../pom.xml</relativePath>
+		<version>${revision}</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
 	<artifactId>magneton-parent</artifactId>
 	<packaging>pom</packaging>
-
-	<properties>
-		<!-- jar versions -->
-		<lombok.version>1.18.12</lombok.version>
-		<spring.version>5.2.9.RELEASE</spring.version>
-		<spring-boot.version>2.3.7.RELEASE</spring-boot.version>
-		<slf4j-api.version>1.7.30</slf4j-api.version>
-		<redisson.version>3.16.1</redisson.version>
-		<junit.version>5.7.0</junit.version>
-		<guava.version>30.1.1-jre</guava.version>
-		<javax.el.version>3.0.1-b12</javax.el.version>
-		<testable.version>0.6.7</testable.version>
-		<joda-time.version>2.10.10</joda-time.version>
-		<fastjson.version>1.2.75</fastjson.version>
-		<mockito-junit-jupiter.version>3.6.28</mockito-junit-jupiter.version>
-		<jakarta.validation-api.version>2.0.2</jakarta.validation-api.version>
-		<hibernate-validator.version>6.1.5.Final</hibernate-validator.version>
-	</properties>
+	<description>框赖，简化Jar依赖架父依</description>
 
 	<dependencyManagement>
 		<dependencies>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-dependencies</artifactId>
+				<version>${spring-boot.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+
 			<dependency>
 				<groupId>org.junit</groupId>
 				<artifactId>junit-bom</artifactId>
@@ -40,30 +30,76 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
+
+			<dependency>
+				<groupId>org.magneton</groupId>
+				<artifactId>magneton-core</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.magneton</groupId>
+				<artifactId>magneton-db-spy</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<!-- magneton-modules -->
+			<dependency>
+				<groupId>org.magneton</groupId>
+				<artifactId>magneton-module-distributed-cache</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.magneton</groupId>
+				<artifactId>magneton-module-distributed-lock</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.magneton</groupId>
+				<artifactId>magneton-module-geo</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.magneton</groupId>
+				<artifactId>magneton-module-sms</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<!-- magneton-modules end-->
+			<dependency>
+				<groupId>org.magneton</groupId>
+				<artifactId>magneton-spring-boot-starter</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<!-- magneton-supports -->
+			<dependency>
+				<groupId>org.magneton</groupId>
+				<artifactId>magneton-support-admin-account</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.magneton</groupId>
+				<artifactId>magneton-support-admin-basic</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.magneton</groupId>
+				<artifactId>magneton-support-api-auth</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.magneton</groupId>
+				<artifactId>magneton-support-core</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.magneton</groupId>
+				<artifactId>magneton-support-record-log</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<!-- magneton-supports end-->
+			<dependency>
+				<groupId>org.magneton</groupId>
+				<artifactId>magneton-test</artifactId>
+				<version>${project.version}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
-
-	<dependencies>
-		<dependency>
-			<artifactId>lombok</artifactId>
-			<groupId>org.projectlombok</groupId>
-			<version>${lombok.version}</version>
-		</dependency>
-		<dependency>
-			<artifactId>guava</artifactId>
-			<groupId>com.google.guava</groupId>
-			<version>${guava.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.junit.jupiter</groupId>
-			<artifactId>junit-jupiter</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-junit-jupiter</artifactId>
-			<version>${mockito-junit-jupiter.version}</version>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
 </project>

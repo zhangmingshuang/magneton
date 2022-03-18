@@ -1,0 +1,4 @@
+org\magneton\module\distributed\lock\redis\AbstractDistributedLock.class
+org\magneton\module\distributed\lock\DistributedLock.class
+org\magneton\module\distributed\lock\exception\LockException.class
+org\magneton\module\distributed\lock\redis\RedissonDistributedLock.class

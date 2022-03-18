@@ -1,13 +1,14 @@
 package org.magneton.test.validate;
 
+import java.lang.annotation.Annotation;
+
+import javax.annotation.Nullable;
+import javax.validation.constraints.Email;
+
 import org.magneton.test.annotation.TestComponent;
 import org.magneton.test.config.Config;
 import org.magneton.test.model.StringModel;
 import org.magneton.test.parser.Definition;
-
-import java.lang.annotation.Annotation;
-import javax.annotation.Nullable;
-import javax.validation.constraints.Email;
 
 /**
  * {@code @Email(regexp=正则表达式,flag=标志的模式)}

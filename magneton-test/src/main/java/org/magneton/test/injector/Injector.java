@@ -1,9 +1,10 @@
 package org.magneton.test.injector;
 
+import javax.annotation.Nullable;
+
 import org.magneton.test.config.Config;
 import org.magneton.test.core.InjectType;
 import org.magneton.test.parser.Definition;
-import javax.annotation.Nullable;
 
 /**
  * .

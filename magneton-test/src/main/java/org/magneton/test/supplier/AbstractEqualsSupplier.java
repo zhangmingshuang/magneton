@@ -1,9 +1,10 @@
 package org.magneton.test.supplier;
 
-import com.google.common.base.Strings;
 import java.lang.reflect.Field;
 import java.util.Objects;
 import java.util.Set;
+
+import com.google.common.base.Strings;
 import lombok.SneakyThrows;
 import org.magneton.test.util.FieldUtil;
 

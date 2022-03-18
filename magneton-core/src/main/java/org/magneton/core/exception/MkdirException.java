@@ -7,7 +7,9 @@ package org.magneton.core.exception;
  * @since 2021/9/7
  */
 public class MkdirException extends RuntimeException {
-  public MkdirException(String message) {
-    super(message);
-  }
+
+	public MkdirException(String message) {
+		super(message);
+	}
+
 }

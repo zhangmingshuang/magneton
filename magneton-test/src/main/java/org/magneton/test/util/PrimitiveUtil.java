@@ -1,7 +1,8 @@
 package org.magneton.test.util;
 
-import com.google.common.collect.Maps;
 import java.util.Map;
+
+import com.google.common.collect.Maps;
 
 /**
  * .

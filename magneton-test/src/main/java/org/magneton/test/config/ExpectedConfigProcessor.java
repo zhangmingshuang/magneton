@@ -7,12 +7,12 @@ import java.time.temporal.ChronoField;
 import java.util.Date;
 import java.util.concurrent.ThreadLocalRandom;
 
+import com.google.common.base.Strings;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.magneton.test.core.InjectType;
 import org.magneton.test.model.StringModel;
 import org.magneton.test.model.generate.base.AbstractGenericGenerator;
 import org.magneton.test.parser.Definition;
-import com.google.common.base.Strings;
-import org.apache.commons.lang3.RandomStringUtils;
 
 /**
  * 预期数据处理.

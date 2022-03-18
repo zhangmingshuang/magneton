@@ -13,50 +13,49 @@ import org.magneton.core.ResponseCodesSupplier.Codes;
  */
 class ResponseCodesSupplierTest {
 
-  private static final String CODE = "100";
-  private static final String BAD = "bad";
+	private static final String CODE = "100";
 
-  @Test
-  void getInstance() {
-    ResponseCodesSupplier responseCodesSupplier = ResponseCodesSupplier.getInstance();
-    this.changeresponseCodes();
-    ResponseCodesSupplier customizedresponseCodesSupplier = ResponseCodesSupplier.getInstance();
-    Assertions.assertNotEquals(
-        responseCodesSupplier,
-        customizedresponseCodesSupplier,
-        "response codes responseCodes change error");
-  }
+	private static final String BAD = "bad";
 
-  @Test
-  void ok() {
-    ResponseCodesSupplier responseCodesSupplier = ResponseCodesSupplier.getInstance();
-    ResponseMessage ok = responseCodesSupplier.ok();
-    Assertions.assertEquals(Codes.OK, ok, "responseCodes ok error");
-  }
+	@Test
+	void getInstance() {
+		ResponseCodesSupplier responseCodesSupplier = ResponseCodesSupplier.getInstance();
+		this.changeresponseCodes();
+		ResponseCodesSupplier customizedresponseCodesSupplier = ResponseCodesSupplier.getInstance();
+		Assertions.assertNotEquals(responseCodesSupplier, customizedresponseCodesSupplier,
+				"response codes responseCodes change error");
+	}
 
-  @Test
-  void bad() {
-    this.changeresponseCodes();
-    ResponseCodesSupplier responseCodesSupplier = ResponseCodesSupplier.getInstance();
-    ResponseMessage bad = responseCodesSupplier.bad();
-    Assertions.assertEquals(CODE, bad.code(), "responseCodes code does not match");
-    Assertions.assertEquals(BAD, bad.message(), "responseCodes message does not match");
-  }
+	@Test
+	void ok() {
+		ResponseCodesSupplier responseCodesSupplier = ResponseCodesSupplier.getInstance();
+		ResponseMessage ok = responseCodesSupplier.ok();
+		Assertions.assertEquals(Codes.OK, ok, "responseCodes ok error");
+	}
 
-  @Test
-  void exception() {
-    ResponseCodesSupplier responseCodesSupplier = ResponseCodesSupplier.getInstance();
-    ResponseMessage exception = responseCodesSupplier.exception();
-    Assertions.assertEquals(Codes.EXCEPTION, exception, "responseCodes exception error");
-  }
+	@Test
+	void bad() {
+		this.changeresponseCodes();
+		ResponseCodesSupplier responseCodesSupplier = ResponseCodesSupplier.getInstance();
+		ResponseMessage bad = responseCodesSupplier.bad();
+		Assertions.assertEquals(CODE, bad.code(), "responseCodes code does not match");
+		Assertions.assertEquals(BAD, bad.message(), "responseCodes message does not match");
+	}
 
-  private void changeresponseCodes() {
-    ResponseCodesSupplier.Instance.setResponseCodesSupplier(
-        new ResponseCodesSupplier() {
-          @Override
-          public ResponseMessage bad() {
-            return ResponseMessage.valueOf(CODE, BAD);
-          }
-        });
-  }
+	@Test
+	void exception() {
+		ResponseCodesSupplier responseCodesSupplier = ResponseCodesSupplier.getInstance();
+		ResponseMessage exception = responseCodesSupplier.exception();
+		Assertions.assertEquals(Codes.EXCEPTION, exception, "responseCodes exception error");
+	}
+
+	private void changeresponseCodes() {
+		ResponseCodesSupplier.Instance.setResponseCodesSupplier(new ResponseCodesSupplier() {
+			@Override
+			public ResponseMessage bad() {
+				return ResponseMessage.valueOf(CODE, BAD);
+			}
+		});
+	}
+
 }

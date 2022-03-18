@@ -4,13 +4,13 @@ import java.lang.reflect.Array;
 
 import javax.annotation.Nullable;
 
+import lombok.extern.slf4j.Slf4j;
 import org.magneton.test.config.Config;
 import org.magneton.test.config.ConfigProcessor;
 import org.magneton.test.config.ConfigProcessorFactory;
 import org.magneton.test.core.InjectType;
 import org.magneton.test.parser.Definition;
 import org.magneton.test.util.PrimitiveUtil;
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * .

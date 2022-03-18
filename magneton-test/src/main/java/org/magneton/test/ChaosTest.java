@@ -1,5 +1,8 @@
 package org.magneton.test;
 
+import java.util.Optional;
+
+import com.google.common.base.Preconditions;
 import org.magneton.test.annotation.TestComponentScan;
 import org.magneton.test.config.Config;
 import org.magneton.test.core.ChaosApplication;
@@ -11,9 +14,6 @@ import org.magneton.test.model.generate.ValueGenerator;
 import org.magneton.test.parser.Definition;
 import org.magneton.test.parser.ParserFactory;
 import org.magneton.test.supplier.TestBooleanSupplier;
-import com.google.common.base.Preconditions;
-
-import java.util.Optional;
 
 /**
  * .

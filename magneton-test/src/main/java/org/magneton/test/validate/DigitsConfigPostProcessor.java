@@ -1,16 +1,17 @@
 package org.magneton.test.validate;
 
-import org.magneton.test.annotation.TestComponent;
-import org.magneton.test.config.Config;
-import org.magneton.test.parser.Definition;
-import org.magneton.test.util.AnnotationUtil;
-
 import java.lang.annotation.Annotation;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Map;
+
 import javax.annotation.Nullable;
 import javax.validation.constraints.Digits;
+
+import org.magneton.test.annotation.TestComponent;
+import org.magneton.test.config.Config;
+import org.magneton.test.parser.Definition;
+import org.magneton.test.util.AnnotationUtil;
 
 /**
  * {@link Digits }整数部分位数不超过integer,小数部分位数不超过fraction.

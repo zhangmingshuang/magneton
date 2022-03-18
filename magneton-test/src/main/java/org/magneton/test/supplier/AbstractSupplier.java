@@ -1,11 +1,13 @@
 package org.magneton.test.supplier;
 
-import com.google.common.base.Strings;
-import com.google.common.collect.Lists;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import java.lang.reflect.Field;
 import java.util.List;
+
 import javax.annotation.Nullable;
+import javax.annotations.CanIgnoreReturnValue;
+
+import com.google.common.base.Strings;
+import com.google.common.collect.Lists;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -83,7 +85,6 @@ public class AbstractSupplier<T> {
 		}
 	}
 
-	@SuppressWarnings("UseOfSystemOutOrSystemErr")
 	protected void doPrint(String msg) {
 		if (Strings.isNullOrEmpty(msg)) {
 			return;

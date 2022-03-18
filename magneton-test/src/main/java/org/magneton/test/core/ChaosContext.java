@@ -1,12 +1,16 @@
 package org.magneton.test.core;
 
-import org.magneton.test.annotation.TestAutowired;
-import org.magneton.test.annotation.TestComponent;
-import org.magneton.test.annotation.TestComponentScan;
-import org.magneton.test.aware.Aware;
-import org.magneton.test.util.AnnotationUtil;
-import org.magneton.test.util.GenericUtil;
-import org.magneton.test.util.SortUtil;
+import java.io.IOException;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import javax.annotation.Nullable;
+
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.base.Verify;
@@ -18,16 +22,13 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 import com.google.common.reflect.ClassPath;
 import com.google.common.reflect.ClassPath.ClassInfo;
-
-import java.io.IOException;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-import javax.annotation.Nullable;
+import org.magneton.test.annotation.TestAutowired;
+import org.magneton.test.annotation.TestComponent;
+import org.magneton.test.annotation.TestComponentScan;
+import org.magneton.test.aware.Aware;
+import org.magneton.test.util.AnnotationUtil;
+import org.magneton.test.util.GenericUtil;
+import org.magneton.test.util.SortUtil;
 
 /**
  * .
@@ -48,7 +49,6 @@ public class ChaosContext {
 	private ChaosContext() {
 	}
 
-	@SuppressWarnings({ "OverlyBroadCatchBlock", "NewExceptionWithoutArguments" })
 	public static void init(Class<? extends ChaosApplication> chaosApplication) {
 
 		try {
@@ -91,7 +91,7 @@ public class ChaosContext {
 			Class fieldClass = field.getType();
 			if (Collection.class.isAssignableFrom(fieldClass)) {
 				List list = Lists.newArrayList();
-				List<Class> generics = GenericUtil.getGenerics(field);
+				List<Class<?>> generics = GenericUtil.getGenerics(field);
 				Verify.verify(!generics.isEmpty(), "获取集合泛型错误:%s#%s，要注入的集合必须声明泛型类型", fieldClass, field);
 				INITIALIZED_OBJECTS.forEach((k, o) -> {
 					if (generics.get(0).isAssignableFrom(o.getClass())) {
@@ -126,7 +126,6 @@ public class ChaosContext {
 		}
 	}
 
-	@SuppressWarnings("MethodWithMoreThanThreeNegations")
 	private static void loadAndInitialize(Set<String> scanPackages) throws IOException {
 		ClassPath classPath = ClassPath.from(ChaosContext.class.getClassLoader());
 
@@ -142,15 +141,20 @@ public class ChaosContext {
 			if (INITIALIZED_OBJECTS.containsKey(classInfo.getName())) {
 				continue;
 			}
-			Class<?> clazz = classInfo.load();
-			TestComponent component = AnnotationUtil.findAnnotations(clazz, TestComponent.class);
-			if (component != null) {
-				addLoadClass(clazz);
+			try {
+				Class<?> clazz = classInfo.load();
+				TestComponent component = AnnotationUtil.findAnnotations(clazz, TestComponent.class);
+				if (component != null) {
+					addLoadClass(clazz);
+				}
+				TestComponentScan componentScan = AnnotationUtil.findAnnotations(clazz, TestComponentScan.class);
+				if (componentScan != null && !Strings.isNullOrEmpty(componentScan.value())
+						&& !LOAD_PACKAGES.contains(componentScan.value())) {
+					componentScanPackages.add(componentScan.value());
+				}
 			}
-			TestComponentScan componentScan = AnnotationUtil.findAnnotations(clazz, TestComponentScan.class);
-			if (componentScan != null && !Strings.isNullOrEmpty(componentScan.value())
-					&& !LOAD_PACKAGES.contains(componentScan.value())) {
-				componentScanPackages.add(componentScan.value());
+			catch (Throwable e) {
+				// ignore
 			}
 		}
 		if (!componentScanPackages.isEmpty()) {
@@ -166,7 +170,7 @@ public class ChaosContext {
 
 			Object obj = clazz.getConstructor().newInstance();
 			if (Aware.class.isAssignableFrom(clazz)) {
-				List<Class> generics = GenericUtil.getGenerics(clazz);
+				List<Class<?>> generics = GenericUtil.getGenerics(clazz);
 				Verify.verify(generics.isEmpty(), "Aware类必须声明泛型类型，如Aware<Xxx>");
 				AWARED_OBJECTS.put(generics.get(0), (Aware) obj);
 				return;

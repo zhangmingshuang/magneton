@@ -1,9 +1,10 @@
 package org.magneton.test.util;
 
-import org.magneton.test.annotation.TestSort;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-
 import java.util.List;
+
+import javax.annotations.CanIgnoreReturnValue;
+
+import org.magneton.test.annotation.TestSort;
 
 /**
  * .
@@ -16,7 +17,6 @@ public class SortUtil {
 	private SortUtil() {
 	}
 
-	@SuppressWarnings("SubtractionInCompareTo")
 	@CanIgnoreReturnValue
 	public static <T> List<T> sort(List<T> list) {
 		list.sort((o1, o2) -> {

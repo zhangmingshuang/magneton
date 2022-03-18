@@ -55,11 +55,11 @@ public class StringUtil {
 	 * @since 3.0 Changed signature from isNumeric(String) to isNumeric(CharSequence)
 	 * @since 3.0 Changed "" to return false and not true
 	 */
-	public static boolean isNumeric(final CharSequence cs) {
+	public static boolean isNumeric(CharSequence cs) {
 		if (!hasLength(cs)) {
 			return false;
 		}
-		final int sz = cs.length();
+		int sz = cs.length();
 		for (int i = 0; i < sz; i++) {
 			if (!Character.isDigit(cs.charAt(i))) {
 				return false;
@@ -87,7 +87,7 @@ public class StringUtil {
 	 * @return left padded String or original String if no padding is necessary,
 	 * {@code null} if null String input
 	 */
-	public static String leftPad(final String str, final int size) {
+	public static String leftPad(String str, int size) {
 		return leftPad(str, size, ' ');
 	}
 
@@ -112,11 +112,11 @@ public class StringUtil {
 	 * {@code null} if null String input
 	 * @since 2.0
 	 */
-	public static String leftPad(final String str, final int size, final char padChar) {
+	public static String leftPad(String str, int size, char padChar) {
 		if (str == null) {
 			return null;
 		}
-		final int pads = size - str.length();
+		int pads = size - str.length();
 		if (pads <= 0) {
 			return str; // returns original String when possible
 		}
@@ -149,16 +149,16 @@ public class StringUtil {
 	 * @return left padded String or original String if no padding is necessary,
 	 * {@code null} if null String input
 	 */
-	public static String leftPad(final String str, final int size, String padStr) {
+	public static String leftPad(String str, int size, String padStr) {
 		if (str == null) {
 			return null;
 		}
 		if (!hasLength(padStr)) {
 			padStr = SPACE;
 		}
-		final int padLen = padStr.length();
-		final int strLen = str.length();
-		final int pads = size - strLen;
+		int padLen = padStr.length();
+		int strLen = str.length();
+		int pads = size - strLen;
 		if (pads <= 0) {
 			return str; // returns original String when possible
 		}
@@ -173,8 +173,8 @@ public class StringUtil {
 			return padStr.substring(0, pads).concat(str);
 		}
 		else {
-			final char[] padding = new char[pads];
-			final char[] padChars = padStr.toCharArray();
+			char[] padding = new char[pads];
+			char[] padChars = padStr.toCharArray();
 			for (int i = 0; i < pads; i++) {
 				padding[i] = padChars[i % padLen];
 			}
@@ -202,11 +202,11 @@ public class StringUtil {
 	 * @return String with repeated character
 	 * @see #repeat(String, int)
 	 */
-	public static String repeat(final char ch, final int repeat) {
+	public static String repeat(char ch, int repeat) {
 		if (repeat <= 0) {
 			return "";
 		}
-		final char[] buf = new char[repeat];
+		char[] buf = new char[repeat];
 		for (int i = repeat - 1; i >= 0; i--) {
 			buf[i] = ch;
 		}
@@ -237,7 +237,7 @@ public class StringUtil {
 	 * between characters.
 	 * @param str the {@code String} to check
 	 * @return the trimmed {@code String}
-	 * @see java.lang.Character#isWhitespace
+	 * @see Character#isWhitespace
 	 */
 	public static String trimAllWhitespace(String str) {
 		if (!hasLength(str)) {

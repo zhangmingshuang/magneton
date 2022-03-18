@@ -28,7 +28,7 @@ public @interface TestSort {
 	/**
 	 * Useful constant for the lowest precedence value.
 	 *
-	 * @see java.lang.Integer#MAX_VALUE
+	 * @see Integer#MAX_VALUE
 	 */
 	int LOWEST_PRECEDENCE = Integer.MAX_VALUE;
 

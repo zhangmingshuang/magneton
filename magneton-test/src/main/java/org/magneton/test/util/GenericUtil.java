@@ -1,11 +1,12 @@
 package org.magneton.test.util;
 
-import com.google.common.collect.Lists;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Collections;
 import java.util.List;
+
+import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import sun.reflect.generics.reflectiveObjects.ParameterizedTypeImpl;
 
@@ -21,11 +22,11 @@ public class GenericUtil {
 	private GenericUtil() {
 	}
 
-	public static List<Class> getGenerics(Field field) {
+	public static List<Class<?>> getGenerics(Field field) {
 		if (field.getGenericType().getClass() == Class.class) {
 			return Collections.emptyList();
 		}
-		List<Class> classes = Lists.newArrayList();
+		List<Class<?>> classes = Lists.newArrayList();
 		Type[] actualTypeArguments = ((ParameterizedTypeImpl) field.getGenericType()).getActualTypeArguments();
 		if (actualTypeArguments.length < 1) {
 			return Collections.emptyList();
@@ -42,7 +43,7 @@ public class GenericUtil {
 	// return getClass(clazz, 0);
 	// }
 	//
-	public static List<Class> getGenerics(Class<?> clazz) {
+	public static List<Class<?>> getGenerics(Class<?> clazz) {
 		try {
 			List<Type> actualTypeArguments = Lists.newArrayList();
 			if (clazz.isInterface()) {
@@ -65,7 +66,7 @@ public class GenericUtil {
 			if (actualTypeArguments.isEmpty()) {
 				return Collections.emptyList();
 			}
-			List<Class> classes = Lists.newArrayList();
+			List<Class<?>> classes = Lists.newArrayList();
 			for (Type actualTypeArgument : actualTypeArguments) {
 				classes.add(getTypeClass(actualTypeArgument));
 			}

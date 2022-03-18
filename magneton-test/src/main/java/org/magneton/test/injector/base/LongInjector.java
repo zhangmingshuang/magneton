@@ -1,12 +1,13 @@
 package org.magneton.test.injector.base;
 
+import javax.annotation.Nullable;
+
 import org.magneton.test.annotation.TestComponent;
 import org.magneton.test.config.Config;
 import org.magneton.test.config.ConfigProcessorFactory;
 import org.magneton.test.core.InjectType;
 import org.magneton.test.injector.AbstractInjector;
 import org.magneton.test.parser.Definition;
-import javax.annotation.Nullable;
 
 /**
  * .

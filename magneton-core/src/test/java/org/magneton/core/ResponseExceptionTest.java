@@ -12,25 +12,21 @@ import org.junit.jupiter.api.Test;
  */
 class ResponseExceptionTest {
 
-  @Test
-  void valueOf() {
-    ResponseException responseException =
-        ResponseException.valueOf(Response.exception().message("error"));
-    Assertions.assertEquals(
-        "error", responseException.getMessage(), "exception message does not equals");
-    Response exception = Response.exception();
-    Assertions.assertThrows(
-        ResponseException.class,
-        () -> {
-          throw new ResponseException(exception);
-        });
-  }
+	@Test
+	void valueOf() {
+		ResponseException responseException = ResponseException.valueOf(Response.exception().message("error"));
+		Assertions.assertEquals("error", responseException.getMessage(), "exception message does not equals");
+		Response exception = Response.exception();
+		Assertions.assertThrows(ResponseException.class, () -> {
+			throw new ResponseException(exception);
+		});
+	}
 
-  @Test
-  void getResponse() {
-    Response exception = Response.exception();
-    ResponseException responseException = ResponseException.valueOf(exception);
-    Assertions.assertEquals(
-        exception, responseException.getResponse(), "exception's response does not equals");
-  }
+	@Test
+	void getResponse() {
+		Response exception = Response.exception();
+		ResponseException responseException = ResponseException.valueOf(exception);
+		Assertions.assertEquals(exception, responseException.getResponse(), "exception's response does not equals");
+	}
+
 }

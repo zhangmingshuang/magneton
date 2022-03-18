@@ -1,5 +1,12 @@
 package org.magneton.test.injector.collection;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
+
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import org.magneton.test.annotation.TestAutowired;
 import org.magneton.test.annotation.TestComponent;
 import org.magneton.test.config.Config;
@@ -10,12 +17,6 @@ import org.magneton.test.injector.AbstractInjector;
 import org.magneton.test.injector.InjectorFactory;
 import org.magneton.test.parser.Definition;
 import org.magneton.test.parser.ParserFactory;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
 
 /**
  * .
@@ -60,7 +61,7 @@ public class CollectionInjector extends AbstractInjector {
 		else if (size == 0) {
 			return Collections.emptyList();
 		}
-		List<Class> generics = definition.getGenerics();
+		List<Class<?>> generics = definition.getGenerics();
 		Class genericClass;
 		if (generics == null || generics.isEmpty()) {
 			// 没有泛型注明，则是一个Object。 使用Object则统一采用字段串代替

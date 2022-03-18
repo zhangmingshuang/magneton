@@ -1,11 +1,12 @@
 package org.magneton.test.config;
 
-import org.magneton.test.core.InjectType;
-import org.magneton.test.parser.Definition;
-import org.magneton.test.util.PrimitiveUtil;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Date;
+
+import org.magneton.test.core.InjectType;
+import org.magneton.test.parser.Definition;
+import org.magneton.test.util.PrimitiveUtil;
 
 /**
  * .

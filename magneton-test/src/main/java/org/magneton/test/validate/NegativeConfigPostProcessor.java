@@ -1,13 +1,14 @@
 package org.magneton.test.validate;
 
-import org.magneton.test.annotation.TestComponent;
-import org.magneton.test.config.Config;
-import org.magneton.test.parser.Definition;
-
 import java.lang.annotation.Annotation;
+
 import javax.annotation.Nullable;
 import javax.validation.constraints.Negative;
 import javax.validation.constraints.NegativeOrZero;
+
+import org.magneton.test.annotation.TestComponent;
+import org.magneton.test.config.Config;
+import org.magneton.test.parser.Definition;
 
 /**
  * {@code @Negative} 验证注解的元素必须是负数

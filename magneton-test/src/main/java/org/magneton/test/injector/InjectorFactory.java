@@ -9,6 +9,10 @@ import java.util.Set;
 
 import javax.annotation.Nullable;
 
+import com.google.common.base.Preconditions;
+import com.google.common.base.Verify;
+import com.google.common.collect.Maps;
+import lombok.extern.slf4j.Slf4j;
 import org.magneton.test.annotation.TestAutowired;
 import org.magneton.test.annotation.TestComponent;
 import org.magneton.test.config.Config;
@@ -17,10 +21,6 @@ import org.magneton.test.core.ChaosContext;
 import org.magneton.test.core.InjectType;
 import org.magneton.test.core.TraceChain;
 import org.magneton.test.parser.Definition;
-import com.google.common.base.Preconditions;
-import com.google.common.base.Verify;
-import com.google.common.collect.Maps;
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * .

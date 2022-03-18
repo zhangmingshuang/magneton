@@ -1,12 +1,13 @@
 package org.magneton.test.validate;
 
+import java.lang.annotation.Annotation;
+
+import javax.annotation.Nullable;
+import javax.validation.constraints.NotEmpty;
+
 import org.magneton.test.annotation.TestComponent;
 import org.magneton.test.config.Config;
 import org.magneton.test.parser.Definition;
-
-import java.lang.annotation.Annotation;
-import javax.annotation.Nullable;
-import javax.validation.constraints.NotEmpty;
 
 /**
  * {@code @NotEmpty}验证注解的元素值不为 null 且不为空（字符串长度不为 0、集合大小不为 0）

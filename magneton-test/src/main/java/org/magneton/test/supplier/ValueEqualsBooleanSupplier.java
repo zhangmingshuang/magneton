@@ -11,8 +11,7 @@ import java.util.Date;
  * @author zhangmsh 2021/8/6
  * @since 2.0.0
  */
-public class ValueEqualsBooleanSupplier
-		extends AbstractEqualsSupplier<ValueEqualsBooleanSupplier> {
+public class ValueEqualsBooleanSupplier extends AbstractEqualsSupplier<ValueEqualsBooleanSupplier> {
 
 	/** Date类型的时间比较时允许的时间差异，单位毫秒 */
 	private int dateTimeDiffTolerate = 999;

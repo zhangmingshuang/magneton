@@ -1,6 +1,7 @@
 package org.magneton.test.supplier;
 
 import java.lang.reflect.Field;
+
 import lombok.SneakyThrows;
 
 /**
@@ -12,8 +13,7 @@ import lombok.SneakyThrows;
  * @author zhangmsh 2021/8/5
  * @since 2.0.0
  */
-public class NotNullBooleanSupplier
-		extends AbstractBooleanSupplier<NotNullBooleanSupplier> {
+public class NotNullBooleanSupplier extends AbstractBooleanSupplier<NotNullBooleanSupplier> {
 
 	public NotNullBooleanSupplier(Object obj) {
 		super(obj);

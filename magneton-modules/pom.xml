@@ -1,16 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <artifactId>magneton-parent</artifactId>
-        <groupId>org.magneton</groupId>
-        <version>1.0.0</version>
-        <relativePath>../magneton-parent/pom.xml</relativePath>
-    </parent>
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<parent>
+		<groupId>org.magneton</groupId>
+		<artifactId>magneton</artifactId>
+		<version>${revision}</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
 
-    <modelVersion>4.0.0</modelVersion>
+	<artifactId>magneton-modules</artifactId>
+	<packaging>pom</packaging>
+	<description>功能模块</description>
 
-    <artifactId>magneton-modules</artifactId>
+	<modules>
+		<module>magneton-module-distributed-cache</module>
+		<module>magneton-module-distributed-lock</module>
+		<module>magneton-module-geo</module>
+		<module>magneton-module-auth</module>
+		<module>magneton-module-sms</module>
+		<module>magneton-module-statistics</module>
+	</modules>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-dependencies</artifactId>
+				<version>${spring-boot.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 </project>

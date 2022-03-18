@@ -3,13 +3,13 @@ package org.magneton.test.config;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.base.Verify;
+import com.google.common.collect.Maps;
 import org.magneton.test.annotation.TestAutowired;
 import org.magneton.test.annotation.TestComponent;
 import org.magneton.test.core.AfterAutowrited;
 import org.magneton.test.core.ChaosContext;
 import org.magneton.test.core.InjectType;
-import com.google.common.base.Verify;
-import com.google.common.collect.Maps;
 
 /**
  * .

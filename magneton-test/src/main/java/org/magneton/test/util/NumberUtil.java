@@ -1,9 +1,10 @@
 package org.magneton.test.util;
 
-import com.google.common.base.Preconditions;
-import com.google.common.reflect.TypeToken;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+
+import com.google.common.base.Preconditions;
+import com.google.common.reflect.TypeToken;
 
 /**
  * .
@@ -11,7 +12,6 @@ import java.math.BigInteger;
  * @author zhangmsh 2021/8/3
  * @since 2.0.0
  */
-@SuppressWarnings("All")
 public class NumberUtil {
 
 	private NumberUtil() {
@@ -83,7 +83,7 @@ public class NumberUtil {
 	}
 
 	/**
-	 * Decode a {@link java.math.BigInteger} from the supplied {@link String} value.
+	 * Decode a {@link BigInteger} from the supplied {@link String} value.
 	 *
 	 * <p>
 	 * Supports decimal, hex, and octal notation.

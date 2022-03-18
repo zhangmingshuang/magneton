@@ -7,6 +7,7 @@ import java.util.SortedMap;
 
 import javax.annotation.Nullable;
 
+import com.google.common.collect.Maps;
 import org.magneton.test.annotation.TestAutowired;
 import org.magneton.test.annotation.TestComponent;
 import org.magneton.test.config.Config;
@@ -17,7 +18,6 @@ import org.magneton.test.injector.AbstractInjector;
 import org.magneton.test.injector.InjectorFactory;
 import org.magneton.test.parser.Definition;
 import org.magneton.test.parser.ParserFactory;
-import com.google.common.collect.Maps;
 
 /**
  * .
@@ -62,7 +62,7 @@ public class MapInjector extends AbstractInjector {
 		else if (size == 0) {
 			return Collections.emptyMap();
 		}
-		List<Class> generics = definition.getGenerics();
+		List<Class<?>> generics = definition.getGenerics();
 		Class keyGeneric;
 		Class valueGeneric;
 		if (generics == null || generics.isEmpty()) {

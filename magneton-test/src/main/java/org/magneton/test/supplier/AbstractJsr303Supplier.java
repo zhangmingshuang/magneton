@@ -1,10 +1,12 @@
 package org.magneton.test.supplier;
 
-import com.google.common.base.Strings;
 import java.util.Set;
+
 import javax.annotation.Nullable;
 import javax.validation.ConstraintViolation;
 import javax.validation.Path;
+
+import com.google.common.base.Strings;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -14,8 +16,7 @@ import lombok.extern.slf4j.Slf4j;
  * @since 2.0.0
  */
 @Slf4j
-public abstract class AbstractJsr303Supplier<T extends AbstractJsr303Supplier>
-		extends AbstractBooleanSupplier<T> {
+public abstract class AbstractJsr303Supplier<T extends AbstractJsr303Supplier> extends AbstractBooleanSupplier<T> {
 
 	private Set<ConstraintViolation<Object>> constraintViolations;
 

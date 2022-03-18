@@ -1,11 +1,12 @@
 package org.magneton.test.config;
 
-import org.magneton.test.parser.Definition;
-
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Date;
+
 import javax.annotation.Nullable;
+
+import org.magneton.test.parser.Definition;
 
 /**
  * .

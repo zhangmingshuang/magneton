@@ -1,13 +1,13 @@
 package org.magneton.test.config;
 
-import org.magneton.test.annotation.TestComponent;
-import org.magneton.test.core.InjectType;
-
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+
+import org.magneton.test.annotation.TestComponent;
+import org.magneton.test.core.InjectType;
 
 /**
  * .

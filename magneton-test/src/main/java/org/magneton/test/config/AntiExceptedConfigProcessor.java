@@ -5,9 +5,9 @@ import java.math.BigInteger;
 import java.util.Date;
 import java.util.concurrent.ThreadLocalRandom;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.magneton.test.core.InjectType;
 import org.magneton.test.parser.Definition;
-import org.apache.commons.lang3.RandomStringUtils;
 
 /**
  * 反预期的数据生成处理器.

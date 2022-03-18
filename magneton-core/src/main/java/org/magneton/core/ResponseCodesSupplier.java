@@ -12,84 +12,90 @@ import lombok.ToString;
 @SuppressWarnings("MissingJavadocType")
 public interface ResponseCodesSupplier {
 
-  /**
-   * response code supplier instance.
-   *
-   * @return instance
-   */
-  static ResponseCodesSupplier getInstance() {
-    return Instance.responseCodesSupplier;
-  }
+	/**
+	 * response code supplier instance.
+	 * @return instance
+	 */
+	static ResponseCodesSupplier getInstance() {
+		return Instance.responseCodesSupplier;
+	}
 
-  /**
-   * get ok code.
-   *
-   * @return ok code
-   */
-  default ResponseMessage ok() {
-    return Codes.OK;
-  }
+	/**
+	 * get ok code.
+	 * @return ok code
+	 */
+	default ResponseMessage ok() {
+		return Codes.OK;
+	}
 
-  /**
-   * get bad code.
-   *
-   * @return bad code
-   */
-  default ResponseMessage bad() {
-    return Codes.BAD;
-  }
+	/**
+	 * get bad code.
+	 * @return bad code
+	 */
+	default ResponseMessage bad() {
+		return Codes.BAD;
+	}
 
-  /**
-   * get exception code.
-   *
-   * @return exception code
-   */
-  default ResponseMessage exception() {
-    return Codes.EXCEPTION;
-  }
+	/**
+	 * get exception code.
+	 * @return exception code
+	 */
+	default ResponseMessage exception() {
+		return Codes.EXCEPTION;
+	}
 
-  /** default response messsage defined. */
-  @ToString
-  enum Codes implements ResponseMessage {
-    /** success. */
-    OK("0", "操作成功"),
-    /** fail. */
-    BAD("1", "操作失败"),
-    /** exception. */
-    EXCEPTION("2", "系统异常");
+	/** default response messsage defined. */
+	@ToString
+	enum Codes implements ResponseMessage {
 
-    private final String code;
-    private final String message;
+		/** success. */
+		OK("0", "操作成功"),
+		/** fail. */
+		BAD("1", "操作失败"),
+		/** exception. */
+		EXCEPTION("2", "系统异常");
 
-    Codes(String code, String message) {
-      this.code = code;
-      this.message = message;
-    }
+		private final String code;
 
-    @Override
-    public String code() {
-      return this.code;
-    }
+		private final String message;
 
-    @Override
-    public String message() {
-      return this.message;
-    }
-  }
+		Codes(String code, String message) {
+			this.code = code;
+			this.message = message;
+		}
 
-  /**
-   * Response codes real supplier.
-   *
-   * <p>In default, the global reponse use the default code to reply. but it may change the default
-   * rule at possible. {@code Instance} exposed a enterance to change the response's code supplier.
-   */
-  class Instance {
-    private static ResponseCodesSupplier responseCodesSupplier = new ResponseCodesSupplier() {};
+		@Override
+		public String code() {
+			return this.code;
+		}
 
-    private Instance() {}
+		@Override
+		public String message() {
+			return this.message;
+		}
 
-    public static void setResponseCodesSupplier(ResponseCodesSupplier responseCodesSupplier) {
-      Instance.responseCodesSupplier = responseCodesSupplier;
-    }
-  }
+	}
+
+	/**
+	 * Response codes real supplier.
+	 *
+	 * <p>
+	 * In default, the global reponse use the default code to reply. but it may change the
+	 * default rule at possible. {@code Instance} exposed a enterance to change the
+	 * response's code supplier.
+	 */
+	class Instance {
+
+		private static ResponseCodesSupplier responseCodesSupplier = new ResponseCodesSupplier() {
+		};
+
+		private Instance() {
+		}
+
+		public static void setResponseCodesSupplier(ResponseCodesSupplier responseCodesSupplier) {
+			Instance.responseCodesSupplier = responseCodesSupplier;
+		}
+
+	}
+
 }

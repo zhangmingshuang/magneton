@@ -7,6 +7,9 @@ import java.util.Set;
 
 import javax.annotation.Nullable;
 
+import com.google.common.base.Preconditions;
+import com.google.common.base.Verify;
+import com.google.common.collect.Lists;
 import org.magneton.test.annotation.TestComponent;
 import org.magneton.test.core.ChaosContext;
 import org.magneton.test.parser.Definition.DefinitionBuilder;
@@ -14,9 +17,6 @@ import org.magneton.test.util.AnnotationUtil;
 import org.magneton.test.util.FieldUtil;
 import org.magneton.test.util.GenericUtil;
 import org.magneton.test.util.PrimitiveUtil;
-import com.google.common.base.Preconditions;
-import com.google.common.base.Verify;
-import com.google.common.collect.Lists;
 
 /**
  * .
@@ -88,7 +88,6 @@ public class ParserFactory {
 		return fieldDefinition;
 	}
 
-	@SuppressWarnings("BooleanMethodIsAlwaysInverted")
 	private boolean isIgnore(Class clazz) {
 		return clazz.getName().startsWith("java.");
 	}

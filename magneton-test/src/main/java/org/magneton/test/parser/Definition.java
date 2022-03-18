@@ -4,7 +4,9 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;
+
 import javax.annotation.Nullable;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -26,16 +28,16 @@ import lombok.ToString;
 @Builder
 public class Definition {
 
-	private Class clazz;
+	private Class<?> clazz;
 
 	@Nullable
 	private Field field;
 
 	@Nullable
-	private List<Class> generics;
+	private List<Class<?>> generics;
 
 	@Nullable
-	private Map<Class, Annotation> annotations;
+	private Map<Class<?>, Annotation> annotations;
 
 	@Nullable
 	private List<Definition> childDefinitions;

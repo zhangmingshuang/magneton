@@ -1,7 +1,5 @@
 package org.magneton.test.util;
 
-import com.google.common.base.Preconditions;
-import com.google.common.collect.Maps;
 import java.lang.annotation.Annotation;
 import java.lang.annotation.Documented;
 import java.lang.annotation.Repeatable;
@@ -11,8 +9,12 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Collections;
 import java.util.Map;
+
 import javax.annotation.Nullable;
 import javax.validation.Constraint;
+
+import com.google.common.base.Preconditions;
+import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -47,7 +49,7 @@ public class AnnotationUtil {
 			}
 		}
 		if (annotation == null) {
-			Map<Class, Annotation> foundAnnotations = findAnnotations(clazz);
+			Map<Class<?>, Annotation> foundAnnotations = findAnnotations(clazz);
 			return (A) foundAnnotations.get(annotationClass);
 		}
 		return (A) annotation;
@@ -60,7 +62,7 @@ public class AnnotationUtil {
 		return field.getAnnotation(annotationClass);
 	}
 
-	public static Map<Class, Annotation> findAnnotations(@Nullable Object object) {
+	public static Map<Class<?>, Annotation> findAnnotations(@Nullable Object object) {
 		if (object == null) {
 			return Collections.emptyMap();
 		}
@@ -69,10 +71,10 @@ public class AnnotationUtil {
 			if (fieldAnnotations.length < 1) {
 				return Collections.emptyMap();
 			}
-			Map<Class, Annotation> annotations = Maps.newHashMap();
+			Map<Class<?>, Annotation> annotations = Maps.newHashMap();
 			for (Annotation fieldAnnotation : fieldAnnotations) {
 				annotations.put(fieldAnnotation.annotationType(), fieldAnnotation);
-				Map<Class, Annotation> anns = findAnnotations(fieldAnnotation.annotationType());
+				Map<Class<?>, Annotation> anns = findAnnotations(fieldAnnotation.annotationType());
 				annotations.putAll(anns);
 			}
 			return annotations;
@@ -80,15 +82,16 @@ public class AnnotationUtil {
 		return findAnnotations(object.getClass());
 	}
 
-	public static Map<Class, Annotation> findAnnotations(@Nullable Class clazz) {
+	public static Map<Class<?>, Annotation> findAnnotations(@Nullable Class<?> clazz) {
 		if (clazz == null || clazz == Object.class) {
 			return Collections.emptyMap();
 		}
-		Map<Class, Annotation> annotations = Maps.newHashMap();
+		Map<Class<?>, Annotation> annotations = Maps.newHashMap();
 		return findAnnotations(annotations, clazz);
 	}
 
-	private static Map<Class, Annotation> findAnnotations(Map<Class, Annotation> annotations, @Nullable Class clazz) {
+	private static Map<Class<?>, Annotation> findAnnotations(Map<Class<?>, Annotation> annotations,
+			@Nullable Class<?> clazz) {
 		Preconditions.checkNotNull(annotations);
 		if (isIgnore(clazz)) {
 			return annotations;
@@ -102,14 +105,13 @@ public class AnnotationUtil {
 			findAnnotations(annotations, clazzAnnotation.annotationType());
 		}
 		findAnnotations(annotations, clazz.getSuperclass());
-		for (Class interfaceClazz : clazz.getInterfaces()) {
+		for (Class<?> interfaceClazz : clazz.getInterfaces()) {
 			findAnnotations(annotations, interfaceClazz);
 		}
 		return annotations;
 	}
 
-	@SuppressWarnings("OverlyComplexBooleanExpression")
-	private static boolean isIgnore(Class clazz) {
+	private static boolean isIgnore(Class<?> clazz) {
 		return clazz == null || clazz == Object.class || clazz == Documented.class || clazz == Retention.class
 				|| clazz == Target.class || clazz == Repeatable.class || clazz == Constraint.class;
 	}

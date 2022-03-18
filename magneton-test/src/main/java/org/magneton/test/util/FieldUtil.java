@@ -1,9 +1,11 @@
 package org.magneton.test.util;
 
-import com.google.common.collect.Sets;
 import java.lang.reflect.Field;
 import java.util.Set;
+
 import javax.annotation.Nullable;
+
+import com.google.common.collect.Sets;
 
 /**
  * .
@@ -22,7 +24,6 @@ public class FieldUtil {
 		return fields;
 	}
 
-	@SuppressWarnings("OverlyComplexBooleanExpression")
 	private static void getFields(Set<Field> fields, Class clazz) {
 		if (clazz == null || clazz == Object.class || clazz.getName().startsWith("java")
 				|| clazz.getName().startsWith("javax")) {

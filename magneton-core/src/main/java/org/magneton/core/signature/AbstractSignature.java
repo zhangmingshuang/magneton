@@ -1,11 +1,13 @@
 package org.magneton.core.signature;
 
-import com.google.common.base.Preconditions;
 import java.util.Map;
 import java.util.Objects;
+
 import javax.annotation.Nullable;
+
 import lombok.Getter;
 import lombok.Setter;
+import org.magneton.core.base.Preconditions;
 
 /**
  * .
@@ -17,58 +19,60 @@ import lombok.Setter;
 @Getter
 public abstract class AbstractSignature implements Signature {
 
-  private final String salt;
-  private SignatureContentBuilder signatureContentBuilder = new DefaultSignatureContentBuilder();
-  @Setter @Nullable private SignatureBodyVerifyer signatureBodyVerifyer;
+	private final String salt;
 
-  protected AbstractSignature(String salt) {
-    Preconditions.checkNotNull(salt, "salt must be not null");
+	private SignatureContentBuilder signatureContentBuilder = new DefaultSignatureContentBuilder();
 
-    this.salt = salt;
-  }
+	@Setter
+	@Nullable
+	private SignatureBodyVerifyer signatureBodyVerifyer;
 
-  @Override
-  public String sign(Map<String, String> body) throws SignatureBodyException {
-    String signatureContent = this.parseSignContent(body);
+	protected AbstractSignature(String salt) {
+		Preconditions.checkNotNull(salt, "salt must be not null");
 
-    return this.generateSignature(signatureContent);
-  }
+		this.salt = salt;
+	}
 
-  /**
-   * generate signature.
-   *
-   * @param signatureContent the signature content.
-   * @return signature.
-   */
-  protected abstract String generateSignature(String signatureContent);
+	@Override
+	public String sign(Map<String, String> body) throws SignatureBodyException {
+		String signatureContent = parseSignContent(body);
 
-  /**
-   * get generate signature content salt.
-   *
-   * @return the signature context salt.
-   */
-  protected String getSalt() {
-    return this.salt;
-  }
+		return generateSignature(signatureContent);
+	}
 
-  @Override
-  public String parseSignContent(Map<String, String> body) throws SignatureBodyException {
-    Preconditions.checkNotNull(body, "body must be not null");
+	/**
+	 * generate signature.
+	 * @param signatureContent the signature content.
+	 * @return signature.
+	 */
+	protected abstract String generateSignature(String signatureContent);
 
-    if (Objects.nonNull(this.signatureBodyVerifyer)) {
-      this.signatureBodyVerifyer.validate(body);
-    }
-    return this.signatureContentBuilder.build(body, this.getSalt());
-  }
+	/**
+	 * get generate signature content salt.
+	 * @return the signature context salt.
+	 */
+	protected String getSalt() {
+		return salt;
+	}
 
-  /**
-   * set signurate body builder.
-   *
-   * @param signatureContentBuilder the signature body builder.
-   */
-  public void setSignatureContentBuilder(SignatureContentBuilder signatureContentBuilder) {
-    Preconditions.checkNotNull(signatureContentBuilder, "signatureBodyBuilder must be not null");
+	@Override
+	public String parseSignContent(Map<String, String> body) throws SignatureBodyException {
+		Preconditions.checkNotNull(body, "body must be not null");
 
-    this.signatureContentBuilder = signatureContentBuilder;
-  }
+		if (Objects.nonNull(signatureBodyVerifyer)) {
+			signatureBodyVerifyer.validate(body);
+		}
+		return signatureContentBuilder.build(body, getSalt());
+	}
+
+	/**
+	 * set signurate body builder.
+	 * @param signatureContentBuilder the signature body builder.
+	 */
+	public void setSignatureContentBuilder(SignatureContentBuilder signatureContentBuilder) {
+		Preconditions.checkNotNull(signatureContentBuilder, "signatureBodyBuilder must be not null");
+
+		this.signatureContentBuilder = signatureContentBuilder;
+	}
+
 }

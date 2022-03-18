@@ -1,19 +1,20 @@
 package org.magneton.test.config;
 
-import org.magneton.test.core.InjectType;
-import org.magneton.test.model.StringModel;
-import com.google.common.base.Preconditions;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.RoundingMode;
 import java.time.Instant;
+
+import com.google.common.base.Preconditions;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.SneakyThrows;
 import lombok.ToString;
 import lombok.experimental.Accessors;
+import org.magneton.test.core.InjectType;
+import org.magneton.test.model.StringModel;
 
 /**
  * .
