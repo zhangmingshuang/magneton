@@ -1,6 +1,0 @@
-org\magneton\module\distributed\cache\redis\RedissonDistributedCacheTest.class
-org\magneton\module\distributed\cache\redis\RedissonListOpsTest.class
-org\magneton\module\distributed\cache\redis\RedissonValueOpsTest.class
-org\magneton\module\distributed\cache\TestRedisson.class
-org\magneton\module\distributed\cache\redis\RedissonHashOpsTest.class
-org\magneton\module\distributed\cache\TestA.class

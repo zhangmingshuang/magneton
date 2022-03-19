@@ -1,8 +1,0 @@
-org\magneton\module\sms\AbstractSms.class
-org\magneton\module\sms\Sms.class
-org\magneton\module\sms\process\aliyun\AbstractAliyunSmsProcessor.class
-org\magneton\module\sms\process\SendProcessor.class
-org\magneton\module\sms\redis\RedissonSms.class
-org\magneton\module\sms\process\aliyun\AliyunSmsProperty.class
-org\magneton\module\sms\SendStatus.class
-org\magneton\module\sms\property\SmsProperty.class
