@@ -32,21 +32,23 @@ public class ModulesAutoConfiguration {
 	private SmsModuleProperties smsModuleProperties;
 
 	@Bean
-	@ConditionalOnClass(RedissonClient.class)
+	@ConditionalOnClass(
+			name = { "org.redisson.api.RedissonClient", "org.magneton.module.distributed.cache.DistributedCache" })
 	@ConditionalOnMissingBean
 	public DistributedCache distributedCache(RedissonClient redissonClient) {
 		return new RedissonDistributedCache(redissonClient);
 	}
 
 	@Bean
-	@ConditionalOnClass(RedissonClient.class)
+	@ConditionalOnClass(
+			name = { "org.redisson.api.RedissonClient", "org.magneton.module.distributed.lock.DistributedLock" })
 	@ConditionalOnMissingBean
 	public DistributedLock distributedLock(RedissonClient redissonClient) {
 		return new RedissonDistributedLock(redissonClient);
 	}
 
 	@Bean
-	@ConditionalOnClass(RedissonClient.class)
+	@ConditionalOnClass(name = { "org.redisson.api.RedissonClient", "org.magneton.module.geo.Geo" })
 	@ConditionalOnMissingBean
 	public Geo geo(RedissonClient redissonClient) {
 		return new RedissonGeo(redissonClient);
@@ -54,14 +56,16 @@ public class ModulesAutoConfiguration {
 
 	// ============== sms ===================
 	@Bean
-	@ConditionalOnClass({ SendProcessor.class, AliyunSmsProperty.class })
+	@ConditionalOnClass(name = { "org.magneton.module.sms.process.SendProcessor",
+			"org.magneton.module.sms.process.aliyun.AliyunSmsProperty" })
 	@ConditionalOnMissingBean
 	public AliyunSmsProperty aliyunSmsProperty() {
 		return this.smsModuleProperties.getAliyun();
 	}
 
 	@Bean
-	@ConditionalOnClass(SendProcessor.class)
+	@ConditionalOnClass(name = { "org.redisson.api.RedissonClient", "org.magneton.module.sms.process.SendProcessor",
+			"org.magneton.module.sms.Sms" })
 	@ConditionalOnMissingBean
 	public Sms sms(RedissonClient redissonClient, SendProcessor sendProcessor) {
 		return new RedissonSms(redissonClient, sendProcessor, this.smsModuleProperties);

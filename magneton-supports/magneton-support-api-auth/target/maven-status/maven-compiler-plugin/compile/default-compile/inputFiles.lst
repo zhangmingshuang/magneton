@@ -1,5 +1,8 @@
+D:\workenv\project_space\magneton\magneton-supports\magneton-support-api-auth\src\main\java\org\magneton\support\api\auth\pojo\SmsAutoLoginReq.java
+D:\workenv\project_space\magneton\magneton-supports\magneton-support-api-auth\src\main\java\org\magneton\support\api\auth\constant\LoginError.java
 D:\workenv\project_space\magneton\magneton-supports\magneton-support-api-auth\src\main\java\org\magneton\support\api\auth\dao\intf\ApiAuthLogDao.java
 D:\workenv\project_space\magneton\magneton-supports\magneton-support-api-auth\src\main\java\org\magneton\support\api\auth\service\impl\AuthServiceImpl.java
+D:\workenv\project_space\magneton\magneton-supports\magneton-support-api-auth\src\main\java\org\magneton\support\api\auth\interceptor\AuthInterceptor.java
 D:\workenv\project_space\magneton\magneton-supports\magneton-support-api-auth\src\main\java\org\magneton\support\api\auth\dao\impl\ApiAuthUserDaoImpl.java
 D:\workenv\project_space\magneton\magneton-supports\magneton-support-api-auth\src\main\java\org\magneton\support\api\auth\entity\ApiAuthStatisticsDO.java
 D:\workenv\project_space\magneton\magneton-supports\magneton-support-api-auth\src\main\java\org\magneton\support\api\auth\controller\ApiAuthSmsController.java
@@ -7,6 +10,7 @@ D:\workenv\project_space\magneton\magneton-supports\magneton-support-api-auth\sr
 D:\workenv\project_space\magneton\magneton-supports\magneton-support-api-auth\src\main\java\org\magneton\support\api\auth\dao\intf\ApiAuthUserDao.java
 D:\workenv\project_space\magneton\magneton-supports\magneton-support-api-auth\src\main\java\org\magneton\support\api\auth\service\AuthService.java
 D:\workenv\project_space\magneton\magneton-supports\magneton-support-api-auth\src\main\java\org\magneton\support\api\auth\entity\ApiAuthLogDO.java
+D:\workenv\project_space\magneton\magneton-supports\magneton-support-api-auth\src\main\java\org\magneton\support\api\auth\pojo\SmsLoginRes.java
 D:\workenv\project_space\magneton\magneton-supports\magneton-support-api-auth\src\main\java\org\magneton\support\api\auth\entity\ApiAuthUserDO.java
 D:\workenv\project_space\magneton\magneton-supports\magneton-support-api-auth\src\main\java\org\magneton\support\api\auth\dao\impl\ApiAuthStatisticsDaoImpl.java
 D:\workenv\project_space\magneton\magneton-supports\magneton-support-api-auth\src\main\java\org\magneton\support\api\auth\pojo\SmsLoginReq.java
