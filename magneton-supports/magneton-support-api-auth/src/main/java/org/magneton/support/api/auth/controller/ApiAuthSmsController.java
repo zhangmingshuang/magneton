@@ -2,7 +2,6 @@ package org.magneton.support.api.auth.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-
 import org.magneton.core.Response;
 import org.magneton.support.api.auth.constant.LoginError;
 import org.magneton.support.api.auth.constant.SmsError;
@@ -11,8 +10,7 @@ import org.magneton.support.api.auth.pojo.SmsLoginReq;
 import org.magneton.support.api.auth.pojo.SmsLoginRes;
 import org.magneton.support.api.auth.pojo.SmsSendReq;
 import org.magneton.support.api.auth.service.AuthService;
-import org.magneton.support.doc.HtmlDoc;
-
+import org.magneton.support.doc.ApiHtmlDoc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -41,7 +39,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ApiAuthSmsController {
 
 	static {
-		HtmlDoc.addApi("短信注册登录");
+		ApiHtmlDoc.addApi("短信注册登录", "api-auth", "该模块提供了短信的登录注册功能");
 	}
 
 	@Autowired

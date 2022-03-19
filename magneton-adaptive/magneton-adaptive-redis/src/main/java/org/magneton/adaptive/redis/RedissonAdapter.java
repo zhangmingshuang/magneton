@@ -2,7 +2,7 @@ package org.magneton.adaptive.redis;
 
 import java.io.File;
 import java.io.IOException;
-
+import java.io.InputStream;
 import lombok.extern.slf4j.Slf4j;
 import org.magneton.core.base.Preconditions;
 import org.magneton.core.base.Strings;
@@ -119,14 +119,15 @@ public class RedissonAdapter {
 	}
 
 	private static Config createConfig(String path) {
+		// noinspection OverlyBroadCatchBlock
 		try {
 			File file = Resources.getFile(Strings.lenientFormat(path, ""));
 			return Config.fromYAML(file);
 		}
 		catch (IOException e) {
-			try {
-				File file = Resources.getFile(Strings.lenientFormat(path, "classpath:adaptive-"));
-				return Config.fromYAML(file);
+			try (InputStream inputStream = RedissonAdapter.class
+					.getResourceAsStream((Strings.lenientFormat(path, "/adaptive-")))) {
+				return Config.fromYAML(inputStream);
 			}
 			catch (IOException e1) {
 				throw new RedissonConfigParseException(e1);

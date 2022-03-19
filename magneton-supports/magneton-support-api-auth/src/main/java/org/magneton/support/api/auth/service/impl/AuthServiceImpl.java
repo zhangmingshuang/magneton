@@ -5,9 +5,7 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.UUID;
-
 import javax.servlet.http.HttpServletRequest;
-
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -15,7 +13,9 @@ import org.magneton.core.Consequences;
 import org.magneton.core.Response;
 import org.magneton.core.base.Objects;
 import org.magneton.core.base.Preconditions;
+import org.magneton.core.base.Strings;
 import org.magneton.core.hash.Hashing;
+import org.magneton.foundation.util.Pair;
 import org.magneton.module.distributed.cache.DistributedCache;
 import org.magneton.module.distributed.lock.DistributedLock;
 import org.magneton.module.sms.SendStatus;
@@ -33,11 +33,11 @@ import org.magneton.support.api.auth.pojo.SmsAutoLoginReq;
 import org.magneton.support.api.auth.pojo.SmsLoginReq;
 import org.magneton.support.api.auth.pojo.SmsLoginRes;
 import org.magneton.support.api.auth.pojo.SmsSendReq;
+import org.magneton.support.api.auth.process.ApiAuthTokenProcessor;
 import org.magneton.support.api.auth.service.AuthService;
 import org.magneton.support.constant.Removed;
 import org.magneton.support.constant.Status;
 import org.magneton.support.util.IpUtil;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.support.TransactionTemplate;
@@ -75,6 +75,9 @@ public class AuthServiceImpl implements AuthService {
 	@Autowired
 	private TransactionTemplate transactionTemplate;
 
+	@Autowired(required = false)
+	private ApiAuthTokenProcessor apiAuthTokenProcessor;
+
 	@Override
 	public Response<String> sendSms(HttpServletRequest request, SmsSendReq smsSendReq) {
 		String mobile = smsSendReq.getMobile();
@@ -94,6 +97,9 @@ public class AuthServiceImpl implements AuthService {
 			return Response.bad().message(sendConsequences.getMessage());
 		}
 		String smsToken = this.sms.token(mobile, group);
+		if (Strings.isNullOrEmpty(smsToken)) {
+			return Response.response(SmsError.TOKEN_MISS);
+		}
 		return Response.ok(smsToken);
 	}
 
@@ -176,14 +182,28 @@ public class AuthServiceImpl implements AuthService {
 		this.apiAuthStatisticsDao.increPvUv(today, isUv);
 
 		// 缓存自动登录信息
-		String token = Hashing.sha256().hashString(UUID.randomUUID() + mobile, StandardCharsets.UTF_8).toString();
-		String autoLoginToken = Hashing.sha256().hashString(UUID.randomUUID() + mobile, StandardCharsets.UTF_8)
-				.toString();
+		Pair<String, String> apiAuthToken = this.createToken(mobile);
+		String token = apiAuthToken.getFirst();
+		String autoLoginToken = apiAuthToken.getSecond();
 		CacheUser cacheUser = new CacheUser().setUserId(useId).setAutoLoginToken(autoLoginToken).setMobile(mobile)
 				.setIdentification(identification);
 		this.distributedCache.opsForValue().setEx("alogin:" + identification, cacheUser, 5 * 24 * 60 * 60);
 		this.distributedCache.opsForValue().setEx("clogin:" + token, cacheUser, 24 * 60 * 60);
 		return Response.ok(new SmsLoginRes().setAutoLoginToken(autoLoginToken).setToken(token));
+	}
+
+	private Pair<String, String> createToken(String mobile) {
+		Pair<String, String> pair = null;
+		if (this.apiAuthTokenProcessor != null) {
+			pair = this.apiAuthTokenProcessor.createToken(mobile);
+		}
+		if (pair == null) {
+			String token = Hashing.sha256().hashString(UUID.randomUUID() + mobile, StandardCharsets.UTF_8).toString();
+			String autoLoginToken = Hashing.sha256().hashString(UUID.randomUUID() + mobile, StandardCharsets.UTF_8)
+					.toString();
+			return Pair.of(token, autoLoginToken);
+		}
+		return pair;
 	}
 
 	@Setter
