@@ -24,6 +24,12 @@ api[0].list[0].list.push({
     url: '/${magneton.api.prefix:api}/auth/sms/login',
     desc: '登录',
 });
+api[0].list[0].list.push({
+    order: '3',
+    deprecated: 'false',
+    url: '/${magneton.api.prefix:api}/auth/sms/autoLogin',
+    desc: '自动登录',
+});
 api[0].list.push({
     alias: 'error',
     order: '2',
