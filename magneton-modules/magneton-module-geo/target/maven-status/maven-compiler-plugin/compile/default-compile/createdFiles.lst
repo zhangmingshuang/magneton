@@ -1,6 +1,0 @@
-org\magneton\module\geo\Geo.class
-org\magneton\module\geo\GeoPosition.class
-org\magneton\module\geo\GeoUnit.class
-org\magneton\module\geo\GeoEntry.class
-org\magneton\module\geo\redis\RedissonGeo$1.class
-org\magneton\module\geo\redis\RedissonGeo.class
