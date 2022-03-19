@@ -56,8 +56,9 @@ public abstract class AbstractSms implements Sms {
 		Consequences<SmsToken> sendResponse = this.getSendProcessor().send(mobile);
 		if (sendResponse.isSuccess()) {
 			this.mobileSendSuccess(mobile, sendResponse.getData());
+			return Consequences.success(SendStatus.SUCCESS, "短信发送成功");
 		}
-		return Consequences.success(SendStatus.SUCCESS, "短信发送成功");
+		return Consequences.fail(SendStatus.FAILURE, "短信发送失败");
 	}
 
 	/**

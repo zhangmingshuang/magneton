@@ -1,7 +1,6 @@
 package org.magneton.module.sms.property;
 
 import java.util.regex.Pattern;
-
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -25,11 +24,15 @@ public class SmsProperty {
 
 	/**
 	 * 一天一个手机号可以发送几次
+	 *
+	 * 如果小于1表示不作用
 	 */
 	private int dayCount = 10;
 
 	/**
 	 * 一小时一个手机号可以发送几次
+	 *
+	 * 如果小于1表示不作用
 	 */
 	private int hourCount = 8;
 
@@ -45,6 +48,8 @@ public class SmsProperty {
 
 	/**
 	 * 分组风控值，即单分组超过该值表示风控
+	 *
+	 * 如果小于1表示不作用
 	 */
 	private int groupRiskCount = 20;
 

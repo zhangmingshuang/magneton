@@ -5,9 +5,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.concurrent.TimeUnit;
-
 import javax.annotation.Nullable;
-
 import org.magneton.core.base.Objects;
 import org.magneton.core.base.Preconditions;
 import org.magneton.module.sms.AbstractSms;
@@ -46,7 +44,7 @@ public class RedissonSms extends AbstractSms {
 			return true;
 		}
 		long preSendTime = gapBucket.get();
-		return preSendTime + (sendGapSeconds * 1000L) >= System.currentTimeMillis();
+		return preSendTime + (sendGapSeconds * 1000L) < System.currentTimeMillis();
 	}
 
 	@Override
@@ -112,6 +110,9 @@ public class RedissonSms extends AbstractSms {
 
 	@Override
 	protected boolean groupRiskOpinion(String group, int groupRiskCount, int groupRiskInSeconds) {
+		if (groupRiskCount < 1 || groupRiskInSeconds < 1) {
+			return true;
+		}
 		RAtomicLong groupAtomic = this.redissonClient.getAtomicLong(KEY + ":" + group);
 		long currentGroupCount = groupAtomic.incrementAndGet();
 		if (currentGroupCount <= 1) {
@@ -122,23 +123,28 @@ public class RedissonSms extends AbstractSms {
 
 	@Override
 	protected boolean mobileCountCapsOpinion(String mobile, int dayCount, int hourCount) {
-		RAtomicLong hourAtomic = this.redissonClient.getAtomicLong(KEY + ":hour:" + mobile);
-		long currentHourCount = hourAtomic.incrementAndGet();
-		if (currentHourCount <= 1) {
-			hourAtomic.expire(1, TimeUnit.HOURS);
+		if (hourCount > 0) {
+			RAtomicLong hourAtomic = this.redissonClient.getAtomicLong(KEY + ":hour:" + mobile);
+			long currentHourCount = hourAtomic.incrementAndGet();
+			if (currentHourCount <= 1) {
+				hourAtomic.expire(1, TimeUnit.HOURS);
+			}
+			if (currentHourCount > hourCount) {
+				return false;
+			}
 		}
-		if (currentHourCount > hourCount) {
-			return false;
+		if (dayCount > 0) {
+			RAtomicLong dayAtomic = this.redissonClient.getAtomicLong(KEY + ":day:" + mobile);
+			long currentDayCount = dayAtomic.incrementAndGet();
+			if (currentDayCount <= 1) {
+				LocalDateTime now = LocalDateTime.now();
+				LocalDateTime tomorrow = LocalDateTime.of(LocalDate.now(), LocalTime.MIN).plusDays(1);
+				long gapSeconds = Duration.between(now, tomorrow).getSeconds();
+				dayAtomic.expire(gapSeconds, TimeUnit.SECONDS);
+			}
+			return currentDayCount <= dayCount;
 		}
-		RAtomicLong dayAtomic = this.redissonClient.getAtomicLong(KEY + ":day:" + mobile);
-		long currentDayCount = dayAtomic.incrementAndGet();
-		if (currentDayCount <= 1) {
-			LocalDateTime now = LocalDateTime.now();
-			LocalDateTime tomorrow = LocalDateTime.of(LocalDate.now(), LocalTime.MIN).plusDays(1);
-			long gapSeconds = Duration.between(now, tomorrow).getSeconds();
-			dayAtomic.expire(gapSeconds, TimeUnit.SECONDS);
-		}
-		return currentDayCount <= dayCount;
+		return true;
 	}
 
 }

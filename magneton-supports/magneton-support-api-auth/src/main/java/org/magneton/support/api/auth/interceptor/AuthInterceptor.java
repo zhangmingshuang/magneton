@@ -3,14 +3,12 @@ package org.magneton.support.api.auth.interceptor;
 import javax.annotation.Nullable;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.magneton.core.Response;
 import org.magneton.core.ResponseException;
 import org.magneton.core.base.Strings;
-import org.magneton.support.adapter.MvcAdapter;
+import org.magneton.support.adapter.InterceptorAdapter;
 import org.magneton.support.api.auth.constant.LoginError;
 import org.magneton.support.api.auth.service.AuthService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -23,7 +21,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
  * @since 2.0.7
  */
 @Component
-public class AuthInterceptor implements MvcAdapter {
+public class AuthInterceptor implements InterceptorAdapter {
 
 	@Value("${magneton.api.prefix:api}")
 	private String prefix;
@@ -52,7 +50,7 @@ public class AuthInterceptor implements MvcAdapter {
 
 	@Override
 	public String[] pathPatterns() {
-		return new String[] { "/**" };
+		return new String[] { this.prefix + "/auth/**" };
 	}
 
 	@Nullable
