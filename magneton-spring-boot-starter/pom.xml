@@ -23,6 +23,11 @@
             <artifactId>spring-boot-starter-web</artifactId>
             <version>${spring-boot.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.magneton</groupId>
+            <artifactId>magneton-support-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
         <!-- 可选功能依赖项 -->
         <dependency>
             <groupId>org.magneton</groupId>

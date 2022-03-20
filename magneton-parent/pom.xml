@@ -60,12 +60,22 @@
             </dependency>
             <dependency>
                 <groupId>org.magneton</groupId>
+                <artifactId>magneton-module-safedog</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.magneton</groupId>
                 <artifactId>magneton-module-geo</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.magneton</groupId>
                 <artifactId>magneton-module-sms</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.magneton</groupId>
+                <artifactId>magneton-module-statistics</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <!-- magneton-modules end-->
