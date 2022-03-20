@@ -18,7 +18,6 @@
         <module>magneton-support-admin-basic</module>
         <module>magneton-support-record-log</module>
         <module>magneton-support-core</module>
-        <module>magneton-support-api-auth</module>
     </modules>
 
     <dependencies>
