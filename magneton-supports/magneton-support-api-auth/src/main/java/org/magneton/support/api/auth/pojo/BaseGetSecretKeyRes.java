@@ -6,25 +6,23 @@ import lombok.ToString;
 import lombok.experimental.Accessors;
 
 /**
- * .
- *
- * @author zhangmsh 18/03/2022
- * @since 2.0.7
+ * @author zhangmsh 2022/3/20
+ * @since 1.0.0
  */
 @Setter
 @Getter
 @ToString
 @Accessors(chain = true)
-public class SmsLoginRes {
+public class BaseGetSecretKeyRes {
 
 	/**
-	 * 操作授权码
+	 * 秘钥Id
 	 */
-	private String token;
+	private String secretId;
 
 	/**
-	 * 自动登录授权码
+	 * 秘钥
 	 */
-	private String autoLoginToken;
+	private String secretKey;
 
 }

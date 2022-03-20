@@ -1,8 +1,9 @@
 package org.magneton.support.api.auth.service;
 
+import javax.annotation.Nullable;
 import javax.servlet.http.HttpServletRequest;
-
 import org.magneton.core.Response;
+import org.magneton.support.api.auth.pojo.BasicGetSecretKeyReq;
 import org.magneton.support.api.auth.pojo.SmsAutoLoginReq;
 import org.magneton.support.api.auth.pojo.SmsLoginReq;
 import org.magneton.support.api.auth.pojo.SmsLoginRes;
@@ -41,5 +42,15 @@ public interface AuthService {
 	Response<SmsLoginRes> autoLogin(HttpServletRequest request, SmsAutoLoginReq smsAutoLoginReq);
 
 	boolean validateToken(String token, String identification);
+
+	/**
+	 * 生成安全摘要秘钥
+	 * @param basicGetSecretKeyReq 请求
+	 * @return 安全摘要秘钥
+	 */
+	Response<String> createSecretKey(BasicGetSecretKeyReq basicGetSecretKeyReq);
+
+	@Nullable
+	String getSecretKey(String secretKeyId);
 
 }

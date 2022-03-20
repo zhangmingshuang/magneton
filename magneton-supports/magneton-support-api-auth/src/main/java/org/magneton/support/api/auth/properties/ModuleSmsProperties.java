@@ -18,7 +18,7 @@ import org.springframework.boot.context.properties.NestedConfigurationProperty;
 @Getter
 @ToString
 @ConfigurationProperties(prefix = "magneton.module.sms")
-public class SmsModuleProperties extends SmsProperty {
+public class ModuleSmsProperties extends SmsProperty {
 
 	/**
 	 * aliyun sms property.

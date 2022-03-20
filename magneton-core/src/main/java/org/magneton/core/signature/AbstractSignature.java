@@ -2,9 +2,7 @@ package org.magneton.core.signature;
 
 import java.util.Map;
 import java.util.Objects;
-
 import javax.annotation.Nullable;
-
 import lombok.Getter;
 import lombok.Setter;
 import org.magneton.core.base.Preconditions;
@@ -35,9 +33,9 @@ public abstract class AbstractSignature implements Signature {
 
 	@Override
 	public String sign(Map<String, String> body) throws SignatureBodyException {
-		String signatureContent = parseSignContent(body);
+		String signatureContent = this.parseSignContent(body);
 
-		return generateSignature(signatureContent);
+		return this.generateSignature(signatureContent);
 	}
 
 	/**
@@ -52,17 +50,17 @@ public abstract class AbstractSignature implements Signature {
 	 * @return the signature context salt.
 	 */
 	protected String getSalt() {
-		return salt;
+		return this.salt;
 	}
 
 	@Override
 	public String parseSignContent(Map<String, String> body) throws SignatureBodyException {
 		Preconditions.checkNotNull(body, "body must be not null");
 
-		if (Objects.nonNull(signatureBodyVerifyer)) {
-			signatureBodyVerifyer.validate(body);
+		if (Objects.nonNull(this.signatureBodyVerifyer)) {
+			this.signatureBodyVerifyer.validate(body);
 		}
-		return signatureContentBuilder.build(body, getSalt());
+		return this.signatureContentBuilder.build(body, this.getSalt());
 	}
 
 	/**

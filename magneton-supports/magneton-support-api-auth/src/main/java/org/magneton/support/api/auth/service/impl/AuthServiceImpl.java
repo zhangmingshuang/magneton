@@ -1,5 +1,10 @@
 package org.magneton.support.api.auth.service.impl;
 
+import cn.hutool.core.codec.Base64;
+import cn.hutool.crypto.KeyUtil;
+import cn.hutool.crypto.asymmetric.KeyType;
+import cn.hutool.crypto.asymmetric.RSA;
+import com.alibaba.fastjson.JSON;
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.time.LocalDate;
@@ -21,6 +26,7 @@ import org.magneton.module.distributed.lock.DistributedLock;
 import org.magneton.module.sms.SendStatus;
 import org.magneton.module.sms.Sms;
 import org.magneton.module.statistics.Statistics;
+import org.magneton.support.api.auth.constant.CommonError;
 import org.magneton.support.api.auth.constant.LoginError;
 import org.magneton.support.api.auth.constant.SmsError;
 import org.magneton.support.api.auth.dao.intf.ApiAuthLogDao;
@@ -29,11 +35,14 @@ import org.magneton.support.api.auth.dao.intf.ApiAuthUserDao;
 import org.magneton.support.api.auth.entity.ApiAuthLogDO;
 import org.magneton.support.api.auth.entity.ApiAuthStatisticsDO;
 import org.magneton.support.api.auth.entity.ApiAuthUserDO;
+import org.magneton.support.api.auth.pojo.BaseGetSecretKeyRes;
+import org.magneton.support.api.auth.pojo.BasicGetSecretKeyReq;
 import org.magneton.support.api.auth.pojo.SmsAutoLoginReq;
 import org.magneton.support.api.auth.pojo.SmsLoginReq;
 import org.magneton.support.api.auth.pojo.SmsLoginRes;
 import org.magneton.support.api.auth.pojo.SmsSendReq;
 import org.magneton.support.api.auth.process.ApiAuthTokenProcessor;
+import org.magneton.support.api.auth.properties.ApiAuthProperties;
 import org.magneton.support.api.auth.service.AuthService;
 import org.magneton.support.constant.Removed;
 import org.magneton.support.constant.Status;
@@ -77,6 +86,9 @@ public class AuthServiceImpl implements AuthService {
 
 	@Autowired(required = false)
 	private ApiAuthTokenProcessor apiAuthTokenProcessor;
+
+	@Autowired
+	private ApiAuthProperties apiAuthProperties;
 
 	@Override
 	public Response<String> sendSms(HttpServletRequest request, SmsSendReq smsSendReq) {
@@ -152,6 +164,59 @@ public class AuthServiceImpl implements AuthService {
 			return false;
 		}
 		return Objects.equal(cacheUser.getIdentification(), identification);
+	}
+
+	@Override
+	public Response<String> createSecretKey(BasicGetSecretKeyReq basicGetSecretKeyReq) {
+		boolean secretKeyDebug = this.apiAuthProperties.isSecretKeyDebug();
+		String rsaPublicKey = basicGetSecretKeyReq.getRsaPublicKey();
+		String secretKeyId;
+		String secretKey;
+		if (!secretKeyDebug) {
+			long nonce = basicGetSecretKeyReq.getNonce();
+			if (System.currentTimeMillis() - this.apiAuthProperties.getSignPeriodSeconds() * 1000L < nonce) {
+				return Response.response(CommonError.SECRET_TIME_OUT);
+			}
+			String sign = Hashing.sha256()
+					.hashString(rsaPublicKey + nonce + this.apiAuthProperties.getSecretKeySignSalt(),
+							StandardCharsets.UTF_8)
+					.toString();
+			if (!Objects.equal(sign, basicGetSecretKeyReq.getSign())) {
+				return Response.response(CommonError.SECRET_SIGN_ERROR);
+			}
+			secretKeyId = Hashing.hmacMd5(sign.getBytes(StandardCharsets.UTF_8)).toString();
+			secretKey = Hashing.sha256().hashString(sign + System.currentTimeMillis(), StandardCharsets.UTF_8)
+					.toString();
+		}
+		else {
+			secretKeyId = this.apiAuthProperties.getDebugSecretKeyId();
+			secretKey = this.apiAuthProperties.getDebugSecretKey();
+		}
+		this.distributedCache.opsForValue().setEx("secret:" + secretKeyId, secretKey, 24 * 60 * 60);
+		String encrypt = this.secretKeyEncrypt(rsaPublicKey, secretKeyId, secretKey);
+		return Response.ok(encrypt);
+	}
+
+	@Override
+	public String getSecretKey(String secretKeyId) {
+		Preconditions.checkNotNull(secretKeyId);
+		String secretKey = this.distributedCache.opsForValue().get("secret:" + secretKeyId);
+		if (!Strings.isNullOrEmpty(secretKey)) {
+			// 每次访问刷新Key
+			this.distributedCache.expire("secret:" + secretKeyId, 24 * 60 * 60);
+		}
+		return secretKey;
+	}
+
+	protected String secretKeyEncrypt(String base64RsaPublicKey, String secretKeyId, String secretKey) {
+		Preconditions.checkNotNull(base64RsaPublicKey);
+		Preconditions.checkNotNull(secretKeyId);
+		Preconditions.checkNotNull(secretKey);
+		BaseGetSecretKeyRes baseGetSecretKeyRes = new BaseGetSecretKeyRes().setSecretId(secretKeyId)
+				.setSecretKey(secretKey);
+		RSA rsa = new RSA();
+		rsa.setPublicKey(KeyUtil.generateRSAPublicKey(Base64.decode(base64RsaPublicKey)));
+		return rsa.encryptBase64(JSON.toJSONBytes(baseGetSecretKeyRes), KeyType.PublicKey);
 	}
 
 	private Response<SmsLoginRes> onLoginSuccessProcess(HttpServletRequest request, String identification,
