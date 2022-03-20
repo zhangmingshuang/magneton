@@ -13,6 +13,9 @@ import org.magneton.core.base.Strings;
 @SuppressWarnings("DoubleCheckedLocking")
 public class ApiHtmlDoc {
 
+	private static final boolean API_DOC = Boolean
+			.parseBoolean(Strings.defaultIfNullOrEmpty(System.getProperty("apiDoc"), "true"));
+
 	@Nullable
 	private static final StringBuilder API = new StringBuilder(1024);
 
@@ -22,6 +25,9 @@ public class ApiHtmlDoc {
 	}
 
 	public static void addDescription(String title, String context) {
+		if (!API_DOC) {
+			return;
+		}
 		Preconditions.checkNotNull(title);
 		Preconditions.checkNotNull(context);
 		StringBuilder builder = new StringBuilder(title.length() + context.length() + 128);
@@ -37,6 +43,10 @@ public class ApiHtmlDoc {
 	}
 
 	public static void addApi(String title, String path, @Nullable String description) {
+		if (!API_DOC) {
+			return;
+		}
+
 		Preconditions.checkNotNull(title);
 		Preconditions.checkNotNull(path);
 
@@ -49,6 +59,9 @@ public class ApiHtmlDoc {
 	}
 
 	public static String getBody() {
+		if (!API_DOC) {
+			return "";
+		}
 		if (body == null) {
 			// noinspection SynchronizeOnThis
 			synchronized (ApiHtmlDoc.class) {

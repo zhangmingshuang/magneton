@@ -27,6 +27,10 @@ public class ResponseException extends RuntimeException {
 		this.response = response;
 	}
 
+	public ResponseException(ResponseMessage responseMessage) {
+		throw new ResponseException(Response.response(responseMessage));
+	}
+
 	public static ResponseException valueOf(Response response) {
 		return new ResponseException(response);
 	}
