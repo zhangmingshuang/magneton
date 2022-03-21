@@ -1,7 +1,6 @@
 package org.magneton.module.sms;
 
 import javax.annotation.Nullable;
-
 import org.magneton.core.Consequences;
 
 /**
@@ -39,6 +38,13 @@ public interface Sms {
 	 * @return 下次可以发送短信的时间间隔，单位秒。
 	 */
 	long ttl(String mobile);
+
+	/**
+	 * 发送短信
+	 * @param mobile 手机号
+	 * @return 发送状态
+	 */
+	Consequences<SendStatus> send(String mobile);
 
 	@Nullable
 	default String token(String mobile) {
