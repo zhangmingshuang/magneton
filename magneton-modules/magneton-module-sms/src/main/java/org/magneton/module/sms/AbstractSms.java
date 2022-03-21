@@ -53,6 +53,12 @@ public abstract class AbstractSms implements Sms {
 		if (!this.mobileCountCapsOpinion(mobile, this.smsProperty.getDayCount(), this.smsProperty.getHourCount())) {
 			return Consequences.fail(SendStatus.COUNT_CAPS, "发送次数达到上限");
 		}
+		return this.send(mobile);
+	}
+
+	@Override
+	public Consequences<SendStatus> send(String mobile) {
+		Preconditions.checkNotNull(mobile);
 		Consequences<SmsToken> sendResponse = this.getSendProcessor().send(mobile);
 		if (sendResponse.isSuccess()) {
 			this.mobileSendSuccess(mobile, sendResponse.getData());
