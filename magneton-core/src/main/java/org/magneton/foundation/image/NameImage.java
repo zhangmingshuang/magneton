@@ -56,7 +56,7 @@ public class NameImage {
 
 	private DrawProcessor drawProcessor;
 
-	public void generateImg(String userName, String imageName) throws IOException {
+	public String generateImg(String userName, String imageName) throws IOException {
 		Preconditions.checkNotNull(userName);
 		int subLen = Math.max(1, isChinese(userName) ? this.subUserNameLength : this.nonChineseSubUserNameLength);
 		int nameLen = Math.min(subLen, userName.length());
@@ -80,6 +80,7 @@ public class NameImage {
 		File file = this.outputPath.resolve(imageName + ".png").toFile();
 		BufferedImage rounded = this.makeRoundedCorner(bufferedImage, this.cornerRadius);
 		ImageIO.write(rounded, "png", file);
+		return imageName + ".png";
 	}
 
 	private Point defaultPoint(String written, int width, int height, Font font) {
