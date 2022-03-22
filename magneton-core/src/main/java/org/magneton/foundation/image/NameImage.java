@@ -78,7 +78,7 @@ public class NameImage {
 			Files.createDirectories(this.outputPath);
 		}
 		File file = this.outputPath.resolve(imageName + ".png").toFile();
-		BufferedImage rounded = this.makeRoundedCorner(bufferedImage, 99);
+		BufferedImage rounded = this.makeRoundedCorner(bufferedImage, this.cornerRadius);
 		ImageIO.write(rounded, "png", file);
 	}
 
