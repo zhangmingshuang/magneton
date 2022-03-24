@@ -7,14 +7,17 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.annotation.Nullable;
 import javax.imageio.ImageIO;
 
 import lombok.Builder;
 import org.magneton.core.base.Preconditions;
+import org.magneton.core.base.Strings;
 
 /**
  * .
@@ -57,7 +60,12 @@ public class NameImage {
 	private DrawProcessor drawProcessor;
 
 	public String generateImg(String userName, String imageName) throws IOException {
+		return this.generateImg(userName, null, imageName);
+	}
+
+	public String generateImg(String userName, @Nullable String prePath, String imageName) throws IOException {
 		Preconditions.checkNotNull(userName);
+		Preconditions.checkNotNull(imageName);
 		int subLen = Math.max(1, isChinese(userName) ? this.subUserNameLength : this.nonChineseSubUserNameLength);
 		int nameLen = Math.min(subLen, userName.length());
 		String written = this.reverseSub ? userName.substring(userName.length() - nameLen)
@@ -74,13 +82,17 @@ public class NameImage {
 		Point point = this.drawProcessor == null ? this.defaultPoint(written, this.width, this.height, font)
 				: this.drawProcessor.point(written, this.width, this.height, font);
 		g2.drawString(written.toUpperCase(), point.getX(), point.getY());
-		if (Files.notExists(this.outputPath)) {
-			Files.createDirectories(this.outputPath);
+
+		Path realPath = Strings.isNullOrEmpty(prePath) ? Paths.get(imageName + ".png")
+				: Paths.get(prePath).resolve(imageName + ".png");
+		Path realOutPath = this.outputPath.resolve(realPath);
+		if (Files.notExists(realOutPath)) {
+			Files.createDirectories(realOutPath);
 		}
-		File file = this.outputPath.resolve(imageName + ".png").toFile();
+		File file = realOutPath.toFile();
 		BufferedImage rounded = this.makeRoundedCorner(bufferedImage, this.cornerRadius);
 		ImageIO.write(rounded, "png", file);
-		return imageName + ".png";
+		return realPath.toString();
 	}
 
 	private Point defaultPoint(String written, int width, int height, Font font) {

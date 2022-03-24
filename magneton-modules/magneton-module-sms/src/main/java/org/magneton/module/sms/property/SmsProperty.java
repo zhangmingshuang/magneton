@@ -1,6 +1,7 @@
 package org.magneton.module.sms.property;
 
 import java.util.regex.Pattern;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -62,5 +63,15 @@ public class SmsProperty {
 	 * 每条短信的有效期限
 	 */
 	private int periodSecond = 5 * 60;
+
+	/**
+	 * 允许校验错误次数
+	 */
+	private int validErrorCount = 5;
+
+	/**
+	 * 校验错误次数的统计时间秒数，即在多少秒内需要记住错误次数
+	 */
+	private int validErrorInSeconds = 60 * 60;
 
 }
