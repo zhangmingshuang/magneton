@@ -8,6 +8,8 @@ import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.magneton.core.reflect.Reflection;
+import org.redisson.api.RLock;
+import org.redisson.api.RedissonClient;
 import org.redisson.config.ClusterServersConfig;
 import org.redisson.config.Config;
 
@@ -55,6 +57,60 @@ class RedissonAdapterTest {
 	void test_singleServerConfig() throws IOException {
 		Config config = RedissonAdapter.getDefaultSingleServerConfig();
 		Assertions.assertNotNull(config);
+	}
+
+	@Test
+	void test() throws InterruptedException {
+		RedissonClient client = RedissonAdapter.createSingleServerClient();
+		String key = "testKey";
+
+		RLock lock = client.getLock(key);
+		lock.lock();
+		Thread t1 = new Thread() {
+			@Override
+			public void run() {
+				try {
+					RLock lock1 = client.getLock(key);
+					lock1.lock();
+				}
+				finally {
+					RLock lock1 = client.getLock(key);
+					lock1.unlock();
+				}
+			}
+		};
+		t1.start();
+		t1.join();
+		lock.unlock();
+
+		// ExecutorService executorService = Executors.newCachedThreadPool();
+		// long c = System.currentTimeMillis();
+		// AtomicInteger i = new AtomicInteger();
+		// StringBuffer buffer = new StringBuffer(1024);
+		// int count = 200;
+		// CountDownLatch countDownLatch = new CountDownLatch(count);
+		// executorService.submit(() -> {
+		// long id = Thread.currentThread().getId();
+		// try {
+		// Thread.sleep(100);
+		// buffer.append("t" + id + "start\n");
+		// RLock lock = client.getLock(key);
+		// lock.unlock();
+		// buffer.append("t" + id + "lock: " + lock + "\n");
+		// }
+		// catch (InterruptedException e) {
+		// e.printStackTrace();
+		// }
+		// finally {
+		// RLock lock = client.getLock(key);
+		// buffer.append("t " + id + " unlock:" + lock + ", " +
+		// lock.isHeldByCurrentThread() + "\n");
+		// lock.unlock();
+		//
+		// countDownLatch.countDown();
+		// }
+		// });
+		// System.out.println(buffer.toString());
 	}
 
 }

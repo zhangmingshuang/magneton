@@ -5,7 +5,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.concurrent.TimeUnit;
+
 import javax.annotation.Nullable;
+
 import org.magneton.core.base.Objects;
 import org.magneton.core.base.Preconditions;
 import org.magneton.module.sms.AbstractSms;
@@ -101,11 +103,20 @@ public class RedissonSms extends AbstractSms {
 			return false;
 		}
 		if (!Objects.equal(cacheToken.getCode(), code)) {
+			this.rememberError(mobile);
 			return false;
 		}
 		this.redissonClient.getBucket(KEY + ":token:" + mobile).deleteAsync();
 		tokenBucket.deleteAsync();
 		return true;
+	}
+
+	private void rememberError(String mobile) {
+		RAtomicLong atomicLong = this.redissonClient.getAtomicLong(KEY + ":error:" + mobile);
+		long count = atomicLong.incrementAndGet();
+		if(count<=1){
+			atomicLong.expire()
+		}
 	}
 
 	@Override
