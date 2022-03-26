@@ -41,8 +41,18 @@ public class AliyunOssProperty {
 	private String roleSessionName;
 
 	/**
-	 * regionId表示RAM的地域ID。以华东1（杭州）地域为例，regionID填写为cn-hangzhou。也可以保留默认值，默认值为空字符串（""）。
+	 * regionId表示RAM的地域ID。以华东1（杭州）地域为例，regionID填写为cn-hangzhou。
 	 */
 	private String regionId;
+
+	/**
+	 * 默认的bucket
+	 */
+	private String defaultBucket;
+
+	/**
+	 * STS临时授权有效期
+	 */
+	private long stsDurationSeconds = 3600;
 
 }
