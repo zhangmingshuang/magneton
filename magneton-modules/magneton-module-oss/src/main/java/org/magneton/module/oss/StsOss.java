@@ -1,5 +1,7 @@
 package org.magneton.module.oss;
 
+import javax.annotation.Nullable;
+
 /**
  * .
  *
@@ -8,6 +10,12 @@ package org.magneton.module.oss;
  */
 public interface StsOss extends Oss {
 
-	<T extends Sts> T sts(String bucket);
+	/**
+	 * 获取STS授权
+	 * @param bucket Bucket
+	 * @return 授权信息，如果异常或失败，返回{@code null}
+	 */
+	@Nullable
+	<T extends Sts> T sts(@Nullable String bucket);
 
 }

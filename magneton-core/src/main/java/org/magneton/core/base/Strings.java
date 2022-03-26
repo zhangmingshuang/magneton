@@ -14,15 +14,14 @@
 
 package org.magneton.core.base;
 
+import static java.util.logging.Level.WARNING;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
-
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import javax.annotations.VisibleForTesting;
-
-import static java.util.logging.Level.WARNING;
 
 /**
  * Static utility methods pertaining to {@code String} or {@code CharSequence} instances.
@@ -63,7 +62,7 @@ public final class Strings {
 	 * {@code null}, may be null
 	 * @return the passed in CharSequence, or the default
 	 */
-	public static String defaultIfNullOrEmpty(String str, String defaultStr) {
+	public static String defaultIfNullOrEmpty(@Nullable String str, String defaultStr) {
 		return isNullOrEmpty(str) ? defaultStr : str;
 	}
 
