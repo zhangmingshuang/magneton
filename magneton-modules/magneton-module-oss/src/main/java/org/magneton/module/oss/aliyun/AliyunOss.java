@@ -35,6 +35,8 @@ import org.magneton.module.oss.StsOss;
 @Slf4j
 public class AliyunOss implements StsOss<AliyunStsRes> {
 
+	private static final AliyunStsRes NIL_STS_RES = new AliyunStsRes();
+
 	private final AliyunOssProperty aliyunOssProperty;
 
 	private DefaultAcsClient defaultAcsClient;
@@ -72,6 +74,7 @@ public class AliyunOss implements StsOss<AliyunStsRes> {
 	@Override
 	@Nullable
 	public AliyunStsRes sts(@Nullable String bucket) {
+		bucket = this.getBucket(bucket);
 		return this.stsCache.computeIfAbsent(bucket, this::doStsRequest);
 	}
 
