@@ -5,13 +5,14 @@ import com.aliyuncs.auth.sts.AssumeRoleRequest;
 import com.aliyuncs.auth.sts.AssumeRoleResponse;
 import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.http.MethodType;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.magneton.module.oss.Sts;
 
 /**
  * @author zhangmsh 2022/3/25
@@ -47,7 +48,9 @@ class AliyunOssTest {
         //@formatter:on
 		request.setPolicy(policy); // 如果policy为空，则用户将获得该角色下所有权限。
 		request.setDurationSeconds(3600L); // 设置临时访问凭证的有效时间为3600秒。
-		final AssumeRoleResponse response = client.getAcsResponse(request);
+		AssumeRoleResponse response = client.getAcsResponse(request);
+		Assertions.assertNotNull(response.getCredentials());
+
 		System.out.println("Expiration: " + response.getCredentials().getExpiration());
 		System.out.println("Access Key Id: " + response.getCredentials().getAccessKeyId());
 		System.out.println("Access Key Secret: " + response.getCredentials().getAccessKeySecret());
@@ -63,15 +66,36 @@ class AliyunOssTest {
 		System.out.println(second);
 		Date date = new Date(second);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		System.out.println(sdf.format(date));
+		Assertions.assertDoesNotThrow(() -> sdf.format(date));
 	}
 
 	@Test
-	void testSts() {
+	void sts() {
 		AliyunOssProperty property = new AliyunOssProperty();
 		AliyunOss aliyunOss = new MockAliyunOss(property);
-		Sts test = aliyunOss.sts("test");
+		AliyunStsRes test = aliyunOss.sts("lookersci");
+		Assertions.assertNotNull(test);
 		System.out.println(test);
+	}
+
+	@Test
+	void putObject() {
+		AliyunOssProperty property = new AliyunOssProperty();
+		property.setAccessKey("LTAI5t7pQ6X5ikNdG28J7NjS");
+		property.setAccessKeySecret("owUAxuLKuYzuArT7QTYCImAtyasaoz");
+		property.setEndpoint("oss-cn-hangzhou.aliyuncs.com");
+		property.setRoleArn("acs:ram::1199947484795824:role/ramossrole");
+		property.setRoleSessionName("test");
+		property.setRegionId("cn-hangzhou");
+		property.setDefaultBucket("lookersci");
+		AliyunOss aliyunOss = new AliyunOss(property);
+		AliyunStsRes sts = aliyunOss.sts(null);
+
+		System.out.println("======== sts ==========");
+		System.out.println(sts);
+		System.out.println("======== sts ==========");
+
+		aliyunOss.simpleUpdate(sts, "/abc/aaa/test.png", Paths.get("D://1.png").toFile());
 	}
 
 }
