@@ -59,6 +59,12 @@
             <version>${project.version}</version>
             <optional>true</optional>
         </dependency>
+        <dependency>
+            <groupId>org.magneton</groupId>
+            <artifactId>magneton-module-oss</artifactId>
+            <version>${project.version}</version>
+            <optional>true</optional>
+        </dependency>
         <!-- 可选功能依赖项 end -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
