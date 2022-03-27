@@ -275,6 +275,15 @@ public final class Strings {
 		return a.subSequence(a.length() - s, a.length()).toString();
 	}
 
+	@Nullable
+	public static String suffixIfNotNullOrEmpty(@Nullable String str, String suffix) {
+		Preconditions.checkNotNull(suffix);
+		if (Strings.isNullOrEmpty(str)) {
+			return str;
+		}
+		return str + suffix;
+	}
+
 	/**
 	 * True when a valid surrogate pair starts at the given {@code index} in the given
 	 * {@code string}. Out-of-range indexes return false.

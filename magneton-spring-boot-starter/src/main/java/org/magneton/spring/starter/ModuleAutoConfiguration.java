@@ -21,6 +21,7 @@ import org.magneton.spring.starter.properties.SmsProperties;
 import org.redisson.api.RedissonClient;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -82,12 +83,14 @@ public class ModuleAutoConfiguration {
 	}
 
 	// =============== oss ===========
+	@ConditionalOnProperty(prefix = AliyunOssProperties.PREFIX, name = AliyunOssProperties.CONDITION_KEY)
 	@Bean
 	@ConditionalOnClass(AliyunOssProperty.class)
 	public AliyunOssProperties aliyunOssProperties() {
 		return new AliyunOssProperties();
 	}
 
+	@ConditionalOnProperty(prefix = AliyunOssProperties.PREFIX, name = AliyunOssProperties.CONDITION_KEY)
 	@Bean
 	@ConditionalOnClass(AliyunOss.class)
 	public Oss oss(AliyunOssProperties aliyunOssProperties) {
