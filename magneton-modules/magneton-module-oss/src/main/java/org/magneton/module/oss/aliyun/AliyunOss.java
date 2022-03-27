@@ -18,7 +18,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.Map;
 import javax.annotation.Nullable;
 import lombok.extern.slf4j.Slf4j;
-import org.jetbrains.annotations.NotNull;
 import org.magneton.core.base.Preconditions;
 import org.magneton.core.base.Strings;
 import org.magneton.core.base.Verify;
@@ -118,7 +117,7 @@ public class AliyunOss implements StsOss<AliyunStsRes> {
 	}
 
 	@Nullable
-	protected AliyunStsRes doStsRequest(@NotNull String bucket) {
+	protected AliyunStsRes doStsRequest(String bucket) {
 		bucket = this.getBucket(bucket);
 		AssumeRoleRequest request = new AssumeRoleRequest();
 		request.setSysMethod(MethodType.POST);

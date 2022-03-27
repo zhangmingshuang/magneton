@@ -2,7 +2,6 @@ package org.magneton.support.adapter;
 
 import java.util.List;
 import java.util.Set;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
@@ -25,7 +24,7 @@ public class InterceptorConfigsAdapter implements WebMvcConfigurer {
 	private List<InterceptorAdapter> interceptorAdapters;
 
 	@Override
-	public void addInterceptors(@NotNull InterceptorRegistry registry) {
+	public void addInterceptors(InterceptorRegistry registry) {
 		if (this.interceptorAdapters == null || this.interceptorAdapters.isEmpty()) {
 			return;
 		}
