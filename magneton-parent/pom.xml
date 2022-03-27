@@ -97,27 +97,7 @@
             <!-- magneton-supports -->
             <dependency>
                 <groupId>org.magneton</groupId>
-                <artifactId>magneton-support-admin-account</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.magneton</groupId>
-                <artifactId>magneton-support-admin-basic</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.magneton</groupId>
-                <artifactId>magneton-support-api-auth</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.magneton</groupId>
                 <artifactId>magneton-support-core</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.magneton</groupId>
-                <artifactId>magneton-support-record-log</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <!-- magneton-supports end-->

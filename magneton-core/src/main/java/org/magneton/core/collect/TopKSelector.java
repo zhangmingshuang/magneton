@@ -23,10 +23,8 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Stream;
-
 import javax.annotation.CheckForNull;
-
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 import org.magneton.core.base.Preconditions;
 import org.magneton.core.math.IntMath;
 

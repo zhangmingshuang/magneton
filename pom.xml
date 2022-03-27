@@ -78,6 +78,7 @@
         <aliyun.dysmsapi.version>2.0.9</aliyun.dysmsapi.version>
         <aliyun-sdk-oss.version>3.13.2</aliyun-sdk-oss.version>
         <logback-classic.version>1.2.10</logback-classic.version>
+        <mybatis-plus-boot-starter.version>3.5.1</mybatis-plus-boot-starter.version>
     </properties>
 
     <dependencyManagement>

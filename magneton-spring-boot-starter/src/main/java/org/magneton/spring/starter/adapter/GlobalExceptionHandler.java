@@ -3,7 +3,7 @@ package org.magneton.spring.starter.adapter;
 import lombok.extern.slf4j.Slf4j;
 import org.magneton.core.Response;
 import org.magneton.core.ResponseException;
-
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
  * @since 2.0.7
  */
 @RestControllerAdvice
+@ControllerAdvice
 @Slf4j
 public class GlobalExceptionHandler {
 

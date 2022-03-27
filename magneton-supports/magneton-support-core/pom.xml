@@ -51,24 +51,6 @@
             <version>${spring-boot.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-cache</artifactId>
-            <version>${spring-boot.version}</version>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>org.magneton</groupId>
-            <artifactId>magneton-module-distributed-cache</artifactId>
-            <version>${project.version}</version>
-            <optional>true</optional>
-        </dependency>
-        <!-- 引入fluent-mybatis 运行依赖包, scope为compile -->
-        <dependency>
-            <groupId>com.github.atool</groupId>
-            <artifactId>fluent-mybatis</artifactId>
-            <version>${fluent-mybatis.version}</version>
-        </dependency>
-        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
@@ -78,15 +60,9 @@
             <version>${spring-boot.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <version>${spring-boot.version}</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>asm</artifactId>
-                    <groupId>org.ow2.asm</groupId>
-                </exclusion>
-            </exclusions>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>${mybatis-plus-boot-starter.version}</version>
         </dependency>
     </dependencies>
 </project>

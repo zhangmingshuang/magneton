@@ -14,9 +14,6 @@
     <description>业务支撑</description>
 
     <modules>
-        <module>magneton-support-admin-account</module>
-        <module>magneton-support-admin-basic</module>
-        <module>magneton-support-record-log</module>
         <module>magneton-support-core</module>
     </modules>
 

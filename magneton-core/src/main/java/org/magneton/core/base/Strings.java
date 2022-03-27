@@ -14,10 +14,10 @@
 
 package org.magneton.core.base;
 
-import static java.util.logging.Level.WARNING;
-
 import java.util.ArrayList;
 import java.util.List;
+import java.util.MissingFormatArgumentException;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
@@ -365,6 +365,38 @@ public final class Strings {
 		return builder.toString();
 	}
 
+	public static String indexFormat(String format, Object... args) {
+		if (isNullOrEmpty(format)) {
+			return "null";
+		}
+		if (args != null && args.length > 0) {
+			for (int i = 0; i < args.length; ++i) {
+				String target = "{" + i + "}";
+				format = format.replace(target, lenientToString(args[i]));
+			}
+		}
+
+		return format;
+	}
+
+	/**
+	 * 格式化字符串
+	 *
+	 * <pre>
+	 *     Strings.format("a %1$s %2$s %1$s", "1", "2") = a 1 2 1
+	 * </pre>
+	 * @param format 支持{@code %s}，或者 {@code %1$s}，{@code %2$s}来表示位置
+	 * @param args 参数
+	 * @return 格式化后的字符串
+	 * @throws MissingFormatArgumentException 当无法找到对应位置的参数时
+	 */
+	public static String format(String format, Object... args) {
+		if (isNullOrEmpty(format)) {
+			return "null";
+		}
+		return String.format(format, args);
+	}
+
 	/**
 	 * Capitalize a {@code String}, changing the first letter to upper case as per
 	 * {@link Character#toUpperCase(char)}. No other letters are changed.
@@ -456,7 +488,7 @@ public final class Strings {
 			String objectToString = o.getClass().getName() + '@' + Integer.toHexString(System.identityHashCode(o));
 			// Logger is created inline with fixed name to avoid forcing Proguard to
 			// create another class.
-			Logger.getLogger("com.google.common.base.Strings").log(WARNING,
+			Logger.getLogger("com.google.common.base.Strings").log(Level.WARNING,
 					"Exception during lenientFormat for " + objectToString, e);
 			return "<" + objectToString + " threw " + e.getClass().getName() + ">";
 		}

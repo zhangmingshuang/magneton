@@ -37,6 +37,10 @@ public interface Oss<Sts extends StsRes> {
 	 */
 	String getDomain(@Nullable String bucket);
 
+	default String getUrl(String fileName) {
+		return this.getUrl(fileName, null);
+	}
+
 	default String getUrl(String fileName, @Nullable String bucket) {
 		String domain = this.getDomain(bucket);
 		if (fileName.charAt(0) == '/') {
