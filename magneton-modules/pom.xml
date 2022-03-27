@@ -21,8 +21,9 @@
         <module>magneton-module-sms</module>
         <module>magneton-module-statistics</module>
         <module>magneton-module-safedog</module>
-		<module>magneton-module-oss</module>
-	</modules>
+        <module>magneton-module-oss</module>
+        <module>magneton-module-pay</module>
+    </modules>
 
 
 </project>

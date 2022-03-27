@@ -1,6 +1,8 @@
 package org.magneton.spring.starter;
 
+import java.util.Locale;
 import org.magneton.adaptive.redis.RedissonAdapter;
+import org.magneton.adaptive.redis.RedissonClientType;
 import org.redisson.api.RedissonClient;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -28,7 +30,9 @@ public class MagnetonAutoConfiguration {
 	@ConditionalOnMissingBean(RedissonClient.class)
 	@Bean
 	public RedissonClient redissonClient() {
-		return RedissonAdapter.createSingleServerClient();
+		String redissonClientType = System.getProperty("redisson.adapter.client.type",
+				RedissonClientType.SINGLE.name());
+		return RedissonAdapter.createClient(RedissonClientType.valueOf(redissonClientType.toUpperCase(Locale.ROOT)));
 	}
 
 }
