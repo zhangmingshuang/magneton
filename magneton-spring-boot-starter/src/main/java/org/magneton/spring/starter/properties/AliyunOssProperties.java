@@ -1,6 +1,7 @@
 package org.magneton.spring.starter.properties;
 
-import org.magneton.module.oss.aliyun.AliyunOssProperty;
+import org.magneton.module.oss.aliyun.AliyunOssConfig;
+
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
@@ -8,7 +9,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @since 1.0.0
  */
 @ConfigurationProperties(prefix = AliyunOssProperties.PREFIX)
-public class AliyunOssProperties extends AliyunOssProperty {
+public class AliyunOssProperties extends AliyunOssConfig {
 
 	public static final String PREFIX = "magneton.module.oss.aliyun";
 
