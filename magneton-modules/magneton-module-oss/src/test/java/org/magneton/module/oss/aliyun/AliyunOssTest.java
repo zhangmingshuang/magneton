@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -28,7 +29,7 @@ class AliyunOssTest {
 
 	@Test
 	void sts() {
-		AliyunOssProperty property = new AliyunOssProperty();
+		AliyunOssConfig property = new AliyunOssConfig();
 		AliyunOss aliyunOss = new MockAliyunOss(property);
 		AliyunStsRes test = aliyunOss.sts("lookersci");
 		Assertions.assertNotNull(test);
@@ -37,7 +38,7 @@ class AliyunOssTest {
 
 	@Test
 	void putObject() {
-		AliyunOssProperty property = new AliyunOssProperty();
+		AliyunOssConfig property = new AliyunOssConfig();
 		property.setDefaultBucket("defaultBucket");
 		AliyunOss aliyunOss = new MockAliyunOss(property);
 		AliyunStsRes sts = aliyunOss.sts(null);

@@ -6,7 +6,7 @@ import org.magneton.module.distributed.lock.DistributedLock;
 import org.magneton.module.distributed.lock.redis.RedissonDistributedLock;
 import org.magneton.module.oss.Oss;
 import org.magneton.module.oss.aliyun.AliyunOss;
-import org.magneton.module.oss.aliyun.AliyunOssProperty;
+import org.magneton.module.oss.aliyun.AliyunOssConfig;
 import org.magneton.module.safedog.SignSafeDog;
 import org.magneton.module.safedog.impl.RedissonSignSafeDog;
 import org.magneton.module.sms.Sms;
@@ -19,6 +19,7 @@ import org.magneton.module.statistics.redis.RedissonStatistics;
 import org.magneton.spring.starter.properties.AliyunOssProperties;
 import org.magneton.spring.starter.properties.SmsProperties;
 import org.redisson.api.RedissonClient;
+
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -85,7 +86,7 @@ public class ModuleAutoConfiguration {
 	// =============== oss ===========
 	@ConditionalOnProperty(prefix = AliyunOssProperties.PREFIX, name = AliyunOssProperties.CONDITION_KEY)
 	@Bean
-	@ConditionalOnClass(AliyunOssProperty.class)
+	@ConditionalOnClass(AliyunOssConfig.class)
 	public AliyunOssProperties aliyunOssProperties() {
 		return new AliyunOssProperties();
 	}

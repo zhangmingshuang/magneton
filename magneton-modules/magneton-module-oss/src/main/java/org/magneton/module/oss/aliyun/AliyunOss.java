@@ -1,5 +1,13 @@
 package org.magneton.module.oss.aliyun;
 
+import java.io.File;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
+import java.util.Map;
+
+import javax.annotation.Nullable;
+
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClientBuilder;
 import com.aliyun.oss.model.PutObjectRequest;
@@ -11,12 +19,6 @@ import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.http.MethodType;
 import com.aliyuncs.profile.DefaultProfile;
 import com.aliyuncs.profile.IClientProfile;
-import java.io.File;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
-import java.time.format.DateTimeFormatter;
-import java.util.Map;
-import javax.annotation.Nullable;
 import lombok.extern.slf4j.Slf4j;
 import org.magneton.core.base.Preconditions;
 import org.magneton.core.base.Strings;
@@ -36,25 +38,25 @@ public class AliyunOss implements StsOss<AliyunStsRes> {
 
 	private static final AliyunStsRes NIL_STS_RES = new AliyunStsRes();
 
-	private final AliyunOssProperty aliyunOssProperty;
+	private final AliyunOssConfig aliyunOssConfig;
 
 	private DefaultAcsClient defaultAcsClient;
 
 	private Map<String, AliyunStsRes> stsCache = Maps.newConcurrentMap();
 
-	public AliyunOss(AliyunOssProperty aliyunOssProperty) {
-		this.aliyunOssProperty = aliyunOssProperty;
+	public AliyunOss(AliyunOssConfig aliyunOssConfig) {
+		this.aliyunOssConfig = aliyunOssConfig;
 	}
 
 	protected DefaultAcsClient getClient() {
 		if (this.defaultAcsClient == null) {
 			synchronized (AliyunOss.class) {
 				if (this.defaultAcsClient == null) {
-					String endpoint = this.aliyunOssProperty.getEndpoint();
+					String endpoint = this.aliyunOssConfig.getEndpoint();
 					DefaultProfile.addEndpoint("", "Sts", endpoint);
 					// 构造default profile。
-					IClientProfile profile = DefaultProfile.getProfile("", this.aliyunOssProperty.getAccessKey(),
-							this.aliyunOssProperty.getAccessKeySecret());
+					IClientProfile profile = DefaultProfile.getProfile("", this.aliyunOssConfig.getAccessKey(),
+							this.aliyunOssConfig.getAccessKeySecret());
 					// 构造client。
 					this.defaultAcsClient = new DefaultAcsClient(profile);
 				}
@@ -103,7 +105,7 @@ public class AliyunOss implements StsOss<AliyunStsRes> {
 	@Override
 	public String getDomain(@Nullable String bucket) {
 		bucket = this.getBucket(bucket);
-		String endpoint = this.aliyunOssProperty.getEndpoint();
+		String endpoint = this.aliyunOssConfig.getEndpoint();
 		return "https://" + bucket + "." + endpoint;
 	}
 
@@ -121,9 +123,9 @@ public class AliyunOss implements StsOss<AliyunStsRes> {
 		bucket = this.getBucket(bucket);
 		AssumeRoleRequest request = new AssumeRoleRequest();
 		request.setSysMethod(MethodType.POST);
-		request.setRoleArn(this.aliyunOssProperty.getRoleArn());
-		request.setRoleSessionName(this.aliyunOssProperty.getRoleSessionName());
-		request.setSysRegionId(this.aliyunOssProperty.getRegionId());
+		request.setRoleArn(this.aliyunOssConfig.getRoleArn());
+		request.setRoleSessionName(this.aliyunOssConfig.getRoleSessionName());
+		request.setSysRegionId(this.aliyunOssConfig.getRegionId());
 		//@formatter:off
 		String policy = "{\n" +
 			"    \"Version\": \"1\", \n" +
@@ -141,7 +143,7 @@ public class AliyunOss implements StsOss<AliyunStsRes> {
 			"}";
 		//@formatter:on
 		request.setPolicy(policy); // 如果policy为空，则用户将获得该角色下所有权限。
-		request.setDurationSeconds(this.aliyunOssProperty.getStsDurationSeconds()); // 设置临时访问凭证的有效时间为3600秒。
+		request.setDurationSeconds(this.aliyunOssConfig.getStsDurationSeconds()); // 设置临时访问凭证的有效时间为3600秒。
 		try {
 			AssumeRoleResponse response = this.doAssumeRequest(request);
 			Credentials credentials = response.getCredentials();
@@ -151,7 +153,7 @@ public class AliyunOss implements StsOss<AliyunStsRes> {
 			res.setAccessKeySecret(credentials.getAccessKeySecret());
 			res.setSecurityToken(credentials.getSecurityToken());
 			res.setBucket(bucket);
-			res.setEndpoint(this.aliyunOssProperty.getEndpoint());
+			res.setEndpoint(this.aliyunOssConfig.getEndpoint());
 			LocalDateTime parse = LocalDateTime.parse(credentials.getExpiration(), DateTimeFormatter.ISO_DATE_TIME);
 			long expireTime = parse.toInstant(ZoneOffset.UTC).toEpochMilli();
 			res.setExpireTime(expireTime);
@@ -165,7 +167,7 @@ public class AliyunOss implements StsOss<AliyunStsRes> {
 
 	protected String getBucket(@Nullable String bucket) {
 		if (Strings.isNullOrEmpty(bucket)) {
-			bucket = this.aliyunOssProperty.getDefaultBucket();
+			bucket = this.aliyunOssConfig.getDefaultBucket();
 		}
 		Verify.verify(!Strings.isNullOrEmpty(bucket), "bucket must not be null");
 		return bucket;

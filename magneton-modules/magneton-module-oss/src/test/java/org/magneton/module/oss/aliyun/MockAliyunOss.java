@@ -1,11 +1,12 @@
 package org.magneton.module.oss.aliyun;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import com.aliyuncs.auth.sts.AssumeRoleRequest;
 import com.aliyuncs.auth.sts.AssumeRoleResponse;
 import com.aliyuncs.auth.sts.AssumeRoleResponse.Credentials;
 import com.aliyuncs.exceptions.ClientException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 /**
  * @author zhangmsh 2022/3/26
@@ -13,8 +14,8 @@ import java.time.format.DateTimeFormatter;
  */
 public class MockAliyunOss extends AliyunOss {
 
-	public MockAliyunOss(AliyunOssProperty aliyunOssProperty) {
-		super(aliyunOssProperty);
+	public MockAliyunOss(AliyunOssConfig aliyunOssConfig) {
+		super(aliyunOssConfig);
 	}
 
 	@Override

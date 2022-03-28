@@ -13,7 +13,7 @@ import lombok.ToString;
 @Setter
 @Getter
 @ToString
-public class AliyunOssProperty {
+public class AliyunOssConfig {
 
 	/**
 	 * AccessKey
