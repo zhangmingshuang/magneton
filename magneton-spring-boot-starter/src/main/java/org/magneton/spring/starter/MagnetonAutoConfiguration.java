@@ -3,9 +3,11 @@ package org.magneton.spring.starter;
 import java.util.Locale;
 import org.magneton.adaptive.redis.RedissonAdapter;
 import org.magneton.adaptive.redis.RedissonClientType;
+import org.magneton.spring.starter.properties.MagnetonProperties;
 import org.redisson.api.RedissonClient;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -19,6 +21,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @ComponentScan
+@EnableConfigurationProperties(MagnetonProperties.class)
 public class MagnetonAutoConfiguration {
 
 	// @Bean
