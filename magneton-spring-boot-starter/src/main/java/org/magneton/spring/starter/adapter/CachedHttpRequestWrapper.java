@@ -1,15 +1,19 @@
 package org.magneton.spring.starter.adapter;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.util.Collections;
+import java.util.Enumeration;
 import javax.servlet.ReadListener;
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
+import org.magneton.core.collect.Lists;
 import org.magneton.core.io.ByteStreams;
 
 /**
@@ -24,14 +28,41 @@ public class CachedHttpRequestWrapper extends HttpServletRequestWrapper {
 
 	private final ObjectMapper objectMapper = new ObjectMapper();
 
+	private JsonNode requestBodyNode = null;
+
 	public CachedHttpRequestWrapper(HttpServletRequest request) {
 		super(request);
 		try {
 			this.requestBody = ByteStreams.toByteArray(request.getInputStream());
+			this.requestBodyNode = this.objectMapper.readTree(this.requestBody);
 		}
 		catch (IOException e) {
 			this.requestBody = EMPTY_REQUEST_BODY;
 		}
+	}
+
+	@Override
+	public String getParameter(String name) {
+		if (this.hasBody()) {
+			return this.requestBodyNode.get(name).asText();
+		}
+		return super.getParameter(name);
+	}
+
+	@Override
+	public Enumeration<String> getParameterNames() {
+		if (this.hasBody()) {
+			return Collections.enumeration(Lists.newArrayList(this.requestBodyNode.fieldNames()));
+		}
+		return super.getParameterNames();
+	}
+
+	public byte[] getRequestBody() {
+		return this.requestBody;
+	}
+
+	private boolean hasBody() {
+		return this.requestBodyNode != null && this.requestBody != null && this.requestBody.length > 0;
 	}
 
 	@Override
