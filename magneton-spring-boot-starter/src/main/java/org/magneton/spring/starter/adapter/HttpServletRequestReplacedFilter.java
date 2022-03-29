@@ -11,8 +11,10 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import org.magneton.spring.starter.properties.MagnetonProperties;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.stereotype.Component;
 
 @WebFilter(urlPatterns = "/*", filterName = "requestReplaced")
+@Component
 @ConditionalOnProperty(prefix = MagnetonProperties.PREFIX, name = "cached-http-request-wrapper", havingValue = "true")
 public class HttpServletRequestReplacedFilter implements Filter {
 
