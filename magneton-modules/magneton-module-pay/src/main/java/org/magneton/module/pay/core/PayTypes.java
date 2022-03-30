@@ -1,9 +1,7 @@
 package org.magneton.module.pay.core;
 
 import java.util.Locale;
-
 import javax.annotation.Nullable;
-
 import org.magneton.module.pay.wechat.WechatTradeType;
 
 /**
