@@ -7,6 +7,8 @@ import org.magneton.module.distributed.lock.redis.RedissonDistributedLock;
 import org.magneton.module.oss.Oss;
 import org.magneton.module.oss.aliyun.AliyunOss;
 import org.magneton.module.oss.aliyun.AliyunOssConfig;
+import org.magneton.module.pay.wechat.WechatPay;
+import org.magneton.module.pay.wechat.WechatV3Pay;
 import org.magneton.module.safedog.SignSafeDog;
 import org.magneton.module.safedog.impl.RedissonSignSafeDog;
 import org.magneton.module.sms.Sms;
@@ -17,6 +19,7 @@ import org.magneton.module.sms.redis.RedissonSms;
 import org.magneton.module.statistics.Statistics;
 import org.magneton.module.statistics.redis.RedissonStatistics;
 import org.magneton.spring.starter.properties.AliyunOssProperties;
+import org.magneton.spring.starter.properties.PayProperties;
 import org.magneton.spring.starter.properties.SmsProperties;
 import org.redisson.api.RedissonClient;
 
@@ -98,5 +101,13 @@ public class ModuleAutoConfiguration {
 		return new AliyunOss(aliyunOssProperties);
 	}
 	// =============== oss =========== end
+
+	// =========== pay wechat ===========
+	@ConditionalOnProperty(prefix = PayProperties.WECHAT_CONDITION_KEY, name = PayProperties.WECHAT_CONDITION_KEY)
+	@Bean
+	public WechatPay wechatPay(PayProperties payProperties) {
+		return new WechatV3Pay(payProperties.getWechat());
+	}
+	// =========== pay wechat =========== end
 
 }
