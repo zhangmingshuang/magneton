@@ -20,19 +20,24 @@ import com.wechat.pay.contrib.apache.httpclient.util.PemUtil;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.magneton.core.Consequences;
 import org.magneton.core.base.Preconditions;
 import org.magneton.core.base.Strings;
-import org.magneton.module.pay.Pay;
-import org.magneton.module.pay.PreOrderReq;
-import org.magneton.module.pay.PreOrderRes;
-import org.magneton.module.pay.PrivateKeyNotFoundException;
-import org.magneton.module.pay.wechat.entity.WechatPreOrderReq;
-import org.magneton.module.pay.wechat.entity.WechatPreOrderRes;
+import org.magneton.module.pay.exception.AmountException;
+import org.magneton.module.pay.exception.PrivateKeyNotFoundException;
+import org.magneton.module.pay.wechat.api._WechatApiPayQueryRes;
+import org.magneton.module.pay.wechat.api._WechatApiPreOrderReq;
+import org.magneton.module.pay.wechat.api._WechatApiPreOrderRes;
+import org.magneton.module.pay.wechat.pojo.WechatOrderQueryReq;
+import org.magneton.module.pay.wechat.pojo.WechatOrderQueryRes;
+import org.magneton.module.pay.wechat.pojo.WechatPreOrderReq;
+import org.magneton.module.pay.wechat.pojo.WechatPreOrderRes;
 
 /**
  * 微信支付.
@@ -43,7 +48,7 @@ import org.magneton.module.pay.wechat.entity.WechatPreOrderRes;
  * @since 2.0.7
  */
 @Slf4j
-public class WechatV3Pay implements Pay<WechatV3Pay> {
+public class WechatV3Pay implements WechatPay {
 
 	private final ObjectMapper objectMapper = new ObjectMapper();
 
@@ -102,32 +107,63 @@ public class WechatV3Pay implements Pay<WechatV3Pay> {
 	}
 
 	@Override
-	public WechatV3Pay actualPay() {
-		return this;
+	public Consequences<WechatPreOrderRes> preOrder(WechatPreOrderReq req) {
+		Preconditions.checkNotNull(req);
+		String outTradeNo = Preconditions.checkNotNull(req.getOutTradeNo());
+		String description = Preconditions.checkNotNull(req.getDescription());
+		int amount = req.getAmount();
+		if (amount < 1) {
+			throw new AmountException(Strings.lenientFormat("amount %s less then 1", amount));
+		}
+		_WechatApiPreOrderReq wechatApiPreOrderReq = new _WechatApiPreOrderReq()
+				.setMchid(this.wechatPayConfig.getMerchantId()).setAppid(this.wechatPayConfig.getAppId())
+				.setNotify_url(this.wechatPayConfig.getNotifyUrl()).setOut_trade_no(outTradeNo)
+				.setDescription(description).setAmount(new _WechatApiPreOrderReq.Amount().setTotal(amount));
+		return this.preOrder(wechatApiPreOrderReq);
 	}
 
-	// 详见：https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_2_1.shtml
-	public Consequences<PreOrderRes> preOrder(WechatPreOrderReq wechatPreOrderReq) {
-		Preconditions.checkNotNull(wechatPreOrderReq);
-
-		HttpPost httpPost = this.newHttpPost(WechatV3Url.PRE_ORDER, wechatPreOrderReq);
-		// 预支付交易会话标识 prepay_id string[1,64] 预支付交易会话标识。用于后续接口调用中使用，该值有效期为2小时
-		// 示例值：wx201410272009395522657a690389285100
-		Consequences<WechatPreOrderRes> res = this.doRequest(httpPost, WechatPreOrderRes.class);
+	@Override
+	public Consequences<WechatOrderQueryRes> queryOrder(WechatOrderQueryReq req) {
+		// 商户订单号 string[6,32] 是 path 商户系统内部订单号，只能是数字、大小写字母_-*且在同一个商户号下唯一。 特殊规则：最小字符长度为6
+		String outTradeNo = Preconditions.checkNotNull(req.getOutTradeNo());
+		/**
+		 * 服务商户号 sp_mchid string[1,32] 是 query 服务商户号，由微信支付生成并下发 示例值：1230000109 子商户号
+		 * sub_mchid string[1,32] 是 query 子商户的商户号，由微信支付生成并下发。 示例值：1900000109
+		 **/
+		String params = Strings.lenientFormat("sp_mchid=%s&sub_mchid=%s", Preconditions.checkNotNull(req.getSpMchId()),
+				Preconditions.checkNotNull(req.getSubMchId()));
+		String url = Strings.lenientFormat(WechatV3Url.QUERY_ORDER_OUT_TRADE_NO, outTradeNo);
+		HttpGet httpGet = this.newHttpGet(url, params);
+		Consequences<_WechatApiPayQueryRes> res = this.doRequest(httpGet, _WechatApiPayQueryRes.class);
 		if (!res.isSuccess()) {
 			return Consequences.failMessageOnly(res.getMessage());
 		}
-		WechatPreOrderRes wechatPreOrderRes = res.getData();
-		return Consequences
-				.success(new PreOrderRes().setPrepayId(Preconditions.checkNotNull(wechatPreOrderRes).getPrepay_id()));
+
+		return null;
 	}
 
-	private <T> Consequences<T> doRequest(HttpPost httpPost, Class<T> type) {
-		Preconditions.checkNotNull(httpPost);
+	// 详见：https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_2_1.shtml
+	public Consequences<WechatPreOrderRes> preOrder(_WechatApiPreOrderReq wechatApiPreOrderReq) {
+		Preconditions.checkNotNull(wechatApiPreOrderReq);
+
+		HttpPost httpPost = this.newHttpPost(WechatV3Url.PRE_ORDER, wechatApiPreOrderReq);
+		// 预支付交易会话标识 prepay_id string[1,64] 预支付交易会话标识。用于后续接口调用中使用，该值有效期为2小时
+		// 示例值：wx201410272009395522657a690389285100
+		Consequences<_WechatApiPreOrderRes> res = this.doRequest(httpPost, _WechatApiPreOrderRes.class);
+		if (!res.isSuccess()) {
+			return Consequences.failMessageOnly(res.getMessage());
+		}
+		_WechatApiPreOrderRes wechatApiPreOrderRes = res.getData();
+		return Consequences.success(
+				new WechatPreOrderRes().setPrepayId(Preconditions.checkNotNull(wechatApiPreOrderRes).getPrepay_id()));
+	}
+
+	private <T> Consequences<T> doRequest(HttpUriRequest httpRequest, Class<T> type) {
+		Preconditions.checkNotNull(httpRequest);
 		Preconditions.checkNotNull(type);
 
 		// 完成签名并执行请求
-		try (CloseableHttpResponse response = this.httpClient.execute(httpPost)) {
+		try (CloseableHttpResponse response = this.httpClient.execute(httpRequest)) {
 			int statusCode = response.getStatusLine().getStatusCode();
 			if (statusCode == 200) { // 处理成功
 				byte[] responseBytes = EntityUtils.toByteArray(response.getEntity());
@@ -142,7 +178,7 @@ public class WechatV3Pay implements Pay<WechatV3Pay> {
 			}
 		}
 		catch (IOException e) {
-			log.error(Strings.lenientFormat("request %s error", httpPost), e);
+			log.error(Strings.lenientFormat("request %s error", httpRequest), e);
 		}
 		return Consequences.fail();
 	}
@@ -158,15 +194,9 @@ public class WechatV3Pay implements Pay<WechatV3Pay> {
 		return httpPost;
 	}
 
-	@Override
-	public Consequences<PreOrderRes> preOrder(PreOrderReq req) {
-		Preconditions.checkNotNull(req);
-		WechatPreOrderReq wechatPreOrderReq = new WechatPreOrderReq().setMchid(this.wechatPayConfig.getMerchantId())
-				.setAppid(this.wechatPayConfig.getAppId()).setNotify_url(this.wechatPayConfig.getNotifyUrl())
-				.setOut_trade_no(req.getOutTradeNo()).setDescription(req.getDescription());
-
-		wechatPreOrderReq.setAmount(new WechatPreOrderReq.Amount().setTotal(req.getAmount()));
-		return this.preOrder(wechatPreOrderReq);
+	@SneakyThrows
+	private HttpGet newHttpGet(String url, String param) {
+		return new HttpGet(url + "?" + param);
 	}
 
 }

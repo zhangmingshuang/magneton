@@ -1,4 +1,4 @@
-package org.magneton.module.pay.wechat.entity;
+package org.magneton.module.pay.wechat.api;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -13,7 +13,7 @@ import lombok.ToString;
 @Setter
 @Getter
 @ToString
-public class WechatPreOrderRes {
+public class _WechatApiPreOrderRes {
 
 	/**
 	 * 预支付交易会话标识。用于后续接口调用中使用，该值有效期为2小时

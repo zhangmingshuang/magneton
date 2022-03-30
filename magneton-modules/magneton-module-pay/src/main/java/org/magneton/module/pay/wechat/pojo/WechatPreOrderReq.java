@@ -1,4 +1,4 @@
-package org.magneton.module.pay;
+package org.magneton.module.pay.wechat.pojo;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -13,7 +13,7 @@ import lombok.ToString;
 @Setter
 @Getter
 @ToString
-public class PreOrderReq {
+public class WechatPreOrderReq {
 
 	/**
 	 * 业务订单号
