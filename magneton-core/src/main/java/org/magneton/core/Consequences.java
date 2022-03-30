@@ -48,6 +48,10 @@ public class Consequences<T> {
 		return state(false, data, message);
 	}
 
+	public static <T> Consequences<T> failMessageOnly(String message) {
+		return state(false, null, message);
+	}
+
 	private static <T> Consequences<T> state(boolean state, @Nullable T data, String message) {
 		return new Consequences<>(state, data, Preconditions.checkNotNull(message));
 	}
