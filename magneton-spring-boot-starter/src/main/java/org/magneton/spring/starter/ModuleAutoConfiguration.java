@@ -19,8 +19,8 @@ import org.magneton.module.sms.redis.RedissonSms;
 import org.magneton.module.statistics.Statistics;
 import org.magneton.module.statistics.redis.RedissonStatistics;
 import org.magneton.spring.starter.properties.AliyunOssProperties;
-import org.magneton.spring.starter.properties.PayProperties;
 import org.magneton.spring.starter.properties.SmsProperties;
+import org.magneton.spring.starter.properties.WechatPayProperties;
 import org.redisson.api.RedissonClient;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -37,15 +37,15 @@ import org.springframework.context.annotation.Configuration;
 public class ModuleAutoConfiguration {
 
 	@Bean
-	@ConditionalOnClass(DistributedCache.class)
 	@ConditionalOnMissingBean
+	@ConditionalOnClass(DistributedCache.class)
 	public DistributedCache distributedCache(RedissonClient redissonClient) {
 		return new RedissonDistributedCache(redissonClient);
 	}
 
 	@Bean
-	@ConditionalOnClass(DistributedLock.class)
 	@ConditionalOnMissingBean
+	@ConditionalOnClass(DistributedLock.class)
 	public DistributedLock distributedLock(RedissonClient redissonClient) {
 		return new RedissonDistributedLock(redissonClient);
 	}
@@ -53,60 +53,71 @@ public class ModuleAutoConfiguration {
 	// ============== sms ===================
 
 	@Bean
+	@ConditionalOnMissingBean
 	@ConditionalOnClass(SmsProperty.class)
 	public SmsProperties smsProperties() {
 		return new SmsProperties();
 	}
 
 	@Bean
+	@ConditionalOnMissingBean
 	@ConditionalOnClass(AliyunSmsProperty.class)
 	public AliyunSmsProperty aliyunSmsProperty(SmsProperties smsProperties) {
 		return smsProperties.getAliyun();
 	}
 
 	@Bean
-	@ConditionalOnClass(Sms.class)
 	@ConditionalOnMissingBean
+	@ConditionalOnClass(Sms.class)
 	public Sms sms(RedissonClient redissonClient, SendProcessor sendProcessor, SmsProperties smsProperties) {
 		return new RedissonSms(redissonClient, sendProcessor, smsProperties);
 	}
 	// ============ sms ============== end
 
 	@Bean
-	@ConditionalOnClass(Statistics.class)
 	@ConditionalOnMissingBean
+	@ConditionalOnClass(Statistics.class)
 	public Statistics statistics(RedissonClient redissonClient) {
 		return new RedissonStatistics(redissonClient);
 	}
 
 	@Bean
-	@ConditionalOnClass(SignSafeDog.class)
 	@ConditionalOnMissingBean
+	@ConditionalOnClass(SignSafeDog.class)
 	public SignSafeDog signSafeDog(RedissonClient redissonClient) {
 		return new RedissonSignSafeDog(redissonClient);
 	}
 
 	// =============== oss ===========
-	@ConditionalOnProperty(prefix = AliyunOssProperties.PREFIX, name = AliyunOssProperties.CONDITION_KEY)
 	@Bean
 	@ConditionalOnClass(AliyunOssConfig.class)
+	@ConditionalOnProperty(prefix = AliyunOssProperties.PREFIX, name = AliyunOssProperties.CONDITION_KEY)
 	public AliyunOssProperties aliyunOssProperties() {
 		return new AliyunOssProperties();
 	}
 
-	@ConditionalOnProperty(prefix = AliyunOssProperties.PREFIX, name = AliyunOssProperties.CONDITION_KEY)
 	@Bean
 	@ConditionalOnClass(AliyunOss.class)
+	@ConditionalOnProperty(prefix = AliyunOssProperties.PREFIX, name = AliyunOssProperties.CONDITION_KEY)
 	public Oss oss(AliyunOssProperties aliyunOssProperties) {
 		return new AliyunOss(aliyunOssProperties);
 	}
 	// =============== oss =========== end
 
 	// =========== pay wechat ===========
-	@ConditionalOnProperty(prefix = PayProperties.WECHAT_CONDITION_KEY, name = PayProperties.WECHAT_CONDITION_KEY)
 	@Bean
-	public WechatPay wechatPay(PayProperties payProperties) {
-		return new WechatV3Pay(payProperties.getWechat());
+	@ConditionalOnMissingBean
+	@ConditionalOnProperty(prefix = WechatPayProperties.PREFIX, name = WechatPayProperties.CONDITION_KEY)
+	@ConditionalOnClass(WechatPay.class)
+	public WechatPayProperties wechatPayProperties() {
+		return new WechatPayProperties();
+	}
+
+	@Bean
+	@ConditionalOnClass(WechatPay.class)
+	@ConditionalOnProperty(prefix = WechatPayProperties.PREFIX, name = WechatPayProperties.CONDITION_KEY)
+	public WechatPay wechatPay(WechatPayProperties wechatPayProperties) {
+		return new WechatV3Pay(wechatPayProperties);
 	}
 	// =========== pay wechat =========== end
 
