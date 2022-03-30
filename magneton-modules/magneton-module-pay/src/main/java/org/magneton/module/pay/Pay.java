@@ -1,5 +1,8 @@
 package org.magneton.module.pay;
 
+import org.magneton.core.Consequences;
+import org.magneton.core.base.Preconditions;
+
 /**
  * .
  *
@@ -10,6 +13,10 @@ public interface Pay<T> {
 
 	T actualPay();
 
-	PreOrderRes preOrder(PreOrderReq req);
+	default boolean isType(Class<?> clazz) {
+		return this.getClass().isAssignableFrom(Preconditions.checkNotNull(clazz));
+	}
+
+	Consequences<PreOrderRes> preOrder(PreOrderReq req);
 
 }
