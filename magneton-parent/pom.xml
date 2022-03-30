@@ -80,6 +80,11 @@
             </dependency>
             <dependency>
                 <groupId>org.magneton</groupId>
+                <artifactId>magneton-module-pay</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.magneton</groupId>
                 <artifactId>magneton-module-sms</artifactId>
                 <version>${project.version}</version>
             </dependency>

@@ -1,9 +1,7 @@
 package org.magneton.module.pay.wechat.api;
 
 import java.util.List;
-
 import javax.annotation.Nullable;
-
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;

@@ -3,6 +3,7 @@ package org.magneton.module.pay.wechat.pojo;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.experimental.Accessors;
 
 /**
  * 预下单请求.
@@ -13,6 +14,7 @@ import lombok.ToString;
 @Setter
 @Getter
 @ToString
+@Accessors(chain = true)
 public class WechatPreOrderReq {
 
 	/**

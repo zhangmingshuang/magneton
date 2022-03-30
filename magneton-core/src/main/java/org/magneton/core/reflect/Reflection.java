@@ -14,6 +14,9 @@
 
 package org.magneton.core.reflect;
 
+import cn.hutool.core.util.ClassUtil;
+import java.lang.reflect.AccessibleObject;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;
@@ -21,15 +24,18 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.Proxy;
 import java.lang.reflect.UndeclaredThrowableException;
+import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-
+import java.util.Set;
 import javax.annotation.Nullable;
-
 import org.magneton.core.base.Preconditions;
 import org.magneton.core.collect.ConcurrentReferenceHashMap;
+import org.magneton.foundation.exception.UtilException;
 
 /**
  * Static utilities relating to Java reflection.
@@ -386,6 +392,174 @@ public final class Reflection {
 			throw (Error) ex;
 		}
 		throw new UndeclaredThrowableException(ex);
+	}
+
+	// --------------------------------------
+	/**
+	 * 实例化对象
+	 * @param <T> 对象类型
+	 * @param clazz 类名
+	 * @return 对象
+	 * @throws UtilException 包装各类异常
+	 */
+	@SuppressWarnings("unchecked")
+	public static <T> T newInstance(String clazz) throws UtilException {
+		try {
+			return (T) Class.forName(clazz).newInstance();
+		}
+		catch (Exception e) {
+			throw new UtilException(e, "Instance class [{}] error!", clazz);
+		}
+	}
+
+	/**
+	 * 实例化对象
+	 * @param <T> 对象类型
+	 * @param clazz 类
+	 * @param params 构造函数参数
+	 * @return 对象
+	 * @throws UtilException 包装各类异常
+	 */
+	public static <T> T newInstance(Class<T> clazz, Object... params) throws UtilException {
+		if (org.magneton.core.base.Arrays.isNullOrEmpty(params)) {
+			final Constructor<T> constructor = getConstructor(clazz);
+			try {
+				return constructor.newInstance();
+			}
+			catch (Exception e) {
+				throw new UtilException(e, "Instance class [{}] error!", clazz);
+			}
+		}
+
+		final Class<?>[] paramTypes = ClassUtil.getClasses(params);
+		final Constructor<T> constructor = getConstructor(clazz, paramTypes);
+		if (null == constructor) {
+			throw new UtilException("No Constructor matched for parameter types: [{}]", new Object[] { paramTypes });
+		}
+		try {
+			return constructor.newInstance(params);
+		}
+		catch (Exception e) {
+			throw new UtilException(e, "Instance class [{}] error!", clazz);
+		}
+	}
+
+	/**
+	 * 尝试遍历并调用此类的所有构造方法，直到构造成功并返回
+	 * <p>
+	 * 对于某些特殊的接口，按照其默认实现实例化，例如： <pre>
+	 *     Map       -》 HashMap
+	 *     Collction -》 ArrayList
+	 *     List      -》 ArrayList
+	 *     Set       -》 HashSet
+	 * </pre>
+	 * @param <T> 对象类型
+	 * @param beanClass 被构造的类
+	 * @return 构造后的对象
+	 */
+	@SuppressWarnings("unchecked")
+	public static <T> T newInstanceIfPossible(Class<T> beanClass) {
+		Preconditions.checkNotNull(beanClass);
+		// 某些特殊接口的实例化按照默认实现进行
+		if (beanClass.isAssignableFrom(AbstractMap.class)) {
+			beanClass = (Class<T>) HashMap.class;
+		}
+		else if (beanClass.isAssignableFrom(List.class)) {
+			beanClass = (Class<T>) ArrayList.class;
+		}
+		else if (beanClass.isAssignableFrom(Set.class)) {
+			beanClass = (Class<T>) HashSet.class;
+		}
+
+		try {
+			return newInstance(beanClass);
+		}
+		catch (Exception e) {
+			// ignore
+			// 默认构造不存在的情况下查找其它构造
+		}
+
+		final Constructor<T>[] constructors = getConstructors(beanClass);
+		Class<?>[] parameterTypes;
+		for (Constructor<T> constructor : constructors) {
+			parameterTypes = constructor.getParameterTypes();
+			if (0 == parameterTypes.length) {
+				continue;
+			}
+			setAccessible(constructor);
+			try {
+				return constructor.newInstance(ClassUtil.getDefaultValues(parameterTypes));
+			}
+			catch (Exception ignore) {
+				// 构造出错时继续尝试下一种构造方式
+			}
+		}
+		return null;
+	}
+	// ---------------------------------------------------------------------------------------------------------
+
+	/**
+	 * 查找类中的指定参数的构造方法，如果找到构造方法，会自动设置可访问为true
+	 * @param <T> 对象类型
+	 * @param clazz 类
+	 * @param parameterTypes 参数类型，只要任何一个参数是指定参数的父类或接口或相等即可，此参数可以不传
+	 * @return 构造方法，如果未找到返回null
+	 */
+	@SuppressWarnings("unchecked")
+	public static <T> Constructor<T> getConstructor(Class<T> clazz, Class<?>... parameterTypes) {
+		if (null == clazz) {
+			return null;
+		}
+
+		final Constructor<?>[] constructors = getConstructors(clazz);
+		Class<?>[] pts;
+		for (Constructor<?> constructor : constructors) {
+			pts = constructor.getParameterTypes();
+			if (ClassUtil.isAllAssignableFrom(pts, parameterTypes)) {
+				// 构造可访问
+				setAccessible(constructor);
+				return (Constructor<T>) constructor;
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * 获得一个类中所有构造列表
+	 * @param <T> 构造的对象类型
+	 * @param beanClass 类，非{@code null}
+	 * @return 字段列表
+	 * @throws SecurityException 安全检查异常
+	 */
+	@SuppressWarnings("unchecked")
+	public static <T> Constructor<T>[] getConstructors(Class<T> beanClass) throws SecurityException {
+		Preconditions.checkNotNull(beanClass);
+		return (Constructor<T>[]) getConstructorsDirectly(beanClass);
+	}
+
+	/**
+	 * 获得一个类中所有构造列表，直接反射获取，无缓存
+	 * @param beanClass 类
+	 * @return 字段列表
+	 * @throws SecurityException 安全检查异常
+	 */
+	public static Constructor<?>[] getConstructorsDirectly(Class<?> beanClass) throws SecurityException {
+		return beanClass.getDeclaredConstructors();
+	}
+
+	// ---------------------------------------------------------------------------------------------------------
+	/**
+	 * 设置方法为可访问（私有方法可以被外部调用）
+	 * @param <T> AccessibleObject的子类，比如Class、Method、Field等
+	 * @param accessibleObject 可设置访问权限的对象，比如Class、Method、Field等
+	 * @return 被设置可访问的对象
+	 * @since 4.6.8
+	 */
+	public static <T extends AccessibleObject> T setAccessible(T accessibleObject) {
+		if (null != accessibleObject && false == accessibleObject.isAccessible()) {
+			accessibleObject.setAccessible(true);
+		}
+		return accessibleObject;
 	}
 
 	private static Method[] getDeclaredMethods(Class<?> clazz, boolean defensive) {
