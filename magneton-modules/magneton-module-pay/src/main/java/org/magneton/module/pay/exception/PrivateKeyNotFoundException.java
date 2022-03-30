@@ -1,4 +1,4 @@
-package org.magneton.module.pay;
+package org.magneton.module.pay.exception;
 
 /**
  * .

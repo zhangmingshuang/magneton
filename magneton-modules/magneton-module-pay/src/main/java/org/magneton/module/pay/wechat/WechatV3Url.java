@@ -13,4 +13,6 @@ public interface WechatV3Url {
 	 */
 	String PRE_ORDER = "https://api.mch.weixin.qq.com/v3/pay/transactions/app";
 
+	String QUERY_ORDER_OUT_TRADE_NO = "https://api.mch.weixin.qq.com/v3/pay/partner/transactions/out-trade-no/%s";
+
 }

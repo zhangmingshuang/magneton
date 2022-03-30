@@ -1,4 +1,4 @@
-package org.magneton.module.pay;
+package org.magneton.module.pay.wechat.pojo;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -15,7 +15,7 @@ import lombok.experimental.Accessors;
 @Getter
 @ToString
 @Accessors(chain = true)
-public class PreOrderRes {
+public class WechatPreOrderRes {
 
 	/**
 	 * 预支付交易会话标识
