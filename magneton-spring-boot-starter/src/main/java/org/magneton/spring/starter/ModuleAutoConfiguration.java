@@ -4,6 +4,8 @@ import org.magneton.module.distributed.cache.DistributedCache;
 import org.magneton.module.distributed.cache.redis.RedissonDistributedCache;
 import org.magneton.module.distributed.lock.DistributedLock;
 import org.magneton.module.distributed.lock.redis.RedissonDistributedLock;
+import org.magneton.module.geo.Geo;
+import org.magneton.module.geo.redis.RedissonGeo;
 import org.magneton.module.oss.Oss;
 import org.magneton.module.oss.aliyun.AliyunOss;
 import org.magneton.module.oss.aliyun.AliyunOssConfig;
@@ -22,7 +24,6 @@ import org.magneton.spring.starter.properties.AliyunOssProperties;
 import org.magneton.spring.starter.properties.SmsProperties;
 import org.magneton.spring.starter.properties.WechatPayProperties;
 import org.redisson.api.RedissonClient;
-
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -72,7 +73,16 @@ public class ModuleAutoConfiguration {
 	public Sms sms(RedissonClient redissonClient, SendProcessor sendProcessor, SmsProperties smsProperties) {
 		return new RedissonSms(redissonClient, sendProcessor, smsProperties);
 	}
+
 	// ============ sms ============== end
+	// ============ geo =============
+	@Bean
+	@ConditionalOnMissingBean
+	@ConditionalOnClass(Geo.class)
+	public Geo geo(RedissonClient redissonClient) {
+		return new RedissonGeo(redissonClient);
+	}
+	// ============ geo ============= end
 
 	@Bean
 	@ConditionalOnMissingBean
