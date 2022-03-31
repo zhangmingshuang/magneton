@@ -67,7 +67,6 @@ public class CachedHttpRequestWrapper extends HttpServletRequestWrapper {
 
 	@Override
 	public ServletInputStream getInputStream() throws IOException {
-		System.out.println("------------------get input stream -------------");
 		ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(this.requestBody);
 		// noinspection OverlyComplexAnonymousInnerClass
 		return new ServletInputStream() {
