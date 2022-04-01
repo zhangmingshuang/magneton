@@ -11,4 +11,16 @@
 
     <artifactId>magneton-module-core</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.magneton</groupId>
+            <artifactId>magneton-adaptive-redis</artifactId>
+            <version>${project.version}</version>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+    </dependencies>
 </project>
