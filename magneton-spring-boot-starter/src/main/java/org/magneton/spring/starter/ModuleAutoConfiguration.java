@@ -1,5 +1,7 @@
 package org.magneton.spring.starter;
 
+import org.magneton.module.auth.wechat.WechatAuth;
+import org.magneton.module.auth.wechat.WechatAuthImpl;
 import org.magneton.module.distributed.cache.DistributedCache;
 import org.magneton.module.distributed.cache.redis.RedissonDistributedCache;
 import org.magneton.module.distributed.lock.DistributedLock;
@@ -130,5 +132,13 @@ public class ModuleAutoConfiguration {
 		return new WechatV3Pay(wechatPayProperties);
 	}
 	// =========== pay wechat =========== end
+
+	// ============ auth ==================
+	@Bean
+	@ConditionalOnClass(WechatAuth.class)
+	public WechatAuth wechatAuth() {
+		return new WechatAuthImpl();
+	}
+	// ============ auth ================== end
 
 }
