@@ -1,7 +1,6 @@
 package org.magneton.core;
 
 import javax.annotation.Nullable;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,6 +26,10 @@ public class Consequences<T> {
 	private T data;
 
 	private String message;
+
+	public Consequences coverage() {
+		return this;
+	}
 
 	public static <T> Consequences<T> success(T data) {
 		return state(true, data, "success");

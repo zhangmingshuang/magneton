@@ -19,4 +19,11 @@ public interface WechatAuth {
 	 */
 	Consequences<WechatUserInfo> getUserInfo(String accessToken, String openid);
 
+	/**
+	 * 使用用户授权的Code获取用户信息
+	 * @param codeReq 用户授权的Code
+	 * @return 微信用户信息
+	 */
+	Consequences<WechatUserInfo> getUserInfoByCode(WechatUserInfoCodeReq codeReq);
+
 }
