@@ -23,6 +23,8 @@
 		<module>magneton-module-safedog</module>
 		<module>magneton-module-oss</module>
 		<module>magneton-module-pay</module>
+		<module>magneton-module-core</module>
+		<module>magneton-module-wechat</module>
 	</modules>
 
 

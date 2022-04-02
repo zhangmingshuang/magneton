@@ -1,4 +1,4 @@
-package org.magneton.module.auth.wechat;
+package org.magneton.module.wechat.auth;
 
 import cn.hutool.http.HttpUtil;
 import com.fasterxml.jackson.databind.JsonNode;

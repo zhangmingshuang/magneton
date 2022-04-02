@@ -1,4 +1,4 @@
-package org.magneton.module.auth.wechat;
+package org.magneton.module.wechat.auth;
 
 import org.magneton.core.Consequences;
 
