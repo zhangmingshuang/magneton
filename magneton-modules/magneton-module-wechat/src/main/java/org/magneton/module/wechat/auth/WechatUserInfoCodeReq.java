@@ -1,6 +1,7 @@
-package org.magneton.module.auth.wechat;
+package org.magneton.module.wechat.auth;
 
 import javax.annotation.Nullable;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;

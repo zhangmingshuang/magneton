@@ -1,4 +1,4 @@
-package org.magneton.module.core.wechat;
+package org.magneton.module.wechat.core;
 
 import org.magneton.core.base.Preconditions;
 

@@ -19,8 +19,7 @@
 		<module>magneton-spring-boot-starter</module>
 		<module>magneton-adaptive</module>
 		<module>magneton-supports</module>
-        <module>magneton-modules/magneton-module-core</module>
-    </modules>
+	</modules>
 
 
 	<contributors>

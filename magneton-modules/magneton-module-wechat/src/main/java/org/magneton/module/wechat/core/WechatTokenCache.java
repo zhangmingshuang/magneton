@@ -1,4 +1,4 @@
-package org.magneton.module.core.wechat;
+package org.magneton.module.wechat.core;
 
 /**
  * @author zhangmsh 2022/4/1

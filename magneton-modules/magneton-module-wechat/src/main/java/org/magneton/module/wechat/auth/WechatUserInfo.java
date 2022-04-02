@@ -1,6 +1,7 @@
-package org.magneton.module.auth.wechat;
+package org.magneton.module.wechat.auth;
 
 import java.util.List;
+
 import javax.annotation.Nullable;
 
 /**
