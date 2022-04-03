@@ -1,8 +1,10 @@
-package org.magneton.module.wechat.auth;
+package org.magneton.module.wechat.entity;
 
 import java.util.List;
-
 import javax.annotation.Nullable;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  * 微信用户信息.
@@ -12,7 +14,10 @@ import javax.annotation.Nullable;
  * @author zhangmsh 2022/4/1
  * @since 1.0.0
  */
-public class WechatUserInfo {
+@Setter
+@Getter
+@ToString
+public class UserInfoRes {
 
 	/**
 	 * 用户统一标识。针对一个微信开放平台帐号下的应用，同一用户的 unionid 是唯一的。
