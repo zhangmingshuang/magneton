@@ -1,4 +1,4 @@
-package org.magneton.module.wechat.auth;
+package org.magneton.module.wechat;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -11,7 +11,7 @@ import lombok.ToString;
 @Setter
 @Getter
 @ToString
-public class WechatAutoConfig {
+public class WechatConfig {
 
 	/**
 	 * 应用唯一标识，在微信开放平台提交应用审核通过后获得
