@@ -1,5 +1,6 @@
-package org.magneton.module.pay.wechat.api;
+package org.magneton.module.pay.wechat.pojo;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 import javax.annotation.Nullable;
 import lombok.Getter;
@@ -18,41 +19,47 @@ import org.magneton.module.pay.wechat.WechatTradeType;
 @Setter
 @Getter
 @ToString
-public class _WechatApiPayQueryRes {
+public class WechatPayQueryOrderRes {
 
 	/**
 	 * 服务商应用ID string[1,32] 是 服务商申请的公众号或移动应用appid。 示例值：wx8888888888888888
 	 **/
-	private String sp_appid;
+	@JsonProperty("sp_appid")
+	private String spAppid;
 
 	/**
 	 * 服务商户号 string[1,32] 是 服务商户号，由微信支付生成并下发 示例值：1230000109
 	 **/
-	private String sp_mchid;
+	@JsonProperty("sp_mchid")
+	private String spMchid;
 
 	/**
 	 * 子商户应用ID string[1,32] 否 子商户申请的公众号或移动应用appid。 示例值：wxd678efh567hg6999
 	 **/
 	@Nullable
-	private String sub_appid;
+	@JsonProperty("sub_appid")
+	private String subAppid;
 
 	/**
 	 * 子商户号 string[1,32] 是 子商户的商户号，由微信支付生成并下发。 示例值：1900000109
 	 **/
-	private String sub_mchid;
+	@JsonProperty("sub_mchid")
+	private String subMchid;
 
 	/**
 	 * 商户订单号 string[6,32] 是 商户系统内部订单号，只能是数字、大小写字母_-*且在同一个商户号下唯一，详见【商户订单号】。
 	 *
 	 * 特殊规则：最小字符长度为6 示例值：1217752501201407033233368018
 	 **/
-	private String out_trade_no;
+	@JsonProperty("out_trade_no")
+	private String outTradeNo;
 
 	/**
 	 * 微信支付订单号 string[1,32] 否 微信支付系统生成的订单号。 示例值：1217752501201407033233368018
 	 **/
 	@Nullable
-	private String transaction_id;
+	@JsonProperty("transaction_id")
+	private String transactionId;
 
 	/**
 	 * 交易类型 string[1,16] 否 交易类型，
@@ -62,7 +69,8 @@ public class _WechatApiPayQueryRes {
 	 * @see WechatTradeType
 	 **/
 	@Nullable
-	private String trade_type;
+	@JsonProperty("trade_type")
+	private String tradeType;
 
 	/**
 	 * 交易状态 string[1,32] 是 交易状态，
@@ -72,18 +80,21 @@ public class _WechatApiPayQueryRes {
 	 *
 	 * 示例值：SUCCESS
 	 **/
-	private String trade_state;
+	@JsonProperty("trade_state")
+	private String tradeState;
 
 	/**
 	 * 交易状态描述 string[1,256] 是 交易状态描述 示例值：支付成功
 	 **/
-	private String trade_state_desc;
+	@JsonProperty("trade_state_desc")
+	private String tradeStateDesc;
 
 	/**
 	 * 付款银行 string[1,32] 否 银行类型，采用字符串类型的银行标识。 银行标识请参考《银行类型对照表》 示例值：CMC
 	 **/
 	@Nullable
-	private String bank_type;
+	@JsonProperty("bank_type")
+	private String bankType;
 
 	/**
 	 * 附加数据 string[1,128] 否 附加数据，在查询API和支付通知中原样返回，可作为自定义参数使用，实际情况下只有支付完成状态才会返回该字段。
@@ -105,7 +116,8 @@ public class _WechatApiPayQueryRes {
 	 * 示例值：2018-06-08T10:34:56+08:00
 	 **/
 	@Nullable
-	private String success_time;
+	@JsonProperty("success_time")
+	private String successTime;
 
 	/** 支付者 object 是 支付者信息 **/
 	private Player payer;
@@ -120,13 +132,15 @@ public class _WechatApiPayQueryRes {
 	 * -场景信息 object 否 支付场景描述
 	 */
 	@Nullable
-	private SceneInfo scene_info;
+	@JsonProperty("scene_info")
+	private SceneInfo sceneInfo;
 
 	/**
 	 * 优惠功能 array 否 优惠功能，享受优惠时返回该字段。
 	 */
 	@Nullable
-	private List<PromotionDetail> promotion_detail;
+	@JsonProperty("promotion_detail")
+	private List<PromotionDetail> promotionDetail;
 
 	// 优惠功能
 	@Setter
@@ -137,7 +151,8 @@ public class _WechatApiPayQueryRes {
 		/**
 		 * 券ID string[1,32] 是 券ID 示例值：109519
 		 **/
-		private String coupon_id;
+		@JsonProperty("coupon_id")
+		private String couponId;
 
 		/**
 		 * 优惠名称 string[1,64] 否 优惠名称 示例值：单品惠-6
@@ -166,22 +181,26 @@ public class _WechatApiPayQueryRes {
 		 * 活动ID string[1,32] 否 活动ID 示例值：931386
 		 **/
 		@Nullable
-		private String stock_id;
+		@JsonProperty("stock_id")
+		private String stockId;
 
 		/**
 		 * 微信出资 int 否 微信出资，单位为分 示例值：0
 		 **/
-		private int wechatpay_contribute;
+		@JsonProperty("wechatpay_contribute")
+		private int wechatpayContribute;
 
 		/**
 		 * 商户出资 int 否 商户出资，单位为分 示例值：0
 		 **/
-		private int merchant_contribute;
+		@JsonProperty("merchant_contribute")
+		private int merchantContribute;
 
 		/**
 		 * 其他出资 int 否 其他出资，单位为分 示例值：0
 		 **/
-		private int other_contribute;
+		@JsonProperty("other_contribute")
+		private int otherContribute;
 
 		/**
 		 * 优惠币种 string[1,16] 否 CNY：人民币，境内商户号仅支持人民币。 示例值：CNY
@@ -193,7 +212,8 @@ public class _WechatApiPayQueryRes {
 		 * -单品列表 array 否 单品列表信息
 		 */
 		@Nullable
-		private List<GoodsDetail> goods_detail;
+		@JsonProperty("goods_detail")
+		private List<GoodsDetail> goodsDetail;
 
 	}
 
@@ -206,7 +226,8 @@ public class _WechatApiPayQueryRes {
 		/**
 		 * 商品编码 string[1,32] 是 商品编码 示例值：M1006
 		 **/
-		private String goods_id;
+		@JsonProperty("goods_id")
+		private String goodsId;
 
 		/**
 		 * 商品数量 int 是 用户购买的数量 示例值：1
@@ -216,18 +237,21 @@ public class _WechatApiPayQueryRes {
 		/**
 		 * 商品单价 int 是 商品单价，单位为分 示例值：100
 		 **/
-		private int unit_price;
+		@JsonProperty("unit_price")
+		private int unitPrice;
 
 		/**
 		 * 商品优惠金额 int 是 商品优惠金额 示例值：0
 		 **/
-		private int discount_amount;
+		@JsonProperty("discount_amount")
+		private int discountAmount;
 
 		/**
 		 * 商品备注 string[1,128] 否 商品备注信息 示例值：商品备注信息
 		 **/
 		@Nullable
-		private String goods_remark;
+		@JsonProperty("goods_remark")
+		private String goodsRemark;
 
 	}
 
@@ -240,7 +264,8 @@ public class _WechatApiPayQueryRes {
 		/**
 		 * 商户端设备号 string[1,32] 否 商户端设备号（发起扣款请求的商户服务器设备号）。 示例值：013467007045764
 		 */
-		private String device_id;
+		@JsonProperty("device_id")
+		private String deviceId;
 
 	}
 
@@ -258,7 +283,8 @@ public class _WechatApiPayQueryRes {
 		/**
 		 * 用户支付金额 int 否 用户支付金额，单位为分。（指使用优惠券的情况下，这里等于总金额-优惠券金额） 示例值：100
 		 **/
-		private int payer_total;
+		@JsonProperty("payer_total")
+		private int payerTotal;
 
 		/**
 		 * 货币类型 string[1,16] 否 CNY：人民币，境内商户号仅支持人民币。 示例值：CNY
@@ -268,7 +294,8 @@ public class _WechatApiPayQueryRes {
 		/**
 		 * 用户支付币种 string[1,16] 否 用户支付币种 示例值：CNY
 		 **/
-		private String payer_currency;
+		@JsonProperty("payer_currency")
+		private String payerCurrency;
 
 	}
 
@@ -281,14 +308,16 @@ public class _WechatApiPayQueryRes {
 		/**
 		 * 用户服务标识 string[1,128] 是 用户在服务商appid下的唯一标识。 示例值：oUpF8uMuAJO_M2pxb1Q9zNjWeS6o
 		 **/
-		private String sp_openid;
+		@JsonProperty("sp_openid")
+		private String spOpenid;
 
 		/**
 		 * 用户子标识 string[1,128] 否 用户在子商户appid下的唯一标识。如果返回sub_appid，那么sub_openid一定会返回
 		 * 示例值：oUpF8uMuAJO_M2pxb1Q9zNjWeS6o
 		 **/
 		@Nullable
-		private String sub_openid;
+		@JsonProperty("sub_openid")
+		private String subOpenid;
 
 	}
 

@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicInteger;
+import lombok.extern.slf4j.Slf4j;
 import org.magneton.core.base.Preconditions;
 import org.magneton.core.base.Strings;
 import org.magneton.core.collect.Lists;
@@ -15,7 +17,10 @@ import org.magneton.module.safedog.SignSafeDog;
  * @author zhangmsh 2022/3/20
  * @since 1.0.0
  */
+@Slf4j
 public abstract class AbstractSignSafeDog implements SignSafeDog {
+
+	private static boolean debug = Boolean.parseBoolean(System.getProperty("module.safedog.sign", "false"));
 
 	@Override
 	public String sign(Map<String, String> data, String salt) {
@@ -44,6 +49,9 @@ public abstract class AbstractSignSafeDog implements SignSafeDog {
 		if (!Strings.isNullOrEmpty(salt)) {
 			embeddingStr += salt;
 		}
+		if (debug) {
+			log.error("sign str: {}", embeddingStr);
+		}
 		return Hashing.sha256().hashString(embeddingStr, StandardCharsets.UTF_8).toString();
 	}
 
@@ -53,6 +61,12 @@ public abstract class AbstractSignSafeDog implements SignSafeDog {
 		}
 		List<String> keys = Lists.newArrayList(keySet);
 		Collections.sort(keys);
+		if (debug) {
+			AtomicInteger i = new AtomicInteger(1);
+			for (String key : keys) {
+				log.info("sorted key : {}.{}", i.getAndIncrement(), key);
+			}
+		}
 		return keys;
 	}
 

@@ -1,10 +1,9 @@
 package org.magneton.module.pay.wechat.pojo;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import lombok.experimental.Accessors;
-import org.magneton.module.pay.wechat.api._WechatApiPreOrderRes;
 
 /**
  * .
@@ -15,14 +14,12 @@ import org.magneton.module.pay.wechat.api._WechatApiPreOrderRes;
 @Setter
 @Getter
 @ToString
-@Accessors(chain = true)
-public class WechatPreOrderRes {
-
-	private _WechatApiPreOrderRes target;
+public class WechatPayPreOrderRes {
 
 	/**
 	 * 预支付交易会话标识
 	 */
+	@JsonProperty("prepay_id")
 	private String prepayId;
 
 }

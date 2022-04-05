@@ -13,6 +13,7 @@ import javax.servlet.ReadListener;
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
+import org.magneton.core.base.Strings;
 import org.magneton.core.collect.Lists;
 import org.magneton.core.io.ByteStreams;
 
@@ -43,8 +44,9 @@ public class CachedHttpRequestWrapper extends HttpServletRequestWrapper {
 
 	@Override
 	public String getParameter(String name) {
-		if (this.hasBody()) {
-			return this.requestBodyNode.get(name).asText();
+		if (!Strings.isNullOrEmpty(name) && this.hasBody()) {
+			JsonNode jsonNode = this.requestBodyNode.get(name);
+			return jsonNode == null ? null : jsonNode.asText();
 		}
 		return super.getParameter(name);
 	}

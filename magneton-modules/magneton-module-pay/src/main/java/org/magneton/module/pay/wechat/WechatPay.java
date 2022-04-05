@@ -1,11 +1,13 @@
 package org.magneton.module.pay.wechat;
 
+import java.util.Map;
 import org.magneton.core.Consequences;
 import org.magneton.module.pay.Pay;
-import org.magneton.module.pay.wechat.pojo.WechatOrderQueryReq;
-import org.magneton.module.pay.wechat.pojo.WechatOrderQueryRes;
-import org.magneton.module.pay.wechat.pojo.WechatPreOrderReq;
-import org.magneton.module.pay.wechat.pojo.WechatPreOrderRes;
+import org.magneton.module.pay.wechat.pojo.WechatPayCallbackRes;
+import org.magneton.module.pay.wechat.pojo.WechatPayPreOrderReq;
+import org.magneton.module.pay.wechat.pojo.WechatPayPreOrderRes;
+import org.magneton.module.pay.wechat.pojo.WechatPayQueryOrderReq;
+import org.magneton.module.pay.wechat.pojo.WechatPayQueryOrderRes;
 
 /**
  * 微信支付.
@@ -16,17 +18,25 @@ import org.magneton.module.pay.wechat.pojo.WechatPreOrderRes;
 public interface WechatPay extends Pay {
 
 	/**
-	 * 查询订单
-	 * @param outTradeNo 业务订单号
-	 * @return 订单数据
-	 */
-	Consequences<WechatOrderQueryRes> queryOrder(WechatOrderQueryReq req);
-
-	/**
 	 * 预下单
 	 * @param req 下单请求
 	 * @return 预下单结果
 	 */
-	Consequences<WechatPreOrderRes> preOrder(WechatPreOrderReq req);
+	Consequences<WechatPayPreOrderRes> preOrder(WechatPayPreOrderReq req);
+
+	/**
+	 * 查询订单
+	 * @param req 业务请求数据
+	 * @return 订单数据
+	 */
+	Consequences<WechatPayQueryOrderRes> queryOrder(WechatPayQueryOrderReq req);
+
+	/**
+	 * 回调处理数据校验并解析响应数据
+	 * @param httpHeaders 请求头
+	 * @param body 请求Body
+	 * @return 解析后的处理数据
+	 */
+	WechatPayCallbackRes callback(Map<String, String> httpHeaders, String body);
 
 }

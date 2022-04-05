@@ -1,8 +1,7 @@
 package org.magneton.module.wechat;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.magneton.module.wechat.platform.mobile.MobileApp;
-import org.magneton.module.wechat.platform.website.WebsiteApp;
 
 /**
  * @author zhangmsh 2022/4/3
@@ -14,11 +13,7 @@ class WechatBuilderTest {
 	void test() {
 		WechatConfig wechatConfig = new WechatConfig();
 		Wechat wechat = WechatBuilder.newBuilder(wechatConfig).build();
-
-		WebsiteApp website = wechat.website();
-
-		MobileApp mobile = wechat.mobile();
-
+		Assertions.assertNotNull(wechat);
 	}
 
 }
