@@ -21,14 +21,14 @@ public class AbstractApp implements App {
 	}
 
 	@Override
-	public Consequences<AccessTokenRes> requestAccessToken(String code) {
+	public Consequences<AccessTokenRes> requestAccessTokenByCode(String code) {
 		Preconditions.checkNotNull(code);
 		return this.wechatContext.getOAuth().accessToken(code);
 	}
 
 	@Nullable
 	@Override
-	public AccessTokenRes getAccessTokenFromCache(String openid) {
+	public AccessTokenRes getAccessTokenByOpenid(String openid) {
 		Preconditions.checkNotNull(openid);
 		return this.wechatContext.getOAuth().accessTokenFromCache(openid);
 	}

@@ -33,7 +33,7 @@ public class ExceptionHandler {
 			writer.print(JSON.toJSONString(Response.response(responseMessage)));
 		}
 		catch (IOException e) {
-			throw new ResponseException(e);
+			throw new ProcessException(e);
 		}
 	}
 

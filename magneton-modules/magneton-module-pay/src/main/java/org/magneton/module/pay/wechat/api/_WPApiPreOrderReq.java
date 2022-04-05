@@ -1,9 +1,7 @@
 package org.magneton.module.pay.wechat.api;
 
 import java.util.List;
-
 import javax.annotation.Nullable;
-
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -35,7 +33,7 @@ import lombok.experimental.Accessors;
 @Getter
 @ToString
 @Accessors(chain = true)
-public class _WechatApiPreOrderReq {
+public class _WPApiPreOrderReq {
 
 	/**
 	 * 应用ID string[1,32]

@@ -98,6 +98,11 @@
                 <artifactId>magneton-module-statistics</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.magneton</groupId>
+                <artifactId>magneton-module-wechat</artifactId>
+                <version>${project.version}</version>
+            </dependency>
             <!-- magneton-modules end-->
             <dependency>
                 <groupId>org.magneton</groupId>

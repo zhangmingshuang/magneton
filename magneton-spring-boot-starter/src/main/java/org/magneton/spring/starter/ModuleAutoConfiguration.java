@@ -1,7 +1,5 @@
 package org.magneton.spring.starter;
 
-import org.magneton.module.auth.wechat.WechatAuth;
-import org.magneton.module.auth.wechat.WechatAuthImpl;
 import org.magneton.module.distributed.cache.DistributedCache;
 import org.magneton.module.distributed.cache.redis.RedissonDistributedCache;
 import org.magneton.module.distributed.lock.DistributedLock;
@@ -12,7 +10,7 @@ import org.magneton.module.oss.Oss;
 import org.magneton.module.oss.aliyun.AliyunOss;
 import org.magneton.module.oss.aliyun.AliyunOssConfig;
 import org.magneton.module.pay.wechat.WechatPay;
-import org.magneton.module.pay.wechat.WechatV3Pay;
+import org.magneton.module.pay.wechat.WechatPayV3Impl;
 import org.magneton.module.safedog.SignSafeDog;
 import org.magneton.module.safedog.impl.RedissonSignSafeDog;
 import org.magneton.module.sms.Sms;
@@ -22,9 +20,14 @@ import org.magneton.module.sms.property.SmsProperty;
 import org.magneton.module.sms.redis.RedissonSms;
 import org.magneton.module.statistics.Statistics;
 import org.magneton.module.statistics.redis.RedissonStatistics;
+import org.magneton.module.wechat.Wechat;
+import org.magneton.module.wechat.WechatBuilder;
+import org.magneton.module.wechat.core.oauth2.AccessTokenCache;
+import org.magneton.spring.starter.extension.wechat.RedisAccessTokenCache;
 import org.magneton.spring.starter.properties.AliyunOssProperties;
 import org.magneton.spring.starter.properties.SmsProperties;
 import org.magneton.spring.starter.properties.WechatPayProperties;
+import org.magneton.spring.starter.properties.WechatProperties;
 import org.redisson.api.RedissonClient;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -36,6 +39,7 @@ import org.springframework.context.annotation.Configuration;
  * @author zhangmsh 2022/3/26
  * @since 1.0.0
  */
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
 @Configuration(proxyBeanMethods = false)
 public class ModuleAutoConfiguration {
 
@@ -129,16 +133,34 @@ public class ModuleAutoConfiguration {
 	@ConditionalOnClass(WechatPay.class)
 	@ConditionalOnProperty(prefix = WechatPayProperties.PREFIX, name = WechatPayProperties.CONDITION_KEY)
 	public WechatPay wechatPay(WechatPayProperties wechatPayProperties) {
-		return new WechatV3Pay(wechatPayProperties);
+		return new WechatPayV3Impl(wechatPayProperties);
 	}
 	// =========== pay wechat =========== end
 
-	// ============ auth ==================
+	// ============== wechat =============
 	@Bean
-	@ConditionalOnClass(WechatAuth.class)
-	public WechatAuth wechatAuth() {
-		return new WechatAuthImpl();
+	@ConditionalOnMissingBean
+	@ConditionalOnProperty(prefix = WechatProperties.PREFIX, name = WechatProperties.CONDITION_KEY)
+	@ConditionalOnClass(Wechat.class)
+	public WechatProperties wechatProperties() {
+		return new WechatProperties();
 	}
-	// ============ auth ================== end
+
+	@Bean
+	@ConditionalOnMissingBean
+	@ConditionalOnProperty(prefix = WechatProperties.PREFIX, name = WechatProperties.CONDITION_KEY)
+	@ConditionalOnClass(Wechat.class)
+	public AccessTokenCache accessTokenCache(RedissonClient redissonClient) {
+		return new RedisAccessTokenCache(redissonClient);
+	}
+
+	@Bean
+	@ConditionalOnMissingBean
+	@ConditionalOnProperty(prefix = WechatProperties.PREFIX, name = WechatProperties.CONDITION_KEY)
+	@ConditionalOnClass(Wechat.class)
+	public Wechat wechat(WechatProperties wechatProperties, AccessTokenCache accessTokenCache) {
+		return WechatBuilder.newBuilder(wechatProperties).accessTokenCache(accessTokenCache).build();
+	}
+	// ============== wechat ============= end
 
 }

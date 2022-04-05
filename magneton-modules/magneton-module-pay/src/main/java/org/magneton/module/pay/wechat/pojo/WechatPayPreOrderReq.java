@@ -15,7 +15,7 @@ import lombok.experimental.Accessors;
 @Getter
 @ToString
 @Accessors(chain = true)
-public class WechatPreOrderReq {
+public class WechatPayPreOrderReq {
 
 	/**
 	 * 业务订单号

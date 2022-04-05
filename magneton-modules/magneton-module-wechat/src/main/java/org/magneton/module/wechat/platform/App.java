@@ -19,14 +19,14 @@ public interface App {
 	 * @param code Code
 	 * @return AccessToken
 	 */
-	Consequences<AccessTokenRes> requestAccessToken(String code);
+	Consequences<AccessTokenRes> requestAccessTokenByCode(String code);
 
 	/**
 	 * @param openid 用户的Openid
 	 * @return AccessToken. 如果缓存已经失效或者不存在，则返回{@code null}
 	 */
 	@Nullable
-	AccessTokenRes getAccessTokenFromCache(String openid);
+	AccessTokenRes getAccessTokenByOpenid(String openid);
 
 	/**
 	 * 获取用户的信息
