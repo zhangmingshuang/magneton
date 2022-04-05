@@ -1,4 +1,4 @@
-package org.magneton.module.pay.wechat;
+package org.magneton.module.pay.wechat.v3.core;
 
 import org.magneton.core.base.Objects;
 import org.magneton.module.pay.core.TradeType;
@@ -9,7 +9,7 @@ import org.magneton.module.pay.core.TradeType;
  * @author zhangmsh 30/03/2022
  * @since 2.0.7
  */
-public enum WechatTradeType implements TradeType {
+public enum WechatPayTradeType implements TradeType {
 
 	JSAPI(0, "公众号支付"),
 
@@ -27,7 +27,7 @@ public enum WechatTradeType implements TradeType {
 
 	private final String description;
 
-	WechatTradeType(int code, String description) {
+	WechatPayTradeType(int code, String description) {
 		this.code = code;
 		this.description = description;
 	}

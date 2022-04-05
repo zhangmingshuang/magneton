@@ -1,4 +1,6 @@
-package org.magneton.spring.starter.exception;
+package org.magneton.foundation.exception;
+
+import org.magneton.core.base.Strings;
 
 /**
  * 处理异常
@@ -12,6 +14,10 @@ public class ProcessException extends RuntimeException {
 
 	public ProcessException(Throwable cause) {
 		super(cause);
+	}
+
+	public ProcessException(String message, Object... args) {
+		super(Strings.lenientFormat(message, args));
 	}
 
 }

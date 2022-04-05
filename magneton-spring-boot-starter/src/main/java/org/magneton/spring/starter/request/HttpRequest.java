@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.magneton.core.base.Preconditions;
 import org.magneton.core.base.Strings;
 import org.magneton.core.collect.Maps;
-import org.magneton.spring.starter.exception.ProcessException;
+import org.magneton.foundation.exception.ProcessException;
 
 /**
  * @author zhangmsh 2022/4/5
