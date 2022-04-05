@@ -1,4 +1,4 @@
-package org.magneton.module.pay.wechat.pojo;
+package org.magneton.module.pay.wechat.v3.entity;
 
 import lombok.Getter;
 import lombok.Setter;

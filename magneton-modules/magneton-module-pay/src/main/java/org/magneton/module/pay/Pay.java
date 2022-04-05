@@ -1,5 +1,7 @@
 package org.magneton.module.pay;
 
+import cn.hutool.core.util.IdUtil;
+
 /**
  * .
  *
@@ -7,5 +9,9 @@ package org.magneton.module.pay;
  * @since 2.0.7
  */
 public interface Pay {
+
+	default String outTradeNo() {
+		return IdUtil.objectId();
+	}
 
 }

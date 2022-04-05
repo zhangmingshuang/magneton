@@ -1,4 +1,4 @@
-package org.magneton.module.pay.wechat;
+package org.magneton.module.pay.wechat.v3.core;
 
 /**
  * 微信支付狀態 .

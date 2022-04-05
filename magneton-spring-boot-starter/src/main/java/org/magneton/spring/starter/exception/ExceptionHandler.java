@@ -9,6 +9,7 @@ import org.magneton.core.Response;
 import org.magneton.core.ResponseMessage;
 import org.magneton.core.base.Preconditions;
 import org.magneton.core.net.MediaType;
+import org.magneton.foundation.exception.ProcessException;
 
 /**
  * @author zhangmsh 2022/3/26

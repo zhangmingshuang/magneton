@@ -2,7 +2,7 @@ package org.magneton.module.pay.core;
 
 import java.util.Locale;
 import javax.annotation.Nullable;
-import org.magneton.module.pay.wechat.WechatTradeType;
+import org.magneton.module.pay.wechat.v3.core.WechatPayTradeType;
 
 /**
  * .
@@ -12,7 +12,7 @@ import org.magneton.module.pay.wechat.WechatTradeType;
  */
 public enum PayTypes {
 
-	WECHAT(0, WechatTradeType.values());
+	WECHAT(0, WechatPayTradeType.values());
 
 	private final int code;
 

@@ -3,7 +3,7 @@ package org.magneton.module.pay.wechat.entity;
 import cn.hutool.json.JSONUtil;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.magneton.module.pay.wechat.api._WPApiPreOrderReq;
+import org.magneton.module.pay.wechat.v3.entity.WechatV3PayPreOrderReq;
 
 /**
  * .
@@ -11,15 +11,15 @@ import org.magneton.module.pay.wechat.api._WPApiPreOrderReq;
  * @author zhangmsh 28/03/2022
  * @since 2.0.7
  */
-class WechatApiWechatPayPreOrderReqTest {
+class WechatApiWechatV3PrepayPreOrderReqTest {
 
 	@Test
 	void test() {
 		String str = "a";
-		_WPApiPreOrderReq wechatApiPreOrderReq = new _WPApiPreOrderReq().setMchid(str).setAppid(str).setNotify_url(str)
-				.setOut_trade_no(str).setDescription(str);
+		WechatV3PayPreOrderReq wechatApiPreOrderReq = new WechatV3PayPreOrderReq().setMchid(str).setAppid(str)
+				.setNotify_url(str).setOut_trade_no(str).setDescription(str);
 
-		wechatApiPreOrderReq.setAmount(new _WPApiPreOrderReq.Amount().setTotal(1));
+		wechatApiPreOrderReq.setAmount(new WechatV3PayPreOrderReq.Amount().setTotal(1));
 
 		String s = JSONUtil.toJsonStr(wechatApiPreOrderReq);
 		Assertions.assertEquals(

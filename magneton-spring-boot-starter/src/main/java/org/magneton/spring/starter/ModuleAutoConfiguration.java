@@ -9,8 +9,8 @@ import org.magneton.module.geo.redis.RedissonGeo;
 import org.magneton.module.oss.Oss;
 import org.magneton.module.oss.aliyun.AliyunOss;
 import org.magneton.module.oss.aliyun.AliyunOssConfig;
-import org.magneton.module.pay.wechat.WechatPay;
-import org.magneton.module.pay.wechat.WechatPayV3Impl;
+import org.magneton.module.pay.wechat.v3.WechatV3Pay;
+import org.magneton.module.pay.wechat.v3.WechatV3PayImpl;
 import org.magneton.module.safedog.SignSafeDog;
 import org.magneton.module.safedog.impl.RedissonSignSafeDog;
 import org.magneton.module.sms.Sms;
@@ -124,16 +124,16 @@ public class ModuleAutoConfiguration {
 	@Bean
 	@ConditionalOnMissingBean
 	@ConditionalOnProperty(prefix = WechatPayProperties.PREFIX, name = WechatPayProperties.CONDITION_KEY)
-	@ConditionalOnClass(WechatPay.class)
+	@ConditionalOnClass(WechatV3Pay.class)
 	public WechatPayProperties wechatPayProperties() {
 		return new WechatPayProperties();
 	}
 
 	@Bean
-	@ConditionalOnClass(WechatPay.class)
+	@ConditionalOnClass(WechatV3Pay.class)
 	@ConditionalOnProperty(prefix = WechatPayProperties.PREFIX, name = WechatPayProperties.CONDITION_KEY)
-	public WechatPay wechatPay(WechatPayProperties wechatPayProperties) {
-		return new WechatPayV3Impl(wechatPayProperties);
+	public WechatV3Pay wechatPay(WechatPayProperties wechatPayProperties) {
+		return new WechatV3PayImpl(wechatPayProperties);
 	}
 	// =========== pay wechat =========== end
 

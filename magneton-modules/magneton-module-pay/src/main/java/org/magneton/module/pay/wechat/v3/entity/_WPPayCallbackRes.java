@@ -1,4 +1,4 @@
-package org.magneton.module.pay.wechat.pojo;
+package org.magneton.module.pay.wechat.v3.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.annotation.Nullable;
@@ -17,7 +17,7 @@ import lombok.ToString;
 @Setter
 @Getter
 @ToString
-public class WechatPayCallbackRes {
+public class _WPPayCallbackRes {
 
 	/**
 	 * 通知ID string[1,36] 是 通知的唯一ID 示例值：EV-2018022511223320873

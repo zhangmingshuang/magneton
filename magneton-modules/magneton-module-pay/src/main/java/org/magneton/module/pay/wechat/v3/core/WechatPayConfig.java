@@ -1,4 +1,4 @@
-package org.magneton.module.pay.wechat;
+package org.magneton.module.pay.wechat.v3.core;
 
 import lombok.Getter;
 import lombok.Setter;
