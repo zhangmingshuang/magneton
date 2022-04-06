@@ -15,7 +15,7 @@ import lombok.experimental.Accessors;
 @Getter
 @ToString
 @Accessors(chain = true)
-public class WechatPayQueryOrderReq {
+public class WechatV3PayOrderReq {
 
 	private String reqId;
 

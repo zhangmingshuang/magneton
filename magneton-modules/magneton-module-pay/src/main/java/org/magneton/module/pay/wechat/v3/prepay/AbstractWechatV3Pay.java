@@ -17,7 +17,6 @@ import org.magneton.core.Consequences;
 import org.magneton.core.base.Preconditions;
 import org.magneton.core.base.Strings;
 import org.magneton.foundation.exception.ProcessException;
-import org.magneton.module.pay.wechat.v3.core.WechatPayConfig;
 import org.magneton.module.pay.wechat.v3.core.WechatV3PayContext;
 import org.magneton.module.pay.wechat.v3.entity.WechatV3PayPreOrderReq;
 import org.magneton.module.pay.wechat.v3.entity.WechatV3PayPreOrderRes;
@@ -37,6 +36,7 @@ public class AbstractWechatV3Pay implements WechatBaseV3Pay {
 		this.payContext = payContext;
 	}
 
+	@Override
 	public WechatV3PayContext getPayContext() {
 		return this.payContext;
 	}
@@ -56,11 +56,6 @@ public class AbstractWechatV3Pay implements WechatBaseV3Pay {
 		}
 		WechatV3PayPreOrderRes wechatApiPreOrderRes = res.getData();
 		return Consequences.success(wechatApiPreOrderRes);
-	}
-
-	@Override
-	public WechatPayConfig getPayConfig() {
-		return this.getPayContext().getPayConfig();
 	}
 
 	@Override

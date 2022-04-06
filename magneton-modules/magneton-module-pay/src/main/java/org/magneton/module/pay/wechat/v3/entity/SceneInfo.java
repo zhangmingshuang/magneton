@@ -32,6 +32,6 @@ public class SceneInfo {
 	 */
 	@Nullable
 	@JsonProperty("store_info")
-	private WechatV3PayPreOrderReq.StoreInfo storeInfo;
+	private StoreInfo storeInfo;
 
 }

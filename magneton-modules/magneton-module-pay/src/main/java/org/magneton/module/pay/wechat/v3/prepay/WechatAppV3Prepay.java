@@ -1,7 +1,7 @@
 package org.magneton.module.pay.wechat.v3.prepay;
 
 import org.magneton.core.Consequences;
-import org.magneton.module.pay.wechat.v3.entity.WechatAppV3PayRes;
+import org.magneton.module.pay.wechat.v3.entity.WechatAppV3PreOrder;
 import org.magneton.module.pay.wechat.v3.entity.WechatV3PayPreOrderReq;
 
 /**
@@ -19,6 +19,6 @@ public interface WechatAppV3Prepay extends V3Prepay {
 	 * @param req 下单请求
 	 * @return 下单结果
 	 */
-	Consequences<WechatAppV3PayRes> preOrder(WechatV3PayPreOrderReq req);
+	Consequences<WechatAppV3PreOrder> preOrder(WechatV3PayPreOrderReq req);
 
 }

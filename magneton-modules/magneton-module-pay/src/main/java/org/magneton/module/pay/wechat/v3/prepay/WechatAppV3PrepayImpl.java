@@ -5,7 +5,7 @@ import org.magneton.core.Consequences;
 import org.magneton.core.base.Preconditions;
 import org.magneton.core.base.Strings;
 import org.magneton.module.pay.exception.AmountException;
-import org.magneton.module.pay.wechat.v3.entity.WechatAppV3PayRes;
+import org.magneton.module.pay.wechat.v3.entity.WechatAppV3PreOrder;
 import org.magneton.module.pay.wechat.v3.entity.WechatV3PayPreOrderReq;
 import org.magneton.module.pay.wechat.v3.entity.WechatV3PayPreOrderRes;
 
@@ -15,14 +15,14 @@ import org.magneton.module.pay.wechat.v3.entity.WechatV3PayPreOrderRes;
  */
 public class WechatAppV3PrepayImpl implements WechatAppV3Prepay {
 
-	private final WechatBaseV3Pay wechatBaseV3Pay;
+	private final WechatBaseV3Pay basePay;
 
 	public WechatAppV3PrepayImpl(WechatBaseV3Pay wechatBaseV3Pay) {
-		this.wechatBaseV3Pay = wechatBaseV3Pay;
+		this.basePay = wechatBaseV3Pay;
 	}
 
 	@Override
-	public Consequences<WechatAppV3PayRes> preOrder(WechatV3PayPreOrderReq req) {
+	public Consequences<WechatAppV3PreOrder> preOrder(WechatV3PayPreOrderReq req) {
 		Preconditions.checkNotNull(req);
 		String outTradeNo = Preconditions.checkNotNull(req.getOutTradeNo());
 		String description = Preconditions.checkNotNull(req.getDescription());
@@ -30,14 +30,14 @@ public class WechatAppV3PrepayImpl implements WechatAppV3Prepay {
 		if (amount < 1) {
 			throw new AmountException(Strings.lenientFormat("amount %s less then 1", amount));
 		}
-		Consequences<WechatV3PayPreOrderRes> wechatV3PayPreOrderRes = this.wechatBaseV3Pay.doPreOrder(req);
+		Consequences<WechatV3PayPreOrderRes> wechatV3PayPreOrderRes = this.basePay.doPreOrder(req);
 		if (!wechatV3PayPreOrderRes.isSuccess()) {
 			return wechatV3PayPreOrderRes.coverage();
 		}
 		WechatV3PayPreOrderRes preOrder = Preconditions.checkNotNull(wechatV3PayPreOrderRes.getData());
-		WechatAppV3PayRes res = new WechatAppV3PayRes();
-		res.setAppId(this.wechatBaseV3Pay.getPayConfig().getAppId());
-		res.setPartnerId(this.wechatBaseV3Pay.getPayConfig().getMerchantId());
+		WechatAppV3PreOrder res = new WechatAppV3PreOrder();
+		res.setAppId(this.basePay.getPayContext().getPayConfig().getAppId());
+		res.setPartnerId(this.basePay.getPayContext().getPayConfig().getMerchantId());
 		res.setPrepayId(preOrder.getPrepayId());
 		res.setPackageValue("Sign=WXPay");
 		String nonce = RandomUtil.randomString(32);
@@ -45,7 +45,7 @@ public class WechatAppV3PrepayImpl implements WechatAppV3Prepay {
 		res.setTimeStamp(String.valueOf(System.currentTimeMillis() / 1000L));
 
 		String signStr = this.signStr(res);
-		String sign = this.wechatBaseV3Pay.doSign(signStr);
+		String sign = this.basePay.doSign(signStr);
 		res.setSign(sign);
 		return Consequences.success(res);
 	}
@@ -75,7 +75,7 @@ public class WechatAppV3PrepayImpl implements WechatAppV3Prepay {
 	 * @param res
 	 * @return 签名串
 	 */
-	private String signStr(WechatAppV3PayRes res) {
+	private String signStr(WechatAppV3PreOrder res) {
 		String appId = Preconditions.checkNotNull(res.getAppId());
 		String timeStamp = Preconditions.checkNotNull(res.getTimeStamp());
 		String nonceStr = Preconditions.checkNotNull(res.getNonceStr());
