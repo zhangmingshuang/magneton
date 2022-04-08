@@ -2,6 +2,7 @@ package org.magneton.module.pay.core;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+
 import org.magneton.core.base.Preconditions;
 
 /**
@@ -72,6 +73,11 @@ public class Amounts {
 			return this.fen;
 		}
 
+		@Override
+		public String toString() {
+			return "Fen{" + "fen=" + this.fen + '}';
+		}
+
 	}
 
 	// 角
@@ -99,17 +105,17 @@ public class Amounts {
 			return this.jiao;
 		}
 
-		@Override
-		public String toString() {
-			return "Jiao{" + "jiao=" + this.jiao + '}';
-		}
-
 		public Fen toFen() {
 			return new Fen(this.jiao.multiply(JIAO_FEN).longValue());
 		}
 
 		public Yuan toYuan() {
 			return Yuan.fromJiao(this.jiao);
+		}
+
+		@Override
+		public String toString() {
+			return "Jiao{" + "jiao=" + this.jiao + '}';
 		}
 
 	}
