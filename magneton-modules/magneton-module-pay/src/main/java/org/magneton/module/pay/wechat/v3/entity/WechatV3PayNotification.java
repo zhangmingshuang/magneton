@@ -3,11 +3,17 @@ package org.magneton.module.pay.wechat.v3.entity;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 import javax.annotation.Nullable;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  * @author zhangmsh 2022/4/5
  * @since 1.0.0
  */
+@Setter
+@Getter
+@ToString
 public class WechatV3PayNotification {
 
 	/**
