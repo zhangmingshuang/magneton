@@ -9,10 +9,10 @@ import org.magneton.module.geo.redis.RedissonGeo;
 import org.magneton.module.oss.Oss;
 import org.magneton.module.oss.aliyun.AliyunOss;
 import org.magneton.module.oss.aliyun.AliyunOssConfig;
-import org.magneton.module.pay.wechat.v3.WechatV3Pay;
-import org.magneton.module.pay.wechat.v3.WechatV3PayImpl;
+import org.magneton.module.pay.wechat.v3.WxV3Pay;
+import org.magneton.module.pay.wechat.v3.WxV3PayImpl;
 import org.magneton.module.safedog.SignSafeDog;
-import org.magneton.module.safedog.impl.RedissonSignSafeDog;
+import org.magneton.module.safedog.sign.RedissonSignSafeDog;
 import org.magneton.module.sms.Sms;
 import org.magneton.module.sms.process.SendProcessor;
 import org.magneton.module.sms.process.aliyun.AliyunSmsProperty;
@@ -26,9 +26,10 @@ import org.magneton.module.wechat.core.oauth2.AccessTokenCache;
 import org.magneton.spring.starter.extension.wechat.RedisAccessTokenCache;
 import org.magneton.spring.starter.properties.AliyunOssProperties;
 import org.magneton.spring.starter.properties.SmsProperties;
-import org.magneton.spring.starter.properties.WechatPayProperties;
 import org.magneton.spring.starter.properties.WechatProperties;
+import org.magneton.spring.starter.properties.WxPayProperties;
 import org.redisson.api.RedissonClient;
+
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -123,17 +124,17 @@ public class ModuleAutoConfiguration {
 	// =========== pay wechat ===========
 	@Bean
 	@ConditionalOnMissingBean
-	@ConditionalOnProperty(prefix = WechatPayProperties.PREFIX, name = WechatPayProperties.CONDITION_KEY)
-	@ConditionalOnClass(WechatV3Pay.class)
-	public WechatPayProperties wechatPayProperties() {
-		return new WechatPayProperties();
+	@ConditionalOnProperty(prefix = WxPayProperties.PREFIX, name = WxPayProperties.CONDITION_KEY)
+	@ConditionalOnClass(WxV3Pay.class)
+	public WxPayProperties wechatPayProperties() {
+		return new WxPayProperties();
 	}
 
 	@Bean
-	@ConditionalOnClass(WechatV3Pay.class)
-	@ConditionalOnProperty(prefix = WechatPayProperties.PREFIX, name = WechatPayProperties.CONDITION_KEY)
-	public WechatV3Pay wechatPay(WechatPayProperties wechatPayProperties) {
-		return new WechatV3PayImpl(wechatPayProperties);
+	@ConditionalOnClass(WxV3Pay.class)
+	@ConditionalOnProperty(prefix = WxPayProperties.PREFIX, name = WxPayProperties.CONDITION_KEY)
+	public WxV3Pay wechatPay(WxPayProperties wechatPayProperties) {
+		return new WxV3PayImpl(wechatPayProperties);
 	}
 	// =========== pay wechat =========== end
 

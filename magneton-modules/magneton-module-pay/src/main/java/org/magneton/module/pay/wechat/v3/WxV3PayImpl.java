@@ -1,12 +1,13 @@
 package org.magneton.module.pay.wechat.v3;
 
+import java.nio.charset.StandardCharsets;
+import java.security.Security;
+import java.util.Map;
+
 import com.wechat.pay.contrib.apache.httpclient.constant.WechatPayHttpHeaders;
 import com.wechat.pay.contrib.apache.httpclient.notification.Notification;
 import com.wechat.pay.contrib.apache.httpclient.notification.NotificationHandler;
 import com.wechat.pay.contrib.apache.httpclient.notification.NotificationRequest;
-import java.nio.charset.StandardCharsets;
-import java.security.Security;
-import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.client.methods.HttpGet;
 import org.magneton.core.Consequences;
@@ -16,15 +17,15 @@ import org.magneton.core.base.Preconditions;
 import org.magneton.core.base.Strings;
 import org.magneton.foundation.exception.ProcessException;
 import org.magneton.module.pay.exception.PaySerialException;
-import org.magneton.module.pay.wechat.v3.core.DefaultWechatV3PayContext;
-import org.magneton.module.pay.wechat.v3.core.WechatPayConfig;
-import org.magneton.module.pay.wechat.v3.core.WechatV3PayContext;
+import org.magneton.module.pay.wechat.v3.core.DefaultWxPayContext;
+import org.magneton.module.pay.wechat.v3.core.WxPayConfig;
+import org.magneton.module.pay.wechat.v3.core.WxPayContext;
 import org.magneton.module.pay.wechat.v3.entity.WechatV3PayNotification;
 import org.magneton.module.pay.wechat.v3.entity.WechatV3PayOrder;
-import org.magneton.module.pay.wechat.v3.entity.WechatV3PayOrderReq;
-import org.magneton.module.pay.wechat.v3.entity.WechatV3PayOrderReq.Type;
-import org.magneton.module.pay.wechat.v3.prepay.WechatAppV3Prepay;
-import org.magneton.module.pay.wechat.v3.prepay.WechatAppV3PrepayImpl;
+import org.magneton.module.pay.wechat.v3.entity.WechatV3PayOrderQuery;
+import org.magneton.module.pay.wechat.v3.entity.WechatV3PayOrderQuery.Type;
+import org.magneton.module.pay.wechat.v3.prepay.AppPrepay;
+import org.magneton.module.pay.wechat.v3.prepay.AppPrepayImpl;
 import org.magneton.module.pay.wechat.v3.prepay.WechatBaseV3Pay;
 import org.magneton.module.pay.wechat.v3.prepay.WechatBaseV3PayImpl;
 
@@ -37,7 +38,7 @@ import org.magneton.module.pay.wechat.v3.prepay.WechatBaseV3PayImpl;
  * @since 2.0.7
  */
 @Slf4j
-public class WechatV3PayImpl implements WechatV3Pay {
+public class WxV3PayImpl implements WxV3Pay {
 
 	static {
 		// 使用Java加载密钥时，抛出异常InvalidKeyException: Illegal key size
@@ -47,24 +48,24 @@ public class WechatV3PayImpl implements WechatV3Pay {
 
 	private WechatBaseV3Pay wechatBaseV3Pay;
 
-	private WechatAppV3Prepay wechatAppV3Pay;
+	private AppPrepay wechatAppV3Pay;
 
-	private WechatV3PayContext wechatV3PayContext;
+	private WxPayContext wxPayContext;
 
-	public WechatV3PayImpl(WechatPayConfig wechatPayConfig) {
-		this.wechatV3PayContext = new DefaultWechatV3PayContext(wechatPayConfig);
-		this.wechatBaseV3Pay = new WechatBaseV3PayImpl(this.wechatV3PayContext);
+	public WxV3PayImpl(WxPayConfig wxPayConfig) {
+		this.wxPayContext = new DefaultWxPayContext(wxPayConfig);
+		this.wechatBaseV3Pay = new WechatBaseV3PayImpl(this.wxPayContext);
 	}
 
 	@Override
-	public WechatAppV3Prepay appPrepay() {
+	public AppPrepay appPrepay() {
 		// noinspection DoubleCheckedLocking
 		if (this.wechatAppV3Pay == null) {
 			// noinspection SynchronizeOnThis
-			synchronized (WechatAppV3Prepay.class) {
+			synchronized (AppPrepay.class) {
 				if (this.wechatAppV3Pay == null) {
 					// noinspection UnnecessaryLocalVariable
-					WechatAppV3Prepay pay = new WechatAppV3PrepayImpl(this.wechatBaseV3Pay);
+					AppPrepay pay = new AppPrepayImpl(this.wechatBaseV3Pay);
 					this.wechatAppV3Pay = pay;
 				}
 			}
@@ -73,18 +74,18 @@ public class WechatV3PayImpl implements WechatV3Pay {
 	}
 
 	@Override
-	public Consequences<WechatV3PayOrder> queryOrder(WechatV3PayOrderReq req) {
-		Type reqIdType = req.getReqIdType();
+	public Consequences<WechatV3PayOrder> queryOrder(WechatV3PayOrderQuery query) {
+		Type reqIdType = query.getReqIdType();
 		String url;
 		switch (reqIdType) {
 		case OUT_TRADE_NO:
 			url = Strings.lenientFormat(
 					"https://api.mch.weixin.qq.com/v3/pay/partner/transactions/out-trade-no/%s?mchid=%s",
-					Preconditions.checkNotNull(req.getReqId()), this.wechatV3PayContext.getPayConfig().getMerchantId());
+					Preconditions.checkNotNull(query.getReqId()), this.wxPayContext.getPayConfig().getMerchantId());
 			break;
 		case TRANSACTION_ID:
 			url = Strings.lenientFormat("https://api.mch.weixin.qq.com/v3/pay/transactions/id/%s?mchid=%s",
-					Preconditions.checkNotNull(req.getReqId()), this.wechatV3PayContext.getPayConfig().getMerchantId());
+					Preconditions.checkNotNull(query.getReqId()), this.wxPayContext.getPayConfig().getMerchantId());
 			break;
 		default:
 			throw new ProcessException("unknown reqIdType %s", reqIdType);
@@ -122,7 +123,7 @@ public class WechatV3PayImpl implements WechatV3Pay {
 		Preconditions.checkArgument(Strings.isNullOrEmpty(reqWechatPaySignature), "request header %s miss",
 				WechatPayHttpHeaders.WECHAT_PAY_SIGNATURE);
 
-		WechatPayConfig payConfig = this.wechatV3PayContext.getPayConfig();
+		WxPayConfig payConfig = this.wxPayContext.getPayConfig();
 		// 证书序列号
 		String wechatPaySerial = payConfig.getMerchantSerialNumber();
 		if (!wechatPaySerial.equals(reqWechatPaySerial)) {
@@ -131,13 +132,13 @@ public class WechatV3PayImpl implements WechatV3Pay {
 		NotificationRequest request = new NotificationRequest.Builder().withSerialNumber(wechatPaySerial)
 				.withNonce(reqWechatPayNonce).withTimestamp(reqWechatPayTimestamp).withSignature(reqWechatPaySignature)
 				.withBody(body).build();
-		NotificationHandler handler = new NotificationHandler(this.wechatV3PayContext.getVerifier(),
+		NotificationHandler handler = new NotificationHandler(this.wxPayContext.getVerifier(),
 				payConfig.getApiV3Key().getBytes(StandardCharsets.UTF_8));
 		// 验签和解析请求体
 		try {
 			Notification notification = handler.parse(request);
 			String decryptData = notification.getDecryptData();
-			return this.wechatV3PayContext.getObjectMapper().readValue(decryptData, WechatV3PayNotification.class);
+			return this.wxPayContext.getObjectMapper().readValue(decryptData, WechatV3PayNotification.class);
 		}
 		catch (Exception e) {
 			throw new ResponseException(Response.bad().message(e.getMessage()));

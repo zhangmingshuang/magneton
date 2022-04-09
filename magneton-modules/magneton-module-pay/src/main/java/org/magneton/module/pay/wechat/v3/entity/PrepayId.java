@@ -14,7 +14,7 @@ import lombok.ToString;
 @Setter
 @Getter
 @ToString
-public class WechatV3PayPreOrderRes {
+public class PrepayId {
 
 	/**
 	 * 预支付交易会话标识

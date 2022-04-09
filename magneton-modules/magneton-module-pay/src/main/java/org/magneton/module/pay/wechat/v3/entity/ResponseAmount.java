@@ -12,7 +12,7 @@ import lombok.ToString;
 @Setter
 @Getter
 @ToString
-public class PayAmount {
+public class ResponseAmount {
 
 	/**
 	 * 总金额 total int 是 订单总金额，单位为分。 示例值：100

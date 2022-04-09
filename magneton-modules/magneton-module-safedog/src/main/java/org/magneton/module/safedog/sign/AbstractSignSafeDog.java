@@ -1,4 +1,4 @@
-package org.magneton.module.safedog.impl;
+package org.magneton.module.safedog.sign;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Collections;
@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
+
 import lombok.extern.slf4j.Slf4j;
 import org.magneton.core.base.Preconditions;
 import org.magneton.core.base.Strings;

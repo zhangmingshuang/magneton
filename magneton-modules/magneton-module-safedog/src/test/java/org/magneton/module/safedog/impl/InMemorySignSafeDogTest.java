@@ -1,9 +1,12 @@
 package org.magneton.module.safedog.impl;
 
 import java.util.Map;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.magneton.core.collect.Maps;
+import org.magneton.module.safedog.sign.AbstractSignSafeDog;
+import org.magneton.module.safedog.sign.InMemorySignSafeDog;
 
 /**
  * @author zhangmsh 2022/3/20

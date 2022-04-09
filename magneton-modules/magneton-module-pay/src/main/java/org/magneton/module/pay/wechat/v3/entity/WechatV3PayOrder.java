@@ -1,10 +1,13 @@
 package org.magneton.module.pay.wechat.v3.entity;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.annotation.Nullable;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.magneton.module.pay.wechat.v3.core.WxPayStatus;
+import org.magneton.module.pay.wechat.v3.core.WxPayTradeType;
 import org.magneton.module.pay.wechat.v3.prepay.BasePayIdData;
 
 /**
@@ -38,7 +41,7 @@ public class WechatV3PayOrder extends BasePayIdData {
 	/**
 	 * 交易类型 trade_type string[1,16] 否 交易类型，枚举值： JSAPI：公众号支付 NATIVE：扫码支付 APP：APP支付
 	 * MICROPAY：付款码支付 MWEB：H5支付 FACEPAY：刷脸支付 示例值：MICROPAY
-	 * @see org.magneton.module.pay.wechat.v3.core.WechatPayTradeType
+	 * @see WxPayTradeType
 	 **/
 	@JsonProperty("trade_type")
 	@Nullable
@@ -49,7 +52,7 @@ public class WechatV3PayOrder extends BasePayIdData {
 	 * CLOSED：已关闭 REVOKED：已撤销（仅付款码支付会返回） USERPAYING：用户支付中（仅付款码支付会返回）
 	 * PAYERROR：支付失败（仅付款码支付会返回） 示例值：SUCCESS
 	 *
-	 * @see org.magneton.module.pay.wechat.v3.core.WechatPayStatus
+	 * @see WxPayStatus
 	 **/
 	@JsonProperty("trade_state")
 	private String tradeState;
