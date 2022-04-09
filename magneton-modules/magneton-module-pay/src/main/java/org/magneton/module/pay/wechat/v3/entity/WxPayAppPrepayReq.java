@@ -1,7 +1,8 @@
 package org.magneton.module.pay.wechat.v3.entity;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.annotation.Nullable;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -34,7 +35,7 @@ import org.magneton.module.pay.wechat.v3.prepay.BasePayIdData;
 @Getter
 @ToString
 @Accessors(chain = true)
-public class WechatV3PayPreOrderReq extends BasePayIdData {
+public class WxPayAppPrepayReq extends BasePayIdData {
 
 	/**
 	 * 商品描述 string[1,127]

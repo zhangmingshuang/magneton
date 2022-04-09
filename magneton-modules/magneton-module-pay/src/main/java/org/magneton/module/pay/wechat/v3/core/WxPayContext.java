@@ -8,7 +8,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
  * @author zhangmsh 2022/4/5
  * @since 1.0.0
  */
-public interface WechatV3PayContext {
+public interface WxPayContext {
 
 	ObjectMapper getObjectMapper();
 
@@ -16,6 +16,6 @@ public interface WechatV3PayContext {
 
 	CloseableHttpClient getHttpClient();
 
-	WechatPayConfig getPayConfig();
+	WxPayConfig getPayConfig();
 
 }

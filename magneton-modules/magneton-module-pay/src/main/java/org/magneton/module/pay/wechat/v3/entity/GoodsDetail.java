@@ -1,7 +1,8 @@
 package org.magneton.module.pay.wechat.v3.entity;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.annotation.Nullable;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -42,6 +43,7 @@ public class GoodsDetail {
 	/**
 	 * 商品单价 ，单位为分 示例值：828800
 	 **/
-	private int unit_price;
+	@JsonProperty("unit_price")
+	private int unitPrice;
 
 }

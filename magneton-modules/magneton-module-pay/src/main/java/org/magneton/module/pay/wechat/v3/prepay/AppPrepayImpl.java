@@ -5,37 +5,39 @@ import org.magneton.core.Consequences;
 import org.magneton.core.base.Preconditions;
 import org.magneton.core.base.Strings;
 import org.magneton.module.pay.exception.AmountException;
-import org.magneton.module.pay.wechat.v3.entity.WechatAppV3PreOrder;
-import org.magneton.module.pay.wechat.v3.entity.WechatV3PayPreOrderReq;
-import org.magneton.module.pay.wechat.v3.entity.WechatV3PayPreOrderRes;
+import org.magneton.module.pay.wechat.v3.entity.PrepayId;
+import org.magneton.module.pay.wechat.v3.entity.WxPayAppPrepay;
+import org.magneton.module.pay.wechat.v3.entity.WxPayAppPrepayReq;
 
 /**
  * @author zhangmsh 2022/4/5
  * @since 1.0.0
  */
-public class WechatAppV3PrepayImpl implements WechatAppV3Prepay {
+public class AppPrepayImpl implements AppPrepay {
 
 	private final WechatBaseV3Pay basePay;
 
-	public WechatAppV3PrepayImpl(WechatBaseV3Pay wechatBaseV3Pay) {
+	public AppPrepayImpl(WechatBaseV3Pay wechatBaseV3Pay) {
 		this.basePay = wechatBaseV3Pay;
 	}
 
 	@Override
-	public Consequences<WechatAppV3PreOrder> preOrder(WechatV3PayPreOrderReq req) {
+	public Consequences<WxPayAppPrepay> prepay(WxPayAppPrepayReq req) {
 		Preconditions.checkNotNull(req);
-		String outTradeNo = Preconditions.checkNotNull(req.getOutTradeNo());
-		String description = Preconditions.checkNotNull(req.getDescription());
+		Preconditions.checkNotNull(req.getOutTradeNo());
+		Preconditions.checkNotNull(req.getDescription());
 		int amount = Preconditions.checkNotNull(req.getAmount()).getTotal();
 		if (amount < 1) {
 			throw new AmountException(Strings.lenientFormat("amount %s less then 1", amount));
 		}
-		Consequences<WechatV3PayPreOrderRes> wechatV3PayPreOrderRes = this.basePay.doPreOrder(req);
+		Consequences<PrepayId> wechatV3PayPreOrderRes = this.basePay
+				.doPreOrder("https://api.mch.weixin.qq.com/v3/pay/transactions/app", req, PrepayId.class);
 		if (!wechatV3PayPreOrderRes.isSuccess()) {
 			return wechatV3PayPreOrderRes.coverage();
 		}
-		WechatV3PayPreOrderRes preOrder = Preconditions.checkNotNull(wechatV3PayPreOrderRes.getData());
-		WechatAppV3PreOrder res = new WechatAppV3PreOrder();
+		// 组成装APP预支付订单，用来提供给微信进行支付
+		PrepayId preOrder = Preconditions.checkNotNull(wechatV3PayPreOrderRes.getData());
+		WxPayAppPrepay res = new WxPayAppPrepay();
 		res.setAppId(this.basePay.getPayContext().getPayConfig().getAppId());
 		res.setPartnerId(this.basePay.getPayContext().getPayConfig().getMerchantId());
 		res.setPrepayId(preOrder.getPrepayId());
@@ -75,7 +77,7 @@ public class WechatAppV3PrepayImpl implements WechatAppV3Prepay {
 	 * @param res
 	 * @return 签名串
 	 */
-	private String signStr(WechatAppV3PreOrder res) {
+	private String signStr(WxPayAppPrepay res) {
 		String appId = Preconditions.checkNotNull(res.getAppId());
 		String timeStamp = Preconditions.checkNotNull(res.getTimeStamp());
 		String nonceStr = Preconditions.checkNotNull(res.getNonceStr());
