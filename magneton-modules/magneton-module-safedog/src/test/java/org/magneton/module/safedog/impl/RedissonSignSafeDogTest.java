@@ -1,10 +1,13 @@
 package org.magneton.module.safedog.impl;
 
 import java.util.Map;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.magneton.adaptive.redis.RedissonAdapter;
 import org.magneton.core.collect.Maps;
+import org.magneton.module.safedog.sign.AbstractSignSafeDog;
+import org.magneton.module.safedog.sign.RedissonSignSafeDog;
 
 /**
  * @author zhangmsh 2022/3/20

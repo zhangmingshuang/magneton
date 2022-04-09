@@ -12,7 +12,7 @@ import org.magneton.module.oss.aliyun.AliyunOssConfig;
 import org.magneton.module.pay.wechat.v3.WxV3Pay;
 import org.magneton.module.pay.wechat.v3.WxV3PayImpl;
 import org.magneton.module.safedog.SignSafeDog;
-import org.magneton.module.safedog.impl.RedissonSignSafeDog;
+import org.magneton.module.safedog.sign.RedissonSignSafeDog;
 import org.magneton.module.sms.Sms;
 import org.magneton.module.sms.process.SendProcessor;
 import org.magneton.module.sms.process.aliyun.AliyunSmsProperty;
