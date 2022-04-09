@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
-
 import lombok.extern.slf4j.Slf4j;
 import org.magneton.core.base.Preconditions;
 import org.magneton.core.base.Strings;
@@ -39,12 +38,10 @@ public abstract class AbstractSignSafeDog implements SignSafeDog {
 		String value;
 		for (int i = 0, s = keys.size(); i < s; i++) {
 			key = keys.get(i);
-			builder.append(key).append('=');
 			value = data.get(keys.get(i));
 			if (!Strings.isNullOrEmpty(value)) {
-				builder.append(value);
+				builder.append(key).append('=').append(value).append(",");
 			}
-			builder.append(',');
 		}
 		String embeddingStr = builder.substring(0, builder.length() - 1);
 		if (!Strings.isNullOrEmpty(salt)) {
