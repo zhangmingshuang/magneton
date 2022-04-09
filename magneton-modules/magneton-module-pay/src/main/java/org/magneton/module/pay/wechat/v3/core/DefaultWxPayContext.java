@@ -1,5 +1,12 @@
 package org.magneton.module.pay.wechat.v3.core;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.security.GeneralSecurityException;
+import java.security.PrivateKey;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wechat.pay.contrib.apache.httpclient.WechatPayHttpClientBuilder;
 import com.wechat.pay.contrib.apache.httpclient.auth.PrivateKeySigner;
@@ -10,12 +17,6 @@ import com.wechat.pay.contrib.apache.httpclient.cert.CertificatesManager;
 import com.wechat.pay.contrib.apache.httpclient.exception.HttpCodeException;
 import com.wechat.pay.contrib.apache.httpclient.exception.NotFoundException;
 import com.wechat.pay.contrib.apache.httpclient.util.PemUtil;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.security.GeneralSecurityException;
-import java.security.PrivateKey;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.magneton.core.base.Preconditions;
@@ -26,18 +27,18 @@ import org.magneton.module.pay.exception.PrivateKeyNotFoundException;
  * @since 1.0.0
  */
 @Slf4j
-public class DefaultWechatV3PayContext implements WechatV3PayContext {
+public class DefaultWxPayContext implements WxPayContext {
 
 	private final ObjectMapper objectMapper = new ObjectMapper();
 
-	private final WechatPayConfig wechatPayConfig;
+	private final WxPayConfig wxPayConfig;
 
 	private Verifier verifier;
 
 	private CloseableHttpClient httpClient;
 
-	public DefaultWechatV3PayContext(WechatPayConfig wechatPayConfig) {
-		this.wechatPayConfig = Preconditions.checkNotNull(wechatPayConfig);
+	public DefaultWxPayContext(WxPayConfig wxPayConfig) {
+		this.wxPayConfig = Preconditions.checkNotNull(wxPayConfig);
 		this.init();
 		Runtime.getRuntime().addShutdownHook(new Thread(this::shutdown));
 	}
@@ -58,19 +59,18 @@ public class DefaultWechatV3PayContext implements WechatV3PayContext {
 	}
 
 	@Override
-	public WechatPayConfig getPayConfig() {
-		return this.wechatPayConfig;
+	public WxPayConfig getPayConfig() {
+		return this.wxPayConfig;
 	}
 
 	protected void init() {
-		String merchantId = Preconditions.checkNotNull(this.wechatPayConfig.getMerchantId(),
+		String merchantId = Preconditions.checkNotNull(this.wxPayConfig.getMerchantId(),
 				"wechat pay merchantId is null.");
-		String merchantSerialNumber = Preconditions.checkNotNull(this.wechatPayConfig.getMerchantSerialNumber(),
+		String merchantSerialNumber = Preconditions.checkNotNull(this.wxPayConfig.getMerchantSerialNumber(),
 				"wechat pay merchant serial number is null.");
-		String merchantPrivateKeyFile = Preconditions.checkNotNull(this.wechatPayConfig.getMerchantPrivateKeyFile(),
+		String merchantPrivateKeyFile = Preconditions.checkNotNull(this.wxPayConfig.getMerchantPrivateKeyFile(),
 				"wechat pay merchant private key file is null.");
-		String apiV3Key = Preconditions.checkNotNull(this.wechatPayConfig.getApiV3Key(),
-				"wechat pay api v3 key is null");
+		String apiV3Key = Preconditions.checkNotNull(this.wxPayConfig.getApiV3Key(), "wechat pay api v3 key is null");
 		PrivateKey merchantPrivateKey = null;
 		try {
 			merchantPrivateKey = PemUtil.loadPrivateKey(new FileInputStream(merchantPrivateKeyFile));

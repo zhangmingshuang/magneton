@@ -6,7 +6,7 @@ package org.magneton.module.pay.wechat.v3.core;
  * @author zhangmsh 30/03/2022
  * @since 2.0.7
  */
-public enum WechatPayStatus {
+public enum WxPayStatus {
 
 	SUCCESS(0, "支付成功"),
 
@@ -32,7 +32,7 @@ public enum WechatPayStatus {
 
 	private final String description;
 
-	WechatPayStatus(int code, String description) {
+	WxPayStatus(int code, String description) {
 		this.code = code;
 		this.description = description;
 	}

@@ -1,14 +1,13 @@
 package org.magneton.module.pay.wechat.v3.prepay;
 
 import javax.annotation.Nullable;
+
 import lombok.SneakyThrows;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.magneton.core.Consequences;
-import org.magneton.module.pay.wechat.v3.core.WechatV3PayContext;
-import org.magneton.module.pay.wechat.v3.entity.WechatV3PayPreOrderReq;
-import org.magneton.module.pay.wechat.v3.entity.WechatV3PayPreOrderRes;
+import org.magneton.module.pay.wechat.v3.core.WxPayContext;
 
 /**
  * @author zhangmsh 2022/4/5
@@ -16,9 +15,9 @@ import org.magneton.module.pay.wechat.v3.entity.WechatV3PayPreOrderRes;
  */
 public interface WechatBaseV3Pay {
 
-	WechatV3PayContext getPayContext();
+	WxPayContext getPayContext();
 
-	Consequences<WechatV3PayPreOrderRes> doPreOrder(WechatV3PayPreOrderReq wechatApiPreOrderReq);
+	<T> Consequences<T> doPreOrder(String url, Object req, Class<T> type);
 
 	String doSign(String signStr);
 

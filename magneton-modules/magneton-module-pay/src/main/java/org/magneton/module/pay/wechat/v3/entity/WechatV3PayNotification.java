@@ -1,8 +1,10 @@
 package org.magneton.module.pay.wechat.v3.entity;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
+
 import javax.annotation.Nullable;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * @author zhangmsh 2022/4/5
@@ -79,7 +81,7 @@ public class WechatV3PayNotification {
 	private Payer payer;
 
 	/** +订单金额 object 是 订单金额信息 **/
-	private PayAmount amount;
+	private ResponseAmount amount;
 
 	/** +场景信息 object 否 支付场景信息描述 **/
 	@JsonProperty("scene_info")
