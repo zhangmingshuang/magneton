@@ -6,7 +6,7 @@ package org.magneton.module.safedog;
  * @author zhangmsh 09/04/2022
  * @since 2.0.8
  */
-public interface TodoSafeDog<T> {
+public interface BehaviorSafeDog<T> {
 
 	boolean validate(T body);
 

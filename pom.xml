@@ -81,6 +81,8 @@
         <mybatis-plus-boot-starter.version>3.5.1</mybatis-plus-boot-starter.version>
         <wechatpay-apache-httpclient.version>0.4.3</wechatpay-apache-httpclient.version>
         <jackson.version>2.13.2</jackson.version>
+        <commons-codec.version>1.15</commons-codec.version>
+        <forest-core.version>1.5.19</forest-core.version>
     </properties>
 
     <dependencyManagement>
