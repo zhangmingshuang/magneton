@@ -1,7 +1,6 @@
 package org.magneton.module.pay.wechat.v3;
 
 import java.util.Map;
-
 import org.magneton.core.Consequences;
 import org.magneton.core.base.Strings;
 import org.magneton.module.pay.Pay;
@@ -9,6 +8,7 @@ import org.magneton.module.pay.wechat.v3.entity.WechatV3PayNotification;
 import org.magneton.module.pay.wechat.v3.entity.WechatV3PayOrder;
 import org.magneton.module.pay.wechat.v3.entity.WechatV3PayOrderQuery;
 import org.magneton.module.pay.wechat.v3.prepay.AppPrepay;
+import org.magneton.module.pay.wechat.v3.prepay.H5Prepay;
 import org.magneton.module.pay.wechat.v3.prepay.JSAPIPrepay;
 
 /**
@@ -40,6 +40,12 @@ public interface WxV3Pay extends Pay {
 	 * @return 处理器
 	 */
 	JSAPIPrepay jsapiPrepay();
+
+	/**
+	 * H5支付
+	 * @return
+	 */
+	H5Prepay h5Prepay();
 
 	/**
 	 * 查询订单

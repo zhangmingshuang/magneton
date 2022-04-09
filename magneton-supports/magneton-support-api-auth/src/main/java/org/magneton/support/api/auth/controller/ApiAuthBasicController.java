@@ -3,7 +3,6 @@ package org.magneton.support.api.auth.controller;
 import java.util.Map;
 import javax.validation.Valid;
 import org.magneton.core.Response;
-import org.magneton.module.safedog.impl.AbstractSignSafeDog;
 import org.magneton.support.api.auth.constant.CommonError;
 import org.magneton.support.api.auth.pojo.BasicGetSecretKeyReq;
 import org.magneton.support.api.auth.properties.ApiAuthProperties;

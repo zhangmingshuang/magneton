@@ -6,7 +6,7 @@ import org.magneton.module.distributed.cache.redis.RedissonDistributedCache;
 import org.magneton.module.distributed.lock.DistributedLock;
 import org.magneton.module.distributed.lock.redis.RedissonDistributedLock;
 import org.magneton.module.safedog.SignSafeDog;
-import org.magneton.module.safedog.impl.RedissonSignSafeDog;
+import org.magneton.module.safedog.sign.RedissonSignSafeDog;
 import org.magneton.module.sms.Sms;
 import org.magneton.module.sms.process.SendProcessor;
 import org.magneton.module.sms.process.aliyun.AliyunSmsProperty;

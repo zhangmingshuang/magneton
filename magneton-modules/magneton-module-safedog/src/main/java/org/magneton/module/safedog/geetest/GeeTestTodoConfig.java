@@ -19,4 +19,10 @@ public class GeeTestTodoConfig {
 
 	private String captchaKey;
 
+	public void validate() {
+		if (this.captchaId == null || this.captchaKey == null) {
+			throw new IllegalArgumentException("captchaId or captchaKey is null");
+		}
+	}
+
 }
