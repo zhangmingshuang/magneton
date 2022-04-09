@@ -13,7 +13,7 @@ import lombok.experimental.Accessors;
 @Getter
 @ToString
 @Accessors(chain = true)
-public class WechatAppV3PreOrder {
+public class WxPayAppPrepay {
 
 	/**
 	 * 应用ID string[1,32] 是 微信开放平台审核通过的移动应用appid 。 示例值：wx8888888888888888

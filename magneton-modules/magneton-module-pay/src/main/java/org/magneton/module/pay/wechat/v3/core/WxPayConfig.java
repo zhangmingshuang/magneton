@@ -13,7 +13,7 @@ import lombok.ToString;
 @Setter
 @Getter
 @ToString
-public class WechatPayConfig {
+public class WxPayConfig {
 
 	/**
 	 * 服务商在开放平台申请的应用appid。 示例值：wx8888888888888888
