@@ -1,13 +1,11 @@
 package org.magneton.module.pay.wechat.v3.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
-
 import javax.annotation.Nullable;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * @author zhangmsh 2022/4/5
@@ -16,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Setter
 @Getter
 @ToString
-public class WechatV3PayNotification {
+public class WxPayNotification {
 
 	/**
 	 * 应用ID string[1,32] 是 直连商户申请的公众号或移动应用appid。 示例值：wxd678efh567hg6787

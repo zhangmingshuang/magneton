@@ -4,9 +4,9 @@ import java.util.Map;
 import org.magneton.core.Consequences;
 import org.magneton.core.base.Strings;
 import org.magneton.module.pay.Pay;
-import org.magneton.module.pay.wechat.v3.entity.WechatV3PayNotification;
-import org.magneton.module.pay.wechat.v3.entity.WechatV3PayOrder;
-import org.magneton.module.pay.wechat.v3.entity.WechatV3PayOrderQuery;
+import org.magneton.module.pay.wechat.v3.entity.WxPayNotification;
+import org.magneton.module.pay.wechat.v3.entity.WxPayOrder;
+import org.magneton.module.pay.wechat.v3.entity.WxPayOrderQuery;
 import org.magneton.module.pay.wechat.v3.prepay.AppPrepay;
 import org.magneton.module.pay.wechat.v3.prepay.H5Prepay;
 import org.magneton.module.pay.wechat.v3.prepay.JSAPIPrepay;
@@ -52,7 +52,7 @@ public interface WxV3Pay extends Pay {
 	 * @param query 业务请求数据
 	 * @return 订单数据
 	 */
-	Consequences<WechatV3PayOrder> queryOrder(WechatV3PayOrderQuery query);
+	Consequences<WxPayOrder> queryOrder(WxPayOrderQuery query);
 
 	/**
 	 * 回调处理数据校验并解析响应数据
@@ -60,6 +60,6 @@ public interface WxV3Pay extends Pay {
 	 * @param body 请求Body
 	 * @return 解析后的处理数据
 	 */
-	WechatV3PayNotification parsePaySuccessData(Map<String, String> httpHeaders, String body);
+	WxPayNotification parsePaySuccessData(Map<String, String> httpHeaders, String body);
 
 }

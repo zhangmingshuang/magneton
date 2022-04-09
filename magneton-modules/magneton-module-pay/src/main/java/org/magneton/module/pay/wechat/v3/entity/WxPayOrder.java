@@ -1,8 +1,7 @@
 package org.magneton.module.pay.wechat.v3.entity;
 
-import javax.annotation.Nullable;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
+import javax.annotation.Nullable;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -21,7 +20,7 @@ import org.magneton.module.pay.wechat.v3.prepay.BasePayIdData;
 @Setter
 @Getter
 @ToString
-public class WechatV3PayOrder extends BasePayIdData {
+public class WxPayOrder extends BasePayIdData {
 
 	/**
 	 * 商户订单号 out_trade_no string[6,32] 是 商户系统内部订单号，只能是数字、大小写字母_-*且在同一个商户号下唯一，详见【商户订单号】。

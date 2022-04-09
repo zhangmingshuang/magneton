@@ -26,9 +26,9 @@ public class GeeTestBehaviorSafeDog implements BehaviorSafeDog<GeeTestBody> {
 
 	private final ObjectMapper objectMapper = new ObjectMapper();
 
-	private final GeeTestTodoConfig config;
+	private final GeeTestBehaviorConfig config;
 
-	public GeeTestBehaviorSafeDog(GeeTestTodoConfig config) {
+	public GeeTestBehaviorSafeDog(GeeTestBehaviorConfig config) {
 		this.config = Preconditions.checkNotNull(config);
 		this.config.validate();
 	}

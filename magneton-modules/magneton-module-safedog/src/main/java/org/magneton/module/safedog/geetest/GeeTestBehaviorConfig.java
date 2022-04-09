@@ -3,6 +3,7 @@ package org.magneton.module.safedog.geetest;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.experimental.Accessors;
 
 /**
  * .
@@ -13,7 +14,8 @@ import lombok.ToString;
 @Setter
 @Getter
 @ToString
-public class GeeTestTodoConfig {
+@Accessors(chain = true)
+public class GeeTestBehaviorConfig {
 
 	private String captchaId;
 

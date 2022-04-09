@@ -19,10 +19,10 @@ import org.magneton.module.pay.exception.PaySerialException;
 import org.magneton.module.pay.wechat.v3.core.DefaultWxPayContext;
 import org.magneton.module.pay.wechat.v3.core.WxPayConfig;
 import org.magneton.module.pay.wechat.v3.core.WxPayContext;
-import org.magneton.module.pay.wechat.v3.entity.WechatV3PayNotification;
-import org.magneton.module.pay.wechat.v3.entity.WechatV3PayOrder;
-import org.magneton.module.pay.wechat.v3.entity.WechatV3PayOrderQuery;
-import org.magneton.module.pay.wechat.v3.entity.WechatV3PayOrderQuery.Type;
+import org.magneton.module.pay.wechat.v3.entity.WxPayNotification;
+import org.magneton.module.pay.wechat.v3.entity.WxPayOrder;
+import org.magneton.module.pay.wechat.v3.entity.WxPayOrderQuery;
+import org.magneton.module.pay.wechat.v3.entity.WxPayOrderQuery.Type;
 import org.magneton.module.pay.wechat.v3.prepay.AppPrepay;
 import org.magneton.module.pay.wechat.v3.prepay.AppPrepayImpl;
 import org.magneton.module.pay.wechat.v3.prepay.H5Prepay;
@@ -95,7 +95,7 @@ public class WxV3PayImpl implements WxV3Pay {
 	}
 
 	@Override
-	public Consequences<WechatV3PayOrder> queryOrder(WechatV3PayOrderQuery query) {
+	public Consequences<WxPayOrder> queryOrder(WxPayOrderQuery query) {
 		Type reqIdType = query.getReqIdType();
 		String url;
 		switch (reqIdType) {
@@ -112,7 +112,7 @@ public class WxV3PayImpl implements WxV3Pay {
 			throw new ProcessException("unknown reqIdType %s", reqIdType);
 		}
 		HttpGet httpGet = this.wechatBaseV3Pay.newHttpGet(url);
-		Consequences<WechatV3PayOrder> res = this.wechatBaseV3Pay.doRequest(httpGet, WechatV3PayOrder.class);
+		Consequences<WxPayOrder> res = this.wechatBaseV3Pay.doRequest(httpGet, WxPayOrder.class);
 		if (!res.isSuccess()) {
 			return Consequences.failMessageOnly(res.getMessage());
 		}
@@ -122,7 +122,7 @@ public class WxV3PayImpl implements WxV3Pay {
 	// 支付通知文档：https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_2_5.shtml
 	@Override
 	@SuppressWarnings("OverlyBroadCatchBlock")
-	public WechatV3PayNotification parsePaySuccessData(Map<String, String> httpHeaders, String body) {
+	public WxPayNotification parsePaySuccessData(Map<String, String> httpHeaders, String body) {
 		Preconditions.checkNotNull(httpHeaders);
 		Preconditions.checkNotNull(body);
 		// 检查平台证书序列号 https://pay.weixin.qq.com/wiki/doc/apiv3/wechatpay/wechatpay4_1.shtml
@@ -159,7 +159,7 @@ public class WxV3PayImpl implements WxV3Pay {
 		try {
 			Notification notification = handler.parse(request);
 			String decryptData = notification.getDecryptData();
-			return this.payContext.getObjectMapper().readValue(decryptData, WechatV3PayNotification.class);
+			return this.payContext.getObjectMapper().readValue(decryptData, WxPayNotification.class);
 		}
 		catch (Exception e) {
 			throw new ResponseException(Response.bad().message(e.getMessage()));
