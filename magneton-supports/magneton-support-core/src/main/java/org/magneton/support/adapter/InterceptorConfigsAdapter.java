@@ -70,37 +70,40 @@ public class InterceptorConfigsAdapter implements WebMvcConfigurer, ApplicationC
 				RequestMapping.class);
 		// 仅作用于注解了RequestMapping的类
 		if (beanRequestMapping != null) {
+			// bean process
 			ExcludeInterceptor beanExcludeInterceptor = AnnotatedElementUtils.getMergedAnnotation(bean.getClass(),
 					ExcludeInterceptor.class);
+			boolean next = true;
 			if (beanExcludeInterceptor != null) {
 				// 类级过滤
+				Class<? extends InterceptorAdapter>[] activeInterceptorAdapter = beanExcludeInterceptor.value();
 				String[] paths = beanRequestMapping.value();
 				if (paths != null && paths.length > 0) {
 					for (String path : paths) {
 						String exclude = path + (path.endsWith("/") ? "**" : "/**");
-						this.excludeInterceptorPaths.put(exclude, beanExcludeInterceptor.value());
+						this.excludeInterceptorPaths.put(exclude, activeInterceptorAdapter);
 					}
 				}
 			}
-			else {
-				Method[] declaredMethods = Reflection.getDeclaredMethods(bean.getClass());
-				for (Method method : declaredMethods) {
-					ExcludeInterceptor methodExcludeInterceptor = AnnotatedElementUtils.getMergedAnnotation(method,
-							ExcludeInterceptor.class);
-					if (methodExcludeInterceptor != null) {
-						// 方法级过滤
-						String[] paths = beanRequestMapping.value();
-						if (paths != null && paths.length > 0) {
-							RequestMapping methodRequestMapping = AnnotatedElementUtils.getMergedAnnotation(method,
-									RequestMapping.class);
-							String[] methodPaths = methodRequestMapping.value();
-							if (methodPaths != null && methodPaths.length > 0) {
-								// paths and methodPaths combination
-								for (String path : paths) {
-									for (String methodPath : methodPaths) {
-										String exclude = path + methodPath;
-										this.excludeInterceptorPaths.put(exclude, methodExcludeInterceptor.value());
-									}
+			// method process
+			Method[] declaredMethods = Reflection.getDeclaredMethods(bean.getClass());
+			for (Method method : declaredMethods) {
+				ExcludeInterceptor methodExcludeInterceptor = AnnotatedElementUtils.getMergedAnnotation(method,
+						ExcludeInterceptor.class);
+				if (methodExcludeInterceptor != null) {
+					Class<? extends InterceptorAdapter>[] activeInterceptorAdapter = methodExcludeInterceptor.value();
+					// 方法级过滤
+					String[] paths = beanRequestMapping.value();
+					if (paths != null && paths.length > 0) {
+						RequestMapping methodRequestMapping = AnnotatedElementUtils.getMergedAnnotation(method,
+								RequestMapping.class);
+						String[] methodPaths = methodRequestMapping.value();
+						if (methodPaths != null && methodPaths.length > 0) {
+							// paths and methodPaths combination
+							for (String path : paths) {
+								for (String methodPath : methodPaths) {
+									String exclude = path + methodPath;
+									this.excludeInterceptorPaths.put(exclude, activeInterceptorAdapter);
 								}
 							}
 						}

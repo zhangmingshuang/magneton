@@ -31,12 +31,6 @@ public class RedissonGeo implements Geo {
 		this.redissonClient = redissonClient;
 	}
 
-	@Override
-	public <V> long add(String name, double longitude, double latitude, V member) {
-		Preconditions.checkNotNull(name);
-		return this.redissonClient.getGeo(name).add(longitude, latitude, member);
-	}
-
 	@SafeVarargs
 	@Override
 	public final <V> long add(String name, GeoEntry<V>... entries) {
