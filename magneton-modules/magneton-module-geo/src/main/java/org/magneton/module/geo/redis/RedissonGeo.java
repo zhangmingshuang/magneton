@@ -1,10 +1,8 @@
 package org.magneton.module.geo.redis;
 
 import java.util.Map;
-
 import javax.annotation.Nullable;
 import javax.annotations.Versielimiet;
-
 import org.magneton.core.base.Arrays;
 import org.magneton.core.base.Preconditions;
 import org.magneton.core.collect.Collections;
@@ -13,6 +11,8 @@ import org.magneton.module.geo.Geo;
 import org.magneton.module.geo.GeoEntry;
 import org.magneton.module.geo.GeoPosition;
 import org.magneton.module.geo.GeoUnit;
+import org.magneton.module.geo.query.MemberArgs;
+import org.magneton.module.geo.query.PositionArgs;
 import org.redisson.api.RGeo;
 import org.redisson.api.RedissonClient;
 import org.redisson.api.geo.GeoSearchArgs;
@@ -85,43 +85,51 @@ public class RedissonGeo implements Geo {
 	}
 
 	@Override
-	public <V> Map<V, Double> radiusWithDistance(String name, V member, double radius, GeoUnit unit) {
-		Preconditions.checkNotNull(name);
-		Preconditions.checkNotNull(member);
-		org.redisson.api.GeoUnit geoUnit = this.unitTransform(unit);
-		RGeo<V> geo = this.redissonClient.getGeo(name);
-		return geo.searchWithDistance(GeoSearchArgs.from(member).radius(radius, geoUnit));
-	}
-
-	@Override
-	public <V> Map<V, Double> radiusWithDistance(String name, GeoPosition position, double radius, GeoUnit unit) {
-		Preconditions.checkNotNull(name);
-		Preconditions.checkNotNull(position);
-		org.redisson.api.GeoUnit geoUnit = this.unitTransform(unit);
-		RGeo<V> geo = this.redissonClient.getGeo(name);
+	public <V> Map<V, Double> radiusWithDistance(MemberArgs<V> args) {
+		Preconditions.checkNotNull(args);
+		Preconditions.checkNotNull(args.getName());
+		Preconditions.checkNotNull(args.getMember());
+		org.redisson.api.GeoUnit geoUnit = this.unitTransform(args.getUnit());
+		RGeo<V> geo = this.redissonClient.getGeo(args.getName());
 		return geo.searchWithDistance(
-				GeoSearchArgs.from(position.getLongitude(), position.getLatitude()).radius(radius, geoUnit));
+				GeoSearchArgs.from(args.getMember()).radius(args.getRadius(), geoUnit).count(args.getCount()));
 	}
 
 	@Override
-	public <V> Map<V, GeoPosition> radiusWithPosition(String name, V member, double radius, GeoUnit unit) {
-		Preconditions.checkNotNull(name);
-		Preconditions.checkNotNull(member);
-		org.redisson.api.GeoUnit geoUnit = this.unitTransform(unit);
-		RGeo<V> geo = this.redissonClient.getGeo(name);
-		Map<V, org.redisson.api.GeoPosition> geoPositions = geo
-				.searchWithPosition(GeoSearchArgs.from(member).radius(radius, geoUnit));
+	public <V> Map<V, Double> radiusWithDistance(PositionArgs args) {
+		Preconditions.checkNotNull(args);
+		Preconditions.checkNotNull(args.getName());
+		Preconditions.checkNotNull(args.getPosition());
+		org.redisson.api.GeoUnit geoUnit = this.unitTransform(args.getUnit());
+		RGeo<V> geo = this.redissonClient.getGeo(args.getName());
+		GeoPosition position = args.getPosition();
+		return geo.searchWithDistance(GeoSearchArgs.from(position.getLongitude(), position.getLatitude())
+				.radius(args.getRadius(), geoUnit).count(args.getCount()));
+	}
+
+	@Override
+	public <V> Map<V, GeoPosition> radiusWithPosition(MemberArgs<V> args) {
+		Preconditions.checkNotNull(args);
+		Preconditions.checkNotNull(args.getName());
+		Preconditions.checkNotNull(args.getMember());
+		org.redisson.api.GeoUnit geoUnit = this.unitTransform(args.getUnit());
+		RGeo<V> geo = this.redissonClient.getGeo(args.getName());
+		Map<V, org.redisson.api.GeoPosition> geoPositions = geo.searchWithPosition(
+				GeoSearchArgs.from(args.getMember()).radius(args.getRadius(), geoUnit).count(args.getCount()));
 		return this.positionTransform(geoPositions);
 	}
 
 	@Override
-	public <V> Map<V, GeoPosition> radiusWithPosition(String name, GeoPosition position, double radius, GeoUnit unit) {
-		Preconditions.checkNotNull(name);
-		Preconditions.checkNotNull(position);
-		org.redisson.api.GeoUnit geoUnit = this.unitTransform(unit);
-		RGeo<V> geo = this.redissonClient.getGeo(name);
-		Map<V, org.redisson.api.GeoPosition> geoPositions = geo.searchWithPosition(
-				GeoSearchArgs.from(position.getLongitude(), position.getLatitude()).radius(radius, geoUnit));
+	public <V> Map<V, GeoPosition> radiusWithPosition(PositionArgs args) {
+		Preconditions.checkNotNull(args);
+		Preconditions.checkNotNull(args.getName());
+		Preconditions.checkNotNull(args.getPosition());
+		org.redisson.api.GeoUnit geoUnit = this.unitTransform(args.getUnit());
+		RGeo<V> geo = this.redissonClient.getGeo(args.getName());
+		GeoPosition position = args.getPosition();
+		Map<V, org.redisson.api.GeoPosition> geoPositions = geo
+				.searchWithPosition(GeoSearchArgs.from(position.getLongitude(), position.getLatitude())
+						.radius(args.getRadius(), geoUnit).count(args.getCount()));
 		return this.positionTransform(geoPositions);
 	}
 

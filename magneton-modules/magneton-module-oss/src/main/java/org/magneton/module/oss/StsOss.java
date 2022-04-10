@@ -8,7 +8,7 @@ import javax.annotation.Nullable;
  * @author zhangmsh 25/03/2022
  * @since 2.0.7
  */
-public interface StsOss<Sts extends StsRes> extends Oss<Sts> {
+public interface StsOss<Sts> extends Oss<Sts> {
 
 	/**
 	 * 获取STS授权
@@ -17,5 +17,10 @@ public interface StsOss<Sts extends StsRes> extends Oss<Sts> {
 	 */
 	@Nullable
 	Sts sts(@Nullable String bucket);
+
+	@Nullable
+	default Sts sts() {
+		return this.sts(null);
+	}
 
 }

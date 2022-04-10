@@ -3,7 +3,6 @@ package org.magneton.module.oss.aliyun;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.magneton.module.oss.StsRes;
 
 /**
  * .
@@ -14,7 +13,7 @@ import org.magneton.module.oss.StsRes;
 @Setter
 @Getter
 @ToString
-public class AliyunStsRes implements StsRes {
+public class AliyunOssSts {
 
 	/**
 	 * STS临时AccessKey
