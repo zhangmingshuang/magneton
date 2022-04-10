@@ -1,6 +1,4 @@
-# Redis Distributed Lock
-
-`Redisson` distributed lock that relies on `Redis`.
+# Redis分布式锁
 
 ## use
 
