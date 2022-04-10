@@ -6,14 +6,25 @@ package org.magneton.adaptive.redis;
  */
 public enum RedissonClientType {
 
+	/**
+	 * 集群模式
+	 */
 	CLUSTER,
-
+	/**
+	 * 主从模式
+	 */
 	MASTER_SLAVE,
-
+	/**
+	 * 云托管模式
+	 */
 	REPLICATED,
-
+	/**
+	 * 哨兵模式
+	 */
 	SENTINEL,
-
+	/**
+	 * 单节点模式
+	 */
 	SINGLE
 
 }
