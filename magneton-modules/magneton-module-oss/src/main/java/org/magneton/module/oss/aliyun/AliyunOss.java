@@ -1,13 +1,5 @@
 package org.magneton.module.oss.aliyun;
 
-import java.io.File;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
-import java.time.format.DateTimeFormatter;
-import java.util.Map;
-
-import javax.annotation.Nullable;
-
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClientBuilder;
 import com.aliyun.oss.model.PutObjectRequest;
@@ -19,6 +11,12 @@ import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.http.MethodType;
 import com.aliyuncs.profile.DefaultProfile;
 import com.aliyuncs.profile.IClientProfile;
+import java.io.File;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
+import java.util.Map;
+import javax.annotation.Nullable;
 import lombok.extern.slf4j.Slf4j;
 import org.magneton.core.base.Preconditions;
 import org.magneton.core.base.Strings;
@@ -34,15 +32,15 @@ import org.magneton.module.oss.StsOss;
  */
 @SuppressWarnings("SynchronizeOnThis")
 @Slf4j
-public class AliyunOss implements StsOss<AliyunStsRes> {
+public class AliyunOss implements StsOss<AliyunOssSts> {
 
-	private static final AliyunStsRes NIL_STS_RES = new AliyunStsRes();
+	private static final AliyunOssSts NIL_STS_RES = new AliyunOssSts();
 
 	private final AliyunOssConfig aliyunOssConfig;
 
 	private DefaultAcsClient defaultAcsClient;
 
-	private Map<String, AliyunStsRes> stsCache = Maps.newConcurrentMap();
+	private Map<String, AliyunOssSts> stsCache = Maps.newConcurrentMap();
 
 	public AliyunOss(AliyunOssConfig aliyunOssConfig) {
 		this.aliyunOssConfig = aliyunOssConfig;
@@ -74,7 +72,7 @@ public class AliyunOss implements StsOss<AliyunStsRes> {
 	 */
 	@Override
 	@Nullable
-	public AliyunStsRes sts(@Nullable String bucket) {
+	public AliyunOssSts sts(@Nullable String bucket) {
 		bucket = this.getBucket(bucket);
 		return this.stsCache.computeIfAbsent(bucket, this::doStsRequest);
 	}
@@ -83,18 +81,18 @@ public class AliyunOss implements StsOss<AliyunStsRes> {
 	 * 简单上传。
 	 *
 	 * 错误说明：The specified object is not valid. 表示文件名称以/开头。
-	 * @param aliyunStsRes
+	 * @param aliyunOssSts
 	 * @param fileName
 	 * @param file
 	 * @param bucket
 	 */
 	@Override
-	public void simpleUpdate(AliyunStsRes aliyunStsRes, String fileName, File file, @Nullable String bucket) {
-		Preconditions.checkNotNull(aliyunStsRes);
+	public void simpleUpdate(AliyunOssSts aliyunOssSts, String fileName, File file, @Nullable String bucket) {
+		Preconditions.checkNotNull(aliyunOssSts);
 		Preconditions.checkNotNull(fileName);
 		Preconditions.checkNotNull(file);
 		bucket = this.getBucket(bucket);
-		OSS oss = this.createOssClient(aliyunStsRes);
+		OSS oss = this.createOssClient(aliyunOssSts);
 		if (fileName.charAt(0) == '/') {
 			fileName = fileName.substring(1);
 		}
@@ -113,13 +111,13 @@ public class AliyunOss implements StsOss<AliyunStsRes> {
 		return this.getClient().getAcsResponse(request);
 	}
 
-	protected OSS createOssClient(AliyunStsRes aliyunStsRes) {
-		return new OSSClientBuilder().build(aliyunStsRes.getEndpoint(), aliyunStsRes.getAccessKeyId(),
-				aliyunStsRes.getAccessKeySecret(), aliyunStsRes.getSecurityToken());
+	protected OSS createOssClient(AliyunOssSts aliyunOssSts) {
+		return new OSSClientBuilder().build(aliyunOssSts.getEndpoint(), aliyunOssSts.getAccessKeyId(),
+				aliyunOssSts.getAccessKeySecret(), aliyunOssSts.getSecurityToken());
 	}
 
 	@Nullable
-	protected AliyunStsRes doStsRequest(String bucket) {
+	protected AliyunOssSts doStsRequest(String bucket) {
 		bucket = this.getBucket(bucket);
 		AssumeRoleRequest request = new AssumeRoleRequest();
 		request.setSysMethod(MethodType.POST);
@@ -148,7 +146,7 @@ public class AliyunOss implements StsOss<AliyunStsRes> {
 			AssumeRoleResponse response = this.doAssumeRequest(request);
 			Credentials credentials = response.getCredentials();
 
-			AliyunStsRes res = new AliyunStsRes();
+			AliyunOssSts res = new AliyunOssSts();
 			res.setAccessKeyId(credentials.getAccessKeyId());
 			res.setAccessKeySecret(credentials.getAccessKeySecret());
 			res.setSecurityToken(credentials.getSecurityToken());

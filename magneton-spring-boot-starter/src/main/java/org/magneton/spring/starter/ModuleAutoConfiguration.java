@@ -6,7 +6,6 @@ import org.magneton.module.distributed.lock.DistributedLock;
 import org.magneton.module.distributed.lock.redis.RedissonDistributedLock;
 import org.magneton.module.geo.Geo;
 import org.magneton.module.geo.redis.RedissonGeo;
-import org.magneton.module.oss.Oss;
 import org.magneton.module.oss.aliyun.AliyunOss;
 import org.magneton.module.oss.aliyun.AliyunOssConfig;
 import org.magneton.module.pay.wechat.v3.WxV3Pay;
@@ -29,7 +28,6 @@ import org.magneton.spring.starter.properties.SmsProperties;
 import org.magneton.spring.starter.properties.WechatProperties;
 import org.magneton.spring.starter.properties.WxPayProperties;
 import org.redisson.api.RedissonClient;
-
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -116,7 +114,7 @@ public class ModuleAutoConfiguration {
 	@Bean
 	@ConditionalOnClass(AliyunOss.class)
 	@ConditionalOnProperty(prefix = AliyunOssProperties.PREFIX, name = AliyunOssProperties.CONDITION_KEY)
-	public Oss oss(AliyunOssProperties aliyunOssProperties) {
+	public AliyunOss aliyunOss(AliyunOssProperties aliyunOssProperties) {
 		return new AliyunOss(aliyunOssProperties);
 	}
 	// =============== oss =========== end

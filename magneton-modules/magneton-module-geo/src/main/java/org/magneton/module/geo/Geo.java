@@ -1,8 +1,9 @@
 package org.magneton.module.geo;
 
 import java.util.Map;
-
 import javax.annotation.Nullable;
+import org.magneton.module.geo.query.MemberArgs;
+import org.magneton.module.geo.query.PositionArgs;
 
 /**
  * .
@@ -103,104 +104,36 @@ public interface Geo {
 	 */
 	<V> Map<V, GeoPosition> pos(String name, V... members);
 
-	/**
-	 * 获取某个成员元素的半径成员元素数据
-	 * @param name 名称
-	 * @param member 成员元素
-	 * @param radius 查找半径
-	 * @param unit 查找半径单位
-	 * @return 对应成员元素半径的所有成员元素数据及对应的距离（单位与查找半径单位一致）列表。
-	 */
-	<V> Map<V, Double> radiusWithDistance(String name, V member, double radius, GeoUnit unit);
+	// ---------------------------DISTANCE-------------------------------
 
 	/**
 	 * 获取某个成员元素的半径成员元素数据
-	 * @param name 名称
-	 * @param member 成员元素
-	 * @param radius 查找半径，以默认的半径单位（米）
+	 * @param args 查询条件
 	 * @return 对应成员元素半径的所有成员元素数据及对应的距离（单位与查找半径单位一致）列表。
 	 */
-	default <V> Map<V, Double> radiusWithDistance(String name, V member, double radius) {
-		return this.radiusWithDistance(name, member, radius, GeoUnit.METERS);
-	}
+	<V> Map<V, Double> radiusWithDistance(MemberArgs<V> args);
 
 	/**
 	 * 获取对应经纬度位置的半径成员元素数据
-	 * @param name 名称
-	 * @param position 查找经纬度
-	 * @param radius 查找半径
-	 * @param unit 查找半径单位
+	 * @param args 查询条件
 	 * @return 对应经纬度半径的所有成员元素数据及对应的距离（单位与查找半径单位一致）列表。
 	 */
-	<V> Map<V, Double> radiusWithDistance(String name, GeoPosition position, double radius, GeoUnit unit);
+	<V> Map<V, Double> radiusWithDistance(PositionArgs args);
 
-	default <V> Map<V, Double> radiusWithDistance(String name, double longitude, double latitude, double radius,
-			GeoUnit unit) {
-		return this.radiusWithDistance(name, GeoPosition.of(longitude, latitude), radius, unit);
-	}
-
-	default <V> Map<V, Double> radiusWithDistance(String name, double longitude, double latitude, double radius) {
-		return this.radiusWithDistance(name, GeoPosition.of(longitude, latitude), radius, GeoUnit.METERS);
-	}
-
-	/**
-	 * 获取对应经纬度位置的半径成员元素数据
-	 * @param name 名称
-	 * @param position 查找经纬度
-	 * @param radius 查找半径，以默认的半径单位（米）
-	 * @return 对应经纬度半径的所有成员元素数据及对应的距离（单位与查找半径单位一致）列表。
-	 */
-	default <V> Map<V, Double> radiusWithDistance(String name, GeoPosition position, double radius) {
-		return this.radiusWithDistance(name, position, radius, GeoUnit.METERS);
-	}
+	// ------------------------------POSITION----------------------------------------
 
 	/**
 	 * 获取某个成员元素的半径成员元素的经纬度信息
-	 * @param name 名称
-	 * @param member 成员元素
-	 * @param radius 查找半径
+	 * @param args 查询参数
 	 * @return 对应成员元素半径的所有成员元素对应的经纬度信息数据。
 	 */
-	<V> Map<V, GeoPosition> radiusWithPosition(String name, V member, double radius, GeoUnit unit);
-
-	/**
-	 * 获取某个成员元素的半径成员元素的经纬度信息
-	 * @param name 名称
-	 * @param member 成员元素
-	 * @param radius 查找半径，以默认的半径单位（米）
-	 * @return 对应成员元素半径的所有成员元素对应的经纬度信息数据。
-	 */
-	default <V> Map<V, GeoPosition> radiusWithPosition(String name, V member, double radius) {
-		return this.radiusWithPosition(name, member, radius, GeoUnit.METERS);
-	}
+	<V> Map<V, GeoPosition> radiusWithPosition(MemberArgs<V> args);
 
 	/**
 	 * 获取对应经纬度位置的半径成员元素的经纬度信息
-	 * @param name 名称
-	 * @param position 查找经纬度
-	 * @param radius 查找半径
+	 * @param args 查询参数
 	 * @return 对应经纬度半径的所有成员元素的经纬度信息
 	 */
-	<V> Map<V, GeoPosition> radiusWithPosition(String name, GeoPosition position, double radius, GeoUnit unit);
-
-	/**
-	 * 获取对应经纬度位置的半径成员元素的经纬度信息
-	 * @param name 名称
-	 * @param position 查找经纬度
-	 * @param radius 查找半径，以默认的半径单位（米）
-	 * @return 对应经纬度半径的所有成员元素的经纬度信息
-	 */
-	default <V> Map<V, GeoPosition> radiusWithPosition(String name, GeoPosition position, double radius) {
-		return this.radiusWithPosition(name, position, radius, GeoUnit.METERS);
-	}
-
-	default <V> Map<V, GeoPosition> radiusWithPosition(String name, double longitude, double latitude, double radius,
-			GeoUnit unit) {
-		return this.radiusWithPosition(name, GeoPosition.of(longitude, latitude), radius, unit);
-	}
-
-	default <V> Map<V, GeoPosition> radiusWithPosition(String name, double longitude, double latitude, double radius) {
-		return this.radiusWithPosition(name, GeoPosition.of(longitude, latitude), radius, GeoUnit.METERS);
-	}
+	<V> Map<V, GeoPosition> radiusWithPosition(PositionArgs args);
 
 }
