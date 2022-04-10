@@ -28,11 +28,15 @@ public class ResponseException extends RuntimeException {
 	}
 
 	public ResponseException(ResponseMessage responseMessage) {
-		throw new ResponseException(Response.response(responseMessage));
+		this(Response.response(responseMessage));
 	}
 
 	public static ResponseException valueOf(Response response) {
 		return new ResponseException(response);
+	}
+
+	public static ResponseException valueOf(ResponseMessage responseMessage) {
+		return new ResponseException(responseMessage);
 	}
 
 	public Response getResponse() {
