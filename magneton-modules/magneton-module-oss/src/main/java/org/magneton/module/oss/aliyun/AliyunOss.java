@@ -12,16 +12,18 @@ import com.aliyuncs.http.MethodType;
 import com.aliyuncs.profile.DefaultProfile;
 import com.aliyuncs.profile.IClientProfile;
 import java.io.File;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
-import java.util.Map;
+import java.util.concurrent.ExecutionException;
 import javax.annotation.Nullable;
 import lombok.extern.slf4j.Slf4j;
 import org.magneton.core.base.Preconditions;
 import org.magneton.core.base.Strings;
 import org.magneton.core.base.Verify;
-import org.magneton.core.collect.Maps;
+import org.magneton.core.cache.Cache;
+import org.magneton.core.cache.CacheBuilder;
 import org.magneton.module.oss.StsOss;
 
 /**
@@ -30,8 +32,8 @@ import org.magneton.module.oss.StsOss;
  * @author zhangmsh 25/03/2022
  * @since 2.0.7
  */
-@SuppressWarnings("SynchronizeOnThis")
 @Slf4j
+@SuppressWarnings("SynchronizeOnThis")
 public class AliyunOss implements StsOss<AliyunOssSts> {
 
 	private static final AliyunOssSts NIL_STS_RES = new AliyunOssSts();
@@ -40,10 +42,13 @@ public class AliyunOss implements StsOss<AliyunOssSts> {
 
 	private DefaultAcsClient defaultAcsClient;
 
-	private Map<String, AliyunOssSts> stsCache = Maps.newConcurrentMap();
+	private Cache<String, AliyunOssSts> stsCache;
 
 	public AliyunOss(AliyunOssConfig aliyunOssConfig) {
 		this.aliyunOssConfig = aliyunOssConfig;
+		this.stsCache = CacheBuilder.newBuilder()
+				.expireAfterWrite(Duration.ofSeconds(aliyunOssConfig.getStsDurationSeconds())).maximumSize(1024)
+				.build();
 	}
 
 	protected DefaultAcsClient getClient() {
@@ -73,26 +78,38 @@ public class AliyunOss implements StsOss<AliyunOssSts> {
 	@Override
 	@Nullable
 	public AliyunOssSts sts(@Nullable String bucket) {
-		bucket = this.getBucket(bucket);
-		return this.stsCache.computeIfAbsent(bucket, this::doStsRequest);
+		String bucketName = this.getBucket(bucket);
+		AliyunOssSts sts;
+		try {
+			sts = this.stsCache.get(bucketName, () -> this.doStsRequest(bucketName));
+		}
+		catch (ExecutionException e) {
+			log.error("sts request error", e);
+			sts = this.doStsRequest(bucketName);
+		}
+		if (sts == null || sts.getExpireTime() < System.currentTimeMillis()) {
+			// 已过期
+			return null;
+		}
+		return sts;
 	}
 
 	/**
 	 * 简单上传。
 	 *
 	 * 错误说明：The specified object is not valid. 表示文件名称以/开头。
-	 * @param aliyunOssSts
+	 * @param sts
 	 * @param fileName
 	 * @param file
 	 * @param bucket
 	 */
 	@Override
-	public void simpleUpdate(AliyunOssSts aliyunOssSts, String fileName, File file, @Nullable String bucket) {
-		Preconditions.checkNotNull(aliyunOssSts);
+	public void simpleUpdate(AliyunOssSts sts, String fileName, File file, @Nullable String bucket) {
+		Preconditions.checkNotNull(sts);
 		Preconditions.checkNotNull(fileName);
 		Preconditions.checkNotNull(file);
 		bucket = this.getBucket(bucket);
-		OSS oss = this.createOssClient(aliyunOssSts);
+		OSS oss = this.createOssClient(sts);
 		if (fileName.charAt(0) == '/') {
 			fileName = fileName.substring(1);
 		}

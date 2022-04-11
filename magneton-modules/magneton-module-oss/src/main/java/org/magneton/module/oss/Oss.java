@@ -2,6 +2,7 @@ package org.magneton.module.oss;
 
 import java.io.File;
 import javax.annotation.Nullable;
+import org.magneton.core.base.Preconditions;
 
 /**
  * .
@@ -42,11 +43,35 @@ public interface Oss<Sts> {
 	}
 
 	default String getUrl(String fileName, @Nullable String bucket) {
+		if (Preconditions.checkNotNull(fileName).startsWith("http")) {
+			return fileName;
+		}
 		String domain = this.getDomain(bucket);
 		if (fileName.charAt(0) == '/') {
 			return domain + fileName;
 		}
 		return domain + "/" + fileName;
+	}
+
+	default String urlAmend(String url) {
+		return this.urlAmend(url, null);
+	}
+
+	default String urlAmend(String url, @Nullable String bucket) {
+		if (!Preconditions.checkNotNull(url).startsWith("http")) {
+			return url;
+		}
+		String domain = this.getDomain(bucket);
+		if (url.startsWith(domain)) {
+			url = url.replace(domain, "");
+		}
+		else {
+			url = url.replace(domain.replace("https://", "http://"), "");
+		}
+		if (url.charAt(0) == '/') {
+			return url;
+		}
+		return url;
 	}
 
 }
