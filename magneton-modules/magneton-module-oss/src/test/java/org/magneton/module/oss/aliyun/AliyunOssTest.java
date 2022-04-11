@@ -50,4 +50,24 @@ class AliyunOssTest {
 				() -> aliyunOss.simpleUpdate(sts, "/abc/aaa/test.png", Paths.get("D://1.png").toFile()));
 	}
 
+	@Test
+	void urlAmend() {
+		AliyunOssConfig property = new AliyunOssConfig();
+		property.setDefaultBucket("test");
+		property.setEndpoint("endpoint");
+		AliyunOss aliyunOss = new MockAliyunOss(property);
+		String url = aliyunOss.urlAmend("http://test.endpoint/test/a/b/1.png");
+		Assertions.assertEquals("/test/a/b/1.png", url);
+	}
+
+	@Test
+	void getUrl() {
+		AliyunOssConfig property = new AliyunOssConfig();
+		property.setDefaultBucket("test");
+		property.setEndpoint("endpoint");
+		AliyunOss aliyunOss = new MockAliyunOss(property);
+		String url = aliyunOss.getUrl("/test/a/b/1.png");
+		Assertions.assertEquals("https://test.endpoint/test/a/b/1.png", url);
+	}
+
 }
