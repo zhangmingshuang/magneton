@@ -1,9 +1,12 @@
 package org.magneton.module.pay.wechat.v3.prepay;
 
+import lombok.ToString;
+
 /**
  * @author zhangmsh 2022/4/5
  * @since 1.0.0
  */
+@ToString
 public class BasePayIdData {
 
 	/**

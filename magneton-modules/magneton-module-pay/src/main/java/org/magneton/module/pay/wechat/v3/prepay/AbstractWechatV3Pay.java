@@ -1,12 +1,9 @@
 package org.magneton.module.pay.wechat.v3.prepay;
 
+import com.wechat.pay.contrib.apache.httpclient.util.RsaCryptoUtil;
 import java.io.IOException;
 import java.security.cert.X509Certificate;
-
 import javax.crypto.IllegalBlockSizeException;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.wechat.pay.contrib.apache.httpclient.util.RsaCryptoUtil;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -27,8 +24,6 @@ import org.magneton.module.pay.wechat.v3.core.WxPayContext;
  */
 @Slf4j
 public class AbstractWechatV3Pay implements WechatBaseV3Pay {
-
-	private static final ObjectMapper JSON = new ObjectMapper();
 
 	private final WxPayContext payContext;
 
@@ -80,7 +75,7 @@ public class AbstractWechatV3Pay implements WechatBaseV3Pay {
 			int statusCode = response.getStatusLine().getStatusCode();
 			if (statusCode == 200) { // 处理成功
 				byte[] responseBytes = EntityUtils.toByteArray(response.getEntity());
-				return Consequences.success(JSON.readValue(responseBytes, type));
+				return Consequences.success(WechatBaseV3Pay.json().readValue(responseBytes, type));
 			}
 			else if (statusCode == 204) { // 处理成功，无返回Body
 				return Consequences.success(null);
@@ -106,7 +101,10 @@ public class AbstractWechatV3Pay implements WechatBaseV3Pay {
 			basePayIdData.setAppid(this.getPayContext().getPayConfig().getAppId());
 			basePayIdData.setMchid(this.getPayContext().getPayConfig().getMerchantId());
 		}
-		String reqData = JSON.writeValueAsString(object);
+		String reqData = WechatBaseV3Pay.json().writeValueAsString(object);
+		if (log.isDebugEnabled()) {
+			log.debug("post url :{}\ndata:{}\n", url, reqData);
+		}
 		HttpPost httpPost = new HttpPost(url);
 		StringEntity entity = new StringEntity(reqData, "utf-8");
 		entity.setContentType("application/json");

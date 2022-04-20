@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
+import javax.annotations.CanIgnoreReturnValue;
 import javax.servlet.http.HttpServletResponse;
 import org.magneton.core.Response;
 import org.magneton.core.ResponseMessage;
@@ -20,22 +21,24 @@ public class ExceptionHandler {
 	private ExceptionHandler() {
 	}
 
-	public static boolean printWithFail(HttpServletResponse response, ResponseMessage responseMessage) {
-		print(response, responseMessage);
-		return false;
-	}
-
-	public static void print(HttpServletResponse response, ResponseMessage responseMessage) {
+	@CanIgnoreReturnValue
+	public static boolean printWithFail(HttpServletResponse httpServletResponse, Response response) {
+		Preconditions.checkNotNull(httpServletResponse);
 		Preconditions.checkNotNull(response);
-		Preconditions.checkNotNull(responseMessage);
-		response.setCharacterEncoding(StandardCharsets.UTF_8.displayName());
-		response.setContentType(MediaType.JSON_UTF_8.toString());
-		try (PrintWriter writer = response.getWriter()) {
-			writer.print(JSON.toJSONString(Response.response(responseMessage)));
+		httpServletResponse.setCharacterEncoding(StandardCharsets.UTF_8.displayName());
+		httpServletResponse.setContentType(MediaType.JSON_UTF_8.toString());
+		try (PrintWriter writer = httpServletResponse.getWriter()) {
+			writer.print(JSON.toJSONString(response));
 		}
 		catch (IOException e) {
 			throw new ProcessException(e);
 		}
+		return false;
+	}
+
+	public static boolean printWithFail(HttpServletResponse httpServletResponse, ResponseMessage responseMessage) {
+		printWithFail(httpServletResponse, Response.response(responseMessage));
+		return false;
 	}
 
 }

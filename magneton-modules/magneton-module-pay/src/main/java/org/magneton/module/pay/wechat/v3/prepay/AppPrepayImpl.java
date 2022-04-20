@@ -1,6 +1,7 @@
 package org.magneton.module.pay.wechat.v3.prepay;
 
 import cn.hutool.core.util.RandomUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.magneton.core.Consequences;
 import org.magneton.core.base.Preconditions;
 import org.magneton.core.base.Strings;
@@ -13,6 +14,7 @@ import org.magneton.module.pay.wechat.v3.entity.WxPayAppPrepayReq;
  * @author zhangmsh 2022/4/5
  * @since 1.0.0
  */
+@Slf4j
 public class AppPrepayImpl implements AppPrepay {
 
 	private final WechatBaseV3Pay basePay;
@@ -24,8 +26,11 @@ public class AppPrepayImpl implements AppPrepay {
 	@Override
 	public Consequences<WxPayAppPrepay> prepay(WxPayAppPrepayReq req) {
 		Preconditions.checkNotNull(req);
-		Preconditions.checkNotNull(req.getOutTradeNo());
-		Preconditions.checkNotNull(req.getDescription());
+		Preconditions.checkNotNull(req.getOutTradeNo(), "outTradeNo must not be null");
+		Preconditions.checkNotNull(req.getDescription(), "description must not be null");
+		if (Strings.isNullOrEmpty(req.getNotifyUrl())) {
+			req.setNotifyUrl(this.basePay.getPayContext().getPayConfig().getNotifyUrl());
+		}
 		int amount = Preconditions.checkNotNull(req.getAmount()).getTotal();
 		if (amount < 1) {
 			throw new AmountException(Strings.lenientFormat("amount %s less then 1", amount));
@@ -38,9 +43,11 @@ public class AppPrepayImpl implements AppPrepay {
 		// 组成装APP预支付订单，用来提供给微信进行支付
 		PrepayId preOrder = Preconditions.checkNotNull(wechatV3PayPreOrderRes.getData());
 		WxPayAppPrepay res = new WxPayAppPrepay();
-		res.setAppId(this.basePay.getPayContext().getPayConfig().getAppId());
-		res.setPartnerId(this.basePay.getPayContext().getPayConfig().getMerchantId());
-		res.setPrepayId(preOrder.getPrepayId());
+		res.setAppId(Preconditions.checkNotNull(this.basePay.getPayContext().getPayConfig().getAppId(),
+				"appId must not be null"));
+		res.setPartnerId(Preconditions.checkNotNull(this.basePay.getPayContext().getPayConfig().getMerchantId(),
+				"merchantId must not be null"));
+		res.setPrepayId(Preconditions.checkNotNull(preOrder.getPrepayId(), "prepayId must not be null"));
 		res.setPackageValue("Sign=WXPay");
 		String nonce = RandomUtil.randomString(32);
 		res.setNonceStr(nonce);

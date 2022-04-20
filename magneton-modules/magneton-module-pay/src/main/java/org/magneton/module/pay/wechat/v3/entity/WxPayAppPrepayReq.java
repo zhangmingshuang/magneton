@@ -1,8 +1,7 @@
 package org.magneton.module.pay.wechat.v3.entity;
 
-import javax.annotation.Nullable;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
+import javax.annotation.Nullable;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -33,8 +32,8 @@ import org.magneton.module.pay.wechat.v3.prepay.BasePayIdData;
  */
 @Setter
 @Getter
-@ToString
 @Accessors(chain = true)
+@ToString(callSuper = true)
 public class WxPayAppPrepayReq extends BasePayIdData {
 
 	/**
@@ -95,7 +94,10 @@ public class WxPayAppPrepayReq extends BasePayIdData {
 	 * 格式：URL
 	 *
 	 * 示例值：https://www.weixin.qq.com/wxpay/pay.php
+	 *
+	 * 如果为{@code null}则使用配置的URL地址
 	 */
+	@Nullable
 	@JsonProperty("notify_url")
 	private String notifyUrl;
 

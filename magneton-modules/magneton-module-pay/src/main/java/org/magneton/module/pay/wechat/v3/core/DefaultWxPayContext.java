@@ -1,12 +1,5 @@
 package org.magneton.module.pay.wechat.v3.core;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.security.GeneralSecurityException;
-import java.security.PrivateKey;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wechat.pay.contrib.apache.httpclient.WechatPayHttpClientBuilder;
 import com.wechat.pay.contrib.apache.httpclient.auth.PrivateKeySigner;
@@ -17,6 +10,12 @@ import com.wechat.pay.contrib.apache.httpclient.cert.CertificatesManager;
 import com.wechat.pay.contrib.apache.httpclient.exception.HttpCodeException;
 import com.wechat.pay.contrib.apache.httpclient.exception.NotFoundException;
 import com.wechat.pay.contrib.apache.httpclient.util.PemUtil;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.security.GeneralSecurityException;
+import java.security.PrivateKey;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.magneton.core.base.Preconditions;
@@ -64,6 +63,8 @@ public class DefaultWxPayContext implements WxPayContext {
 	}
 
 	protected void init() {
+		Preconditions.checkNotNull(this.wxPayConfig.getAppId(), "wechat pay appId must not be null");
+
 		String merchantId = Preconditions.checkNotNull(this.wxPayConfig.getMerchantId(),
 				"wechat pay merchantId is null.");
 		String merchantSerialNumber = Preconditions.checkNotNull(this.wxPayConfig.getMerchantSerialNumber(),
