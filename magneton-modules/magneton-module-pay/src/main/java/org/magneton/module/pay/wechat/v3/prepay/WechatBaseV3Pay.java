@@ -1,12 +1,12 @@
 package org.magneton.module.pay.wechat.v3.prepay;
 
 import javax.annotation.Nullable;
-
 import lombok.SneakyThrows;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.magneton.core.Consequences;
+import org.magneton.module.pay.wechat.v3.core.Json;
 import org.magneton.module.pay.wechat.v3.core.WxPayContext;
 
 /**
@@ -33,5 +33,9 @@ public interface WechatBaseV3Pay {
 
 	@SneakyThrows
 	HttpGet newHttpGet(String url, @Nullable String param);
+
+	static Json json() {
+		return Json.getInstance();
+	}
 
 }
