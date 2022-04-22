@@ -1,25 +1,28 @@
 package org.magneton.module.pay.wechat.v3.core;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 
-public class Json {
+public class WxPayJson {
 
-	private static final Json INSTANCE = new Json();
+	private static final WxPayJson INSTANCE = new WxPayJson();
 
 	private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 	static {
 		OBJECT_MAPPER.setVisibility(PropertyAccessor.ALL, Visibility.PROTECTED_AND_PUBLIC);
+		// 忽略Null字段
+		OBJECT_MAPPER.setSerializationInclusion(Include.NON_NULL);
 	}
 
-	public static Json getInstance() {
+	public static WxPayJson getInstance() {
 		return INSTANCE;
 	}
 
-	private Json() {
+	private WxPayJson() {
 		// private
 	}
 

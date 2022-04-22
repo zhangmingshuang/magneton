@@ -125,6 +125,9 @@ public class WxV3PayImpl implements WxV3Pay {
 	public WxPayNotification parsePaySuccessData(Map<String, String> httpHeaders, String body) {
 		Preconditions.checkNotNull(httpHeaders);
 		Preconditions.checkNotNull(body);
+		if (log.isDebugEnabled()) {
+			log.debug("parsePaySuccessData, headers:{}, body:{}", httpHeaders, body);
+		}
 		// 检查平台证书序列号 https://pay.weixin.qq.com/wiki/doc/apiv3/wechatpay/wechatpay4_1.shtml
 		// 证签名前，请商户先检查序列号是否跟商户当前所持有的
 		// 微信支付平台证书的序列号一致。如果不一致，请重新获取证书。否则，签名的私钥和证书不匹配，将无法成功验证签名。
@@ -148,7 +151,8 @@ public class WxV3PayImpl implements WxV3Pay {
 		// 证书序列号
 		String wechatPaySerial = payConfig.getMerchantSerialNumber();
 		if (!wechatPaySerial.equals(reqWechatPaySerial)) {
-			throw new PaySerialException("wechat pay serial not match");
+			throw new PaySerialException(String.format("wechat pay serial not match. should be %s but %s",
+					wechatPaySerial, reqWechatPayNonce));
 		}
 		NotificationRequest request = new NotificationRequest.Builder().withSerialNumber(wechatPaySerial)
 				.withNonce(reqWechatPayNonce).withTimestamp(reqWechatPayTimestamp).withSignature(reqWechatPaySignature)
@@ -164,6 +168,14 @@ public class WxV3PayImpl implements WxV3Pay {
 		catch (Exception e) {
 			throw new ResponseException(Response.bad().message(e.getMessage()));
 		}
+	}
+
+	public WxPayContext getPayContext() {
+		return this.payContext;
+	}
+
+	public WechatBaseV3Pay getWechatBaseV3Pay() {
+		return this.wechatBaseV3Pay;
 	}
 
 }

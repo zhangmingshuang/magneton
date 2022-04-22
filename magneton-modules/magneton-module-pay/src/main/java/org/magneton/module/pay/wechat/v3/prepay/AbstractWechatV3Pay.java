@@ -1,9 +1,8 @@
 package org.magneton.module.pay.wechat.v3.prepay;
 
-import com.wechat.pay.contrib.apache.httpclient.util.RsaCryptoUtil;
+import com.wechat.pay.contrib.apache.httpclient.auth.Signer.SignatureResult;
 import java.io.IOException;
-import java.security.cert.X509Certificate;
-import javax.crypto.IllegalBlockSizeException;
+import java.nio.charset.StandardCharsets;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -15,7 +14,6 @@ import org.apache.http.util.EntityUtils;
 import org.magneton.core.Consequences;
 import org.magneton.core.base.Preconditions;
 import org.magneton.core.base.Strings;
-import org.magneton.foundation.exception.ProcessException;
 import org.magneton.module.pay.wechat.v3.core.WxPayContext;
 
 /**
@@ -55,14 +53,9 @@ public class AbstractWechatV3Pay implements WechatBaseV3Pay {
 	@Override
 	public String doSign(String signStr) {
 		Preconditions.checkNotNull(signStr);
-
-		X509Certificate validCertificate = this.getPayContext().getVerifier().getValidCertificate();
-		try {
-			return RsaCryptoUtil.encryptOAEP(signStr, validCertificate);
-		}
-		catch (IllegalBlockSizeException e) {
-			throw new ProcessException(e);
-		}
+		SignatureResult sign = this.getPayContext().getPrivateKeySigner()
+				.sign(signStr.getBytes(StandardCharsets.UTF_8));
+		return sign.getSign();
 	}
 
 	@Override
