@@ -60,7 +60,7 @@ public class AppPrepayImpl implements AppPrepay {
 	}
 
 	/**
-	 * 签名
+	 * 签名 https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_2_4.shtml
 	 *
 	 * <pre>
 	 * 1、构造签名串
@@ -89,7 +89,11 @@ public class AppPrepayImpl implements AppPrepay {
 		String timeStamp = Preconditions.checkNotNull(res.getTimeStamp());
 		String nonceStr = Preconditions.checkNotNull(res.getNonceStr());
 		String prepayId = Preconditions.checkNotNull(res.getPrepayId());
-		return appId + "\n" + timeStamp + "\n" + nonceStr + "\n" + prepayId;
+		String signStr = appId + "\n" + timeStamp + "\n" + nonceStr + "\n" + prepayId + "\n";
+		if (log.isDebugEnabled()) {
+			log.debug("wxPayAppPrepay sign str: {}", signStr);
+		}
+		return signStr;
 	}
 
 }

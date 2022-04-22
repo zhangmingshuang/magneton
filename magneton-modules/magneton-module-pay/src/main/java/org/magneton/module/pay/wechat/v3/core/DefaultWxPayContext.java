@@ -34,6 +34,10 @@ public class DefaultWxPayContext implements WxPayContext {
 
 	private Verifier verifier;
 
+	private PrivateKeySigner privateKeySigner;
+
+	private WechatPay2Validator wechatPay2Validator;
+
 	private CloseableHttpClient httpClient;
 
 	public DefaultWxPayContext(WxPayConfig wxPayConfig) {
@@ -50,6 +54,16 @@ public class DefaultWxPayContext implements WxPayContext {
 	@Override
 	public Verifier getVerifier() {
 		return this.verifier;
+	}
+
+	@Override
+	public PrivateKeySigner getPrivateKeySigner() {
+		return this.privateKeySigner;
+	}
+
+	@Override
+	public WechatPay2Validator getWechatPay2Validator() {
+		return this.wechatPay2Validator;
 	}
 
 	@Override
@@ -86,11 +100,11 @@ public class DefaultWxPayContext implements WxPayContext {
 		try {
 			// 向证书管理器增加需要自动更新平台证书的商户信息
 			// ... 若有多个商户号，可继续调用putMerchant添加商户信息
-			certificatesManager.putMerchant(merchantId,
-					new WechatPay2Credentials(merchantId,
-							new PrivateKeySigner(merchantSerialNumber, merchantPrivateKey)),
+			this.privateKeySigner = new PrivateKeySigner(merchantSerialNumber, merchantPrivateKey);
+			certificatesManager.putMerchant(merchantId, new WechatPay2Credentials(merchantId, this.privateKeySigner),
 					apiV3Key.getBytes(StandardCharsets.UTF_8));
 			this.verifier = certificatesManager.getVerifier(merchantId);
+			this.wechatPay2Validator = new WechatPay2Validator(this.verifier);
 		}
 		catch (NotFoundException e) {
 			log.error("wechat pay merchant get verifier error.", e);
