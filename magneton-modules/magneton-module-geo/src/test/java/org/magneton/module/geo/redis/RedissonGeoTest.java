@@ -2,13 +2,13 @@ package org.magneton.module.geo.redis;
 
 import java.util.Map;
 import java.util.Set;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.magneton.foundation.comparator.VersionComparator;
 import org.magneton.module.geo.Geo;
 import org.magneton.module.geo.GeoEntry;
 import org.magneton.module.geo.GeoPosition;
+import org.magneton.module.geo.query.PositionArgs;
 import org.redisson.api.redisnode.RedisNode;
 import org.redisson.api.redisnode.RedisNodes;
 
@@ -120,9 +120,11 @@ class RedissonGeoTest extends TestRedisson {
 		long add2 = this.geo.add("radiusWithDistance", GeoEntry.of(118.185701, 24.491918, no2));
 		Assertions.assertEquals(1, add2);
 
-		Map<Integer, Double> radiusWithDistance = this.geo.radiusWithDistance("radiusWithDistance", 118.1880, 24.4941,
-				1000);
-		Assertions.assertTrue(radiusWithDistance.size() > 0);
+		PositionArgs args = new PositionArgs().setName("radiusWithDistance").setPosition(118.188087, 24.494134)
+				.setRadius(1000);
+
+		Map<Integer, Double> radiusWithDistance = this.geo.radiusWithDistance(args);
+		Assertions.assertFalse(radiusWithDistance.isEmpty());
 	}
 
 	@Test
@@ -135,10 +137,11 @@ class RedissonGeoTest extends TestRedisson {
 		long add2 = this.geo.add("radiusWithPosition", GeoEntry.of(118.185701, 24.491918, no2));
 		Assertions.assertEquals(1, add2);
 
-		Map<Object, GeoPosition> radiusWithPosition = this.geo.radiusWithPosition("radiusWithPosition", 118.1880,
-				24.4941, 1000);
+		PositionArgs args = new PositionArgs().setName("radiusWithPosition").setPosition(118.188087, 24.494134)
+				.setRadius(1000);
+		Map<Object, GeoPosition> radiusWithPosition = this.geo.radiusWithPosition(args);
 		System.out.println(radiusWithPosition);
-		Assertions.assertTrue(radiusWithPosition.size() > 0);
+		Assertions.assertFalse(radiusWithPosition.isEmpty());
 	}
 
 }
