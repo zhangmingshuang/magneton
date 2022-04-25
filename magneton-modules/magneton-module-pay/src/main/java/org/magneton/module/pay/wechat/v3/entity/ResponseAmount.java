@@ -22,8 +22,8 @@ public class ResponseAmount {
 	/**
 	 * 用户支付金额 payer_total int 是 用户支付金额，单位为分。 示例值：100
 	 **/
-	@JsonProperty("payerTotal")
-	private int payer_total;
+	@JsonProperty("payer_total")
+	private int payerTotal;
 
 	/**
 	 * 货币类型 currency string[1,16] 是 CNY：人民币，境内商户号仅支持人民币。 示例值：CNY
