@@ -75,7 +75,14 @@ public class RedissonValueOps extends AbstractRedissonOps implements ValueOps {
 	@Nullable
 	@Override
 	public <V> V get(String key) {
+		Preconditions.checkNotNull(key);
 		return (V) this.redissonClient.getBucket(key).get();
+	}
+
+	@Override
+	public long incr(String key, long incr) {
+		Preconditions.checkNotNull(key);
+		return this.redissonClient.getAtomicLong(key).addAndGet(incr);
 	}
 
 }

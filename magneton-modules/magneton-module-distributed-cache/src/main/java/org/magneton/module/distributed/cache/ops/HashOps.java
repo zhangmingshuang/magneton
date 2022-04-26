@@ -78,4 +78,10 @@ public interface HashOps {
 
 	<V> Set<Map.Entry<String, V>> entrySet(String hash);
 
+	default long incr(String hash, String key) {
+		return this.incr(hash, key, 1L);
+	}
+
+	long incr(String hash, String key, long incr);
+
 }
