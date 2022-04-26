@@ -103,4 +103,10 @@ public interface ValueOps {
 	@Nullable
 	<V> V get(String key);
 
+	default long incr(String key) {
+		return this.incr(key, 1L);
+	}
+
+	long incr(String key, long incr);
+
 }
