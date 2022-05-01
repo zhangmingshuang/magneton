@@ -1,12 +1,10 @@
 package org.magneton.module.im.tencent.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 import java.util.Set;
-
 import javax.annotation.Nullable;
 import javax.annotations.SizeLimit;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -69,7 +67,7 @@ public class BatchSendMsg {
 	 *
 	 */
 	@JsonProperty("MsgBody")
-	private List<MsgBodyElem> msgBody;
+	private List<MsgBodyElem.Body> msgBody;
 
 	/**
 	 * MsgLifeTime Integer 选填 消息离线保存时长（单位：秒），最长为7天（604800秒）。若设置该字段为0，则消息只发在线用户，不保存离线及漫游
@@ -99,6 +97,6 @@ public class BatchSendMsg {
 	/** OfflinePushInfo Object 选填 离线推送信息配置，具体可参考 消息格式描述 **/
 	@Nullable
 	@JsonProperty("OfflinePushInfo")
-	private List<MsgBodyElem> offlinePushInfo;
+	private List<MsgBodyElem.Body> offlinePushInfo;
 
 }

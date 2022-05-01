@@ -1,10 +1,10 @@
 package org.magneton.module.im.tencent.entity;
 
-import java.util.List;
-
-import javax.annotation.Nullable;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.beans.Transient;
+import java.util.List;
+import javax.annotation.Nullable;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -54,6 +54,12 @@ public class MsgSendRes {
 	@Nullable
 	@JsonProperty("MsgKey")
 	private String msgKey;
+
+	@JsonIgnore
+	@Transient
+	public boolean isOk() {
+		return this.errorCode == 0;
+	}
 
 	@Setter
 	@Getter
