@@ -1,6 +1,7 @@
 package org.magneton.module.wechat.core.oauth2;
 
 import javax.annotation.Nullable;
+
 import org.magneton.core.Consequences;
 import org.magneton.module.wechat.entity.AccessTokenRes;
 import org.magneton.module.wechat.entity.UserInfoReq;
@@ -13,7 +14,7 @@ import org.magneton.module.wechat.entity.UserInfoRes;
  * @author zhangmsh 2022/4/1
  * @since 1.0.0
  */
-public interface OAuth {
+public interface WechatOAuth {
 
 	/**
 	 * 获取用户信息

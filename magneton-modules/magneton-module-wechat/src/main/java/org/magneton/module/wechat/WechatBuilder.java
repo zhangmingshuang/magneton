@@ -1,9 +1,10 @@
 package org.magneton.module.wechat;
 
 import javax.annotation.Nullable;
+
 import org.magneton.core.base.Preconditions;
-import org.magneton.module.wechat.core.oauth2.AccessTokenCache;
-import org.magneton.module.wechat.core.oauth2.MemoryAccessTokenCache;
+import org.magneton.module.wechat.core.oauth2.MemoryWechatAccessTokenCache;
+import org.magneton.module.wechat.core.oauth2.WechatAccessTokenCache;
 
 /**
  * @author zhangmsh 2022/4/2
@@ -13,7 +14,7 @@ public class WechatBuilder {
 
 	private final WechatConfig wechatConfig;
 
-	private AccessTokenCache accessTokenCache = new MemoryAccessTokenCache();
+	private WechatAccessTokenCache wechatAccessTokenCache = new MemoryWechatAccessTokenCache();
 
 	private WechatBuilder(WechatConfig wechatConfig) {
 		this.wechatConfig = Preconditions.checkNotNull(wechatConfig);
@@ -23,8 +24,8 @@ public class WechatBuilder {
 		return new WechatBuilder(wechatConfig);
 	}
 
-	public WechatBuilder accessTokenCache(@Nullable AccessTokenCache accessTokenCache) {
-		this.accessTokenCache = accessTokenCache;
+	public WechatBuilder accessTokenCache(@Nullable WechatAccessTokenCache wechatAccessTokenCache) {
+		this.wechatAccessTokenCache = wechatAccessTokenCache;
 		return this;
 	}
 
@@ -37,8 +38,8 @@ public class WechatBuilder {
 	}
 
 	@Nullable
-	protected AccessTokenCache getAccessTokenCache() {
-		return this.accessTokenCache;
+	protected WechatAccessTokenCache getAccessTokenCache() {
+		return this.wechatAccessTokenCache;
 	}
 
 }

@@ -3,7 +3,7 @@ package org.magneton.module.wechat;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.magneton.module.wechat.core.oauth2.OAuth;
+import org.magneton.module.wechat.core.oauth2.WechatOAuth;
 import org.magneton.module.wechat.platform.mobile.MobileApp;
 import org.magneton.module.wechat.platform.website.WebsiteApp;
 
@@ -34,8 +34,8 @@ public class DefaultWechatImplTest {
 
 	@Test
 	void testOAuth() {
-		OAuth oAuth = defaultWechat.getOAuth();
-		Assertions.assertNotNull(oAuth);
+		WechatOAuth wechatOAuth = defaultWechat.getOAuth();
+		Assertions.assertNotNull(wechatOAuth);
 	}
 
 	@Test

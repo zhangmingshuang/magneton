@@ -1,7 +1,8 @@
 package org.magneton.module.wechat.core.oauth2;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import javax.annotation.Nullable;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.magneton.core.Consequences;
 import org.magneton.core.base.MoreObjects;
@@ -17,7 +18,7 @@ import org.magneton.module.wechat.entity.UserInfoRes;
  * @since 1.0.0
  */
 @Slf4j
-public class OAuthImpl implements OAuth {
+public class WechatOAuthImpl implements WechatOAuth {
 
 	private static final String ACCESS_TOKEN_URL = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=%s&secret=%s&code=%sE&grant_type=authorization_code";
 
@@ -28,11 +29,11 @@ public class OAuthImpl implements OAuth {
 	private final WechatConfig wechatConfig;
 
 	@Nullable
-	private final AccessTokenCache accessTokenCache;
+	private final WechatAccessTokenCache wechatAccessTokenCache;
 
-	public OAuthImpl(WechatConfig wechatConfig, @Nullable AccessTokenCache accessTokenCache) {
+	public WechatOAuthImpl(WechatConfig wechatConfig, @Nullable WechatAccessTokenCache wechatAccessTokenCache) {
 		this.wechatConfig = Preconditions.checkNotNull(wechatConfig);
-		this.accessTokenCache = accessTokenCache;
+		this.wechatAccessTokenCache = wechatAccessTokenCache;
 	}
 
 	@Override
@@ -45,8 +46,8 @@ public class OAuthImpl implements OAuth {
 			return response.coverage();
 		}
 		AccessTokenRes accessTokenRes = response.getData();
-		if (this.accessTokenCache != null) {
-			this.accessTokenCache.save(accessTokenRes);
+		if (this.wechatAccessTokenCache != null) {
+			this.wechatAccessTokenCache.save(accessTokenRes);
 		}
 		return Consequences.success(accessTokenRes);
 	}
@@ -55,10 +56,10 @@ public class OAuthImpl implements OAuth {
 	@Nullable
 	public AccessTokenRes accessTokenFromCache(String openid) {
 		Preconditions.checkNotNull(openid);
-		if (this.accessTokenCache == null) {
+		if (this.wechatAccessTokenCache == null) {
 			return null;
 		}
-		return this.accessTokenCache.get(openid);
+		return this.wechatAccessTokenCache.get(openid);
 	}
 
 	@Override
