@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.experimental.Accessors;
 
 /**
  * 语音消息元素.
@@ -18,6 +19,7 @@ import lombok.ToString;
 @Setter
 @Getter
 @ToString
+@Accessors(chain = true)
 public class SoundElem implements MsgBodyElem {
 
 	/**

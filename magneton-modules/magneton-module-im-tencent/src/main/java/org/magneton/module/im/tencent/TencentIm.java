@@ -1,8 +1,7 @@
 package org.magneton.module.im.tencent;
 
-import javax.annotation.Nullable;
-
 import com.tencentyun.TLSSigAPIv2;
+import javax.annotation.Nullable;
 import lombok.Getter;
 import lombok.Setter;
 import org.magneton.core.base.Preconditions;
@@ -29,12 +28,15 @@ public class TencentIm {
 	private TLSSigAPIv2 api;
 
 	@Setter
-	@Getter
 	private Msg msg = new MsgImpl(this);
 
 	public TencentIm(TencentImConfig config) {
 		this.config = config;
 		this.init();
+	}
+
+	public Msg msg() {
+		return this.msg;
 	}
 
 	protected void init() {
