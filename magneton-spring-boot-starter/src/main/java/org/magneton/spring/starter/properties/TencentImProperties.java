@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.magneton.module.im.tencent.TencentImConfig;
-
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
@@ -20,5 +19,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class TencentImProperties extends TencentImConfig {
 
 	public static final String PREFIX = "magneton.module.im.tencent";
+
+	public static final String CONDITION_KEY = "app-id";
 
 }

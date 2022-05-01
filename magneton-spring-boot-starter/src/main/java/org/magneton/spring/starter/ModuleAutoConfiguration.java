@@ -32,7 +32,6 @@ import org.magneton.spring.starter.properties.TencentImProperties;
 import org.magneton.spring.starter.properties.WechatProperties;
 import org.magneton.spring.starter.properties.WxPayProperties;
 import org.redisson.api.RedissonClient;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -161,8 +160,8 @@ public class ModuleAutoConfiguration {
 
 	@Bean
 	@ConditionalOnMissingBean
-	@ConditionalOnProperty(prefix = WechatProperties.PREFIX, name = WechatProperties.CONDITION_KEY)
 	@ConditionalOnClass(Wechat.class)
+	@ConditionalOnProperty(prefix = WechatProperties.PREFIX, name = WechatProperties.CONDITION_KEY)
 	public Wechat wechat(WechatProperties wechatProperties, WechatAccessTokenCache wechatAccessTokenCache) {
 		return WechatBuilder.newBuilder(wechatProperties).accessTokenCache(wechatAccessTokenCache).build();
 	}
@@ -172,6 +171,15 @@ public class ModuleAutoConfiguration {
 	@Bean
 	@ConditionalOnMissingBean
 	@ConditionalOnClass(TencentIm.class)
+	@ConditionalOnProperty(prefix = TencentImProperties.PREFIX, name = TencentImProperties.CONDITION_KEY)
+	public TencentImProperties tencentImProperties() {
+		return new TencentImProperties();
+	}
+
+	@Bean
+	@ConditionalOnMissingBean
+	@ConditionalOnClass(TencentIm.class)
+	@ConditionalOnProperty(prefix = TencentImProperties.PREFIX, name = TencentImProperties.CONDITION_KEY)
 	public UserSignCache userSignCache(RedissonClient redissonClient) {
 		return new TencentImUserSignCache(redissonClient);
 	}
@@ -179,10 +187,7 @@ public class ModuleAutoConfiguration {
 	@Bean
 	@ConditionalOnMissingBean
 	@ConditionalOnClass(TencentIm.class)
-	public TencentImProperties tencentImProperties() {
-		return new TencentImProperties();
-	}
-
+	@ConditionalOnProperty(prefix = TencentImProperties.PREFIX, name = TencentImProperties.CONDITION_KEY)
 	public TencentIm tencentIm(TencentImProperties tencentImProperties,
 			@Autowired(required = false) UserSignCache userSignCache) {
 		TencentIm tencentIm = new TencentIm(tencentImProperties);

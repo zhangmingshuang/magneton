@@ -80,6 +80,11 @@
             </dependency>
             <dependency>
                 <groupId>org.magneton</groupId>
+                <artifactId>magneton-module-im-tencent</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.magneton</groupId>
                 <artifactId>magneton-module-oss</artifactId>
                 <version>${project.version}</version>
             </dependency>
