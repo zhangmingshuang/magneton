@@ -1,8 +1,8 @@
 package org.magneton.module.wechat;
 
 import org.magneton.core.base.Preconditions;
-import org.magneton.module.wechat.core.oauth2.OAuth;
-import org.magneton.module.wechat.core.oauth2.OAuthImpl;
+import org.magneton.module.wechat.core.oauth2.WechatOAuth;
+import org.magneton.module.wechat.core.oauth2.WechatOAuthImpl;
 import org.magneton.module.wechat.platform.mobile.DefaultMobileAppImpl;
 import org.magneton.module.wechat.platform.mobile.MobileApp;
 import org.magneton.module.wechat.platform.website.DefaultWebsiteAppImpl;
@@ -20,7 +20,7 @@ public class DefaultWechatImpl implements Wechat, WechatContext {
 
 	private MobileApp mobileApp;
 
-	private OAuth oAuth;
+	private WechatOAuth wechatOAuth;
 
 	public DefaultWechatImpl(WechatBuilder wechatBuilder) {
 		this.wechatConfig = Preconditions.checkNotNull(wechatBuilder.getWechatConfig());
@@ -28,7 +28,7 @@ public class DefaultWechatImpl implements Wechat, WechatContext {
 	}
 
 	protected void init(WechatBuilder wechatBuilder) {
-		this.oAuth = new OAuthImpl(this.wechatConfig, wechatBuilder.getAccessTokenCache());
+		this.wechatOAuth = new WechatOAuthImpl(this.wechatConfig, wechatBuilder.getAccessTokenCache());
 		this.websiteApp = new DefaultWebsiteAppImpl(this);
 		this.mobileApp = new DefaultMobileAppImpl(this);
 	}
@@ -49,8 +49,8 @@ public class DefaultWechatImpl implements Wechat, WechatContext {
 	}
 
 	@Override
-	public OAuth getOAuth() {
-		return this.oAuth;
+	public WechatOAuth getOAuth() {
+		return this.wechatOAuth;
 	}
 
 }

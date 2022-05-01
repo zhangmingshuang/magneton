@@ -25,6 +25,7 @@
 		<module>magneton-module-pay</module>
 		<module>magneton-module-core</module>
 		<module>magneton-module-wechat</module>
+		<module>magneton-module-im-tencent</module>
 	</modules>
 
 

@@ -6,6 +6,8 @@ import org.magneton.module.distributed.lock.DistributedLock;
 import org.magneton.module.distributed.lock.redis.RedissonDistributedLock;
 import org.magneton.module.geo.Geo;
 import org.magneton.module.geo.redis.RedissonGeo;
+import org.magneton.module.im.tencent.TencentIm;
+import org.magneton.module.im.tencent.UserSignCache;
 import org.magneton.module.oss.aliyun.AliyunOss;
 import org.magneton.module.oss.aliyun.AliyunOssConfig;
 import org.magneton.module.pay.wechat.v3.WxV3Pay;
@@ -21,13 +23,17 @@ import org.magneton.module.statistics.Statistics;
 import org.magneton.module.statistics.redis.RedissonStatistics;
 import org.magneton.module.wechat.Wechat;
 import org.magneton.module.wechat.WechatBuilder;
-import org.magneton.module.wechat.core.oauth2.AccessTokenCache;
-import org.magneton.spring.starter.extension.wechat.RedisAccessTokenCache;
+import org.magneton.module.wechat.core.oauth2.WechatAccessTokenCache;
+import org.magneton.spring.starter.extension.tencent.im.TencentImUserSignCache;
+import org.magneton.spring.starter.extension.wechat.RedisWechatAccessTokenCache;
 import org.magneton.spring.starter.properties.AliyunOssProperties;
 import org.magneton.spring.starter.properties.SmsProperties;
+import org.magneton.spring.starter.properties.TencentImProperties;
 import org.magneton.spring.starter.properties.WechatProperties;
 import org.magneton.spring.starter.properties.WxPayProperties;
 import org.redisson.api.RedissonClient;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -121,18 +127,18 @@ public class ModuleAutoConfiguration {
 
 	// =========== pay wechat ===========
 	@Bean
+	@ConditionalOnClass(WxV3Pay.class)
+	@ConditionalOnProperty(prefix = WxPayProperties.PREFIX, name = WxPayProperties.CONDITION_KEY)
+	public WxV3Pay wechatPay(WxPayProperties wechatPayProperties) {
+		return new WxV3PayImpl(wechatPayProperties);
+	}
+
+	@Bean
 	@ConditionalOnMissingBean
 	@ConditionalOnProperty(prefix = WxPayProperties.PREFIX, name = WxPayProperties.CONDITION_KEY)
 	@ConditionalOnClass(WxV3Pay.class)
 	public WxPayProperties wechatPayProperties() {
 		return new WxPayProperties();
-	}
-
-	@Bean
-	@ConditionalOnClass(WxV3Pay.class)
-	@ConditionalOnProperty(prefix = WxPayProperties.PREFIX, name = WxPayProperties.CONDITION_KEY)
-	public WxV3Pay wechatPay(WxPayProperties wechatPayProperties) {
-		return new WxV3PayImpl(wechatPayProperties);
 	}
 	// =========== pay wechat =========== end
 
@@ -149,17 +155,40 @@ public class ModuleAutoConfiguration {
 	@ConditionalOnMissingBean
 	@ConditionalOnProperty(prefix = WechatProperties.PREFIX, name = WechatProperties.CONDITION_KEY)
 	@ConditionalOnClass(Wechat.class)
-	public AccessTokenCache accessTokenCache(RedissonClient redissonClient) {
-		return new RedisAccessTokenCache(redissonClient);
+	public WechatAccessTokenCache accessTokenCache(RedissonClient redissonClient) {
+		return new RedisWechatAccessTokenCache(redissonClient);
 	}
 
 	@Bean
 	@ConditionalOnMissingBean
 	@ConditionalOnProperty(prefix = WechatProperties.PREFIX, name = WechatProperties.CONDITION_KEY)
 	@ConditionalOnClass(Wechat.class)
-	public Wechat wechat(WechatProperties wechatProperties, AccessTokenCache accessTokenCache) {
-		return WechatBuilder.newBuilder(wechatProperties).accessTokenCache(accessTokenCache).build();
+	public Wechat wechat(WechatProperties wechatProperties, WechatAccessTokenCache wechatAccessTokenCache) {
+		return WechatBuilder.newBuilder(wechatProperties).accessTokenCache(wechatAccessTokenCache).build();
 	}
 	// ============== wechat ============= end
+
+	// ================ im =======================
+	@Bean
+	@ConditionalOnMissingBean
+	@ConditionalOnClass(TencentIm.class)
+	public UserSignCache userSignCache(RedissonClient redissonClient) {
+		return new TencentImUserSignCache(redissonClient);
+	}
+
+	@Bean
+	@ConditionalOnMissingBean
+	@ConditionalOnClass(TencentIm.class)
+	public TencentImProperties tencentImProperties() {
+		return new TencentImProperties();
+	}
+
+	public TencentIm tencentIm(TencentImProperties tencentImProperties,
+			@Autowired(required = false) UserSignCache userSignCache) {
+		TencentIm tencentIm = new TencentIm(tencentImProperties);
+		tencentIm.setUserSignCache(userSignCache);
+		return tencentIm;
+	}
+	// ================ im ======================= end
 
 }

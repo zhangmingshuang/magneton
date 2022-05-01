@@ -1,22 +1,26 @@
 package org.magneton.spring.starter.extension.wechat;
 
 import java.util.concurrent.TimeUnit;
+
 import javax.annotation.Nullable;
+
 import org.magneton.core.base.Preconditions;
-import org.magneton.module.wechat.core.oauth2.AccessTokenCache;
+import org.magneton.module.wechat.core.oauth2.WechatAccessTokenCache;
 import org.magneton.module.wechat.entity.AccessTokenRes;
 import org.redisson.api.RBucket;
 import org.redisson.api.RedissonClient;
 
 /**
+ * Redis Wechat AccessToken Cache
+ *
  * @author zhangmsh 2022/4/3
  * @since 1.0.0
  */
-public class RedisAccessTokenCache implements AccessTokenCache {
+public class RedisWechatAccessTokenCache implements WechatAccessTokenCache {
 
 	private final RedissonClient redissonClient;
 
-	public RedisAccessTokenCache(RedissonClient redissonClient) {
+	public RedisWechatAccessTokenCache(RedissonClient redissonClient) {
 		this.redissonClient = Preconditions.checkNotNull(redissonClient);
 	}
 
