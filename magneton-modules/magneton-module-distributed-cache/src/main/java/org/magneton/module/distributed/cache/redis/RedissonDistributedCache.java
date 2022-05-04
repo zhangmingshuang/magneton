@@ -61,13 +61,25 @@ public class RedissonDistributedCache implements DistributedCache {
 	@Override
 	public long ttl(String key) {
 		Preconditions.checkNotNull(key, "key");
-		return this.redissonClient.getBucket(key).remainTimeToLive();
+		long ttl = this.redissonClient.getBucket(key).remainTimeToLive();
+		return ttl <= 0 ? ttl : ttl / 1000;
 	}
 
 	@Override
 	public boolean expire(String key, long expire) {
 		Preconditions.checkNotNull(key, "key");
 		return this.redissonClient.getBucket(key).expire(expire, TimeUnit.SECONDS);
+	}
+
+	@Override
+	public boolean expireByOther(String key, String otherKey) {
+		Preconditions.checkNotNull(key, "key must not be null");
+		Preconditions.checkNotNull(otherKey, "otherKey must not be null");
+		long ttl = this.ttl(otherKey);
+		if (ttl <= 0) {
+			return false;
+		}
+		return this.expire(key, ttl);
 	}
 
 	@Override

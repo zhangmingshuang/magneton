@@ -40,6 +40,15 @@ public interface DistributedCache {
 	boolean expire(String key, long expire);
 
 	/**
+	 * 根据某个Key的当前TTL值，设置对应的过期时间
+	 * @param key 要过期的Key
+	 * @param otherKey 根据这个Key的当前TTL值，设置对应的过期时间
+	 * @return 是否设置成功。如果{@code otherKey}不存在（已过期）或者是永久有效的则忽略该操作，返回{@code false}。
+	 * 如果{@code otherKey}存在，并且存在过期时间（即TTL>0），则设置{@code key}的过期时间为{@code otherKey}的过期时间。
+	 */
+	boolean expireByOther(String key, String otherKey);
+
+	/**
 	 * 判断是否存在
 	 * @param key 要判断的Key
 	 * @return 如果存在则返回 {@code true}，否则返回 {@code false}
