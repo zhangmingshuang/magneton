@@ -1,12 +1,10 @@
 package org.magneton.spring.starter.extension.wechat;
 
 import java.util.concurrent.TimeUnit;
-
 import javax.annotation.Nullable;
-
 import org.magneton.core.base.Preconditions;
-import org.magneton.module.wechat.core.oauth2.WechatAccessTokenCache;
-import org.magneton.module.wechat.entity.AccessTokenRes;
+import org.magneton.module.wechat.open.core.oauth2.WechatAccessTokenCache;
+import org.magneton.module.wechat.open.entity.AccessTokenRes;
 import org.redisson.api.RBucket;
 import org.redisson.api.RedissonClient;
 

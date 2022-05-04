@@ -10,6 +10,7 @@ import lombok.Setter;
 import lombok.ToString;
 import org.magneton.module.im.tencent.api.MsgModel;
 import org.magneton.module.im.tencent.entity.msgbody.MsgBodyElem;
+import org.magneton.module.im.tencent.entity.msgbody.OfflinePushElem;
 
 /**
  * 批量发单聊消息
@@ -97,6 +98,6 @@ public class BatchSendMsg {
 	/** OfflinePushInfo Object 选填 离线推送信息配置，具体可参考 消息格式描述 **/
 	@Nullable
 	@JsonProperty("OfflinePushInfo")
-	private List<MsgBodyElem.Body> offlinePushInfo;
+	private OfflinePushElem offlinePushInfo;
 
 }

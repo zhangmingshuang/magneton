@@ -48,6 +48,12 @@ public class TencentIm {
 		return this.api;
 	}
 
+	public void cleanSig(String userId) {
+		if (this.userSignCache != null) {
+			this.userSignCache.remove(userId);
+		}
+	}
+
 	/**
 	 * UserSig 是用户登录即时通信 IM 的密码，其本质是对 UserID 等信息加密后得到的密文
 	 * @param userId 用户 ID

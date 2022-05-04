@@ -34,6 +34,8 @@ public interface Geo {
 	 */
 	<V> long add(String name, GeoEntry<V>... entries);
 
+	<V> void remove(String name, V member);
+
 	/**
 	 * 如果位置不存在，则添加。如果已存在则忽略。
 	 * @param name 名称

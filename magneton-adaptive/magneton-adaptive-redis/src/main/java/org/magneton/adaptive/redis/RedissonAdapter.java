@@ -152,6 +152,10 @@ public class RedissonAdapter {
 			defaultConfigFile = Strings.lenientFormat(path, "/" + Strings.suffixIfNotNullOrEmpty(PROFILE, "-"));
 			log.warn("loading redisson config  [{}] but not found", defaultConfigFile);
 			try (InputStream inputStream = RedissonAdapter.class.getResourceAsStream(defaultConfigFile)) {
+				if (inputStream == null) {
+					// noinspection ThrowCaughtLocally
+					throw new IOException(String.format("file %s not found", defaultConfigFile));
+				}
 				Config config = Config.fromYAML(inputStream);
 				log.info("using redisson config [{}]", defaultConfigFile);
 				return config;

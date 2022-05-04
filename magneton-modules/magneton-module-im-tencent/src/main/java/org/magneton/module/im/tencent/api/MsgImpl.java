@@ -38,11 +38,11 @@ public class MsgImpl implements Msg {
 				config.getAppId(), config.getAdmin(), this.tencentIm.getAdminUserSign(), random);
 		// 若不希望将消息同步至 From_Account，则 SyncOtherMachine 填写2。
 		// 若希望将消息同步至 From_Account，则 SyncOtherMachine 填写1。
-		if (log.isDebugEnabled()) {
-			log.debug("batchSendMsg url: {}, data:{}", url, batchSendMsg);
-		}
 		try {
 			String body = TencentImJson.getInstance().writeValueAsString(batchSendMsg);
+			if (log.isDebugEnabled()) {
+				log.debug("batchSendMsg url: {}, data:{}", url, body);
+			}
 			String response = HttpUtil.post(url, body);
 			return TencentImJson.getInstance().readValue(response, MsgSendRes.class);
 		}

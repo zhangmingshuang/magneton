@@ -1,11 +1,10 @@
 package org.magneton.module.distributed.cache;
 
 import java.util.List;
-
 import javax.annotations.Underperforming;
-
 import org.magneton.module.distributed.cache.ops.HashOps;
 import org.magneton.module.distributed.cache.ops.ListOps;
+import org.magneton.module.distributed.cache.ops.SetOps;
 import org.magneton.module.distributed.cache.ops.ValueOps;
 
 /**
@@ -21,6 +20,8 @@ public interface DistributedCache {
 	ListOps opsForList();
 
 	HashOps opsForHash();
+
+	SetOps opsForSet();
 
 	/**
 	 * 获取Key的过期时间(秒）

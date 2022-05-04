@@ -21,15 +21,15 @@ import org.magneton.module.sms.property.SmsProperty;
 import org.magneton.module.sms.redis.RedissonSms;
 import org.magneton.module.statistics.Statistics;
 import org.magneton.module.statistics.redis.RedissonStatistics;
-import org.magneton.module.wechat.Wechat;
-import org.magneton.module.wechat.WechatBuilder;
-import org.magneton.module.wechat.core.oauth2.WechatAccessTokenCache;
+import org.magneton.module.wechat.open.WechatOpen;
+import org.magneton.module.wechat.open.WechatOpenBuilder;
+import org.magneton.module.wechat.open.core.oauth2.WechatAccessTokenCache;
 import org.magneton.spring.starter.extension.tencent.im.TencentImUserSignCache;
 import org.magneton.spring.starter.extension.wechat.RedisWechatAccessTokenCache;
 import org.magneton.spring.starter.properties.AliyunOssProperties;
 import org.magneton.spring.starter.properties.SmsProperties;
 import org.magneton.spring.starter.properties.TencentImProperties;
-import org.magneton.spring.starter.properties.WechatProperties;
+import org.magneton.spring.starter.properties.WechatOpenProperties;
 import org.magneton.spring.starter.properties.WxPayProperties;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -144,26 +144,26 @@ public class ModuleAutoConfiguration {
 	// ============== wechat =============
 	@Bean
 	@ConditionalOnMissingBean
-	@ConditionalOnProperty(prefix = WechatProperties.PREFIX, name = WechatProperties.CONDITION_KEY)
-	@ConditionalOnClass(Wechat.class)
-	public WechatProperties wechatProperties() {
-		return new WechatProperties();
+	@ConditionalOnProperty(prefix = WechatOpenProperties.PREFIX, name = WechatOpenProperties.CONDITION_KEY)
+	@ConditionalOnClass(WechatOpen.class)
+	public WechatOpenProperties wechatOpenProperties() {
+		return new WechatOpenProperties();
 	}
 
 	@Bean
 	@ConditionalOnMissingBean
-	@ConditionalOnProperty(prefix = WechatProperties.PREFIX, name = WechatProperties.CONDITION_KEY)
-	@ConditionalOnClass(Wechat.class)
+	@ConditionalOnProperty(prefix = WechatOpenProperties.PREFIX, name = WechatOpenProperties.CONDITION_KEY)
+	@ConditionalOnClass(WechatOpen.class)
 	public WechatAccessTokenCache accessTokenCache(RedissonClient redissonClient) {
 		return new RedisWechatAccessTokenCache(redissonClient);
 	}
 
 	@Bean
 	@ConditionalOnMissingBean
-	@ConditionalOnClass(Wechat.class)
-	@ConditionalOnProperty(prefix = WechatProperties.PREFIX, name = WechatProperties.CONDITION_KEY)
-	public Wechat wechat(WechatProperties wechatProperties, WechatAccessTokenCache wechatAccessTokenCache) {
-		return WechatBuilder.newBuilder(wechatProperties).accessTokenCache(wechatAccessTokenCache).build();
+	@ConditionalOnClass(WechatOpen.class)
+	@ConditionalOnProperty(prefix = WechatOpenProperties.PREFIX, name = WechatOpenProperties.CONDITION_KEY)
+	public WechatOpen wechat(WechatOpenProperties wechatOpenProperties, WechatAccessTokenCache wechatAccessTokenCache) {
+		return WechatOpenBuilder.newBuilder(wechatOpenProperties).accessTokenCache(wechatAccessTokenCache).build();
 	}
 	// ============== wechat ============= end
 

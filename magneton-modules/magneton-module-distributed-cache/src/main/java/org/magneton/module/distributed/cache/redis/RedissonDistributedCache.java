@@ -2,13 +2,13 @@ package org.magneton.module.distributed.cache.redis;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-
 import org.magneton.core.base.Preconditions;
 import org.magneton.core.base.Strings;
 import org.magneton.core.collect.Lists;
 import org.magneton.module.distributed.cache.DistributedCache;
 import org.magneton.module.distributed.cache.ops.HashOps;
 import org.magneton.module.distributed.cache.ops.ListOps;
+import org.magneton.module.distributed.cache.ops.SetOps;
 import org.magneton.module.distributed.cache.ops.ValueOps;
 import org.redisson.api.RedissonClient;
 
@@ -28,16 +28,24 @@ public class RedissonDistributedCache implements DistributedCache {
 
 	private final HashOps hashOps;
 
+	private final SetOps setOps;
+
 	public RedissonDistributedCache(RedissonClient redissonClient) {
 		this.redissonClient = Preconditions.checkNotNull(redissonClient);
 		this.valueOps = new RedissonValueOps(this.redissonClient);
 		this.listOps = new RedissonListOps(this.redissonClient);
 		this.hashOps = new RedissonHashOps(this.redissonClient);
+		this.setOps = new RedissonSetOps(this.redissonClient);
 	}
 
 	@Override
 	public HashOps opsForHash() {
 		return this.hashOps;
+	}
+
+	@Override
+	public SetOps opsForSet() {
+		return this.setOps;
 	}
 
 	@Override
