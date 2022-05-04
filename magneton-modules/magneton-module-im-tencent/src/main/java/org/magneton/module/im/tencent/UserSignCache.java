@@ -15,4 +15,6 @@ public interface UserSignCache {
 	@Nullable
 	String get(String userId);
 
+	void remove(String userId);
+
 }

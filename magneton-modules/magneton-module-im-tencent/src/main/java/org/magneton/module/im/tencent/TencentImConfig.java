@@ -28,7 +28,7 @@ public class TencentImConfig {
 	/**
 	 * 管理员账号
 	 */
-	private String admin;
+	private String admin = "administrator";
 
 	/**
 	 * 生成的UserSign的默认生效时间，单位为秒，默认为180天

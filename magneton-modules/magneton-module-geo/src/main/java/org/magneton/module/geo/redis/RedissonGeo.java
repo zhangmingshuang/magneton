@@ -40,6 +40,13 @@ public class RedissonGeo implements Geo {
 	}
 
 	@Override
+	public <V> void remove(String name, V member) {
+		Preconditions.checkNotNull(name);
+		Preconditions.checkNotNull(member);
+		this.redissonClient.getGeo(name).remove(member);
+	}
+
+	@Override
 	@Versielimiet(component = "redis", version = "6.2.0")
 	public <V> long addIfAbsent(String name, GeoEntry<V>... entries) {
 		Preconditions.checkNotNull(name);

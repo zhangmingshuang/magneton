@@ -1,9 +1,7 @@
 package org.magneton.spring.starter.extension.tencent.im;
 
 import java.util.concurrent.TimeUnit;
-
 import javax.annotation.Nullable;
-
 import org.magneton.core.base.Preconditions;
 import org.magneton.module.im.tencent.UserSignCache;
 import org.redisson.api.RedissonClient;
@@ -34,6 +32,12 @@ public class TencentImUserSignCache implements UserSignCache {
 	public String get(String userId) {
 		Preconditions.checkNotNull(userId, "userId must not be null");
 		return (String) this.redissonClient.getBucket("tencentIm:userSign:" + userId).get();
+	}
+
+	@Override
+	public void remove(String userId) {
+		Preconditions.checkNotNull(userId, "userId must not be null");
+		this.redissonClient.getBucket("tencentIm:userSign:" + userId).delete();
 	}
 
 }
