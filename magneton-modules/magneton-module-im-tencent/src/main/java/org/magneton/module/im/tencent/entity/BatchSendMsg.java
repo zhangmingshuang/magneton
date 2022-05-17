@@ -8,7 +8,7 @@ import javax.annotations.SizeLimit;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.magneton.module.im.tencent.api.MsgModel;
+import org.magneton.module.im.tencent.api.msg.MsgModel;
 import org.magneton.module.im.tencent.entity.msgbody.MsgBodyElem;
 import org.magneton.module.im.tencent.entity.msgbody.OfflinePushElem;
 

@@ -1,4 +1,4 @@
-package org.magneton.module.im.tencent.api;
+package org.magneton.module.im.tencent.api.msg;
 
 public enum MsgModel {
 

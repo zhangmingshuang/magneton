@@ -48,7 +48,7 @@ public abstract class AbstractSignSafeDog implements SignSafeDog {
 			embeddingStr += salt;
 		}
 		if (debug) {
-			log.error("sign str: {}", embeddingStr);
+			log.info("debug sign str: {}", embeddingStr);
 		}
 		return Hashing.sha256().hashString(embeddingStr, StandardCharsets.UTF_8).toString();
 	}

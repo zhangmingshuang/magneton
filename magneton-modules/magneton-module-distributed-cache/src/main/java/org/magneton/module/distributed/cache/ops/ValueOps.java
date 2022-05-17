@@ -3,9 +3,7 @@ package org.magneton.module.distributed.cache.ops;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-
 import javax.annotation.Nullable;
-
 import org.magneton.core.base.Preconditions;
 import org.magneton.core.collect.Maps;
 import org.magneton.module.distributed.cache.Entry;
@@ -99,6 +97,8 @@ public interface ValueOps {
 	<V> void setEx(List<ExpireEntry<V>> expireEntries);
 
 	<V> void setEx(ExpireEntry<V> expireEntry);
+
+	<V> boolean trySet(String key, V value, long expire);
 
 	@Nullable
 	<V> V get(String key);

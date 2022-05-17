@@ -1,4 +1,4 @@
-package org.magneton.module.im.tencent.api;
+package org.magneton.module.im.tencent.api.msg;
 
 import org.magneton.module.im.tencent.entity.BatchSendMsg;
 import org.magneton.module.im.tencent.entity.MsgSendRes;
