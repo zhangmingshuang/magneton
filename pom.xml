@@ -84,6 +84,7 @@
         <commons-codec.version>1.15</commons-codec.version>
         <forest-core.version>1.5.19</forest-core.version>
         <tls-sig-api-v2.version>2.0</tls-sig-api-v2.version>
+        <tomcat-embed-core.version>9.0.62</tomcat-embed-core.version>
     </properties>
 
     <dependencyManagement>
@@ -112,6 +113,12 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
                 <version>${fastjson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.tomcat.embed</groupId>
+                <artifactId>tomcat-embed-core</artifactId>
+                <version>${tomcat-embed-core.version}</version>
+                <scope>provided</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>

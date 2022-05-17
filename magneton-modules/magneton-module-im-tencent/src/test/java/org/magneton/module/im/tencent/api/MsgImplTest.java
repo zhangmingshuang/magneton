@@ -12,6 +12,7 @@ import org.magneton.core.collect.Sets;
 import org.magneton.module.im.tencent.TencentIm;
 import org.magneton.module.im.tencent.TencentImConfig;
 import org.magneton.module.im.tencent.TencentImJson;
+import org.magneton.module.im.tencent.api.msg.MsgModel;
 import org.magneton.module.im.tencent.entity.BatchSendMsg;
 import org.magneton.module.im.tencent.entity.MsgSendRes;
 import org.magneton.module.im.tencent.entity.msgbody.MsgBodyElem;

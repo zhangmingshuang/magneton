@@ -1,4 +1,4 @@
-package org.magneton.module.im.tencent.api;
+package org.magneton.module.im.tencent.api.msg;
 
 import cn.hutool.http.HttpUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;

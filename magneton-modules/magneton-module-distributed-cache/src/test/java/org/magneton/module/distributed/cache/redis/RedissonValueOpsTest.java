@@ -98,4 +98,16 @@ class RedissonValueOpsTest extends TestRedisson {
 		Assertions.assertTrue(ChaosTest.booleanSupplier().valueEquals(testA, testA1));
 	}
 
+	@Test
+	void trySet() {
+		String key = "trySetKey";
+		String value = "value";
+		boolean trySet = this.ops.trySet(key, value, 11);
+		Assertions.assertTrue(trySet);
+		trySet = this.ops.trySet(key, "value2", 11);
+		Assertions.assertFalse(trySet);
+
+		Assertions.assertEquals(value, this.ops.get(key));
+	}
+
 }
