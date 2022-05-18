@@ -2,7 +2,7 @@ package org.magneton.adaptive.redis;
 
 import java.io.File;
 import java.io.IOException;
-
+import java.io.InputStream;
 import lombok.extern.slf4j.Slf4j;
 import org.magneton.core.base.Preconditions;
 import org.magneton.core.base.Strings;
@@ -22,6 +22,27 @@ public class RedissonAdapter {
 
 	private RedissonAdapter() {
 
+	}
+
+	public static final String PROFILE = System.getProperty("spring.profiles.active",
+			System.getProperty("redisson.adapter.prefix", ""));
+
+	public static RedissonClient createClient(RedissonClientType redissonClientType) {
+		Preconditions.checkNotNull(redissonClientType);
+		switch (redissonClientType) {
+		case CLUSTER:
+			return createClusterServersClient();
+		case MASTER_SLAVE:
+			return createMasterSlaveServersClient();
+		case REPLICATED:
+			return createReplicatedServersClient();
+		case SENTINEL:
+			return createSentinelServersClient();
+		case SINGLE:
+			return createSingleServerClient();
+		default:
+			throw new UnsupportedOperationException(Strings.format("redisson %s type unsupported", redissonClientType));
+		}
 	}
 
 	/**
@@ -119,17 +140,39 @@ public class RedissonAdapter {
 	}
 
 	private static Config createConfig(String path) {
+		String defaultConfigFile = Strings.lenientFormat(path,
+				"classpath:" + Strings.suffixIfNotNullOrEmpty(PROFILE, "-"));
 		try {
-			File file = Resources.getFile(Strings.lenientFormat(path, ""));
-			return Config.fromYAML(file);
+			File file = Resources.getFile(defaultConfigFile);
+			Config config = Config.fromYAML(file);
+			log.info("using redisson config [{}]", defaultConfigFile);
+			return config;
 		}
-		catch (IOException e) {
-			try {
-				File file = Resources.getFile(Strings.lenientFormat(path, "classpath:adaptive-"));
-				return Config.fromYAML(file);
+		catch (@SuppressWarnings("OverlyBroadCatchBlock") IOException e) {
+			defaultConfigFile = Strings.lenientFormat(path, "/" + Strings.suffixIfNotNullOrEmpty(PROFILE, "-"));
+			log.warn("loading redisson config  [{}] but not found", defaultConfigFile);
+			try (InputStream inputStream = RedissonAdapter.class.getResourceAsStream(defaultConfigFile)) {
+				if (inputStream == null) {
+					// noinspection ThrowCaughtLocally
+					throw new IOException(String.format("file %s not found", defaultConfigFile));
+				}
+				Config config = Config.fromYAML(inputStream);
+				log.info("using redisson config [{}]", defaultConfigFile);
+				return config;
 			}
 			catch (IOException e1) {
-				throw new RedissonConfigParseException(e1);
+				log.warn("loading redisson config  [{}] but not found", defaultConfigFile);
+
+				String adapterConfigFile = Strings.lenientFormat(path, "/adaptive-");
+				log.warn("loading redisson config  [{}] but not found", defaultConfigFile);
+				try (InputStream inputStream = RedissonAdapter.class.getResourceAsStream(adapterConfigFile)) {
+					Config config = Config.fromYAML(inputStream);
+					log.info("using redisson config [{}]", adapterConfigFile);
+					return config;
+				}
+				catch (IOException e2) {
+					throw new RedissonConfigParseException(e2);
+				}
 			}
 		}
 	}

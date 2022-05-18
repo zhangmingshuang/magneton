@@ -1,25 +1,32 @@
 package org.magneton.support.api.auth.service.impl;
 
+import cn.hutool.core.codec.Base64;
+import cn.hutool.crypto.KeyUtil;
+import cn.hutool.crypto.asymmetric.KeyType;
+import cn.hutool.crypto.asymmetric.RSA;
+import com.alibaba.fastjson.JSON;
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.UUID;
-
 import javax.servlet.http.HttpServletRequest;
-
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import org.magneton.core.Consequences;
 import org.magneton.core.Response;
 import org.magneton.core.base.Objects;
+import org.magneton.core.base.Preconditions;
+import org.magneton.core.base.Strings;
 import org.magneton.core.hash.Hashing;
+import org.magneton.foundation.util.Pair;
 import org.magneton.module.distributed.cache.DistributedCache;
 import org.magneton.module.distributed.lock.DistributedLock;
 import org.magneton.module.sms.SendStatus;
 import org.magneton.module.sms.Sms;
 import org.magneton.module.statistics.Statistics;
+import org.magneton.support.api.auth.constant.CommonError;
 import org.magneton.support.api.auth.constant.LoginError;
 import org.magneton.support.api.auth.constant.SmsError;
 import org.magneton.support.api.auth.dao.intf.ApiAuthLogDao;
@@ -28,15 +35,18 @@ import org.magneton.support.api.auth.dao.intf.ApiAuthUserDao;
 import org.magneton.support.api.auth.entity.ApiAuthLogDO;
 import org.magneton.support.api.auth.entity.ApiAuthStatisticsDO;
 import org.magneton.support.api.auth.entity.ApiAuthUserDO;
+import org.magneton.support.api.auth.pojo.BaseGetSecretKeyRes;
+import org.magneton.support.api.auth.pojo.BasicGetSecretKeyReq;
 import org.magneton.support.api.auth.pojo.SmsAutoLoginReq;
 import org.magneton.support.api.auth.pojo.SmsLoginReq;
 import org.magneton.support.api.auth.pojo.SmsLoginRes;
 import org.magneton.support.api.auth.pojo.SmsSendReq;
+import org.magneton.support.api.auth.process.ApiAuthTokenProcessor;
+import org.magneton.support.api.auth.properties.ApiAuthProperties;
 import org.magneton.support.api.auth.service.AuthService;
 import org.magneton.support.constant.Removed;
 import org.magneton.support.constant.Status;
 import org.magneton.support.util.IpUtil;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.support.TransactionTemplate;
@@ -74,6 +84,12 @@ public class AuthServiceImpl implements AuthService {
 	@Autowired
 	private TransactionTemplate transactionTemplate;
 
+	@Autowired(required = false)
+	private ApiAuthTokenProcessor apiAuthTokenProcessor;
+
+	@Autowired
+	private ApiAuthProperties apiAuthProperties;
+
 	@Override
 	public Response<String> sendSms(HttpServletRequest request, SmsSendReq smsSendReq) {
 		String mobile = smsSendReq.getMobile();
@@ -93,6 +109,9 @@ public class AuthServiceImpl implements AuthService {
 			return Response.bad().message(sendConsequences.getMessage());
 		}
 		String smsToken = this.sms.token(mobile, group);
+		if (Strings.isNullOrEmpty(smsToken)) {
+			return Response.response(SmsError.TOKEN_MISS);
+		}
 		return Response.ok(smsToken);
 	}
 
@@ -136,6 +155,70 @@ public class AuthServiceImpl implements AuthService {
 		return this.onLoginSuccessProcess(request, identification, cacheUser.getMobile(), cacheUser.getUserId());
 	}
 
+	@Override
+	public boolean validateToken(String token, String identification) {
+		Preconditions.checkNotNull(token);
+		Preconditions.checkNotNull(identification);
+		CacheUser cacheUser = this.distributedCache.opsForValue().get("clogin:" + token);
+		if (cacheUser == null) {
+			return false;
+		}
+		return Objects.equal(cacheUser.getIdentification(), identification);
+	}
+
+	@Override
+	public Response<String> createSecretKey(BasicGetSecretKeyReq basicGetSecretKeyReq) {
+		boolean secretKeyDebug = this.apiAuthProperties.isSecretKeyDebug();
+		String rsaPublicKey = basicGetSecretKeyReq.getRsaPublicKey();
+		String secretKeyId;
+		String secretKey;
+		if (!secretKeyDebug) {
+			long nonce = basicGetSecretKeyReq.getNonce();
+			if (System.currentTimeMillis() - this.apiAuthProperties.getSignPeriodSeconds() * 1000L < nonce) {
+				return Response.response(CommonError.SECRET_TIME_OUT);
+			}
+			String sign = Hashing.sha256()
+					.hashString(rsaPublicKey + nonce + this.apiAuthProperties.getSecretKeySignSalt(),
+							StandardCharsets.UTF_8)
+					.toString();
+			if (!Objects.equal(sign, basicGetSecretKeyReq.getSign())) {
+				return Response.response(CommonError.SECRET_SIGN_ERROR);
+			}
+			secretKeyId = Hashing.hmacMd5(sign.getBytes(StandardCharsets.UTF_8)).toString();
+			secretKey = Hashing.sha256().hashString(sign + System.currentTimeMillis(), StandardCharsets.UTF_8)
+					.toString();
+		}
+		else {
+			secretKeyId = this.apiAuthProperties.getDebugSecretKeyId();
+			secretKey = this.apiAuthProperties.getDebugSecretKey();
+		}
+		this.distributedCache.opsForValue().setEx("secret:" + secretKeyId, secretKey, 24 * 60 * 60);
+		String encrypt = this.secretKeyEncrypt(rsaPublicKey, secretKeyId, secretKey);
+		return Response.ok(encrypt);
+	}
+
+	@Override
+	public String getSecretKey(String secretKeyId) {
+		Preconditions.checkNotNull(secretKeyId);
+		String secretKey = this.distributedCache.opsForValue().get("secret:" + secretKeyId);
+		if (!Strings.isNullOrEmpty(secretKey)) {
+			// 每次访问刷新Key
+			this.distributedCache.expire("secret:" + secretKeyId, 24 * 60 * 60);
+		}
+		return secretKey;
+	}
+
+	protected String secretKeyEncrypt(String base64RsaPublicKey, String secretKeyId, String secretKey) {
+		Preconditions.checkNotNull(base64RsaPublicKey);
+		Preconditions.checkNotNull(secretKeyId);
+		Preconditions.checkNotNull(secretKey);
+		BaseGetSecretKeyRes baseGetSecretKeyRes = new BaseGetSecretKeyRes().setSecretId(secretKeyId)
+				.setSecretKey(secretKey);
+		RSA rsa = new RSA();
+		rsa.setPublicKey(KeyUtil.generateRSAPublicKey(Base64.decode(base64RsaPublicKey)));
+		return rsa.encryptBase64(JSON.toJSONBytes(baseGetSecretKeyRes), KeyType.PublicKey);
+	}
+
 	private Response<SmsLoginRes> onLoginSuccessProcess(HttpServletRequest request, String identification,
 			String mobile, int useId) {
 		String today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
@@ -164,13 +247,28 @@ public class AuthServiceImpl implements AuthService {
 		this.apiAuthStatisticsDao.increPvUv(today, isUv);
 
 		// 缓存自动登录信息
-		String token = Hashing.sha256().hashString(UUID.randomUUID() + mobile, StandardCharsets.UTF_8).toString();
-		String autoLoginToken = Hashing.sha256().hashString(UUID.randomUUID() + mobile, StandardCharsets.UTF_8)
-				.toString();
-		CacheUser cacheUser = new CacheUser().setUserId(useId).setAutoLoginToken(autoLoginToken).setMobile(mobile);
+		Pair<String, String> apiAuthToken = this.createToken(mobile);
+		String token = apiAuthToken.getFirst();
+		String autoLoginToken = apiAuthToken.getSecond();
+		CacheUser cacheUser = new CacheUser().setUserId(useId).setAutoLoginToken(autoLoginToken).setMobile(mobile)
+				.setIdentification(identification);
 		this.distributedCache.opsForValue().setEx("alogin:" + identification, cacheUser, 5 * 24 * 60 * 60);
 		this.distributedCache.opsForValue().setEx("clogin:" + token, cacheUser, 24 * 60 * 60);
 		return Response.ok(new SmsLoginRes().setAutoLoginToken(autoLoginToken).setToken(token));
+	}
+
+	private Pair<String, String> createToken(String mobile) {
+		Pair<String, String> pair = null;
+		if (this.apiAuthTokenProcessor != null) {
+			pair = this.apiAuthTokenProcessor.createToken(mobile);
+		}
+		if (pair == null) {
+			String token = Hashing.sha256().hashString(UUID.randomUUID() + mobile, StandardCharsets.UTF_8).toString();
+			String autoLoginToken = Hashing.sha256().hashString(UUID.randomUUID() + mobile, StandardCharsets.UTF_8)
+					.toString();
+			return Pair.of(token, autoLoginToken);
+		}
+		return pair;
 	}
 
 	@Setter
@@ -183,6 +281,8 @@ public class AuthServiceImpl implements AuthService {
 		private int userId;
 
 		private String mobile;
+
+		private String identification;
 
 	}
 

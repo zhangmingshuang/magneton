@@ -101,4 +101,12 @@ public class RedissonHashOps extends AbstractRedissonOps implements HashOps {
 		return map.readAllEntrySet();
 	}
 
+	@Override
+	public long incr(String hash, String key, long incr) {
+		Preconditions.checkNotNull(hash);
+		Preconditions.checkNotNull(key);
+		RMap<String, Object> map = this.redissonClient.getMap(hash);
+		return (long) map.addAndGet(key, incr);
+	}
+
 }

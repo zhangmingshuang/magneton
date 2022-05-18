@@ -29,8 +29,9 @@ public class SPILoader {
 
 	@Nullable
 	public static <T> T loadOneOnly(Class<T> clazz, ClassLoader classLoader) {
-		verifyIsSpiClass(clazz);
 		Preconditions.checkNotNull(classLoader, "classLoader must be not null");
+
+		verifyIsSpiClass(clazz);
 
 		ServiceLoader<T> serviceLoader = ServiceLoader.load(clazz);
 		Iterator<T> iterator = serviceLoader.iterator();
@@ -49,16 +50,18 @@ public class SPILoader {
 	}
 
 	public static <T> Iterator<Class<T>> load(Class<T> clazz, ClassLoader classLoader) {
-		verifyIsSpiClass(clazz);
 		Preconditions.checkNotNull(classLoader, "classLoader must be not null");
+
+		verifyIsSpiClass(clazz);
 
 		DeinstanceServiceLoader<T> loadClasses = DeinstanceServiceLoader.load(clazz, classLoader);
 		return loadClasses.iterator();
 	}
 
 	public static <T> List<T> loadServices(Class<T> clazz, ClassLoader classLoader) {
-		verifyIsSpiClass(clazz);
 		Preconditions.checkNotNull(classLoader, "classLoader must be not null");
+
+		verifyIsSpiClass(clazz);
 
 		ServiceLoader<T> serviceLoader = ServiceLoader.load(clazz, classLoader);
 		List<T> result = Lists.newArrayList();

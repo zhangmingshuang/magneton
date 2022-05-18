@@ -1,8 +1,8 @@
 package org.magneton.support.api.auth.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-
 import org.magneton.core.Response;
 import org.magneton.support.api.auth.constant.LoginError;
 import org.magneton.support.api.auth.constant.SmsError;
@@ -10,9 +10,9 @@ import org.magneton.support.api.auth.pojo.SmsAutoLoginReq;
 import org.magneton.support.api.auth.pojo.SmsLoginReq;
 import org.magneton.support.api.auth.pojo.SmsLoginRes;
 import org.magneton.support.api.auth.pojo.SmsSendReq;
+import org.magneton.support.api.auth.properties.ApiAuthProperties;
 import org.magneton.support.api.auth.service.AuthService;
-import org.magneton.support.doc.HtmlDoc;
-
+import org.magneton.support.doc.ApiHtmlDoc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,14 +34,15 @@ import org.springframework.web.bind.annotation.RestController;
  * 2. 已登录时 登录成功之后会获得自动登录授权码，可以使用登录授权码自动登录。
  * @author zhangmsh 15/03/2022
  * @since 2.0.7
+ * @order 2
  */
 @RestController
-@RequestMapping("/${magneton.api.prefix:api}/auth/sms")
+@RequestMapping("/" + ApiAuthProperties.PREFIX + "/auth/sms")
 @Validated
 public class ApiAuthSmsController {
 
 	static {
-		HtmlDoc.addApi("短信注册登录");
+		ApiHtmlDoc.addApi("短信注册登录模式", "api-auth", "该模块提供了短信的登录注册功能");
 	}
 
 	@Autowired
@@ -64,6 +65,13 @@ public class ApiAuthSmsController {
 	/**
 	 * 登录
 	 * @apiNote 该流程为第二步流程，需要先获取验证码之后才可以进行登录。
+	 *
+	 * 需要注意的时，登录成功之后，所有的请求中需要携带以下请求头
+	 * {@link org.magneton.support.api.auth.interceptor.AuthInterceptor.AuthHandlerInterceptorAdapter#preHandle(HttpServletRequest, HttpServletResponse, Object)}
+	 * <ul>
+	 * <li>token 登录成功之后返回的操作授权</li>
+	 * <li>identification 登录时请求的标识。用来处理一些安全校验。一把手机应该只有一个唯一的安全标识</li>
+	 * </ul>
 	 * @param request 请求
 	 * @param smsLoginReq 登录请求
 	 * @return 自动登录授权，可以用来调用自动登录流程。
@@ -77,6 +85,13 @@ public class ApiAuthSmsController {
 	 * 自动登录
 	 * @apiNote 需要有登录成功之后才可以使用自动登录授权进行自动登录。该接口用来用户在一定时间内可以通过直接打开手机而无须每次都手动登录。如果自动登录不被允许，
 	 * 则自动登录授权过期或者其他原因，则返回的失败码为{@link LoginError#AUTO_LOGIN_ERROR}，此时调用端应该使用手动登录{@link #login(HttpServletRequest, SmsLoginReq)}。
+	 *
+	 * 需要注意的时，登录成功之后，所有的请求中需要携带以下请求头
+	 * {@link org.magneton.support.api.auth.interceptor.AuthInterceptor.AuthHandlerInterceptorAdapter#preHandle(HttpServletRequest, HttpServletResponse, Object)}
+	 * <ul>
+	 * <li>token 登录成功之后返回的操作授权</li>
+	 * <li>identification 登录时请求的标识。用来处理一些安全校验。一把手机应该只有一个唯一的安全标识</li>
+	 * </ul>
 	 * @param request 请求
 	 * @param smsAutoLoginReq 自动登录请求
 	 * @return 自动登录授权，可以用来调用自动登录流程。

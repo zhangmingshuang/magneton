@@ -1,7 +1,6 @@
 package org.magneton.core;
 
 import javax.annotation.Nullable;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -28,6 +27,10 @@ public class Consequences<T> {
 
 	private String message;
 
+	public Consequences coverage() {
+		return this;
+	}
+
 	public static <T> Consequences<T> success(T data) {
 		return state(true, data, "success");
 	}
@@ -46,6 +49,10 @@ public class Consequences<T> {
 
 	public static <T> Consequences<T> fail(T data, String message) {
 		return state(false, data, message);
+	}
+
+	public static <T> Consequences<T> failMessageOnly(String message) {
+		return state(false, null, message);
 	}
 
 	private static <T> Consequences<T> state(boolean state, @Nullable T data, String message) {

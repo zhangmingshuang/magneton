@@ -21,7 +21,7 @@ public class KeysSignatureBodyVerifyer implements SignatureBodyVerifyer {
 	public void validate(Map<String, String> body) throws SignatureBodyException {
 		for (String needBodyKey : this.needBodyKeys) {
 			if (!body.containsKey(needBodyKey)) {
-				throw new SignatureBodyException(needBodyKey + " not founded in boey");
+				throw new SignatureBodyException(needBodyKey + " not founded in body");
 			}
 		}
 	}

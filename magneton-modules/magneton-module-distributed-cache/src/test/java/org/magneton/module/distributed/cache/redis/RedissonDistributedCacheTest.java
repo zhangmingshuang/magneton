@@ -1,7 +1,6 @@
 package org.magneton.module.distributed.cache.redis;
 
 import java.util.List;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.magneton.core.base.Stopwatch;
@@ -43,11 +42,11 @@ class RedissonDistributedCacheTest extends TestRedisson {
 		valueOps.setEx("ttl", "ttl", 10);
 
 		long ttl = distributedCache.ttl("ttl");
-		Assertions.assertTrue(ttl <= 10);
+		Assertions.assertTrue(ttl <= 10, "过期时间不在范围内,ttl=" + ttl);
 
 		// test miss.
 		long ttl1 = distributedCache.ttl("ttl-nil");
-		Assertions.assertEquals(-2, ttl1);
+		Assertions.assertEquals(-2, ttl1, "过期时间不在范围内,ttl=" + ttl1);
 	}
 
 	@Test
@@ -65,6 +64,26 @@ class RedissonDistributedCacheTest extends TestRedisson {
 		Assertions.assertTrue(expire);
 		expire = distributedCache.expire("expire-nil", 10);
 		Assertions.assertFalse(expire);
+	}
+
+	@Test
+	void expireByOther() {
+		ValueOps valueOps = distributedCache.opsForValue();
+		valueOps.set("expireByOther", "expire");
+		valueOps.set("expireByOtherKey", "expire");
+
+		boolean expire = distributedCache.expire("expireByOther", 10);
+		Assertions.assertTrue(expire);
+
+		expire = distributedCache.expireByOther("expireByOtherKey", "expireByOther");
+		Assertions.assertTrue(expire);
+		distributedCache.del("expireByOther");
+
+		expire = distributedCache.expireByOther("expireByOtherKey", "expireByOther");
+		Assertions.assertFalse(expire);
+
+		long ttl = distributedCache.ttl("expireByOtherKey");
+		Assertions.assertTrue(ttl > 0 && ttl <= 10, "过期时间不在范围内");
 	}
 
 	@Test

@@ -1,10 +1,9 @@
 package org.magneton.core;
 
+import java.beans.Transient;
 import java.util.Map;
 import java.util.Objects;
-
 import javax.annotation.Nullable;
-
 import lombok.Getter;
 import lombok.ToString;
 import org.magneton.core.base.Strings;
@@ -20,6 +19,8 @@ import org.magneton.core.collect.Maps;
 @Getter
 @ToString
 public class Response<T> {
+
+	private boolean ok;
 
 	/**
 	 * 响应码
@@ -49,6 +50,10 @@ public class Response<T> {
 
 	private Response() {
 		// private
+	}
+
+	public Response coverage() {
+		return this;
 	}
 
 	public static Response ok() {
@@ -90,6 +95,7 @@ public class Response<T> {
 
 	public Response<T> code(String code) {
 		this.code = code;
+		this.ok = this.isOkCode(code);
 		return this;
 	}
 
@@ -129,10 +135,12 @@ public class Response<T> {
 		return this;
 	}
 
-	public boolean isOk() {
-		return ResponseCodesSupplier.getInstance().ok().code().equals(this.code);
+	@Transient
+	public boolean isOkCode(String codeValue) {
+		return ResponseCodesSupplier.getInstance().ok().code().equals(codeValue);
 	}
 
+	@Transient
 	public boolean isException() {
 		return ResponseCodesSupplier.getInstance().exception().code().equals(this.code);
 	}

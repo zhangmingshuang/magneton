@@ -14,11 +14,11 @@
 
 package org.magneton.core.base;
 
-import javax.annotations.CanIgnoreReturnValue;
+import static org.magneton.core.base.Strings.lenientFormat;
+
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
-
-import static org.magneton.core.base.Strings.lenientFormat;
+import javax.annotations.CanIgnoreReturnValue;
 
 /**
  * Static convenience methods that help a method or constructor check whether it was

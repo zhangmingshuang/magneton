@@ -16,13 +16,12 @@ package org.magneton.core.base;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.MissingFormatArgumentException;
+import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import javax.annotations.VisibleForTesting;
-
-import static java.util.logging.Level.WARNING;
 
 /**
  * Static utility methods pertaining to {@code String} or {@code CharSequence} instances.
@@ -32,6 +31,22 @@ import static java.util.logging.Level.WARNING;
  */
 @ElementTypesAreNonnullByDefault
 public final class Strings {
+
+	/**
+	 * 字符串常量：{@code "null"} <br>
+	 * 注意：{@code "null" != null}
+	 */
+	public static final String NULL = "null";
+
+	/**
+	 * 字符串常量：空字符串 {@code ""}
+	 */
+	public static final String EMPTY = "";
+
+	/**
+	 * 字符串常量：空格符 {@code " "}
+	 */
+	public static final String SPACE = " ";
 
 	private Strings() {
 	}
@@ -63,7 +78,7 @@ public final class Strings {
 	 * {@code null}, may be null
 	 * @return the passed in CharSequence, or the default
 	 */
-	public static String defaultIfNullOrEmpty(String str, String defaultStr) {
+	public static String defaultIfNullOrEmpty(@Nullable String str, String defaultStr) {
 		return isNullOrEmpty(str) ? defaultStr : str;
 	}
 
@@ -276,6 +291,15 @@ public final class Strings {
 		return a.subSequence(a.length() - s, a.length()).toString();
 	}
 
+	@Nullable
+	public static String suffixIfNotNullOrEmpty(@Nullable String str, String suffix) {
+		Preconditions.checkNotNull(suffix);
+		if (Strings.isNullOrEmpty(str)) {
+			return str;
+		}
+		return str + suffix;
+	}
+
 	/**
 	 * True when a valid surrogate pair starts at the given {@code index} in the given
 	 * {@code string}. Out-of-range indexes return false.
@@ -364,6 +388,38 @@ public final class Strings {
 		}
 
 		return builder.toString();
+	}
+
+	public static String indexFormat(String format, Object... args) {
+		if (isNullOrEmpty(format)) {
+			return "null";
+		}
+		if (args != null && args.length > 0) {
+			for (int i = 0; i < args.length; ++i) {
+				String target = "{" + i + "}";
+				format = format.replace(target, lenientToString(args[i]));
+			}
+		}
+
+		return format;
+	}
+
+	/**
+	 * 格式化字符串
+	 *
+	 * <pre>
+	 *     Strings.format("a %1$s %2$s %1$s", "1", "2") = a 1 2 1
+	 * </pre>
+	 * @param format 支持{@code %s}，或者 {@code %1$s}，{@code %2$s}来表示位置
+	 * @param args 参数
+	 * @return 格式化后的字符串
+	 * @throws MissingFormatArgumentException 当无法找到对应位置的参数时
+	 */
+	public static String format(String format, Object... args) {
+		if (isNullOrEmpty(format)) {
+			return "null";
+		}
+		return String.format(format, args);
 	}
 
 	/**
@@ -457,7 +513,7 @@ public final class Strings {
 			String objectToString = o.getClass().getName() + '@' + Integer.toHexString(System.identityHashCode(o));
 			// Logger is created inline with fixed name to avoid forcing Proguard to
 			// create another class.
-			Logger.getLogger("com.google.common.base.Strings").log(WARNING,
+			Logger.getLogger("com.google.common.base.Strings").log(Level.WARNING,
 					"Exception during lenientFormat for " + objectToString, e);
 			return "<" + objectToString + " threw " + e.getClass().getName() + ">";
 		}

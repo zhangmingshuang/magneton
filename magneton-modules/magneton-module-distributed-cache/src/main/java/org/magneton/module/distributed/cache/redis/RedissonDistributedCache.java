@@ -2,13 +2,13 @@ package org.magneton.module.distributed.cache.redis;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-
 import org.magneton.core.base.Preconditions;
 import org.magneton.core.base.Strings;
 import org.magneton.core.collect.Lists;
 import org.magneton.module.distributed.cache.DistributedCache;
 import org.magneton.module.distributed.cache.ops.HashOps;
 import org.magneton.module.distributed.cache.ops.ListOps;
+import org.magneton.module.distributed.cache.ops.SetOps;
 import org.magneton.module.distributed.cache.ops.ValueOps;
 import org.redisson.api.RedissonClient;
 
@@ -28,16 +28,24 @@ public class RedissonDistributedCache implements DistributedCache {
 
 	private final HashOps hashOps;
 
+	private final SetOps setOps;
+
 	public RedissonDistributedCache(RedissonClient redissonClient) {
 		this.redissonClient = Preconditions.checkNotNull(redissonClient);
 		this.valueOps = new RedissonValueOps(this.redissonClient);
 		this.listOps = new RedissonListOps(this.redissonClient);
 		this.hashOps = new RedissonHashOps(this.redissonClient);
+		this.setOps = new RedissonSetOps(this.redissonClient);
 	}
 
 	@Override
 	public HashOps opsForHash() {
 		return this.hashOps;
+	}
+
+	@Override
+	public SetOps opsForSet() {
+		return this.setOps;
 	}
 
 	@Override
@@ -53,13 +61,25 @@ public class RedissonDistributedCache implements DistributedCache {
 	@Override
 	public long ttl(String key) {
 		Preconditions.checkNotNull(key, "key");
-		return this.redissonClient.getBucket(key).remainTimeToLive();
+		long ttl = this.redissonClient.getBucket(key).remainTimeToLive();
+		return ttl <= 0 ? ttl : ttl / 1000;
 	}
 
 	@Override
 	public boolean expire(String key, long expire) {
 		Preconditions.checkNotNull(key, "key");
 		return this.redissonClient.getBucket(key).expire(expire, TimeUnit.SECONDS);
+	}
+
+	@Override
+	public boolean expireByOther(String key, String otherKey) {
+		Preconditions.checkNotNull(key, "key must not be null");
+		Preconditions.checkNotNull(otherKey, "otherKey must not be null");
+		long ttl = this.ttl(otherKey);
+		if (ttl <= 0) {
+			return false;
+		}
+		return this.expire(key, ttl);
 	}
 
 	@Override

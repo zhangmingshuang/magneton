@@ -18,7 +18,9 @@ public enum SmsError implements ResponseMessage {
 
 	MOBILE_RISK("1000004", "手机号存在风险"),
 
-	MOBIL_SEND_GAP("1000005", "两次短信发送时间间隔太短");
+	MOBIL_SEND_GAP("1000005", "两次短信发送时间间隔太短"),
+
+	TOKEN_MISS("1000006", "授权信息有误");
 
 	private String code;
 

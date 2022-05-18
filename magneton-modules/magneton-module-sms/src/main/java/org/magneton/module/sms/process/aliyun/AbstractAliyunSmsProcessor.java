@@ -1,15 +1,14 @@
 package org.magneton.module.sms.process.aliyun;
 
-import java.util.Map;
-import java.util.UUID;
-import java.util.concurrent.ThreadLocalRandom;
-
 import com.alibaba.fastjson.JSON;
 import com.aliyun.dysmsapi20170525.Client;
 import com.aliyun.dysmsapi20170525.models.SendSmsRequest;
 import com.aliyun.dysmsapi20170525.models.SendSmsResponse;
 import com.aliyun.dysmsapi20170525.models.SendSmsResponseBody;
 import com.aliyun.teaopenapi.models.Config;
+import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.ThreadLocalRandom;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.magneton.core.Consequences;
@@ -92,6 +91,8 @@ public abstract class AbstractAliyunSmsProcessor implements SendProcessor {
 		if (isSuccess) {
 			return Consequences.success(new SmsToken(UUID.randomUUID().toString(), code));
 		}
+		SendSmsResponseBody body = sendSmsResponse.getBody();
+		log.error("send sms error: {} -- {} ", body.getCode(), body.getMessage());
 		return Consequences.fail();
 	}
 
@@ -121,7 +122,7 @@ public abstract class AbstractAliyunSmsProcessor implements SendProcessor {
 		if (addition == null) {
 			addition = Maps.newHashMapWithExpectedSize(1);
 		}
-		addition.put(code, code);
+		addition.put("code", code);
 		return JSON.toJSONString(addition);
 	}
 

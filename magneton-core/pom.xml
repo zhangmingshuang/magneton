@@ -18,9 +18,24 @@
 			<version>${slf4j-api.version}</version>
 		</dependency>
 		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>${logback-classic.version}</version>
+		</dependency>
+		<dependency>
 			<artifactId>guava</artifactId>
 			<groupId>com.google.guava</groupId>
 			<version>${guava.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>${commons-codec.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.dtflys.forest</groupId>
+			<artifactId>forest-core</artifactId>
+			<version>${forest-core.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>cn.hutool</groupId>
@@ -42,10 +57,6 @@
 			<artifactId>jsr305</artifactId>
 			<version>${jsr305.version}</version>
 		</dependency>
-		<dependency>
-			<artifactId>lombok</artifactId>
-			<groupId>org.projectlombok</groupId>
-		</dependency>
 		<!-- 单元测试 -->
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
@@ -54,10 +65,9 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.jetbrains</groupId>
-			<artifactId>annotations</artifactId>
-			<version>RELEASE</version>
-			<scope>compile</scope>
+			<groupId>com.alibaba.testable</groupId>
+			<artifactId>testable-all</artifactId>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 </project>

@@ -3,9 +3,7 @@ package org.magneton.module.distributed.cache.redis;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-
 import javax.annotation.Nullable;
-
 import org.magneton.core.base.Preconditions;
 import org.magneton.core.collect.Collections;
 import org.magneton.module.distributed.cache.Entry;
@@ -72,10 +70,24 @@ public class RedissonValueOps extends AbstractRedissonOps implements ValueOps {
 		batch.execute();
 	}
 
+	@Override
+	public <V> boolean trySet(String key, V value, long expire) {
+		Preconditions.checkNotNull(key, "key must not be null");
+		Preconditions.checkNotNull(value, "value must not be null");
+		return this.redissonClient.getBucket(key).trySet(value, expire, TimeUnit.SECONDS);
+	}
+
 	@Nullable
 	@Override
 	public <V> V get(String key) {
+		Preconditions.checkNotNull(key);
 		return (V) this.redissonClient.getBucket(key).get();
+	}
+
+	@Override
+	public long incr(String key, long incr) {
+		Preconditions.checkNotNull(key);
+		return this.redissonClient.getAtomicLong(key).addAndGet(incr);
 	}
 
 }

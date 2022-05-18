@@ -25,6 +25,10 @@ public enum SendStatus {
 	 */
 	SEND_GAP,
 	/**
+	 * 临时禁用
+	 */
+	TEMPORARILY_DISABLE,
+	/**
 	 * 失败
 	 */
 	FAILURE;

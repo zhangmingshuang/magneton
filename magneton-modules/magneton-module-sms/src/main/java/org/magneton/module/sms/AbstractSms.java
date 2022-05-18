@@ -49,16 +49,33 @@ public abstract class AbstractSms implements Sms {
 				this.smsProperty.getGroupRiskInSeconds())) {
 			return Consequences.fail(SendStatus.RISK, "分组存在风险");
 		}
+		// 手机风控处理
+		// boolean isValidErrorCount = this.smsProperty.getValidErrorCount() > 0;
+		// if (isValidErrorCount && !this.temporarilyDisableOpinion(mobile,
+		// this.smsProperty.getValidErrorCount(),
+		// this.smsProperty.getValidErrorInSeconds())) {
+		// return Consequences.fail(SendStatus.TEMPORARILY_DISABLE, "手机号存在风险");
+		// }
 		// 次数上限判断
 		if (!this.mobileCountCapsOpinion(mobile, this.smsProperty.getDayCount(), this.smsProperty.getHourCount())) {
 			return Consequences.fail(SendStatus.COUNT_CAPS, "发送次数达到上限");
 		}
+		return this.send(mobile);
+	}
+
+	@Override
+	public Consequences<SendStatus> send(String mobile) {
+		Preconditions.checkNotNull(mobile);
 		Consequences<SmsToken> sendResponse = this.getSendProcessor().send(mobile);
 		if (sendResponse.isSuccess()) {
 			this.mobileSendSuccess(mobile, sendResponse.getData());
+			return Consequences.success(SendStatus.SUCCESS, "短信发送成功");
 		}
-		return Consequences.success(SendStatus.SUCCESS, "短信发送成功");
+		return Consequences.fail(SendStatus.FAILURE, "短信发送失败");
 	}
+
+	// protected abstract boolean temporarilyDisableOpinion(String mobile, int
+	// validErrorCount, int validErrorInSeconds);
 
 	/**
 	 * 发送统计

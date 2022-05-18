@@ -40,6 +40,20 @@ public interface Sms {
 	 */
 	long ttl(String mobile);
 
+	/**
+	 * 剩余可错误次数
+	 * @param mobile 手机号
+	 * @return 剩余的可错误次数，如果不限制则返回-1，返回0表示没有可错误次数了，此时手机号表示为临时禁用状态{@link SendStatus#TEMPORARILY_DISABLE}。
+	 */
+	long remainErrors(String mobile);
+
+	/**
+	 * 发送短信
+	 * @param mobile 手机号
+	 * @return 发送状态
+	 */
+	Consequences<SendStatus> send(String mobile);
+
 	@Nullable
 	default String token(String mobile) {
 		return this.token(mobile, DEFAULT_GROUP);

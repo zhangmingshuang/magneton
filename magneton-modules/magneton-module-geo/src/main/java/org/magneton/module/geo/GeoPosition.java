@@ -17,6 +17,7 @@ package org.magneton.module.geo;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import org.magneton.core.base.Preconditions;
 
 /**
@@ -25,6 +26,7 @@ import org.magneton.core.base.Preconditions;
  */
 @Setter
 @Getter
+@ToString
 public class GeoPosition {
 
 	private final double longitude;
