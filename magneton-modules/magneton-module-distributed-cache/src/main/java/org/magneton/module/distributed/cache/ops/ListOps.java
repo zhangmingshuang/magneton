@@ -1,12 +1,11 @@
 package org.magneton.module.distributed.cache.ops;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
-
 import javax.annotation.Nullable;
-
-import org.magneton.core.base.Arrays;
-import org.magneton.core.collect.Collections;
+import org.magneton.foundation.MoreArrays;
+import org.magneton.foundation.collection.MoreCollections;
 
 /**
  * .
@@ -92,11 +91,11 @@ public interface ListOps {
 	 * @return 操作完成之后当前列表集合中的长度
 	 */
 	default <V> void addAtHead(String list, Collection<V> values) {
-		if (Collections.isNullOrEmpty(values)) {
+		if (MoreCollections.isNullOrEmpty(values)) {
 			return;
 		}
 		V obj = (V) values.stream().findFirst();
-		this.addAtHead(list, Arrays.toArray(values, obj.getClass()));
+		this.addAtHead(list, MoreArrays.toArray(values, obj.getClass()));
 	}
 
 	/**

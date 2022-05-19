@@ -1,11 +1,11 @@
 package org.magneton.module.distributed.cache.redis;
 
+import com.google.common.base.Preconditions;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import javax.annotation.Nullable;
-import org.magneton.core.base.Preconditions;
-import org.magneton.core.collect.Collections;
+import org.magneton.foundation.collection.MoreCollections;
 import org.magneton.module.distributed.cache.Entry;
 import org.magneton.module.distributed.cache.ExpireEntry;
 import org.magneton.module.distributed.cache.ops.ValueOps;
@@ -32,7 +32,7 @@ public class RedissonValueOps extends AbstractRedissonOps implements ValueOps {
 
 	@Override
 	public <V> void set(Map<String, V> map) {
-		if (Collections.isNullOrEmpty(map)) {
+		if (MoreCollections.isNullOrEmpty(map)) {
 			return;
 		}
 		this.redissonClient.getBuckets().set(map);
@@ -46,7 +46,7 @@ public class RedissonValueOps extends AbstractRedissonOps implements ValueOps {
 
 	@Override
 	public <V> boolean setNx(Map<String, V> map) {
-		if (Collections.isNullOrEmpty(map)) {
+		if (MoreCollections.isNullOrEmpty(map)) {
 			return false;
 		}
 		return this.redissonClient.getBuckets().trySet(map);

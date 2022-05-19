@@ -1,14 +1,14 @@
 package org.magneton.foundation.cache;
 
+import com.google.common.base.Preconditions;
+import com.google.common.collect.Lists;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Collections;
 import java.util.List;
 import javax.annotation.Nullable;
-import org.magneton.core.base.Arrays;
-import org.magneton.core.base.Preconditions;
-import org.magneton.core.collect.Lists;
-import org.magneton.core.reflect.Reflection;
+import org.magneton.foundation.MoreArrays;
+import org.magneton.foundation.reflect.MoreReflection;
 
 /**
  * @author zhangmsh 2022/3/24
@@ -35,8 +35,8 @@ public class CachedHolder<T> {
 
 	public List<Object> invokeWithArgs(@Nullable Object... args)
 			throws InvocationTargetException, IllegalAccessException {
-		Method[] declaredMethods = Reflection.getDeclaredMethods(Preconditions.checkNotNull(this.clazz));
-		if (Arrays.isNullOrEmpty(declaredMethods)) {
+		Method[] declaredMethods = MoreReflection.getDeclaredMethods(Preconditions.checkNotNull(this.clazz));
+		if (MoreArrays.isNullOrEmpty(declaredMethods)) {
 			return Collections.emptyList();
 		}
 		List<Object> result = Lists.newArrayList(declaredMethods.length);

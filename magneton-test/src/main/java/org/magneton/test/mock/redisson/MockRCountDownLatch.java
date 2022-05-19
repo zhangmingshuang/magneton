@@ -1,9 +1,8 @@
 package org.magneton.test.mock.redisson;
 
+import com.google.common.base.Preconditions;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
-
-import org.magneton.core.base.Preconditions;
 import org.magneton.test.mock.UnsupportedException;
 import org.redisson.api.ObjectListener;
 import org.redisson.api.RCountDownLatch;

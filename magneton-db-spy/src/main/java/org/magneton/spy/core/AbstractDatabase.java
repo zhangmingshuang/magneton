@@ -1,6 +1,6 @@
 package org.magneton.spy.core;
 
-import org.magneton.core.base.Verify;
+import com.google.common.base.Verify;
 import org.magneton.spy.sql.Select;
 
 /**

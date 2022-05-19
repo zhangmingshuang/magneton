@@ -1,12 +1,11 @@
 package org.magneton.module.safedog.sign;
 
+import com.google.common.base.Objects;
+import com.google.common.base.Preconditions;
+import com.google.common.cache.Cache;
+import com.google.common.cache.CacheBuilder;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-
-import org.magneton.core.base.Objects;
-import org.magneton.core.base.Preconditions;
-import org.magneton.core.cache.Cache;
-import org.magneton.core.cache.CacheBuilder;
 
 /**
  * @author zhangmsh 2022/3/20

@@ -1,10 +1,10 @@
 package org.magneton.module.im.tencent;
 
+import com.google.common.base.Preconditions;
 import com.tencentyun.TLSSigAPIv2;
 import javax.annotation.Nullable;
 import lombok.Getter;
 import lombok.Setter;
-import org.magneton.core.base.Preconditions;
 import org.magneton.module.im.tencent.api.msg.Msg;
 import org.magneton.module.im.tencent.api.msg.MsgImpl;
 

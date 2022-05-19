@@ -1,6 +1,12 @@
 package org.magneton.foundation.image;
 
-import java.awt.*;
+import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
+import java.awt.AlphaComposite;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -11,13 +17,9 @@ import java.nio.file.Paths;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import javax.annotation.Nullable;
 import javax.imageio.ImageIO;
-
 import lombok.Builder;
-import org.magneton.core.base.Preconditions;
-import org.magneton.core.base.Strings;
 
 /**
  * .

@@ -1,10 +1,9 @@
 package org.magneton.core.signature;
 
+import com.google.common.base.Preconditions;
 import java.util.Map;
 import java.util.Objects;
-
-import org.magneton.core.base.Arrays;
-import org.magneton.core.base.Preconditions;
+import org.magneton.foundation.MoreArrays;
 
 /**
  * .
@@ -84,7 +83,7 @@ public interface Signature {
 
 			AbstractSignature abstractSignature = Objects.isNull(this.signature) ? new Sha1Signature(this.salt)
 					: this.signature;
-			if (!Arrays.isNullOrEmpty(this.needBodyKeys)) {
+			if (!MoreArrays.isNullOrEmpty(this.needBodyKeys)) {
 				abstractSignature.setSignatureBodyVerifyer(new KeysSignatureBodyVerifyer(this.needBodyKeys));
 			}
 			if (Objects.nonNull(this.signatureContentBuilder)) {

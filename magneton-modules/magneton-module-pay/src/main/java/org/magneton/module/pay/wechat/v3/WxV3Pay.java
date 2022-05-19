@@ -1,8 +1,8 @@
 package org.magneton.module.pay.wechat.v3;
 
+import com.google.common.base.Strings;
 import java.util.Map;
 import org.magneton.core.Consequences;
-import org.magneton.core.base.Strings;
 import org.magneton.module.pay.Pay;
 import org.magneton.module.pay.wechat.v3.entity.WxPayNotification;
 import org.magneton.module.pay.wechat.v3.entity.WxPayOrder;
@@ -22,7 +22,7 @@ public interface WxV3Pay extends Pay {
 
 	static String callbackResult(boolean success) {
 		// @formatter:off
-		return Strings.format("{"
+		return Strings.lenientFormat("{"
 			+ "\"code\": \"%s\","
 			+ "\"message\": \"%s\""
 			+ "}", success ? "SUCCESS" : "FAIL", success ? "OK" : "FAIL");

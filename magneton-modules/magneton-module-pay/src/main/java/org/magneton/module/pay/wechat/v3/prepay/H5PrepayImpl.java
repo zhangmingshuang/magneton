@@ -1,8 +1,8 @@
 package org.magneton.module.pay.wechat.v3.prepay;
 
+import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
 import org.magneton.core.Consequences;
-import org.magneton.core.base.Preconditions;
-import org.magneton.core.base.Strings;
 import org.magneton.module.pay.exception.AmountException;
 import org.magneton.module.pay.wechat.v3.entity.WxPayH5PrepayReq;
 import org.magneton.module.pay.wechat.v3.entity.WxPayH5PrepayRes;

@@ -1,12 +1,12 @@
 package org.magneton.module.geo.redis;
 
+import com.google.common.base.Preconditions;
+import com.google.common.collect.Maps;
+import java.util.Collections;
 import java.util.Map;
 import javax.annotation.Nullable;
 import javax.annotations.Versielimiet;
-import org.magneton.core.base.Arrays;
-import org.magneton.core.base.Preconditions;
-import org.magneton.core.collect.Collections;
-import org.magneton.core.collect.Maps;
+import org.magneton.foundation.MoreArrays;
 import org.magneton.module.geo.Geo;
 import org.magneton.module.geo.GeoEntry;
 import org.magneton.module.geo.GeoPosition;
@@ -73,7 +73,7 @@ public class RedissonGeo implements Geo {
 	public <V> Map<V, GeoPosition> pos(String name, V... members) {
 		Preconditions.checkNotNull(name);
 		Preconditions.checkNotNull(members);
-		if (Arrays.isNullOrEmpty(members)) {
+		if (MoreArrays.isNullOrEmpty(members)) {
 			return Collections.emptyMap();
 		}
 		RGeo<V> geo = this.redissonClient.getGeo(name);

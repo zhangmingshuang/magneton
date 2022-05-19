@@ -1,7 +1,7 @@
 package org.magneton.module.wechat.miniprogram;
 
+import com.google.common.base.Preconditions;
 import org.magneton.core.Consequences;
-import org.magneton.core.base.Preconditions;
 import org.magneton.module.wechat.core.Req;
 import org.magneton.module.wechat.miniprogram.entity.Code2Session;
 

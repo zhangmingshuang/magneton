@@ -1,8 +1,8 @@
 package org.magneton.module.sms;
 
+import com.google.common.base.Preconditions;
 import lombok.Getter;
 import org.magneton.core.Consequences;
-import org.magneton.core.base.Preconditions;
 import org.magneton.module.sms.entity.SmsToken;
 import org.magneton.module.sms.process.SendProcessor;
 import org.magneton.module.sms.property.SmsProperty;

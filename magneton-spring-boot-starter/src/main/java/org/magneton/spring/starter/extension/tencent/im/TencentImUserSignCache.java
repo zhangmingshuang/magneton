@@ -1,8 +1,8 @@
 package org.magneton.spring.starter.extension.tencent.im;
 
+import com.google.common.base.Preconditions;
 import java.util.concurrent.TimeUnit;
 import javax.annotation.Nullable;
-import org.magneton.core.base.Preconditions;
 import org.magneton.module.im.tencent.UserSignCache;
 import org.redisson.api.RedissonClient;
 

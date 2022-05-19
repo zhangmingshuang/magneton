@@ -1,6 +1,6 @@
 package org.magneton.core;
 
-import org.magneton.core.base.Preconditions;
+import com.google.common.base.Preconditions;
 
 /**
  * .

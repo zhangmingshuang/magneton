@@ -1,6 +1,6 @@
 package org.magneton.module.wechat.open.platform.mobile;
 
-import org.magneton.core.base.Preconditions;
+import com.google.common.base.Preconditions;
 import org.magneton.module.wechat.open.WechatContext;
 import org.magneton.module.wechat.open.entity.MobileCodeReq;
 import org.magneton.module.wechat.open.entity.MobileCodeRes;

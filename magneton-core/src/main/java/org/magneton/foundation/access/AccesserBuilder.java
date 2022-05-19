@@ -1,6 +1,6 @@
 package org.magneton.foundation.access;
 
-import org.magneton.core.base.Preconditions;
+import com.google.common.base.Preconditions;
 
 /**
  * .
@@ -66,13 +66,13 @@ public class AccesserBuilder {
 	 */
 	public Accesser build() {
 		AccessConfig config = new AccessConfig();
-		config.setLockTime(lockTime);
-		config.setLockSize(lockSize);
-		config.setLockErrorCount(lockErrorCount);
-		config.setErrorRecordTime(errorRecordTime);
-		config.setErrorRecordSize(errorRecordSize);
-		accesser.afterConfigSet(config);
-		return accesser;
+		config.setLockTime(this.lockTime);
+		config.setLockSize(this.lockSize);
+		config.setLockErrorCount(this.lockErrorCount);
+		config.setErrorRecordTime(this.errorRecordTime);
+		config.setErrorRecordSize(this.errorRecordSize);
+		this.accesser.afterConfigSet(config);
+		return this.accesser;
 	}
 
 }

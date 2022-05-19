@@ -1,6 +1,7 @@
 package org.magneton.module.pay.wechat.v3.core;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.base.Preconditions;
 import com.wechat.pay.contrib.apache.httpclient.WechatPayHttpClientBuilder;
 import com.wechat.pay.contrib.apache.httpclient.auth.PrivateKeySigner;
 import com.wechat.pay.contrib.apache.httpclient.auth.Verifier;
@@ -18,7 +19,6 @@ import java.security.GeneralSecurityException;
 import java.security.PrivateKey;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.impl.client.CloseableHttpClient;
-import org.magneton.core.base.Preconditions;
 import org.magneton.module.pay.exception.PrivateKeyNotFoundException;
 
 /**

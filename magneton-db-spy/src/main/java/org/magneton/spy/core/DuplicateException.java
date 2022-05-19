@@ -1,6 +1,6 @@
 package org.magneton.spy.core;
 
-import org.magneton.core.base.Strings;
+import com.google.common.base.Strings;
 
 /**
  * @author zhangmsh 2021/7/28

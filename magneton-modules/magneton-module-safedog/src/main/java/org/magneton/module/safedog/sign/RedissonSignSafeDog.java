@@ -1,9 +1,8 @@
 package org.magneton.module.safedog.sign;
 
+import com.google.common.base.Objects;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-
-import org.magneton.core.base.Objects;
 import org.redisson.api.RBucket;
 import org.redisson.api.RedissonClient;
 

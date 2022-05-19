@@ -1,20 +1,17 @@
 package org.magneton.spring.starter.exception;
 
+import com.google.common.base.Preconditions;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.ReentrantLock;
-
 import javax.annotation.Nullable;
-
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.magneton.core.Response;
 import org.magneton.core.ResponseException;
-import org.magneton.core.base.Preconditions;
-import org.magneton.core.collect.Lists;
-
+import org.magneton.foundation.collection.MoreCollections;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -104,7 +101,7 @@ public class ControllerExceptionProcessor implements InitializingBean {
 		this.lock.lock();
 		try {
 			if (this.exceptionProcessorsAddable.compareAndSet(true, false)) {
-				if (!Lists.isNullOrEmpty(this.exceptionProcessors)) {
+				if (!MoreCollections.isNullOrEmpty(this.exceptionProcessors)) {
 					this.exceptionProcessors.sort(
 							Comparator.comparingInt(e -> OrderUtils.getOrder(e.getClass(), Ordered.LOWEST_PRECEDENCE)));
 					this.exceptionProcessors.forEach(this.exceptionProcessorContext::registerExceptionProcessor);

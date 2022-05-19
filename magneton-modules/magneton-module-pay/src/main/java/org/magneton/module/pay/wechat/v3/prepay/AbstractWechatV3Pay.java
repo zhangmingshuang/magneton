@@ -1,5 +1,7 @@
 package org.magneton.module.pay.wechat.v3.prepay;
 
+import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
 import com.wechat.pay.contrib.apache.httpclient.auth.Signer.SignatureResult;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -12,8 +14,6 @@ import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.util.EntityUtils;
 import org.magneton.core.Consequences;
-import org.magneton.core.base.Preconditions;
-import org.magneton.core.base.Strings;
 import org.magneton.module.pay.wechat.v3.core.WxPayContext;
 
 /**

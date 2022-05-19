@@ -1,10 +1,10 @@
 package org.magneton.module.distributed.cache.redis;
 
+import cn.hutool.core.text.CharSequenceUtil;
+import com.google.common.base.Preconditions;
+import com.google.common.collect.Lists;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-import org.magneton.core.base.Preconditions;
-import org.magneton.core.base.Strings;
-import org.magneton.core.collect.Lists;
 import org.magneton.module.distributed.cache.DistributedCache;
 import org.magneton.module.distributed.cache.ops.HashOps;
 import org.magneton.module.distributed.cache.ops.ListOps;
@@ -101,7 +101,7 @@ public class RedissonDistributedCache implements DistributedCache {
 
 	@Override
 	public List<String> keys(String pattern) {
-		pattern = Strings.defaultIfNullOrEmpty(pattern, "*");
+		pattern = CharSequenceUtil.blankToDefault(pattern, "*");
 
 		Iterable<String> iterable = this.redissonClient.getKeys().getKeysByPattern(pattern);
 		List<String> keys = Lists.newArrayListWithCapacity(64);

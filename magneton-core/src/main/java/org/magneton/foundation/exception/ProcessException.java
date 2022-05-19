@@ -1,6 +1,6 @@
 package org.magneton.foundation.exception;
 
-import org.magneton.core.base.Strings;
+import com.google.common.base.Strings;
 
 /**
  * 处理异常

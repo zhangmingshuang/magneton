@@ -1,9 +1,7 @@
 package org.magneton.test.util;
 
+import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import java.util.List;
-
-import javax.annotations.CanIgnoreReturnValue;
-
 import org.magneton.test.annotation.TestSort;
 
 /**

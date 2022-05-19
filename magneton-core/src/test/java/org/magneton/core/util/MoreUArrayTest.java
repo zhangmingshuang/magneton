@@ -2,7 +2,7 @@ package org.magneton.core.util;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.magneton.core.base.Arrays;
+import org.magneton.foundation.MoreArrays;
 
 /**
  * .
@@ -16,20 +16,20 @@ class MoreUArrayTest {
 
 	@Test
 	void isNullOrEmpty() {
-		Assertions.assertFalse(Arrays.isNullOrEmpty(new int[] { 1, 2, 3 }), "not empty");
-		Assertions.assertTrue(Arrays.isNullOrEmpty(new float[] {}), "is empty");
-		Assertions.assertFalse(Arrays.isNullOrEmpty(new double[] { 1D }), "not empty");
-		Assertions.assertTrue(Arrays.isNullOrEmpty(new byte[] {}), "is empty");
-		Assertions.assertFalse(Arrays.isNullOrEmpty(new char[] { 'c' }), "not empty");
-		Assertions.assertTrue(Arrays.isNullOrEmpty(new boolean[] {}), "is empty");
-		Assertions.assertFalse(Arrays.isNullOrEmpty(new Integer[] { 1 }), "not empty");
+		Assertions.assertFalse(MoreArrays.isNullOrEmpty(new int[] { 1, 2, 3 }), "not empty");
+		Assertions.assertTrue(MoreArrays.isNullOrEmpty(new float[] {}), "is empty");
+		Assertions.assertFalse(MoreArrays.isNullOrEmpty(new double[] { 1D }), "not empty");
+		Assertions.assertTrue(MoreArrays.isNullOrEmpty(new byte[] {}), "is empty");
+		Assertions.assertFalse(MoreArrays.isNullOrEmpty(new char[] { 'c' }), "not empty");
+		Assertions.assertTrue(MoreArrays.isNullOrEmpty(new boolean[] {}), "is empty");
+		Assertions.assertFalse(MoreArrays.isNullOrEmpty(new Integer[] { 1 }), "not empty");
 		int[] a = null;
-		Assertions.assertTrue(Arrays.isNullOrEmpty(a), "is null");
+		Assertions.assertTrue(MoreArrays.isNullOrEmpty(a), "is null");
 	}
 
 	@Test
 	void join() {
-		String join = Arrays.join(new int[] { 1, 2 }, ",");
+		String join = MoreArrays.join(new int[] { 1, 2 }, ",");
 		Assertions.assertEquals("1,2", join, "arrays join error");
 	}
 

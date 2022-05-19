@@ -1,5 +1,7 @@
 package org.magneton.module.pay.wechat.v3;
 
+import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
 import com.wechat.pay.contrib.apache.httpclient.constant.WechatPayHttpHeaders;
 import com.wechat.pay.contrib.apache.httpclient.notification.Notification;
 import com.wechat.pay.contrib.apache.httpclient.notification.NotificationHandler;
@@ -14,8 +16,6 @@ import org.apache.http.client.methods.HttpGet;
 import org.magneton.core.Consequences;
 import org.magneton.core.Response;
 import org.magneton.core.ResponseException;
-import org.magneton.core.base.Preconditions;
-import org.magneton.core.base.Strings;
 import org.magneton.foundation.exception.ProcessException;
 import org.magneton.module.pay.wechat.v3.core.DefaultWxPayContext;
 import org.magneton.module.pay.wechat.v3.core.WxPayConfig;

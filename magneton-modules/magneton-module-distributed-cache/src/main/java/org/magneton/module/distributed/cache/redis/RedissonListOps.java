@@ -1,8 +1,7 @@
 package org.magneton.module.distributed.cache.redis;
 
+import com.google.common.base.Preconditions;
 import java.util.List;
-
-import org.magneton.core.base.Preconditions;
 import org.magneton.module.distributed.cache.ops.ListOps;
 import org.redisson.api.RedissonClient;
 

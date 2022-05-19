@@ -1,6 +1,6 @@
 package org.magneton.module.wechat.open;
 
-import org.magneton.core.base.Preconditions;
+import com.google.common.base.Preconditions;
 import org.magneton.module.wechat.open.core.oauth2.WechatOAuth;
 import org.magneton.module.wechat.open.core.oauth2.WechatOAuthImpl;
 import org.magneton.module.wechat.open.platform.mobile.DefaultMobileAppImpl;

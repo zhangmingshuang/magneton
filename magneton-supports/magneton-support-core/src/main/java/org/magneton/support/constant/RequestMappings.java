@@ -1,7 +1,7 @@
 package org.magneton.support.constant;
 
+import com.google.common.collect.Sets;
 import java.util.Set;
-import org.magneton.core.collect.Sets;
 
 /**
  * @author zhangmsh 2022/3/19

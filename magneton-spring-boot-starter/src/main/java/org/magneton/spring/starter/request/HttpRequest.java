@@ -1,5 +1,8 @@
 package org.magneton.spring.starter.request;
 
+import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
+import com.google.common.collect.Maps;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -8,9 +11,6 @@ import java.util.Enumeration;
 import java.util.Map;
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
-import org.magneton.core.base.Preconditions;
-import org.magneton.core.base.Strings;
-import org.magneton.core.collect.Maps;
 import org.magneton.foundation.exception.ProcessException;
 
 /**

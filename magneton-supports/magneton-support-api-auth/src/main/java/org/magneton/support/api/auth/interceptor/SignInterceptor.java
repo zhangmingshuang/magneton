@@ -1,5 +1,7 @@
 package org.magneton.support.api.auth.interceptor;
 
+import com.google.common.base.Strings;
+import com.google.common.collect.Maps;
 import java.util.Enumeration;
 import java.util.Map;
 import java.util.Set;
@@ -8,9 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.magneton.core.ResponseException;
-import org.magneton.core.base.Arrays;
-import org.magneton.core.base.Strings;
-import org.magneton.core.collect.Maps;
+import org.magneton.foundation.MoreArrays;
 import org.magneton.module.safedog.SignSafeDog;
 import org.magneton.support.adapter.InterceptorAdapter;
 import org.magneton.support.api.auth.constant.CommonError;
@@ -93,7 +93,7 @@ public class SignInterceptor implements InterceptorAdapter {
 				data.put(key, value);
 			}
 			String[] signInterceptorNeedParams = SignInterceptor.this.apiAuthProperties.getSignInterceptorNeedParams();
-			if (!Arrays.isNullOrEmpty(signInterceptorNeedParams)) {
+			if (!MoreArrays.isNullOrEmpty(signInterceptorNeedParams)) {
 				for (String signInterceptorNeedParam : signInterceptorNeedParams) {
 					if (!data.containsKey(signInterceptorNeedParam)) {
 						log.error("sign need param {} miss", signInterceptorNeedParam);

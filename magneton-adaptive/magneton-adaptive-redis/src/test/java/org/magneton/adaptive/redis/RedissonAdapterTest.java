@@ -4,10 +4,9 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.magneton.core.reflect.Reflection;
+import org.magneton.foundation.reflect.MoreReflection;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.redisson.config.ClusterServersConfig;
@@ -26,7 +25,7 @@ class RedissonAdapterTest {
 		Config config = RedissonAdapter.getDefaultClusterServersConfig();
 		int threads = config.getThreads();
 		Assertions.assertEquals(0, threads);
-		Method method = Reflection.findMethod(Config.class, "getClusterServersConfig");
+		Method method = MoreReflection.findMethod(Config.class, "getClusterServersConfig");
 		method.setAccessible(true);
 		ClusterServersConfig invoke = (ClusterServersConfig) method.invoke(config);
 		System.out.println(invoke);

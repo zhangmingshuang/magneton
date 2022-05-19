@@ -1,13 +1,12 @@
 package org.magneton.foundation.comparator;
 
+import cn.hutool.core.text.CharPool;
+import cn.hutool.core.text.CharSequenceUtil;
+import com.google.common.base.Objects;
+import com.google.common.collect.Lists;
 import java.io.Serializable;
 import java.util.Comparator;
 import java.util.List;
-
-import org.magneton.core.base.Objects;
-import org.magneton.core.base.Strings;
-import org.magneton.core.collect.Lists;
-import org.magneton.core.pool.CharPool;
 
 /**
  * 版本比较器<br>
@@ -67,8 +66,8 @@ public class VersionComparator implements Comparator<String>, Serializable {
 			return 1;
 		}
 
-		final List<String> v1s = Lists.newArrayList(Strings.split(version1, CharPool.DOT));
-		final List<String> v2s = Lists.newArrayList(Strings.split(version2, CharPool.DOT));
+		List<String> v1s = Lists.newArrayList(CharSequenceUtil.split(version1, CharPool.DOT));
+		List<String> v2s = Lists.newArrayList(CharSequenceUtil.split(version2, CharPool.DOT));
 
 		int diff = 0;
 		int minLength = Math.min(v1s.size(), v2s.size());// 取最小长度值

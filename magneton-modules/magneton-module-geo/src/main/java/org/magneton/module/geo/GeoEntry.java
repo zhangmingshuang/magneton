@@ -1,9 +1,9 @@
 package org.magneton.module.geo;
 
+import com.google.common.base.Preconditions;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.magneton.core.base.Preconditions;
 
 @Setter
 @Getter

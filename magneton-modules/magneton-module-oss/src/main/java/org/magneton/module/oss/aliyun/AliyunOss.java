@@ -11,6 +11,11 @@ import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.http.MethodType;
 import com.aliyuncs.profile.DefaultProfile;
 import com.aliyuncs.profile.IClientProfile;
+import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
+import com.google.common.base.Verify;
+import com.google.common.cache.Cache;
+import com.google.common.cache.CacheBuilder;
 import java.io.File;
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -19,11 +24,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.concurrent.ExecutionException;
 import javax.annotation.Nullable;
 import lombok.extern.slf4j.Slf4j;
-import org.magneton.core.base.Preconditions;
-import org.magneton.core.base.Strings;
-import org.magneton.core.base.Verify;
-import org.magneton.core.cache.Cache;
-import org.magneton.core.cache.CacheBuilder;
 import org.magneton.module.oss.StsOss;
 
 /**

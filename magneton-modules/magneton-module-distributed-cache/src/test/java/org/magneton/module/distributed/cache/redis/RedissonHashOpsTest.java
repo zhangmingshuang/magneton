@@ -1,13 +1,12 @@
 package org.magneton.module.distributed.cache.redis;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.magneton.core.collect.Lists;
-import org.magneton.core.collect.Maps;
 import org.magneton.module.distributed.cache.Entry;
 import org.magneton.module.distributed.cache.TestA;
 import org.magneton.module.distributed.cache.TestRedisson;
