@@ -2,15 +2,15 @@ package org.magneton.module.safedog.geetest;
 
 import com.dtflys.forest.Forest;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
+import com.google.common.collect.Maps;
+import com.google.common.net.MediaType;
 import java.time.Duration;
 import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.HmacAlgorithms;
 import org.apache.commons.codec.digest.HmacUtils;
-import org.magneton.core.base.Preconditions;
-import org.magneton.core.base.Strings;
-import org.magneton.core.collect.Maps;
-import org.magneton.core.net.MediaType;
 import org.magneton.module.safedog.BehaviorSafeDog;
 
 /**

@@ -1,16 +1,16 @@
 package org.magneton.module.distributed.cache.util;
 
+import com.google.common.collect.Lists;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import org.magneton.core.collect.Collections;
-import org.magneton.core.collect.Lists;
+import org.magneton.foundation.collection.MoreCollections;
 
 /**
  * .
@@ -81,7 +81,7 @@ public class Trans {
 	}
 
 	public static List<Boolean> toBoolean(Collection<Object> objects) {
-		if (Collections.isNullOrEmpty(objects)) {
+		if (MoreCollections.isNullOrEmpty(objects)) {
 			return Collections.emptyList();
 		}
 		List<Boolean> list = Lists.newArrayListWithCapacity(objects.size());

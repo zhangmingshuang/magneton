@@ -3,9 +3,9 @@ package org.magneton.module.wechat.core;
 import cn.hutool.http.HttpUtil;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.base.Strings;
 import lombok.extern.slf4j.Slf4j;
 import org.magneton.core.Consequences;
-import org.magneton.core.base.Strings;
 
 /**
  * @author zhangmsh 2022/4/2

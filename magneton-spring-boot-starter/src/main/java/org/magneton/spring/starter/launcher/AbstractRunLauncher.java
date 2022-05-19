@@ -1,10 +1,9 @@
 package org.magneton.spring.starter.launcher;
 
+import com.google.common.collect.Lists;
 import java.util.Collection;
 import java.util.List;
-
-import org.magneton.core.collect.Collections;
-import org.magneton.core.collect.Lists;
+import org.magneton.foundation.collection.MoreCollections;
 import org.magneton.foundation.spi.SPILoader;
 
 /**
@@ -32,7 +31,7 @@ public abstract class AbstractRunLauncher {
 	}
 
 	protected void initSubsequentRunLaunchers(Collection<RunLauncher> runLaunchers) {
-		if (Collections.isNullOrEmpty(runLaunchers)) {
+		if (MoreCollections.isNullOrEmpty(runLaunchers)) {
 			return;
 		}
 		SUBSEQUENT_RUN_LAUNCHERS.addAll(runLaunchers);
@@ -40,7 +39,7 @@ public abstract class AbstractRunLauncher {
 	}
 
 	private void initServiceLaunchers(Collection<RunLauncher> runLaunchers) {
-		if (Collections.isNullOrEmpty(runLaunchers)) {
+		if (MoreCollections.isNullOrEmpty(runLaunchers)) {
 			return;
 		}
 		for (RunLauncher runLauncher : runLaunchers) {

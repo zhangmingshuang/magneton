@@ -1,10 +1,9 @@
 package org.magneton.module.distributed.lock.redis;
 
+import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
-
-import org.magneton.core.base.Preconditions;
-import org.magneton.core.base.Strings;
 import org.magneton.module.distributed.lock.exception.LockException;
 import org.redisson.api.RedissonClient;
 

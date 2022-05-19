@@ -1,10 +1,10 @@
 package org.magneton.module.wechat.open.core.oauth2;
 
+import com.google.common.base.Preconditions;
+import com.google.common.cache.Cache;
+import com.google.common.cache.CacheBuilder;
 import java.time.Duration;
 import javax.annotation.Nullable;
-import org.magneton.core.base.Preconditions;
-import org.magneton.core.cache.Cache;
-import org.magneton.core.cache.CacheBuilder;
 import org.magneton.module.wechat.open.entity.AccessTokenRes;
 
 /**

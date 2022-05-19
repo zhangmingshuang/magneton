@@ -2,6 +2,9 @@ package org.magneton.spring.starter.adapter;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.base.Strings;
+import com.google.common.collect.Lists;
+import com.google.common.io.ByteStreams;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -13,9 +16,6 @@ import javax.servlet.ReadListener;
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
-import org.magneton.core.base.Strings;
-import org.magneton.core.collect.Lists;
-import org.magneton.core.io.ByteStreams;
 
 /**
  * @author zhangmsh 2022/3/29

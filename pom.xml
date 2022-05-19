@@ -45,7 +45,7 @@
         <!-- 版本环境标识-->
         <changelist>-RC</changelist>
         <!-- 项目版本 -->
-        <revision>1.2.0${changelist}</revision>
+        <revision>1.2.1${changelist}</revision>
 
         <sonar.host.url>https://builds.apache.org/analysis</sonar.host.url>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -54,7 +54,7 @@
         <spring-boot.version>2.3.7.RELEASE</spring-boot.version>
         <!-- 工具 -->
         <testable.version>0.7.5</testable.version>
-        <commons-lang3.version>3.11</commons-lang3.version>
+        <commons-lang3.version>3.12.0</commons-lang3.version>
         <lombok.version>1.18.12</lombok.version>
         <slf4j-api.version>1.7.30</slf4j-api.version>
         <junit.version>5.7.0</junit.version>
@@ -65,7 +65,7 @@
         <jakarta.validation-api.version>2.0.2</jakarta.validation-api.version>
         <hibernate-validator.version>6.1.5.Final</hibernate-validator.version>
         <auto-service.version>1.0</auto-service.version>
-        <hutool-all.version>5.7.17</hutool-all.version>
+        <hutool-all.version>5.8.0</hutool-all.version>
         <!-- redis -->
         <redisson.version>3.16.8</redisson.version>
         <redisson-spring-boot-starter.version>3.16.8</redisson-spring-boot-starter.version>

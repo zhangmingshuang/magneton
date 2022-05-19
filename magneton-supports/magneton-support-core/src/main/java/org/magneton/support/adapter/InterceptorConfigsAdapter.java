@@ -1,15 +1,15 @@
 package org.magneton.support.adapter;
 
 import cn.hutool.core.util.ArrayUtil;
+import com.google.common.base.Strings;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import lombok.extern.slf4j.Slf4j;
-import org.magneton.core.base.Strings;
-import org.magneton.core.collect.Maps;
-import org.magneton.core.collect.Sets;
-import org.magneton.core.reflect.Reflection;
+import org.magneton.foundation.reflect.MoreReflection;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanPostProcessor;
@@ -86,7 +86,7 @@ public class InterceptorConfigsAdapter implements WebMvcConfigurer, ApplicationC
 				}
 			}
 			// method process
-			Method[] declaredMethods = Reflection.getDeclaredMethods(bean.getClass());
+			Method[] declaredMethods = MoreReflection.getDeclaredMethods(bean.getClass());
 			for (Method method : declaredMethods) {
 				ExcludeInterceptor methodExcludeInterceptor = AnnotatedElementUtils.getMergedAnnotation(method,
 						ExcludeInterceptor.class);

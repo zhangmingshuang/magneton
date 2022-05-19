@@ -1,6 +1,6 @@
 package org.magneton.module.pay.wechat.v3.core;
 
-import org.magneton.core.base.Objects;
+import com.google.common.base.Objects;
 import org.magneton.module.pay.core.TradeType;
 
 /**

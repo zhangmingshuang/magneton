@@ -1,6 +1,6 @@
 package org.magneton.module.im.tencent.api;
 
-import org.magneton.core.base.Preconditions;
+import com.google.common.base.Preconditions;
 
 /**
  * 客户端平台

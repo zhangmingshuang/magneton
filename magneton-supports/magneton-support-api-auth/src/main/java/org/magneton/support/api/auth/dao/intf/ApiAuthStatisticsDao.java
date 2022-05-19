@@ -1,9 +1,8 @@
 package org.magneton.support.api.auth.dao.intf;
 
-import javax.annotation.Nullable;
-
 import cn.org.atool.fluent.mybatis.base.IBaseDao;
-import org.magneton.core.base.Preconditions;
+import com.google.common.base.Preconditions;
+import javax.annotation.Nullable;
 import org.magneton.support.api.auth.entity.ApiAuthStatisticsDO;
 import org.magneton.support.api.auth.helper.ApiAuthStatisticsSegment;
 import org.magneton.support.api.auth.wrapper.ApiAuthStatisticsQuery;

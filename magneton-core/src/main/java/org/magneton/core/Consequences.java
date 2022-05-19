@@ -1,11 +1,11 @@
 package org.magneton.core;
 
+import com.google.common.base.Preconditions;
 import javax.annotation.Nullable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.magneton.core.base.Preconditions;
 
 /**
  * 内部使用的响应结果.

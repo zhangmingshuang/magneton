@@ -1,8 +1,8 @@
 package org.magneton.module.wechat.open.platform;
 
+import com.google.common.base.Preconditions;
 import javax.annotation.Nullable;
 import org.magneton.core.Consequences;
-import org.magneton.core.base.Preconditions;
 import org.magneton.module.wechat.open.WechatContext;
 import org.magneton.module.wechat.open.entity.AccessTokenRes;
 import org.magneton.module.wechat.open.entity.UserInfoReq;

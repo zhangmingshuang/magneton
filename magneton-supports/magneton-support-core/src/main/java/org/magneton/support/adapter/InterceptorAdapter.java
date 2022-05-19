@@ -1,8 +1,8 @@
 package org.magneton.support.adapter;
 
+import com.google.common.collect.Sets;
 import java.util.Set;
 import javax.annotation.Nullable;
-import org.magneton.core.collect.Sets;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 /**

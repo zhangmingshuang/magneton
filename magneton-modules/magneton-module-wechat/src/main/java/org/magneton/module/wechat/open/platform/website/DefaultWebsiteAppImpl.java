@@ -1,8 +1,7 @@
 package org.magneton.module.wechat.open.platform.website;
 
-import org.magneton.core.base.MoreObjects;
-import org.magneton.core.base.Preconditions;
-import org.magneton.core.base.Strings;
+import com.google.common.base.MoreObjects;
+import com.google.common.base.Preconditions;
 import org.magneton.module.wechat.open.WechatContext;
 import org.magneton.module.wechat.open.entity.WebsiteCodeReq;
 import org.magneton.module.wechat.open.platform.AbstractApp;
@@ -21,7 +20,7 @@ public class DefaultWebsiteAppImpl extends AbstractApp implements WebsiteApp {
 	public String requestCodeUrl(WebsiteCodeReq websiteCodeReq) {
 		Preconditions.checkNotNull(websiteCodeReq);
 		//@formatter:off
-		return Strings.format(
+		return String.format(
 				"https://open.weixin.qq.com/connect/qrconnect?appid=%s"
 						+ "&redirect_uri=%s&response_type=code&scope=%s&state=%s#wechat_redirect",
 				super.getWechatContext().getWechatConfig().getAppid(),

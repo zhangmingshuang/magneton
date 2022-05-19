@@ -1,8 +1,9 @@
 package org.magneton.support.doc;
 
+import cn.hutool.core.text.CharSequenceUtil;
+import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
 import javax.annotation.Nullable;
-import org.magneton.core.base.Preconditions;
-import org.magneton.core.base.Strings;
 
 /**
  * .
@@ -14,7 +15,7 @@ import org.magneton.core.base.Strings;
 public class ApiHtmlDoc {
 
 	private static final boolean API_DOC = Boolean
-			.parseBoolean(Strings.defaultIfNullOrEmpty(System.getProperty("apiDoc"), "true"));
+			.parseBoolean(CharSequenceUtil.blankToDefault(System.getProperty("apiDoc"), "true"));
 
 	@Nullable
 	private static final StringBuilder API = new StringBuilder(1024);

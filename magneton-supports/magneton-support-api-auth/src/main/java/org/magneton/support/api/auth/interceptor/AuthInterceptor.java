@@ -1,12 +1,12 @@
 package org.magneton.support.api.auth.interceptor;
 
+import com.google.common.base.Strings;
 import java.util.Set;
 import javax.annotation.Nullable;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.magneton.core.Response;
 import org.magneton.core.ResponseException;
-import org.magneton.core.base.Strings;
 import org.magneton.support.adapter.InterceptorAdapter;
 import org.magneton.support.api.auth.constant.LoginError;
 import org.magneton.support.api.auth.properties.ApiAuthProperties;

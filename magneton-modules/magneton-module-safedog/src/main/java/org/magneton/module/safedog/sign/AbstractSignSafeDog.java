@@ -1,5 +1,9 @@
 package org.magneton.module.safedog.sign;
 
+import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
+import com.google.common.collect.Lists;
+import com.google.common.hash.Hashing;
 import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.List;
@@ -7,10 +11,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 import lombok.extern.slf4j.Slf4j;
-import org.magneton.core.base.Preconditions;
-import org.magneton.core.base.Strings;
-import org.magneton.core.collect.Lists;
-import org.magneton.core.hash.Hashing;
 import org.magneton.module.safedog.SignSafeDog;
 
 /**

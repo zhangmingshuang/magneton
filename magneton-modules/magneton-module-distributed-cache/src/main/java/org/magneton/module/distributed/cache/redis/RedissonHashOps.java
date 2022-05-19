@@ -1,13 +1,13 @@
 package org.magneton.module.distributed.cache.redis;
 
+import com.google.common.base.Preconditions;
+import com.google.common.collect.Lists;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import org.magneton.core.base.Arrays;
-import org.magneton.core.base.Preconditions;
-import org.magneton.core.collect.Collections;
-import org.magneton.core.collect.Lists;
+import org.magneton.foundation.MoreArrays;
+import org.magneton.foundation.collection.MoreCollections;
 import org.magneton.module.distributed.cache.Entry;
 import org.magneton.module.distributed.cache.ops.HashOps;
 import org.redisson.api.RMap;
@@ -50,7 +50,7 @@ public class RedissonHashOps extends AbstractRedissonOps implements HashOps {
 	public <V> Map<String, V> get(String hash, Set<String> keys) {
 		Preconditions.checkNotNull(hash);
 		Preconditions.checkNotNull(keys);
-		if (Collections.isNullOrEmpty(keys)) {
+		if (MoreCollections.isNullOrEmpty(keys)) {
 			return Collections.emptyMap();
 		}
 		RMap<String, V> map = this.redissonClient.getMap(hash);
@@ -68,7 +68,7 @@ public class RedissonHashOps extends AbstractRedissonOps implements HashOps {
 	public long remove(String hash, String... keys) {
 		Preconditions.checkNotNull(hash);
 		Preconditions.checkNotNull(keys);
-		if (Arrays.isNullOrEmpty(keys)) {
+		if (MoreArrays.isNullOrEmpty(keys)) {
 			return 0;
 		}
 		return this.redissonClient.getMap(hash).fastRemove(keys);

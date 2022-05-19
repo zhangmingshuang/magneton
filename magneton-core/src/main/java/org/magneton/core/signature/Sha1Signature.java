@@ -1,8 +1,7 @@
 package org.magneton.core.signature;
 
+import com.google.common.hash.Hashing;
 import java.nio.charset.StandardCharsets;
-
-import org.magneton.core.hash.Hashing;
 
 /**
  * .

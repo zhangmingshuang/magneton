@@ -1,13 +1,11 @@
 package org.magneton.test;
 
+import com.google.common.base.Strings;
 import java.util.Set;
-
 import javax.validation.ConstraintViolation;
 import javax.validation.Path;
 import javax.validation.Validation;
 import javax.validation.ValidatorFactory;
-
-import org.magneton.core.base.Strings;
 
 /**
  * .

@@ -1,11 +1,10 @@
 package org.magneton.module.distributed.cache.redis;
 
+import com.google.common.collect.Lists;
 import java.util.List;
-
+import java.util.concurrent.ThreadLocalRandom;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.magneton.core.base.Randoms;
-import org.magneton.core.collect.Lists;
 import org.magneton.module.distributed.cache.TestA;
 import org.magneton.module.distributed.cache.TestRedisson;
 import org.magneton.module.distributed.cache.ops.ListOps;
@@ -91,7 +90,7 @@ class RedissonListOpsTest extends TestRedisson {
 
 	@Test
 	void size() {
-		int size = Randoms.nextInt(1, 50);
+		int size = ThreadLocalRandom.current().nextInt(1, 50);
 		List<TestA> testAs = this.getTestAS(size);
 		this.ops.add("list-size", testAs);
 
@@ -101,7 +100,7 @@ class RedissonListOpsTest extends TestRedisson {
 
 	@Test
 	void get() {
-		int size = Randoms.nextInt(1, 50);
+		int size = ThreadLocalRandom.current().nextInt(1, 50);
 		List<TestA> testAs = this.getTestAS(size);
 		this.ops.add("list-get", testAs);
 

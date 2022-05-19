@@ -1,10 +1,8 @@
 package org.magneton.module.statistics.redis;
 
+import com.google.common.annotations.VisibleForTesting;
+import com.google.common.base.Preconditions;
 import java.util.concurrent.TimeUnit;
-
-import javax.annotations.VisibleForTesting;
-
-import org.magneton.core.base.Preconditions;
 import org.magneton.module.statistics.Statistics;
 import org.magneton.module.statistics.process.PvUv;
 import org.redisson.api.RBitSet;

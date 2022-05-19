@@ -7,9 +7,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-
-import org.magneton.core.exception.MkdirException;
-import org.magneton.core.exception.WriteFileException;
+import org.magneton.foundation.exception.MkdirException;
+import org.magneton.foundation.exception.WriteFileException;
 
 /**
  * .

@@ -1,11 +1,11 @@
 package org.magneton.core.signature;
 
+import com.google.common.base.Preconditions;
 import java.util.Map;
 import java.util.Objects;
 import javax.annotation.Nullable;
 import lombok.Getter;
 import lombok.Setter;
-import org.magneton.core.base.Preconditions;
 
 /**
  * .

@@ -1,10 +1,10 @@
 package org.magneton.module.geo.query;
 
+import com.google.common.base.Preconditions;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.Accessors;
-import org.magneton.core.base.Preconditions;
 import org.magneton.module.geo.GeoUnit;
 
 /**

@@ -1,13 +1,11 @@
 package org.magneton.test.supplier;
 
-import java.lang.reflect.Field;
-import java.util.List;
-
-import javax.annotation.Nullable;
-import javax.annotations.CanIgnoreReturnValue;
-
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
+import com.google.errorprone.annotations.CanIgnoreReturnValue;
+import java.lang.reflect.Field;
+import java.util.List;
+import javax.annotation.Nullable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;

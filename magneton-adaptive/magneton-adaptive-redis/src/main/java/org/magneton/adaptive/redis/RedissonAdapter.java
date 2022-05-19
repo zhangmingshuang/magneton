@@ -1,12 +1,13 @@
 package org.magneton.adaptive.redis;
 
+import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import lombok.extern.slf4j.Slf4j;
-import org.magneton.core.base.Preconditions;
-import org.magneton.core.base.Strings;
-import org.magneton.foundation.resource.Resources;
+import org.magneton.foundation.MoreStrings;
+import org.magneton.foundation.Resources;
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;
 import org.redisson.config.Config;
@@ -41,7 +42,7 @@ public class RedissonAdapter {
 		case SINGLE:
 			return createSingleServerClient();
 		default:
-			throw new UnsupportedOperationException(Strings.format("redisson %s type unsupported", redissonClientType));
+			throw new UnsupportedOperationException(String.format("redisson %s type unsupported", redissonClientType));
 		}
 	}
 
@@ -141,7 +142,7 @@ public class RedissonAdapter {
 
 	private static Config createConfig(String path) {
 		String defaultConfigFile = Strings.lenientFormat(path,
-				"classpath:" + Strings.suffixIfNotNullOrEmpty(PROFILE, "-"));
+				"classpath:" + MoreStrings.suffixIfNotNullOrEmpty(PROFILE, "-"));
 		try {
 			File file = Resources.getFile(defaultConfigFile);
 			Config config = Config.fromYAML(file);
@@ -149,7 +150,7 @@ public class RedissonAdapter {
 			return config;
 		}
 		catch (@SuppressWarnings("OverlyBroadCatchBlock") IOException e) {
-			defaultConfigFile = Strings.lenientFormat(path, "/" + Strings.suffixIfNotNullOrEmpty(PROFILE, "-"));
+			defaultConfigFile = Strings.lenientFormat(path, "/" + MoreStrings.suffixIfNotNullOrEmpty(PROFILE, "-"));
 			log.warn("loading redisson config  [{}] but not found", defaultConfigFile);
 			try (InputStream inputStream = RedissonAdapter.class.getResourceAsStream(defaultConfigFile)) {
 				if (inputStream == null) {

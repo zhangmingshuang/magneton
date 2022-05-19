@@ -1,9 +1,8 @@
 package org.magneton.module.pay.core;
 
+import com.google.common.base.Preconditions;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-
-import org.magneton.core.base.Preconditions;
 
 /**
  * @author zhangmsh 2022/4/7

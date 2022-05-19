@@ -1,9 +1,9 @@
 package org.magneton.module.distributed.cache.redis;
 
+import com.google.common.base.Stopwatch;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.magneton.core.base.Stopwatch;
 import org.magneton.module.distributed.cache.TestRedisson;
 import org.magneton.module.distributed.cache.ops.HashOps;
 import org.magneton.module.distributed.cache.ops.ListOps;

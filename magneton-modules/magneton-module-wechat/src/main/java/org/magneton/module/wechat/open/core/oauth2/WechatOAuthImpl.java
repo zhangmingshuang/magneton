@@ -1,11 +1,11 @@
 package org.magneton.module.wechat.open.core.oauth2;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.base.MoreObjects;
+import com.google.common.base.Preconditions;
 import javax.annotation.Nullable;
 import lombok.extern.slf4j.Slf4j;
 import org.magneton.core.Consequences;
-import org.magneton.core.base.MoreObjects;
-import org.magneton.core.base.Preconditions;
 import org.magneton.module.wechat.core.Req;
 import org.magneton.module.wechat.open.WechatOpenConfig;
 import org.magneton.module.wechat.open.entity.AccessTokenRes;

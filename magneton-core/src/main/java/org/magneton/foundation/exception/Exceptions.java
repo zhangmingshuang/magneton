@@ -5,6 +5,7 @@ import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.ReflectUtil;
 import cn.hutool.core.util.StrUtil;
+import com.google.common.base.Strings;
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.UndeclaredThrowableException;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.magneton.core.base.Strings;
+import org.magneton.foundation.MoreStrings;
 
 /**
  * 异常工具类
@@ -21,6 +22,9 @@ import org.magneton.core.base.Strings;
  */
 public class Exceptions {
 
+	private Exceptions() {
+	}
+
 	/**
 	 * 获得完整消息，包括异常名，消息格式为：{SimpleClassName}: {ThrowableMessage}
 	 * @param e 异常
@@ -28,9 +32,9 @@ public class Exceptions {
 	 */
 	public static String getMessage(Throwable e) {
 		if (null == e) {
-			return Strings.NULL;
+			return MoreStrings.NULL;
 		}
-		return Strings.format("%s: %s", e.getClass().getSimpleName(), e.getMessage());
+		return Strings.lenientFormat("%s: %s", e.getClass().getSimpleName(), e.getMessage());
 	}
 
 	/**
@@ -39,7 +43,7 @@ public class Exceptions {
 	 * @return 消息
 	 */
 	public static String getSimpleMessage(Throwable e) {
-		return (null == e) ? Strings.NULL : e.getMessage();
+		return (null == e) ? MoreStrings.NULL : e.getMessage();
 	}
 
 	/**

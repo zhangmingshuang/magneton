@@ -1,15 +1,15 @@
 package org.magneton.spring.starter.exception;
 
 import com.alibaba.fastjson.JSON;
+import com.google.common.base.Preconditions;
+import com.google.common.net.MediaType;
+import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
-import javax.annotations.CanIgnoreReturnValue;
 import javax.servlet.http.HttpServletResponse;
 import org.magneton.core.Response;
 import org.magneton.core.ResponseMessage;
-import org.magneton.core.base.Preconditions;
-import org.magneton.core.net.MediaType;
 import org.magneton.foundation.exception.ProcessException;
 
 /**

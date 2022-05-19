@@ -1,9 +1,7 @@
 package org.magneton.spring.starter.launcher;
 
 import java.util.Map;
-
-import org.magneton.core.collect.Maps;
-
+import org.magneton.foundation.collection.MoreCollections;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.SpringApplicationRunListener;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -23,7 +21,7 @@ public class RunLauncherRunListener extends AbstractRunLauncher implements Sprin
 	@Override
 	public void started(ConfigurableApplicationContext context) {
 		Map<String, RunLauncher> runLaunchers = context.getBeansOfType(RunLauncher.class);
-		if (Maps.isNullOrEmpty(runLaunchers)) {
+		if (MoreCollections.isNullOrEmpty(runLaunchers)) {
 			return;
 		}
 		this.initSubsequentRunLaunchers(runLaunchers.values());
