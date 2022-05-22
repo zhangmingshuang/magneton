@@ -9,6 +9,7 @@ import org.magneton.module.distributed.cache.DistributedCache;
 import org.magneton.module.distributed.cache.ops.HashOps;
 import org.magneton.module.distributed.cache.ops.ListOps;
 import org.magneton.module.distributed.cache.ops.SetOps;
+import org.magneton.module.distributed.cache.ops.SortedSetOps;
 import org.magneton.module.distributed.cache.ops.ValueOps;
 import org.redisson.api.RedissonClient;
 
@@ -30,12 +31,15 @@ public class RedissonDistributedCache implements DistributedCache {
 
 	private final SetOps setOps;
 
+	private final SortedSetOps sortedSetOps;
+
 	public RedissonDistributedCache(RedissonClient redissonClient) {
 		this.redissonClient = Preconditions.checkNotNull(redissonClient);
 		this.valueOps = new RedissonValueOps(this.redissonClient);
 		this.listOps = new RedissonListOps(this.redissonClient);
 		this.hashOps = new RedissonHashOps(this.redissonClient);
 		this.setOps = new RedissonSetOps(this.redissonClient);
+		this.sortedSetOps = new ResissonSortedSetOps(this.redissonClient);
 	}
 
 	@Override
@@ -46,6 +50,11 @@ public class RedissonDistributedCache implements DistributedCache {
 	@Override
 	public SetOps opsForSet() {
 		return this.setOps;
+	}
+
+	@Override
+	public SortedSetOps opsForSortedSet() {
+		return this.sortedSetOps;
 	}
 
 	@Override
