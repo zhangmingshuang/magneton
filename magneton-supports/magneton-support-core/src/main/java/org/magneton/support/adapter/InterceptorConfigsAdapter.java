@@ -1,5 +1,6 @@
 package org.magneton.support.adapter;
 
+import cn.hutool.core.annotation.AnnotationUtil;
 import cn.hutool.core.util.ArrayUtil;
 import com.google.common.base.Strings;
 import com.google.common.collect.Maps;
@@ -8,14 +9,17 @@ import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import javax.annotation.Nullable;
 import lombok.extern.slf4j.Slf4j;
 import org.magneton.foundation.reflect.MoreReflection;
+import org.springframework.aop.support.AopUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.core.annotation.AnnotatedElementUtils;
+import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
@@ -52,8 +56,11 @@ public class InterceptorConfigsAdapter implements WebMvcConfigurer, ApplicationC
 				.getBeansWithAnnotation(GlobalExcludeInterceptor.class);
 		if (!globalExcludeInterceptors.isEmpty()) {
 			globalExcludeInterceptors.forEach((name, gei) -> {
-				GlobalExcludeInterceptor globalExcludeInterceptor = AnnotatedElementUtils
-						.getMergedAnnotation(gei.getClass(), GlobalExcludeInterceptor.class);
+				GlobalExcludeInterceptor globalExcludeInterceptor = this.getGlobalExcludeInterceptor(gei);
+				if (globalExcludeInterceptor == null) {
+					throw new NullPointerException(
+							String.format("GlobalExcludeInterceptor is not found on (%s) %s", name, gei));
+				}
 				for (String exclude : globalExcludeInterceptor.value()) {
 					if (!Strings.isNullOrEmpty(exclude)) {
 						this.excludeInterceptorPaths.put(exclude, EMPTY);
@@ -61,6 +68,30 @@ public class InterceptorConfigsAdapter implements WebMvcConfigurer, ApplicationC
 				}
 			});
 		}
+	}
+
+	@Nullable
+	private GlobalExcludeInterceptor getGlobalExcludeInterceptor(Object object) {
+		Class<?> clazz = object.getClass();
+		GlobalExcludeInterceptor globalExcludeInterceptor = AnnotatedElementUtils.getMergedAnnotation(clazz,
+				GlobalExcludeInterceptor.class);
+		if (globalExcludeInterceptor == null) {
+			globalExcludeInterceptor = AnnotationUtils.findAnnotation(clazz, GlobalExcludeInterceptor.class);
+		}
+		if (globalExcludeInterceptor == null) {
+			globalExcludeInterceptor = clazz.getAnnotation(GlobalExcludeInterceptor.class);
+		}
+		if (globalExcludeInterceptor == null) {
+			globalExcludeInterceptor = clazz.getDeclaredAnnotation(GlobalExcludeInterceptor.class);
+		}
+		if (globalExcludeInterceptor == null) {
+			globalExcludeInterceptor = AnnotationUtil.getAnnotation(clazz, GlobalExcludeInterceptor.class);
+		}
+		if (globalExcludeInterceptor == null && AopUtils.isAopProxy(clazz)) {
+			clazz = AopUtils.getTargetClass(clazz);
+			return this.getGlobalExcludeInterceptor(clazz);
+		}
+		return globalExcludeInterceptor;
 	}
 
 	@Override

@@ -1,8 +1,7 @@
 package javax.annotations;
 
 import java.lang.annotation.Retention;
-
-import static java.lang.annotation.RetentionPolicy.CLASS;
+import java.lang.annotation.RetentionPolicy;
 
 /**
  * 待支持.
@@ -10,7 +9,7 @@ import static java.lang.annotation.RetentionPolicy.CLASS;
  * @author zhangmsh 2022/2/15
  * @since 1.2.0
  */
-@Retention(CLASS)
+@Retention(RetentionPolicy.CLASS)
 public @interface ToSupport {
 
 	/**
