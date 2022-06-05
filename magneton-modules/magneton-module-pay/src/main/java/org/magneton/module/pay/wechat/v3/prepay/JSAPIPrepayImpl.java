@@ -5,9 +5,9 @@ import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import org.magneton.core.Consequences;
 import org.magneton.module.pay.exception.AmountException;
-import org.magneton.module.pay.wechat.v3.entity.PrepayId;
-import org.magneton.module.pay.wechat.v3.entity.WxPayJSAPIPrepay;
-import org.magneton.module.pay.wechat.v3.entity.WxPayJSAPIPrepayReq;
+import org.magneton.module.pay.wechat.v3.prepay.entity.PrepayId;
+import org.magneton.module.pay.wechat.v3.prepay.entity.WxPayJSAPIPrepay;
+import org.magneton.module.pay.wechat.v3.prepay.entity.WxPayJSAPIPrepayReq;
 
 /**
  * JSAPI预支付.

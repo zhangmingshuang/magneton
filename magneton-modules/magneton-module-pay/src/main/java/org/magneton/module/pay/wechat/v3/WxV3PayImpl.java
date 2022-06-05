@@ -2,6 +2,7 @@ package org.magneton.module.pay.wechat.v3;
 
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
+import com.google.common.collect.Maps;
 import com.wechat.pay.contrib.apache.httpclient.constant.WechatPayHttpHeaders;
 import com.wechat.pay.contrib.apache.httpclient.notification.Notification;
 import com.wechat.pay.contrib.apache.httpclient.notification.NotificationHandler;
@@ -20,10 +21,6 @@ import org.magneton.foundation.exception.ProcessException;
 import org.magneton.module.pay.wechat.v3.core.DefaultWxPayContext;
 import org.magneton.module.pay.wechat.v3.core.WxPayConfig;
 import org.magneton.module.pay.wechat.v3.core.WxPayContext;
-import org.magneton.module.pay.wechat.v3.entity.WxPayNotification;
-import org.magneton.module.pay.wechat.v3.entity.WxPayOrder;
-import org.magneton.module.pay.wechat.v3.entity.WxPayOrderQuery;
-import org.magneton.module.pay.wechat.v3.entity.WxPayOrderQuery.Type;
 import org.magneton.module.pay.wechat.v3.prepay.AppPrepay;
 import org.magneton.module.pay.wechat.v3.prepay.AppPrepayImpl;
 import org.magneton.module.pay.wechat.v3.prepay.H5Prepay;
@@ -32,6 +29,12 @@ import org.magneton.module.pay.wechat.v3.prepay.JSAPIPrepay;
 import org.magneton.module.pay.wechat.v3.prepay.JSAPIPrepayImpl;
 import org.magneton.module.pay.wechat.v3.prepay.WechatBaseV3Pay;
 import org.magneton.module.pay.wechat.v3.prepay.WechatBaseV3PayImpl;
+import org.magneton.module.pay.wechat.v3.prepay.entity.WxPayNotification;
+import org.magneton.module.pay.wechat.v3.prepay.entity.WxPayOrder;
+import org.magneton.module.pay.wechat.v3.prepay.entity.WxPayOrderQuery;
+import org.magneton.module.pay.wechat.v3.prepay.entity.WxPayOrderQuery.Type;
+import org.magneton.module.pay.wechat.v3.profitsharing.ProfitSharing;
+import org.magneton.module.pay.wechat.v3.profitsharing.ProfitSharingImpl;
 
 /**
  * 微信支付.
@@ -52,13 +55,9 @@ public class WxV3PayImpl implements WxV3Pay {
 
 	private WechatBaseV3Pay wechatBaseV3Pay;
 
-	private AppPrepay appPrepay;
-
-	private JSAPIPrepay jsapiPrepay;
-
-	private H5Prepay h5Prepay;
-
 	private WxPayContext payContext;
+
+	private Map<Class, Object> classCache = Maps.newConcurrentMap();
 
 	public WxV3PayImpl(WxPayConfig wxPayConfig) {
 		this.payContext = new DefaultWxPayContext(wxPayConfig);
@@ -67,32 +66,26 @@ public class WxV3PayImpl implements WxV3Pay {
 
 	@Override
 	public AppPrepay appPrepay() {
-		if (this.appPrepay == null) {
-			synchronized (this) {
-				this.appPrepay = new AppPrepayImpl(this.wechatBaseV3Pay);
-			}
-		}
-		return this.appPrepay;
+		return (AppPrepay) this.classCache.computeIfAbsent(AppPrepay.class,
+				clazz -> new AppPrepayImpl(this.wechatBaseV3Pay));
 	}
 
 	@Override
 	public JSAPIPrepay jsapiPrepay() {
-		if (this.jsapiPrepay == null) {
-			synchronized (this) {
-				this.jsapiPrepay = new JSAPIPrepayImpl(this.wechatBaseV3Pay);
-			}
-		}
-		return this.jsapiPrepay;
+		return (JSAPIPrepay) this.classCache.computeIfAbsent(JSAPIPrepay.class,
+				clazz -> new JSAPIPrepayImpl(this.wechatBaseV3Pay));
 	}
 
 	@Override
 	public H5Prepay h5Prepay() {
-		if (this.h5Prepay == null) {
-			synchronized (this) {
-				this.h5Prepay = new H5PrepayImpl(this.wechatBaseV3Pay);
-			}
-		}
-		return this.h5Prepay;
+		return (H5Prepay) this.classCache.computeIfAbsent(H5Prepay.class,
+				clazz -> new H5PrepayImpl(this.wechatBaseV3Pay));
+	}
+
+	@Override
+	public ProfitSharing profitSharing() {
+		return (ProfitSharing) this.classCache.computeIfAbsent(ProfitSharing.class,
+				clazz -> new ProfitSharingImpl(this.payContext));
 	}
 
 	@Override
