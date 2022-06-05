@@ -23,6 +23,7 @@ public class WxProfitSharingReceiverAddReq extends BaseV3Data {
 	/**
 	 * 分账接收方类型 type string[1, 32] 是 body枚举值： MERCHANT_ID：商户ID
 	 * PERSONAL_OPENID：个人openid（由父商户APPID转换得到） 示例值：MERCHANT_ID
+	 * @see org.magneton.module.pay.wechat.v3.core.WxReceiverType
 	 */
 	private String type;
 
@@ -53,6 +54,7 @@ public class WxProfitSharingReceiverAddReq extends BaseV3Data {
 	 * 与分账方的关系类型 relation_type string[1, 32] 是 body子商户与接收方的关系。 本字段值为枚举： STORE：门店 STAFF：员工
 	 * STORE_OWNER：店主 PARTNER：合作伙伴 HEADQUARTER：总部 BRAND：品牌方 DISTRIBUTOR：分销商 USER：用户
 	 * SUPPLIER： 供应商 CUSTOM：自定义 示例值：STORE
+	 * @see org.magneton.module.pay.wechat.v3.core.WxRelationType
 	 */
 	@JsonProperty("relation_type")
 	private String relationType;
