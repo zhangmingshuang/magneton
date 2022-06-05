@@ -1,7 +1,7 @@
 package org.magneton.module.pay.wechat.v3.prepay;
 
-import org.magneton.module.pay.wechat.v3.entity.WxPayJSAPIPrepay;
-import org.magneton.module.pay.wechat.v3.entity.WxPayJSAPIPrepayReq;
+import org.magneton.module.pay.wechat.v3.prepay.entity.WxPayJSAPIPrepay;
+import org.magneton.module.pay.wechat.v3.prepay.entity.WxPayJSAPIPrepayReq;
 
 /**
  * JSAPI支付

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.magneton.module.pay.wechat.v3.prepay.WechatBaseV3Pay;
+import org.magneton.module.pay.wechat.v3.prepay.entity.WxPayAppPrepayReq;
 import org.magneton.test.ChaosTest;
 
 /**

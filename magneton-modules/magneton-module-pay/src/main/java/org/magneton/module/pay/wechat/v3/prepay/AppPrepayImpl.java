@@ -6,9 +6,9 @@ import com.google.common.base.Strings;
 import lombok.extern.slf4j.Slf4j;
 import org.magneton.core.Consequences;
 import org.magneton.module.pay.exception.AmountException;
-import org.magneton.module.pay.wechat.v3.entity.PrepayId;
-import org.magneton.module.pay.wechat.v3.entity.WxPayAppPrepay;
-import org.magneton.module.pay.wechat.v3.entity.WxPayAppPrepayReq;
+import org.magneton.module.pay.wechat.v3.prepay.entity.PrepayId;
+import org.magneton.module.pay.wechat.v3.prepay.entity.WxPayAppPrepay;
+import org.magneton.module.pay.wechat.v3.prepay.entity.WxPayAppPrepayReq;
 
 /**
  * @author zhangmsh 2022/4/5

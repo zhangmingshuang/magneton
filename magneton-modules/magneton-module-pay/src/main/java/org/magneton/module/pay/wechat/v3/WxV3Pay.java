@@ -4,12 +4,13 @@ import com.google.common.base.Strings;
 import java.util.Map;
 import org.magneton.core.Consequences;
 import org.magneton.module.pay.Pay;
-import org.magneton.module.pay.wechat.v3.entity.WxPayNotification;
-import org.magneton.module.pay.wechat.v3.entity.WxPayOrder;
-import org.magneton.module.pay.wechat.v3.entity.WxPayOrderQuery;
 import org.magneton.module.pay.wechat.v3.prepay.AppPrepay;
 import org.magneton.module.pay.wechat.v3.prepay.H5Prepay;
 import org.magneton.module.pay.wechat.v3.prepay.JSAPIPrepay;
+import org.magneton.module.pay.wechat.v3.prepay.entity.WxPayNotification;
+import org.magneton.module.pay.wechat.v3.prepay.entity.WxPayOrder;
+import org.magneton.module.pay.wechat.v3.prepay.entity.WxPayOrderQuery;
+import org.magneton.module.pay.wechat.v3.profitsharing.ProfitSharing;
 
 /**
  * 微信支付.
@@ -20,6 +21,11 @@ import org.magneton.module.pay.wechat.v3.prepay.JSAPIPrepay;
  */
 public interface WxV3Pay extends Pay {
 
+	/**
+	 * 回调结果响应文本处理
+	 * @param success 是否成功
+	 * @return 回调结果响应文本
+	 */
 	static String callbackResult(boolean success) {
 		// @formatter:off
 		return Strings.lenientFormat("{"
@@ -31,21 +37,27 @@ public interface WxV3Pay extends Pay {
 
 	/**
 	 * APP预下单处理
-	 * @return 处理器
+	 * @return APP预下单处理API
 	 */
 	AppPrepay appPrepay();
 
 	/**
 	 * JSAPI预下单处理
-	 * @return 处理器
+	 * @return JSAPI预下单处理API
 	 */
 	JSAPIPrepay jsapiPrepay();
 
 	/**
 	 * H5支付
-	 * @return
+	 * @return H5支付API
 	 */
 	H5Prepay h5Prepay();
+
+	/**
+	 * 分账
+	 * @return 分账API
+	 */
+	ProfitSharing profitSharing();
 
 	/**
 	 * 查询订单
