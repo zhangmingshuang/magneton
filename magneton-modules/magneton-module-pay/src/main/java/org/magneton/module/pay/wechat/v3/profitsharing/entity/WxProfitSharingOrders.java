@@ -42,6 +42,7 @@ public class WxProfitSharingOrders {
 	/**
 	 * 分账单状态 state string[1, 32] 是 分账单状态（每个接收方的分账结果请查看receivers中的result字段），枚举值：
 	 * 1、PROCESSING：处理中 2、FINISHED：分账完成 示例值：FINISHED
+	 * @see org.magneton.module.pay.wechat.v3.core.WxProfitSharingState
 	 */
 	private String state;
 
