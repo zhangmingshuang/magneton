@@ -53,7 +53,7 @@ public interface ProfitSharing extends BaseV3Api {
 	 *
 	 * 注意： • 商户需确保向微信支付传输用户身份信息和账号标识信息做一致性校验已合法征得用户授权
 	 * <a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter8_1_8.shtml">官网地址</a>
-	 * @param req 请求参数
+	 * @param req 请求参数AbstractSignSafeDog
 	 * @return 添加结果
 	 */
 	Consequences<WxProfitSharingReceiverAdd> add(WxProfitSharingReceiverAddReq req);

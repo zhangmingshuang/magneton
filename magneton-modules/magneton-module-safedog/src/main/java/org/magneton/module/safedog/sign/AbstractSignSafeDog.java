@@ -25,6 +25,9 @@ public abstract class AbstractSignSafeDog implements SignSafeDog {
 	@Override
 	public String sign(Map<String, String> data, String salt) {
 		Preconditions.checkNotNull(data);
+		if (log.isDebugEnabled()) {
+			log.debug("sign data: {}", data);
+		}
 		List<String> keys = this.keysAmend(data.keySet());
 		if (keys.isEmpty()) {
 			return "";
@@ -41,6 +44,9 @@ public abstract class AbstractSignSafeDog implements SignSafeDog {
 			value = data.get(keys.get(i));
 			if (!Strings.isNullOrEmpty(value)) {
 				builder.append(key).append('=').append(value).append(",");
+			}
+			else if (log.isDebugEnabled()) {
+				log.debug("sign the key {}'s data miss", key);
 			}
 		}
 		String embeddingStr = builder.substring(0, builder.length() - 1);
