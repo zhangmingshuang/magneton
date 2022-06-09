@@ -1,8 +1,12 @@
 package org.magneton.module.pay.wechat.v3.profitsharing.entity;
 
+import javax.annotation.Nullable;
+import javax.annotations.Description;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.magneton.module.pay.wechat.v3.annotation.WxSecret;
+import org.magneton.module.pay.wechat.v3.core.WxReceiverType;
 
 /**
  * 分账接收方
@@ -19,7 +23,7 @@ public class Receiver {
 	 * 分账接收方类型 type string[1, 32] 是 示例值：MERCHANT_ID
 	 * @see org.magneton.module.pay.wechat.v3.core.WxReceiverType
 	 */
-	private String type;
+	private WxReceiverType type;
 
 	/**
 	 * 分账接收方账号 account string[1, 64] 是
@@ -45,6 +49,9 @@ public class Receiver {
 	 * </ul>
 	 * 示例值：hu89ohu89ohu89o
 	 */
+	@Nullable
+	@WxSecret
+	@Description("此字段需要加密，加密方法详见：敏感信息加密说明")
 	private String name;
 
 	/**
