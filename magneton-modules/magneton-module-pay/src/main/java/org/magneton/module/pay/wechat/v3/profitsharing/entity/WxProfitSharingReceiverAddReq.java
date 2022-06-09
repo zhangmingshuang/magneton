@@ -8,6 +8,8 @@ import lombok.Setter;
 import lombok.ToString;
 import org.magneton.module.pay.wechat.v3.annotation.WxSecret;
 import org.magneton.module.pay.wechat.v3.core.BaseV3Data;
+import org.magneton.module.pay.wechat.v3.core.WxReceiverType;
+import org.magneton.module.pay.wechat.v3.core.WxRelationType;
 
 /**
  * 添加分账接收方
@@ -25,7 +27,7 @@ public class WxProfitSharingReceiverAddReq extends BaseV3Data {
 	 * PERSONAL_OPENID：个人openid（由父商户APPID转换得到） 示例值：MERCHANT_ID
 	 * @see org.magneton.module.pay.wechat.v3.core.WxReceiverType
 	 */
-	private String type;
+	private WxReceiverType type;
 
 	/**
 	 * 分账接收方账号 account string[1, 64] 是 body类型是MERCHANT_ID时，是商户号
@@ -57,7 +59,7 @@ public class WxProfitSharingReceiverAddReq extends BaseV3Data {
 	 * @see org.magneton.module.pay.wechat.v3.core.WxRelationType
 	 */
 	@JsonProperty("relation_type")
-	private String relationType;
+	private WxRelationType relationType;
 
 	/**
 	 * 自定义的分账关系 custom_relation string[1, 10] 否 body子商户与接收方具体的关系，本字段最多10个字。
