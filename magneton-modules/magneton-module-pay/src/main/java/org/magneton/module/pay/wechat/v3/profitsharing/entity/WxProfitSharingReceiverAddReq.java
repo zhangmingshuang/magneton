@@ -48,6 +48,7 @@ public class WxProfitSharingReceiverAddReq extends BaseV3Data {
 	 * </ul>
 	 * 示例值：hu89ohu89ohu89o
 	 */
+	@Nullable
 	@WxSecret
 	@Description("此字段需要加密，加密方法详见：敏感信息加密说明")
 	private String name;

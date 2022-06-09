@@ -94,7 +94,7 @@ public class DefaultWxPayContext implements WxPayContext {
 			log.error("wechat pay merchant private key not found.", e);
 			throw new PrivateKeyNotFoundException(e);
 		}
-		// 获取证书管理器实例
+		// 获取证书管理器实例,它会定时下载和更新商户对应的微信支付平台证书 （默认下载间隔为UPDATE_INTERVAL_MINUTE）。
 		CertificatesManager certificatesManager = CertificatesManager.getInstance();
 
 		try {
@@ -103,6 +103,7 @@ public class DefaultWxPayContext implements WxPayContext {
 			this.privateKeySigner = new PrivateKeySigner(merchantSerialNumber, merchantPrivateKey);
 			certificatesManager.putMerchant(merchantId, new WechatPay2Credentials(merchantId, this.privateKeySigner),
 					apiV3Key.getBytes(StandardCharsets.UTF_8));
+			// 从证书管理器中获取verifier
 			this.verifier = certificatesManager.getVerifier(merchantId);
 			this.wechatPay2Validator = new WechatPay2Validator(this.verifier);
 		}
@@ -116,7 +117,7 @@ public class DefaultWxPayContext implements WxPayContext {
 		}
 		WechatPayHttpClientBuilder builder = WechatPayHttpClientBuilder.create()
 				.withMerchant(merchantId, merchantSerialNumber, merchantPrivateKey)
-				.withValidator(new WechatPay2Validator(this.verifier));
+				.withValidator(this.wechatPay2Validator);
 		// 通过WechatPayHttpClientBuilder构造的HttpClient，会自动的处理签名和验签
 		this.httpClient = builder.build();
 	}

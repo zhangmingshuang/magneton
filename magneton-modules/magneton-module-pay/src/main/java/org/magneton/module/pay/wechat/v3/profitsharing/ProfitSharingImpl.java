@@ -1,6 +1,10 @@
 package org.magneton.module.pay.wechat.v3.profitsharing;
 
 import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
+import com.wechat.pay.contrib.apache.httpclient.constant.WechatPayHttpHeaders;
+import com.wechat.pay.contrib.apache.httpclient.util.RsaCryptoUtil;
+import javax.crypto.IllegalBlockSizeException;
 import org.apache.http.client.methods.HttpPost;
 import org.magneton.core.Consequences;
 import org.magneton.module.pay.wechat.v3.core.WxPayContext;
@@ -42,6 +46,18 @@ public class ProfitSharingImpl implements ProfitSharing {
 	@Override
 	public Consequences<WxProfitSharingReceiverAdd> add(WxProfitSharingReceiverAddReq req) {
 		HttpPost httpPost = this.newHttpPost("https://api.mch.weixin.qq.com/v3/profitsharing/receiver/add", req);
+		String name = req.getName();
+		if (!Strings.isNullOrEmpty(name)) {
+			httpPost.addHeader(WechatPayHttpHeaders.WECHAT_PAY_SERIAL,
+					this.getPayContext().getPayConfig().getMerchantSerialNumber());
+			// name需要加密
+			try {
+				req.setName(RsaCryptoUtil.encryptOAEP(name, this.getPayContext().getVerifier().getValidCertificate()));
+			}
+			catch (IllegalBlockSizeException e) {
+				throw new RuntimeException(e);
+			}
+		}
 		return this.doRequest(httpPost, WxProfitSharingReceiverAdd.class);
 	}
 
