@@ -41,8 +41,12 @@ public interface BaseV3Api {
 		Preconditions.checkNotNull(type);
 
 		// 完成签名并执行请求
+		Logger logger = this.getLogger();
 		try (CloseableHttpResponse response = this.getPayContext().getHttpClient().execute(httpRequest)) {
 			int statusCode = response.getStatusLine().getStatusCode();
+			if (logger != null && logger.isDebugEnabled()) {
+				logger.debug("request url: {}, status code: {}", httpRequest.getURI(), statusCode);
+			}
 			if (statusCode == 200) { // 处理成功
 				byte[] responseBytes = EntityUtils.toByteArray(response.getEntity());
 				return Consequences.success(BaseV3Api.json().readValue(responseBytes, type));
@@ -56,7 +60,6 @@ public interface BaseV3Api {
 			}
 		}
 		catch (IOException e) {
-			Logger logger = this.getLogger();
 			if (logger != null) {
 				logger.error(Strings.lenientFormat("request %s error", httpRequest), e);
 			}
