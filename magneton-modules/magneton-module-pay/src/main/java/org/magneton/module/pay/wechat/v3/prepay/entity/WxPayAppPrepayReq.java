@@ -128,4 +128,11 @@ public class WxPayAppPrepayReq extends BaseV3PayIdData {
 	@JsonProperty("scene_info")
 	private SceneInfo sceneInfo;
 
+	/**
+	 * 结算信息
+	 */
+	@Nullable
+	@JsonProperty("settle_info")
+	private SettleInfo settleInfo;
+
 }

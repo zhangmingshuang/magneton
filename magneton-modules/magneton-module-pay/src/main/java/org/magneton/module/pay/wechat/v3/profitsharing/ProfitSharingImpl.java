@@ -5,6 +5,7 @@ import com.google.common.base.Strings;
 import com.wechat.pay.contrib.apache.httpclient.constant.WechatPayHttpHeaders;
 import com.wechat.pay.contrib.apache.httpclient.util.RsaCryptoUtil;
 import javax.crypto.IllegalBlockSizeException;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.http.client.methods.HttpPost;
 import org.magneton.core.Consequences;
 import org.magneton.module.pay.wechat.v3.core.WxPayContext;
@@ -14,17 +15,24 @@ import org.magneton.module.pay.wechat.v3.profitsharing.entity.WxProfitSharingOrd
 import org.magneton.module.pay.wechat.v3.profitsharing.entity.WxProfitSharingOrdersReq;
 import org.magneton.module.pay.wechat.v3.profitsharing.entity.WxProfitSharingReceiverAdd;
 import org.magneton.module.pay.wechat.v3.profitsharing.entity.WxProfitSharingReceiverAddReq;
+import org.slf4j.Logger;
 
 /**
  * @author zhangmsh 2022/6/5
  * @since 1.0.0
  */
+@Slf4j
 public class ProfitSharingImpl implements ProfitSharing {
 
 	private final WxPayContext wxPayContext;
 
 	public ProfitSharingImpl(WxPayContext wxPayContext) {
 		this.wxPayContext = Preconditions.checkNotNull(wxPayContext);
+	}
+
+	@Override
+	public Logger getLogger() {
+		return log;
 	}
 
 	@Override
@@ -45,7 +53,7 @@ public class ProfitSharingImpl implements ProfitSharing {
 
 	@Override
 	public Consequences<WxProfitSharingReceiverAdd> add(WxProfitSharingReceiverAddReq req) {
-		HttpPost httpPost = this.newHttpPost("https://api.mch.weixin.qq.com/v3/profitsharing/receiver/add", req);
+		HttpPost httpPost = this.newHttpPost("https://api.mch.weixin.qq.com/v3/profitsharing/receivers/add", req);
 		String name = req.getName();
 		if (!Strings.isNullOrEmpty(name)) {
 			httpPost.addHeader(WechatPayHttpHeaders.WECHAT_PAY_SERIAL,
