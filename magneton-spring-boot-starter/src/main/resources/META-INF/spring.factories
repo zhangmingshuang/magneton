@@ -1,3 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  org.magneton.spring.starter.MagnetonAutoConfiguration, \
-  org.magneton.spring.starter.ModuleAutoConfiguration
+  org.magneton.spring.starter.MagnetonAutoConfiguration

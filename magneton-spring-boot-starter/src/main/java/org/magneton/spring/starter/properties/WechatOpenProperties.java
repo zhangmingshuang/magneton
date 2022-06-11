@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.magneton.module.wechat.open.WechatOpenConfig;
+
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
@@ -13,6 +15,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @Setter
 @Getter
 @ToString
+@ConditionalOnClass(WechatOpenConfig.class)
 @ConfigurationProperties(WechatOpenProperties.PREFIX)
 public class WechatOpenProperties extends WechatOpenConfig {
 

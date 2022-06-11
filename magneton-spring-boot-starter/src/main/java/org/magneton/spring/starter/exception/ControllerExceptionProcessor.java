@@ -1,17 +1,20 @@
 package org.magneton.spring.starter.exception;
 
-import com.google.common.base.Preconditions;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.ReentrantLock;
+
 import javax.annotation.Nullable;
+
+import com.google.common.base.Preconditions;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.magneton.core.Response;
 import org.magneton.core.ResponseException;
 import org.magneton.foundation.collection.MoreCollections;
+
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -38,8 +41,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
  * @since 2020/12/25
  * @see ExceptionProcessor
  */
-@RestControllerAdvice
 @Slf4j
+@RestControllerAdvice
 @ConditionalOnProperty(prefix = "magneton", value = "exception.advice.enable", havingValue = "true",
 		matchIfMissing = true)
 public class ControllerExceptionProcessor implements InitializingBean {
@@ -52,8 +55,8 @@ public class ControllerExceptionProcessor implements InitializingBean {
 	private final ReentrantLock lock = new ReentrantLock();
 
 	/** the expcetion processor in spring bean context. */
-	@Autowired(required = false)
 	@Nullable
+	@Autowired(required = false)
 	private List<ExceptionProcessor> exceptionProcessors;
 
 	/**
