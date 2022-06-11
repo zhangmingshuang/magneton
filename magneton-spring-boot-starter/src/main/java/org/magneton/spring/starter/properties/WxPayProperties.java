@@ -5,6 +5,7 @@ import lombok.Setter;
 import lombok.ToString;
 import org.magneton.module.pay.wechat.v3.core.WxPayConfig;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
@@ -16,6 +17,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @Setter
 @Getter
 @ToString
+@ConditionalOnClass(WxPayConfig.class)
 @ConfigurationProperties(WxPayProperties.PREFIX)
 public class WxPayProperties extends WxPayConfig {
 

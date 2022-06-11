@@ -5,6 +5,8 @@ import lombok.Setter;
 import lombok.ToString;
 import org.magneton.module.sms.process.aliyun.AliyunSmsProperty;
 import org.magneton.module.sms.property.SmsProperty;
+
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.NestedConfigurationProperty;
 
@@ -17,6 +19,7 @@ import org.springframework.boot.context.properties.NestedConfigurationProperty;
 @Setter
 @Getter
 @ToString
+@ConditionalOnClass(SmsProperty.class)
 @ConfigurationProperties(prefix = "magneton.module.sms")
 public class SmsProperties extends SmsProperty {
 

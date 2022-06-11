@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.magneton.module.im.tencent.TencentImConfig;
+
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
@@ -15,6 +17,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @Setter
 @Getter
 @ToString
+@ConditionalOnClass(TencentImConfig.class)
 @ConfigurationProperties(prefix = TencentImProperties.PREFIX)
 public class TencentImProperties extends TencentImConfig {
 
