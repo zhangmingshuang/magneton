@@ -1,385 +1,385 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns="http://maven.apache.org/POM/4.0.0"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+		 xmlns="http://maven.apache.org/POM/4.0.0"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-    <groupId>org.magneton</groupId>
-    <artifactId>magneton</artifactId>
-    <packaging>pom</packaging>
-    <version>${revision}</version>
-    <modelVersion>4.0.0</modelVersion>
-    <inceptionYear>2020</inceptionYear>
+	<groupId>org.magneton</groupId>
+	<artifactId>magneton</artifactId>
+	<packaging>pom</packaging>
+	<version>${revision}</version>
+	<modelVersion>4.0.0</modelVersion>
+	<inceptionYear>2020</inceptionYear>
 
-    <modules>
-        <module>magneton-core</module>
-        <module>magneton-test</module>
-        <module>magneton-modules</module>
-        <module>magneton-db-spy</module>
-        <module>magneton-parent</module>
-        <module>magneton-spring-boot-starter</module>
-        <module>magneton-adaptive</module>
-        <module>magneton-supports</module>
-    </modules>
+	<modules>
+		<module>magneton-core</module>
+		<module>magneton-test</module>
+		<module>magneton-modules</module>
+		<module>magneton-db-spy</module>
+		<module>magneton-parent</module>
+		<module>magneton-spring-boot-starter</module>
+		<module>magneton-adaptive</module>
+		<module>magneton-supports</module>
+	</modules>
 
 
-    <contributors>
-        <contributor>
-            <name>caspar</name>
-            <email>zms198983@163.com</email>
-        </contributor>
-    </contributors>
+	<contributors>
+		<contributor>
+			<name>caspar</name>
+			<email>zms198983@163.com</email>
+		</contributor>
+	</contributors>
 
-    <licenses>
-        <license>
-            <name>Apache License, Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
+	<licenses>
+		<license>
+			<name>Apache License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
 
-    <properties>
-        <java.version>1.8</java.version>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
+	<properties>
+		<java.version>1.8</java.version>
+		<maven.compiler.source>8</maven.compiler.source>
+		<maven.compiler.target>8</maven.compiler.target>
 
-        <!-- 版本环境标识-->
-        <changelist>.RELEASE</changelist>
-        <!-- 项目版本 -->
-        <revision>1.2.1${changelist}</revision>
+		<!-- 版本环境标识-->
+		<changelist>.RELEASE</changelist>
+		<!-- 项目版本 -->
+		<revision>1.2.2${changelist}</revision>
 
-        <sonar.host.url>https://builds.apache.org/analysis</sonar.host.url>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <!-- spring -->
-        <spring.version>5.2.9.RELEASE</spring.version>
-        <spring-boot.version>2.3.7.RELEASE</spring-boot.version>
-        <!-- 工具 -->
-        <testable.version>0.7.5</testable.version>
-        <commons-lang3.version>3.12.0</commons-lang3.version>
-        <lombok.version>1.18.12</lombok.version>
-        <slf4j-api.version>1.7.30</slf4j-api.version>
-        <junit.version>5.7.0</junit.version>
-        <guava.version>30.1.1-jre</guava.version>
-        <javax.el.version>3.0.1-b12</javax.el.version>
-        <joda-time.version>2.10.10</joda-time.version>
-        <fastjson.version>1.2.75</fastjson.version>
-        <jakarta.validation-api.version>2.0.2</jakarta.validation-api.version>
-        <hibernate-validator.version>6.1.5.Final</hibernate-validator.version>
-        <auto-service.version>1.0</auto-service.version>
-        <hutool-all.version>5.8.0</hutool-all.version>
-        <!-- redis -->
-        <redisson.version>3.16.8</redisson.version>
-        <redisson-spring-boot-starter.version>3.16.8</redisson-spring-boot-starter.version>
-        <!-- 数据库 -->
-        <fluent-mybatis.version>1.9.4</fluent-mybatis.version>
-        <mysql-connector-java.version>8.0.28</mysql-connector-java.version>
-        <druid.version>1.2.8</druid.version>
-        <jsr305.version>3.0.2</jsr305.version>
-        <mybatis-spring-boot-starter.version>2.2.2</mybatis-spring-boot-starter.version>
-        <aliyun.dysmsapi.version>2.0.9</aliyun.dysmsapi.version>
-        <aliyun-sdk-oss.version>3.13.2</aliyun-sdk-oss.version>
-        <logback-classic.version>1.2.10</logback-classic.version>
-        <mybatis-plus-boot-starter.version>3.5.1</mybatis-plus-boot-starter.version>
-        <wechatpay-apache-httpclient.version>0.4.3</wechatpay-apache-httpclient.version>
-        <jackson.version>2.13.2</jackson.version>
-        <commons-codec.version>1.15</commons-codec.version>
-        <forest-core.version>1.5.19</forest-core.version>
-        <tls-sig-api-v2.version>2.0</tls-sig-api-v2.version>
-        <tomcat-embed-core.version>9.0.62</tomcat-embed-core.version>
-    </properties>
+		<sonar.host.url>https://builds.apache.org/analysis</sonar.host.url>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<!-- spring -->
+		<spring.version>5.2.9.RELEASE</spring.version>
+		<spring-boot.version>2.3.7.RELEASE</spring-boot.version>
+		<!-- 工具 -->
+		<testable.version>0.7.5</testable.version>
+		<commons-lang3.version>3.12.0</commons-lang3.version>
+		<lombok.version>1.18.12</lombok.version>
+		<slf4j-api.version>1.7.30</slf4j-api.version>
+		<junit.version>5.7.0</junit.version>
+		<guava.version>30.1.1-jre</guava.version>
+		<javax.el.version>3.0.1-b12</javax.el.version>
+		<joda-time.version>2.10.10</joda-time.version>
+		<fastjson.version>1.2.75</fastjson.version>
+		<jakarta.validation-api.version>2.0.2</jakarta.validation-api.version>
+		<hibernate-validator.version>6.1.5.Final</hibernate-validator.version>
+		<auto-service.version>1.0</auto-service.version>
+		<hutool-all.version>5.8.0</hutool-all.version>
+		<!-- redis -->
+		<redisson.version>3.16.8</redisson.version>
+		<redisson-spring-boot-starter.version>3.16.8</redisson-spring-boot-starter.version>
+		<!-- 数据库 -->
+		<fluent-mybatis.version>1.9.4</fluent-mybatis.version>
+		<mysql-connector-java.version>8.0.28</mysql-connector-java.version>
+		<druid.version>1.2.8</druid.version>
+		<jsr305.version>3.0.2</jsr305.version>
+		<mybatis-spring-boot-starter.version>2.2.2</mybatis-spring-boot-starter.version>
+		<aliyun.dysmsapi.version>2.0.9</aliyun.dysmsapi.version>
+		<aliyun-sdk-oss.version>3.13.2</aliyun-sdk-oss.version>
+		<logback-classic.version>1.2.10</logback-classic.version>
+		<mybatis-plus-boot-starter.version>3.5.1</mybatis-plus-boot-starter.version>
+		<wechatpay-apache-httpclient.version>0.4.3</wechatpay-apache-httpclient.version>
+		<jackson.version>2.13.2</jackson.version>
+		<commons-codec.version>1.15</commons-codec.version>
+		<forest-core.version>1.5.19</forest-core.version>
+		<tls-sig-api-v2.version>2.0</tls-sig-api-v2.version>
+		<tomcat-embed-core.version>9.0.62</tomcat-embed-core.version>
+	</properties>
 
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>com.google.auto.service</groupId>
-                <artifactId>auto-service</artifactId>
-                <version>${auto-service.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok</artifactId>
-                <version>${lombok.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.alibaba.testable</groupId>
-                <artifactId>testable-all</artifactId>
-                <version>${testable.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.alibaba.testable</groupId>
-                <artifactId>testable-core</artifactId>
-                <version>${testable.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.alibaba</groupId>
-                <artifactId>fastjson</artifactId>
-                <version>${fastjson.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.tomcat.embed</groupId>
-                <artifactId>tomcat-embed-core</artifactId>
-                <version>${tomcat-embed-core.version}</version>
-                <scope>provided</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.google.auto.service</groupId>
+				<artifactId>auto-service</artifactId>
+				<version>${auto-service.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.projectlombok</groupId>
+				<artifactId>lombok</artifactId>
+				<version>${lombok.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.alibaba.testable</groupId>
+				<artifactId>testable-all</artifactId>
+				<version>${testable.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.alibaba.testable</groupId>
+				<artifactId>testable-core</artifactId>
+				<version>${testable.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>fastjson</artifactId>
+				<version>${fastjson.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.tomcat.embed</groupId>
+				<artifactId>tomcat-embed-core</artifactId>
+				<version>${tomcat-embed-core.version}</version>
+				<scope>provided</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
-    <dependencies>
-        <dependency>
-            <artifactId>lombok</artifactId>
-            <groupId>org.projectlombok</groupId>
-            <optional>true</optional>
-        </dependency>
-    </dependencies>
+	<dependencies>
+		<dependency>
+			<artifactId>lombok</artifactId>
+			<groupId>org.projectlombok</groupId>
+			<optional>true</optional>
+		</dependency>
+	</dependencies>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.5.1</version>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                    <compilerVersion>1.8</compilerVersion>
-                    <showDeprecation>true</showDeprecation>
-                    <showWarnings>true</showWarnings>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>2.10.4</version>
-                <configuration>
-                    <charset>${project.build.sourceEncoding}</charset>
-                    <skip>true</skip>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>attach-javadocs</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <!-- generate java source -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-                <version>3.0.1</version>
-                <executions>
-                    <execution>
-                        <id>attach-sources</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-site-plugin</artifactId>
-                <version>3.9.1</version>
-                <configuration>
-                    <locales>en,zh_CN</locales>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M5</version>
-                <configuration>
-                    <argLine>@{argLine}
-                        -javaagent:${settings.localRepository}/com/alibaba/testable/testable-agent/${testable.version}/testable-agent-${testable.version}.jar
-                    </argLine>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.6</version>
-                <executions>
-                    <execution>
-                        <id>default-prepare-agent</id>
-                        <goals>
-                            <goal>prepare-agent</goal>
-                        </goals>
-                        <configuration>
-                            <destFile>${project.build.directory}/jacoco.exec</destFile>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>default-prepare-agent-integration</id>
-                        <phase>pre-integration-test</phase>
-                        <goals>
-                            <goal>prepare-agent-integration</goal>
-                        </goals>
-                        <configuration>
-                            <destFile>${project.build.directory}/jacoco-it.exec</destFile>
-                            <propertyName>failsafeArgLine</propertyName>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>default-report</id>
-                        <goals>
-                            <goal>report</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>default-report-integration</id>
-                        <goals>
-                            <goal>report-integration</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>findbugs-maven-plugin</artifactId>
-                <version>3.0.5</version>
-            </plugin>
-            <plugin>
-                <groupId>org.sonarsource.scanner.maven</groupId>
-                <artifactId>sonar-maven-plugin</artifactId>
-                <version>3.7.0.1746</version>
-            </plugin>
-            <!--            <plugin>-->
-            <!--                <groupId>org.apache.maven.plugins</groupId>-->
-            <!--                <artifactId>maven-checkstyle-plugin</artifactId>-->
-            <!--                <version>3.1.1</version>-->
-            <!--                <dependencies>-->
-            <!--                    <dependency>-->
-            <!--                        <artifactId>checkstyle</artifactId>-->
-            <!--                        <groupId>com.puppycrawl.tools</groupId>-->
-            <!--                        <version>8.38</version>-->
-            <!--                    </dependency>-->
-            <!--                </dependencies>-->
-            <!--                <configuration>-->
-            <!--                    <configLocation>src/google_checks.xml</configLocation>-->
-            <!--                    <failsOnError>true</failsOnError>-->
-            <!--                    <failOnViolation>true</failOnViolation>-->
-            <!--                    <consoleOutput>true</consoleOutput>-->
-            <!--                    <encoding>UTF-8</encoding>-->
-            <!--                    <outputEncoding>UTF-8</outputEncoding>-->
-            <!--                </configuration>-->
-            <!--                <executions>-->
-            <!--                    <execution>-->
-            <!--                        <phase>validate</phase>-->
-            <!--                        <goals>-->
-            <!--                            <goal>check</goal>-->
-            <!--                        </goals>-->
-            <!--                    </execution>-->
-            <!--                </executions>-->
-            <!--            </plugin>-->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>flatten-maven-plugin</artifactId>
-                <version>1.1.0</version>
-                <configuration>
-                    <updatePomFile>true</updatePomFile>
-                    <!--
-                        minimum	不推荐使用，会展开pluginRepositories。
-                        bom	会保留dependencyManagement，展开properties。
-                        oss	推荐开源项目使用，会展开
-                            ciManagement、contributors、distributionManagement、 inceptionYear、
-                            issueManagement、mailingLists、organization、prerequisites
-                        ossrh	会展开name、description、url、scm、developers
-                        defaults	会展开repositories
-                        clean	删除全部可选元素
-                     -->
-                    <!-- 如果设置该配置，则只会覆盖主要的配置 -->
-                    <flattenMode>oss</flattenMode>
-                    <pomElements>
-                        <dependencyManagement>expand</dependencyManagement>
-                        <!--<dependencies>expand</dependencies>-->
-                    </pomElements>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>flatten</id>
-                        <phase>process-resources</phase>
-                        <goals>
-                            <goal>flatten</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>flatten.clean</id>
-                        <phase>clean</phase>
-                        <goals>
-                            <goal>clean</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>io.spring.javaformat</groupId>
-                <artifactId>spring-javaformat-maven-plugin</artifactId>
-                <version>0.0.28</version>
-                <executions>
-                    <execution>
-                        <phase>validate</phase>
-                        <inherited>true</inherited>
-                        <goals>
-                            <goal>validate</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.5.1</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+					<compilerVersion>1.8</compilerVersion>
+					<showDeprecation>true</showDeprecation>
+					<showWarnings>true</showWarnings>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.10.4</version>
+				<configuration>
+					<charset>${project.build.sourceEncoding}</charset>
+					<skip>true</skip>
+				</configuration>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- generate java source -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>3.0.1</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>3.9.1</version>
+				<configuration>
+					<locales>en,zh_CN</locales>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>3.0.0-M5</version>
+				<configuration>
+					<argLine>@{argLine}
+						-javaagent:${settings.localRepository}/com/alibaba/testable/testable-agent/${testable.version}/testable-agent-${testable.version}.jar
+					</argLine>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.6</version>
+				<executions>
+					<execution>
+						<id>default-prepare-agent</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+						<configuration>
+							<destFile>${project.build.directory}/jacoco.exec</destFile>
+						</configuration>
+					</execution>
+					<execution>
+						<id>default-prepare-agent-integration</id>
+						<phase>pre-integration-test</phase>
+						<goals>
+							<goal>prepare-agent-integration</goal>
+						</goals>
+						<configuration>
+							<destFile>${project.build.directory}/jacoco-it.exec</destFile>
+							<propertyName>failsafeArgLine</propertyName>
+						</configuration>
+					</execution>
+					<execution>
+						<id>default-report</id>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>default-report-integration</id>
+						<goals>
+							<goal>report-integration</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>findbugs-maven-plugin</artifactId>
+				<version>3.0.5</version>
+			</plugin>
+			<plugin>
+				<groupId>org.sonarsource.scanner.maven</groupId>
+				<artifactId>sonar-maven-plugin</artifactId>
+				<version>3.7.0.1746</version>
+			</plugin>
+			<!--            <plugin>-->
+			<!--                <groupId>org.apache.maven.plugins</groupId>-->
+			<!--                <artifactId>maven-checkstyle-plugin</artifactId>-->
+			<!--                <version>3.1.1</version>-->
+			<!--                <dependencies>-->
+			<!--                    <dependency>-->
+			<!--                        <artifactId>checkstyle</artifactId>-->
+			<!--                        <groupId>com.puppycrawl.tools</groupId>-->
+			<!--                        <version>8.38</version>-->
+			<!--                    </dependency>-->
+			<!--                </dependencies>-->
+			<!--                <configuration>-->
+			<!--                    <configLocation>src/google_checks.xml</configLocation>-->
+			<!--                    <failsOnError>true</failsOnError>-->
+			<!--                    <failOnViolation>true</failOnViolation>-->
+			<!--                    <consoleOutput>true</consoleOutput>-->
+			<!--                    <encoding>UTF-8</encoding>-->
+			<!--                    <outputEncoding>UTF-8</outputEncoding>-->
+			<!--                </configuration>-->
+			<!--                <executions>-->
+			<!--                    <execution>-->
+			<!--                        <phase>validate</phase>-->
+			<!--                        <goals>-->
+			<!--                            <goal>check</goal>-->
+			<!--                        </goals>-->
+			<!--                    </execution>-->
+			<!--                </executions>-->
+			<!--            </plugin>-->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>flatten-maven-plugin</artifactId>
+				<version>1.1.0</version>
+				<configuration>
+					<updatePomFile>true</updatePomFile>
+					<!--
+						minimum	不推荐使用，会展开pluginRepositories。
+						bom	会保留dependencyManagement，展开properties。
+						oss	推荐开源项目使用，会展开
+							ciManagement、contributors、distributionManagement、 inceptionYear、
+							issueManagement、mailingLists、organization、prerequisites
+						ossrh	会展开name、description、url、scm、developers
+						defaults	会展开repositories
+						clean	删除全部可选元素
+					 -->
+					<!-- 如果设置该配置，则只会覆盖主要的配置 -->
+					<flattenMode>oss</flattenMode>
+					<pomElements>
+						<dependencyManagement>expand</dependencyManagement>
+						<!--<dependencies>expand</dependencies>-->
+					</pomElements>
+				</configuration>
+				<executions>
+					<execution>
+						<id>flatten</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>flatten</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>flatten.clean</id>
+						<phase>clean</phase>
+						<goals>
+							<goal>clean</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>io.spring.javaformat</groupId>
+				<artifactId>spring-javaformat-maven-plugin</artifactId>
+				<version>0.0.28</version>
+				<executions>
+					<execution>
+						<phase>validate</phase>
+						<inherited>true</inherited>
+						<goals>
+							<goal>validate</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 
-            <plugin>
-                <groupId>com.github.shalousun</groupId>
-                <artifactId>smart-doc-maven-plugin</artifactId>
-                <version>2.4.0</version>
-                <configuration>
-                    <!--指定生成文档的使用的配置文件,配置文件放在自己的项目中-->
-                    <configFile>./src/main/resources/smart-doc.json</configFile>
-                    <!--smart-doc实现自动分析依赖树加载第三方依赖的源码，如果一些框架依赖库加载不到导致报错，这时请使用excludes排除掉-->
-                    <excludes>
-                        <!--格式为：groupId:artifactId;参考如下-->
-                        <!--也可以支持正则式如：com.alibaba:.* -->
-                        <exclude>com.alibaba:fastjson</exclude>
-                    </excludes>
-                    <!--includes配置用于配置加载外部依赖源码,配置后插件会按照配置项加载外部源代码而不是自动加载所有，因此使用时需要注意-->
-                    <!--smart-doc能自动分析依赖树加载所有依赖源码，原则上会影响文档构建效率，因此你可以使用includes来让插件加载你配置的组件-->
-                    <includes>
-                        <!--格式为：groupId:artifactId;参考如下-->
-                        <!--也可以支持正则式如：com.alibaba:.* -->
-                        <include>com.alibaba:fastjson</include>
-                    </includes>
-                </configuration>
-                <executions>
-                    <execution>
-                        <!--如果不需要在执行编译时启动smart-doc，则将phase注释掉-->
-                        <phase>compile</phase>
-                        <goals>
-                            <!--smart-doc提供了html、openapi、markdown等goal，可按需配置-->
-                            <goal>html</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
-    <reporting>
-        <plugins>
-            <!--      <plugin>-->
-            <!--        <groupId>org.apache.maven.plugins</groupId>-->
-            <!--        <artifactId>maven-checkstyle-plugin</artifactId>-->
-            <!--        <version>3.1.1</version>-->
-            <!--        <configuration>-->
-            <!--          <configLocation>src/google_checks.xml</configLocation>-->
-            <!--        </configuration>-->
-            <!--      </plugin>-->
-            <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.6</version>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jxr-plugin</artifactId>
-                <version>3.0.0</version>
-            </plugin>
-        </plugins>
-    </reporting>
+			<plugin>
+				<groupId>com.github.shalousun</groupId>
+				<artifactId>smart-doc-maven-plugin</artifactId>
+				<version>2.4.0</version>
+				<configuration>
+					<!--指定生成文档的使用的配置文件,配置文件放在自己的项目中-->
+					<configFile>./src/main/resources/smart-doc.json</configFile>
+					<!--smart-doc实现自动分析依赖树加载第三方依赖的源码，如果一些框架依赖库加载不到导致报错，这时请使用excludes排除掉-->
+					<excludes>
+						<!--格式为：groupId:artifactId;参考如下-->
+						<!--也可以支持正则式如：com.alibaba:.* -->
+						<exclude>com.alibaba:fastjson</exclude>
+					</excludes>
+					<!--includes配置用于配置加载外部依赖源码,配置后插件会按照配置项加载外部源代码而不是自动加载所有，因此使用时需要注意-->
+					<!--smart-doc能自动分析依赖树加载所有依赖源码，原则上会影响文档构建效率，因此你可以使用includes来让插件加载你配置的组件-->
+					<includes>
+						<!--格式为：groupId:artifactId;参考如下-->
+						<!--也可以支持正则式如：com.alibaba:.* -->
+						<include>com.alibaba:fastjson</include>
+					</includes>
+				</configuration>
+				<executions>
+					<execution>
+						<!--如果不需要在执行编译时启动smart-doc，则将phase注释掉-->
+						<phase>compile</phase>
+						<goals>
+							<!--smart-doc提供了html、openapi、markdown等goal，可按需配置-->
+							<goal>html</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+	<reporting>
+		<plugins>
+			<!--      <plugin>-->
+			<!--        <groupId>org.apache.maven.plugins</groupId>-->
+			<!--        <artifactId>maven-checkstyle-plugin</artifactId>-->
+			<!--        <version>3.1.1</version>-->
+			<!--        <configuration>-->
+			<!--          <configLocation>src/google_checks.xml</configLocation>-->
+			<!--        </configuration>-->
+			<!--      </plugin>-->
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.6</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jxr-plugin</artifactId>
+				<version>3.0.0</version>
+			</plugin>
+		</plugins>
+	</reporting>
 </project>
