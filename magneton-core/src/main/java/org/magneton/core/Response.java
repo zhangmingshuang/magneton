@@ -72,6 +72,10 @@ public class Response<T> {
 		return response(ResponseCodesSupplier.getInstance().bad(), t);
 	}
 
+	public static Response error(String message) {
+		return bad().message(message);
+	}
+
 	public static Response exception() {
 		return response(ResponseCodesSupplier.getInstance().exception(), null);
 	}
