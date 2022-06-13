@@ -1,10 +1,8 @@
 package org.magneton.spring.starter.modules;
 
-import io.lettuce.core.RedisClient;
 import org.magneton.module.distributed.cache.DistributedCache;
 import org.magneton.module.distributed.cache.redis.RedissonDistributedCache;
 import org.redisson.api.RedissonClient;
-
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
@@ -17,7 +15,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Configuration(proxyBeanMethods = false)
-@ConditionalOnClass({ RedisClient.class, DistributedCache.class })
+@ConditionalOnClass({ RedissonClient.class, DistributedCache.class })
 public class RedissonCacheAutoConfiguration {
 
 	@Bean
