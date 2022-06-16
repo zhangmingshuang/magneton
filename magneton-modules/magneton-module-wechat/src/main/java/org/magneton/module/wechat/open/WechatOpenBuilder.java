@@ -2,8 +2,8 @@ package org.magneton.module.wechat.open;
 
 import com.google.common.base.Preconditions;
 import javax.annotation.Nullable;
-import org.magneton.module.wechat.open.core.oauth2.MemoryWechatAccessTokenCache;
-import org.magneton.module.wechat.open.core.oauth2.WechatAccessTokenCache;
+import org.magneton.module.wechat.core.MemoryWechatAccessTokenCache;
+import org.magneton.module.wechat.core.WechatAccessTokenCache;
 
 /**
  * @author zhangmsh 2022/4/2
