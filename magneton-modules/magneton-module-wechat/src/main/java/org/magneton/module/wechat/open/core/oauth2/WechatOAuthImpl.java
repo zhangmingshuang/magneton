@@ -7,6 +7,7 @@ import javax.annotation.Nullable;
 import lombok.extern.slf4j.Slf4j;
 import org.magneton.core.Consequences;
 import org.magneton.module.wechat.core.Req;
+import org.magneton.module.wechat.core.WechatAccessTokenCache;
 import org.magneton.module.wechat.open.WechatOpenConfig;
 import org.magneton.module.wechat.open.entity.AccessTokenRes;
 import org.magneton.module.wechat.open.entity.UserInfoReq;
@@ -28,9 +29,10 @@ public class WechatOAuthImpl implements WechatOAuth {
 	private final WechatOpenConfig wechatOpenConfig;
 
 	@Nullable
-	private final WechatAccessTokenCache wechatAccessTokenCache;
+	private final WechatAccessTokenCache<AccessTokenRes> wechatAccessTokenCache;
 
-	public WechatOAuthImpl(WechatOpenConfig wechatOpenConfig, @Nullable WechatAccessTokenCache wechatAccessTokenCache) {
+	public WechatOAuthImpl(WechatOpenConfig wechatOpenConfig,
+			@Nullable WechatAccessTokenCache<AccessTokenRes> wechatAccessTokenCache) {
 		this.wechatOpenConfig = Preconditions.checkNotNull(wechatOpenConfig);
 		this.wechatAccessTokenCache = wechatAccessTokenCache;
 	}
@@ -46,7 +48,7 @@ public class WechatOAuthImpl implements WechatOAuth {
 		}
 		AccessTokenRes accessTokenRes = response.getData();
 		if (this.wechatAccessTokenCache != null) {
-			this.wechatAccessTokenCache.save(accessTokenRes);
+			this.wechatAccessTokenCache.save(accessTokenRes.getOpenid(), accessTokenRes);
 		}
 		return Consequences.success(accessTokenRes);
 	}

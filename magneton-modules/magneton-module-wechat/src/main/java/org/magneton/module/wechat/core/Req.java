@@ -4,6 +4,8 @@ import cn.hutool.http.HttpUtil;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Strings;
+import java.io.IOException;
+import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 import org.magneton.core.Consequences;
 
@@ -23,22 +25,37 @@ public class Req {
 		// noinspection OverlyBroadCatchBlock
 		try {
 			String body = HttpUtil.get(requestUrl, 3);
-			if (Strings.isNullOrEmpty(body)) {
-				return Consequences.failMessageOnly("未知错误，没有响应体数据");
-			}
-			JsonNode jsonNode = OBJECT_MAPPER.readTree(body);
-			String errCode = jsonNode.get("errcode").asText();
-			if (!Strings.isNullOrEmpty(errCode)) {
-				log.error("请求{}错误：{}", requestUrl, body);
-				return Consequences.failMessageOnly(jsonNode.get("errmsg").asText());
-			}
-			T response = OBJECT_MAPPER.readValue(jsonNode.traverse(), clazz);
-			return Consequences.success(response);
+			return doResponse(requestUrl, clazz, body);
 		}
 		catch (Throwable e) {
 			log.error("parse body error", e);
 		}
 		return Consequences.failMessageOnly("未知错误");
+	}
+
+	public static <T> Consequences<T> doPost(String url, Map<String, Object> data, Class<T> clazz) {
+		try {
+			String body = HttpUtil.post(url, data);
+			return doResponse(url, clazz, body);
+		}
+		catch (Throwable e) {
+			log.error("parse body error", e);
+		}
+		return Consequences.failMessageOnly("未知错误");
+	}
+
+	private static <T> Consequences<T> doResponse(String requestUrl, Class<T> clazz, String body) throws IOException {
+		if (Strings.isNullOrEmpty(body)) {
+			return Consequences.failMessageOnly("未知错误，没有响应体数据");
+		}
+		JsonNode jsonNode = OBJECT_MAPPER.readTree(body);
+		String errCode = jsonNode.get("errcode").asText();
+		if (!Strings.isNullOrEmpty(errCode)) {
+			log.error("请求{}错误：{}", requestUrl, body);
+			return Consequences.failMessageOnly(jsonNode.get("errmsg").asText());
+		}
+		T response = OBJECT_MAPPER.readValue(jsonNode.traverse(), clazz);
+		return Consequences.success(response);
 	}
 
 }
