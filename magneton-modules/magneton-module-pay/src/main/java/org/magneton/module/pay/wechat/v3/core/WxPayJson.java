@@ -1,11 +1,12 @@
 package org.magneton.module.pay.wechat.v3.core;
 
+import java.io.IOException;
+
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import java.io.IOException;
 
 public class WxPayJson {
 

@@ -1,11 +1,13 @@
 package org.magneton.module.pay.wechat.v3.core;
 
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+
+import javax.annotation.Nullable;
+
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.wechat.pay.contrib.apache.httpclient.auth.Signer.SignatureResult;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import javax.annotation.Nullable;
 import lombok.SneakyThrows;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -28,6 +30,10 @@ public interface BaseV3Api {
 	}
 
 	WxPayContext getPayContext();
+
+	default WxPayConfig getPayConfig() {
+		return this.getPayContext().getPayConfig();
+	}
 
 	default String doSign(String signStr) {
 		Preconditions.checkNotNull(signStr);
@@ -74,15 +80,6 @@ public interface BaseV3Api {
 	default HttpPost newHttpPost(String url, Object object) {
 		Preconditions.checkNotNull(url);
 		Preconditions.checkNotNull(object);
-		if (object instanceof BaseV3PayIdData) {
-			BaseV3PayIdData basePayIdData = (BaseV3PayIdData) object;
-			basePayIdData.setAppid(this.getPayContext().getPayConfig().getAppId());
-			basePayIdData.setMchid(this.getPayContext().getPayConfig().getMerchantId());
-		}
-		else if (object instanceof BaseV3Data) {
-			BaseV3Data baseV3Data = (BaseV3Data) object;
-			baseV3Data.setAppid(this.getPayContext().getPayConfig().getAppId());
-		}
 		String reqData = BaseV3Api.json().writeValueAsString(object);
 		Logger logger = this.getLogger();
 		if (logger != null && logger.isDebugEnabled()) {

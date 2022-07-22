@@ -6,6 +6,7 @@ import com.google.common.base.Strings;
 import lombok.extern.slf4j.Slf4j;
 import org.magneton.core.Consequences;
 import org.magneton.module.pay.exception.AmountException;
+import org.magneton.module.pay.wechat.v3.core.WxPayContext;
 import org.magneton.module.pay.wechat.v3.prepay.entity.PrepayId;
 import org.magneton.module.pay.wechat.v3.prepay.entity.WxPayAppPrepay;
 import org.magneton.module.pay.wechat.v3.prepay.entity.WxPayAppPrepayReq;
@@ -15,12 +16,10 @@ import org.magneton.module.pay.wechat.v3.prepay.entity.WxPayAppPrepayReq;
  * @since 1.0.0
  */
 @Slf4j
-public class AppPrepayImpl implements AppPrepay {
+public class AppPrepayImpl extends AbstractPrepay implements AppPrepay {
 
-	private final WechatBaseV3Pay basePay;
-
-	public AppPrepayImpl(WechatBaseV3Pay wechatBaseV3Pay) {
-		this.basePay = wechatBaseV3Pay;
+	public AppPrepayImpl(WxPayContext wxPayContext) {
+		super(wxPayContext);
 	}
 
 	@Override
@@ -29,13 +28,21 @@ public class AppPrepayImpl implements AppPrepay {
 		Preconditions.checkNotNull(req.getOutTradeNo(), "outTradeNo must not be null");
 		Preconditions.checkNotNull(req.getDescription(), "description must not be null");
 		if (Strings.isNullOrEmpty(req.getNotifyUrl())) {
-			req.setNotifyUrl(this.basePay.getPayContext().getPayConfig().getNotifyUrl());
+			req.setNotifyUrl(Preconditions.checkNotNull(this.getPayConfig().getNotifyUrl(), "notifyUrl is empty"));
+		}
+		if (Strings.isNullOrEmpty(req.getAppId())) {
+			req.setAppId(Preconditions.checkNotNull(this.getPayConfig().getAppId().getApp(),
+					"app prepay appId must be not null"));
+		}
+		if (Strings.isNullOrEmpty(req.getMchId())) {
+			req.setMchId(
+					Preconditions.checkNotNull(this.getPayConfig().getMerchantId(), "merchantId must be not null"));
 		}
 		int amount = Preconditions.checkNotNull(req.getAmount()).getTotal();
 		if (amount < 1) {
 			throw new AmountException(Strings.lenientFormat("amount %s less then 1", amount));
 		}
-		Consequences<PrepayId> wechatV3PayPreOrderRes = this.basePay
+		Consequences<PrepayId> wechatV3PayPreOrderRes = this
 				.doPreOrder("https://api.mch.weixin.qq.com/v3/pay/transactions/app", req, PrepayId.class);
 		if (!wechatV3PayPreOrderRes.isSuccess()) {
 			return wechatV3PayPreOrderRes.coverage();
@@ -43,10 +50,9 @@ public class AppPrepayImpl implements AppPrepay {
 		// 组成装APP预支付订单，用来提供给微信进行支付
 		PrepayId preOrder = Preconditions.checkNotNull(wechatV3PayPreOrderRes.getData());
 		WxPayAppPrepay res = new WxPayAppPrepay();
-		res.setAppId(Preconditions.checkNotNull(this.basePay.getPayContext().getPayConfig().getAppId(),
-				"appId must not be null"));
-		res.setPartnerId(Preconditions.checkNotNull(this.basePay.getPayContext().getPayConfig().getMerchantId(),
-				"merchantId must not be null"));
+		res.setAppId(req.getAppId());
+		res.setPartnerId(
+				Preconditions.checkNotNull(super.getPayConfig().getMerchantId(), "merchantId must not be null"));
 		res.setPrepayId(Preconditions.checkNotNull(preOrder.getPrepayId(), "prepayId must not be null"));
 		res.setPackageValue("Sign=WXPay");
 		String nonce = RandomUtil.randomString(32);
@@ -54,7 +60,7 @@ public class AppPrepayImpl implements AppPrepay {
 		res.setTimeStamp(String.valueOf(System.currentTimeMillis() / 1000L));
 
 		String signStr = this.signStr(res);
-		String sign = this.basePay.doSign(signStr);
+		String sign = this.doSign(signStr);
 		res.setSign(sign);
 		return Consequences.success(res);
 	}

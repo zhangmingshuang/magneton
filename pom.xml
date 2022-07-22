@@ -45,7 +45,7 @@
 		<!-- 版本环境标识-->
 		<changelist>.RELEASE</changelist>
 		<!-- 项目版本 -->
-		<revision>1.2.2${changelist}</revision>
+		<revision>1.2.3${changelist}</revision>
 
 		<sonar.host.url>https://builds.apache.org/analysis</sonar.host.url>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -85,6 +85,7 @@
 		<forest-core.version>1.5.19</forest-core.version>
 		<tls-sig-api-v2.version>2.0</tls-sig-api-v2.version>
 		<tomcat-embed-core.version>9.0.62</tomcat-embed-core.version>
+		<cglib.version>3.3.0</cglib.version>
 	</properties>
 
 	<dependencyManagement>

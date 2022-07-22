@@ -3,11 +3,14 @@ package org.magneton.module.pay.wechat.v3.prepay;
 import cn.hutool.core.util.RandomUtil;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
+import lombok.extern.slf4j.Slf4j;
 import org.magneton.core.Consequences;
 import org.magneton.module.pay.exception.AmountException;
+import org.magneton.module.pay.wechat.v3.core.WxPayContext;
 import org.magneton.module.pay.wechat.v3.prepay.entity.PrepayId;
 import org.magneton.module.pay.wechat.v3.prepay.entity.WxPayJSAPIPrepay;
 import org.magneton.module.pay.wechat.v3.prepay.entity.WxPayJSAPIPrepayReq;
+import org.slf4j.Logger;
 
 /**
  * JSAPI预支付.
@@ -15,12 +18,11 @@ import org.magneton.module.pay.wechat.v3.prepay.entity.WxPayJSAPIPrepayReq;
  * @author zhangmsh 09/04/2022
  * @since 2.0.8
  */
-public class JSAPIPrepayImpl implements JSAPIPrepay {
+@Slf4j
+public class JSAPIPrepayImpl extends AbstractPrepay implements JSAPIPrepay {
 
-	private final WechatBaseV3Pay basePay;
-
-	public JSAPIPrepayImpl(WechatBaseV3Pay basePay) {
-		this.basePay = basePay;
+	public JSAPIPrepayImpl(WxPayContext wxPayContext) {
+		super(wxPayContext);
 	}
 
 	@Override
@@ -28,30 +30,45 @@ public class JSAPIPrepayImpl implements JSAPIPrepay {
 		Preconditions.checkNotNull(req);
 		Preconditions.checkNotNull(req.getOutTradeNo());
 		Preconditions.checkNotNull(req.getDescription());
+		if (Strings.isNullOrEmpty(req.getNotifyUrl())) {
+			req.setNotifyUrl(Preconditions.checkNotNull(super.getPayConfig().getNotifyUrl(), "notifyUrl is empty"));
+		}
+		if (Strings.isNullOrEmpty(req.getAppId())) {
+			req.setAppId(Preconditions.checkNotNull(this.getPayConfig().getAppId().getJsapi(),
+					"app prepay appId must be not null"));
+		}
+		if (Strings.isNullOrEmpty(req.getMchId())) {
+			req.setMchId(
+					Preconditions.checkNotNull(this.getPayConfig().getMerchantId(), "merchantId must be not null"));
+		}
 		int amount = Preconditions.checkNotNull(req.getAmount()).getTotal();
 		if (amount < 1) {
 			throw new AmountException(Strings.lenientFormat("amount %s less then 1", amount));
 		}
-		Consequences<PrepayId> prepayRes = this.basePay
-				.doPreOrder("https://api.mch.weixin.qq.com/v3/pay/transactions/jsapi", req, PrepayId.class);
+		Consequences<PrepayId> prepayRes = this.doPreOrder("https://api.mch.weixin.qq.com/v3/pay/transactions/jsapi",
+				req, PrepayId.class);
 		if (!prepayRes.isSuccess()) {
+			if (log.isDebugEnabled()) {
+				log.debug("jsapi prepay:{} : ({})", req, prepayRes);
+			}
 			return prepayRes.coverage();
 		}
 
 		// 组成装APP预支付订单，用来提供给微信进行支付
 		PrepayId prepay = Preconditions.checkNotNull(prepayRes.getData());
+
 		WxPayJSAPIPrepay res = new WxPayJSAPIPrepay();
-		res.setAppId(this.basePay.getPayContext().getPayConfig().getAppId());
+		res.setAppId(req.getAppId());
 		res.setTimeStamp(String.valueOf(System.currentTimeMillis() / 1000L));
 
 		String nonce = RandomUtil.randomString(32);
 		res.setNonceStr(nonce);
 
-		res.setPackageValue(prepay.getPrepayId());
+		res.setPackageValue("prepay_id=" + prepay.getPrepayId());
 		res.setSignType("RSA");
 
 		String signStr = this.signStr(res);
-		String sign = this.basePay.doSign(signStr);
+		String sign = this.doSign(signStr);
 		res.setPaySign(sign);
 		return Consequences.success(res);
 	}
@@ -73,7 +90,16 @@ public class JSAPIPrepayImpl implements JSAPIPrepay {
 		String timeStamp = Preconditions.checkNotNull(res.getTimeStamp());
 		String nonceStr = Preconditions.checkNotNull(res.getNonceStr());
 		String prepayId = Preconditions.checkNotNull(res.getPackageValue());
-		return appId + "\n" + timeStamp + "\n" + nonceStr + "\nprepay_id=" + prepayId;
+		String signStr = appId + "\n" + timeStamp + "\n" + nonceStr + "\n" + prepayId + "\n";
+		if (log.isDebugEnabled()) {
+			log.debug("jsapi prepay sign str: {}", signStr);
+		}
+		return signStr;
+	}
+
+	@Override
+	public Logger getLogger() {
+		return log;
 	}
 
 }

@@ -11,7 +11,7 @@ import lombok.ToString;
 @Setter
 @Getter
 @ToString
-public class PhoneInfo {
+public class MPPhoneInfo {
 
 	/**
 	 * phoneNumber string 用户绑定的手机号（国外手机号会有区号）

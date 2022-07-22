@@ -27,6 +27,11 @@
 			<artifactId>wechatpay-apache-httpclient</artifactId>
 			<version>${wechatpay-apache-httpclient.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib</artifactId>
+			<version>${cglib.version}</version>
+		</dependency>
 		<!-- test -->
 		<dependency>
 			<groupId>org.magneton</groupId>

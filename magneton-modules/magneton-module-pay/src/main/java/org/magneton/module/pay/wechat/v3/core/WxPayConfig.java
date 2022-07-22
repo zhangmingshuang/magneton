@@ -12,13 +12,13 @@ import lombok.ToString;
  */
 @Setter
 @Getter
-@ToString
+@ToString(callSuper = true)
 public class WxPayConfig {
 
 	/**
 	 * 服务商在开放平台申请的应用appid。 示例值：wx8888888888888888
 	 */
-	private String appId;
+	private AppId appId;
 
 	/**
 	 * 服务商户号，由微信支付生成并下发
@@ -46,5 +46,23 @@ public class WxPayConfig {
 	 * 异步通知地址
 	 */
 	private String notifyUrl;
+
+	@Setter
+	@Getter
+	@ToString
+	public static class AppId {
+
+		private String app;
+
+		private String jsapi;
+
+		private String h5;
+
+		/**
+		 * 分账时的APPID，如果没有配置，则默认使用 {@link #app}
+		 */
+		private String profitSharing;
+
+	}
 
 }

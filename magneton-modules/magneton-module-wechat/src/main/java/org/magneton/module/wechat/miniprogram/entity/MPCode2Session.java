@@ -12,7 +12,7 @@ import lombok.ToString;
 @Setter
 @Getter
 @ToString
-public class Code2Session {
+public class MPCode2Session {
 
 	/**
 	 * openid string 用户唯一标识

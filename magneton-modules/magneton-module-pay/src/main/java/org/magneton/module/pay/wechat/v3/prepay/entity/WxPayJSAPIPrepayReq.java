@@ -1,7 +1,8 @@
 package org.magneton.module.pay.wechat.v3.prepay.entity;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.annotation.Nullable;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -18,7 +19,7 @@ import org.magneton.module.pay.wechat.v3.core.BaseV3PayIdData;
  */
 @Setter
 @Getter
-@ToString
+@ToString(callSuper = true)
 @Accessors(chain = true)
 public class WxPayJSAPIPrepayReq extends BaseV3PayIdData {
 

@@ -1,5 +1,11 @@
 package org.magneton.module.pay.wechat.v3;
 
+import java.nio.charset.StandardCharsets;
+import java.security.Security;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Map.Entry;
+
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.collect.Maps;
@@ -7,17 +13,9 @@ import com.wechat.pay.contrib.apache.httpclient.constant.WechatPayHttpHeaders;
 import com.wechat.pay.contrib.apache.httpclient.notification.Notification;
 import com.wechat.pay.contrib.apache.httpclient.notification.NotificationHandler;
 import com.wechat.pay.contrib.apache.httpclient.notification.NotificationRequest;
-import java.nio.charset.StandardCharsets;
-import java.security.Security;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Map.Entry;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.http.client.methods.HttpGet;
-import org.magneton.core.Consequences;
 import org.magneton.core.Response;
 import org.magneton.core.ResponseException;
-import org.magneton.foundation.exception.ProcessException;
 import org.magneton.module.pay.wechat.v3.core.DefaultWxPayContext;
 import org.magneton.module.pay.wechat.v3.core.WxPayConfig;
 import org.magneton.module.pay.wechat.v3.core.WxPayContext;
@@ -27,14 +25,11 @@ import org.magneton.module.pay.wechat.v3.prepay.H5Prepay;
 import org.magneton.module.pay.wechat.v3.prepay.H5PrepayImpl;
 import org.magneton.module.pay.wechat.v3.prepay.JSAPIPrepay;
 import org.magneton.module.pay.wechat.v3.prepay.JSAPIPrepayImpl;
-import org.magneton.module.pay.wechat.v3.prepay.WechatBaseV3Pay;
-import org.magneton.module.pay.wechat.v3.prepay.WechatBaseV3PayImpl;
 import org.magneton.module.pay.wechat.v3.prepay.entity.WxPayNotification;
-import org.magneton.module.pay.wechat.v3.prepay.entity.WxPayOrder;
-import org.magneton.module.pay.wechat.v3.prepay.entity.WxPayOrderQuery;
-import org.magneton.module.pay.wechat.v3.prepay.entity.WxPayOrderQuery.Type;
 import org.magneton.module.pay.wechat.v3.profitsharing.ProfitSharing;
 import org.magneton.module.pay.wechat.v3.profitsharing.ProfitSharingImpl;
+import org.magneton.module.pay.wechat.v3.refund.Refund;
+import org.magneton.module.pay.wechat.v3.refund.RefundImpl;
 
 /**
  * 微信支付.
@@ -53,33 +48,29 @@ public class WxV3PayImpl implements WxV3Pay {
 		Security.setProperty("crypto.policy", "unlimited");
 	}
 
-	private WechatBaseV3Pay wechatBaseV3Pay;
-
 	private WxPayContext payContext;
 
 	private Map<Class, Object> classCache = Maps.newConcurrentMap();
 
 	public WxV3PayImpl(WxPayConfig wxPayConfig) {
 		this.payContext = new DefaultWxPayContext(wxPayConfig);
-		this.wechatBaseV3Pay = new WechatBaseV3PayImpl(this.payContext);
 	}
 
 	@Override
 	public AppPrepay appPrepay() {
 		return (AppPrepay) this.classCache.computeIfAbsent(AppPrepay.class,
-				clazz -> new AppPrepayImpl(this.wechatBaseV3Pay));
+				clazz -> new AppPrepayImpl(this.payContext));
 	}
 
 	@Override
 	public JSAPIPrepay jsapiPrepay() {
 		return (JSAPIPrepay) this.classCache.computeIfAbsent(JSAPIPrepay.class,
-				clazz -> new JSAPIPrepayImpl(this.wechatBaseV3Pay));
+				clazz -> new JSAPIPrepayImpl(this.payContext));
 	}
 
 	@Override
 	public H5Prepay h5Prepay() {
-		return (H5Prepay) this.classCache.computeIfAbsent(H5Prepay.class,
-				clazz -> new H5PrepayImpl(this.wechatBaseV3Pay));
+		return (H5Prepay) this.classCache.computeIfAbsent(H5Prepay.class, clazz -> new H5PrepayImpl(this.payContext));
 	}
 
 	@Override
@@ -89,36 +80,16 @@ public class WxV3PayImpl implements WxV3Pay {
 	}
 
 	@Override
-	public Consequences<WxPayOrder> queryOrder(WxPayOrderQuery query) {
-		Type reqIdType = query.getReqIdType();
-		String url;
-		switch (reqIdType) {
-		case OUT_TRADE_NO:
-			url = Strings.lenientFormat(
-					"https://api.mch.weixin.qq.com/v3/pay/partner/transactions/out-trade-no/%s?mchid=%s",
-					Preconditions.checkNotNull(query.getReqId()), this.payContext.getPayConfig().getMerchantId());
-			break;
-		case TRANSACTION_ID:
-			url = Strings.lenientFormat("https://api.mch.weixin.qq.com/v3/pay/transactions/id/%s?mchid=%s",
-					Preconditions.checkNotNull(query.getReqId()), this.payContext.getPayConfig().getMerchantId());
-			break;
-		default:
-			throw new ProcessException("unknown reqIdType %s", reqIdType);
-		}
-		HttpGet httpGet = this.wechatBaseV3Pay.newHttpGet(url);
-		Consequences<WxPayOrder> res = this.wechatBaseV3Pay.doRequest(httpGet, WxPayOrder.class);
-		if (!res.isSuccess()) {
-			return Consequences.failMessageOnly(res.getMessage());
-		}
-		return res;
+	public Refund refund() {
+		return (Refund) this.classCache.computeIfAbsent(Refund.class, clazz -> new RefundImpl(this.payContext));
 	}
 
 	// 支付通知文档：https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_2_5.shtml
 	@Override
 	@SuppressWarnings("OverlyBroadCatchBlock")
 	public WxPayNotification parsePaySuccessData(Map<String, String> httpHeaders, String body) {
-		Preconditions.checkNotNull(httpHeaders);
-		Preconditions.checkNotNull(body);
+		Preconditions.checkNotNull(httpHeaders, "httpHeaders");
+		Preconditions.checkNotNull(body, "body");
 		if (log.isDebugEnabled()) {
 			log.debug("parsePaySuccessData, headers:{}, body:{}", httpHeaders, body);
 		}
@@ -172,14 +143,6 @@ public class WxV3PayImpl implements WxV3Pay {
 		catch (Exception e) {
 			throw new ResponseException(Response.bad().message(e.getMessage()));
 		}
-	}
-
-	public WxPayContext getPayContext() {
-		return this.payContext;
-	}
-
-	public WechatBaseV3Pay getWechatBaseV3Pay() {
-		return this.wechatBaseV3Pay;
 	}
 
 }
