@@ -1,3 +1,17 @@
+/*
+ * Copyright (c) 2020-2030  Xiamen Nascent Corporation. All rights reserved.
+ *
+ * https://www.nascent.cn
+ *
+ * 厦门南讯股份有限公司创立于2010年，是一家始终以技术和产品为驱动，帮助大消费领域企业提供客户资源管理（CRM）解决方案的公司。
+ * 福建省厦门市软件园二期观日路22号401
+ * 客服电话 400-009-2300
+ * 电话 +86（592）5971731 传真 +86（592）5971710
+ *
+ * All source code copyright of this system belongs to Xiamen Nascent Co., Ltd.
+ * Any organization or individual is not allowed to reprint, publish, disclose, embezzle, sell and use it for other illegal purposes without permission!
+ */
+
 package org.magneton.test.util;
 
 import javax.annotation.Nullable;
@@ -55,11 +69,11 @@ public class StringUtil {
 	 * @since 3.0 Changed signature from isNumeric(String) to isNumeric(CharSequence)
 	 * @since 3.0 Changed "" to return false and not true
 	 */
-	public static boolean isNumeric(CharSequence cs) {
+	public static boolean isNumeric(final CharSequence cs) {
 		if (!hasLength(cs)) {
 			return false;
 		}
-		int sz = cs.length();
+		final int sz = cs.length();
 		for (int i = 0; i < sz; i++) {
 			if (!Character.isDigit(cs.charAt(i))) {
 				return false;
@@ -87,7 +101,7 @@ public class StringUtil {
 	 * @return left padded String or original String if no padding is necessary,
 	 * {@code null} if null String input
 	 */
-	public static String leftPad(String str, int size) {
+	public static String leftPad(final String str, final int size) {
 		return leftPad(str, size, ' ');
 	}
 
@@ -112,11 +126,11 @@ public class StringUtil {
 	 * {@code null} if null String input
 	 * @since 2.0
 	 */
-	public static String leftPad(String str, int size, char padChar) {
+	public static String leftPad(final String str, final int size, final char padChar) {
 		if (str == null) {
 			return null;
 		}
-		int pads = size - str.length();
+		final int pads = size - str.length();
 		if (pads <= 0) {
 			return str; // returns original String when possible
 		}
@@ -149,16 +163,16 @@ public class StringUtil {
 	 * @return left padded String or original String if no padding is necessary,
 	 * {@code null} if null String input
 	 */
-	public static String leftPad(String str, int size, String padStr) {
+	public static String leftPad(final String str, final int size, String padStr) {
 		if (str == null) {
 			return null;
 		}
 		if (!hasLength(padStr)) {
 			padStr = SPACE;
 		}
-		int padLen = padStr.length();
-		int strLen = str.length();
-		int pads = size - strLen;
+		final int padLen = padStr.length();
+		final int strLen = str.length();
+		final int pads = size - strLen;
 		if (pads <= 0) {
 			return str; // returns original String when possible
 		}
@@ -173,8 +187,8 @@ public class StringUtil {
 			return padStr.substring(0, pads).concat(str);
 		}
 		else {
-			char[] padding = new char[pads];
-			char[] padChars = padStr.toCharArray();
+			final char[] padding = new char[pads];
+			final char[] padChars = padStr.toCharArray();
 			for (int i = 0; i < pads; i++) {
 				padding[i] = padChars[i % padLen];
 			}
@@ -202,11 +216,11 @@ public class StringUtil {
 	 * @return String with repeated character
 	 * @see #repeat(String, int)
 	 */
-	public static String repeat(char ch, int repeat) {
+	public static String repeat(final char ch, final int repeat) {
 		if (repeat <= 0) {
 			return "";
 		}
-		char[] buf = new char[repeat];
+		final char[] buf = new char[repeat];
 		for (int i = repeat - 1; i >= 0; i--) {
 			buf[i] = ch;
 		}
@@ -237,7 +251,7 @@ public class StringUtil {
 	 * between characters.
 	 * @param str the {@code String} to check
 	 * @return the trimmed {@code String}
-	 * @see Character#isWhitespace
+	 * @see java.lang.Character#isWhitespace
 	 */
 	public static String trimAllWhitespace(String str) {
 		if (!hasLength(str)) {

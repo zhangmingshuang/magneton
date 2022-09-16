@@ -1,3 +1,17 @@
+/*
+ * Copyright (c) 2020-2030  Xiamen Nascent Corporation. All rights reserved.
+ *
+ * https://www.nascent.cn
+ *
+ * 厦门南讯股份有限公司创立于2010年，是一家始终以技术和产品为驱动，帮助大消费领域企业提供客户资源管理（CRM）解决方案的公司。
+ * 福建省厦门市软件园二期观日路22号401
+ * 客服电话 400-009-2300
+ * 电话 +86（592）5971731 传真 +86（592）5971710
+ *
+ * All source code copyright of this system belongs to Xiamen Nascent Co., Ltd.
+ * Any organization or individual is not allowed to reprint, publish, disclose, embezzle, sell and use it for other illegal purposes without permission!
+ */
+
 package org.magneton.test.model.generate.util;
 
 import java.io.UnsupportedEncodingException;
@@ -5,6 +19,9 @@ import java.util.Random;
 
 public class ChineseCharUtils {
 
+	/**
+	 * 随机汉字
+	 */
 	public static String ODD_CHINESE_CHARS = "厷厸厹厺厼厽厾叀叁参叄叅叆叇亝収叏叐叒叓叕叚叜叝叞"
 			+ "叠叧叨叭叱叴叵叺叻叼叽叾卟叿吀吁吂吅吆吇吋吒吔吖吘吙吚吜吡吢吣吤吥吧吩吪吭吮吰吱吲呐吷吺吽呁呃呄呅呇呉"
 			+ "呋呋呌呍呎呏呐呒呓呔呕呗呙呚呛呜呝呞呟呠呡呢呣呤呥呦呧周呩呪呫呬呭呮呯呰呱呲呴呶呵呷呸呹呺呻呾呿咀咁咂"
