@@ -1,17 +1,3 @@
-/*
- * Copyright (c) 2020-2030  Xiamen Nascent Corporation. All rights reserved.
- *
- * https://www.nascent.cn
- *
- * 厦门南讯股份有限公司创立于2010年，是一家始终以技术和产品为驱动，帮助大消费领域企业提供客户资源管理（CRM）解决方案的公司。
- * 福建省厦门市软件园二期观日路22号401
- * 客服电话 400-009-2300
- * 电话 +86（592）5971731 传真 +86（592）5971710
- *
- * All source code copyright of this system belongs to Xiamen Nascent Co., Ltd.
- * Any organization or individual is not allowed to reprint, publish, disclose, embezzle, sell and use it for other illegal purposes without permission!
- */
-
 package org.magneton.test.model.generate;
 
 import java.text.SimpleDateFormat;
@@ -20,10 +6,10 @@ import java.util.Date;
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
-import org.magneton.test.model.generate.base.AbstractGenericGenerator;
-import org.magneton.test.util.StringUtil;
 import com.google.common.collect.Maps;
 import org.joda.time.DateTime;
+import org.magneton.test.model.generate.base.AbstractGenericGenerator;
+import org.magneton.test.util.StringUtil;
 
 /**
  * 身份证号码 1、号码的结构 公民身份号码是特征组合码，由十七位数字本体码和一位校验码组成。排列顺序从左至右依次为：六位数字地址码，

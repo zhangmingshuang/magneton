@@ -4,10 +4,16 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
+
+import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.magneton.foundation.reflect.MoreReflection;
 import org.redisson.api.RLock;
+import org.redisson.api.RRateLimiter;
+import org.redisson.api.RateIntervalUnit;
+import org.redisson.api.RateType;
 import org.redisson.api.RedissonClient;
 import org.redisson.config.ClusterServersConfig;
 import org.redisson.config.Config;
@@ -59,6 +65,25 @@ class RedissonAdapterTest {
 	}
 
 	@Test
+	void testRate() throws InterruptedException {
+		RedissonClient client = RedissonAdapter.createSingleServerClient();
+		RRateLimiter test = client.getRateLimiter("test");
+		test.trySetRate(RateType.OVERALL, 2, 1, RateIntervalUnit.SECONDS);
+		// 每秒2次，即500ms一次
+		int count = 10;
+		CountDownLatch cdl = new CountDownLatch(count);
+		for (int i = 0; i < count; i++) {
+			new Thread(() -> {
+				System.out.println(test.tryAcquire());
+				cdl.countDown();
+			}).start();
+		}
+		cdl.await();
+		System.out.println("finish");
+	}
+
+	@Test
+	@Ignore
 	void test() throws InterruptedException {
 		RedissonClient client = RedissonAdapter.createSingleServerClient();
 		String key = "testKey";
@@ -81,35 +106,6 @@ class RedissonAdapterTest {
 		t1.start();
 		t1.join();
 		lock.unlock();
-
-		// ExecutorService executorService = Executors.newCachedThreadPool();
-		// long c = System.currentTimeMillis();
-		// AtomicInteger i = new AtomicInteger();
-		// StringBuffer buffer = new StringBuffer(1024);
-		// int count = 200;
-		// CountDownLatch countDownLatch = new CountDownLatch(count);
-		// executorService.submit(() -> {
-		// long id = Thread.currentThread().getId();
-		// try {
-		// Thread.sleep(100);
-		// buffer.append("t" + id + "start\n");
-		// RLock lock = client.getLock(key);
-		// lock.unlock();
-		// buffer.append("t" + id + "lock: " + lock + "\n");
-		// }
-		// catch (InterruptedException e) {
-		// e.printStackTrace();
-		// }
-		// finally {
-		// RLock lock = client.getLock(key);
-		// buffer.append("t " + id + " unlock:" + lock + ", " +
-		// lock.isHeldByCurrentThread() + "\n");
-		// lock.unlock();
-		//
-		// countDownLatch.countDown();
-		// }
-		// });
-		// System.out.println(buffer.toString());
 	}
 
 }
