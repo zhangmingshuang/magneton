@@ -5,14 +5,14 @@ import java.math.BigInteger;
 
 import javax.validation.constraints.Min;
 
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.RepeatedTest;
+import org.junit.jupiter.api.Test;
 import org.magneton.test.ChaosTest;
 import org.magneton.test.HibernateValid;
 import org.magneton.test.config.Config;
 import org.magneton.test.core.InjectType;
 import org.magneton.test.helper.Human;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.RepeatedTest;
-import org.junit.jupiter.api.Test;
 
 /**
  * .

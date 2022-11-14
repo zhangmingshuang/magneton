@@ -34,7 +34,7 @@ public class AnnotationUtil {
 		if (clazz == null || clazz == Object.class) {
 			return null;
 		}
-		Preconditions.checkNotNull(annotationClass, "annotationClass must be not null");
+		Preconditions.checkNotNull(annotationClass, "annotationClass must not be null");
 		Annotation annotation = clazz.getAnnotation(annotationClass);
 		if (annotation == null) {
 			annotation = findAnnotations(clazz.getSuperclass(), annotationClass);
@@ -57,8 +57,8 @@ public class AnnotationUtil {
 
 	@Nullable
 	public static <A extends Annotation> A findAnnotations(Field field, Class<A> annotationClass) {
-		Preconditions.checkNotNull(annotationClass, "annotationClass must be not null");
-		Preconditions.checkNotNull(field, "Field class must be not null");
+		Preconditions.checkNotNull(annotationClass, "annotationClass must not be null");
+		Preconditions.checkNotNull(field, "Field class must not be null");
 		return field.getAnnotation(annotationClass);
 	}
 
@@ -111,6 +111,7 @@ public class AnnotationUtil {
 		return annotations;
 	}
 
+	@SuppressWarnings("OverlyComplexBooleanExpression")
 	private static boolean isIgnore(Class<?> clazz) {
 		return clazz == null || clazz == Object.class || clazz == Documented.class || clazz == Retention.class
 				|| clazz == Target.class || clazz == Repeatable.class || clazz == Constraint.class;

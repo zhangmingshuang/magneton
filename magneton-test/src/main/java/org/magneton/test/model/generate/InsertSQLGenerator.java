@@ -12,11 +12,12 @@ import java.util.List;
 import com.google.common.base.CaseFormat;
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
+import com.google.common.collect.Collections2;
 import com.google.common.collect.Lists;
 
-import static com.google.common.collect.Collections2.transform;
-
 /**
+ * Insert SQL 生成器
+ *
  * @author Binary Wang
  */
 public class InsertSQLGenerator {
@@ -25,7 +26,7 @@ public class InsertSQLGenerator {
 
 	private Connection con;
 
-	private String tableName;
+	private final String tableName;
 
 	public InsertSQLGenerator(String url, String username, String password, String tableName) {
 		try {
@@ -46,7 +47,7 @@ public class InsertSQLGenerator {
 	}
 
 	public String generateParams() {
-		return COMMA_JOINER.join(transform(this.getColumns(), new Function<String, String>() {
+		return COMMA_JOINER.join(Collections2.transform(this.getColumns(), new Function<String, String>() {
 
 			@Override
 			public String apply(String input) {

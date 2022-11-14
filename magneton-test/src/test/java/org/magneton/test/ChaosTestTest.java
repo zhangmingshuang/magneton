@@ -1,16 +1,17 @@
 package org.magneton.test;
 
 import java.io.Serializable;
+import java.util.function.BooleanSupplier;
 
 import javax.annotation.Nullable;
 import javax.validation.constraints.NotNull;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.Accessors;
 import org.hibernate.validator.constraints.Range;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -22,16 +23,44 @@ import org.junit.jupiter.api.Test;
 class ChaosTestTest {
 
 	@Test
+	void testRatio() {
+		long slowCount = 10;
+		long totalCount = 10;
+
+		double currentRatio = slowCount * 1.0d / totalCount;
+		if (currentRatio > 1.0D) {
+			System.out.println("当前比例大于1");
+		}
+	}
+
+	@Test
 	void test() {
 		WarehouseSearchRequestDTO dto = ChaosTest.createExcepted(WarehouseSearchRequestDTO.class);
 		System.out.println(dto);
+	}
+
+	@Test
+	void test1() {
+		WarehouseSearchRequestDTO dto1 = new WarehouseSearchRequestDTO();
+		dto1.setAccessToken("test");
+		WarehouseSearchRequestDTO dto2 = new WarehouseSearchRequestDTO();
+		dto2.setAccessToken("test");
+
+		BooleanSupplier booleanSupplier = ChaosTest.booleanSupplier().valueEquals(dto1, dto2);
+		Assertions.assertTrue(booleanSupplier);
+	}
+
+	public static class TestA {
+
+		private int i;
+
 	}
 
 	@Setter
 	@Getter
 	@ToString(callSuper = true)
 	@Accessors(chain = true)
-	public static class WarehouseSearchRequestDTO extends PageBaseRequestDTO implements Serializable {
+	public static class WarehouseSearchRequestDTO extends PageBaseRequestDTO {
 
 		/**
 		 * 店铺id
@@ -43,9 +72,9 @@ class ChaosTestTest {
 
 	@Setter
 	@Getter
-	@ToString
+	@ToString(callSuper = true)
 	@Accessors(chain = true)
-	public static class PageBaseRequestDTO extends BaseRequestDTO implements Serializable {
+	public static class PageBaseRequestDTO extends BaseRequestDTO {
 
 		private static final long serialVersionUID = 1L;
 
@@ -71,7 +100,7 @@ class ChaosTestTest {
 
 		/**
 		 * 获取分页开始ID
-		 * @return
+		 * @return 分页开始ID
 		 */
 		public Long getPageStart() {
 			try {
@@ -88,7 +117,9 @@ class ChaosTestTest {
 
 	}
 
-	@Data
+	@Getter
+	@Setter
+	@ToString
 	public static class BaseRequestDTO implements Serializable {
 
 		/**

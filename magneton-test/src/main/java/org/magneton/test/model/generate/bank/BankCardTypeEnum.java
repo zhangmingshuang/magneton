@@ -1,11 +1,8 @@
 package org.magneton.test.model.generate.bank;
 
 /**
- * <pre>
  * 银行卡类型枚举类
- * Created by Binary Wang on 2017-3-31.
- * @author <a href="https://github.com/binarywang">binarywang(Binary Wang)</a>
- * </pre>
+ * @author other
  */
 public enum BankCardTypeEnum {
 

@@ -1,14 +1,15 @@
 package org.magneton.test.injector;
 
-import org.magneton.test.ChaosTest;
-import org.magneton.test.config.Config;
-import org.magneton.test.core.InjectType;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+
 import lombok.ToString;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.magneton.test.ChaosTest;
+import org.magneton.test.config.Config;
+import org.magneton.test.core.InjectType;
 
 /**
  * .
@@ -27,29 +28,6 @@ class ObjectInjectorTest {
 				.setMaxInt(1).setMinLong(1L).setMaxLong(1L).setMinFloat(1F).setMaxFloat(1F).setMinDouble(1D)
 				.setMaxDouble(1D).setBooleanTrueProbability(100).setMinBigInteger(BigInteger.ONE)
 				.setMaxBigInteger(BigInteger.ONE).setMinBigDecimal(BigDecimal.ONE).setMaxBigDecimal(BigDecimal.ONE);
-	}
-
-	@ToString
-	public static class TestA {
-
-		private byte b;
-
-		private short s;
-
-		private int i;
-
-		private long l;
-
-		private float f;
-
-		private double d;
-
-		private boolean bool;
-
-		private BigInteger bigInteger;
-
-		private BigDecimal bigDecimal;
-
 	}
 
 	@Test
@@ -73,6 +51,21 @@ class ObjectInjectorTest {
 		Assertions.assertTrue(testInt.bool);
 	}
 
+	@Test
+	void testB() {
+		TestB testB = ChaosTest.create(TestB.class, config, InjectType.EXPECTED);
+		System.out.println(testB);
+		this.assertionsTestA(testB.a);
+		Assertions.assertEquals(1, testB.i);
+	}
+
+	@Test
+	void testC() {
+		TestC test = ChaosTest.create(TestC.class, config, InjectType.EXPECTED);
+		System.out.println(test);
+		Assertions.assertTrue(test.ints.length > 0 && test.strings.length > 0);
+	}
+
 	@ToString
 	public static class TestB {
 
@@ -80,14 +73,6 @@ class ObjectInjectorTest {
 
 		private int i;
 
-	}
-
-	@Test
-	void testB() {
-		TestB testB = ChaosTest.create(TestB.class, config, InjectType.EXPECTED);
-		System.out.println(testB);
-		this.assertionsTestA(testB.a);
-		Assertions.assertEquals(1, testB.i);
 	}
 
 	@ToString
@@ -99,11 +84,27 @@ class ObjectInjectorTest {
 
 	}
 
-	@Test
-	void testC() {
-		TestC test = ChaosTest.create(TestC.class, config, InjectType.EXPECTED);
-		System.out.println(test);
-		Assertions.assertTrue(test.ints.length > 0 && test.strings.length > 0);
+	@ToString
+	public static class TestA {
+
+		private byte b;
+
+		private short s;
+
+		private int i;
+
+		private long l;
+
+		private float f;
+
+		private double d;
+
+		private boolean bool;
+
+		private BigInteger bigInteger;
+
+		private BigDecimal bigDecimal;
+
 	}
 
 }

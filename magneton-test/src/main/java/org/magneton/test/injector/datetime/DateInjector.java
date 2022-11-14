@@ -34,6 +34,7 @@ import org.magneton.test.parser.Definition;
 @TestComponent
 public class DateInjector extends AbstractInjector {
 
+	@SuppressWarnings({ "OverlyComplexMethod", "OverlyLongMethod" })
 	@Override
 	protected Object createValue(Definition definition, Config config, InjectType injectType) {
 		Date date = ConfigProcessorFactory.of(injectType).nextDate(config, definition);

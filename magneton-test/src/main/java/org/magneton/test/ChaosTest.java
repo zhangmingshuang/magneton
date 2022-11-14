@@ -26,10 +26,6 @@ public class ChaosTest implements ChaosApplication {
 
 	private static final Config DEFAULT_CONFIG = new Config();
 
-	static {
-		ChaosContext.init(ChaosTest.class);
-	}
-
 	public static <T> T createExcepted(Class<T> clazz) {
 		return create(clazz, null, InjectType.EXPECTED);
 	}
@@ -51,8 +47,8 @@ public class ChaosTest implements ChaosApplication {
 	}
 
 	public static <T> T create(Class<T> clazz, Config config, InjectType injectType) {
-		Preconditions.checkNotNull(clazz, "clazz must be not null");
-		Preconditions.checkNotNull(injectType, "injectType must be not null");
+		Preconditions.checkNotNull(clazz, "clazz must not be null");
+		Preconditions.checkNotNull(injectType, "injectType must not be null");
 		TraceChain.current().start(clazz);
 		try {
 			Definition definition = ParserFactory.getInstance().parse(clazz);
@@ -70,6 +66,10 @@ public class ChaosTest implements ChaosApplication {
 
 	public static ValueGenerator valueGenerator() {
 		return ValueGenerator.getInstance();
+	}
+
+	static {
+		ChaosContext.init(ChaosTest.class);
 	}
 
 }

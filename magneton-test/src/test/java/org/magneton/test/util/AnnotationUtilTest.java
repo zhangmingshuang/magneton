@@ -17,18 +17,18 @@ import org.junit.jupiter.api.Test;
  */
 class AnnotationUtilTest {
 
-	public static class TestA {
-
-		@AssertTrue
-		private boolean bool;
-
-	}
-
 	@SneakyThrows
 	@Test
 	void testA() {
 		Map<Class<?>, Annotation> bool = AnnotationUtil.findAnnotations(TestA.class.getDeclaredField("bool"));
 		Assertions.assertTrue(bool.containsKey(AssertTrue.class));
+	}
+
+	public static class TestA {
+
+		@AssertTrue
+		private boolean bool;
+
 	}
 
 }

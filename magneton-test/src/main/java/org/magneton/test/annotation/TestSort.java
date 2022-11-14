@@ -28,13 +28,13 @@ public @interface TestSort {
 	/**
 	 * Useful constant for the lowest precedence value.
 	 *
-	 * @see Integer#MAX_VALUE
+	 * @see java.lang.Integer#MAX_VALUE
 	 */
 	int LOWEST_PRECEDENCE = Integer.MAX_VALUE;
 
 	/**
 	 * 排序值，值越大越晚执行
-	 * @return
+	 * @return 排序值
 	 */
 	int value() default LOWEST_PRECEDENCE;
 

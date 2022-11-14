@@ -1,9 +1,9 @@
 package org.magneton.test.injector.base;
 
-import org.magneton.test.config.Config;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.magneton.test.ChaosTest;
+import org.magneton.test.config.Config;
 import org.magneton.test.core.InjectType;
 
 /**
@@ -18,8 +18,7 @@ class StringInjectorTest {
 	void test() {
 		InjectType type = InjectType.EXPECTED;
 		Config config = new Config();
-
-		config.setMinSize(12).setMaxSize(12);
+		config.setMinCharSequenceLength(12).setMaxCharSequenceLength(12);
 		String integer = ChaosTest.create(String.class, config, type);
 		Assertions.assertEquals(12, integer.toString().length());
 	}

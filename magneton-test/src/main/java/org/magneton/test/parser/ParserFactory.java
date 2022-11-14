@@ -34,7 +34,7 @@ public class ParserFactory {
 	}
 
 	public <T> Definition parse(Class<T> clazz) {
-		Preconditions.checkNotNull(clazz, "clazz must be not null");
+		Preconditions.checkNotNull(clazz, "clazz must not be null");
 		return this.parseClass(clazz);
 	}
 
@@ -88,6 +88,7 @@ public class ParserFactory {
 		return fieldDefinition;
 	}
 
+	@SuppressWarnings("BooleanMethodIsAlwaysInverted")
 	private boolean isIgnore(Class clazz) {
 		return clazz.getName().startsWith("java.");
 	}

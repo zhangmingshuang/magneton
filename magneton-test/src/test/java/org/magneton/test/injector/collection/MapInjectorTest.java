@@ -1,11 +1,12 @@
 package org.magneton.test.injector.collection;
 
-import org.magneton.test.config.Config;
 import java.util.Map;
+
 import lombok.ToString;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.magneton.test.ChaosTest;
+import org.magneton.test.config.Config;
 import org.magneton.test.core.InjectType;
 
 /**
@@ -20,15 +21,6 @@ class MapInjectorTest {
 
 	private final InjectType angle = InjectType.EXPECTED;
 
-	@ToString
-	public static class TestA {
-
-		private Map map;
-
-		private Map<Integer, Long[]> map2;
-
-	}
-
 	@Test
 	void testA() {
 		this.config.setMinSize(1).setMaxSize(1);
@@ -36,6 +28,15 @@ class MapInjectorTest {
 		System.out.println(test);
 		Assertions.assertEquals(1, test.map.size());
 		Assertions.assertEquals(1, test.map2.size());
+	}
+
+	@ToString
+	public static class TestA {
+
+		private Map map;
+
+		private Map<Integer, Long[]> map2;
+
 	}
 
 }

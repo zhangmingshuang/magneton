@@ -3,18 +3,12 @@ package org.magneton.test.model.generate.bank;
 import org.magneton.test.util.ArrayUtils;
 
 /**
- * <pre>
  * 常见银行名称枚举类
- * Created by Binary Wang on 2017-3-31.
- *
- * @author <a href="https://github.com/binarywang">binarywang(Binary Wang)</a>
- * </pre>
+ * @author other
  */
 public enum BankNameEnum {
 
 	/**
-	 *
-	 *
 	 * <pre>
 	 * 中国工商银行
 	 * 中国工商银行VISA学生国际信用卡：427020

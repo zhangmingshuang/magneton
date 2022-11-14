@@ -28,7 +28,10 @@ public class ChineseMobileNumberGeneratorAbstract extends AbstractGenericGenerat
 		return genMobilePre() + StringUtil.leftPad("" + ThreadLocalRandom.current().nextInt(0, 99999999 + 1), 8, "0");
 	}
 
-	/** 生成假的手机号，以19开头 */
+	/**
+	 * 生成假的手机号，以19开头
+	 * @return 假的手机号
+	 */
 	public String generateFake() {
 		return "19" + StringUtil.leftPad("" + ThreadLocalRandom.current().nextInt(0, 999999999 + 1), 9, "0");
 	}

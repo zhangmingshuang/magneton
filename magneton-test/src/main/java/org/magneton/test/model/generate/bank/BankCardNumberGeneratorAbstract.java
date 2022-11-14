@@ -34,11 +34,9 @@ public class BankCardNumberGeneratorAbstract extends AbstractGenericGenerator {
 	}
 
 	/**
-	 *
-	 *
-	 * <pre>
 	 * 根据给定前六位生成卡号
-	 * </pre>
+	 * @param prefix 前六位
+	 * @return 银行卡号
 	 */
 	public static String generateByPrefix(Integer prefix) {
 		Random random = ThreadLocalRandom.current();

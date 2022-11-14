@@ -49,6 +49,7 @@ public class ChaosContext {
 	private ChaosContext() {
 	}
 
+	@SuppressWarnings({ "OverlyBroadCatchBlock", "NewExceptionWithoutArguments" })
 	public static void init(Class<? extends ChaosApplication> chaosApplication) {
 
 		try {
@@ -126,6 +127,7 @@ public class ChaosContext {
 		}
 	}
 
+	@SuppressWarnings("MethodWithMoreThanThreeNegations")
 	private static void loadAndInitialize(Set<String> scanPackages) throws IOException {
 		ClassPath classPath = ClassPath.from(ChaosContext.class.getClassLoader());
 
@@ -141,20 +143,15 @@ public class ChaosContext {
 			if (INITIALIZED_OBJECTS.containsKey(classInfo.getName())) {
 				continue;
 			}
-			try {
-				Class<?> clazz = classInfo.load();
-				TestComponent component = AnnotationUtil.findAnnotations(clazz, TestComponent.class);
-				if (component != null) {
-					addLoadClass(clazz);
-				}
-				TestComponentScan componentScan = AnnotationUtil.findAnnotations(clazz, TestComponentScan.class);
-				if (componentScan != null && !Strings.isNullOrEmpty(componentScan.value())
-						&& !LOAD_PACKAGES.contains(componentScan.value())) {
-					componentScanPackages.add(componentScan.value());
-				}
+			Class<?> clazz = classInfo.load();
+			TestComponent component = AnnotationUtil.findAnnotations(clazz, TestComponent.class);
+			if (component != null) {
+				addLoadClass(clazz);
 			}
-			catch (Throwable e) {
-				// ignore
+			TestComponentScan componentScan = AnnotationUtil.findAnnotations(clazz, TestComponentScan.class);
+			if (componentScan != null && !Strings.isNullOrEmpty(componentScan.value())
+					&& !LOAD_PACKAGES.contains(componentScan.value())) {
+				componentScanPackages.add(componentScan.value());
 			}
 		}
 		if (!componentScanPackages.isEmpty()) {

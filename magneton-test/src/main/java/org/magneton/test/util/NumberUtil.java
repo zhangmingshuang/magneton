@@ -7,11 +7,12 @@ import com.google.common.base.Preconditions;
 import com.google.common.reflect.TypeToken;
 
 /**
- * .
+ * 数字工具.
  *
  * @author zhangmsh 2021/8/3
  * @since 2.0.0
  */
+@SuppressWarnings("All")
 public class NumberUtil {
 
 	private NumberUtil() {
@@ -76,6 +77,8 @@ public class NumberUtil {
 	/**
 	 * Determine whether the given {@code value} String indicates a hex number, i.e. needs
 	 * to be passed into {@code Integer.decode} instead of {@code Integer.valueOf}, etc.
+	 * @param value the value String
+	 * @return {@code true} if the value is a hex number
 	 */
 	private static boolean isHexNumber(String value) {
 		int index = (value.startsWith("-") ? 1 : 0);
@@ -83,11 +86,12 @@ public class NumberUtil {
 	}
 
 	/**
-	 * Decode a {@link BigInteger} from the supplied {@link String} value.
+	 * Decode a {@link java.math.BigInteger} from the supplied {@link String} value.
 	 *
 	 * <p>
 	 * Supports decimal, hex, and octal notation.
-	 *
+	 * @param value the value to decode
+	 * @return the decoded {@link java.math.BigInteger}
 	 * @see BigInteger#BigInteger(String, int)
 	 */
 	private static BigInteger decodeBigInteger(String value) {

@@ -33,7 +33,7 @@ public class EmailConfigPostProcessor extends AbstractConfigPostProcessor {
 	@Nullable
 	@Override
 	protected Class[] jsrAnnotations() {
-		return new Class[] { Email.class };
+		return new Class[] { Email.class, org.hibernate.validator.constraints.Email.class };
 	}
 
 }

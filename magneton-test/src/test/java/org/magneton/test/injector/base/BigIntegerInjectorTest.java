@@ -1,9 +1,10 @@
 package org.magneton.test.injector.base;
 
+import java.math.BigInteger;
+
 import org.magneton.test.ChaosTest;
 import org.magneton.test.config.Config;
 import org.magneton.test.core.InjectType;
-import java.math.BigInteger;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

@@ -83,6 +83,7 @@ public class AbstractSupplier<T> {
 		}
 	}
 
+	@SuppressWarnings("UseOfSystemOutOrSystemErr")
 	protected void doPrint(String msg) {
 		if (Strings.isNullOrEmpty(msg)) {
 			return;

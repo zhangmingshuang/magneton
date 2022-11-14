@@ -28,18 +28,8 @@ class ParserFactoryTest {
 		Assertions.assertEquals("java.lang.Long", definition.getClazz().getName());
 		Assertions.assertNull(definition.getChildDefinitions());
 		Assertions.assertNull(definition.getGenerics());
-		Assertions.assertEquals(1, definition.getAnnotations().size());
+		Assertions.assertEquals(0, definition.getAnnotations().size());
 		System.out.println(definition);
-	}
-
-	public static class A {
-
-		@Size(min = 1, max = 12)
-		private long a;
-
-		@NotNull
-		private String b;
-
 	}
 
 	@Test
@@ -50,16 +40,6 @@ class ParserFactoryTest {
 			Assertions.assertEquals(1, childDefinition.getAnnotations().size());
 		}
 		System.out.println(definition);
-	}
-
-	public static class B {
-
-		private A a;
-
-		private String str;
-
-		private B b;
-
 	}
 
 	@Test
@@ -78,23 +58,10 @@ class ParserFactoryTest {
 		System.out.println(definition);
 	}
 
-	public static class C {
-
-		private List<String> list;
-
-	}
-
 	@Test
 	void testC() {
 		Definition definition = this.parserFactory.parse(C.class);
 		System.out.println(definition);
-	}
-
-	public static class D {
-
-		@AssertTrue
-		private Boolean bool;
-
 	}
 
 	@Test
@@ -105,6 +72,39 @@ class ParserFactoryTest {
 		Map<Class<?>, Annotation> annotations = definition.getAnnotations();
 		Human.sout(annotations);
 		Assertions.assertNotNull(annotations.get(AssertTrue.class));
+	}
+
+	public static class A {
+
+		@Size(min = 1, max = 12)
+		private long a;
+
+		@NotNull
+		private String b;
+
+	}
+
+	public static class B {
+
+		private A a;
+
+		private String str;
+
+		private B b;
+
+	}
+
+	public static class C {
+
+		private List<String> list;
+
+	}
+
+	public static class D {
+
+		@AssertTrue
+		private Boolean bool;
+
 	}
 
 }

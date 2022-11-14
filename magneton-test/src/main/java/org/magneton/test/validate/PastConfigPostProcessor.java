@@ -40,7 +40,7 @@ public class PastConfigPostProcessor extends AbstractConfigPostProcessor {
 		else if (LocalTime.class.isAssignableFrom(clazz)) {
 			// 时、分、秒
 			// 任何进位都可能得到一个未来的时间
-			minDateMillis = Math.min(minDateMillis, System.currentTimeMillis() - 10 * 1000L);
+			minDateMillis = Math.min(minDateMillis, System.currentTimeMillis() - 100 * 1000L);
 			maxDateMillis = minDateMillis;
 		}
 		else if (Year.class.isAssignableFrom(clazz)) {
@@ -49,7 +49,7 @@ public class PastConfigPostProcessor extends AbstractConfigPostProcessor {
 			minDateMillis = Math.min(minDateMillis, calendar.getTimeInMillis());
 		}
 		else {
-			if (minDateMillis == null || minDateMillis < System.currentTimeMillis()) {
+			if (minDateMillis == null || minDateMillis <= System.currentTimeMillis()) {
 				minDateMillis = System.currentTimeMillis() - 86400 * 1000L;
 			}
 		}

@@ -31,13 +31,19 @@ public class ChineseIDCardNumberGeneratorAbstract extends AbstractGenericGenerat
 		return instance;
 	}
 
-	/** 生成签发机关：XXX公安局/XX区分局 Authority */
+	/**
+	 * 生成签发机关：XXX公安局/XX区分局 Authority
+	 * @return 签发机关
+	 */
 	public static String generateIssueOrg() {
 		return ChineseAreaList.cityNameList
 				.get(ThreadLocalRandom.current().nextInt(0, ChineseAreaList.cityNameList.size())) + "公安局某某分局";
 	}
 
-	/** 生成有效期限：20150906-20350906 Valid Through */
+	/**
+	 * 生成有效期限：20150906-20350906 Valid Through
+	 * @return 有效期限
+	 */
 	public static String generateValidPeriod() {
 		DateTime beginDate = new DateTime(randomDate());
 		String formater = "yyyyMMdd";
@@ -72,7 +78,7 @@ public class ChineseIDCardNumberGeneratorAbstract extends AbstractGenericGenerat
 	}
 
 	private static Map<String, String> getAreaCode() {
-		Map<String, String> map = Maps.newHashMap();
+		final Map<String, String> map = Maps.newHashMap();
 		map.put("11", "北京");
 		map.put("12", "天津");
 		map.put("13", "河北");

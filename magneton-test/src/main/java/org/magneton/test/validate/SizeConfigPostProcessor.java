@@ -26,6 +26,16 @@ public class SizeConfigPostProcessor extends AbstractConfigPostProcessor {
 		int min = (int) metadata.get("min");
 		int max = (int) metadata.get("max");
 		config.setMinSize(min).setMaxSize(max);
+
+		// 对于字符串，其他的处理逻辑比当前的逻辑应该更高
+		int minCharSequenceLength = config.getMinCharSequenceLength();
+		if (minCharSequenceLength < min) {
+			config.setMinCharSequenceLength(min);
+		}
+		int maxCharSequenceLength = config.getMaxCharSequenceLength();
+		if (maxCharSequenceLength > max) {
+			config.setMaxCharSequenceLength(max);
+		}
 	}
 
 	@Nullable
