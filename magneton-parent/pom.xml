@@ -53,6 +53,11 @@
 			<!-- magneton-modules -->
 			<dependency>
 				<groupId>org.magneton</groupId>
+				<artifactId>magneton-module-algorithm</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.magneton</groupId>
 				<artifactId>magneton-module-auth</artifactId>
 				<version>${project.version}</version>
 			</dependency>
