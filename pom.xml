@@ -20,6 +20,7 @@
 		<module>magneton-adaptive</module>
 		<module>magneton-supports</module>
 		<module>magneton-adaptive/magneton-adaptive-mybatis</module>
+		<module>magneton-modules/magneton-module-algorithm</module>
 	</modules>
 
 
@@ -73,6 +74,7 @@
 		<tls-sig-api-v2.version>2.0</tls-sig-api-v2.version>
 		<tomcat-embed-core.version>9.0.62</tomcat-embed-core.version>
 		<cglib.version>3.3.0</cglib.version>
+		<RoaringBitmap.version>0.9.32</RoaringBitmap.version>
 		<!-- 日志 -->
 		<slf4j-api.version>2.0.0</slf4j-api.version>
 		<logback-classic.version>1.2.10</logback-classic.version>
