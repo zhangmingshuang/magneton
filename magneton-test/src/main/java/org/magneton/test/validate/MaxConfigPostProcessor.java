@@ -29,13 +29,22 @@ public class MaxConfigPostProcessor extends AbstractConfigPostProcessor {
 	@Override
 	protected void doPostProcessor(Annotation annotation, Config config, Definition definition) {
 		Map<String, Object> metadata = AnnotationUtil.getMetadata(annotation);
-		long max = (long) metadata.get("value");
-
+		Object value = metadata.get("value");
+		Class annotationType = (Class) metadata.get("annotationType");
+		long max;
+		if (DecimalMax.class.isAssignableFrom(annotationType)) {
+			double maxVal = Double.parseDouble(value.toString());
+			this.setBigDecimal(config, maxVal);
+			max = (long) maxVal;
+		}
+		else {
+			max = Long.parseLong(value.toString());
+			this.setBigDecimal(config, max);
+		}
 		this.setByte(config, max);
 		this.setShort(config, max);
 		this.setInt(config, max);
 		this.setLong(config, max);
-		this.setBigDecimal(config, max);
 		this.setBigInteger(config, max);
 	}
 
@@ -50,7 +59,7 @@ public class MaxConfigPostProcessor extends AbstractConfigPostProcessor {
 		}
 	}
 
-	public void setBigDecimal(Config config, long max) {
+	public void setBigDecimal(Config config, double max) {
 		BigDecimal minBigDecimal = config.getMinBigDecimal();
 		if (minBigDecimal == null || minBigDecimal.compareTo(BigDecimal.valueOf(max)) > 0) {
 			config.setMinBigDecimal(BigDecimal.valueOf(max));
