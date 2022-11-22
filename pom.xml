@@ -51,9 +51,6 @@
 
 		<sonar.host.url>https://builds.apache.org/analysis</sonar.host.url>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<!-- spring -->
-		<spring.version>5.2.12.RELEASE</spring.version>
-		<spring-boot.version>2.3.7.RELEASE</spring-boot.version>
 		<!-- 工具 -->
 		<testable.version>0.7.5</testable.version>
 		<commons-lang3.version>3.12.0</commons-lang3.version>
@@ -63,6 +60,7 @@
 		<javax.el.version>3.0.1-b12</javax.el.version>
 		<joda-time.version>2.10.10</joda-time.version>
 		<fastjson.version>1.2.75</fastjson.version>
+		<jackson.version>2.14.0</jackson.version>
 		<jakarta.validation-api.version>2.0.2</jakarta.validation-api.version>
 		<hibernate-validator.version>6.1.5.Final</hibernate-validator.version>
 		<auto-service.version>1.0</auto-service.version>
