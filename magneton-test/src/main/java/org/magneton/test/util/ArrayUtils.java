@@ -1,19 +1,3 @@
-/*
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package org.magneton.test.util;
 
 import java.lang.reflect.Array;
@@ -157,8 +141,8 @@ public class ArrayUtils {
 	 * @return A new array containing the existing elements plus the new element
 	 * @since 2.1
 	 */
-	public static boolean[] add(boolean[] array, boolean element) {
-		boolean[] newArray = (boolean[]) copyArrayGrow1(array, Boolean.TYPE);
+	public static boolean[] add(final boolean[] array, final boolean element) {
+		final boolean[] newArray = (boolean[]) copyArrayGrow1(array, Boolean.TYPE);
 		newArray[newArray.length - 1] = element;
 		return newArray;
 	}
@@ -196,7 +180,7 @@ public class ArrayUtils {
 	 *     null} not {@code X}.
 	 */
 	@Deprecated
-	public static boolean[] add(boolean[] array, int index, boolean element) {
+	public static boolean[] add(final boolean[] array, final int index, final boolean element) {
 		return (boolean[]) add(array, index, Boolean.valueOf(element), Boolean.TYPE);
 	}
 
@@ -222,8 +206,8 @@ public class ArrayUtils {
 	 * @return A new array containing the existing elements plus the new element
 	 * @since 2.1
 	 */
-	public static byte[] add(byte[] array, byte element) {
-		byte[] newArray = (byte[]) copyArrayGrow1(array, Byte.TYPE);
+	public static byte[] add(final byte[] array, final byte element) {
+		final byte[] newArray = (byte[]) copyArrayGrow1(array, Byte.TYPE);
 		newArray[newArray.length - 1] = element;
 		return newArray;
 	}
@@ -261,7 +245,7 @@ public class ArrayUtils {
 	 * {@code X}.
 	 */
 	@Deprecated
-	public static byte[] add(byte[] array, int index, byte element) {
+	public static byte[] add(final byte[] array, final int index, final byte element) {
 		return (byte[]) add(array, index, Byte.valueOf(element), Byte.TYPE);
 	}
 
@@ -287,8 +271,8 @@ public class ArrayUtils {
 	 * @return A new array containing the existing elements plus the new element
 	 * @since 2.1
 	 */
-	public static char[] add(char[] array, char element) {
-		char[] newArray = (char[]) copyArrayGrow1(array, Character.TYPE);
+	public static char[] add(final char[] array, final char element) {
+		final char[] newArray = (char[]) copyArrayGrow1(array, Character.TYPE);
 		newArray[newArray.length - 1] = element;
 		return newArray;
 	}
@@ -327,7 +311,7 @@ public class ArrayUtils {
 	 * {@code X}.
 	 */
 	@Deprecated
-	public static char[] add(char[] array, int index, char element) {
+	public static char[] add(final char[] array, final int index, final char element) {
 		return (char[]) add(array, index, Character.valueOf(element), Character.TYPE);
 	}
 
@@ -353,8 +337,8 @@ public class ArrayUtils {
 	 * @return A new array containing the existing elements plus the new element
 	 * @since 2.1
 	 */
-	public static double[] add(double[] array, double element) {
-		double[] newArray = (double[]) copyArrayGrow1(array, Double.TYPE);
+	public static double[] add(final double[] array, final double element) {
+		final double[] newArray = (double[]) copyArrayGrow1(array, Double.TYPE);
 		newArray[newArray.length - 1] = element;
 		return newArray;
 	}
@@ -392,7 +376,7 @@ public class ArrayUtils {
 	 *     null} not {@code X}.
 	 */
 	@Deprecated
-	public static double[] add(double[] array, int index, double element) {
+	public static double[] add(final double[] array, final int index, final double element) {
 		return (double[]) add(array, index, Double.valueOf(element), Double.TYPE);
 	}
 
@@ -418,8 +402,8 @@ public class ArrayUtils {
 	 * @return A new array containing the existing elements plus the new element
 	 * @since 2.1
 	 */
-	public static float[] add(float[] array, float element) {
-		float[] newArray = (float[]) copyArrayGrow1(array, Float.TYPE);
+	public static float[] add(final float[] array, final float element) {
+		final float[] newArray = (float[]) copyArrayGrow1(array, Float.TYPE);
 		newArray[newArray.length - 1] = element;
 		return newArray;
 	}
@@ -457,7 +441,7 @@ public class ArrayUtils {
 	 *     null} not {@code X}.
 	 */
 	@Deprecated
-	public static float[] add(float[] array, int index, float element) {
+	public static float[] add(final float[] array, final int index, final float element) {
 		return (float[]) add(array, index, Float.valueOf(element), Float.TYPE);
 	}
 
@@ -483,8 +467,8 @@ public class ArrayUtils {
 	 * @return A new array containing the existing elements plus the new element
 	 * @since 2.1
 	 */
-	public static int[] add(int[] array, int element) {
-		int[] newArray = (int[]) copyArrayGrow1(array, Integer.TYPE);
+	public static int[] add(final int[] array, final int element) {
+		final int[] newArray = (int[]) copyArrayGrow1(array, Integer.TYPE);
 		newArray[newArray.length - 1] = element;
 		return newArray;
 	}
@@ -521,7 +505,7 @@ public class ArrayUtils {
 	 * array results in {@code null} not {@code X}.
 	 */
 	@Deprecated
-	public static int[] add(int[] array, int index, int element) {
+	public static int[] add(final int[] array, final int index, final int element) {
 		return (int[]) add(array, index, Integer.valueOf(element), Integer.TYPE);
 	}
 
@@ -558,7 +542,7 @@ public class ArrayUtils {
 	 * {@code X}.
 	 */
 	@Deprecated
-	public static long[] add(long[] array, int index, long element) {
+	public static long[] add(final long[] array, final int index, final long element) {
 		return (long[]) add(array, index, Long.valueOf(element), Long.TYPE);
 	}
 
@@ -584,8 +568,8 @@ public class ArrayUtils {
 	 * @return A new array containing the existing elements plus the new element
 	 * @since 2.1
 	 */
-	public static long[] add(long[] array, long element) {
-		long[] newArray = (long[]) copyArrayGrow1(array, Long.TYPE);
+	public static long[] add(final long[] array, final long element) {
+		final long[] newArray = (long[]) copyArrayGrow1(array, Long.TYPE);
 		newArray[newArray.length - 1] = element;
 		return newArray;
 	}
@@ -599,20 +583,20 @@ public class ArrayUtils {
 	 * @param clss the type of the element being added
 	 * @return A new array containing the existing elements and the new element
 	 */
-	private static Object add(Object array, int index, Object element, Class<?> clss) {
+	private static Object add(final Object array, final int index, final Object element, final Class<?> clss) {
 		if (array == null) {
 			if (index != 0) {
 				throw new IndexOutOfBoundsException("Index: " + index + ", Length: 0");
 			}
-			Object joinedArray = Array.newInstance(clss, 1);
+			final Object joinedArray = Array.newInstance(clss, 1);
 			Array.set(joinedArray, 0, element);
 			return joinedArray;
 		}
-		int length = Array.getLength(array);
+		final int length = Array.getLength(array);
 		if (index > length || index < 0) {
 			throw new IndexOutOfBoundsException("Index: " + index + ", Length: " + length);
 		}
-		Object result = Array.newInstance(clss, length + 1);
+		final Object result = Array.newInstance(clss, length + 1);
 		System.arraycopy(array, 0, result, 0, index);
 		Array.set(result, index, element);
 		if (index < length) {
@@ -654,7 +638,7 @@ public class ArrayUtils {
 	 *     null} not {@code X}.
 	 */
 	@Deprecated
-	public static short[] add(short[] array, int index, short element) {
+	public static short[] add(final short[] array, final int index, final short element) {
 		return (short[]) add(array, index, Short.valueOf(element), Short.TYPE);
 	}
 
@@ -680,8 +664,8 @@ public class ArrayUtils {
 	 * @return A new array containing the existing elements plus the new element
 	 * @since 2.1
 	 */
-	public static short[] add(short[] array, short element) {
-		short[] newArray = (short[]) copyArrayGrow1(array, Short.TYPE);
+	public static short[] add(final short[] array, final short element) {
+		final short[] newArray = (short[]) copyArrayGrow1(array, Short.TYPE);
 		newArray[newArray.length - 1] = element;
 		return newArray;
 	}
@@ -722,7 +706,7 @@ public class ArrayUtils {
 	 *     null} array results in {@code null} not {@code X}.
 	 */
 	@Deprecated
-	public static <T> T[] add(T[] array, int index, T element) {
+	public static <T> T[] add(final T[] array, final int index, final T element) {
 		Class<?> clss = null;
 		if (array != null) {
 			clss = array.getClass().getComponentType();
@@ -733,9 +717,9 @@ public class ArrayUtils {
 		else {
 			throw new IllegalArgumentException("Array and element cannot both be null");
 		}
-		// the add method creates an array of type clss,
+		@SuppressWarnings("unchecked") // the add method creates an array of type clss,
 		// which is type T
-		T[] newArray = (T[]) add(array, index, element, clss);
+		final T[] newArray = (T[]) add(array, index, element, clss);
 		return newArray;
 	}
 
@@ -766,10 +750,10 @@ public class ArrayUtils {
 	 * returned array type will be that of the input array (unless null), in which case it
 	 * will have the same type as the element. If both are null, an
 	 * IllegalArgumentException is thrown
-	 * @since 2.1
 	 * @throws IllegalArgumentException if both arguments are null
+	 * @since 2.1
 	 */
-	public static <T> T[] add(T[] array, T element) {
+	public static <T> T[] add(final T[] array, final T element) {
 		Class<?> type;
 		if (array != null) {
 			type = array.getClass().getComponentType();
@@ -780,8 +764,8 @@ public class ArrayUtils {
 		else {
 			throw new IllegalArgumentException("Arguments cannot both be null");
 		}
-		// type must be T
-		T[] newArray = (T[]) copyArrayGrow1(array, type);
+		@SuppressWarnings("unchecked") // type must be T
+		final T[] newArray = (T[]) copyArrayGrow1(array, type);
 		newArray[newArray.length - 1] = element;
 		return newArray;
 	}
@@ -803,14 +787,14 @@ public class ArrayUtils {
 	 * @return The new boolean[] array.
 	 * @since 2.1
 	 */
-	public static boolean[] addAll(boolean[] array1, boolean... array2) {
+	public static boolean[] addAll(final boolean[] array1, final boolean... array2) {
 		if (array1 == null) {
 			return clone(array2);
 		}
 		else if (array2 == null) {
 			return clone(array1);
 		}
-		boolean[] joinedArray = new boolean[array1.length + array2.length];
+		final boolean[] joinedArray = new boolean[array1.length + array2.length];
 		System.arraycopy(array1, 0, joinedArray, 0, array1.length);
 		System.arraycopy(array2, 0, joinedArray, array1.length, array2.length);
 		return joinedArray;
@@ -833,14 +817,14 @@ public class ArrayUtils {
 	 * @return The new byte[] array.
 	 * @since 2.1
 	 */
-	public static byte[] addAll(byte[] array1, byte... array2) {
+	public static byte[] addAll(final byte[] array1, final byte... array2) {
 		if (array1 == null) {
 			return clone(array2);
 		}
 		else if (array2 == null) {
 			return clone(array1);
 		}
-		byte[] joinedArray = new byte[array1.length + array2.length];
+		final byte[] joinedArray = new byte[array1.length + array2.length];
 		System.arraycopy(array1, 0, joinedArray, 0, array1.length);
 		System.arraycopy(array2, 0, joinedArray, array1.length, array2.length);
 		return joinedArray;
@@ -863,14 +847,14 @@ public class ArrayUtils {
 	 * @return The new char[] array.
 	 * @since 2.1
 	 */
-	public static char[] addAll(char[] array1, char... array2) {
+	public static char[] addAll(final char[] array1, final char... array2) {
 		if (array1 == null) {
 			return clone(array2);
 		}
 		else if (array2 == null) {
 			return clone(array1);
 		}
-		char[] joinedArray = new char[array1.length + array2.length];
+		final char[] joinedArray = new char[array1.length + array2.length];
 		System.arraycopy(array1, 0, joinedArray, 0, array1.length);
 		System.arraycopy(array2, 0, joinedArray, array1.length, array2.length);
 		return joinedArray;
@@ -893,14 +877,14 @@ public class ArrayUtils {
 	 * @return The new double[] array.
 	 * @since 2.1
 	 */
-	public static double[] addAll(double[] array1, double... array2) {
+	public static double[] addAll(final double[] array1, final double... array2) {
 		if (array1 == null) {
 			return clone(array2);
 		}
 		else if (array2 == null) {
 			return clone(array1);
 		}
-		double[] joinedArray = new double[array1.length + array2.length];
+		final double[] joinedArray = new double[array1.length + array2.length];
 		System.arraycopy(array1, 0, joinedArray, 0, array1.length);
 		System.arraycopy(array2, 0, joinedArray, array1.length, array2.length);
 		return joinedArray;
@@ -923,14 +907,14 @@ public class ArrayUtils {
 	 * @return The new float[] array.
 	 * @since 2.1
 	 */
-	public static float[] addAll(float[] array1, float... array2) {
+	public static float[] addAll(final float[] array1, final float... array2) {
 		if (array1 == null) {
 			return clone(array2);
 		}
 		else if (array2 == null) {
 			return clone(array1);
 		}
-		float[] joinedArray = new float[array1.length + array2.length];
+		final float[] joinedArray = new float[array1.length + array2.length];
 		System.arraycopy(array1, 0, joinedArray, 0, array1.length);
 		System.arraycopy(array2, 0, joinedArray, array1.length, array2.length);
 		return joinedArray;
@@ -953,14 +937,14 @@ public class ArrayUtils {
 	 * @return The new int[] array.
 	 * @since 2.1
 	 */
-	public static int[] addAll(int[] array1, int... array2) {
+	public static int[] addAll(final int[] array1, final int... array2) {
 		if (array1 == null) {
 			return clone(array2);
 		}
 		else if (array2 == null) {
 			return clone(array1);
 		}
-		int[] joinedArray = new int[array1.length + array2.length];
+		final int[] joinedArray = new int[array1.length + array2.length];
 		System.arraycopy(array1, 0, joinedArray, 0, array1.length);
 		System.arraycopy(array2, 0, joinedArray, array1.length, array2.length);
 		return joinedArray;
@@ -983,14 +967,14 @@ public class ArrayUtils {
 	 * @return The new long[] array.
 	 * @since 2.1
 	 */
-	public static long[] addAll(long[] array1, long... array2) {
+	public static long[] addAll(final long[] array1, final long... array2) {
 		if (array1 == null) {
 			return clone(array2);
 		}
 		else if (array2 == null) {
 			return clone(array1);
 		}
-		long[] joinedArray = new long[array1.length + array2.length];
+		final long[] joinedArray = new long[array1.length + array2.length];
 		System.arraycopy(array1, 0, joinedArray, 0, array1.length);
 		System.arraycopy(array2, 0, joinedArray, array1.length, array2.length);
 		return joinedArray;
@@ -1013,14 +997,14 @@ public class ArrayUtils {
 	 * @return The new short[] array.
 	 * @since 2.1
 	 */
-	public static short[] addAll(short[] array1, short... array2) {
+	public static short[] addAll(final short[] array1, final short... array2) {
 		if (array1 == null) {
 			return clone(array2);
 		}
 		else if (array2 == null) {
 			return clone(array1);
 		}
-		short[] joinedArray = new short[array1.length + array2.length];
+		final short[] joinedArray = new short[array1.length + array2.length];
 		System.arraycopy(array1, 0, joinedArray, 0, array1.length);
 		System.arraycopy(array2, 0, joinedArray, array1.length, array2.length);
 		return joinedArray;
@@ -1049,31 +1033,31 @@ public class ArrayUtils {
 	 * @return The new array, {@code null} if both arrays are {@code null}. The type of
 	 * the new array is the type of the first array, unless the first array is null, in
 	 * which case the type is the same as the second array.
-	 * @since 2.1
 	 * @throws IllegalArgumentException if the array types are incompatible
+	 * @since 2.1
 	 */
-	public static <T> T[] addAll(T[] array1, T... array2) {
+	public static <T> T[] addAll(final T[] array1, @SuppressWarnings("unchecked") final T... array2) {
 		if (array1 == null) {
 			return clone(array2);
 		}
 		else if (array2 == null) {
 			return clone(array1);
 		}
-		Class<?> type1 = array1.getClass().getComponentType();
-		// OK, because array is of type T
-		T[] joinedArray = (T[]) Array.newInstance(type1, array1.length + array2.length);
+		final Class<?> type1 = array1.getClass().getComponentType();
+		@SuppressWarnings("unchecked") // OK, because array is of type T
+		final T[] joinedArray = (T[]) Array.newInstance(type1, array1.length + array2.length);
 		System.arraycopy(array1, 0, joinedArray, 0, array1.length);
 		try {
 			System.arraycopy(array2, 0, joinedArray, array1.length, array2.length);
 		}
-		catch (ArrayStoreException ase) {
+		catch (final ArrayStoreException ase) {
 			// Check if problem was due to incompatible types
 			/*
 			 * We do this here, rather than before the copy because: - it would be a
 			 * wasted check most of the time - safer, in case check turns out to be too
 			 * strict
 			 */
-			Class<?> type2 = array2.getClass().getComponentType();
+			final Class<?> type2 = array2.getClass().getComponentType();
 			if (!type1.isAssignableFrom(type2)) {
 				throw new IllegalArgumentException(
 						"Cannot store " + type2.getName() + " in an array of " + type1.getName(), ase);
@@ -1108,7 +1092,7 @@ public class ArrayUtils {
 	 * will have the same type as the element.
 	 * @since 3.10
 	 */
-	public static boolean[] addFirst(boolean[] array, boolean element) {
+	public static boolean[] addFirst(final boolean[] array, final boolean element) {
 		return array == null ? add(array, element) : insert(0, array, element);
 	}
 
@@ -1137,7 +1121,7 @@ public class ArrayUtils {
 	 * will have the same type as the element.
 	 * @since 3.10
 	 */
-	public static byte[] addFirst(byte[] array, byte element) {
+	public static byte[] addFirst(final byte[] array, final byte element) {
 		return array == null ? add(array, element) : insert(0, array, element);
 	}
 
@@ -1166,7 +1150,7 @@ public class ArrayUtils {
 	 * will have the same type as the element.
 	 * @since 3.10
 	 */
-	public static char[] addFirst(char[] array, char element) {
+	public static char[] addFirst(final char[] array, final char element) {
 		return array == null ? add(array, element) : insert(0, array, element);
 	}
 
@@ -1195,7 +1179,7 @@ public class ArrayUtils {
 	 * will have the same type as the element.
 	 * @since 3.10
 	 */
-	public static double[] addFirst(double[] array, double element) {
+	public static double[] addFirst(final double[] array, final double element) {
 		return array == null ? add(array, element) : insert(0, array, element);
 	}
 
@@ -1224,7 +1208,7 @@ public class ArrayUtils {
 	 * will have the same type as the element.
 	 * @since 3.10
 	 */
-	public static float[] addFirst(float[] array, float element) {
+	public static float[] addFirst(final float[] array, final float element) {
 		return array == null ? add(array, element) : insert(0, array, element);
 	}
 
@@ -1253,7 +1237,7 @@ public class ArrayUtils {
 	 * will have the same type as the element.
 	 * @since 3.10
 	 */
-	public static int[] addFirst(int[] array, int element) {
+	public static int[] addFirst(final int[] array, final int element) {
 		return array == null ? add(array, element) : insert(0, array, element);
 	}
 
@@ -1282,7 +1266,7 @@ public class ArrayUtils {
 	 * will have the same type as the element.
 	 * @since 3.10
 	 */
-	public static long[] addFirst(long[] array, long element) {
+	public static long[] addFirst(final long[] array, final long element) {
 		return array == null ? add(array, element) : insert(0, array, element);
 	}
 
@@ -1311,7 +1295,7 @@ public class ArrayUtils {
 	 * will have the same type as the element.
 	 * @since 3.10
 	 */
-	public static short[] addFirst(short[] array, short element) {
+	public static short[] addFirst(final short[] array, final short element) {
 		return array == null ? add(array, element) : insert(0, array, element);
 	}
 
@@ -1343,10 +1327,10 @@ public class ArrayUtils {
 	 * returned array type will be that of the input array (unless null), in which case it
 	 * will have the same type as the element. If both are null, an
 	 * IllegalArgumentException is thrown
-	 * @since 3.10
 	 * @throws IllegalArgumentException if both arguments are null
+	 * @since 3.10
 	 */
-	public static <T> T[] addFirst(T[] array, T element) {
+	public static <T> T[] addFirst(final T[] array, final T element) {
 		return array == null ? add(array, element) : insert(0, array, element);
 	}
 
@@ -1358,7 +1342,7 @@ public class ArrayUtils {
 	 * @param array the array to clone, may be {@code null}
 	 * @return the cloned array, {@code null} if {@code null} input
 	 */
-	public static boolean[] clone(boolean[] array) {
+	public static boolean[] clone(final boolean[] array) {
 		if (array == null) {
 			return null;
 		}
@@ -1373,7 +1357,7 @@ public class ArrayUtils {
 	 * @param array the array to clone, may be {@code null}
 	 * @return the cloned array, {@code null} if {@code null} input
 	 */
-	public static byte[] clone(byte[] array) {
+	public static byte[] clone(final byte[] array) {
 		if (array == null) {
 			return null;
 		}
@@ -1388,7 +1372,7 @@ public class ArrayUtils {
 	 * @param array the array to clone, may be {@code null}
 	 * @return the cloned array, {@code null} if {@code null} input
 	 */
-	public static char[] clone(char[] array) {
+	public static char[] clone(final char[] array) {
 		if (array == null) {
 			return null;
 		}
@@ -1403,7 +1387,7 @@ public class ArrayUtils {
 	 * @param array the array to clone, may be {@code null}
 	 * @return the cloned array, {@code null} if {@code null} input
 	 */
-	public static double[] clone(double[] array) {
+	public static double[] clone(final double[] array) {
 		if (array == null) {
 			return null;
 		}
@@ -1418,7 +1402,7 @@ public class ArrayUtils {
 	 * @param array the array to clone, may be {@code null}
 	 * @return the cloned array, {@code null} if {@code null} input
 	 */
-	public static float[] clone(float[] array) {
+	public static float[] clone(final float[] array) {
 		if (array == null) {
 			return null;
 		}
@@ -1433,7 +1417,7 @@ public class ArrayUtils {
 	 * @param array the array to clone, may be {@code null}
 	 * @return the cloned array, {@code null} if {@code null} input
 	 */
-	public static int[] clone(int[] array) {
+	public static int[] clone(final int[] array) {
 		if (array == null) {
 			return null;
 		}
@@ -1448,7 +1432,7 @@ public class ArrayUtils {
 	 * @param array the array to clone, may be {@code null}
 	 * @return the cloned array, {@code null} if {@code null} input
 	 */
-	public static long[] clone(long[] array) {
+	public static long[] clone(final long[] array) {
 		if (array == null) {
 			return null;
 		}
@@ -1463,7 +1447,7 @@ public class ArrayUtils {
 	 * @param array the array to clone, may be {@code null}
 	 * @return the cloned array, {@code null} if {@code null} input
 	 */
-	public static short[] clone(short[] array) {
+	public static short[] clone(final short[] array) {
 		if (array == null) {
 			return null;
 		}
@@ -1485,7 +1469,7 @@ public class ArrayUtils {
 	 * @param array the array to shallow clone, may be {@code null}
 	 * @return the cloned array, {@code null} if {@code null} input
 	 */
-	public static <T> T[] clone(T[] array) {
+	public static <T> T[] clone(final T[] array) {
 		if (array == null) {
 			return null;
 		}
@@ -1501,7 +1485,7 @@ public class ArrayUtils {
 	 * @param valueToFind the value to find
 	 * @return {@code true} if the array contains the object
 	 */
-	public static boolean contains(boolean[] array, boolean valueToFind) {
+	public static boolean contains(final boolean[] array, final boolean valueToFind) {
 		return indexOf(array, valueToFind) != INDEX_NOT_FOUND;
 	}
 
@@ -1514,7 +1498,7 @@ public class ArrayUtils {
 	 * @param valueToFind the value to find
 	 * @return {@code true} if the array contains the object
 	 */
-	public static boolean contains(byte[] array, byte valueToFind) {
+	public static boolean contains(final byte[] array, final byte valueToFind) {
 		return indexOf(array, valueToFind) != INDEX_NOT_FOUND;
 	}
 
@@ -1528,7 +1512,7 @@ public class ArrayUtils {
 	 * @return {@code true} if the array contains the object
 	 * @since 2.1
 	 */
-	public static boolean contains(char[] array, char valueToFind) {
+	public static boolean contains(final char[] array, final char valueToFind) {
 		return indexOf(array, valueToFind) != INDEX_NOT_FOUND;
 	}
 
@@ -1541,7 +1525,7 @@ public class ArrayUtils {
 	 * @param valueToFind the value to find
 	 * @return {@code true} if the array contains the object
 	 */
-	public static boolean contains(double[] array, double valueToFind) {
+	public static boolean contains(final double[] array, final double valueToFind) {
 		return indexOf(array, valueToFind) != INDEX_NOT_FOUND;
 	}
 
@@ -1557,7 +1541,7 @@ public class ArrayUtils {
 	 * @param tolerance the array contains the tolerance of the search
 	 * @return true if value falling within tolerance is in array
 	 */
-	public static boolean contains(double[] array, double valueToFind, double tolerance) {
+	public static boolean contains(final double[] array, final double valueToFind, final double tolerance) {
 		return indexOf(array, valueToFind, 0, tolerance) != INDEX_NOT_FOUND;
 	}
 
@@ -1570,7 +1554,7 @@ public class ArrayUtils {
 	 * @param valueToFind the value to find
 	 * @return {@code true} if the array contains the object
 	 */
-	public static boolean contains(float[] array, float valueToFind) {
+	public static boolean contains(final float[] array, final float valueToFind) {
 		return indexOf(array, valueToFind) != INDEX_NOT_FOUND;
 	}
 
@@ -1583,7 +1567,7 @@ public class ArrayUtils {
 	 * @param valueToFind the value to find
 	 * @return {@code true} if the array contains the object
 	 */
-	public static boolean contains(int[] array, int valueToFind) {
+	public static boolean contains(final int[] array, final int valueToFind) {
 		return indexOf(array, valueToFind) != INDEX_NOT_FOUND;
 	}
 
@@ -1596,7 +1580,7 @@ public class ArrayUtils {
 	 * @param valueToFind the value to find
 	 * @return {@code true} if the array contains the object
 	 */
-	public static boolean contains(long[] array, long valueToFind) {
+	public static boolean contains(final long[] array, final long valueToFind) {
 		return indexOf(array, valueToFind) != INDEX_NOT_FOUND;
 	}
 
@@ -1609,7 +1593,7 @@ public class ArrayUtils {
 	 * @param objectToFind the object to find
 	 * @return {@code true} if the array contains the object
 	 */
-	public static boolean contains(Object[] array, Object objectToFind) {
+	public static boolean contains(final Object[] array, final Object objectToFind) {
 		return indexOf(array, objectToFind) != INDEX_NOT_FOUND;
 	}
 
@@ -1622,7 +1606,7 @@ public class ArrayUtils {
 	 * @param valueToFind the value to find
 	 * @return {@code true} if the array contains the object
 	 */
-	public static boolean contains(short[] array, short valueToFind) {
+	public static boolean contains(final short[] array, final short valueToFind) {
 		return indexOf(array, valueToFind) != INDEX_NOT_FOUND;
 	}
 
@@ -1634,10 +1618,10 @@ public class ArrayUtils {
 	 * array of this type.
 	 * @return A new copy of the array of size 1 greater than the input.
 	 */
-	private static Object copyArrayGrow1(Object array, Class<?> newArrayComponentType) {
+	private static Object copyArrayGrow1(final Object array, final Class<?> newArrayComponentType) {
 		if (array != null) {
-			int arrayLength = Array.getLength(array);
-			Object newArray = Array.newInstance(array.getClass().getComponentType(), arrayLength + 1);
+			final int arrayLength = Array.getLength(array);
+			final Object newArray = Array.newInstance(array.getClass().getComponentType(), arrayLength + 1);
 			System.arraycopy(array, 0, newArray, 0, arrayLength);
 			return newArray;
 		}
@@ -1665,7 +1649,7 @@ public class ArrayUtils {
 	 * @throws IllegalArgumentException if the object argument is not an array.
 	 * @since 2.1
 	 */
-	public static int getLength(Object array) {
+	public static int getLength(final Object array) {
 		if (array == null) {
 			return 0;
 		}
@@ -1683,7 +1667,7 @@ public class ArrayUtils {
 	 * BitSet if not found or {@code null} array input
 	 * @since 3.10
 	 */
-	public static BitSet indexesOf(boolean[] array, boolean valueToFind) {
+	public static BitSet indexesOf(final boolean[] array, final boolean valueToFind) {
 		return indexesOf(array, valueToFind, 0);
 	}
 
@@ -1703,8 +1687,8 @@ public class ArrayUtils {
 	 * if not found or {@code null} array input
 	 * @since 3.10
 	 */
-	public static BitSet indexesOf(boolean[] array, boolean valueToFind, int startIndex) {
-		BitSet bitSet = new BitSet();
+	public static BitSet indexesOf(final boolean[] array, final boolean valueToFind, int startIndex) {
+		final BitSet bitSet = new BitSet();
 
 		if (array == null) {
 			return bitSet;
@@ -1735,7 +1719,7 @@ public class ArrayUtils {
 	 * if not found or {@code null} array input
 	 * @since 3.10
 	 */
-	public static BitSet indexesOf(byte[] array, byte valueToFind) {
+	public static BitSet indexesOf(final byte[] array, final byte valueToFind) {
 		return indexesOf(array, valueToFind, 0);
 	}
 
@@ -1755,8 +1739,8 @@ public class ArrayUtils {
 	 * if not found or {@code null} array input
 	 * @since 3.10
 	 */
-	public static BitSet indexesOf(byte[] array, byte valueToFind, int startIndex) {
-		BitSet bitSet = new BitSet();
+	public static BitSet indexesOf(final byte[] array, final byte valueToFind, int startIndex) {
+		final BitSet bitSet = new BitSet();
 
 		if (array == null) {
 			return bitSet;
@@ -1787,7 +1771,7 @@ public class ArrayUtils {
 	 * if not found or {@code null} array input
 	 * @since 3.10
 	 */
-	public static BitSet indexesOf(char[] array, char valueToFind) {
+	public static BitSet indexesOf(final char[] array, final char valueToFind) {
 		return indexesOf(array, valueToFind, 0);
 	}
 
@@ -1807,8 +1791,8 @@ public class ArrayUtils {
 	 * if not found or {@code null} array input
 	 * @since 3.10
 	 */
-	public static BitSet indexesOf(char[] array, char valueToFind, int startIndex) {
-		BitSet bitSet = new BitSet();
+	public static BitSet indexesOf(final char[] array, final char valueToFind, int startIndex) {
+		final BitSet bitSet = new BitSet();
 
 		if (array == null) {
 			return bitSet;
@@ -1839,7 +1823,7 @@ public class ArrayUtils {
 	 * if not found or {@code null} array input
 	 * @since 3.10
 	 */
-	public static BitSet indexesOf(double[] array, double valueToFind) {
+	public static BitSet indexesOf(final double[] array, final double valueToFind) {
 		return indexesOf(array, valueToFind, 0);
 	}
 
@@ -1860,7 +1844,7 @@ public class ArrayUtils {
 	 * if not found or {@code null} array input
 	 * @since 3.10
 	 */
-	public static BitSet indexesOf(double[] array, double valueToFind, double tolerance) {
+	public static BitSet indexesOf(final double[] array, final double valueToFind, final double tolerance) {
 		return indexesOf(array, valueToFind, 0, tolerance);
 	}
 
@@ -1880,8 +1864,8 @@ public class ArrayUtils {
 	 * not found or {@code null} array input
 	 * @since 3.10
 	 */
-	public static BitSet indexesOf(double[] array, double valueToFind, int startIndex) {
-		BitSet bitSet = new BitSet();
+	public static BitSet indexesOf(final double[] array, final double valueToFind, int startIndex) {
+		final BitSet bitSet = new BitSet();
 
 		if (array == null) {
 			return bitSet;
@@ -1923,8 +1907,9 @@ public class ArrayUtils {
 	 * not found or {@code null} array input
 	 * @since 3.10
 	 */
-	public static BitSet indexesOf(double[] array, double valueToFind, int startIndex, double tolerance) {
-		BitSet bitSet = new BitSet();
+	public static BitSet indexesOf(final double[] array, final double valueToFind, int startIndex,
+			final double tolerance) {
+		final BitSet bitSet = new BitSet();
 
 		if (array == null) {
 			return bitSet;
@@ -1955,7 +1940,7 @@ public class ArrayUtils {
 	 * if not found or {@code null} array input
 	 * @since 3.10
 	 */
-	public static BitSet indexesOf(float[] array, float valueToFind) {
+	public static BitSet indexesOf(final float[] array, final float valueToFind) {
 		return indexesOf(array, valueToFind, 0);
 	}
 
@@ -1975,8 +1960,8 @@ public class ArrayUtils {
 	 * if not found or {@code null} array input
 	 * @since 3.10
 	 */
-	public static BitSet indexesOf(float[] array, float valueToFind, int startIndex) {
-		BitSet bitSet = new BitSet();
+	public static BitSet indexesOf(final float[] array, final float valueToFind, int startIndex) {
+		final BitSet bitSet = new BitSet();
 
 		if (array == null) {
 			return bitSet;
@@ -2007,7 +1992,7 @@ public class ArrayUtils {
 	 * if not found or {@code null} array input
 	 * @since 3.10
 	 */
-	public static BitSet indexesOf(int[] array, int valueToFind) {
+	public static BitSet indexesOf(final int[] array, final int valueToFind) {
 		return indexesOf(array, valueToFind, 0);
 	}
 
@@ -2027,8 +2012,8 @@ public class ArrayUtils {
 	 * if not found or {@code null} array input
 	 * @since 3.10
 	 */
-	public static BitSet indexesOf(int[] array, int valueToFind, int startIndex) {
-		BitSet bitSet = new BitSet();
+	public static BitSet indexesOf(final int[] array, final int valueToFind, int startIndex) {
+		final BitSet bitSet = new BitSet();
 
 		if (array == null) {
 			return bitSet;
@@ -2059,7 +2044,7 @@ public class ArrayUtils {
 	 * if not found or {@code null} array input
 	 * @since 3.10
 	 */
-	public static BitSet indexesOf(long[] array, long valueToFind) {
+	public static BitSet indexesOf(final long[] array, final long valueToFind) {
 		return indexesOf(array, valueToFind, 0);
 	}
 
@@ -2079,8 +2064,8 @@ public class ArrayUtils {
 	 * if not found or {@code null} array input
 	 * @since 3.10
 	 */
-	public static BitSet indexesOf(long[] array, long valueToFind, int startIndex) {
-		BitSet bitSet = new BitSet();
+	public static BitSet indexesOf(final long[] array, final long valueToFind, int startIndex) {
+		final BitSet bitSet = new BitSet();
 
 		if (array == null) {
 			return bitSet;
@@ -2111,7 +2096,7 @@ public class ArrayUtils {
 	 * if not found or {@code null} array input
 	 * @since 3.10
 	 */
-	public static BitSet indexesOf(Object[] array, Object objectToFind) {
+	public static BitSet indexesOf(final Object[] array, final Object objectToFind) {
 		return indexesOf(array, objectToFind, 0);
 	}
 
@@ -2131,8 +2116,8 @@ public class ArrayUtils {
 	 * index, an empty BitSet if not found or {@code null} array input
 	 * @since 3.10
 	 */
-	public static BitSet indexesOf(Object[] array, Object objectToFind, int startIndex) {
-		BitSet bitSet = new BitSet();
+	public static BitSet indexesOf(final Object[] array, final Object objectToFind, int startIndex) {
+		final BitSet bitSet = new BitSet();
 
 		if (array == null) {
 			return bitSet;
@@ -2163,7 +2148,7 @@ public class ArrayUtils {
 	 * if not found or {@code null} array input
 	 * @since 3.10
 	 */
-	public static BitSet indexesOf(short[] array, short valueToFind) {
+	public static BitSet indexesOf(final short[] array, final short valueToFind) {
 		return indexesOf(array, valueToFind, 0);
 	}
 
@@ -2183,8 +2168,8 @@ public class ArrayUtils {
 	 * if not found or {@code null} array input
 	 * @since 3.10
 	 */
-	public static BitSet indexesOf(short[] array, short valueToFind, int startIndex) {
-		BitSet bitSet = new BitSet();
+	public static BitSet indexesOf(final short[] array, final short valueToFind, int startIndex) {
+		final BitSet bitSet = new BitSet();
 
 		if (array == null) {
 			return bitSet;
@@ -2217,7 +2202,7 @@ public class ArrayUtils {
 	 * @return the index of the value within the array, {@link #INDEX_NOT_FOUND}
 	 * ({@code -1}) if not found or {@code null} array input
 	 */
-	public static int indexOf(boolean[] array, boolean valueToFind) {
+	public static int indexOf(final boolean[] array, final boolean valueToFind) {
 		return indexOf(array, valueToFind, 0);
 	}
 
@@ -2237,7 +2222,7 @@ public class ArrayUtils {
 	 * @return the index of the value within the array, {@link #INDEX_NOT_FOUND}
 	 * ({@code -1}) if not found or {@code null} array input
 	 */
-	public static int indexOf(boolean[] array, boolean valueToFind, int startIndex) {
+	public static int indexOf(final boolean[] array, final boolean valueToFind, int startIndex) {
 		if (isEmpty(array)) {
 			return INDEX_NOT_FOUND;
 		}
@@ -2265,7 +2250,7 @@ public class ArrayUtils {
 	 * @return the index of the value within the array, {@link #INDEX_NOT_FOUND}
 	 * ({@code -1}) if not found or {@code null} array input
 	 */
-	public static int indexOf(byte[] array, byte valueToFind) {
+	public static int indexOf(final byte[] array, final byte valueToFind) {
 		return indexOf(array, valueToFind, 0);
 	}
 
@@ -2285,7 +2270,7 @@ public class ArrayUtils {
 	 * @return the index of the value within the array, {@link #INDEX_NOT_FOUND}
 	 * ({@code -1}) if not found or {@code null} array input
 	 */
-	public static int indexOf(byte[] array, byte valueToFind, int startIndex) {
+	public static int indexOf(final byte[] array, final byte valueToFind, int startIndex) {
 		if (array == null) {
 			return INDEX_NOT_FOUND;
 		}
@@ -2314,7 +2299,7 @@ public class ArrayUtils {
 	 * ({@code -1}) if not found or {@code null} array input
 	 * @since 2.1
 	 */
-	public static int indexOf(char[] array, char valueToFind) {
+	public static int indexOf(final char[] array, final char valueToFind) {
 		return indexOf(array, valueToFind, 0);
 	}
 
@@ -2335,7 +2320,7 @@ public class ArrayUtils {
 	 * ({@code -1}) if not found or {@code null} array input
 	 * @since 2.1
 	 */
-	public static int indexOf(char[] array, char valueToFind, int startIndex) {
+	public static int indexOf(final char[] array, final char valueToFind, int startIndex) {
 		if (array == null) {
 			return INDEX_NOT_FOUND;
 		}
@@ -2363,7 +2348,7 @@ public class ArrayUtils {
 	 * @return the index of the value within the array, {@link #INDEX_NOT_FOUND}
 	 * ({@code -1}) if not found or {@code null} array input
 	 */
-	public static int indexOf(double[] array, double valueToFind) {
+	public static int indexOf(final double[] array, final double valueToFind) {
 		return indexOf(array, valueToFind, 0);
 	}
 
@@ -2381,7 +2366,7 @@ public class ArrayUtils {
 	 * @return the index of the value within the array, {@link #INDEX_NOT_FOUND}
 	 * ({@code -1}) if not found or {@code null} array input
 	 */
-	public static int indexOf(double[] array, double valueToFind, double tolerance) {
+	public static int indexOf(final double[] array, final double valueToFind, final double tolerance) {
 		return indexOf(array, valueToFind, 0, tolerance);
 	}
 
@@ -2401,7 +2386,7 @@ public class ArrayUtils {
 	 * @return the index of the value within the array, {@link #INDEX_NOT_FOUND}
 	 * ({@code -1}) if not found or {@code null} array input
 	 */
-	public static int indexOf(double[] array, double valueToFind, int startIndex) {
+	public static int indexOf(final double[] array, final double valueToFind, int startIndex) {
 		if (isEmpty(array)) {
 			return INDEX_NOT_FOUND;
 		}
@@ -2435,15 +2420,15 @@ public class ArrayUtils {
 	 * @return the index of the value within the array, {@link #INDEX_NOT_FOUND}
 	 * ({@code -1}) if not found or {@code null} array input
 	 */
-	public static int indexOf(double[] array, double valueToFind, int startIndex, double tolerance) {
+	public static int indexOf(final double[] array, final double valueToFind, int startIndex, final double tolerance) {
 		if (isEmpty(array)) {
 			return INDEX_NOT_FOUND;
 		}
 		if (startIndex < 0) {
 			startIndex = 0;
 		}
-		double min = valueToFind - tolerance;
-		double max = valueToFind + tolerance;
+		final double min = valueToFind - tolerance;
+		final double max = valueToFind + tolerance;
 		for (int i = startIndex; i < array.length; i++) {
 			if (array[i] >= min && array[i] <= max) {
 				return i;
@@ -2465,7 +2450,7 @@ public class ArrayUtils {
 	 * @return the index of the value within the array, {@link #INDEX_NOT_FOUND}
 	 * ({@code -1}) if not found or {@code null} array input
 	 */
-	public static int indexOf(float[] array, float valueToFind) {
+	public static int indexOf(final float[] array, final float valueToFind) {
 		return indexOf(array, valueToFind, 0);
 	}
 
@@ -2485,7 +2470,7 @@ public class ArrayUtils {
 	 * @return the index of the value within the array, {@link #INDEX_NOT_FOUND}
 	 * ({@code -1}) if not found or {@code null} array input
 	 */
-	public static int indexOf(float[] array, float valueToFind, int startIndex) {
+	public static int indexOf(final float[] array, final float valueToFind, int startIndex) {
 		if (isEmpty(array)) {
 			return INDEX_NOT_FOUND;
 		}
@@ -2513,7 +2498,7 @@ public class ArrayUtils {
 	 * @return the index of the value within the array, {@link #INDEX_NOT_FOUND}
 	 * ({@code -1}) if not found or {@code null} array input
 	 */
-	public static int indexOf(int[] array, int valueToFind) {
+	public static int indexOf(final int[] array, final int valueToFind) {
 		return indexOf(array, valueToFind, 0);
 	}
 
@@ -2533,7 +2518,7 @@ public class ArrayUtils {
 	 * @return the index of the value within the array, {@link #INDEX_NOT_FOUND}
 	 * ({@code -1}) if not found or {@code null} array input
 	 */
-	public static int indexOf(int[] array, int valueToFind, int startIndex) {
+	public static int indexOf(final int[] array, final int valueToFind, int startIndex) {
 		if (array == null) {
 			return INDEX_NOT_FOUND;
 		}
@@ -2561,7 +2546,7 @@ public class ArrayUtils {
 	 * @return the index of the value within the array, {@link #INDEX_NOT_FOUND}
 	 * ({@code -1}) if not found or {@code null} array input
 	 */
-	public static int indexOf(long[] array, long valueToFind) {
+	public static int indexOf(final long[] array, final long valueToFind) {
 		return indexOf(array, valueToFind, 0);
 	}
 
@@ -2581,7 +2566,7 @@ public class ArrayUtils {
 	 * @return the index of the value within the array, {@link #INDEX_NOT_FOUND}
 	 * ({@code -1}) if not found or {@code null} array input
 	 */
-	public static int indexOf(long[] array, long valueToFind, int startIndex) {
+	public static int indexOf(final long[] array, final long valueToFind, int startIndex) {
 		if (array == null) {
 			return INDEX_NOT_FOUND;
 		}
@@ -2609,7 +2594,7 @@ public class ArrayUtils {
 	 * @return the index of the object within the array, {@link #INDEX_NOT_FOUND}
 	 * ({@code -1}) if not found or {@code null} array input
 	 */
-	public static int indexOf(Object[] array, Object objectToFind) {
+	public static int indexOf(final Object[] array, final Object objectToFind) {
 		return indexOf(array, objectToFind, 0);
 	}
 
@@ -2629,7 +2614,7 @@ public class ArrayUtils {
 	 * @return the index of the object within the array starting at the index,
 	 * {@link #INDEX_NOT_FOUND} ({@code -1}) if not found or {@code null} array input
 	 */
-	public static int indexOf(Object[] array, Object objectToFind, int startIndex) {
+	public static int indexOf(final Object[] array, final Object objectToFind, int startIndex) {
 		if (array == null) {
 			return INDEX_NOT_FOUND;
 		}
@@ -2666,7 +2651,7 @@ public class ArrayUtils {
 	 * @return the index of the value within the array, {@link #INDEX_NOT_FOUND}
 	 * ({@code -1}) if not found or {@code null} array input
 	 */
-	public static int indexOf(short[] array, short valueToFind) {
+	public static int indexOf(final short[] array, final short valueToFind) {
 		return indexOf(array, valueToFind, 0);
 	}
 
@@ -2686,7 +2671,7 @@ public class ArrayUtils {
 	 * @return the index of the value within the array, {@link #INDEX_NOT_FOUND}
 	 * ({@code -1}) if not found or {@code null} array input
 	 */
-	public static int indexOf(short[] array, short valueToFind, int startIndex) {
+	public static int indexOf(final short[] array, final short valueToFind, int startIndex) {
 		if (array == null) {
 			return INDEX_NOT_FOUND;
 		}
@@ -2720,7 +2705,7 @@ public class ArrayUtils {
 	 * {@code index < 0} or {@code index > array.length}
 	 * @since 3.6
 	 */
-	public static boolean[] insert(int index, boolean[] array, boolean... values) {
+	public static boolean[] insert(final int index, final boolean[] array, final boolean... values) {
 		if (array == null) {
 			return null;
 		}
@@ -2731,7 +2716,7 @@ public class ArrayUtils {
 			throw new IndexOutOfBoundsException("Index: " + index + ", Length: " + array.length);
 		}
 
-		boolean[] result = new boolean[array.length + values.length];
+		final boolean[] result = new boolean[array.length + values.length];
 
 		System.arraycopy(values, 0, result, index, values.length);
 		if (index > 0) {
@@ -2762,7 +2747,7 @@ public class ArrayUtils {
 	 * {@code index < 0} or {@code index > array.length}
 	 * @since 3.6
 	 */
-	public static byte[] insert(int index, byte[] array, byte... values) {
+	public static byte[] insert(final int index, final byte[] array, final byte... values) {
 		if (array == null) {
 			return null;
 		}
@@ -2773,7 +2758,7 @@ public class ArrayUtils {
 			throw new IndexOutOfBoundsException("Index: " + index + ", Length: " + array.length);
 		}
 
-		byte[] result = new byte[array.length + values.length];
+		final byte[] result = new byte[array.length + values.length];
 
 		System.arraycopy(values, 0, result, index, values.length);
 		if (index > 0) {
@@ -2804,7 +2789,7 @@ public class ArrayUtils {
 	 * {@code index < 0} or {@code index > array.length}
 	 * @since 3.6
 	 */
-	public static char[] insert(int index, char[] array, char... values) {
+	public static char[] insert(final int index, final char[] array, final char... values) {
 		if (array == null) {
 			return null;
 		}
@@ -2815,7 +2800,7 @@ public class ArrayUtils {
 			throw new IndexOutOfBoundsException("Index: " + index + ", Length: " + array.length);
 		}
 
-		char[] result = new char[array.length + values.length];
+		final char[] result = new char[array.length + values.length];
 
 		System.arraycopy(values, 0, result, index, values.length);
 		if (index > 0) {
@@ -2846,7 +2831,7 @@ public class ArrayUtils {
 	 * {@code index < 0} or {@code index > array.length}
 	 * @since 3.6
 	 */
-	public static double[] insert(int index, double[] array, double... values) {
+	public static double[] insert(final int index, final double[] array, final double... values) {
 		if (array == null) {
 			return null;
 		}
@@ -2857,7 +2842,7 @@ public class ArrayUtils {
 			throw new IndexOutOfBoundsException("Index: " + index + ", Length: " + array.length);
 		}
 
-		double[] result = new double[array.length + values.length];
+		final double[] result = new double[array.length + values.length];
 
 		System.arraycopy(values, 0, result, index, values.length);
 		if (index > 0) {
@@ -2888,7 +2873,7 @@ public class ArrayUtils {
 	 * {@code index < 0} or {@code index > array.length}
 	 * @since 3.6
 	 */
-	public static float[] insert(int index, float[] array, float... values) {
+	public static float[] insert(final int index, final float[] array, final float... values) {
 		if (array == null) {
 			return null;
 		}
@@ -2899,7 +2884,7 @@ public class ArrayUtils {
 			throw new IndexOutOfBoundsException("Index: " + index + ", Length: " + array.length);
 		}
 
-		float[] result = new float[array.length + values.length];
+		final float[] result = new float[array.length + values.length];
 
 		System.arraycopy(values, 0, result, index, values.length);
 		if (index > 0) {
@@ -2930,7 +2915,7 @@ public class ArrayUtils {
 	 * {@code index < 0} or {@code index > array.length}
 	 * @since 3.6
 	 */
-	public static int[] insert(int index, int[] array, int... values) {
+	public static int[] insert(final int index, final int[] array, final int... values) {
 		if (array == null) {
 			return null;
 		}
@@ -2941,7 +2926,7 @@ public class ArrayUtils {
 			throw new IndexOutOfBoundsException("Index: " + index + ", Length: " + array.length);
 		}
 
-		int[] result = new int[array.length + values.length];
+		final int[] result = new int[array.length + values.length];
 
 		System.arraycopy(values, 0, result, index, values.length);
 		if (index > 0) {
@@ -2972,7 +2957,7 @@ public class ArrayUtils {
 	 * {@code index < 0} or {@code index > array.length}
 	 * @since 3.6
 	 */
-	public static long[] insert(int index, long[] array, long... values) {
+	public static long[] insert(final int index, final long[] array, final long... values) {
 		if (array == null) {
 			return null;
 		}
@@ -2983,7 +2968,7 @@ public class ArrayUtils {
 			throw new IndexOutOfBoundsException("Index: " + index + ", Length: " + array.length);
 		}
 
-		long[] result = new long[array.length + values.length];
+		final long[] result = new long[array.length + values.length];
 
 		System.arraycopy(values, 0, result, index, values.length);
 		if (index > 0) {
@@ -3014,7 +2999,7 @@ public class ArrayUtils {
 	 * {@code index < 0} or {@code index > array.length}
 	 * @since 3.6
 	 */
-	public static short[] insert(int index, short[] array, short... values) {
+	public static short[] insert(final int index, final short[] array, final short... values) {
 		if (array == null) {
 			return null;
 		}
@@ -3025,7 +3010,7 @@ public class ArrayUtils {
 			throw new IndexOutOfBoundsException("Index: " + index + ", Length: " + array.length);
 		}
 
-		short[] result = new short[array.length + values.length];
+		final short[] result = new short[array.length + values.length];
 
 		System.arraycopy(values, 0, result, index, values.length);
 		if (index > 0) {
@@ -3058,7 +3043,7 @@ public class ArrayUtils {
 	 * @since 3.6
 	 */
 	@SafeVarargs
-	public static <T> T[] insert(int index, T[] array, T... values) {
+	public static <T> T[] insert(final int index, final T[] array, final T... values) {
 		/*
 		 * Note on use of @SafeVarargs:
 		 *
@@ -3077,9 +3062,9 @@ public class ArrayUtils {
 			throw new IndexOutOfBoundsException("Index: " + index + ", Length: " + array.length);
 		}
 
-		Class<?> type = array.getClass().getComponentType();
-		// OK, because array and values are of type T
-		T[] result = (T[]) Array.newInstance(type, array.length + values.length);
+		final Class<?> type = array.getClass().getComponentType();
+		@SuppressWarnings("unchecked") // OK, because array and values are of type T
+		final T[] result = (T[]) Array.newInstance(type, array.length + values.length);
 
 		System.arraycopy(values, 0, result, index, values.length);
 		if (index > 0) {
@@ -3099,7 +3084,7 @@ public class ArrayUtils {
 	 * @return Whether the given index is safely-accessible in the given array
 	 * @since 3.8
 	 */
-	public static <T> boolean isArrayIndexValid(T[] array, int index) {
+	public static <T> boolean isArrayIndexValid(final T[] array, final int index) {
 		if (getLength(array) == 0 || array.length <= index) {
 			return false;
 		}
@@ -3113,7 +3098,7 @@ public class ArrayUtils {
 	 * @return {@code true} if the array is empty or {@code null}
 	 * @since 2.1
 	 */
-	public static boolean isEmpty(boolean[] array) {
+	public static boolean isEmpty(final boolean[] array) {
 		return getLength(array) == 0;
 	}
 
@@ -3126,7 +3111,7 @@ public class ArrayUtils {
 	 * @return {@code true} if the array is empty or {@code null}
 	 * @since 2.1
 	 */
-	public static boolean isEmpty(byte[] array) {
+	public static boolean isEmpty(final byte[] array) {
 		return getLength(array) == 0;
 	}
 
@@ -3136,7 +3121,7 @@ public class ArrayUtils {
 	 * @return {@code true} if the array is empty or {@code null}
 	 * @since 2.1
 	 */
-	public static boolean isEmpty(char[] array) {
+	public static boolean isEmpty(final char[] array) {
 		return getLength(array) == 0;
 	}
 
@@ -3146,7 +3131,7 @@ public class ArrayUtils {
 	 * @return {@code true} if the array is empty or {@code null}
 	 * @since 2.1
 	 */
-	public static boolean isEmpty(double[] array) {
+	public static boolean isEmpty(final double[] array) {
 		return getLength(array) == 0;
 	}
 
@@ -3156,7 +3141,7 @@ public class ArrayUtils {
 	 * @return {@code true} if the array is empty or {@code null}
 	 * @since 2.1
 	 */
-	public static boolean isEmpty(float[] array) {
+	public static boolean isEmpty(final float[] array) {
 		return getLength(array) == 0;
 	}
 
@@ -3166,7 +3151,7 @@ public class ArrayUtils {
 	 * @return {@code true} if the array is empty or {@code null}
 	 * @since 2.1
 	 */
-	public static boolean isEmpty(int[] array) {
+	public static boolean isEmpty(final int[] array) {
 		return getLength(array) == 0;
 	}
 
@@ -3176,7 +3161,7 @@ public class ArrayUtils {
 	 * @return {@code true} if the array is empty or {@code null}
 	 * @since 2.1
 	 */
-	public static boolean isEmpty(long[] array) {
+	public static boolean isEmpty(final long[] array) {
 		return getLength(array) == 0;
 	}
 
@@ -3187,7 +3172,7 @@ public class ArrayUtils {
 	 * @return {@code true} if the array is empty or {@code null}
 	 * @since 2.1
 	 */
-	public static boolean isEmpty(Object[] array) {
+	public static boolean isEmpty(final Object[] array) {
 		return getLength(array) == 0;
 	}
 
@@ -3197,7 +3182,7 @@ public class ArrayUtils {
 	 * @return {@code true} if the array is empty or {@code null}
 	 * @since 2.1
 	 */
-	public static boolean isEmpty(short[] array) {
+	public static boolean isEmpty(final short[] array) {
 		return getLength(array) == 0;
 	}
 
@@ -3207,7 +3192,7 @@ public class ArrayUtils {
 	 * @return {@code true} if the array is not empty and not {@code null}
 	 * @since 2.5
 	 */
-	public static boolean isNotEmpty(boolean[] array) {
+	public static boolean isNotEmpty(final boolean[] array) {
 		return !isEmpty(array);
 	}
 
@@ -3217,7 +3202,7 @@ public class ArrayUtils {
 	 * @return {@code true} if the array is not empty and not {@code null}
 	 * @since 2.5
 	 */
-	public static boolean isNotEmpty(byte[] array) {
+	public static boolean isNotEmpty(final byte[] array) {
 		return !isEmpty(array);
 	}
 
@@ -3227,7 +3212,7 @@ public class ArrayUtils {
 	 * @return {@code true} if the array is not empty and not {@code null}
 	 * @since 2.5
 	 */
-	public static boolean isNotEmpty(char[] array) {
+	public static boolean isNotEmpty(final char[] array) {
 		return !isEmpty(array);
 	}
 
@@ -3237,7 +3222,7 @@ public class ArrayUtils {
 	 * @return {@code true} if the array is not empty and not {@code null}
 	 * @since 2.5
 	 */
-	public static boolean isNotEmpty(double[] array) {
+	public static boolean isNotEmpty(final double[] array) {
 		return !isEmpty(array);
 	}
 
@@ -3247,7 +3232,7 @@ public class ArrayUtils {
 	 * @return {@code true} if the array is not empty and not {@code null}
 	 * @since 2.5
 	 */
-	public static boolean isNotEmpty(float[] array) {
+	public static boolean isNotEmpty(final float[] array) {
 		return !isEmpty(array);
 	}
 
@@ -3257,7 +3242,7 @@ public class ArrayUtils {
 	 * @return {@code true} if the array is not empty and not {@code null}
 	 * @since 2.5
 	 */
-	public static boolean isNotEmpty(int[] array) {
+	public static boolean isNotEmpty(final int[] array) {
 		return !isEmpty(array);
 	}
 
@@ -3267,7 +3252,7 @@ public class ArrayUtils {
 	 * @return {@code true} if the array is not empty and not {@code null}
 	 * @since 2.5
 	 */
-	public static boolean isNotEmpty(long[] array) {
+	public static boolean isNotEmpty(final long[] array) {
 		return !isEmpty(array);
 	}
 
@@ -3277,7 +3262,7 @@ public class ArrayUtils {
 	 * @return {@code true} if the array is not empty and not {@code null}
 	 * @since 2.5
 	 */
-	public static boolean isNotEmpty(short[] array) {
+	public static boolean isNotEmpty(final short[] array) {
 		return !isEmpty(array);
 	}
 
@@ -3289,7 +3274,7 @@ public class ArrayUtils {
 	 * @return {@code true} if the array is not empty and not {@code null}
 	 * @since 2.5
 	 */
-	public static <T> boolean isNotEmpty(T[] array) {
+	public static <T> boolean isNotEmpty(final T[] array) {
 		return !isEmpty(array);
 	}
 
@@ -3302,7 +3287,7 @@ public class ArrayUtils {
 	 * @return {@code true} if length of arrays matches, treating {@code null} as an empty
 	 * array
 	 */
-	public static boolean isSameLength(boolean[] array1, boolean[] array2) {
+	public static boolean isSameLength(final boolean[] array1, final boolean[] array2) {
 		return getLength(array1) == getLength(array2);
 	}
 
@@ -3315,7 +3300,7 @@ public class ArrayUtils {
 	 * @return {@code true} if length of arrays matches, treating {@code null} as an empty
 	 * array
 	 */
-	public static boolean isSameLength(byte[] array1, byte[] array2) {
+	public static boolean isSameLength(final byte[] array1, final byte[] array2) {
 		return getLength(array1) == getLength(array2);
 	}
 
@@ -3328,7 +3313,7 @@ public class ArrayUtils {
 	 * @return {@code true} if length of arrays matches, treating {@code null} as an empty
 	 * array
 	 */
-	public static boolean isSameLength(char[] array1, char[] array2) {
+	public static boolean isSameLength(final char[] array1, final char[] array2) {
 		return getLength(array1) == getLength(array2);
 	}
 
@@ -3341,7 +3326,7 @@ public class ArrayUtils {
 	 * @return {@code true} if length of arrays matches, treating {@code null} as an empty
 	 * array
 	 */
-	public static boolean isSameLength(double[] array1, double[] array2) {
+	public static boolean isSameLength(final double[] array1, final double[] array2) {
 		return getLength(array1) == getLength(array2);
 	}
 
@@ -3354,7 +3339,7 @@ public class ArrayUtils {
 	 * @return {@code true} if length of arrays matches, treating {@code null} as an empty
 	 * array
 	 */
-	public static boolean isSameLength(float[] array1, float[] array2) {
+	public static boolean isSameLength(final float[] array1, final float[] array2) {
 		return getLength(array1) == getLength(array2);
 	}
 
@@ -3367,7 +3352,7 @@ public class ArrayUtils {
 	 * @return {@code true} if length of arrays matches, treating {@code null} as an empty
 	 * array
 	 */
-	public static boolean isSameLength(int[] array1, int[] array2) {
+	public static boolean isSameLength(final int[] array1, final int[] array2) {
 		return getLength(array1) == getLength(array2);
 	}
 
@@ -3380,7 +3365,7 @@ public class ArrayUtils {
 	 * @return {@code true} if length of arrays matches, treating {@code null} as an empty
 	 * array
 	 */
-	public static boolean isSameLength(long[] array1, long[] array2) {
+	public static boolean isSameLength(final long[] array1, final long[] array2) {
 		return getLength(array1) == getLength(array2);
 	}
 
@@ -3398,7 +3383,7 @@ public class ArrayUtils {
 	 * @return {@code true} if length of arrays matches, treating {@code null} as an empty
 	 * array
 	 */
-	public static boolean isSameLength(Object[] array1, Object[] array2) {
+	public static boolean isSameLength(final Object[] array1, final Object[] array2) {
 		return getLength(array1) == getLength(array2);
 	}
 
@@ -3411,7 +3396,7 @@ public class ArrayUtils {
 	 * @return {@code true} if length of arrays matches, treating {@code null} as an empty
 	 * array
 	 */
-	public static boolean isSameLength(short[] array1, short[] array2) {
+	public static boolean isSameLength(final short[] array1, final short[] array2) {
 		return getLength(array1) == getLength(array2);
 	}
 
@@ -3423,7 +3408,7 @@ public class ArrayUtils {
 	 * @return {@code true} if type of arrays matches
 	 * @throws IllegalArgumentException if either array is {@code null}
 	 */
-	public static boolean isSameType(Object array1, Object array2) {
+	public static boolean isSameType(final Object array1, final Object array2) {
 		if (array1 == null || array2 == null) {
 			throw new IllegalArgumentException("The Array must not be null");
 		}
@@ -3437,15 +3422,15 @@ public class ArrayUtils {
 	 * @return whether the array is sorted according to natural ordering
 	 * @since 3.4
 	 */
-	public static boolean isSorted(double[] array) {
+	public static boolean isSorted(final double[] array) {
 		if (array == null || array.length < 2) {
 			return true;
 		}
 
 		double previous = array[0];
-		int n = array.length;
+		final int n = array.length;
 		for (int i = 1; i < n; i++) {
-			double current = array[i];
+			final double current = array[i];
 			if (Double.compare(previous, current) > 0) {
 				return false;
 			}
@@ -3462,15 +3447,15 @@ public class ArrayUtils {
 	 * @return whether the array is sorted according to natural ordering
 	 * @since 3.4
 	 */
-	public static boolean isSorted(float[] array) {
+	public static boolean isSorted(final float[] array) {
 		if (array == null || array.length < 2) {
 			return true;
 		}
 
 		float previous = array[0];
-		int n = array.length;
+		final int n = array.length;
 		for (int i = 1; i < n; i++) {
-			float current = array[i];
+			final float current = array[i];
 			if (Float.compare(previous, current) > 0) {
 				return false;
 			}
@@ -3489,7 +3474,7 @@ public class ArrayUtils {
 	 * @return whether the array is sorted
 	 * @since 3.4
 	 */
-	public static <T extends Comparable<? super T>> boolean isSorted(T[] array) {
+	public static <T extends Comparable<? super T>> boolean isSorted(final T[] array) {
 		return isSorted(array, (o1, o2) -> o1.compareTo(o2));
 	}
 
@@ -3503,7 +3488,7 @@ public class ArrayUtils {
 	 * @return whether the array is sorted
 	 * @since 3.4
 	 */
-	public static <T> boolean isSorted(T[] array, Comparator<T> comparator) {
+	public static <T> boolean isSorted(final T[] array, final Comparator<T> comparator) {
 		if (comparator == null) {
 			throw new IllegalArgumentException("Comparator should not be null.");
 		}
@@ -3513,9 +3498,9 @@ public class ArrayUtils {
 		}
 
 		T previous = array[0];
-		int n = array.length;
+		final int n = array.length;
 		for (int i = 1; i < n; i++) {
-			T current = array[i];
+			final T current = array[i];
 			if (comparator.compare(previous, current) > 0) {
 				return false;
 			}
@@ -3537,7 +3522,7 @@ public class ArrayUtils {
 	 * @return the last index of the value within the array, {@link #INDEX_NOT_FOUND}
 	 * ({@code -1}) if not found or {@code null} array input
 	 */
-	public static int lastIndexOf(boolean[] array, boolean valueToFind) {
+	public static int lastIndexOf(final boolean[] array, final boolean valueToFind) {
 		return lastIndexOf(array, valueToFind, Integer.MAX_VALUE);
 	}
 
@@ -3557,7 +3542,7 @@ public class ArrayUtils {
 	 * @return the last index of the value within the array, {@link #INDEX_NOT_FOUND}
 	 * ({@code -1}) if not found or {@code null} array input
 	 */
-	public static int lastIndexOf(boolean[] array, boolean valueToFind, int startIndex) {
+	public static int lastIndexOf(final boolean[] array, final boolean valueToFind, int startIndex) {
 		if (isEmpty(array)) {
 			return INDEX_NOT_FOUND;
 		}
@@ -3587,7 +3572,7 @@ public class ArrayUtils {
 	 * @return the last index of the value within the array, {@link #INDEX_NOT_FOUND}
 	 * ({@code -1}) if not found or {@code null} array input
 	 */
-	public static int lastIndexOf(byte[] array, byte valueToFind) {
+	public static int lastIndexOf(final byte[] array, final byte valueToFind) {
 		return lastIndexOf(array, valueToFind, Integer.MAX_VALUE);
 	}
 
@@ -3607,7 +3592,7 @@ public class ArrayUtils {
 	 * @return the last index of the value within the array, {@link #INDEX_NOT_FOUND}
 	 * ({@code -1}) if not found or {@code null} array input
 	 */
-	public static int lastIndexOf(byte[] array, byte valueToFind, int startIndex) {
+	public static int lastIndexOf(final byte[] array, final byte valueToFind, int startIndex) {
 		if (array == null) {
 			return INDEX_NOT_FOUND;
 		}
@@ -3638,7 +3623,7 @@ public class ArrayUtils {
 	 * ({@code -1}) if not found or {@code null} array input
 	 * @since 2.1
 	 */
-	public static int lastIndexOf(char[] array, char valueToFind) {
+	public static int lastIndexOf(final char[] array, final char valueToFind) {
 		return lastIndexOf(array, valueToFind, Integer.MAX_VALUE);
 	}
 
@@ -3659,7 +3644,7 @@ public class ArrayUtils {
 	 * ({@code -1}) if not found or {@code null} array input
 	 * @since 2.1
 	 */
-	public static int lastIndexOf(char[] array, char valueToFind, int startIndex) {
+	public static int lastIndexOf(final char[] array, final char valueToFind, int startIndex) {
 		if (array == null) {
 			return INDEX_NOT_FOUND;
 		}
@@ -3689,7 +3674,7 @@ public class ArrayUtils {
 	 * @return the last index of the value within the array, {@link #INDEX_NOT_FOUND}
 	 * ({@code -1}) if not found or {@code null} array input
 	 */
-	public static int lastIndexOf(double[] array, double valueToFind) {
+	public static int lastIndexOf(final double[] array, final double valueToFind) {
 		return lastIndexOf(array, valueToFind, Integer.MAX_VALUE);
 	}
 
@@ -3707,7 +3692,7 @@ public class ArrayUtils {
 	 * @return the index of the value within the array, {@link #INDEX_NOT_FOUND}
 	 * ({@code -1}) if not found or {@code null} array input
 	 */
-	public static int lastIndexOf(double[] array, double valueToFind, double tolerance) {
+	public static int lastIndexOf(final double[] array, final double valueToFind, final double tolerance) {
 		return lastIndexOf(array, valueToFind, Integer.MAX_VALUE, tolerance);
 	}
 
@@ -3727,7 +3712,7 @@ public class ArrayUtils {
 	 * @return the last index of the value within the array, {@link #INDEX_NOT_FOUND}
 	 * ({@code -1}) if not found or {@code null} array input
 	 */
-	public static int lastIndexOf(double[] array, double valueToFind, int startIndex) {
+	public static int lastIndexOf(final double[] array, final double valueToFind, int startIndex) {
 		if (isEmpty(array)) {
 			return INDEX_NOT_FOUND;
 		}
@@ -3764,7 +3749,8 @@ public class ArrayUtils {
 	 * @return the last index of the value within the array, {@link #INDEX_NOT_FOUND}
 	 * ({@code -1}) if not found or {@code null} array input
 	 */
-	public static int lastIndexOf(double[] array, double valueToFind, int startIndex, double tolerance) {
+	public static int lastIndexOf(final double[] array, final double valueToFind, int startIndex,
+			final double tolerance) {
 		if (isEmpty(array)) {
 			return INDEX_NOT_FOUND;
 		}
@@ -3774,8 +3760,8 @@ public class ArrayUtils {
 		else if (startIndex >= array.length) {
 			startIndex = array.length - 1;
 		}
-		double min = valueToFind - tolerance;
-		double max = valueToFind + tolerance;
+		final double min = valueToFind - tolerance;
+		final double max = valueToFind + tolerance;
 		for (int i = startIndex; i >= 0; i--) {
 			if (array[i] >= min && array[i] <= max) {
 				return i;
@@ -3796,7 +3782,7 @@ public class ArrayUtils {
 	 * @return the last index of the value within the array, {@link #INDEX_NOT_FOUND}
 	 * ({@code -1}) if not found or {@code null} array input
 	 */
-	public static int lastIndexOf(float[] array, float valueToFind) {
+	public static int lastIndexOf(final float[] array, final float valueToFind) {
 		return lastIndexOf(array, valueToFind, Integer.MAX_VALUE);
 	}
 
@@ -3816,7 +3802,7 @@ public class ArrayUtils {
 	 * @return the last index of the value within the array, {@link #INDEX_NOT_FOUND}
 	 * ({@code -1}) if not found or {@code null} array input
 	 */
-	public static int lastIndexOf(float[] array, float valueToFind, int startIndex) {
+	public static int lastIndexOf(final float[] array, final float valueToFind, int startIndex) {
 		if (isEmpty(array)) {
 			return INDEX_NOT_FOUND;
 		}
@@ -3846,7 +3832,7 @@ public class ArrayUtils {
 	 * @return the last index of the value within the array, {@link #INDEX_NOT_FOUND}
 	 * ({@code -1}) if not found or {@code null} array input
 	 */
-	public static int lastIndexOf(int[] array, int valueToFind) {
+	public static int lastIndexOf(final int[] array, final int valueToFind) {
 		return lastIndexOf(array, valueToFind, Integer.MAX_VALUE);
 	}
 
@@ -3866,7 +3852,7 @@ public class ArrayUtils {
 	 * @return the last index of the value within the array, {@link #INDEX_NOT_FOUND}
 	 * ({@code -1}) if not found or {@code null} array input
 	 */
-	public static int lastIndexOf(int[] array, int valueToFind, int startIndex) {
+	public static int lastIndexOf(final int[] array, final int valueToFind, int startIndex) {
 		if (array == null) {
 			return INDEX_NOT_FOUND;
 		}
@@ -3896,7 +3882,7 @@ public class ArrayUtils {
 	 * @return the last index of the value within the array, {@link #INDEX_NOT_FOUND}
 	 * ({@code -1}) if not found or {@code null} array input
 	 */
-	public static int lastIndexOf(long[] array, long valueToFind) {
+	public static int lastIndexOf(final long[] array, final long valueToFind) {
 		return lastIndexOf(array, valueToFind, Integer.MAX_VALUE);
 	}
 
@@ -3916,7 +3902,7 @@ public class ArrayUtils {
 	 * @return the last index of the value within the array, {@link #INDEX_NOT_FOUND}
 	 * ({@code -1}) if not found or {@code null} array input
 	 */
-	public static int lastIndexOf(long[] array, long valueToFind, int startIndex) {
+	public static int lastIndexOf(final long[] array, final long valueToFind, int startIndex) {
 		if (array == null) {
 			return INDEX_NOT_FOUND;
 		}
@@ -3946,7 +3932,7 @@ public class ArrayUtils {
 	 * @return the last index of the object within the array, {@link #INDEX_NOT_FOUND}
 	 * ({@code -1}) if not found or {@code null} array input
 	 */
-	public static int lastIndexOf(Object[] array, Object objectToFind) {
+	public static int lastIndexOf(final Object[] array, final Object objectToFind) {
 		return lastIndexOf(array, objectToFind, Integer.MAX_VALUE);
 	}
 
@@ -3966,7 +3952,7 @@ public class ArrayUtils {
 	 * @return the last index of the object within the array, {@link #INDEX_NOT_FOUND}
 	 * ({@code -1}) if not found or {@code null} array input
 	 */
-	public static int lastIndexOf(Object[] array, Object objectToFind, int startIndex) {
+	public static int lastIndexOf(final Object[] array, final Object objectToFind, int startIndex) {
 		if (array == null) {
 			return INDEX_NOT_FOUND;
 		}
@@ -4005,7 +3991,7 @@ public class ArrayUtils {
 	 * @return the last index of the value within the array, {@link #INDEX_NOT_FOUND}
 	 * ({@code -1}) if not found or {@code null} array input
 	 */
-	public static int lastIndexOf(short[] array, short valueToFind) {
+	public static int lastIndexOf(final short[] array, final short valueToFind) {
 		return lastIndexOf(array, valueToFind, Integer.MAX_VALUE);
 	}
 
@@ -4025,7 +4011,7 @@ public class ArrayUtils {
 	 * @return the last index of the value within the array, {@link #INDEX_NOT_FOUND}
 	 * ({@code -1}) if not found or {@code null} array input
 	 */
-	public static int lastIndexOf(short[] array, short valueToFind, int startIndex) {
+	public static int lastIndexOf(final short[] array, final short valueToFind, int startIndex) {
 		if (array == null) {
 			return INDEX_NOT_FOUND;
 		}
@@ -4057,7 +4043,7 @@ public class ArrayUtils {
 	 * input
 	 * @since 2.5
 	 */
-	public static boolean[] nullToEmpty(boolean[] array) {
+	public static boolean[] nullToEmpty(final boolean[] array) {
 		if (isEmpty(array)) {
 			return EMPTY_BOOLEAN_ARRAY;
 		}
@@ -4078,7 +4064,7 @@ public class ArrayUtils {
 	 * input
 	 * @since 2.5
 	 */
-	public static Boolean[] nullToEmpty(Boolean[] array) {
+	public static Boolean[] nullToEmpty(final Boolean[] array) {
 		if (isEmpty(array)) {
 			return EMPTY_BOOLEAN_OBJECT_ARRAY;
 		}
@@ -4099,7 +4085,7 @@ public class ArrayUtils {
 	 * input
 	 * @since 2.5
 	 */
-	public static byte[] nullToEmpty(byte[] array) {
+	public static byte[] nullToEmpty(final byte[] array) {
 		if (isEmpty(array)) {
 			return EMPTY_BYTE_ARRAY;
 		}
@@ -4120,7 +4106,7 @@ public class ArrayUtils {
 	 * input
 	 * @since 2.5
 	 */
-	public static Byte[] nullToEmpty(Byte[] array) {
+	public static Byte[] nullToEmpty(final Byte[] array) {
 		if (isEmpty(array)) {
 			return EMPTY_BYTE_OBJECT_ARRAY;
 		}
@@ -4141,7 +4127,7 @@ public class ArrayUtils {
 	 * input
 	 * @since 2.5
 	 */
-	public static char[] nullToEmpty(char[] array) {
+	public static char[] nullToEmpty(final char[] array) {
 		if (isEmpty(array)) {
 			return EMPTY_CHAR_ARRAY;
 		}
@@ -4162,7 +4148,7 @@ public class ArrayUtils {
 	 * input
 	 * @since 2.5
 	 */
-	public static Character[] nullToEmpty(Character[] array) {
+	public static Character[] nullToEmpty(final Character[] array) {
 		if (isEmpty(array)) {
 			return EMPTY_CHARACTER_OBJECT_ARRAY;
 		}
@@ -4183,7 +4169,7 @@ public class ArrayUtils {
 	 * input
 	 * @since 3.2
 	 */
-	public static Class<?>[] nullToEmpty(Class<?>[] array) {
+	public static Class<?>[] nullToEmpty(final Class<?>[] array) {
 		if (isEmpty(array)) {
 			return EMPTY_CLASS_ARRAY;
 		}
@@ -4204,7 +4190,7 @@ public class ArrayUtils {
 	 * input
 	 * @since 2.5
 	 */
-	public static double[] nullToEmpty(double[] array) {
+	public static double[] nullToEmpty(final double[] array) {
 		if (isEmpty(array)) {
 			return EMPTY_DOUBLE_ARRAY;
 		}
@@ -4225,7 +4211,7 @@ public class ArrayUtils {
 	 * input
 	 * @since 2.5
 	 */
-	public static Double[] nullToEmpty(Double[] array) {
+	public static Double[] nullToEmpty(final Double[] array) {
 		if (isEmpty(array)) {
 			return EMPTY_DOUBLE_OBJECT_ARRAY;
 		}
@@ -4246,7 +4232,7 @@ public class ArrayUtils {
 	 * input
 	 * @since 2.5
 	 */
-	public static float[] nullToEmpty(float[] array) {
+	public static float[] nullToEmpty(final float[] array) {
 		if (isEmpty(array)) {
 			return EMPTY_FLOAT_ARRAY;
 		}
@@ -4267,7 +4253,7 @@ public class ArrayUtils {
 	 * input
 	 * @since 2.5
 	 */
-	public static Float[] nullToEmpty(Float[] array) {
+	public static Float[] nullToEmpty(final Float[] array) {
 		if (isEmpty(array)) {
 			return EMPTY_FLOAT_OBJECT_ARRAY;
 		}
@@ -4288,7 +4274,7 @@ public class ArrayUtils {
 	 * input
 	 * @since 2.5
 	 */
-	public static int[] nullToEmpty(int[] array) {
+	public static int[] nullToEmpty(final int[] array) {
 		if (isEmpty(array)) {
 			return EMPTY_INT_ARRAY;
 		}
@@ -4312,7 +4298,7 @@ public class ArrayUtils {
 	 * input
 	 * @since 2.5
 	 */
-	public static Integer[] nullToEmpty(Integer[] array) {
+	public static Integer[] nullToEmpty(final Integer[] array) {
 		if (isEmpty(array)) {
 			return EMPTY_INTEGER_OBJECT_ARRAY;
 		}
@@ -4333,7 +4319,7 @@ public class ArrayUtils {
 	 * input
 	 * @since 2.5
 	 */
-	public static long[] nullToEmpty(long[] array) {
+	public static long[] nullToEmpty(final long[] array) {
 		if (isEmpty(array)) {
 			return EMPTY_LONG_ARRAY;
 		}
@@ -4354,7 +4340,7 @@ public class ArrayUtils {
 	 * input
 	 * @since 2.5
 	 */
-	public static Long[] nullToEmpty(Long[] array) {
+	public static Long[] nullToEmpty(final Long[] array) {
 		if (isEmpty(array)) {
 			return EMPTY_LONG_OBJECT_ARRAY;
 		}
@@ -4375,7 +4361,7 @@ public class ArrayUtils {
 	 * input
 	 * @since 2.5
 	 */
-	public static Object[] nullToEmpty(Object[] array) {
+	public static Object[] nullToEmpty(final Object[] array) {
 		if (isEmpty(array)) {
 			return EMPTY_OBJECT_ARRAY;
 		}
@@ -4396,7 +4382,7 @@ public class ArrayUtils {
 	 * input
 	 * @since 2.5
 	 */
-	public static short[] nullToEmpty(short[] array) {
+	public static short[] nullToEmpty(final short[] array) {
 		if (isEmpty(array)) {
 			return EMPTY_SHORT_ARRAY;
 		}
@@ -4417,7 +4403,7 @@ public class ArrayUtils {
 	 * input
 	 * @since 2.5
 	 */
-	public static Short[] nullToEmpty(Short[] array) {
+	public static Short[] nullToEmpty(final Short[] array) {
 		if (isEmpty(array)) {
 			return EMPTY_SHORT_OBJECT_ARRAY;
 		}
@@ -4438,7 +4424,7 @@ public class ArrayUtils {
 	 * input
 	 * @since 2.5
 	 */
-	public static String[] nullToEmpty(String[] array) {
+	public static String[] nullToEmpty(final String[] array) {
 		if (isEmpty(array)) {
 			return EMPTY_STRING_ARRAY;
 		}
@@ -4459,7 +4445,7 @@ public class ArrayUtils {
 	 * @throws IllegalArgumentException if the type argument is null
 	 * @since 3.5
 	 */
-	public static <T> T[] nullToEmpty(T[] array, Class<T[]> type) {
+	public static <T> T[] nullToEmpty(final T[] array, final Class<T[]> type) {
 		if (type == null) {
 			throw new IllegalArgumentException("The type must not be null");
 		}
@@ -4497,7 +4483,7 @@ public class ArrayUtils {
 	 * index &gt;= array.length), or if the array is {@code null}.
 	 * @since 2.1
 	 */
-	public static boolean[] remove(boolean[] array, int index) {
+	public static boolean[] remove(final boolean[] array, final int index) {
 		return (boolean[]) remove((Object) array, index);
 	}
 
@@ -4528,7 +4514,7 @@ public class ArrayUtils {
 	 * index &gt;= array.length), or if the array is {@code null}.
 	 * @since 2.1
 	 */
-	public static byte[] remove(byte[] array, int index) {
+	public static byte[] remove(final byte[] array, final int index) {
 		return (byte[]) remove((Object) array, index);
 	}
 
@@ -4559,7 +4545,7 @@ public class ArrayUtils {
 	 * index &gt;= array.length), or if the array is {@code null}.
 	 * @since 2.1
 	 */
-	public static char[] remove(char[] array, int index) {
+	public static char[] remove(final char[] array, final int index) {
 		return (char[]) remove((Object) array, index);
 	}
 
@@ -4590,7 +4576,7 @@ public class ArrayUtils {
 	 * index &gt;= array.length), or if the array is {@code null}.
 	 * @since 2.1
 	 */
-	public static double[] remove(double[] array, int index) {
+	public static double[] remove(final double[] array, final int index) {
 		return (double[]) remove((Object) array, index);
 	}
 
@@ -4621,7 +4607,7 @@ public class ArrayUtils {
 	 * index &gt;= array.length), or if the array is {@code null}.
 	 * @since 2.1
 	 */
-	public static float[] remove(float[] array, int index) {
+	public static float[] remove(final float[] array, final int index) {
 		return (float[]) remove((Object) array, index);
 	}
 
@@ -4652,7 +4638,7 @@ public class ArrayUtils {
 	 * index &gt;= array.length), or if the array is {@code null}.
 	 * @since 2.1
 	 */
-	public static int[] remove(int[] array, int index) {
+	public static int[] remove(final int[] array, final int index) {
 		return (int[]) remove((Object) array, index);
 	}
 
@@ -4683,7 +4669,7 @@ public class ArrayUtils {
 	 * index &gt;= array.length), or if the array is {@code null}.
 	 * @since 2.1
 	 */
-	public static long[] remove(long[] array, int index) {
+	public static long[] remove(final long[] array, final int index) {
 		return (long[]) remove((Object) array, index);
 	}
 
@@ -4707,13 +4693,13 @@ public class ArrayUtils {
 	 * index &gt;= array.length), or if the array is {@code null}.
 	 * @since 2.1
 	 */
-	private static Object remove(Object array, int index) {
-		int length = getLength(array);
+	private static Object remove(final Object array, final int index) {
+		final int length = getLength(array);
 		if (index < 0 || index >= length) {
 			throw new IndexOutOfBoundsException("Index: " + index + ", Length: " + length);
 		}
 
-		Object result = Array.newInstance(array.getClass().getComponentType(), length - 1);
+		final Object result = Array.newInstance(array.getClass().getComponentType(), length - 1);
 		System.arraycopy(array, 0, result, 0, index);
 		if (index < length - 1) {
 			System.arraycopy(array, index + 1, result, index, length - index - 1);
@@ -4749,7 +4735,7 @@ public class ArrayUtils {
 	 * index &gt;= array.length), or if the array is {@code null}.
 	 * @since 2.1
 	 */
-	public static short[] remove(short[] array, int index) {
+	public static short[] remove(final short[] array, final int index) {
 		return (short[]) remove((Object) array, index);
 	}
 
@@ -4781,9 +4767,9 @@ public class ArrayUtils {
 	 * index &gt;= array.length), or if the array is {@code null}.
 	 * @since 2.1
 	 */
-	// remove() always creates an array of the same type as
+	@SuppressWarnings("unchecked") // remove() always creates an array of the same type as
 	// its input
-	public static <T> T[] remove(T[] array, int index) {
+	public static <T> T[] remove(final T[] array, final int index) {
 		return (T[]) remove((Object) array, index);
 	}
 
@@ -4812,7 +4798,7 @@ public class ArrayUtils {
 	 * index &gt;= array.length), or if the array is {@code null}.
 	 * @since 3.0.1
 	 */
-	public static boolean[] removeAll(boolean[] array, int... indices) {
+	public static boolean[] removeAll(final boolean[] array, final int... indices) {
 		return (boolean[]) removeAll((Object) array, indices);
 	}
 
@@ -4845,7 +4831,7 @@ public class ArrayUtils {
 	 * index &gt;= array.length), or if the array is {@code null}.
 	 * @since 3.0.1
 	 */
-	public static byte[] removeAll(byte[] array, int... indices) {
+	public static byte[] removeAll(final byte[] array, final int... indices) {
 		return (byte[]) removeAll((Object) array, indices);
 	}
 
@@ -4878,7 +4864,7 @@ public class ArrayUtils {
 	 * index &gt;= array.length), or if the array is {@code null}.
 	 * @since 3.0.1
 	 */
-	public static char[] removeAll(char[] array, int... indices) {
+	public static char[] removeAll(final char[] array, final int... indices) {
 		return (char[]) removeAll((Object) array, indices);
 	}
 
@@ -4911,7 +4897,7 @@ public class ArrayUtils {
 	 * index &gt;= array.length), or if the array is {@code null}.
 	 * @since 3.0.1
 	 */
-	public static double[] removeAll(double[] array, int... indices) {
+	public static double[] removeAll(final double[] array, final int... indices) {
 		return (double[]) removeAll((Object) array, indices);
 	}
 
@@ -4944,7 +4930,7 @@ public class ArrayUtils {
 	 * index &gt;= array.length), or if the array is {@code null}.
 	 * @since 3.0.1
 	 */
-	public static float[] removeAll(float[] array, int... indices) {
+	public static float[] removeAll(final float[] array, final int... indices) {
 		return (float[]) removeAll((Object) array, indices);
 	}
 
@@ -4977,7 +4963,7 @@ public class ArrayUtils {
 	 * index &gt;= array.length), or if the array is {@code null}.
 	 * @since 3.0.1
 	 */
-	public static int[] removeAll(int[] array, int... indices) {
+	public static int[] removeAll(final int[] array, final int... indices) {
 		return (int[]) removeAll((Object) array, indices);
 	}
 
@@ -5010,7 +4996,7 @@ public class ArrayUtils {
 	 * index &gt;= array.length), or if the array is {@code null}.
 	 * @since 3.0.1
 	 */
-	public static long[] removeAll(long[] array, int... indices) {
+	public static long[] removeAll(final long[] array, final int... indices) {
 		return (long[]) removeAll((Object) array, indices);
 	}
 
@@ -5023,12 +5009,12 @@ public class ArrayUtils {
 	 * @since 3.2
 	 */
 	// package protected for access by unit tests
-	static Object removeAll(Object array, BitSet indices) {
+	static Object removeAll(final Object array, final BitSet indices) {
 		if (array == null) {
 			return null;
 		}
 
-		int srcLength = getLength(array);
+		final int srcLength = getLength(array);
 		// No need to check maxIndex here, because method only currently called from
 		// removeElements()
 		// which guarantee to generate on;y valid bit entries.
@@ -5037,8 +5023,8 @@ public class ArrayUtils {
 		// throw new IndexOutOfBoundsException("Index: " + (maxIndex-1) + ", Length: " +
 		// srcLength);
 		// }
-		int removals = indices.cardinality(); // true bits are items to remove
-		Object result = Array.newInstance(array.getClass().getComponentType(), srcLength - removals);
+		final int removals = indices.cardinality(); // true bits are items to remove
+		final Object result = Array.newInstance(array.getClass().getComponentType(), srcLength - removals);
 		int srcIndex = 0;
 		int destIndex = 0;
 		int count;
@@ -5067,11 +5053,11 @@ public class ArrayUtils {
 	 * @since 3.0.1
 	 */
 	// package protected for access by unit tests
-	static Object removeAll(Object array, int... indices) {
-		int length = getLength(array);
+	static Object removeAll(final Object array, final int... indices) {
+		final int length = getLength(array);
 		int diff = 0; // number of distinct indexes, i.e. number of entries that will be
 		// removed
-		int[] clonedIndices = clone(indices);
+		final int[] clonedIndices = clone(indices);
 		Arrays.sort(clonedIndices);
 
 		// identify length of result array
@@ -5079,7 +5065,7 @@ public class ArrayUtils {
 			int i = clonedIndices.length;
 			int prevIndex = length;
 			while (--i >= 0) {
-				int index = clonedIndices[i];
+				final int index = clonedIndices[i];
 				if (index < 0 || index >= length) {
 					throw new IndexOutOfBoundsException("Index: " + index + ", Length: " + length);
 				}
@@ -5092,14 +5078,14 @@ public class ArrayUtils {
 		}
 
 		// create result array
-		Object result = Array.newInstance(array.getClass().getComponentType(), length - diff);
+		final Object result = Array.newInstance(array.getClass().getComponentType(), length - diff);
 		if (diff < length) {
 			int end = length; // index just after last copy
 			int dest = length - diff; // number of entries so far not copied
 			for (int i = clonedIndices.length - 1; i >= 0; i--) {
-				int index = clonedIndices[i];
+				final int index = clonedIndices[i];
 				if (end - index > 1) { // same as (cp > 0)
-					int cp = end - index - 1;
+					final int cp = end - index - 1;
 					dest -= cp;
 					System.arraycopy(array, index + 1, result, dest, cp);
 					// Afer this copy, we still have room for dest items.
@@ -5142,7 +5128,7 @@ public class ArrayUtils {
 	 * index &gt;= array.length), or if the array is {@code null}.
 	 * @since 3.0.1
 	 */
-	public static short[] removeAll(short[] array, int... indices) {
+	public static short[] removeAll(final short[] array, final int... indices) {
 		return (short[]) removeAll((Object) array, indices);
 	}
 
@@ -5172,9 +5158,9 @@ public class ArrayUtils {
 	 * index &gt;= array.length), or if the array is {@code null}.
 	 * @since 3.0.1
 	 */
-	// removeAll() always creates an array of the same type
+	@SuppressWarnings("unchecked") // removeAll() always creates an array of the same type
 	// as its input
-	public static <T> T[] removeAll(T[] array, int... indices) {
+	public static <T> T[] removeAll(final T[] array, final int... indices) {
 		return (T[]) removeAll((Object) array, indices);
 	}
 
@@ -5192,7 +5178,7 @@ public class ArrayUtils {
 	 * @since 3.5
 	 * @deprecated Use {@link #removeAllOccurrences(boolean[], boolean)}
 	 */
-	public static boolean[] removeAllOccurences(boolean[] array, boolean element) {
+	public static boolean[] removeAllOccurences(final boolean[] array, final boolean element) {
 		return (boolean[]) removeAll((Object) array, indexesOf(array, element));
 	}
 
@@ -5210,7 +5196,7 @@ public class ArrayUtils {
 	 * @since 3.5
 	 * @deprecated Use {@link #removeAllOccurrences(byte[], byte)}
 	 */
-	public static byte[] removeAllOccurences(byte[] array, byte element) {
+	public static byte[] removeAllOccurences(final byte[] array, final byte element) {
 		return (byte[]) removeAll((Object) array, indexesOf(array, element));
 	}
 
@@ -5228,7 +5214,7 @@ public class ArrayUtils {
 	 * @since 3.5
 	 * @deprecated Use {@link #removeAllOccurrences(char[], char)}
 	 */
-	public static char[] removeAllOccurences(char[] array, char element) {
+	public static char[] removeAllOccurences(final char[] array, final char element) {
 		return (char[]) removeAll((Object) array, indexesOf(array, element));
 	}
 
@@ -5246,7 +5232,7 @@ public class ArrayUtils {
 	 * @since 3.5
 	 * @deprecated Use {@link #removeAllOccurrences(double[], double)}
 	 */
-	public static double[] removeAllOccurences(double[] array, double element) {
+	public static double[] removeAllOccurences(final double[] array, final double element) {
 		return (double[]) removeAll((Object) array, indexesOf(array, element));
 	}
 
@@ -5264,7 +5250,7 @@ public class ArrayUtils {
 	 * @since 3.5
 	 * @deprecated Use {@link #removeAllOccurrences(float[], float)}
 	 */
-	public static float[] removeAllOccurences(float[] array, float element) {
+	public static float[] removeAllOccurences(final float[] array, final float element) {
 		return (float[]) removeAll((Object) array, indexesOf(array, element));
 	}
 
@@ -5282,7 +5268,7 @@ public class ArrayUtils {
 	 * @since 3.5
 	 * @deprecated Use {@link #removeAllOccurrences(int[], int)}
 	 */
-	public static int[] removeAllOccurences(int[] array, int element) {
+	public static int[] removeAllOccurences(final int[] array, final int element) {
 		return (int[]) removeAll((Object) array, indexesOf(array, element));
 	}
 
@@ -5300,7 +5286,7 @@ public class ArrayUtils {
 	 * @since 3.5
 	 * @deprecated Use {@link #removeAllOccurrences(long[], long)}
 	 */
-	public static long[] removeAllOccurences(long[] array, long element) {
+	public static long[] removeAllOccurences(final long[] array, final long element) {
 		return (long[]) removeAll((Object) array, indexesOf(array, element));
 	}
 
@@ -5318,7 +5304,7 @@ public class ArrayUtils {
 	 * @since 3.5
 	 * @deprecated Use {@link #removeAllOccurrences(short[], short)}
 	 */
-	public static short[] removeAllOccurences(short[] array, short element) {
+	public static short[] removeAllOccurences(final short[] array, final short element) {
 		return (short[]) removeAll((Object) array, indexesOf(array, element));
 	}
 
@@ -5337,7 +5323,7 @@ public class ArrayUtils {
 	 * @since 3.5
 	 * @deprecated Use {@link #removeAllOccurrences(Object[], Object)}
 	 */
-	public static <T> T[] removeAllOccurences(T[] array, T element) {
+	public static <T> T[] removeAllOccurences(final T[] array, final T element) {
 		return (T[]) removeAll((Object) array, indexesOf(array, element));
 	}
 
@@ -5354,7 +5340,7 @@ public class ArrayUtils {
 	 * specified element.
 	 * @since 3.10
 	 */
-	public static boolean[] removeAllOccurrences(boolean[] array, boolean element) {
+	public static boolean[] removeAllOccurrences(final boolean[] array, final boolean element) {
 		return (boolean[]) removeAll((Object) array, indexesOf(array, element));
 	}
 
@@ -5371,7 +5357,7 @@ public class ArrayUtils {
 	 * specified element.
 	 * @since 3.10
 	 */
-	public static byte[] removeAllOccurrences(byte[] array, byte element) {
+	public static byte[] removeAllOccurrences(final byte[] array, final byte element) {
 		return (byte[]) removeAll((Object) array, indexesOf(array, element));
 	}
 
@@ -5388,7 +5374,7 @@ public class ArrayUtils {
 	 * specified element.
 	 * @since 3.10
 	 */
-	public static char[] removeAllOccurrences(char[] array, char element) {
+	public static char[] removeAllOccurrences(final char[] array, final char element) {
 		return (char[]) removeAll((Object) array, indexesOf(array, element));
 	}
 
@@ -5405,7 +5391,7 @@ public class ArrayUtils {
 	 * specified element.
 	 * @since 3.10
 	 */
-	public static double[] removeAllOccurrences(double[] array, double element) {
+	public static double[] removeAllOccurrences(final double[] array, final double element) {
 		return (double[]) removeAll((Object) array, indexesOf(array, element));
 	}
 
@@ -5422,7 +5408,7 @@ public class ArrayUtils {
 	 * specified element.
 	 * @since 3.10
 	 */
-	public static float[] removeAllOccurrences(float[] array, float element) {
+	public static float[] removeAllOccurrences(final float[] array, final float element) {
 		return (float[]) removeAll((Object) array, indexesOf(array, element));
 	}
 
@@ -5439,7 +5425,7 @@ public class ArrayUtils {
 	 * specified element.
 	 * @since 3.10
 	 */
-	public static int[] removeAllOccurrences(int[] array, int element) {
+	public static int[] removeAllOccurrences(final int[] array, final int element) {
 		return (int[]) removeAll((Object) array, indexesOf(array, element));
 	}
 
@@ -5456,7 +5442,7 @@ public class ArrayUtils {
 	 * specified element.
 	 * @since 3.10
 	 */
-	public static long[] removeAllOccurrences(long[] array, long element) {
+	public static long[] removeAllOccurrences(final long[] array, final long element) {
 		return (long[]) removeAll((Object) array, indexesOf(array, element));
 	}
 
@@ -5473,7 +5459,7 @@ public class ArrayUtils {
 	 * specified element.
 	 * @since 3.10
 	 */
-	public static short[] removeAllOccurrences(short[] array, short element) {
+	public static short[] removeAllOccurrences(final short[] array, final short element) {
 		return (short[]) removeAll((Object) array, indexesOf(array, element));
 	}
 
@@ -5491,7 +5477,7 @@ public class ArrayUtils {
 	 * specified element.
 	 * @since 3.10
 	 */
-	public static <T> T[] removeAllOccurrences(T[] array, T element) {
+	public static <T> T[] removeAllOccurrences(final T[] array, final T element) {
 		return (T[]) removeAll((Object) array, indexesOf(array, element));
 	}
 
@@ -5518,8 +5504,8 @@ public class ArrayUtils {
 	 * the specified element.
 	 * @since 2.1
 	 */
-	public static boolean[] removeElement(boolean[] array, boolean element) {
-		int index = indexOf(array, element);
+	public static boolean[] removeElement(final boolean[] array, final boolean element) {
+		final int index = indexOf(array, element);
 		if (index == INDEX_NOT_FOUND) {
 			return clone(array);
 		}
@@ -5549,8 +5535,8 @@ public class ArrayUtils {
 	 * the specified element.
 	 * @since 2.1
 	 */
-	public static byte[] removeElement(byte[] array, byte element) {
-		int index = indexOf(array, element);
+	public static byte[] removeElement(final byte[] array, final byte element) {
+		final int index = indexOf(array, element);
 		if (index == INDEX_NOT_FOUND) {
 			return clone(array);
 		}
@@ -5580,8 +5566,8 @@ public class ArrayUtils {
 	 * the specified element.
 	 * @since 2.1
 	 */
-	public static char[] removeElement(char[] array, char element) {
-		int index = indexOf(array, element);
+	public static char[] removeElement(final char[] array, final char element) {
+		final int index = indexOf(array, element);
 		if (index == INDEX_NOT_FOUND) {
 			return clone(array);
 		}
@@ -5611,8 +5597,8 @@ public class ArrayUtils {
 	 * the specified element.
 	 * @since 2.1
 	 */
-	public static double[] removeElement(double[] array, double element) {
-		int index = indexOf(array, element);
+	public static double[] removeElement(final double[] array, final double element) {
+		final int index = indexOf(array, element);
 		if (index == INDEX_NOT_FOUND) {
 			return clone(array);
 		}
@@ -5642,8 +5628,8 @@ public class ArrayUtils {
 	 * the specified element.
 	 * @since 2.1
 	 */
-	public static float[] removeElement(float[] array, float element) {
-		int index = indexOf(array, element);
+	public static float[] removeElement(final float[] array, final float element) {
+		final int index = indexOf(array, element);
 		if (index == INDEX_NOT_FOUND) {
 			return clone(array);
 		}
@@ -5673,8 +5659,8 @@ public class ArrayUtils {
 	 * the specified element.
 	 * @since 2.1
 	 */
-	public static int[] removeElement(int[] array, int element) {
-		int index = indexOf(array, element);
+	public static int[] removeElement(final int[] array, final int element) {
+		final int index = indexOf(array, element);
 		if (index == INDEX_NOT_FOUND) {
 			return clone(array);
 		}
@@ -5704,8 +5690,8 @@ public class ArrayUtils {
 	 * the specified element.
 	 * @since 2.1
 	 */
-	public static long[] removeElement(long[] array, long element) {
-		int index = indexOf(array, element);
+	public static long[] removeElement(final long[] array, final long element) {
+		final int index = indexOf(array, element);
 		if (index == INDEX_NOT_FOUND) {
 			return clone(array);
 		}
@@ -5735,8 +5721,8 @@ public class ArrayUtils {
 	 * the specified element.
 	 * @since 2.1
 	 */
-	public static short[] removeElement(short[] array, short element) {
-		int index = indexOf(array, element);
+	public static short[] removeElement(final short[] array, final short element) {
+		final int index = indexOf(array, element);
 		if (index == INDEX_NOT_FOUND) {
 			return clone(array);
 		}
@@ -5767,8 +5753,8 @@ public class ArrayUtils {
 	 * the specified element.
 	 * @since 2.1
 	 */
-	public static <T> T[] removeElement(T[] array, Object element) {
-		int index = indexOf(array, element);
+	public static <T> T[] removeElement(final T[] array, final Object element) {
+		final int index = indexOf(array, element);
 		if (index == INDEX_NOT_FOUND) {
 			return clone(array);
 		}
@@ -5782,7 +5768,7 @@ public class ArrayUtils {
 	 * This method does nothing for a {@code null} input array.
 	 * @param array the array to reverse, may be {@code null}
 	 */
-	public static void reverse(boolean[] array) {
+	public static void reverse(final boolean[] array) {
 		if (array == null) {
 			return;
 		}
@@ -5802,7 +5788,7 @@ public class ArrayUtils {
 	 * demoted to array length.
 	 * @since 3.2
 	 */
-	public static void reverse(boolean[] array, int startIndexInclusive, int endIndexExclusive) {
+	public static void reverse(final boolean[] array, final int startIndexInclusive, final int endIndexExclusive) {
 		if (array == null) {
 			return;
 		}
@@ -5825,7 +5811,7 @@ public class ArrayUtils {
 	 * This method does nothing for a {@code null} input array.
 	 * @param array the array to reverse, may be {@code null}
 	 */
-	public static void reverse(byte[] array) {
+	public static void reverse(final byte[] array) {
 		if (array == null) {
 			return;
 		}
@@ -5845,7 +5831,7 @@ public class ArrayUtils {
 	 * demoted to array length.
 	 * @since 3.2
 	 */
-	public static void reverse(byte[] array, int startIndexInclusive, int endIndexExclusive) {
+	public static void reverse(final byte[] array, final int startIndexInclusive, final int endIndexExclusive) {
 		if (array == null) {
 			return;
 		}
@@ -5868,7 +5854,7 @@ public class ArrayUtils {
 	 * This method does nothing for a {@code null} input array.
 	 * @param array the array to reverse, may be {@code null}
 	 */
-	public static void reverse(char[] array) {
+	public static void reverse(final char[] array) {
 		if (array == null) {
 			return;
 		}
@@ -5888,7 +5874,7 @@ public class ArrayUtils {
 	 * demoted to array length.
 	 * @since 3.2
 	 */
-	public static void reverse(char[] array, int startIndexInclusive, int endIndexExclusive) {
+	public static void reverse(final char[] array, final int startIndexInclusive, final int endIndexExclusive) {
 		if (array == null) {
 			return;
 		}
@@ -5911,7 +5897,7 @@ public class ArrayUtils {
 	 * This method does nothing for a {@code null} input array.
 	 * @param array the array to reverse, may be {@code null}
 	 */
-	public static void reverse(double[] array) {
+	public static void reverse(final double[] array) {
 		if (array == null) {
 			return;
 		}
@@ -5931,7 +5917,7 @@ public class ArrayUtils {
 	 * demoted to array length.
 	 * @since 3.2
 	 */
-	public static void reverse(double[] array, int startIndexInclusive, int endIndexExclusive) {
+	public static void reverse(final double[] array, final int startIndexInclusive, final int endIndexExclusive) {
 		if (array == null) {
 			return;
 		}
@@ -5954,7 +5940,7 @@ public class ArrayUtils {
 	 * This method does nothing for a {@code null} input array.
 	 * @param array the array to reverse, may be {@code null}
 	 */
-	public static void reverse(float[] array) {
+	public static void reverse(final float[] array) {
 		if (array == null) {
 			return;
 		}
@@ -5974,7 +5960,7 @@ public class ArrayUtils {
 	 * demoted to array length.
 	 * @since 3.2
 	 */
-	public static void reverse(float[] array, int startIndexInclusive, int endIndexExclusive) {
+	public static void reverse(final float[] array, final int startIndexInclusive, final int endIndexExclusive) {
 		if (array == null) {
 			return;
 		}
@@ -5997,7 +5983,7 @@ public class ArrayUtils {
 	 * This method does nothing for a {@code null} input array.
 	 * @param array the array to reverse, may be {@code null}
 	 */
-	public static void reverse(int[] array) {
+	public static void reverse(final int[] array) {
 		if (array == null) {
 			return;
 		}
@@ -6017,7 +6003,7 @@ public class ArrayUtils {
 	 * demoted to array length.
 	 * @since 3.2
 	 */
-	public static void reverse(int[] array, int startIndexInclusive, int endIndexExclusive) {
+	public static void reverse(final int[] array, final int startIndexInclusive, final int endIndexExclusive) {
 		if (array == null) {
 			return;
 		}
@@ -6040,7 +6026,7 @@ public class ArrayUtils {
 	 * This method does nothing for a {@code null} input array.
 	 * @param array the array to reverse, may be {@code null}
 	 */
-	public static void reverse(long[] array) {
+	public static void reverse(final long[] array) {
 		if (array == null) {
 			return;
 		}
@@ -6060,7 +6046,7 @@ public class ArrayUtils {
 	 * demoted to array length.
 	 * @since 3.2
 	 */
-	public static void reverse(long[] array, int startIndexInclusive, int endIndexExclusive) {
+	public static void reverse(final long[] array, final int startIndexInclusive, final int endIndexExclusive) {
 		if (array == null) {
 			return;
 		}
@@ -6088,7 +6074,7 @@ public class ArrayUtils {
 	 * This method does nothing for a {@code null} input array.
 	 * @param array the array to reverse, may be {@code null}
 	 */
-	public static void reverse(Object[] array) {
+	public static void reverse(final Object[] array) {
 		if (array == null) {
 			return;
 		}
@@ -6108,7 +6094,7 @@ public class ArrayUtils {
 	 * demoted to array length.
 	 * @since 3.2
 	 */
-	public static void reverse(Object[] array, int startIndexInclusive, int endIndexExclusive) {
+	public static void reverse(final Object[] array, final int startIndexInclusive, final int endIndexExclusive) {
 		if (array == null) {
 			return;
 		}
@@ -6131,7 +6117,7 @@ public class ArrayUtils {
 	 * This method does nothing for a {@code null} input array.
 	 * @param array the array to reverse, may be {@code null}
 	 */
-	public static void reverse(short[] array) {
+	public static void reverse(final short[] array) {
 		if (array == null) {
 			return;
 		}
@@ -6151,7 +6137,7 @@ public class ArrayUtils {
 	 * demoted to array length.
 	 * @since 3.2
 	 */
-	public static void reverse(short[] array, int startIndexInclusive, int endIndexExclusive) {
+	public static void reverse(final short[] array, final int startIndexInclusive, final int endIndexExclusive) {
 		if (array == null) {
 			return;
 		}
@@ -6179,7 +6165,7 @@ public class ArrayUtils {
 	 * the number of elements to rotate.
 	 * @since 3.5
 	 */
-	public static void shift(boolean[] array, int offset) {
+	public static void shift(final boolean[] array, final int offset) {
 		if (array == null) {
 			return;
 		}
@@ -6203,7 +6189,7 @@ public class ArrayUtils {
 	 * the number of elements to rotate.
 	 * @since 3.5
 	 */
-	public static void shift(boolean[] array, int startIndexInclusive, int endIndexExclusive, int offset) {
+	public static void shift(final boolean[] array, int startIndexInclusive, int endIndexExclusive, int offset) {
 		if (array == null) {
 			return;
 		}
@@ -6228,7 +6214,7 @@ public class ArrayUtils {
 		// complexity
 		// see https://beradrian.wordpress.com/2015/04/07/shift-an-array-in-on-in-place/
 		while (n > 1 && offset > 0) {
-			int n_offset = n - offset;
+			final int n_offset = n - offset;
 
 			if (offset > n_offset) {
 				swap(array, startIndexInclusive, startIndexInclusive + n - n_offset, n_offset);
@@ -6259,7 +6245,7 @@ public class ArrayUtils {
 	 * the number of elements to rotate.
 	 * @since 3.5
 	 */
-	public static void shift(byte[] array, int offset) {
+	public static void shift(final byte[] array, final int offset) {
 		if (array == null) {
 			return;
 		}
@@ -6283,7 +6269,7 @@ public class ArrayUtils {
 	 * the number of elements to rotate.
 	 * @since 3.5
 	 */
-	public static void shift(byte[] array, int startIndexInclusive, int endIndexExclusive, int offset) {
+	public static void shift(final byte[] array, int startIndexInclusive, int endIndexExclusive, int offset) {
 		if (array == null) {
 			return;
 		}
@@ -6308,7 +6294,7 @@ public class ArrayUtils {
 		// complexity
 		// see https://beradrian.wordpress.com/2015/04/07/shift-an-array-in-on-in-place/
 		while (n > 1 && offset > 0) {
-			int n_offset = n - offset;
+			final int n_offset = n - offset;
 
 			if (offset > n_offset) {
 				swap(array, startIndexInclusive, startIndexInclusive + n - n_offset, n_offset);
@@ -6339,7 +6325,7 @@ public class ArrayUtils {
 	 * the number of elements to rotate.
 	 * @since 3.5
 	 */
-	public static void shift(char[] array, int offset) {
+	public static void shift(final char[] array, final int offset) {
 		if (array == null) {
 			return;
 		}
@@ -6363,7 +6349,7 @@ public class ArrayUtils {
 	 * the number of elements to rotate.
 	 * @since 3.5
 	 */
-	public static void shift(char[] array, int startIndexInclusive, int endIndexExclusive, int offset) {
+	public static void shift(final char[] array, int startIndexInclusive, int endIndexExclusive, int offset) {
 		if (array == null) {
 			return;
 		}
@@ -6388,7 +6374,7 @@ public class ArrayUtils {
 		// complexity
 		// see https://beradrian.wordpress.com/2015/04/07/shift-an-array-in-on-in-place/
 		while (n > 1 && offset > 0) {
-			int n_offset = n - offset;
+			final int n_offset = n - offset;
 
 			if (offset > n_offset) {
 				swap(array, startIndexInclusive, startIndexInclusive + n - n_offset, n_offset);
@@ -6419,7 +6405,7 @@ public class ArrayUtils {
 	 * the number of elements to rotate.
 	 * @since 3.5
 	 */
-	public static void shift(double[] array, int offset) {
+	public static void shift(final double[] array, final int offset) {
 		if (array == null) {
 			return;
 		}
@@ -6443,7 +6429,7 @@ public class ArrayUtils {
 	 * the number of elements to rotate.
 	 * @since 3.5
 	 */
-	public static void shift(double[] array, int startIndexInclusive, int endIndexExclusive, int offset) {
+	public static void shift(final double[] array, int startIndexInclusive, int endIndexExclusive, int offset) {
 		if (array == null) {
 			return;
 		}
@@ -6468,7 +6454,7 @@ public class ArrayUtils {
 		// complexity
 		// see https://beradrian.wordpress.com/2015/04/07/shift-an-array-in-on-in-place/
 		while (n > 1 && offset > 0) {
-			int n_offset = n - offset;
+			final int n_offset = n - offset;
 
 			if (offset > n_offset) {
 				swap(array, startIndexInclusive, startIndexInclusive + n - n_offset, n_offset);
@@ -6499,7 +6485,7 @@ public class ArrayUtils {
 	 * the number of elements to rotate.
 	 * @since 3.5
 	 */
-	public static void shift(float[] array, int offset) {
+	public static void shift(final float[] array, final int offset) {
 		if (array == null) {
 			return;
 		}
@@ -6523,7 +6509,7 @@ public class ArrayUtils {
 	 * the number of elements to rotate.
 	 * @since 3.5
 	 */
-	public static void shift(float[] array, int startIndexInclusive, int endIndexExclusive, int offset) {
+	public static void shift(final float[] array, int startIndexInclusive, int endIndexExclusive, int offset) {
 		if (array == null) {
 			return;
 		}
@@ -6548,7 +6534,7 @@ public class ArrayUtils {
 		// complexity
 		// see https://beradrian.wordpress.com/2015/04/07/shift-an-array-in-on-in-place/
 		while (n > 1 && offset > 0) {
-			int n_offset = n - offset;
+			final int n_offset = n - offset;
 
 			if (offset > n_offset) {
 				swap(array, startIndexInclusive, startIndexInclusive + n - n_offset, n_offset);
@@ -6579,7 +6565,7 @@ public class ArrayUtils {
 	 * the number of elements to rotate.
 	 * @since 3.5
 	 */
-	public static void shift(int[] array, int offset) {
+	public static void shift(final int[] array, final int offset) {
 		if (array == null) {
 			return;
 		}
@@ -6603,7 +6589,7 @@ public class ArrayUtils {
 	 * the number of elements to rotate.
 	 * @since 3.5
 	 */
-	public static void shift(int[] array, int startIndexInclusive, int endIndexExclusive, int offset) {
+	public static void shift(final int[] array, int startIndexInclusive, int endIndexExclusive, int offset) {
 		if (array == null) {
 			return;
 		}
@@ -6628,7 +6614,7 @@ public class ArrayUtils {
 		// complexity
 		// see https://beradrian.wordpress.com/2015/04/07/shift-an-array-in-on-in-place/
 		while (n > 1 && offset > 0) {
-			int n_offset = n - offset;
+			final int n_offset = n - offset;
 
 			if (offset > n_offset) {
 				swap(array, startIndexInclusive, startIndexInclusive + n - n_offset, n_offset);
@@ -6659,7 +6645,7 @@ public class ArrayUtils {
 	 * the number of elements to rotate.
 	 * @since 3.5
 	 */
-	public static void shift(long[] array, int offset) {
+	public static void shift(final long[] array, final int offset) {
 		if (array == null) {
 			return;
 		}
@@ -6683,7 +6669,7 @@ public class ArrayUtils {
 	 * the number of elements to rotate.
 	 * @since 3.5
 	 */
-	public static void shift(long[] array, int startIndexInclusive, int endIndexExclusive, int offset) {
+	public static void shift(final long[] array, int startIndexInclusive, int endIndexExclusive, int offset) {
 		if (array == null) {
 			return;
 		}
@@ -6708,7 +6694,7 @@ public class ArrayUtils {
 		// complexity
 		// see https://beradrian.wordpress.com/2015/04/07/shift-an-array-in-on-in-place/
 		while (n > 1 && offset > 0) {
-			int n_offset = n - offset;
+			final int n_offset = n - offset;
 
 			if (offset > n_offset) {
 				swap(array, startIndexInclusive, startIndexInclusive + n - n_offset, n_offset);
@@ -6741,7 +6727,7 @@ public class ArrayUtils {
 	 * the number of elements to rotate.
 	 * @since 3.5
 	 */
-	public static void shift(Object[] array, int offset) {
+	public static void shift(final Object[] array, final int offset) {
 		if (array == null) {
 			return;
 		}
@@ -6765,7 +6751,7 @@ public class ArrayUtils {
 	 * the number of elements to rotate.
 	 * @since 3.5
 	 */
-	public static void shift(Object[] array, int startIndexInclusive, int endIndexExclusive, int offset) {
+	public static void shift(final Object[] array, int startIndexInclusive, int endIndexExclusive, int offset) {
 		if (array == null) {
 			return;
 		}
@@ -6790,7 +6776,7 @@ public class ArrayUtils {
 		// complexity
 		// see https://beradrian.wordpress.com/2015/04/07/shift-an-array-in-on-in-place/
 		while (n > 1 && offset > 0) {
-			int n_offset = n - offset;
+			final int n_offset = n - offset;
 
 			if (offset > n_offset) {
 				swap(array, startIndexInclusive, startIndexInclusive + n - n_offset, n_offset);
@@ -6821,7 +6807,7 @@ public class ArrayUtils {
 	 * the number of elements to rotate.
 	 * @since 3.5
 	 */
-	public static void shift(short[] array, int offset) {
+	public static void shift(final short[] array, final int offset) {
 		if (array == null) {
 			return;
 		}
@@ -6845,7 +6831,7 @@ public class ArrayUtils {
 	 * the number of elements to rotate.
 	 * @since 3.5
 	 */
-	public static void shift(short[] array, int startIndexInclusive, int endIndexExclusive, int offset) {
+	public static void shift(final short[] array, int startIndexInclusive, int endIndexExclusive, int offset) {
 		if (array == null) {
 			return;
 		}
@@ -6870,7 +6856,7 @@ public class ArrayUtils {
 		// complexity
 		// see https://beradrian.wordpress.com/2015/04/07/shift-an-array-in-on-in-place/
 		while (n > 1 && offset > 0) {
-			int n_offset = n - offset;
+			final int n_offset = n - offset;
 
 			if (offset > n_offset) {
 				swap(array, startIndexInclusive, startIndexInclusive + n - n_offset, n_offset);
@@ -6894,12 +6880,12 @@ public class ArrayUtils {
 	 * algorithm.
 	 * @param array the array to shuffle
 	 * @param random the source of randomness used to permute the elements
+	 * @since 3.6
 	 * @see <a href=
 	 * "https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle">Fisher-Yates shuffle
 	 * algorithm</a>
-	 * @since 3.6
 	 */
-	public static void shuffle(boolean[] array, Random random) {
+	public static void shuffle(final boolean[] array, final Random random) {
 		for (int i = array.length; i > 1; i--) {
 			swap(array, i - 1, random.nextInt(i), 1);
 		}
@@ -6910,12 +6896,12 @@ public class ArrayUtils {
 	 * algorithm.
 	 * @param array the array to shuffle
 	 * @param random the source of randomness used to permute the elements
+	 * @since 3.6
 	 * @see <a href=
 	 * "https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle">Fisher-Yates shuffle
 	 * algorithm</a>
-	 * @since 3.6
 	 */
-	public static void shuffle(byte[] array, Random random) {
+	public static void shuffle(final byte[] array, final Random random) {
 		for (int i = array.length; i > 1; i--) {
 			swap(array, i - 1, random.nextInt(i), 1);
 		}
@@ -6926,12 +6912,12 @@ public class ArrayUtils {
 	 * algorithm.
 	 * @param array the array to shuffle
 	 * @param random the source of randomness used to permute the elements
+	 * @since 3.6
 	 * @see <a href=
 	 * "https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle">Fisher-Yates shuffle
 	 * algorithm</a>
-	 * @since 3.6
 	 */
-	public static void shuffle(char[] array, Random random) {
+	public static void shuffle(final char[] array, final Random random) {
 		for (int i = array.length; i > 1; i--) {
 			swap(array, i - 1, random.nextInt(i), 1);
 		}
@@ -6942,12 +6928,12 @@ public class ArrayUtils {
 	 * algorithm.
 	 * @param array the array to shuffle
 	 * @param random the source of randomness used to permute the elements
+	 * @since 3.6
 	 * @see <a href=
 	 * "https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle">Fisher-Yates shuffle
 	 * algorithm</a>
-	 * @since 3.6
 	 */
-	public static void shuffle(double[] array, Random random) {
+	public static void shuffle(final double[] array, final Random random) {
 		for (int i = array.length; i > 1; i--) {
 			swap(array, i - 1, random.nextInt(i), 1);
 		}
@@ -6958,12 +6944,12 @@ public class ArrayUtils {
 	 * algorithm.
 	 * @param array the array to shuffle
 	 * @param random the source of randomness used to permute the elements
+	 * @since 3.6
 	 * @see <a href=
 	 * "https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle">Fisher-Yates shuffle
 	 * algorithm</a>
-	 * @since 3.6
 	 */
-	public static void shuffle(float[] array, Random random) {
+	public static void shuffle(final float[] array, final Random random) {
 		for (int i = array.length; i > 1; i--) {
 			swap(array, i - 1, random.nextInt(i), 1);
 		}
@@ -6974,12 +6960,12 @@ public class ArrayUtils {
 	 * algorithm.
 	 * @param array the array to shuffle
 	 * @param random the source of randomness used to permute the elements
+	 * @since 3.6
 	 * @see <a href=
 	 * "https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle">Fisher-Yates shuffle
 	 * algorithm</a>
-	 * @since 3.6
 	 */
-	public static void shuffle(int[] array, Random random) {
+	public static void shuffle(final int[] array, final Random random) {
 		for (int i = array.length; i > 1; i--) {
 			swap(array, i - 1, random.nextInt(i), 1);
 		}
@@ -6990,12 +6976,12 @@ public class ArrayUtils {
 	 * algorithm.
 	 * @param array the array to shuffle
 	 * @param random the source of randomness used to permute the elements
+	 * @since 3.6
 	 * @see <a href=
 	 * "https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle">Fisher-Yates shuffle
 	 * algorithm</a>
-	 * @since 3.6
 	 */
-	public static void shuffle(long[] array, Random random) {
+	public static void shuffle(final long[] array, final Random random) {
 		for (int i = array.length; i > 1; i--) {
 			swap(array, i - 1, random.nextInt(i), 1);
 		}
@@ -7006,12 +6992,12 @@ public class ArrayUtils {
 	 * algorithm.
 	 * @param array the array to shuffle
 	 * @param random the source of randomness used to permute the elements
+	 * @since 3.6
 	 * @see <a href=
 	 * "https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle">Fisher-Yates shuffle
 	 * algorithm</a>
-	 * @since 3.6
 	 */
-	public static void shuffle(Object[] array, Random random) {
+	public static void shuffle(final Object[] array, final Random random) {
 		for (int i = array.length; i > 1; i--) {
 			swap(array, i - 1, random.nextInt(i), 1);
 		}
@@ -7022,12 +7008,12 @@ public class ArrayUtils {
 	 * algorithm.
 	 * @param array the array to shuffle
 	 * @param random the source of randomness used to permute the elements
+	 * @since 3.6
 	 * @see <a href=
 	 * "https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle">Fisher-Yates shuffle
 	 * algorithm</a>
-	 * @since 3.6
 	 */
-	public static void shuffle(short[] array, Random random) {
+	public static void shuffle(final short[] array, final Random random) {
 		for (int i = array.length; i > 1; i--) {
 			swap(array, i - 1, random.nextInt(i), 1);
 		}
@@ -7050,7 +7036,7 @@ public class ArrayUtils {
 	 * @since 2.1
 	 * @see Arrays#copyOfRange(boolean[], int, int)
 	 */
-	public static boolean[] subarray(boolean[] array, int startIndexInclusive, int endIndexExclusive) {
+	public static boolean[] subarray(final boolean[] array, int startIndexInclusive, int endIndexExclusive) {
 		if (array == null) {
 			return null;
 		}
@@ -7060,12 +7046,12 @@ public class ArrayUtils {
 		if (endIndexExclusive > array.length) {
 			endIndexExclusive = array.length;
 		}
-		int newSize = endIndexExclusive - startIndexInclusive;
+		final int newSize = endIndexExclusive - startIndexInclusive;
 		if (newSize <= 0) {
 			return EMPTY_BOOLEAN_ARRAY;
 		}
 
-		boolean[] subarray = new boolean[newSize];
+		final boolean[] subarray = new boolean[newSize];
 		System.arraycopy(array, startIndexInclusive, subarray, 0, newSize);
 		return subarray;
 	}
@@ -7087,7 +7073,7 @@ public class ArrayUtils {
 	 * @since 2.1
 	 * @see Arrays#copyOfRange(byte[], int, int)
 	 */
-	public static byte[] subarray(byte[] array, int startIndexInclusive, int endIndexExclusive) {
+	public static byte[] subarray(final byte[] array, int startIndexInclusive, int endIndexExclusive) {
 		if (array == null) {
 			return null;
 		}
@@ -7097,12 +7083,12 @@ public class ArrayUtils {
 		if (endIndexExclusive > array.length) {
 			endIndexExclusive = array.length;
 		}
-		int newSize = endIndexExclusive - startIndexInclusive;
+		final int newSize = endIndexExclusive - startIndexInclusive;
 		if (newSize <= 0) {
 			return EMPTY_BYTE_ARRAY;
 		}
 
-		byte[] subarray = new byte[newSize];
+		final byte[] subarray = new byte[newSize];
 		System.arraycopy(array, startIndexInclusive, subarray, 0, newSize);
 		return subarray;
 	}
@@ -7124,7 +7110,7 @@ public class ArrayUtils {
 	 * @since 2.1
 	 * @see Arrays#copyOfRange(char[], int, int)
 	 */
-	public static char[] subarray(char[] array, int startIndexInclusive, int endIndexExclusive) {
+	public static char[] subarray(final char[] array, int startIndexInclusive, int endIndexExclusive) {
 		if (array == null) {
 			return null;
 		}
@@ -7134,12 +7120,12 @@ public class ArrayUtils {
 		if (endIndexExclusive > array.length) {
 			endIndexExclusive = array.length;
 		}
-		int newSize = endIndexExclusive - startIndexInclusive;
+		final int newSize = endIndexExclusive - startIndexInclusive;
 		if (newSize <= 0) {
 			return EMPTY_CHAR_ARRAY;
 		}
 
-		char[] subarray = new char[newSize];
+		final char[] subarray = new char[newSize];
 		System.arraycopy(array, startIndexInclusive, subarray, 0, newSize);
 		return subarray;
 	}
@@ -7161,7 +7147,7 @@ public class ArrayUtils {
 	 * @since 2.1
 	 * @see Arrays#copyOfRange(double[], int, int)
 	 */
-	public static double[] subarray(double[] array, int startIndexInclusive, int endIndexExclusive) {
+	public static double[] subarray(final double[] array, int startIndexInclusive, int endIndexExclusive) {
 		if (array == null) {
 			return null;
 		}
@@ -7171,12 +7157,12 @@ public class ArrayUtils {
 		if (endIndexExclusive > array.length) {
 			endIndexExclusive = array.length;
 		}
-		int newSize = endIndexExclusive - startIndexInclusive;
+		final int newSize = endIndexExclusive - startIndexInclusive;
 		if (newSize <= 0) {
 			return EMPTY_DOUBLE_ARRAY;
 		}
 
-		double[] subarray = new double[newSize];
+		final double[] subarray = new double[newSize];
 		System.arraycopy(array, startIndexInclusive, subarray, 0, newSize);
 		return subarray;
 	}
@@ -7198,7 +7184,7 @@ public class ArrayUtils {
 	 * @since 2.1
 	 * @see Arrays#copyOfRange(float[], int, int)
 	 */
-	public static float[] subarray(float[] array, int startIndexInclusive, int endIndexExclusive) {
+	public static float[] subarray(final float[] array, int startIndexInclusive, int endIndexExclusive) {
 		if (array == null) {
 			return null;
 		}
@@ -7208,12 +7194,12 @@ public class ArrayUtils {
 		if (endIndexExclusive > array.length) {
 			endIndexExclusive = array.length;
 		}
-		int newSize = endIndexExclusive - startIndexInclusive;
+		final int newSize = endIndexExclusive - startIndexInclusive;
 		if (newSize <= 0) {
 			return EMPTY_FLOAT_ARRAY;
 		}
 
-		float[] subarray = new float[newSize];
+		final float[] subarray = new float[newSize];
 		System.arraycopy(array, startIndexInclusive, subarray, 0, newSize);
 		return subarray;
 	}
@@ -7235,7 +7221,7 @@ public class ArrayUtils {
 	 * @since 2.1
 	 * @see Arrays#copyOfRange(int[], int, int)
 	 */
-	public static int[] subarray(int[] array, int startIndexInclusive, int endIndexExclusive) {
+	public static int[] subarray(final int[] array, int startIndexInclusive, int endIndexExclusive) {
 		if (array == null) {
 			return null;
 		}
@@ -7245,12 +7231,12 @@ public class ArrayUtils {
 		if (endIndexExclusive > array.length) {
 			endIndexExclusive = array.length;
 		}
-		int newSize = endIndexExclusive - startIndexInclusive;
+		final int newSize = endIndexExclusive - startIndexInclusive;
 		if (newSize <= 0) {
 			return EMPTY_INT_ARRAY;
 		}
 
-		int[] subarray = new int[newSize];
+		final int[] subarray = new int[newSize];
 		System.arraycopy(array, startIndexInclusive, subarray, 0, newSize);
 		return subarray;
 	}
@@ -7272,7 +7258,7 @@ public class ArrayUtils {
 	 * @since 2.1
 	 * @see Arrays#copyOfRange(long[], int, int)
 	 */
-	public static long[] subarray(long[] array, int startIndexInclusive, int endIndexExclusive) {
+	public static long[] subarray(final long[] array, int startIndexInclusive, int endIndexExclusive) {
 		if (array == null) {
 			return null;
 		}
@@ -7282,12 +7268,12 @@ public class ArrayUtils {
 		if (endIndexExclusive > array.length) {
 			endIndexExclusive = array.length;
 		}
-		int newSize = endIndexExclusive - startIndexInclusive;
+		final int newSize = endIndexExclusive - startIndexInclusive;
 		if (newSize <= 0) {
 			return EMPTY_LONG_ARRAY;
 		}
 
-		long[] subarray = new long[newSize];
+		final long[] subarray = new long[newSize];
 		System.arraycopy(array, startIndexInclusive, subarray, 0, newSize);
 		return subarray;
 	}
@@ -7309,7 +7295,7 @@ public class ArrayUtils {
 	 * @since 2.1
 	 * @see Arrays#copyOfRange(short[], int, int)
 	 */
-	public static short[] subarray(short[] array, int startIndexInclusive, int endIndexExclusive) {
+	public static short[] subarray(final short[] array, int startIndexInclusive, int endIndexExclusive) {
 		if (array == null) {
 			return null;
 		}
@@ -7319,12 +7305,12 @@ public class ArrayUtils {
 		if (endIndexExclusive > array.length) {
 			endIndexExclusive = array.length;
 		}
-		int newSize = endIndexExclusive - startIndexInclusive;
+		final int newSize = endIndexExclusive - startIndexInclusive;
 		if (newSize <= 0) {
 			return EMPTY_SHORT_ARRAY;
 		}
 
-		short[] subarray = new short[newSize];
+		final short[] subarray = new short[newSize];
 		System.arraycopy(array, startIndexInclusive, subarray, 0, newSize);
 		return subarray;
 	}
@@ -7357,7 +7343,7 @@ public class ArrayUtils {
 	 * @since 2.1
 	 * @see Arrays#copyOfRange(Object[], int, int)
 	 */
-	public static <T> T[] subarray(T[] array, int startIndexInclusive, int endIndexExclusive) {
+	public static <T> T[] subarray(final T[] array, int startIndexInclusive, int endIndexExclusive) {
 		if (array == null) {
 			return null;
 		}
@@ -7367,15 +7353,15 @@ public class ArrayUtils {
 		if (endIndexExclusive > array.length) {
 			endIndexExclusive = array.length;
 		}
-		int newSize = endIndexExclusive - startIndexInclusive;
-		Class<?> type = array.getClass().getComponentType();
+		final int newSize = endIndexExclusive - startIndexInclusive;
+		final Class<?> type = array.getClass().getComponentType();
 		if (newSize <= 0) {
-			// OK, because array is of type T
-			T[] emptyArray = (T[]) Array.newInstance(type, 0);
+			@SuppressWarnings("unchecked") // OK, because array is of type T
+			final T[] emptyArray = (T[]) Array.newInstance(type, 0);
 			return emptyArray;
 		}
-		// OK, because array is of type T
-		T[] subarray = (T[]) Array.newInstance(type, newSize);
+		@SuppressWarnings("unchecked") // OK, because array is of type T
+		final T[] subarray = (T[]) Array.newInstance(type, newSize);
 		System.arraycopy(array, startIndexInclusive, subarray, 0, newSize);
 		return subarray;
 	}
@@ -7400,7 +7386,7 @@ public class ArrayUtils {
 	 * @param offset2 the index of the second element to swap
 	 * @since 3.5
 	 */
-	public static void swap(boolean[] array, int offset1, int offset2) {
+	public static void swap(final boolean[] array, final int offset1, final int offset2) {
 		if (isEmpty(array)) {
 			return;
 		}
@@ -7434,7 +7420,7 @@ public class ArrayUtils {
 	 * @param len the number of elements to swap starting with the given indices
 	 * @since 3.5
 	 */
-	public static void swap(boolean[] array, int offset1, int offset2, int len) {
+	public static void swap(final boolean[] array, int offset1, int offset2, int len) {
 		if (isEmpty(array) || offset1 >= array.length || offset2 >= array.length) {
 			return;
 		}
@@ -7446,7 +7432,7 @@ public class ArrayUtils {
 		}
 		len = Math.min(Math.min(len, array.length - offset1), array.length - offset2);
 		for (int i = 0; i < len; i++, offset1++, offset2++) {
-			boolean aux = array[offset1];
+			final boolean aux = array[offset1];
 			array[offset1] = array[offset2];
 			array[offset2] = aux;
 		}
@@ -7472,7 +7458,7 @@ public class ArrayUtils {
 	 * @param offset2 the index of the second element to swap
 	 * @since 3.5
 	 */
-	public static void swap(byte[] array, int offset1, int offset2) {
+	public static void swap(final byte[] array, final int offset1, final int offset2) {
 		if (isEmpty(array)) {
 			return;
 		}
@@ -7501,7 +7487,7 @@ public class ArrayUtils {
 	 * @param len the number of elements to swap starting with the given indices
 	 * @since 3.5
 	 */
-	public static void swap(byte[] array, int offset1, int offset2, int len) {
+	public static void swap(final byte[] array, int offset1, int offset2, int len) {
 		if (isEmpty(array) || offset1 >= array.length || offset2 >= array.length) {
 			return;
 		}
@@ -7513,7 +7499,7 @@ public class ArrayUtils {
 		}
 		len = Math.min(Math.min(len, array.length - offset1), array.length - offset2);
 		for (int i = 0; i < len; i++, offset1++, offset2++) {
-			byte aux = array[offset1];
+			final byte aux = array[offset1];
 			array[offset1] = array[offset2];
 			array[offset2] = aux;
 		}
@@ -7539,7 +7525,7 @@ public class ArrayUtils {
 	 * @param offset2 the index of the second element to swap
 	 * @since 3.5
 	 */
-	public static void swap(char[] array, int offset1, int offset2) {
+	public static void swap(final char[] array, final int offset1, final int offset2) {
 		if (isEmpty(array)) {
 			return;
 		}
@@ -7568,7 +7554,7 @@ public class ArrayUtils {
 	 * @param len the number of elements to swap starting with the given indices
 	 * @since 3.5
 	 */
-	public static void swap(char[] array, int offset1, int offset2, int len) {
+	public static void swap(final char[] array, int offset1, int offset2, int len) {
 		if (isEmpty(array) || offset1 >= array.length || offset2 >= array.length) {
 			return;
 		}
@@ -7580,7 +7566,7 @@ public class ArrayUtils {
 		}
 		len = Math.min(Math.min(len, array.length - offset1), array.length - offset2);
 		for (int i = 0; i < len; i++, offset1++, offset2++) {
-			char aux = array[offset1];
+			final char aux = array[offset1];
 			array[offset1] = array[offset2];
 			array[offset2] = aux;
 		}
@@ -7606,7 +7592,7 @@ public class ArrayUtils {
 	 * @param offset2 the index of the second element to swap
 	 * @since 3.5
 	 */
-	public static void swap(double[] array, int offset1, int offset2) {
+	public static void swap(final double[] array, final int offset1, final int offset2) {
 		if (isEmpty(array)) {
 			return;
 		}
@@ -7635,7 +7621,7 @@ public class ArrayUtils {
 	 * @param len the number of elements to swap starting with the given indices
 	 * @since 3.5
 	 */
-	public static void swap(double[] array, int offset1, int offset2, int len) {
+	public static void swap(final double[] array, int offset1, int offset2, int len) {
 		if (isEmpty(array) || offset1 >= array.length || offset2 >= array.length) {
 			return;
 		}
@@ -7647,7 +7633,7 @@ public class ArrayUtils {
 		}
 		len = Math.min(Math.min(len, array.length - offset1), array.length - offset2);
 		for (int i = 0; i < len; i++, offset1++, offset2++) {
-			double aux = array[offset1];
+			final double aux = array[offset1];
 			array[offset1] = array[offset2];
 			array[offset2] = aux;
 		}
@@ -7673,7 +7659,7 @@ public class ArrayUtils {
 	 * @param offset2 the index of the second element to swap
 	 * @since 3.5
 	 */
-	public static void swap(float[] array, int offset1, int offset2) {
+	public static void swap(final float[] array, final int offset1, final int offset2) {
 		if (isEmpty(array)) {
 			return;
 		}
@@ -7702,7 +7688,7 @@ public class ArrayUtils {
 	 * @param len the number of elements to swap starting with the given indices
 	 * @since 3.5
 	 */
-	public static void swap(float[] array, int offset1, int offset2, int len) {
+	public static void swap(final float[] array, int offset1, int offset2, int len) {
 		if (isEmpty(array) || offset1 >= array.length || offset2 >= array.length) {
 			return;
 		}
@@ -7714,7 +7700,7 @@ public class ArrayUtils {
 		}
 		len = Math.min(Math.min(len, array.length - offset1), array.length - offset2);
 		for (int i = 0; i < len; i++, offset1++, offset2++) {
-			float aux = array[offset1];
+			final float aux = array[offset1];
 			array[offset1] = array[offset2];
 			array[offset2] = aux;
 		}
@@ -7740,7 +7726,7 @@ public class ArrayUtils {
 	 * @param offset2 the index of the second element to swap
 	 * @since 3.5
 	 */
-	public static void swap(int[] array, int offset1, int offset2) {
+	public static void swap(final int[] array, final int offset1, final int offset2) {
 		if (isEmpty(array)) {
 			return;
 		}
@@ -7769,7 +7755,7 @@ public class ArrayUtils {
 	 * @param len the number of elements to swap starting with the given indices
 	 * @since 3.5
 	 */
-	public static void swap(int[] array, int offset1, int offset2, int len) {
+	public static void swap(final int[] array, int offset1, int offset2, int len) {
 		if (isEmpty(array) || offset1 >= array.length || offset2 >= array.length) {
 			return;
 		}
@@ -7781,7 +7767,7 @@ public class ArrayUtils {
 		}
 		len = Math.min(Math.min(len, array.length - offset1), array.length - offset2);
 		for (int i = 0; i < len; i++, offset1++, offset2++) {
-			int aux = array[offset1];
+			final int aux = array[offset1];
 			array[offset1] = array[offset2];
 			array[offset2] = aux;
 		}
@@ -7807,7 +7793,7 @@ public class ArrayUtils {
 	 * @param offset2 the index of the second element to swap
 	 * @since 3.5
 	 */
-	public static void swap(long[] array, int offset1, int offset2) {
+	public static void swap(final long[] array, final int offset1, final int offset2) {
 		if (isEmpty(array)) {
 			return;
 		}
@@ -7836,7 +7822,7 @@ public class ArrayUtils {
 	 * @param len the number of elements to swap starting with the given indices
 	 * @since 3.5
 	 */
-	public static void swap(long[] array, int offset1, int offset2, int len) {
+	public static void swap(final long[] array, int offset1, int offset2, int len) {
 		if (isEmpty(array) || offset1 >= array.length || offset2 >= array.length) {
 			return;
 		}
@@ -7848,7 +7834,7 @@ public class ArrayUtils {
 		}
 		len = Math.min(Math.min(len, array.length - offset1), array.length - offset2);
 		for (int i = 0; i < len; i++, offset1++, offset2++) {
-			long aux = array[offset1];
+			final long aux = array[offset1];
 			array[offset1] = array[offset2];
 			array[offset2] = aux;
 		}
@@ -7876,7 +7862,7 @@ public class ArrayUtils {
 	 * @param offset2 the index of the second element to swap
 	 * @since 3.5
 	 */
-	public static void swap(Object[] array, int offset1, int offset2) {
+	public static void swap(final Object[] array, final int offset1, final int offset2) {
 		if (isEmpty(array)) {
 			return;
 		}
@@ -7905,7 +7891,7 @@ public class ArrayUtils {
 	 * @param len the number of elements to swap starting with the given indices
 	 * @since 3.5
 	 */
-	public static void swap(Object[] array, int offset1, int offset2, int len) {
+	public static void swap(final Object[] array, int offset1, int offset2, int len) {
 		if (isEmpty(array) || offset1 >= array.length || offset2 >= array.length) {
 			return;
 		}
@@ -7917,7 +7903,7 @@ public class ArrayUtils {
 		}
 		len = Math.min(Math.min(len, array.length - offset1), array.length - offset2);
 		for (int i = 0; i < len; i++, offset1++, offset2++) {
-			Object aux = array[offset1];
+			final Object aux = array[offset1];
 			array[offset1] = array[offset2];
 			array[offset2] = aux;
 		}
@@ -7943,7 +7929,7 @@ public class ArrayUtils {
 	 * @param offset2 the index of the second element to swap
 	 * @since 3.5
 	 */
-	public static void swap(short[] array, int offset1, int offset2) {
+	public static void swap(final short[] array, final int offset1, final int offset2) {
 		if (isEmpty(array)) {
 			return;
 		}
@@ -7972,7 +7958,7 @@ public class ArrayUtils {
 	 * @param len the number of elements to swap starting with the given indices
 	 * @since 3.5
 	 */
-	public static void swap(short[] array, int offset1, int offset2, int len) {
+	public static void swap(final short[] array, int offset1, int offset2, int len) {
 		if (isEmpty(array) || offset1 >= array.length || offset2 >= array.length) {
 			return;
 		}
@@ -7987,7 +7973,7 @@ public class ArrayUtils {
 		}
 		len = Math.min(Math.min(len, array.length - offset1), array.length - offset2);
 		for (int i = 0; i < len; i++, offset1++, offset2++) {
-			short aux = array[offset1];
+			final short aux = array[offset1];
 			array[offset1] = array[offset2];
 			array[offset2] = aux;
 		}
@@ -8035,16 +8021,16 @@ public class ArrayUtils {
 	 * @return the array, not null unless a null array is passed in
 	 * @since 3.0
 	 */
-	public static <T> T[] toArray(T... items) {
+	public static <T> T[] toArray(@SuppressWarnings("unchecked") final T... items) {
 		return items;
 	}
 
 	// To map
 	// -----------------------------------------------------------------------
 	/**
-	 * Converts the given array into a {@link Map}. Each element of the array must be
-	 * either a {@link Map.Entry} or an Array, containing at least two elements, where the
-	 * first element is used as key and the second as value.
+	 * Converts the given array into a {@link java.util.Map}. Each element of the array
+	 * must be either a {@link java.util.Map.Entry} or an Array, containing at least two
+	 * elements, where the first element is used as key and the second as value.
 	 *
 	 * <p>
 	 * This method can be used to initialize:
@@ -8059,27 +8045,27 @@ public class ArrayUtils {
 	 *
 	 * <p>
 	 * This method returns {@code null} for a {@code null} input array.
-	 * @param array an array whose elements are either a {@link Map.Entry} or an Array
-	 * containing at least two elements, may be {@code null}
+	 * @param array an array whose elements are either a {@link java.util.Map.Entry} or an
+	 * Array containing at least two elements, may be {@code null}
 	 * @return a {@code Map} that was created from the array
 	 * @throws IllegalArgumentException if one element of this Array is itself an Array
 	 * containing less then two elements
 	 * @throws IllegalArgumentException if the array contains elements other than
-	 * {@link Map.Entry} and an Array
+	 * {@link java.util.Map.Entry} and an Array
 	 */
-	public static Map<Object, Object> toMap(Object[] array) {
+	public static Map<Object, Object> toMap(final Object[] array) {
 		if (array == null) {
 			return null;
 		}
-		Map<Object, Object> map = new HashMap<>((int) (array.length * 1.5));
+		final Map<Object, Object> map = new HashMap<>((int) (array.length * 1.5));
 		for (int i = 0; i < array.length; i++) {
-			Object object = array[i];
+			final Object object = array[i];
 			if (object instanceof Map.Entry<?, ?>) {
-				Map.Entry<?, ?> entry = (Map.Entry<?, ?>) object;
+				final Map.Entry<?, ?> entry = (Map.Entry<?, ?>) object;
 				map.put(entry.getKey(), entry.getValue());
 			}
 			else if (object instanceof Object[]) {
-				Object[] entry = (Object[]) object;
+				final Object[] entry = (Object[]) object;
 				if (entry.length < 2) {
 					throw new IllegalArgumentException(
 							"Array element " + i + ", '" + object + "', has a length less than 2");
@@ -8102,14 +8088,14 @@ public class ArrayUtils {
 	 * @param array a {@code boolean} array
 	 * @return a {@code Boolean} array, {@code null} if null array input
 	 */
-	public static Boolean[] toObject(boolean[] array) {
+	public static Boolean[] toObject(final boolean[] array) {
 		if (array == null) {
 			return null;
 		}
 		else if (array.length == 0) {
 			return EMPTY_BOOLEAN_OBJECT_ARRAY;
 		}
-		Boolean[] result = new Boolean[array.length];
+		final Boolean[] result = new Boolean[array.length];
 		for (int i = 0; i < array.length; i++) {
 			result[i] = (array[i] ? Boolean.TRUE : Boolean.FALSE);
 		}
@@ -8124,14 +8110,14 @@ public class ArrayUtils {
 	 * @param array a {@code byte} array
 	 * @return a {@code Byte} array, {@code null} if null array input
 	 */
-	public static Byte[] toObject(byte[] array) {
+	public static Byte[] toObject(final byte[] array) {
 		if (array == null) {
 			return null;
 		}
 		else if (array.length == 0) {
 			return EMPTY_BYTE_OBJECT_ARRAY;
 		}
-		Byte[] result = new Byte[array.length];
+		final Byte[] result = new Byte[array.length];
 		for (int i = 0; i < array.length; i++) {
 			result[i] = Byte.valueOf(array[i]);
 		}
@@ -8146,14 +8132,14 @@ public class ArrayUtils {
 	 * @param array a {@code char} array
 	 * @return a {@code Character} array, {@code null} if null array input
 	 */
-	public static Character[] toObject(char[] array) {
+	public static Character[] toObject(final char[] array) {
 		if (array == null) {
 			return null;
 		}
 		else if (array.length == 0) {
 			return EMPTY_CHARACTER_OBJECT_ARRAY;
 		}
-		Character[] result = new Character[array.length];
+		final Character[] result = new Character[array.length];
 		for (int i = 0; i < array.length; i++) {
 			result[i] = Character.valueOf(array[i]);
 		}
@@ -8168,14 +8154,14 @@ public class ArrayUtils {
 	 * @param array a {@code double} array
 	 * @return a {@code Double} array, {@code null} if null array input
 	 */
-	public static Double[] toObject(double[] array) {
+	public static Double[] toObject(final double[] array) {
 		if (array == null) {
 			return null;
 		}
 		else if (array.length == 0) {
 			return EMPTY_DOUBLE_OBJECT_ARRAY;
 		}
-		Double[] result = new Double[array.length];
+		final Double[] result = new Double[array.length];
 		for (int i = 0; i < array.length; i++) {
 			result[i] = Double.valueOf(array[i]);
 		}
@@ -8190,14 +8176,14 @@ public class ArrayUtils {
 	 * @param array a {@code float} array
 	 * @return a {@code Float} array, {@code null} if null array input
 	 */
-	public static Float[] toObject(float[] array) {
+	public static Float[] toObject(final float[] array) {
 		if (array == null) {
 			return null;
 		}
 		else if (array.length == 0) {
 			return EMPTY_FLOAT_OBJECT_ARRAY;
 		}
-		Float[] result = new Float[array.length];
+		final Float[] result = new Float[array.length];
 		for (int i = 0; i < array.length; i++) {
 			result[i] = Float.valueOf(array[i]);
 		}
@@ -8212,14 +8198,14 @@ public class ArrayUtils {
 	 * @param array an {@code int} array
 	 * @return an {@code Integer} array, {@code null} if null array input
 	 */
-	public static Integer[] toObject(int[] array) {
+	public static Integer[] toObject(final int[] array) {
 		if (array == null) {
 			return null;
 		}
 		else if (array.length == 0) {
 			return EMPTY_INTEGER_OBJECT_ARRAY;
 		}
-		Integer[] result = new Integer[array.length];
+		final Integer[] result = new Integer[array.length];
 		for (int i = 0; i < array.length; i++) {
 			result[i] = Integer.valueOf(array[i]);
 		}
@@ -8234,14 +8220,14 @@ public class ArrayUtils {
 	 * @param array a {@code long} array
 	 * @return a {@code Long} array, {@code null} if null array input
 	 */
-	public static Long[] toObject(long[] array) {
+	public static Long[] toObject(final long[] array) {
 		if (array == null) {
 			return null;
 		}
 		else if (array.length == 0) {
 			return EMPTY_LONG_OBJECT_ARRAY;
 		}
-		Long[] result = new Long[array.length];
+		final Long[] result = new Long[array.length];
 		for (int i = 0; i < array.length; i++) {
 			result[i] = Long.valueOf(array[i]);
 		}
@@ -8256,14 +8242,14 @@ public class ArrayUtils {
 	 * @param array a {@code short} array
 	 * @return a {@code Short} array, {@code null} if null array input
 	 */
-	public static Short[] toObject(short[] array) {
+	public static Short[] toObject(final short[] array) {
 		if (array == null) {
 			return null;
 		}
 		else if (array.length == 0) {
 			return EMPTY_SHORT_OBJECT_ARRAY;
 		}
-		Short[] result = new Short[array.length];
+		final Short[] result = new Short[array.length];
 		for (int i = 0; i < array.length; i++) {
 			result[i] = Short.valueOf(array[i]);
 		}
@@ -8281,14 +8267,14 @@ public class ArrayUtils {
 	 * @return a {@code boolean} array, {@code null} if null array input
 	 * @throws NullPointerException if array content is {@code null}
 	 */
-	public static boolean[] toPrimitive(Boolean[] array) {
+	public static boolean[] toPrimitive(final Boolean[] array) {
 		if (array == null) {
 			return null;
 		}
 		else if (array.length == 0) {
 			return EMPTY_BOOLEAN_ARRAY;
 		}
-		boolean[] result = new boolean[array.length];
+		final boolean[] result = new boolean[array.length];
 		for (int i = 0; i < array.length; i++) {
 			result[i] = array[i].booleanValue();
 		}
@@ -8304,16 +8290,16 @@ public class ArrayUtils {
 	 * @param valueForNull the value to insert if {@code null} found
 	 * @return a {@code boolean} array, {@code null} if null array input
 	 */
-	public static boolean[] toPrimitive(Boolean[] array, boolean valueForNull) {
+	public static boolean[] toPrimitive(final Boolean[] array, final boolean valueForNull) {
 		if (array == null) {
 			return null;
 		}
 		else if (array.length == 0) {
 			return EMPTY_BOOLEAN_ARRAY;
 		}
-		boolean[] result = new boolean[array.length];
+		final boolean[] result = new boolean[array.length];
 		for (int i = 0; i < array.length; i++) {
-			Boolean b = array[i];
+			final Boolean b = array[i];
 			result[i] = (b == null ? valueForNull : b.booleanValue());
 		}
 		return result;
@@ -8330,14 +8316,14 @@ public class ArrayUtils {
 	 * @return a {@code byte} array, {@code null} if null array input
 	 * @throws NullPointerException if array content is {@code null}
 	 */
-	public static byte[] toPrimitive(Byte[] array) {
+	public static byte[] toPrimitive(final Byte[] array) {
 		if (array == null) {
 			return null;
 		}
 		else if (array.length == 0) {
 			return EMPTY_BYTE_ARRAY;
 		}
-		byte[] result = new byte[array.length];
+		final byte[] result = new byte[array.length];
 		for (int i = 0; i < array.length; i++) {
 			result[i] = array[i].byteValue();
 		}
@@ -8353,16 +8339,16 @@ public class ArrayUtils {
 	 * @param valueForNull the value to insert if {@code null} found
 	 * @return a {@code byte} array, {@code null} if null array input
 	 */
-	public static byte[] toPrimitive(Byte[] array, byte valueForNull) {
+	public static byte[] toPrimitive(final Byte[] array, final byte valueForNull) {
 		if (array == null) {
 			return null;
 		}
 		else if (array.length == 0) {
 			return EMPTY_BYTE_ARRAY;
 		}
-		byte[] result = new byte[array.length];
+		final byte[] result = new byte[array.length];
 		for (int i = 0; i < array.length; i++) {
-			Byte b = array[i];
+			final Byte b = array[i];
 			result[i] = (b == null ? valueForNull : b.byteValue());
 		}
 		return result;
@@ -8379,14 +8365,14 @@ public class ArrayUtils {
 	 * @return a {@code char} array, {@code null} if null array input
 	 * @throws NullPointerException if array content is {@code null}
 	 */
-	public static char[] toPrimitive(Character[] array) {
+	public static char[] toPrimitive(final Character[] array) {
 		if (array == null) {
 			return null;
 		}
 		else if (array.length == 0) {
 			return EMPTY_CHAR_ARRAY;
 		}
-		char[] result = new char[array.length];
+		final char[] result = new char[array.length];
 		for (int i = 0; i < array.length; i++) {
 			result[i] = array[i].charValue();
 		}
@@ -8402,16 +8388,16 @@ public class ArrayUtils {
 	 * @param valueForNull the value to insert if {@code null} found
 	 * @return a {@code char} array, {@code null} if null array input
 	 */
-	public static char[] toPrimitive(Character[] array, char valueForNull) {
+	public static char[] toPrimitive(final Character[] array, final char valueForNull) {
 		if (array == null) {
 			return null;
 		}
 		else if (array.length == 0) {
 			return EMPTY_CHAR_ARRAY;
 		}
-		char[] result = new char[array.length];
+		final char[] result = new char[array.length];
 		for (int i = 0; i < array.length; i++) {
-			Character b = array[i];
+			final Character b = array[i];
 			result[i] = (b == null ? valueForNull : b.charValue());
 		}
 		return result;
@@ -8428,14 +8414,14 @@ public class ArrayUtils {
 	 * @return a {@code double} array, {@code null} if null array input
 	 * @throws NullPointerException if array content is {@code null}
 	 */
-	public static double[] toPrimitive(Double[] array) {
+	public static double[] toPrimitive(final Double[] array) {
 		if (array == null) {
 			return null;
 		}
 		else if (array.length == 0) {
 			return EMPTY_DOUBLE_ARRAY;
 		}
-		double[] result = new double[array.length];
+		final double[] result = new double[array.length];
 		for (int i = 0; i < array.length; i++) {
 			result[i] = array[i].doubleValue();
 		}
@@ -8451,16 +8437,16 @@ public class ArrayUtils {
 	 * @param valueForNull the value to insert if {@code null} found
 	 * @return a {@code double} array, {@code null} if null array input
 	 */
-	public static double[] toPrimitive(Double[] array, double valueForNull) {
+	public static double[] toPrimitive(final Double[] array, final double valueForNull) {
 		if (array == null) {
 			return null;
 		}
 		else if (array.length == 0) {
 			return EMPTY_DOUBLE_ARRAY;
 		}
-		double[] result = new double[array.length];
+		final double[] result = new double[array.length];
 		for (int i = 0; i < array.length; i++) {
-			Double b = array[i];
+			final Double b = array[i];
 			result[i] = (b == null ? valueForNull : b.doubleValue());
 		}
 		return result;
@@ -8477,14 +8463,14 @@ public class ArrayUtils {
 	 * @return a {@code float} array, {@code null} if null array input
 	 * @throws NullPointerException if array content is {@code null}
 	 */
-	public static float[] toPrimitive(Float[] array) {
+	public static float[] toPrimitive(final Float[] array) {
 		if (array == null) {
 			return null;
 		}
 		else if (array.length == 0) {
 			return EMPTY_FLOAT_ARRAY;
 		}
-		float[] result = new float[array.length];
+		final float[] result = new float[array.length];
 		for (int i = 0; i < array.length; i++) {
 			result[i] = array[i].floatValue();
 		}
@@ -8500,16 +8486,16 @@ public class ArrayUtils {
 	 * @param valueForNull the value to insert if {@code null} found
 	 * @return a {@code float} array, {@code null} if null array input
 	 */
-	public static float[] toPrimitive(Float[] array, float valueForNull) {
+	public static float[] toPrimitive(final Float[] array, final float valueForNull) {
 		if (array == null) {
 			return null;
 		}
 		else if (array.length == 0) {
 			return EMPTY_FLOAT_ARRAY;
 		}
-		float[] result = new float[array.length];
+		final float[] result = new float[array.length];
 		for (int i = 0; i < array.length; i++) {
-			Float b = array[i];
+			final Float b = array[i];
 			result[i] = (b == null ? valueForNull : b.floatValue());
 		}
 		return result;
@@ -8526,14 +8512,14 @@ public class ArrayUtils {
 	 * @return an {@code int} array, {@code null} if null array input
 	 * @throws NullPointerException if array content is {@code null}
 	 */
-	public static int[] toPrimitive(Integer[] array) {
+	public static int[] toPrimitive(final Integer[] array) {
 		if (array == null) {
 			return null;
 		}
 		else if (array.length == 0) {
 			return EMPTY_INT_ARRAY;
 		}
-		int[] result = new int[array.length];
+		final int[] result = new int[array.length];
 		for (int i = 0; i < array.length; i++) {
 			result[i] = array[i].intValue();
 		}
@@ -8549,16 +8535,16 @@ public class ArrayUtils {
 	 * @param valueForNull the value to insert if {@code null} found
 	 * @return an {@code int} array, {@code null} if null array input
 	 */
-	public static int[] toPrimitive(Integer[] array, int valueForNull) {
+	public static int[] toPrimitive(final Integer[] array, final int valueForNull) {
 		if (array == null) {
 			return null;
 		}
 		else if (array.length == 0) {
 			return EMPTY_INT_ARRAY;
 		}
-		int[] result = new int[array.length];
+		final int[] result = new int[array.length];
 		for (int i = 0; i < array.length; i++) {
-			Integer b = array[i];
+			final Integer b = array[i];
 			result[i] = (b == null ? valueForNull : b.intValue());
 		}
 		return result;
@@ -8575,14 +8561,14 @@ public class ArrayUtils {
 	 * @return a {@code long} array, {@code null} if null array input
 	 * @throws NullPointerException if array content is {@code null}
 	 */
-	public static long[] toPrimitive(Long[] array) {
+	public static long[] toPrimitive(final Long[] array) {
 		if (array == null) {
 			return null;
 		}
 		else if (array.length == 0) {
 			return EMPTY_LONG_ARRAY;
 		}
-		long[] result = new long[array.length];
+		final long[] result = new long[array.length];
 		for (int i = 0; i < array.length; i++) {
 			result[i] = array[i].longValue();
 		}
@@ -8598,16 +8584,16 @@ public class ArrayUtils {
 	 * @param valueForNull the value to insert if {@code null} found
 	 * @return a {@code long} array, {@code null} if null array input
 	 */
-	public static long[] toPrimitive(Long[] array, long valueForNull) {
+	public static long[] toPrimitive(final Long[] array, final long valueForNull) {
 		if (array == null) {
 			return null;
 		}
 		else if (array.length == 0) {
 			return EMPTY_LONG_ARRAY;
 		}
-		long[] result = new long[array.length];
+		final long[] result = new long[array.length];
 		for (int i = 0; i < array.length; i++) {
-			Long b = array[i];
+			final Long b = array[i];
 			result[i] = (b == null ? valueForNull : b.longValue());
 		}
 		return result;
@@ -8624,14 +8610,14 @@ public class ArrayUtils {
 	 * @return a {@code byte} array, {@code null} if null array input
 	 * @throws NullPointerException if array content is {@code null}
 	 */
-	public static short[] toPrimitive(Short[] array) {
+	public static short[] toPrimitive(final Short[] array) {
 		if (array == null) {
 			return null;
 		}
 		else if (array.length == 0) {
 			return EMPTY_SHORT_ARRAY;
 		}
-		short[] result = new short[array.length];
+		final short[] result = new short[array.length];
 		for (int i = 0; i < array.length; i++) {
 			result[i] = array[i].shortValue();
 		}
@@ -8647,16 +8633,16 @@ public class ArrayUtils {
 	 * @param valueForNull the value to insert if {@code null} found
 	 * @return a {@code byte} array, {@code null} if null array input
 	 */
-	public static short[] toPrimitive(Short[] array, short valueForNull) {
+	public static short[] toPrimitive(final Short[] array, final short valueForNull) {
 		if (array == null) {
 			return null;
 		}
 		else if (array.length == 0) {
 			return EMPTY_SHORT_ARRAY;
 		}
-		short[] result = new short[array.length];
+		final short[] result = new short[array.length];
 		for (int i = 0; i < array.length; i++) {
-			Short b = array[i];
+			final Short b = array[i];
 			result[i] = (b == null ? valueForNull : b.shortValue());
 		}
 		return result;
@@ -8677,7 +8663,7 @@ public class ArrayUtils {
 	 * @throws NullPointerException if array contains {@code null}
 	 * @since 3.6
 	 */
-	public static String[] toStringArray(Object[] array) {
+	public static String[] toStringArray(final Object[] array) {
 		if (array == null) {
 			return null;
 		}
@@ -8685,7 +8671,7 @@ public class ArrayUtils {
 			return EMPTY_STRING_ARRAY;
 		}
 
-		String[] result = new String[array.length];
+		final String[] result = new String[array.length];
 		for (int i = 0; i < array.length; i++) {
 			result[i] = array[i].toString();
 		}
@@ -8704,7 +8690,7 @@ public class ArrayUtils {
 	 * @return a {@code String} array, {@code null} if null array input
 	 * @since 3.6
 	 */
-	public static String[] toStringArray(Object[] array, String valueForNullElements) {
+	public static String[] toStringArray(final Object[] array, final String valueForNullElements) {
 		if (null == array) {
 			return null;
 		}
@@ -8712,9 +8698,9 @@ public class ArrayUtils {
 			return EMPTY_STRING_ARRAY;
 		}
 
-		String[] result = new String[array.length];
+		final String[] result = new String[array.length];
 		for (int i = 0; i < array.length; i++) {
-			Object object = array[i];
+			final Object object = array[i];
 			result[i] = (object == null ? valueForNullElements : object.toString());
 		}
 

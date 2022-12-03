@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
  * .
  *
  * @author zhangmsh 2021/8/24
- * @since
+ * @since 1.0.0
  */
 class ConfigTest {
 
@@ -17,7 +17,7 @@ class ConfigTest {
 		config.setBooleanTrueProbability(1);
 
 		Config copied = Config.copyOf(config);
-		System.out.println(copied);
+		copied.setBooleanTrueProbability(22);
 		Assertions.assertEquals(1, config.getBooleanTrueProbability());
 	}
 

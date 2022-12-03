@@ -1,9 +1,9 @@
 package org.magneton.test.injector.base;
 
-import org.magneton.test.config.Config;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.magneton.test.ChaosTest;
+import org.magneton.test.config.Config;
 import org.magneton.test.core.InjectType;
 
 /**

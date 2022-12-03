@@ -1,7 +1,6 @@
 package org.magneton.test.supplier;
 
 import java.lang.reflect.Field;
-
 import lombok.SneakyThrows;
 
 /**

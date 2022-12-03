@@ -20,6 +20,7 @@ import org.magneton.test.parser.Definition;
 public abstract class AbstractConfigPostProcessor implements ConfigPostProcessor {
 
 	@Override
+	@SuppressWarnings("java:S1181")
 	public void beforeConfig(Config config, Definition definition) {
 		Map<Class<?>, Annotation> annotations = definition.getAnnotations();
 		if (annotations == null || annotations.isEmpty()) {

@@ -7,15 +7,22 @@ import org.magneton.test.core.InjectType;
 import org.magneton.test.parser.Definition;
 
 /**
- * .
+ * 注射器.
  *
  * @author zhangmsh 2021/8/18
  * @since 2.0.0
  */
 public interface Injector {
 
+	/**
+	 * 空类列表
+	 */
 	Class[] EMPTY_CLASSES = new Class[0];
 
+	/**
+	 * 类型列表
+	 * @return 类型列表
+	 */
 	Class[] getTypes();
 
 	/**

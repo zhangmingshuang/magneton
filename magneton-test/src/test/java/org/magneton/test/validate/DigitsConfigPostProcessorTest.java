@@ -1,13 +1,15 @@
 package org.magneton.test.validate;
 
-import org.magneton.test.HibernateValid;
-import org.magneton.test.config.Config;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+
 import javax.validation.constraints.Digits;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.RepeatedTest;
 import org.magneton.test.ChaosTest;
+import org.magneton.test.HibernateValid;
+import org.magneton.test.config.Config;
 import org.magneton.test.core.InjectType;
 import org.magneton.test.helper.Human;
 
@@ -23,6 +25,18 @@ class DigitsConfigPostProcessorTest {
 	private final Config config = new Config();
 
 	private final InjectType angle = InjectType.EXPECTED;
+
+	@SuppressWarnings("OverlyComplexMethod")
+	@RepeatedTest(10)
+	void testA() {
+		Config copied = Config.copyOf(this.config);
+		copied.setMinByte((byte) 100).setMaxByte((byte) 100);
+		copied.setMinShort((short) 100).setMaxShort((short) 9999);
+		TestA testA = ChaosTest.create(TestA.class, copied, this.angle);
+		Human.sout(testA);
+
+		Assertions.assertTrue(HibernateValid.valid(testA));
+	}
 
 	public static class TestA {
 
@@ -72,18 +86,6 @@ class DigitsConfigPostProcessorTest {
 		@Digits(integer = 1, fraction = 2)
 		private BigInteger bigInteger;
 
-	}
-
-	@SuppressWarnings("OverlyComplexMethod")
-	@RepeatedTest(10)
-	void testA() {
-		Config copied = Config.copyOf(this.config);
-		copied.setMinByte((byte) 100).setMaxByte((byte) 100);
-		copied.setMinShort((short) 100).setMaxShort((short) 9999);
-		TestA testA = ChaosTest.create(TestA.class, copied, this.angle);
-		Human.sout(testA);
-
-		Assertions.assertTrue(HibernateValid.valid(testA));
 	}
 
 }

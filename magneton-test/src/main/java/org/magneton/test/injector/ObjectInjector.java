@@ -1,12 +1,12 @@
 package org.magneton.test.injector;
 
-import lombok.SneakyThrows;
 import org.magneton.test.annotation.TestAutowired;
 import org.magneton.test.annotation.TestComponent;
 import org.magneton.test.config.Config;
 import org.magneton.test.core.InjectType;
 import org.magneton.test.parser.Definition;
 import org.magneton.test.util.PrimitiveUtil;
+import lombok.SneakyThrows;
 
 /**
  * .

@@ -5,8 +5,8 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.List;
 
-import lombok.Getter;
 import org.magneton.test.parser.Definition;
+import lombok.Getter;
 
 /**
  * .

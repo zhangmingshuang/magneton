@@ -20,6 +20,7 @@ import org.magneton.test.util.PrimitiveUtil;
  * @author zhangmsh 2021/8/24
  * @since 2.0.0
  */
+@SuppressWarnings("UseOfSystemOutOrSystemErr")
 public class Human {
 
 	private static final String BR = System.lineSeparator();

@@ -5,6 +5,9 @@ import java.util.Random;
 
 public class ChineseCharUtils {
 
+	/**
+	 * 随机汉字
+	 */
 	public static String ODD_CHINESE_CHARS = "厷厸厹厺厼厽厾叀叁参叄叅叆叇亝収叏叐叒叓叕叚叜叝叞"
 			+ "叠叧叨叭叱叴叵叺叻叼叽叾卟叿吀吁吂吅吆吇吋吒吔吖吘吙吚吜吡吢吣吤吥吧吩吪吭吮吰吱吲呐吷吺吽呁呃呄呅呇呉"
 			+ "呋呋呌呍呎呏呐呒呓呔呕呗呙呚呛呜呝呞呟呠呡呢呣呤呥呦呧周呩呪呫呬呭呮呯呰呱呲呴呶呵呷呸呹呺呻呾呿咀咁咂"

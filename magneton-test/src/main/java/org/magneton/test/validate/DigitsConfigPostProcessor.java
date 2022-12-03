@@ -31,7 +31,7 @@ public class DigitsConfigPostProcessor extends AbstractConfigPostProcessor {
 		int fraction = (int) metadata.get("fraction");
 
 		int minValue = integer * -9;
-		int maxValue = integer * 10;
+		int maxValue = integer * 9;
 
 		this.setByte(config, minValue, maxValue);
 		this.setShort(config, minValue, maxValue);

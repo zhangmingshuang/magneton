@@ -23,7 +23,7 @@ import org.magneton.test.core.TraceChain;
 import org.magneton.test.parser.Definition;
 
 /**
- * .
+ * 注入工厂.
  *
  * @author zhangmsh 2021/8/17
  * @since 2.0.0
@@ -93,22 +93,26 @@ public class InjectorFactory implements AfterAutowrited {
 		}
 		Set<Entry<Class, Injector>> entries = this.injectorTypeRef.entrySet();
 		for (Entry<Class, Injector> entry : entries) {
-			if (entry.getKey().isAssignableFrom(clazz)) {
-				injector = entry.getValue();
-				if (injector != null && injector.getClass() != ObjectInjector.class) {
-					if (injector.afterTypes().length > 0) {
-						for (Class afterClass : injector.afterTypes()) {
-							if (afterClass.isAssignableFrom(clazz)) {
-								injector = this.injectorTypeRef.get(afterClass);
-								if (injector != null) {
-									return injector;
-								}
-							}
-						}
+			if (!entry.getKey().isAssignableFrom(clazz)) {
+				continue;
+			}
+			injector = entry.getValue();
+			if (injector == null || injector.getClass() == ObjectInjector.class) {
+				continue;
+			}
+			if (injector.afterTypes().length < 1) {
+				this.injectorTypeRef.put(clazz, injector);
+				return injector;
+			}
+			for (Class afterClass : injector.afterTypes()) {
+				if (afterClass.isAssignableFrom(clazz)) {
+					injector = this.injectorTypeRef.get(afterClass);
+					if (injector != null) {
+						return injector;
 					}
-					return injector;
 				}
 			}
+			return injector;
 		}
 		return this.injectorTypeRef.get(Object.class);
 	}

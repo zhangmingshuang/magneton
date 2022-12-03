@@ -5,9 +5,18 @@ import java.util.List;
 
 public class ChineseAreaList {
 
+	/**
+	 * 全国省份列表
+	 */
 	public static List<String> provinceCityList = new ArrayList<>();
 
+	/**
+	 * 全国城市列表
+	 */
 	public static List<String> cityNameList = new ArrayList<>();
+
+	private ChineseAreaList() {
+	}
 
 	static {
 		provinceCityList.add("黑龙江省齐齐哈尔市");

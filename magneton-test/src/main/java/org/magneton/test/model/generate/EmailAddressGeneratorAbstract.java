@@ -1,7 +1,7 @@
 package org.magneton.test.model.generate;
 
-import org.apache.commons.lang3.RandomStringUtils;
 import org.magneton.test.model.generate.base.AbstractGenericGenerator;
+import org.apache.commons.lang3.RandomStringUtils;
 
 public class EmailAddressGeneratorAbstract extends AbstractGenericGenerator {
 

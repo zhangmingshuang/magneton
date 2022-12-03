@@ -28,6 +28,7 @@ public abstract class AbstractEqualsSupplier<T> extends AbstractBooleanSupplier<
 
 	@SneakyThrows
 	@Override
+	@SuppressWarnings("java:S3011")
 	protected boolean doBooleanJudge() {
 		if (Objects.equals(this.element1, this.element2)) {
 			return true;

@@ -2,6 +2,7 @@ package org.magneton.test;
 
 import java.util.Optional;
 
+import com.alibaba.testable.core.tool.OmniConstructor;
 import com.google.common.base.Preconditions;
 import org.magneton.test.annotation.TestComponentScan;
 import org.magneton.test.config.Config;
@@ -26,8 +27,12 @@ public class ChaosTest implements ChaosApplication {
 
 	private static final Config DEFAULT_CONFIG = new Config();
 
-	static {
-		ChaosContext.init(ChaosTest.class);
+	public static <T> T create(Class<T> clazz) {
+		return OmniConstructor.newInstance(clazz);
+	}
+
+	public static <T> T[] createArray(Class<T> clazz, int size) {
+		return OmniConstructor.newArray(clazz, size);
 	}
 
 	public static <T> T createExcepted(Class<T> clazz) {
@@ -51,8 +56,8 @@ public class ChaosTest implements ChaosApplication {
 	}
 
 	public static <T> T create(Class<T> clazz, Config config, InjectType injectType) {
-		Preconditions.checkNotNull(clazz, "clazz must be not null");
-		Preconditions.checkNotNull(injectType, "injectType must be not null");
+		Preconditions.checkNotNull(clazz, "clazz must not be null");
+		Preconditions.checkNotNull(injectType, "injectType must not be null");
 		TraceChain.current().start(clazz);
 		try {
 			Definition definition = ParserFactory.getInstance().parse(clazz);
@@ -70,6 +75,10 @@ public class ChaosTest implements ChaosApplication {
 
 	public static ValueGenerator valueGenerator() {
 		return ValueGenerator.getInstance();
+	}
+
+	static {
+		ChaosContext.init(ChaosTest.class);
 	}
 
 }

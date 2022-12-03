@@ -5,15 +5,15 @@ import java.util.Map;
 
 import javax.annotation.Nullable;
 
-import org.hibernate.validator.constraints.Range;
 import org.magneton.test.annotation.TestAutowired;
 import org.magneton.test.annotation.TestComponent;
 import org.magneton.test.config.Config;
 import org.magneton.test.parser.Definition;
 import org.magneton.test.util.AnnotationUtil;
+import org.hibernate.validator.constraints.Range;
 
 /**
- * {@link Range}
+ * {@link org.hibernate.validator.constraints.Range}
  *
  * <p>
  * {@link javax.validation.constraints.Min}与{@link javax.validation.constraints.Max}的组合

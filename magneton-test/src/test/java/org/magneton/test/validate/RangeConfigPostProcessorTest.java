@@ -1,13 +1,14 @@
 package org.magneton.test.validate;
 
-import org.magneton.test.HibernateValid;
-import org.magneton.test.config.Config;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+
 import org.hibernate.validator.constraints.Range;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.RepeatedTest;
 import org.magneton.test.ChaosTest;
+import org.magneton.test.HibernateValid;
+import org.magneton.test.config.Config;
 import org.magneton.test.core.InjectType;
 import org.magneton.test.helper.Human;
 
@@ -23,6 +24,14 @@ class RangeConfigPostProcessorTest {
 	private final Config config = new Config();
 
 	private final InjectType angle = InjectType.EXPECTED;
+
+	@RepeatedTest(10)
+	void testB() {
+		MaxConfigPostProcessorTest.TestB testB = ChaosTest.create(MaxConfigPostProcessorTest.TestB.class, this.config,
+				this.angle);
+		Human.sout(testB);
+		Assertions.assertTrue(HibernateValid.valid(testB));
+	}
 
 	public static class TestB {
 
@@ -44,14 +53,6 @@ class RangeConfigPostProcessorTest {
 		@Range(min = 999, max = 1000)
 		private BigInteger bigInteger;
 
-	}
-
-	@RepeatedTest(10)
-	void testB() {
-		MaxConfigPostProcessorTest.TestB testB = ChaosTest.create(MaxConfigPostProcessorTest.TestB.class, this.config,
-				this.angle);
-		Human.sout(testB);
-		Assertions.assertTrue(HibernateValid.valid(testB));
 	}
 
 }

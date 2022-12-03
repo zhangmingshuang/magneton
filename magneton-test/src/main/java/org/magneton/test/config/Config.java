@@ -17,7 +17,7 @@ import org.magneton.test.core.InjectType;
 import org.magneton.test.model.StringModel;
 
 /**
- * .
+ * 配置类.
  *
  * @author zhangmsh 2021/8/2
  * @since 2.0.0
@@ -28,8 +28,14 @@ import org.magneton.test.model.StringModel;
 @Accessors(chain = true)
 public class Config {
 
+	/**
+	 * 默认最小数字
+	 */
 	public static final int DEFAULT_NUMBER_MIN = -128;
 
+	/**
+	 * 默认最大数字
+	 */
 	public static final int DEFAULT_NUMBER_MAX = 127;
 
 	/** 生成数组、集合时的随机最小长度,如果小于0表示返回{@code null}，如果等于0表示返回空数组、字符串、集合 */
@@ -44,15 +50,15 @@ public class Config {
 	/** 生成字符串时的随机最大长度，如果小于0表示返回{@code null}，如果为0表示返回空字符串 */
 	private int maxCharSequenceLength = 16;
 
-	/**
-	 * 生成字符串时的随机最小长度，如果小于0表示返回{@code null}，如果为0表示返回空字符串
-	 */
-	private int minStringLength = 1;
-
-	/**
-	 * 生成字符串时的随机最大长度，如果小于0表示返回{@code null}，如果为0表示返回空字符串
-	 */
-	private int maxStringLength = 16;
+	// /**
+	// * 生成字符串时的随机最小长度，如果小于0表示返回{@code null}，如果为0表示返回空字符串
+	// */
+	// private int minStringLength = 1;
+	//
+	// /**
+	// * 生成字符串时的随机最大长度，如果小于0表示返回{@code null}，如果为0表示返回空字符串
+	// */
+	// private int maxStringLength = 16;
 
 	/** 生成byte的最小值。如果设置为{@code null}表示返回{@code null} */
 	private Byte minByte = (byte) DEFAULT_NUMBER_MIN;
@@ -178,7 +184,7 @@ public class Config {
 
 	@SneakyThrows
 	public static Config copyOf(Config config) {
-		Preconditions.checkNotNull(config, "config must be not null");
+		Preconditions.checkNotNull(config, "config must not be null");
 		Field[] fields = Config.class.getDeclaredFields();
 		Config copied = new Config();
 		for (Field field : fields) {
@@ -191,6 +197,10 @@ public class Config {
 			field.set(copied, value);
 		}
 		return copied;
+	}
+
+	public static Config builder() {
+		return new Config();
 	}
 
 	public void setAllNumberMinValue(Number number) {
@@ -235,10 +245,6 @@ public class Config {
 		else {
 			this.setMaxBigInteger(BigInteger.valueOf(number.longValue()));
 		}
-	}
-
-	public static Config builder() {
-		return new Config();
 	}
 
 	public Config build() {

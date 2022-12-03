@@ -1,11 +1,13 @@
 package org.magneton.module.pay.wechat.v3.core;
 
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+
+import javax.annotation.Nullable;
+
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.wechat.pay.contrib.apache.httpclient.auth.Signer.SignatureResult;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import javax.annotation.Nullable;
 import lombok.SneakyThrows;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -28,6 +30,10 @@ public interface BaseV3Api {
 	}
 
 	WxPayContext getPayContext();
+
+	default WxPayConfig getPayConfig() {
+		return this.getPayContext().getPayConfig();
+	}
 
 	default String doSign(String signStr) {
 		Preconditions.checkNotNull(signStr);

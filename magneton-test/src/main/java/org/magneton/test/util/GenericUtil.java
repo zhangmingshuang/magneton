@@ -11,7 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import sun.reflect.generics.reflectiveObjects.ParameterizedTypeImpl;
 
 /**
- * .
+ * 生成工具.
  *
  * @author zhangmsh 2021/8/3
  * @since 2.0.0
