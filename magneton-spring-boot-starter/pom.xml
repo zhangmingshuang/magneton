@@ -23,6 +23,10 @@
 			<groupId>org.magneton</groupId>
 			<artifactId>magneton-core</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.magneton</groupId>
+			<artifactId>magneton-support-core</artifactId>
+		</dependency>
 		<!-- 可选功能依赖项 -->
 		<dependency>
 			<groupId>org.magneton</groupId>
