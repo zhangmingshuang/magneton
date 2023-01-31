@@ -22,5 +22,10 @@
 			<artifactId>RoaringBitmap</artifactId>
 			<version>${RoaringBitmap.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.magneton</groupId>
+			<artifactId>magneton-test</artifactId>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 </project>
