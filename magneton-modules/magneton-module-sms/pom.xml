@@ -7,7 +7,7 @@
 	<parent>
 		<groupId>org.magneton</groupId>
 		<artifactId>magneton-modules</artifactId>
-		<version>2023</version>
+		<version>2023.1</version>
 	</parent>
 
 	<artifactId>magneton-module-sms</artifactId>

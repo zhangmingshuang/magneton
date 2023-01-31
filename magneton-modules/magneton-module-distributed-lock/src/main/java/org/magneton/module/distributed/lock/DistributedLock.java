@@ -40,7 +40,7 @@ public interface DistributedLock {
 	/**
 	 * 尝试加琐
 	 * @param key 要加琐的资源Key
-	 * @param duration 获取锁的等待时间，等待时间内无法获取锁则放弃加琐操作
+	 * @param instant 获取锁的等待时间，等待时间内无法获取锁则放弃加琐操作
 	 * @return 是否成功加琐
 	 */
 	default boolean tryLock(String key, Instant instant) {

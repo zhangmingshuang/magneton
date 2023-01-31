@@ -1,7 +1,8 @@
 package org.magneton.module.distributed.cache.redis;
 
-import com.google.common.collect.Sets;
 import java.util.Set;
+
+import com.google.common.collect.Sets;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.magneton.module.distributed.cache.TestRedisson;

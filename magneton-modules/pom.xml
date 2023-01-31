@@ -7,7 +7,8 @@
 	<parent>
 		<groupId>org.magneton</groupId>
 		<artifactId>magneton-parent</artifactId>
-		<version>2023</version>
+		<version>2023.1</version>
+		<relativePath>../magneton-parent/pom.xml</relativePath>
 	</parent>
 
 	<artifactId>magneton-modules</artifactId>

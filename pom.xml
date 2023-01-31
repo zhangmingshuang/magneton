@@ -7,7 +7,7 @@
 
 	<groupId>org.magneton</groupId>
 	<artifactId>magneton</artifactId>
-	<version>2023</version>
+	<version>2023.1</version>
 	<packaging>pom</packaging>
 
 	<modules>
@@ -58,56 +58,6 @@
 					<showWarnings>true</showWarnings>
 				</configuration>
 			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>3.0.0-M5</version>
-				<configuration>
-					<argLine>@{argLine}
-						-javaagent:${settings.localRepository}/com/alibaba/testable/testable-agent/${testable.version}/testable-agent-${testable.version}.jar
-					</argLine>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>flatten-maven-plugin</artifactId>
-				<version>1.1.0</version>
-				<configuration>
-					<updatePomFile>true</updatePomFile>
-					<!--
-						minimum	不推荐使用，会展开pluginRepositories。
-						bom	会保留dependencyManagement，展开properties。
-						oss	推荐开源项目使用，会展开
-							ciManagement、contributors、distributionManagement、 inceptionYear、
-							issueManagement、mailingLists、organization、prerequisites
-						ossrh	会展开name、description、url、scm、developers
-						defaults	会展开repositories
-						clean	删除全部可选元素
-					 -->
-					<!-- 如果设置该配置，则只会覆盖主要的配置 -->
-					<flattenMode>defaults</flattenMode>
-					<pomElements>
-						<!--<dependencyManagement>expand</dependencyManagement>-->
-						<!--<dependencies>expand</dependencies>-->
-					</pomElements>
-				</configuration>
-				<executions>
-					<execution>
-						<id>flatten</id>
-						<phase>process-resources</phase>
-						<goals>
-							<goal>flatten</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>flatten.clean</id>
-						<phase>clean</phase>
-						<goals>
-							<goal>clean</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
 			<!--            <plugin>-->
 			<!--                <groupId>org.apache.maven.plugins</groupId>-->
 			<!--                <artifactId>maven-checkstyle-plugin</artifactId>-->
@@ -149,6 +99,11 @@
 						</goals>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>versions-maven-plugin</artifactId>
+				<version>2.13.0</version>
 			</plugin>
 		</plugins>
 	</build>

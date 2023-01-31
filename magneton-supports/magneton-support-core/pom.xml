@@ -7,7 +7,7 @@
 	<parent>
 		<groupId>org.magneton</groupId>
 		<artifactId>magneton-supports</artifactId>
-		<version>2023</version>
+		<version>2023.1</version>
 	</parent>
 
 	<artifactId>magneton-support-core</artifactId>
