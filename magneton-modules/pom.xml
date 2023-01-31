@@ -1,32 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <groupId>org.magneton</groupId>
-        <artifactId>magneton</artifactId>
-        <version>${revision}</version>
-    </parent>
-    <modelVersion>4.0.0</modelVersion>
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-    <artifactId>magneton-modules</artifactId>
-    <packaging>pom</packaging>
-    <description>功能模块</description>
+	<parent>
+		<groupId>org.magneton</groupId>
+		<artifactId>magneton-parent</artifactId>
+		<version>2023</version>
+	</parent>
 
-    <modules>
-        <module>magneton-module-distributed-cache</module>
-        <module>magneton-module-distributed-lock</module>
-        <module>magneton-module-geo</module>
-        <module>magneton-module-auth</module>
-        <module>magneton-module-sms</module>
-        <module>magneton-module-statistics</module>
-        <module>magneton-module-safedog</module>
-        <module>magneton-module-oss</module>
-        <module>magneton-module-pay</module>
-        <module>magneton-module-core</module>
-        <module>magneton-module-wechat</module>
-        <module>magneton-module-im-tencent</module>
-    </modules>
+	<artifactId>magneton-modules</artifactId>
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>magneton-module-distributed-cache</module>
+		<module>magneton-module-distributed-lock</module>
+		<module>magneton-module-geo</module>
+		<module>magneton-module-auth</module>
+		<module>magneton-module-sms</module>
+		<module>magneton-module-statistics</module>
+		<module>magneton-module-safedog</module>
+		<module>magneton-module-oss</module>
+		<module>magneton-module-pay</module>
+		<module>magneton-module-core</module>
+		<module>magneton-module-wechat</module>
+		<module>magneton-module-im-tencent</module>
+		<module>magneton-module-algorithm</module>
+	</modules>
 
 
 </project>

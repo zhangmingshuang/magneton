@@ -2,13 +2,14 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		 xmlns="http://maven.apache.org/POM/4.0.0"
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<parent>
-		<groupId>org.magneton</groupId>
-		<artifactId>magneton</artifactId>
-		<version>${revision}</version>
-	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
+	<parent>
+		<groupId>org.magneton</groupId>
+		<artifactId>magneton-parent</artifactId>
+		<version>2023</version>
+		<relativePath>../magneton-parent/pom.xml</relativePath>
+	</parent>
 
 	<artifactId>magneton-test</artifactId>
 
@@ -16,7 +17,6 @@
 		<dependency>
 			<groupId>org.magneton</groupId>
 			<artifactId>magneton-core</artifactId>
-			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>

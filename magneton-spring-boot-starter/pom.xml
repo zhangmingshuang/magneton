@@ -2,92 +2,80 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
 	<parent>
 		<groupId>org.magneton</groupId>
-		<artifactId>magneton</artifactId>
-		<version>${revision}</version>
+		<artifactId>magneton-parent</artifactId>
+		<version>2023</version>
 	</parent>
-	<modelVersion>4.0.0</modelVersion>
 
 	<artifactId>magneton-spring-boot-starter</artifactId>
 
-
 	<dependencies>
-		<dependency>
-			<groupId>org.magneton</groupId>
-			<artifactId>magneton-core</artifactId>
-			<version>${project.version}</version>
-		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-			<version>${spring-boot.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.magneton</groupId>
+			<artifactId>magneton-core</artifactId>
 		</dependency>
 		<!-- 可选功能依赖项 -->
 		<dependency>
 			<groupId>org.magneton</groupId>
 			<artifactId>magneton-module-distributed-cache</artifactId>
-			<version>${project.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.magneton</groupId>
 			<artifactId>magneton-module-distributed-lock</artifactId>
-			<version>${project.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.magneton</groupId>
 			<artifactId>magneton-module-geo</artifactId>
-			<version>${project.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.magneton</groupId>
 			<artifactId>magneton-module-sms</artifactId>
-			<version>${project.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.magneton</groupId>
 			<artifactId>magneton-module-statistics</artifactId>
-			<version>${project.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.magneton</groupId>
 			<artifactId>magneton-module-oss</artifactId>
-			<version>${project.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.magneton</groupId>
 			<artifactId>magneton-module-im-tencent</artifactId>
-			<version>${project.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.magneton</groupId>
 			<artifactId>magneton-module-safedog</artifactId>
-			<version>${project.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.magneton</groupId>
 			<artifactId>magneton-module-pay</artifactId>
-			<version>${project.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.magneton</groupId>
 			<artifactId>magneton-module-auth</artifactId>
-			<version>${project.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.magneton</groupId>
 			<artifactId>magneton-module-wechat</artifactId>
-			<version>${project.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<!-- 可选功能依赖项 end -->
@@ -99,25 +87,21 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-redis</artifactId>
-			<version>${spring-boot.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-cache</artifactId>
-			<version>${spring-boot.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-configuration-processor</artifactId>
-			<version>${spring-boot.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.magneton</groupId>
 			<artifactId>magneton-test</artifactId>
-			<version>${project.version}</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
