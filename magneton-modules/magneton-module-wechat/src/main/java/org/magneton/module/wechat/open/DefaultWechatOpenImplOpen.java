@@ -3,43 +3,43 @@ package org.magneton.module.wechat.open;
 import com.google.common.base.Preconditions;
 import org.magneton.module.wechat.open.core.oauth2.WechatOAuth;
 import org.magneton.module.wechat.open.core.oauth2.WechatOAuthImpl;
-import org.magneton.module.wechat.open.platform.mobile.DefaultMobileAppImpl;
-import org.magneton.module.wechat.open.platform.mobile.MobileApp;
-import org.magneton.module.wechat.open.platform.website.DefaultWebsiteAppImpl;
-import org.magneton.module.wechat.open.platform.website.WebsiteApp;
+import org.magneton.module.wechat.open.platform.mobile.DefaultMobileOAppImpl;
+import org.magneton.module.wechat.open.platform.mobile.MobileOApp;
+import org.magneton.module.wechat.open.platform.website.DefaultWebsiteOAppImpl;
+import org.magneton.module.wechat.open.platform.website.WebsiteOApp;
 
 /**
  * @author zhangmsh 2022/4/2
  * @since 1.0.0
  */
-public class DefaultWechatOpenImpl implements WechatOpen, WechatContext {
+public class DefaultWechatOpenImplOpen implements WechatOpen, WechatOpenContext {
 
 	private final WechatOpenConfig wechatOpenConfig;
 
-	private WebsiteApp websiteApp;
+	private WebsiteOApp WebsiteOApp;
 
-	private MobileApp mobileApp;
+	private MobileOApp mobileApp;
 
 	private WechatOAuth wechatOAuth;
 
-	public DefaultWechatOpenImpl(WechatOpenBuilder wechatOpenBuilder) {
+	public DefaultWechatOpenImplOpen(WechatOpenBuilder wechatOpenBuilder) {
 		this.wechatOpenConfig = Preconditions.checkNotNull(wechatOpenBuilder.getWechatConfig());
 		this.init(wechatOpenBuilder);
 	}
 
 	protected void init(WechatOpenBuilder wechatOpenBuilder) {
 		this.wechatOAuth = new WechatOAuthImpl(this.wechatOpenConfig, wechatOpenBuilder.getAccessTokenCache());
-		this.websiteApp = new DefaultWebsiteAppImpl(this);
-		this.mobileApp = new DefaultMobileAppImpl(this);
+		this.WebsiteOApp = new DefaultWebsiteOAppImpl(this);
+		this.mobileApp = new DefaultMobileOAppImpl(this);
 	}
 
 	@Override
-	public WebsiteApp website() {
-		return this.websiteApp;
+	public WebsiteOApp website() {
+		return this.WebsiteOApp;
 	}
 
 	@Override
-	public MobileApp mobile() {
+	public MobileOApp mobile() {
 		return this.mobileApp;
 	}
 

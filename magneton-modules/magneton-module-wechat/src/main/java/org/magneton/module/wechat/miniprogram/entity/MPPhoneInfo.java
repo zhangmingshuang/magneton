@@ -32,6 +32,6 @@ public class MPPhoneInfo {
 	/**
 	 * 数据水印
 	 */
-	private Watermark watermark;
+	private MPWatermark watermark;
 
 }

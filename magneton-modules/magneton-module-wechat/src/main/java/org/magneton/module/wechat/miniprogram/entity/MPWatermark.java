@@ -11,7 +11,7 @@ import lombok.ToString;
 @Setter
 @Getter
 @ToString
-public class Watermark {
+public class MPWatermark {
 
 	/** appid string 小程序appid */
 	private String appid;

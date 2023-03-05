@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.magneton.adaptive.redis.RedissonAdapter;
-import org.magneton.core.Consequences;
+import org.magneton.core.Reply;
 import org.magneton.module.sms.SendStatus;
 import org.magneton.module.sms.Sms;
 import org.magneton.module.sms.process.SendProcessor;
@@ -31,7 +31,7 @@ class AbstractAliyunSmsProcessorTest {
 	@Test
 	void send() {
 		String mobile = "13860132592";
-		Consequences<SendStatus> response = sms.trySend(mobile);
+		Reply<SendStatus> response = sms.trySend(mobile);
 		Assertions.assertTrue(response.isSuccess());
 
 		long ttl = sms.ttl(mobile);

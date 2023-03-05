@@ -2,7 +2,7 @@ package org.magneton.module.wechat.open.platform.mobile;
 
 import org.magneton.module.wechat.open.entity.MobileCodeReq;
 import org.magneton.module.wechat.open.entity.MobileCodeRes;
-import org.magneton.module.wechat.open.platform.App;
+import org.magneton.module.wechat.open.platform.OApp;
 
 /**
  * 微信移动应用
@@ -10,7 +10,7 @@ import org.magneton.module.wechat.open.platform.App;
  * @author zhangmsh 2022/4/3
  * @since 1.0.0
  */
-public interface MobileApp extends App {
+public interface MobileOApp extends OApp {
 
 	/**
 	 * 获取Code请求数据

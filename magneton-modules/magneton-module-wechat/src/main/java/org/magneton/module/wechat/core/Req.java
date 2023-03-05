@@ -1,13 +1,14 @@
 package org.magneton.module.wechat.core;
 
+import java.io.IOException;
+import java.util.Map;
+
 import cn.hutool.http.HttpUtil;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Strings;
-import java.io.IOException;
-import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
-import org.magneton.core.Consequences;
+import org.magneton.core.Reply;
 
 /**
  * @author zhangmsh 2022/4/2
@@ -21,7 +22,7 @@ public class Req {
 	private Req() {
 	}
 
-	public static <T> Consequences<T> doGet(String requestUrl, Class<T> clazz) {
+	public static <T> Reply<T> doGet(String requestUrl, Class<T> clazz) {
 		// noinspection OverlyBroadCatchBlock
 		try {
 			String body = HttpUtil.get(requestUrl, 3);
@@ -30,10 +31,10 @@ public class Req {
 		catch (Throwable e) {
 			log.error("parse body error", e);
 		}
-		return Consequences.failMessageOnly("未知错误");
+		return Reply.failMsg("未知错误");
 	}
 
-	public static <T> Consequences<T> doPost(String url, Map<String, Object> data, Class<T> clazz) {
+	public static <T> Reply<T> doPost(String url, Map<String, Object> data, Class<T> clazz) {
 		try {
 			String body = HttpUtil.post(url, data);
 			return doResponse(url, clazz, body);
@@ -41,21 +42,21 @@ public class Req {
 		catch (Throwable e) {
 			log.error("parse body error", e);
 		}
-		return Consequences.failMessageOnly("未知错误");
+		return Reply.failMsg("未知错误");
 	}
 
-	private static <T> Consequences<T> doResponse(String requestUrl, Class<T> clazz, String body) throws IOException {
+	private static <T> Reply<T> doResponse(String requestUrl, Class<T> clazz, String body) throws IOException {
 		if (Strings.isNullOrEmpty(body)) {
-			return Consequences.failMessageOnly("未知错误，没有响应体数据");
+			return Reply.failMsg("未知错误，没有响应体数据");
 		}
 		JsonNode jsonNode = OBJECT_MAPPER.readTree(body);
 		String errCode = jsonNode.get("errcode").asText();
 		if (!Strings.isNullOrEmpty(errCode)) {
 			log.error("请求{}错误：{}", requestUrl, body);
-			return Consequences.failMessageOnly(jsonNode.get("errmsg").asText());
+			return Reply.failMsg(jsonNode.get("errmsg").asText());
 		}
 		T response = OBJECT_MAPPER.readValue(jsonNode.traverse(), clazz);
-		return Consequences.success(response);
+		return Reply.success(response);
 	}
 
 }

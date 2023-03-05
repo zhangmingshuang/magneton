@@ -14,7 +14,7 @@
 	<packaging>pom</packaging>
 
 	<properties>
-		<magneton.version>2023.1</magneton.version>
+		<java.version>1.8</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<!-- 工具 -->
 		<testable.version>0.7.5</testable.version>
@@ -42,7 +42,7 @@
 		<mybatis-spring-boot-starter.version>3.0.1</mybatis-spring-boot-starter.version>
 		<!-- 日志 -->
 		<slf4j-api.version>1.7.30</slf4j-api.version>
-		<logback-classic.version>1.2.10</logback-classic.version>
+		<logback-classic.version>1.4.5</logback-classic.version>
 		<!-- redis -->
 		<redisson.version>3.16.8</redisson.version>
 		<redisson-spring-boot-starter.version>3.16.8</redisson-spring-boot-starter.version>
@@ -66,7 +66,6 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
-
 			<dependency>
 				<groupId>org.junit</groupId>
 				<artifactId>junit-bom</artifactId>
@@ -74,7 +73,6 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
-
 			<dependency>
 				<groupId>com.github.atool</groupId>
 				<artifactId>fluent-mybatis-processor</artifactId>
@@ -96,11 +94,6 @@
 				<version>${testable.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.alibaba.testable</groupId>
-				<artifactId>testable-core</artifactId>
-				<version>${testable.version}</version>
-			</dependency>
-			<dependency>
 				<groupId>com.alibaba</groupId>
 				<artifactId>fastjson</artifactId>
 				<version>${fastjson.version}</version>
@@ -111,8 +104,6 @@
 				<version>${tomcat-embed-core.version}</version>
 				<scope>provided</scope>
 			</dependency>
-
-			<!-- 引入fluent-mybatis 运行依赖包, scope为compile -->
 			<dependency>
 				<groupId>com.github.atool</groupId>
 				<artifactId>fluent-mybatis</artifactId>
@@ -121,119 +112,112 @@
 			<dependency>
 				<groupId>org.magneton</groupId>
 				<artifactId>magneton-core</artifactId>
-				<version>${magneton.version}</version>
+				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.magneton</groupId>
 				<artifactId>magneton-db-spy</artifactId>
-				<version>${magneton.version}</version>
+				<version>${project.version}</version>
 			</dependency>
-			<!-- magneton-modules -->
 			<dependency>
 				<groupId>org.magneton</groupId>
 				<artifactId>magneton-adaptive-mybatis</artifactId>
-				<version>${magneton.version}</version>
+				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.magneton</groupId>
 				<artifactId>magneton-adaptive-redis</artifactId>
-				<version>${magneton.version}</version>
-			</dependency> <!--end adaptive-->
-
+				<version>${project.version}</version>
+			</dependency>
 			<dependency>
 				<groupId>org.magneton</groupId>
 				<artifactId>magneton-core</artifactId>
-				<version>${magneton.version}</version>
+				<version>${project.version}</version>
 			</dependency>
-
 			<dependency>
 				<groupId>org.magneton</groupId>
 				<artifactId>magneton-db-spy</artifactId>
-				<version>${magneton.version}</version>
+				<version>${project.version}</version>
 			</dependency>
-
 			<dependency>
 				<groupId>org.magneton</groupId>
 				<artifactId>magneton-module-algorithm</artifactId>
-				<version>${magneton.version}</version>
+				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.magneton</groupId>
 				<artifactId>magneton-module-auth</artifactId>
-				<version>${magneton.version}</version>
+				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.magneton</groupId>
 				<artifactId>magneton-module-core</artifactId>
-				<version>${magneton.version}</version>
+				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.magneton</groupId>
 				<artifactId>magneton-module-distributed-cache</artifactId>
-				<version>${magneton.version}</version>
+				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.magneton</groupId>
 				<artifactId>magneton-module-distributed-lock</artifactId>
-				<version>${magneton.version}</version>
+				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.magneton</groupId>
 				<artifactId>magneton-module-geo</artifactId>
-				<version>${magneton.version}</version>
+				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.magneton</groupId>
 				<artifactId>magneton-module-im-tencent</artifactId>
-				<version>${magneton.version}</version>
+				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.magneton</groupId>
 				<artifactId>magneton-module-oss</artifactId>
-				<version>${magneton.version}</version>
+				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.magneton</groupId>
 				<artifactId>magneton-module-pay</artifactId>
-				<version>${magneton.version}</version>
+				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.magneton</groupId>
 				<artifactId>magneton-module-safedog</artifactId>
-				<version>${magneton.version}</version>
+				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.magneton</groupId>
 				<artifactId>magneton-module-sms</artifactId>
-				<version>${magneton.version}</version>
+				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.magneton</groupId>
 				<artifactId>magneton-module-statistics</artifactId>
-				<version>${magneton.version}</version>
+				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.magneton</groupId>
 				<artifactId>magneton-module-wechat</artifactId>
-				<version>${magneton.version}</version>
+				<version>${project.version}</version>
 			</dependency>
-
 			<dependency>
 				<groupId>org.magneton</groupId>
 				<artifactId>magneton-spring-boot-starter</artifactId>
-				<version>${magneton.version}</version>
+				<version>${project.version}</version>
 			</dependency>
-
 			<dependency>
 				<groupId>org.magneton</groupId>
 				<artifactId>magneton-support-core</artifactId>
-				<version>${magneton.version}</version>
+				<version>${project.version}</version>
 			</dependency>
-
 			<dependency>
 				<groupId>org.magneton</groupId>
 				<artifactId>magneton-test</artifactId>
-				<version>${magneton.version}</version>
+				<version>${project.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

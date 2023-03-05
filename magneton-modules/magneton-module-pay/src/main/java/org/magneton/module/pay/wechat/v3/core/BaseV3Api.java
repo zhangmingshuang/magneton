@@ -15,7 +15,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.util.EntityUtils;
-import org.magneton.core.Consequences;
+import org.magneton.core.Reply;
 import org.slf4j.Logger;
 
 /**
@@ -42,7 +42,7 @@ public interface BaseV3Api {
 		return sign.getSign();
 	}
 
-	default <T> Consequences<T> doRequest(HttpUriRequest httpRequest, Class<T> type) {
+	default <T> Reply<T> doRequest(HttpUriRequest httpRequest, Class<T> type) {
 		Preconditions.checkNotNull(httpRequest);
 		Preconditions.checkNotNull(type);
 
@@ -55,14 +55,14 @@ public interface BaseV3Api {
 			}
 			if (statusCode == 200) { // 处理成功
 				byte[] responseBytes = EntityUtils.toByteArray(response.getEntity());
-				return Consequences.success(BaseV3Api.json().readValue(responseBytes, type));
+				return Reply.success(BaseV3Api.json().readValue(responseBytes, type));
 			}
 			else if (statusCode == 204) { // 处理成功，无返回Body
-				return Consequences.success(null);
+				return Reply.success(null);
 			}
 			else {
 				// noinspection unchecked
-				return Consequences.failMessageOnly(EntityUtils.toString(response.getEntity()));
+				return Reply.failMsg(EntityUtils.toString(response.getEntity()));
 			}
 		}
 		catch (IOException e) {
@@ -73,7 +73,7 @@ public interface BaseV3Api {
 				throw new RuntimeException(e);
 			}
 		}
-		return Consequences.fail();
+		return Reply.fail();
 	}
 
 	@SneakyThrows

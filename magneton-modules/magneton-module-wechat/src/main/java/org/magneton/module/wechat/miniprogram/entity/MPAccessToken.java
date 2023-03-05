@@ -13,7 +13,7 @@ import lombok.ToString;
 @Setter
 @Getter
 @ToString
-public class MPAccessTokenRes {
+public class MPAccessToken {
 
 	/**
 	 * 接口调用凭证

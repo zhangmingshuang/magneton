@@ -4,7 +4,7 @@ import cn.hutool.core.util.RandomUtil;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import lombok.extern.slf4j.Slf4j;
-import org.magneton.core.Consequences;
+import org.magneton.core.Reply;
 import org.magneton.module.pay.exception.AmountException;
 import org.magneton.module.pay.wechat.v3.prepay.entity.PrepayId;
 import org.magneton.module.pay.wechat.v3.prepay.entity.WxPayAppPrepay;
@@ -24,7 +24,7 @@ public class AppPrepayImpl implements AppPrepay {
 	}
 
 	@Override
-	public Consequences<WxPayAppPrepay> prepay(WxPayAppPrepayReq req) {
+	public Reply<WxPayAppPrepay> prepay(WxPayAppPrepayReq req) {
 		Preconditions.checkNotNull(req);
 		Preconditions.checkNotNull(req.getOutTradeNo(), "outTradeNo must not be null");
 		Preconditions.checkNotNull(req.getDescription(), "description must not be null");
@@ -35,7 +35,7 @@ public class AppPrepayImpl implements AppPrepay {
 		if (amount < 1) {
 			throw new AmountException(Strings.lenientFormat("amount %s less then 1", amount));
 		}
-		Consequences<PrepayId> wechatV3PayPreOrderRes = this.basePay
+		Reply<PrepayId> wechatV3PayPreOrderRes = this.basePay
 				.doPreOrder("https://api.mch.weixin.qq.com/v3/pay/transactions/app", req, PrepayId.class);
 		if (!wechatV3PayPreOrderRes.isSuccess()) {
 			return wechatV3PayPreOrderRes.coverage();
@@ -56,7 +56,7 @@ public class AppPrepayImpl implements AppPrepay {
 		String signStr = this.signStr(res);
 		String sign = this.basePay.doSign(signStr);
 		res.setSign(sign);
-		return Consequences.success(res);
+		return Reply.success(res);
 	}
 
 	/**

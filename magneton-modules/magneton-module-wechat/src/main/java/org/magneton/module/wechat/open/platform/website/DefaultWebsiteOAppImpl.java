@@ -2,18 +2,18 @@ package org.magneton.module.wechat.open.platform.website;
 
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Preconditions;
-import org.magneton.module.wechat.open.WechatContext;
+import org.magneton.module.wechat.open.WechatOpenContext;
 import org.magneton.module.wechat.open.entity.WebsiteCodeReq;
-import org.magneton.module.wechat.open.platform.AbstractApp;
+import org.magneton.module.wechat.open.platform.AbstractOApp;
 
 /**
  * @author zhangmsh 2022/4/2
  * @since 1.0.0
  */
-public class DefaultWebsiteAppImpl extends AbstractApp implements WebsiteApp {
+public class DefaultWebsiteOAppImpl extends AbstractOApp implements WebsiteOApp {
 
-	public DefaultWebsiteAppImpl(WechatContext wechatContext) {
-		super(wechatContext);
+	public DefaultWebsiteOAppImpl(WechatOpenContext wechatOpenContext) {
+		super(wechatOpenContext);
 	}
 
 	@Override

@@ -3,7 +3,7 @@ package org.magneton.module.wechat.open.platform.website;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.magneton.core.Consequences;
+import org.magneton.core.Reply;
 import org.magneton.module.wechat.open.WechatOpen;
 import org.magneton.module.wechat.open.WechatOpenBuilder;
 import org.magneton.module.wechat.open.WechatOpenConfig;
@@ -14,7 +14,7 @@ import org.magneton.module.wechat.open.entity.WebsiteCodeReq;
  * @author zhangmsh 2022/4/3
  * @since 1.0.0
  */
-class DefaultWebsiteAppImplTest {
+class DefaultWebsiteOAppImplTest {
 
 	private static WechatOpen wechatOpen;
 
@@ -27,7 +27,7 @@ class DefaultWebsiteAppImplTest {
 
 	@Test
 	void requestCodeUrl() {
-		WebsiteApp website = wechatOpen.website();
+		WebsiteOApp website = wechatOpen.website();
 		WebsiteCodeReq req = new WebsiteCodeReq();
 		req.setRedirectUri("testRedirectUri").setScope("testScope").setState("testState");
 		String requestCodeUrl = website.requestCodeUrl(req);
@@ -39,8 +39,8 @@ class DefaultWebsiteAppImplTest {
 
 	@Test
 	void requestAccessToken() {
-		WebsiteApp website = wechatOpen.website();
-		Consequences<AccessTokenRes> accessTokenRes = website.requestAccessTokenByCode("testCode");
+		WebsiteOApp website = wechatOpen.website();
+		Reply<AccessTokenRes> accessTokenRes = website.requestAccessTokenByCode("testCode");
 		Assertions.assertTrue(accessTokenRes.isSuccess());
 
 		AccessTokenRes data = accessTokenRes.getData();

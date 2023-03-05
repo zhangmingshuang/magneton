@@ -1,7 +1,8 @@
 package org.magneton.module.wechat.open.platform;
 
 import javax.annotation.Nullable;
-import org.magneton.core.Consequences;
+
+import org.magneton.core.Reply;
 import org.magneton.module.wechat.open.entity.AccessTokenRes;
 import org.magneton.module.wechat.open.entity.UserInfoReq;
 import org.magneton.module.wechat.open.entity.UserInfoRes;
@@ -10,7 +11,7 @@ import org.magneton.module.wechat.open.entity.UserInfoRes;
  * @author zhangmsh 2022/4/2
  * @since 1.0.0
  */
-public interface App {
+public interface OApp {
 
 	/**
 	 * 通过Code获取AccessToken
@@ -19,7 +20,7 @@ public interface App {
 	 * @param code Code
 	 * @return AccessToken
 	 */
-	Consequences<AccessTokenRes> requestAccessTokenByCode(String code);
+	Reply<AccessTokenRes> requestAccessTokenByCode(String code);
 
 	/**
 	 * @param openid 用户的Openid
@@ -35,6 +36,6 @@ public interface App {
 	 * @param userInfoReq 用户信息请求
 	 * @return 用户的信息
 	 */
-	Consequences<UserInfoRes> requestUserInfo(UserInfoReq userInfoReq);
+	Reply<UserInfoRes> requestUserInfo(UserInfoReq userInfoReq);
 
 }

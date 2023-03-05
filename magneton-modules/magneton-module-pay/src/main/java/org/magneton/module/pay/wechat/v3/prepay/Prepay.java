@@ -1,6 +1,6 @@
 package org.magneton.module.pay.wechat.v3.prepay;
 
-import org.magneton.core.Consequences;
+import org.magneton.core.Reply;
 
 /**
  * @author zhangmsh 2022/4/5
@@ -13,6 +13,6 @@ public interface Prepay<Req, Res> {
 	 * @param req 下单请求
 	 * @return 下单结果
 	 */
-	Consequences<Res> prepay(Req req);
+	Reply<Res> prepay(Req req);
 
 }

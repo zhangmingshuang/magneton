@@ -3,7 +3,7 @@ package org.magneton.module.pay.wechat.v3.prepay;
 import cn.hutool.core.util.RandomUtil;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
-import org.magneton.core.Consequences;
+import org.magneton.core.Reply;
 import org.magneton.module.pay.exception.AmountException;
 import org.magneton.module.pay.wechat.v3.prepay.entity.PrepayId;
 import org.magneton.module.pay.wechat.v3.prepay.entity.WxPayJSAPIPrepay;
@@ -24,7 +24,7 @@ public class JSAPIPrepayImpl implements JSAPIPrepay {
 	}
 
 	@Override
-	public Consequences<WxPayJSAPIPrepay> prepay(WxPayJSAPIPrepayReq req) {
+	public Reply<WxPayJSAPIPrepay> prepay(WxPayJSAPIPrepayReq req) {
 		Preconditions.checkNotNull(req);
 		Preconditions.checkNotNull(req.getOutTradeNo());
 		Preconditions.checkNotNull(req.getDescription());
@@ -32,8 +32,8 @@ public class JSAPIPrepayImpl implements JSAPIPrepay {
 		if (amount < 1) {
 			throw new AmountException(Strings.lenientFormat("amount %s less then 1", amount));
 		}
-		Consequences<PrepayId> prepayRes = this.basePay
-				.doPreOrder("https://api.mch.weixin.qq.com/v3/pay/transactions/jsapi", req, PrepayId.class);
+		Reply<PrepayId> prepayRes = this.basePay.doPreOrder("https://api.mch.weixin.qq.com/v3/pay/transactions/jsapi",
+				req, PrepayId.class);
 		if (!prepayRes.isSuccess()) {
 			return prepayRes.coverage();
 		}
@@ -53,7 +53,7 @@ public class JSAPIPrepayImpl implements JSAPIPrepay {
 		String signStr = this.signStr(res);
 		String sign = this.basePay.doSign(signStr);
 		res.setPaySign(sign);
-		return Consequences.success(res);
+		return Reply.success(res);
 	}
 
 	/**

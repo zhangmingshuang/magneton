@@ -1,7 +1,7 @@
 package org.magneton.module.wechat.open.platform.website;
 
 import org.magneton.module.wechat.open.entity.WebsiteCodeReq;
-import org.magneton.module.wechat.open.platform.App;
+import org.magneton.module.wechat.open.platform.OApp;
 
 /**
  * 微信网站应用
@@ -9,7 +9,7 @@ import org.magneton.module.wechat.open.platform.App;
  * @author zhangmsh 2022/4/2
  * @since 1.0.0
  */
-public interface WebsiteApp extends App {
+public interface WebsiteOApp extends OApp {
 
 	/**
 	 * 生成请求Code的URL

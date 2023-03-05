@@ -1,6 +1,6 @@
 package org.magneton.module.sms.process;
 
-import org.magneton.core.Consequences;
+import org.magneton.core.Reply;
 import org.magneton.module.sms.entity.SmsToken;
 
 /**
@@ -16,6 +16,6 @@ public interface SendProcessor {
 	 * @param mobile 手机号
 	 * @return 如果发送成功，则返回此次的Token。
 	 */
-	Consequences<SmsToken> send(String mobile);
+	Reply<SmsToken> send(String mobile);
 
 }

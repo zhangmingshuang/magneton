@@ -1,5 +1,11 @@
 package org.magneton.module.pay.wechat.v3;
 
+import java.nio.charset.StandardCharsets;
+import java.security.Security;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Map.Entry;
+
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.collect.Maps;
@@ -7,14 +13,9 @@ import com.wechat.pay.contrib.apache.httpclient.constant.WechatPayHttpHeaders;
 import com.wechat.pay.contrib.apache.httpclient.notification.Notification;
 import com.wechat.pay.contrib.apache.httpclient.notification.NotificationHandler;
 import com.wechat.pay.contrib.apache.httpclient.notification.NotificationRequest;
-import java.nio.charset.StandardCharsets;
-import java.security.Security;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Map.Entry;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.client.methods.HttpGet;
-import org.magneton.core.Consequences;
+import org.magneton.core.Reply;
 import org.magneton.core.Response;
 import org.magneton.core.ResponseException;
 import org.magneton.foundation.exception.ProcessException;
@@ -89,7 +90,7 @@ public class WxV3PayImpl implements WxV3Pay {
 	}
 
 	@Override
-	public Consequences<WxPayOrder> queryOrder(WxPayOrderQuery query) {
+	public Reply<WxPayOrder> queryOrder(WxPayOrderQuery query) {
 		Type reqIdType = query.getReqIdType();
 		String url;
 		switch (reqIdType) {
@@ -106,9 +107,9 @@ public class WxV3PayImpl implements WxV3Pay {
 			throw new ProcessException("unknown reqIdType %s", reqIdType);
 		}
 		HttpGet httpGet = this.wechatBaseV3Pay.newHttpGet(url);
-		Consequences<WxPayOrder> res = this.wechatBaseV3Pay.doRequest(httpGet, WxPayOrder.class);
+		Reply<WxPayOrder> res = this.wechatBaseV3Pay.doRequest(httpGet, WxPayOrder.class);
 		if (!res.isSuccess()) {
-			return Consequences.failMessageOnly(res.getMessage());
+			return Reply.failMsg(res.getMessage());
 		}
 		return res;
 	}
