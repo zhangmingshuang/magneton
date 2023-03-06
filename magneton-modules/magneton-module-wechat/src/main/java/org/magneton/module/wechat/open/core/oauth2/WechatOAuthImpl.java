@@ -49,16 +49,6 @@ public class WechatOAuthImpl implements WechatOAuth {
 	}
 
 	@Override
-	@Nullable
-	public AccessTokenRes accessTokenFromCache(String openid) {
-		Preconditions.checkNotNull(openid);
-		if (this.wechatAccessTokenCache == null) {
-			return null;
-		}
-		return this.wechatAccessTokenCache.get(openid);
-	}
-
-	@Override
 	public Reply<UserInfoRes> userInfo(UserInfoReq userInfoReq) {
 		Preconditions.checkNotNull(userInfoReq);
 		String requestUrl = String.format("https://api.weixin.qq.com/sns/userinfo?access_token=%s&openid=%s&lang=%s",

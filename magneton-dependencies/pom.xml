@@ -110,6 +110,11 @@
 				<version>${fluent-mybatis.version}</version>
 			</dependency>
 			<dependency>
+				<groupId>org.redisson</groupId>
+				<artifactId>redisson</artifactId>
+				<version>${redisson.version}</version>
+			</dependency>
+			<dependency>
 				<groupId>org.magneton</groupId>
 				<artifactId>magneton-core</artifactId>
 				<version>${project.version}</version>

@@ -4,6 +4,7 @@ import javax.annotation.Nullable;
 
 import com.google.common.base.Preconditions;
 import org.magneton.core.Reply;
+import org.magneton.foundation.exception.BusinessException;
 import org.magneton.module.wechat.open.WechatOpenContext;
 import org.magneton.module.wechat.open.entity.AccessTokenRes;
 import org.magneton.module.wechat.open.entity.UserInfoReq;
@@ -31,7 +32,11 @@ public class AbstractOApp implements OApp {
 	@Override
 	public AccessTokenRes getAccessTokenByOpenid(String openid) {
 		Preconditions.checkNotNull(openid);
-		return this.wechatOpenContext.getOAuth().accessTokenFromCache(openid);
+		Reply<AccessTokenRes> reply = this.wechatOpenContext.getOAuth().accessToken(openid);
+		if (!reply.isSuccess()) {
+			throw new BusinessException(String.format("get accessToken exception: %s", reply.getMessage()));
+		}
+		return reply.getData();
 	}
 
 	@Override
