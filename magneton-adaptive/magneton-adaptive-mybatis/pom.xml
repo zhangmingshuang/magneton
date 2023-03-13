@@ -22,7 +22,6 @@
 		<dependency>
 			<groupId>com.baomidou</groupId>
 			<artifactId>mybatis-plus-boot-starter</artifactId>
-			<version>${mybatis-plus-boot-starter.version}</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>slf4j-api</artifactId>
