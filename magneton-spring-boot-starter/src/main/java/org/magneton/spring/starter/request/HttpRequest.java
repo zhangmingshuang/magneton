@@ -40,6 +40,11 @@ public class HttpRequest {
 		return bodyBuilder.toString();
 	}
 
+	/**
+	 * 获取请求头.
+	 * @param httpServletRequest httpServletRequest
+	 * @return 请求头
+	 */
 	public static Map<String, String> getHeaders(HttpServletRequest httpServletRequest) {
 		Preconditions.checkNotNull(httpServletRequest);
 		Enumeration<String> headerNames = httpServletRequest.getHeaderNames();
