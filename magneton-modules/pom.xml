@@ -28,7 +28,8 @@
 		<module>magneton-module-wechat</module>
 		<module>magneton-module-im-tencent</module>
 		<module>magneton-module-algorithm</module>
-	</modules>
+        <module>magneton-module-monitor</module>
+    </modules>
 
 
 </project>

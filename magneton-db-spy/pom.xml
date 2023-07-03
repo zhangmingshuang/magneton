@@ -20,6 +20,10 @@
 			<artifactId>magneton-core</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>org.magneton </groupId>
+			<artifactId>magneton-adaptive-mybatis</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>org.magneton</groupId>
 			<artifactId>magneton-test</artifactId>
 			<scope>test</scope>
