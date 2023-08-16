@@ -4,8 +4,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.magneton.module.wechat.open.core.oauth2.WechatOAuth;
-import org.magneton.module.wechat.open.platform.mobile.MobileApp;
-import org.magneton.module.wechat.open.platform.website.WebsiteApp;
+import org.magneton.module.wechat.open.platform.mobile.MobileOApp;
+import org.magneton.module.wechat.open.platform.website.WebsiteOApp;
 
 /**
  * @author zhangmsh 2022/4/3
@@ -13,20 +13,20 @@ import org.magneton.module.wechat.open.platform.website.WebsiteApp;
  */
 public class DefaultWechatImplTestOpen {
 
-	private static DefaultWechatOpenImpl defaultWechat;
+	private static DefaultWechatOpenImplOpen defaultWechat;
 
 	private static WechatOpenConfig testWechatOpenConfig = new WechatOpenConfig();
 
 	@BeforeAll
 	public static void init() {
-		defaultWechat = new DefaultWechatOpenImpl(WechatOpenBuilder.newBuilder(testWechatOpenConfig));
+		defaultWechat = new DefaultWechatOpenImplOpen(WechatOpenBuilder.newBuilder(testWechatOpenConfig));
 	}
 
 	@Test
 	void testApp() {
 
-		WebsiteApp website = defaultWechat.website();
-		MobileApp mobile = defaultWechat.mobile();
+		WebsiteOApp website = defaultWechat.website();
+		MobileOApp mobile = defaultWechat.mobile();
 
 		Assertions.assertNotNull(website);
 		Assertions.assertNotNull(mobile);

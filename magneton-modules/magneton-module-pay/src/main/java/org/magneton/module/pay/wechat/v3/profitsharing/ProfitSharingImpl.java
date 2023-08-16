@@ -8,7 +8,7 @@ import com.wechat.pay.contrib.apache.httpclient.constant.WechatPayHttpHeaders;
 import com.wechat.pay.contrib.apache.httpclient.util.RsaCryptoUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.client.methods.HttpPost;
-import org.magneton.core.Consequences;
+import org.magneton.core.Reply;
 import org.magneton.module.pay.wechat.v3.core.WxPayContext;
 import org.magneton.module.pay.wechat.v3.profitsharing.entity.WxProfitSharingOrderState;
 import org.magneton.module.pay.wechat.v3.profitsharing.entity.WxProfitSharingOrderStateQuery;
@@ -37,21 +37,13 @@ public class ProfitSharingImpl implements ProfitSharing {
 	}
 
 	@Override
-	public Consequences<WxProfitSharingOrders> orders(WxProfitSharingOrdersReq req) {
-		if (Strings.isNullOrEmpty(req.getAppid())) {
-			String appId = this.getPayContext().getPayConfig().getAppId().getProfitSharing();
-			if (Strings.isNullOrEmpty(appId)) {
-				appId = Preconditions.checkNotNull(this.getPayContext().getPayConfig().getAppId().getApp(),
-						"AppId#app must be not null");
-			}
-			req.setAppid(appId);
-		}
+	public Reply<WxProfitSharingOrders> orders(WxProfitSharingOrdersReq req) {
 		HttpPost httpPost = this.newHttpPost("https://api.mch.weixin.qq.com/v3/profitsharing/orders", req);
 		return this.doRequest(httpPost, WxProfitSharingOrders.class);
 	}
 
 	@Override
-	public Consequences<WxProfitSharingOrderState> state(WxProfitSharingOrderStateQuery query) {
+	public Reply<WxProfitSharingOrderState> state(WxProfitSharingOrderStateQuery query) {
 		String outOrderNo = Preconditions.checkNotNull(query.getOutOrderNo(), "outOrderNo");
 		String transactionId = Preconditions.checkNotNull(query.getTransactionId(), "transactionId");
 		String url = String.format("https://api.mch.weixin.qq.com/v3/profitsharing/orders/%s?transaction_id=%s",
@@ -61,15 +53,7 @@ public class ProfitSharingImpl implements ProfitSharing {
 	}
 
 	@Override
-	public Consequences<WxProfitSharingReceiverAdd> add(WxProfitSharingReceiverAddReq req) {
-		if (Strings.isNullOrEmpty(req.getAppid())) {
-			String appId = this.getPayContext().getPayConfig().getAppId().getProfitSharing();
-			if (Strings.isNullOrEmpty(appId)) {
-				appId = Preconditions.checkNotNull(this.getPayContext().getPayConfig().getAppId().getApp(),
-						"AppId#app must be not null");
-			}
-			req.setAppid(appId);
-		}
+	public Reply<WxProfitSharingReceiverAdd> add(WxProfitSharingReceiverAddReq req) {
 		HttpPost httpPost = this.newHttpPost("https://api.mch.weixin.qq.com/v3/profitsharing/receivers/add", req);
 		String name = req.getName();
 		if (!Strings.isNullOrEmpty(name)) {

@@ -3,7 +3,7 @@ package org.magneton.module.pay.wechat.v3.refund;
 import com.google.common.base.Preconditions;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.client.methods.HttpPost;
-import org.magneton.core.Consequences;
+import org.magneton.core.Reply;
 import org.magneton.module.pay.wechat.v3.core.WxPayContext;
 import org.magneton.module.pay.wechat.v3.refund.entity.DomesticRefunds;
 import org.magneton.module.pay.wechat.v3.refund.entity.DomesticRefundsReq;
@@ -24,7 +24,7 @@ public class RefundImpl implements Refund {
 	}
 
 	@Override
-	public Consequences<DomesticRefunds> refund(DomesticRefundsReq req) {
+	public Reply<DomesticRefunds> refund(DomesticRefundsReq req) {
 		HttpPost httpPost = this.newHttpPost("https://api.mch.weixin.qq.com/v3/refund/domestic/refunds", req);
 		return this.doRequest(httpPost, DomesticRefunds.class);
 	}

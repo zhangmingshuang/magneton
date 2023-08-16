@@ -2,6 +2,7 @@ package org.magneton.test;
 
 import java.util.Optional;
 
+import com.alibaba.testable.core.tool.OmniConstructor;
 import com.google.common.base.Preconditions;
 import org.magneton.test.annotation.TestComponentScan;
 import org.magneton.test.config.Config;
@@ -25,6 +26,14 @@ import org.magneton.test.supplier.TestBooleanSupplier;
 public class ChaosTest implements ChaosApplication {
 
 	private static final Config DEFAULT_CONFIG = new Config();
+
+	public static <T> T create(Class<T> clazz) {
+		return OmniConstructor.newInstance(clazz);
+	}
+
+	public static <T> T[] createArray(Class<T> clazz, int size) {
+		return OmniConstructor.newArray(clazz, size);
+	}
 
 	public static <T> T createExcepted(Class<T> clazz) {
 		return create(clazz, null, InjectType.EXPECTED);

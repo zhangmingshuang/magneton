@@ -1,7 +1,8 @@
 package org.magneton.module.wechat.open;
 
-import com.google.common.base.Preconditions;
 import javax.annotation.Nullable;
+
+import com.google.common.base.Preconditions;
 import org.magneton.module.wechat.core.MemoryWechatAccessTokenCache;
 import org.magneton.module.wechat.core.WechatAccessTokenCache;
 
@@ -13,6 +14,7 @@ public class WechatOpenBuilder {
 
 	private final WechatOpenConfig wechatOpenConfig;
 
+	@Nullable
 	private WechatAccessTokenCache wechatAccessTokenCache = new MemoryWechatAccessTokenCache();
 
 	private WechatOpenBuilder(WechatOpenConfig wechatOpenConfig) {
@@ -20,7 +22,7 @@ public class WechatOpenBuilder {
 	}
 
 	public static WechatOpenBuilder newBuilder(WechatOpenConfig wechatOpenConfig) {
-		return new WechatOpenBuilder(wechatOpenConfig);
+		return new WechatOpenBuilder(Preconditions.checkNotNull(wechatOpenConfig, "wechatOpenConfig"));
 	}
 
 	public WechatOpenBuilder accessTokenCache(@Nullable WechatAccessTokenCache wechatAccessTokenCache) {
@@ -29,7 +31,7 @@ public class WechatOpenBuilder {
 	}
 
 	public WechatOpen build() {
-		return new DefaultWechatOpenImpl(this);
+		return new DefaultWechatOpenImplOpen(this);
 	}
 
 	protected WechatOpenConfig getWechatConfig() {

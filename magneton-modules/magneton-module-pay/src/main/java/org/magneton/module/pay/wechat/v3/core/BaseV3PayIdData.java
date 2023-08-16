@@ -1,6 +1,5 @@
 package org.magneton.module.pay.wechat.v3.core;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -23,8 +22,7 @@ public class BaseV3PayIdData {
 	 *
 	 * 示例值：wxd678efh567hg6787
 	 */
-	@JsonProperty("appid")
-	private String appId;
+	private String appid;
 
 	/**
 	 * 直连商户号 string[1,32]
@@ -33,7 +31,22 @@ public class BaseV3PayIdData {
 	 *
 	 * 示例值：1230000109
 	 */
-	@JsonProperty("mchid")
-	private String mchId;
+	private String mchid;
+
+	protected void setAppid(String appid) {
+		this.appid = appid;
+	}
+
+	protected String getAppid() {
+		return this.appid;
+	}
+
+	protected void setMchid(String mchid) {
+		this.mchid = mchid;
+	}
+
+	protected String getMchid() {
+		return this.mchid;
+	}
 
 }

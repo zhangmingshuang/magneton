@@ -1,6 +1,5 @@
 package org.magneton.foundation;
 
-import com.sun.tools.internal.jxc.gen.config.Classes;
 import javax.annotation.Nullable;
 
 /**
@@ -37,7 +36,7 @@ public class MoreClasses {
 		}
 		if (cl == null) {
 			// No thread context class loader -> use class loader of this class.
-			cl = Classes.class.getClassLoader();
+			cl = MoreClasses.class.getClassLoader();
 			if (cl == null) {
 				// getClassLoader() returning null indicates the bootstrap ClassLoader
 				try {

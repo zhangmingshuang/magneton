@@ -1,15 +1,25 @@
 package org.magneton.support.adapter;
 
-import com.google.common.collect.Sets;
 import java.util.Set;
+
 import javax.annotation.Nullable;
+
+import com.google.common.collect.Sets;
+
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 /**
- * .
+ * 拦截适配器.
+ *
+ * 支持使用 {@link org.springframework.core.annotation.Order} 或者
+ * {@link javax.annotation.Priority} 注解来进行优先级排序。
+ *
+ * 优先级根据数值从从小到大，值越小越优化。
  *
  * @author zhangmsh 18/03/2022
  * @since 2.0.7
+ * @see org.springframework.core.annotation.Order
+ * @see org.springframework.core.annotation.AnnotationAwareOrderComparator
  */
 public interface InterceptorAdapter {
 

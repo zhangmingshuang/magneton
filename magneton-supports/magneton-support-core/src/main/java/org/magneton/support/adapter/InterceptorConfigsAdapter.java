@@ -1,17 +1,20 @@
 package org.magneton.support.adapter;
 
+import java.lang.reflect.Method;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import javax.annotation.Nullable;
+
 import cn.hutool.core.annotation.AnnotationUtil;
 import cn.hutool.core.util.ArrayUtil;
 import com.google.common.base.Strings;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import java.lang.reflect.Method;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import javax.annotation.Nullable;
 import lombok.extern.slf4j.Slf4j;
 import org.magneton.foundation.reflect.MoreReflection;
+
 import org.springframework.aop.support.AopUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +23,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.core.annotation.AnnotatedElementUtils;
 import org.springframework.core.annotation.AnnotationUtils;
+import org.springframework.core.annotation.OrderUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
@@ -32,21 +36,25 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
  *
  * @author zhangmsh 18/03/2022
  * @since 2.0.7
+ * @see org.springframework.core.annotation.AnnotationAwareOrderComparator
  */
-@Component
 @Slf4j
+@Component
 public class InterceptorConfigsAdapter implements WebMvcConfigurer, ApplicationContextAware, BeanPostProcessor {
 
 	private static final String[] EMPTY_STRINGS = new String[0];
 
 	private static final Class[] EMPTY = new Class[0];
 
-	@Autowired(required = false)
 	private List<InterceptorAdapter> interceptorAdapters;
 
 	private Map<String, Class<? extends InterceptorAdapter>[]> excludeInterceptorPaths = Maps.newConcurrentMap();
 
 	private ApplicationContext applicationContext;
+
+	public InterceptorConfigsAdapter(@Autowired(required = false) List<InterceptorAdapter> interceptorAdapters) {
+		this.interceptorAdapters = interceptorAdapters;
+	}
 
 	@Override
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
@@ -184,6 +192,8 @@ public class InterceptorConfigsAdapter implements WebMvcConfigurer, ApplicationC
 			else {
 				log.info("interceptor {}, path:{}", handlerInterceptorAdapter.getClass(), pathPatterns);
 			}
+
+			interceptorRegistration.order(OrderUtils.getOrder(interceptorAdapter.getClass(), 0));
 		}
 	}
 

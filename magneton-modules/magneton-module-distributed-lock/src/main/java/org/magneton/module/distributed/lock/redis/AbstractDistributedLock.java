@@ -3,7 +3,7 @@ package org.magneton.module.distributed.lock.redis;
 import org.magneton.module.distributed.lock.DistributedLock;
 
 /**
- * .
+ * 分布式锁抽象类.
  *
  * @author zhangmsh
  * @version 1.0.0
@@ -11,7 +11,7 @@ import org.magneton.module.distributed.lock.DistributedLock;
  */
 public abstract class AbstractDistributedLock implements DistributedLock {
 
-	private static final String LOCK_KEY_PREFIX = "magneton:dl:";
+	private static final String LOCK_KEY_PREFIX = "m:dl:";
 
 	/**
 	 * retouch key.

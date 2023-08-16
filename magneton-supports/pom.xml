@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <groupId>org.magneton</groupId>
-        <artifactId>magneton</artifactId>
-        <version>${revision}</version>
-    </parent>
-    <modelVersion>4.0.0</modelVersion>
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-    <artifactId>magneton-supports</artifactId>
-    <packaging>pom</packaging>
-    <description>业务支撑</description>
+	<parent>
+		<groupId>org.magneton</groupId>
+		<artifactId>magneton-parent</artifactId>
+		<version>2023.1</version>
+		<relativePath>../magneton-parent/pom.xml</relativePath>
+	</parent>
 
-    <modules>
-        <module>magneton-support-core</module>
-    </modules>
+	<artifactId>magneton-supports</artifactId>
+	<packaging>pom</packaging>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.magneton</groupId>
-            <artifactId>magneton-test</artifactId>
-            <version>${project.version}</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
+	<modules>
+		<module>magneton-support-core</module>
+	</modules>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.magneton</groupId>
+			<artifactId>magneton-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
 
 </project>

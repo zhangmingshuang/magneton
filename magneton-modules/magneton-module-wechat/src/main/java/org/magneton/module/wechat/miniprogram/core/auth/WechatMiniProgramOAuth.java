@@ -1,8 +1,7 @@
 package org.magneton.module.wechat.miniprogram.core.auth;
 
-import javax.annotation.Nullable;
-import org.magneton.core.Consequences;
-import org.magneton.module.wechat.miniprogram.entity.MPAccessTokenRes;
+import org.magneton.core.Reply;
+import org.magneton.module.wechat.miniprogram.entity.MPAccessToken;
 
 /**
  * @author zhangmsh 2022/6/16
@@ -10,9 +9,6 @@ import org.magneton.module.wechat.miniprogram.entity.MPAccessTokenRes;
  */
 public interface WechatMiniProgramOAuth {
 
-	Consequences<MPAccessTokenRes> accessToken();
-
-	@Nullable
-	MPAccessTokenRes accessTokenFromCache();
+	Reply<MPAccessToken> accessToken();
 
 }

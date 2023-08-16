@@ -29,13 +29,22 @@ public class MinConfigPostProcessor extends AbstractConfigPostProcessor {
 	@Override
 	protected void doPostProcessor(Annotation annotation, Config config, Definition definition) {
 		Map<String, Object> metadata = AnnotationUtil.getMetadata(annotation);
-		long min = (long) metadata.get("value");
-
+		Object value = metadata.get("value");
+		Class annotationType = (Class) metadata.get("annotationType");
+		long min;
+		if (DecimalMin.class.isAssignableFrom(annotationType)) {
+			double minVal = Double.parseDouble(value.toString());
+			this.setBigDecimal(config, minVal);
+			min = (long) minVal;
+		}
+		else {
+			min = Long.parseLong(value.toString());
+			this.setBigDecimal(config, min);
+		}
 		this.setByte(config, min);
 		this.setShort(config, min);
 		this.setInt(config, min);
 		this.setLong(config, min);
-		this.setBigDecimal(config, min);
 		this.setBigInteger(config, min);
 	}
 
@@ -50,7 +59,7 @@ public class MinConfigPostProcessor extends AbstractConfigPostProcessor {
 		}
 	}
 
-	public void setBigDecimal(Config config, long min) {
+	public void setBigDecimal(Config config, double min) {
 		BigDecimal minBigDecimal = config.getMinBigDecimal();
 		if (minBigDecimal == null || minBigDecimal.compareTo(BigDecimal.valueOf(min)) < 0) {
 			// 如果当前设置的最小值比预期的最小值小，则使用该预期的最小值

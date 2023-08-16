@@ -24,4 +24,12 @@ public class BaseV3Data {
 	 */
 	private String appid;
 
+	protected void setAppid(String appid) {
+		this.appid = appid;
+	}
+
+	protected String getAppid() {
+		return this.appid;
+	}
+
 }

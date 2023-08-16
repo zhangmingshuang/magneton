@@ -6,7 +6,17 @@ import javax.crypto.spec.SecretKeySpec;
 
 import cn.hutool.core.codec.Base64;
 
+/**
+ * 微信小程序Aes数据加解密辅助类
+ *
+ * @author zhangmsh
+ * @since 1.0.0
+ */
 public class MPAesHelper {
+
+	private MPAesHelper() {
+		// private
+	}
 
 	/**
 	 * 微信小程序 开放数据解密 AES解密（Base64） Add by 成长的小猪（Jason.Song） on 2018/10/26

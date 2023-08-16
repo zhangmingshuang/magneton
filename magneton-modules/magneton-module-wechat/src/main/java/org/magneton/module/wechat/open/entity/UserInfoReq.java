@@ -1,6 +1,7 @@
 package org.magneton.module.wechat.open.entity;
 
 import javax.annotation.Nullable;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -19,7 +20,7 @@ public class UserInfoReq {
 	/**
 	 * 调用凭证
 	 */
-	private String access_token;
+	private String accessToken;
 
 	/**
 	 * 普通用户的标识，对当前开发者帐号唯一

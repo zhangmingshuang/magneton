@@ -42,6 +42,6 @@ public class MPSensitiveUserInfo {
 	 */
 	private String unionId;
 
-	private Watermark watermark;
+	private MPWatermark watermark;
 
 }

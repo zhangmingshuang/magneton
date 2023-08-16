@@ -1,11 +1,13 @@
 package org.magneton.core;
 
-import com.google.common.base.Strings;
-import com.google.common.collect.Maps;
 import java.beans.Transient;
 import java.util.Map;
 import java.util.Objects;
+
 import javax.annotation.Nullable;
+
+import com.google.common.base.Strings;
+import com.google.common.collect.Maps;
 import lombok.Getter;
 import lombok.ToString;
 

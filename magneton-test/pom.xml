@@ -2,13 +2,14 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		 xmlns="http://maven.apache.org/POM/4.0.0"
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<parent>
-		<groupId>org.magneton</groupId>
-		<artifactId>magneton</artifactId>
-		<version>${revision}</version>
-	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
+	<parent>
+		<groupId>org.magneton</groupId>
+		<artifactId>magneton-parent</artifactId>
+		<version>2023.1</version>
+		<relativePath>../magneton-parent/pom.xml</relativePath>
+	</parent>
 
 	<artifactId>magneton-test</artifactId>
 
@@ -16,13 +17,6 @@
 		<dependency>
 			<groupId>org.magneton</groupId>
 			<artifactId>magneton-core</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-tx</artifactId>
-			<version>${spring.version}</version>
-			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
@@ -37,7 +31,6 @@
 		<dependency>
 			<groupId>org.hibernate.validator</groupId>
 			<artifactId>hibernate-validator</artifactId>
-			<version>${hibernate-validator.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.glassfish</groupId>
@@ -47,10 +40,6 @@
 		<dependency>
 			<groupId>com.alibaba.testable</groupId>
 			<artifactId>testable-all</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.alibaba.testable</groupId>
-			<artifactId>testable-core</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>joda-time</groupId>
@@ -65,7 +54,6 @@
 		<dependency>
 			<groupId>org.redisson</groupId>
 			<artifactId>redisson</artifactId>
-			<version>${redisson.version}</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>slf4j-api</artifactId>
@@ -78,50 +66,6 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
 			<version>${commons-lang3.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<version>${spring-boot.version}</version>
-			<scope>test</scope>
-			<exclusions>
-				<exclusion>
-					<artifactId>slf4j-api</artifactId>
-					<groupId>org.slf4j</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>snakeyaml</artifactId>
-					<groupId>org.yaml</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>junit-jupiter-api</artifactId>
-					<groupId>org.junit.jupiter</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>junit-jupiter-engine</artifactId>
-					<groupId>org.junit.jupiter</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>junit-platform-engine</artifactId>
-					<groupId>org.junit.platform</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>logback-classic</artifactId>
-					<groupId>ch.qos.logback</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>asm</artifactId>
-					<groupId>org.ow2.asm</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>byte-buddy</artifactId>
-					<groupId>net.bytebuddy</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>spring-boot-autoconfigure</artifactId>
-					<groupId>org.springframework.boot</groupId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>com.google.guava</groupId>
@@ -158,6 +102,11 @@
 					<groupId>org.springframework</groupId>
 				</exclusion>
 			</exclusions>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
 			<optional>true</optional>
 		</dependency>
 	</dependencies>

@@ -1,12 +1,5 @@
 package org.magneton.module.pay.wechat.v3.core;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.security.GeneralSecurityException;
-import java.security.PrivateKey;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Preconditions;
 import com.wechat.pay.contrib.apache.httpclient.WechatPayHttpClientBuilder;
@@ -18,7 +11,12 @@ import com.wechat.pay.contrib.apache.httpclient.cert.CertificatesManager;
 import com.wechat.pay.contrib.apache.httpclient.exception.HttpCodeException;
 import com.wechat.pay.contrib.apache.httpclient.exception.NotFoundException;
 import com.wechat.pay.contrib.apache.httpclient.util.PemUtil;
-import lombok.SneakyThrows;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.security.GeneralSecurityException;
+import java.security.PrivateKey;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.magneton.module.pay.exception.PrivateKeyNotFoundException;
@@ -32,46 +30,21 @@ public class DefaultWxPayContext implements WxPayContext {
 
 	private final ObjectMapper objectMapper = new ObjectMapper();
 
-	/**
-	 * 默认的微信支付属性配置
-	 */
 	private final WxPayConfig wxPayConfig;
 
-	private WxPaySession wxPaySession;
+	private Verifier verifier;
+
+	private PrivateKeySigner privateKeySigner;
+
+	private WechatPay2Validator wechatPay2Validator;
+
+	private CloseableHttpClient httpClient;
 
 	public DefaultWxPayContext(WxPayConfig wxPayConfig) {
 		this.wxPayConfig = Preconditions.checkNotNull(wxPayConfig);
-		this.validAndInit();
+		this.init();
 		Runtime.getRuntime().addShutdownHook(new Thread(this::shutdown));
 	}
-
-	@SneakyThrows
-	// private void parseConfigs(WxPayConfig wxPayConfig) {
-	// Field[] fields = wxPayConfig.getClass().getDeclaredFields();
-	// if (fields.length < 1) {
-	// return;
-	// }
-	// for (Field field : fields) {
-	// WxPayConfigIdStatement wxPayConfigIdStatement =
-	// field.getAnnotation(WxPayConfigIdStatement.class);
-	// if (wxPayConfigIdStatement == null) {
-	// continue;
-	// }
-	// field.setAccessible(true);
-	// wxPayConfig config = (wxPayConfig) field.get(wxPayConfig);
-	// if (config == null) {
-	// continue;
-	// }
-	// WxPayType id = wxPayConfigIdStatement.value();
-	// if (id == null) {
-	// throw new IllegalArgumentException("@WxPayConfigId#id不能为空");
-	// }
-	// wxPayConfig exist = this.wxPayConfigs.put(id, config);
-	// if (exist != null) {
-	// throw new DuplicateFoundException(config, exist);
-	// }
-	// }
-	// }
 
 	@Override
 	public ObjectMapper getObjectMapper() {
@@ -80,22 +53,22 @@ public class DefaultWxPayContext implements WxPayContext {
 
 	@Override
 	public Verifier getVerifier() {
-		return this.wxPaySession.getVerifier();
+		return this.verifier;
 	}
 
 	@Override
 	public PrivateKeySigner getPrivateKeySigner() {
-		return this.wxPaySession.getPrivateKeySigner();
+		return this.privateKeySigner;
 	}
 
 	@Override
 	public WechatPay2Validator getWechatPay2Validator() {
-		return this.wxPaySession.getWechatPay2Validator();
+		return this.wechatPay2Validator;
 	}
 
 	@Override
 	public CloseableHttpClient getHttpClient() {
-		return this.wxPaySession.getHttpClient();
+		return this.httpClient;
 	}
 
 	@Override
@@ -103,31 +76,16 @@ public class DefaultWxPayContext implements WxPayContext {
 		return this.wxPayConfig;
 	}
 
-	protected void validAndInit() {
-		// 获取证书管理器实例,它会定时下载和更新商户对应的微信支付平台证书 （默认下载间隔为UPDATE_INTERVAL_MINUTE）。
-		CertificatesManager certificatesManager = CertificatesManager.getInstance();
+	protected void init() {
+		Preconditions.checkNotNull(this.wxPayConfig.getAppId(), "wechat pay appId must not be null");
 
-		String merchantId = this.wxPayConfig.getMerchantId();
-
-		try {
-			if (certificatesManager.getVerifier(merchantId) != null) {
-				// merchantId已经初始化，不需要重复初始化
-				return;
-			}
-		}
-		catch (NotFoundException e) {
-			// ignore
-		}
-
-		String merchantSerialNumber = this.wxPayConfig.getMerchantSerialNumber();
-		String merchantPrivateKeyFile = this.wxPayConfig.getMerchantPrivateKeyFile();
-		String apiV3Key = this.wxPayConfig.getApiV3Key();
-
-		Preconditions.checkNotNull(merchantId, "wechat pay merchantId must not be null");
-		Preconditions.checkNotNull(merchantSerialNumber, "wechat pay merchantSerialNumber must not be null");
-		Preconditions.checkNotNull(merchantPrivateKeyFile, "wechat pay merchantPrivateKeyFile must not be null");
-		Preconditions.checkNotNull(apiV3Key, "wechat pay apiV3Key must not be null");
-
+		String merchantId = Preconditions.checkNotNull(this.wxPayConfig.getMerchantId(),
+				"wechat pay merchantId is null.");
+		String merchantSerialNumber = Preconditions.checkNotNull(this.wxPayConfig.getMerchantSerialNumber(),
+				"wechat pay merchant serial number is null.");
+		String merchantPrivateKeyFile = Preconditions.checkNotNull(this.wxPayConfig.getMerchantPrivateKeyFile(),
+				"wechat pay merchant private key file is null.");
+		String apiV3Key = Preconditions.checkNotNull(this.wxPayConfig.getApiV3Key(), "wechat pay api v3 key is null");
 		PrivateKey merchantPrivateKey = null;
 		try {
 			merchantPrivateKey = PemUtil.loadPrivateKey(new FileInputStream(merchantPrivateKeyFile));
@@ -136,38 +94,38 @@ public class DefaultWxPayContext implements WxPayContext {
 			log.error("wechat pay merchant private key not found.", e);
 			throw new PrivateKeyNotFoundException(e);
 		}
-		// 向证书管理器增加需要自动更新平台证书的商户信息
-		// ... 若有多个商户号，可继续调用putMerchant添加商户信息
-		PrivateKeySigner privateKeySigner = new PrivateKeySigner(merchantSerialNumber, merchantPrivateKey);
-		try {
-			certificatesManager.putMerchant(merchantId, new WechatPay2Credentials(merchantId, privateKeySigner),
-					apiV3Key.getBytes(StandardCharsets.UTF_8));
-		}
-		catch (IOException | GeneralSecurityException | HttpCodeException e) {
-			throw new RuntimeException(e);
-		}
+		// 获取证书管理器实例,它会定时下载和更新商户对应的微信支付平台证书 （默认下载间隔为UPDATE_INTERVAL_MINUTE）。
+		CertificatesManager certificatesManager = CertificatesManager.getInstance();
 
 		try {
+			// 向证书管理器增加需要自动更新平台证书的商户信息
+			// ... 若有多个商户号，可继续调用putMerchant添加商户信息
+			this.privateKeySigner = new PrivateKeySigner(merchantSerialNumber, merchantPrivateKey);
+			certificatesManager.putMerchant(merchantId, new WechatPay2Credentials(merchantId, this.privateKeySigner),
+					apiV3Key.getBytes(StandardCharsets.UTF_8));
 			// 从证书管理器中获取verifier
-			Verifier verifier = certificatesManager.getVerifier(merchantId);
-			WechatPay2Validator wechatPay2Validator = new WechatPay2Validator(verifier);
-			WechatPayHttpClientBuilder builder = WechatPayHttpClientBuilder.create()
-					.withMerchant(merchantId, merchantSerialNumber, merchantPrivateKey)
-					.withValidator(wechatPay2Validator);
-			// 通过WechatPayHttpClientBuilder构造的HttpClient，会自动的处理签名和验签
-			this.wxPaySession = new WxPaySession(privateKeySigner, verifier, wechatPay2Validator, builder.build());
+			this.verifier = certificatesManager.getVerifier(merchantId);
+			this.wechatPay2Validator = new WechatPay2Validator(this.verifier);
 		}
 		catch (NotFoundException e) {
 			log.error("wechat pay merchant get verifier error.", e);
 			throw new PrivateKeyNotFoundException(e);
 		}
+		catch (GeneralSecurityException | HttpCodeException | IOException e) {
+			log.error("wechat pay general security error.", e);
+			throw new PrivateKeyNotFoundException(e);
+		}
+		WechatPayHttpClientBuilder builder = WechatPayHttpClientBuilder.create()
+				.withMerchant(merchantId, merchantSerialNumber, merchantPrivateKey)
+				.withValidator(this.wechatPay2Validator);
+		// 通过WechatPayHttpClientBuilder构造的HttpClient，会自动的处理签名和验签
+		this.httpClient = builder.build();
 	}
 
 	protected void shutdown() {
-		CloseableHttpClient httpClient = this.wxPaySession.getHttpClient();
-		if (httpClient != null) {
+		if (this.httpClient != null) {
 			try {
-				httpClient.close();
+				this.httpClient.close();
 			}
 			catch (IOException e) {
 				// ignore

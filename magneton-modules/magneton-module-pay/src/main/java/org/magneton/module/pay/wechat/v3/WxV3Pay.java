@@ -3,13 +3,15 @@ package org.magneton.module.pay.wechat.v3;
 import java.util.Map;
 
 import com.google.common.base.Strings;
+import org.magneton.core.Reply;
 import org.magneton.module.pay.Pay;
 import org.magneton.module.pay.wechat.v3.prepay.AppPrepay;
 import org.magneton.module.pay.wechat.v3.prepay.H5Prepay;
 import org.magneton.module.pay.wechat.v3.prepay.JSAPIPrepay;
 import org.magneton.module.pay.wechat.v3.prepay.entity.WxPayNotification;
+import org.magneton.module.pay.wechat.v3.prepay.entity.WxPayOrder;
+import org.magneton.module.pay.wechat.v3.prepay.entity.WxPayOrderQuery;
 import org.magneton.module.pay.wechat.v3.profitsharing.ProfitSharing;
-import org.magneton.module.pay.wechat.v3.refund.Refund;
 
 /**
  * 微信支付.
@@ -58,7 +60,12 @@ public interface WxV3Pay extends Pay {
 	 */
 	ProfitSharing profitSharing();
 
-	Refund refund();
+	/**
+	 * 查询订单
+	 * @param query 业务请求数据
+	 * @return 订单数据
+	 */
+	Reply<WxPayOrder> queryOrder(WxPayOrderQuery query);
 
 	/**
 	 * 回调处理数据校验并解析响应数据

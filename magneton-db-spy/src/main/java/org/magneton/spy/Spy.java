@@ -17,15 +17,15 @@ import org.magneton.spy.core.Protocol;
  */
 public class Spy {
 
-	private static final Map<String, Protocol> protocols = Maps.newConcurrentMap();
+	private static final Map<String, Protocol> PROTOCOLS = Maps.newConcurrentMap();
 
-	private static final Map<DB, Database> databases = Maps.newConcurrentMap();
+	private static final Map<DB, Database> DATABASES = Maps.newConcurrentMap();
 
 	static {
 		ServiceLoader<Protocol> loader = ServiceLoader.load(Protocol.class);
 		loader.forEach(protocol -> {
 			String name = protocol.name().toUpperCase(Locale.ROOT);
-			Protocol exist = protocols.put(name, protocol);
+			Protocol exist = PROTOCOLS.put(name, protocol);
 			if (exist != null) {
 				throw new DuplicateException(name, protocol.getClass(), exist.getClass());
 			}
@@ -34,7 +34,7 @@ public class Spy {
 		ServiceLoader<Database> databaseLoader = ServiceLoader.load(Database.class);
 		databaseLoader.forEach(database -> {
 			DB db = database.db();
-			Database exist = databases.put(db, database);
+			Database exist = DATABASES.put(db, database);
 			if (exist != null) {
 				throw new DuplicateException(db.name(), database.getClass(), exist.getClass());
 			}
@@ -45,7 +45,7 @@ public class Spy {
 	}
 
 	public static Database use(DB db) {
-		Database database = databases.get(Preconditions.checkNotNull(db, "db"));
+		Database database = DATABASES.get(Preconditions.checkNotNull(db, "db"));
 		Verify.verifyNotNull(database, "%s database not found", db.name());
 		return database;
 	}

@@ -1,5 +1,9 @@
 package org.magneton.module.sms.process.aliyun;
 
+import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.ThreadLocalRandom;
+
 import com.alibaba.fastjson.JSON;
 import com.aliyun.dysmsapi20170525.Client;
 import com.aliyun.dysmsapi20170525.models.SendSmsRequest;
@@ -9,12 +13,9 @@ import com.aliyun.teaopenapi.models.Config;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.collect.Maps;
-import java.util.Map;
-import java.util.UUID;
-import java.util.concurrent.ThreadLocalRandom;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-import org.magneton.core.Consequences;
+import org.magneton.core.Reply;
 import org.magneton.foundation.exception.InitializationException;
 import org.magneton.module.sms.entity.SmsToken;
 import org.magneton.module.sms.process.SendProcessor;
@@ -58,7 +59,7 @@ public abstract class AbstractAliyunSmsProcessor implements SendProcessor {
 	}
 
 	@Override
-	public Consequences<SmsToken> send(String mobile) {
+	public Reply<SmsToken> send(String mobile) {
 		try {
 			AliyunSmsTemplate aliyunSmsTemplate = this.createTemplate(mobile,
 					this.getAliyunSmsProperty().getTemplateCode());
@@ -74,7 +75,7 @@ public abstract class AbstractAliyunSmsProcessor implements SendProcessor {
 		catch (Exception e) {
 			this.onSendException(e, mobile);
 		}
-		return Consequences.fail();
+		return Reply.fail();
 	}
 
 	protected SendSmsResponse doSend(SendSmsRequest sendSmsRequest) throws Exception {
@@ -86,14 +87,13 @@ public abstract class AbstractAliyunSmsProcessor implements SendProcessor {
 	 * @param sendSmsResponse 短信响应信息
 	 * @return 处理结果
 	 */
-	protected Consequences<SmsToken> doSendResponseProcess(String code, SendSmsResponse sendSmsResponse,
-			boolean isSuccess) {
+	protected Reply<SmsToken> doSendResponseProcess(String code, SendSmsResponse sendSmsResponse, boolean isSuccess) {
 		if (isSuccess) {
-			return Consequences.success(new SmsToken(UUID.randomUUID().toString(), code));
+			return Reply.success(new SmsToken(UUID.randomUUID().toString(), code));
 		}
 		SendSmsResponseBody body = sendSmsResponse.getBody();
 		log.error("send sms error: {} -- {} ", body.getCode(), body.getMessage());
-		return Consequences.fail();
+		return Reply.fail();
 	}
 
 	protected AliyunSmsTemplate createTemplate(String mobile, String templateCode) {

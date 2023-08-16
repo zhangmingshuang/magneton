@@ -23,4 +23,6 @@ public class WxPayProperties extends WxPayConfig {
 
 	public static final String PREFIX = "magneton.module.pay.weixin";
 
+	public static final String CONDITION_KEY = "app-id";
+
 }
