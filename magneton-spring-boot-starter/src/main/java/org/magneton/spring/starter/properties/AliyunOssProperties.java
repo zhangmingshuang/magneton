@@ -1,12 +1,13 @@
 package org.magneton.spring.starter.properties;
 
 import org.magneton.module.oss.aliyun.AliyunOssConfig;
-
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
- * @author zhangmsh 2022/3/26
+ * The properties of aliyun oss.
+ *
+ * @author zhangmsh
  * @since 1.0.0
  */
 @ConditionalOnClass(AliyunOssConfig.class)

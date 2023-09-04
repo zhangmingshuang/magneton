@@ -1,29 +1,28 @@
 package org.magneton.spring.starter.servlet;
 
-import java.util.Map;
-
-import javax.annotation.Nullable;
-
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
-
 import org.springframework.core.NamedInheritableThreadLocal;
 
+import javax.annotation.Nullable;
+import java.util.Map;
+
 /**
- * Magneton Request Context
+ * Request Context
  *
  * @author zhangmsh
  * @since 2023.1
  */
-public class MRC {
+@SuppressWarnings("unchecked")
+public class RequestContext {
 
 	private static final ThreadLocal<Object> HOLDER = new NamedInheritableThreadLocal<>("Magneton Request Context");
 
 	private static final ThreadLocal<Map<?, ?>> REF_HOLDER = new NamedInheritableThreadLocal<>(
 			"Magneton Ref Request Context");
 
-	private MRC() {
+	private RequestContext() {
 
 	}
 
