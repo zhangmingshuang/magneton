@@ -1,17 +1,16 @@
 package org.magneton.module.wechat.open.core.oauth2;
 
-import javax.annotation.Nullable;
-
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Preconditions;
 import lombok.extern.slf4j.Slf4j;
-import org.magneton.core.Reply;
 import org.magneton.module.wechat.core.Req;
 import org.magneton.module.wechat.core.WechatAccessTokenCache;
 import org.magneton.module.wechat.open.WechatOpenConfig;
 import org.magneton.module.wechat.open.entity.AccessTokenRes;
 import org.magneton.module.wechat.open.entity.UserInfoReq;
 import org.magneton.module.wechat.open.entity.UserInfoRes;
+
+import javax.annotation.Nullable;
 
 /**
  * @author zhangmsh 2022/4/1

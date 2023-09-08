@@ -1,9 +1,5 @@
 package org.magneton.module.sms.process.aliyun;
 
-import java.util.Map;
-import java.util.UUID;
-import java.util.concurrent.ThreadLocalRandom;
-
 import com.alibaba.fastjson.JSON;
 import com.aliyun.dysmsapi20170525.Client;
 import com.aliyun.dysmsapi20170525.models.SendSmsRequest;
@@ -15,10 +11,13 @@ import com.google.common.base.Strings;
 import com.google.common.collect.Maps;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-import org.magneton.core.Reply;
 import org.magneton.foundation.exception.InitializationException;
 import org.magneton.module.sms.entity.SmsToken;
 import org.magneton.module.sms.process.SendProcessor;
+
+import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * 阿里云验证码.

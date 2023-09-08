@@ -2,7 +2,7 @@ package org.magneton.exception;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.magneton.core.Response;
+import org.magneton.core.Result;
 import org.magneton.spring.starter.exception.DefaultExceptionProcessorContext;
 import org.magneton.spring.starter.exception.ExceptionProcessorContext;
 
@@ -22,9 +22,9 @@ class ExceptionProcessorTest {
 
 		Object test = exceptionProcessorContext.handle(new NullPointerException("test"));
 		System.out.println(test);
-		Assertions.assertSame(test.getClass(), Response.class, "class not match");
-		Response response = (Response) test;
-		Assertions.assertEquals(NullPointerExceptionProcessor.NULL_ERROR, response.getMessage(),
+		Assertions.assertSame(test.getClass(), Result.class, "class not match");
+		Result result = (Result) test;
+		Assertions.assertEquals(NullPointerExceptionProcessor.NULL_ERROR, result.getMessage(),
 				"response message not match");
 	}
 

@@ -1,16 +1,17 @@
 package org.magneton.module.im.tencent.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.List;
-import java.util.Set;
-import javax.annotation.Nullable;
-import javax.annotations.SizeLimit;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.magneton.module.im.tencent.api.msg.MsgModel;
 import org.magneton.module.im.tencent.entity.msgbody.MsgBodyElem;
 import org.magneton.module.im.tencent.entity.msgbody.OfflinePushElem;
+
+import javax.annotation.Nullable;
+import javax.annotation.SizeLimit;
+import java.util.List;
+import java.util.Set;
 
 /**
  * 批量发单聊消息

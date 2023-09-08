@@ -2,8 +2,6 @@ package org.magneton.module.sms;
 
 import javax.annotation.Nullable;
 
-import org.magneton.core.Reply;
-
 /**
  * .
  *

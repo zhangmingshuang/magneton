@@ -1,11 +1,5 @@
 package org.magneton.module.pay.wechat.v3;
 
-import java.nio.charset.StandardCharsets;
-import java.security.Security;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.collect.Maps;
@@ -15,27 +9,25 @@ import com.wechat.pay.contrib.apache.httpclient.notification.NotificationHandler
 import com.wechat.pay.contrib.apache.httpclient.notification.NotificationRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.client.methods.HttpGet;
-import org.magneton.core.Reply;
-import org.magneton.core.Response;
-import org.magneton.core.ResponseException;
+import org.magneton.core.Result;
+import org.magneton.core.ResultException;
 import org.magneton.foundation.exception.ProcessException;
 import org.magneton.module.pay.wechat.v3.core.DefaultWxPayContext;
 import org.magneton.module.pay.wechat.v3.core.WxPayConfig;
 import org.magneton.module.pay.wechat.v3.core.WxPayContext;
-import org.magneton.module.pay.wechat.v3.prepay.AppPrepay;
-import org.magneton.module.pay.wechat.v3.prepay.AppPrepayImpl;
-import org.magneton.module.pay.wechat.v3.prepay.H5Prepay;
-import org.magneton.module.pay.wechat.v3.prepay.H5PrepayImpl;
-import org.magneton.module.pay.wechat.v3.prepay.JSAPIPrepay;
-import org.magneton.module.pay.wechat.v3.prepay.JSAPIPrepayImpl;
-import org.magneton.module.pay.wechat.v3.prepay.WechatBaseV3Pay;
-import org.magneton.module.pay.wechat.v3.prepay.WechatBaseV3PayImpl;
+import org.magneton.module.pay.wechat.v3.prepay.*;
 import org.magneton.module.pay.wechat.v3.prepay.entity.WxPayNotification;
 import org.magneton.module.pay.wechat.v3.prepay.entity.WxPayOrder;
 import org.magneton.module.pay.wechat.v3.prepay.entity.WxPayOrderQuery;
 import org.magneton.module.pay.wechat.v3.prepay.entity.WxPayOrderQuery.Type;
 import org.magneton.module.pay.wechat.v3.profitsharing.ProfitSharing;
 import org.magneton.module.pay.wechat.v3.profitsharing.ProfitSharingImpl;
+
+import java.nio.charset.StandardCharsets;
+import java.security.Security;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * 微信支付.
@@ -171,7 +163,7 @@ public class WxV3PayImpl implements WxV3Pay {
 			return this.payContext.getObjectMapper().readValue(decryptData, WxPayNotification.class);
 		}
 		catch (Exception e) {
-			throw new ResponseException(Response.bad().message(e.getMessage()));
+			throw new ResultException(Result.bad().message(e.getMessage()));
 		}
 	}
 

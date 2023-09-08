@@ -1,8 +1,6 @@
 package org.magneton.module.pay.wechat.v3.profitsharing.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import javax.annotation.Nullable;
-import javax.annotations.Description;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -10,6 +8,9 @@ import org.magneton.module.pay.wechat.v3.annotation.WxSecret;
 import org.magneton.module.pay.wechat.v3.core.BaseV3Data;
 import org.magneton.module.pay.wechat.v3.core.WxReceiverType;
 import org.magneton.module.pay.wechat.v3.core.WxRelationType;
+
+import javax.annotation.Description;
+import javax.annotation.Nullable;
 
 /**
  * 添加分账接收方

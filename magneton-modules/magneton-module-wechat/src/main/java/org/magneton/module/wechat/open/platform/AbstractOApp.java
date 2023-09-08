@@ -1,14 +1,13 @@
 package org.magneton.module.wechat.open.platform;
 
-import javax.annotation.Nullable;
-
 import com.google.common.base.Preconditions;
-import org.magneton.core.Reply;
 import org.magneton.foundation.exception.BusinessException;
 import org.magneton.module.wechat.open.WechatOpenContext;
 import org.magneton.module.wechat.open.entity.AccessTokenRes;
 import org.magneton.module.wechat.open.entity.UserInfoReq;
 import org.magneton.module.wechat.open.entity.UserInfoRes;
+
+import javax.annotation.Nullable;
 
 /**
  * @author zhangmsh 2022/4/2

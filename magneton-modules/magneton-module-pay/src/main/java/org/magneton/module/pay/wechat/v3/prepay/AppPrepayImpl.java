@@ -4,7 +4,6 @@ import cn.hutool.core.util.RandomUtil;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import lombok.extern.slf4j.Slf4j;
-import org.magneton.core.Reply;
 import org.magneton.module.pay.exception.AmountException;
 import org.magneton.module.pay.wechat.v3.prepay.entity.PrepayId;
 import org.magneton.module.pay.wechat.v3.prepay.entity.WxPayAppPrepay;

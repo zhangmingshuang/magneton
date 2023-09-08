@@ -3,7 +3,6 @@ package org.magneton.module.pay.wechat.v3.refund;
 import com.google.common.base.Preconditions;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.client.methods.HttpPost;
-import org.magneton.core.Reply;
 import org.magneton.module.pay.wechat.v3.core.WxPayContext;
 import org.magneton.module.pay.wechat.v3.refund.entity.DomesticRefunds;
 import org.magneton.module.pay.wechat.v3.refund.entity.DomesticRefundsReq;

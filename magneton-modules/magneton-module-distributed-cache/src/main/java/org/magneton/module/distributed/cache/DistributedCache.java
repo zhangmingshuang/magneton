@@ -1,12 +1,9 @@
 package org.magneton.module.distributed.cache;
 
+import org.magneton.module.distributed.cache.ops.*;
+
+import javax.annotation.Underperforming;
 import java.util.List;
-import javax.annotations.Underperforming;
-import org.magneton.module.distributed.cache.ops.HashOps;
-import org.magneton.module.distributed.cache.ops.ListOps;
-import org.magneton.module.distributed.cache.ops.SetOps;
-import org.magneton.module.distributed.cache.ops.SortedSetOps;
-import org.magneton.module.distributed.cache.ops.ValueOps;
 
 /**
  * .

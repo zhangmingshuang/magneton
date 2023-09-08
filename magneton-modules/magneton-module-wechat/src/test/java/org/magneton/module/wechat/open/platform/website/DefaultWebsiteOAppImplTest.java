@@ -3,7 +3,6 @@ package org.magneton.module.wechat.open.platform.website;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.magneton.core.Reply;
 import org.magneton.module.wechat.open.WechatOpen;
 import org.magneton.module.wechat.open.WechatOpenBuilder;
 import org.magneton.module.wechat.open.WechatOpenConfig;

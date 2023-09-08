@@ -1,6 +1,5 @@
 package org.magneton.module.wechat.miniprogram;
 
-import org.magneton.core.Reply;
 import org.magneton.module.wechat.miniprogram.entity.MPCode2Session;
 import org.magneton.module.wechat.miniprogram.entity.MPPhoneInfo;
 

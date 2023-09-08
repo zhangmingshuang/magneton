@@ -1,13 +1,7 @@
 package org.magneton.module.pay.wechat.v3.profitsharing;
 
-import org.magneton.core.Reply;
 import org.magneton.module.pay.wechat.v3.core.BaseV3Api;
-import org.magneton.module.pay.wechat.v3.profitsharing.entity.WxProfitSharingOrderState;
-import org.magneton.module.pay.wechat.v3.profitsharing.entity.WxProfitSharingOrderStateQuery;
-import org.magneton.module.pay.wechat.v3.profitsharing.entity.WxProfitSharingOrders;
-import org.magneton.module.pay.wechat.v3.profitsharing.entity.WxProfitSharingOrdersReq;
-import org.magneton.module.pay.wechat.v3.profitsharing.entity.WxProfitSharingReceiverAdd;
-import org.magneton.module.pay.wechat.v3.profitsharing.entity.WxProfitSharingReceiverAddReq;
+import org.magneton.module.pay.wechat.v3.profitsharing.entity.*;
 
 /**
  * 分账API

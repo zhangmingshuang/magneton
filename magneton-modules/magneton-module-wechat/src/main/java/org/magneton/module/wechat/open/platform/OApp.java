@@ -1,11 +1,10 @@
 package org.magneton.module.wechat.open.platform;
 
-import javax.annotation.Nullable;
-
-import org.magneton.core.Reply;
 import org.magneton.module.wechat.open.entity.AccessTokenRes;
 import org.magneton.module.wechat.open.entity.UserInfoReq;
 import org.magneton.module.wechat.open.entity.UserInfoRes;
+
+import javax.annotation.Nullable;
 
 /**
  * @author zhangmsh 2022/4/2

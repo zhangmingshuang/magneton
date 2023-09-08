@@ -1,20 +1,11 @@
 package org.magneton.spring.starter.exception;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.locks.ReentrantLock;
-
-import javax.annotation.Nullable;
-
 import com.google.common.base.Preconditions;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-import org.magneton.core.Response;
-import org.magneton.core.ResponseException;
+import org.magneton.core.Result;
+import org.magneton.core.ResultException;
 import org.magneton.foundation.collection.MoreCollections;
-
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -23,12 +14,19 @@ import org.springframework.core.annotation.OrderUtils;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.locks.ReentrantLock;
+
 /**
  * global exception processor.
  *
  * <p>
  * this use to process all the {@code Exception}s if throwed. but, in default is only
- * {@link ResponseException} processed . if want process other {@code Exception}s, using
+ * {@link ResultException} processed . if want process other {@code Exception}s, using
  * {@link ExceptionProcessor} to register a processor to process a specify
  * {@code Exception}.
  *
@@ -63,13 +61,13 @@ public class ControllerExceptionProcessor implements InitializingBean {
 	 * the default processor.
 	 * @param exception {@code ResponseException}
 	 * @return {@code Response}
-	 * @see ResponseException
+	 * @see ResultException
 	 */
-	@ExceptionHandler(ResponseException.class)
-	public Response onResponseException(ResponseException exception) {
-		Response response = exception.getResponse();
-		log.error(response.getMessage(), exception);
-		return response;
+	@ExceptionHandler(ResultException.class)
+	public Result onResponseException(ResultException exception) {
+		Result result = exception.getResponse();
+		log.error(result.getMessage(), exception);
+		return result;
 	}
 
 	@ExceptionHandler(Exception.class)

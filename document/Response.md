@@ -18,10 +18,10 @@ return Response.bad().message("It's bad");
 ## 默认响应码
 
 | Response Code | Represent |
-| ---------- | ------ |
-| 0 | success |
-| 1 | fail |
-| 2 | exception
+|---------------|-----------|
+| 0             | success   |
+| 1             | fail      |
+| 2             | exception 
 
 ### 自定义默认响应码
 
@@ -48,7 +48,7 @@ public enum Errors implements ResponseMessage {
 使用：
 
 ```java
-Response.response(Errors.TOO_NEAR);
+Response.result(Errors.TOO_NEAR);
 ```
 
 ## 响应结果对象自定义响应消息内容

@@ -2,7 +2,6 @@ package org.magneton.module.wechat.open.core.oauth2;
 
 import com.alibaba.testable.core.annotation.MockInvoke;
 import com.alibaba.testable.core.model.MockScope;
-import org.magneton.core.Reply;
 import org.magneton.module.wechat.core.Req;
 import org.magneton.module.wechat.open.entity.AccessTokenRes;
 

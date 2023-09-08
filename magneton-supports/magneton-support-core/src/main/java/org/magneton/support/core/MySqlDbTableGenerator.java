@@ -1,6 +1,6 @@
 package org.magneton.support.core;
 
-import javax.annotations.ToSupport;
+import javax.annotation.ToSupport;
 
 /**
  * 自动根据MySQL脚本创建表结构.

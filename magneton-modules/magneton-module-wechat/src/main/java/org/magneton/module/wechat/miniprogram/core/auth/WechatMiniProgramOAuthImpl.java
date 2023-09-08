@@ -1,13 +1,12 @@
 package org.magneton.module.wechat.miniprogram.core.auth;
 
-import javax.annotation.Nullable;
-
 import com.google.common.base.Preconditions;
-import org.magneton.core.Reply;
 import org.magneton.module.wechat.core.Req;
 import org.magneton.module.wechat.core.WechatAccessTokenCache;
 import org.magneton.module.wechat.miniprogram.WechatMiniProgramConfig;
 import org.magneton.module.wechat.miniprogram.entity.MPAccessToken;
+
+import javax.annotation.Nullable;
 
 /**
  * <a href=

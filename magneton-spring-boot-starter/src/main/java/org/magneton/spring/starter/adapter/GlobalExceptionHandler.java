@@ -1,8 +1,8 @@
 package org.magneton.spring.starter.adapter;
 
 import lombok.extern.slf4j.Slf4j;
-import org.magneton.core.Response;
-import org.magneton.core.ResponseException;
+import org.magneton.core.Result;
+import org.magneton.core.ResultException;
 import org.magneton.foundation.exception.ProcessException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -19,16 +19,16 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-	@ExceptionHandler(ResponseException.class)
-	public Response<?> responseException(ResponseException e) {
+	@ExceptionHandler(ResultException.class)
+	public Result<?> responseException(ResultException e) {
 		log.error("response", e);
 		return e.getResponse();
 	}
 
 	@ExceptionHandler(ProcessException.class)
-	public Response<?> processException(ProcessException e) {
+	public Result<?> processException(ProcessException e) {
 		log.error("process", e);
-		return Response.bad().message("处理异常");
+		return Result.bad().message("处理异常");
 	}
 
 }
