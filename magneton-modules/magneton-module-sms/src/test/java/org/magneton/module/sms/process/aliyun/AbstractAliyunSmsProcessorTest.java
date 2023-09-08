@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.magneton.adaptive.redis.RedissonAdapter;
-import org.magneton.core.Reply;
 import org.magneton.module.sms.SendStatus;
 import org.magneton.module.sms.Sms;
 import org.magneton.module.sms.process.SendProcessor;

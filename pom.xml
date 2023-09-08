@@ -1,125 +1,125 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		 xmlns="http://maven.apache.org/POM/4.0.0"
-		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-	<modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
 
-	<groupId>org.magneton</groupId>
-	<artifactId>magneton</artifactId>
-	<version>2023.1</version>
-	<packaging>pom</packaging>
+    <groupId>org.magneton</groupId>
+    <artifactId>magneton</artifactId>
+    <version>2023.1</version>
+    <packaging>pom</packaging>
 
-	<modules>
-		<module>magneton-dependencies</module>
-		<module>magneton-parent</module>
-		<module>magneton-core</module>
-		<module>magneton-test</module>
-		<module>magneton-modules</module>
-		<module>magneton-db-spy</module>
-		<module>magneton-spring-boot-starter</module>
-		<module>magneton-adaptive</module>
-		<module>magneton-supports</module>
-	</modules>
+    <modules>
+        <module>magneton-dependencies</module>
+        <module>magneton-parent</module>
+        <module>magneton-core</module>
+        <module>magneton-test</module>
+        <module>magneton-modules</module>
+        <module>magneton-spring-boot-starter</module>
+        <module>magneton-adaptive</module>
+        <module>magneton-supports</module>
+        <module>magneton-annotation</module>
+    </modules>
 
-	<contributors>
-		<contributor>
-			<name>caspar</name>
-			<email>zms198983@163.com</email>
-		</contributor>
-	</contributors>
+    <contributors>
+        <contributor>
+            <name>caspar</name>
+            <email>zms198983@163.com</email>
+        </contributor>
+    </contributors>
 
-	<licenses>
-		<license>
-			<name>Apache License, Version 2.0</name>
-			<url>http://www.apache.org/licenses/LICENSE-2.0</url>
-			<distribution>repo</distribution>
-		</license>
-	</licenses>
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
 
-	<properties>
-		<java.version>1.8</java.version>
-		<maven.compiler.source>8</maven.compiler.source>
-		<maven.compiler.target>8</maven.compiler.target>
-	</properties>
+    <properties>
+        <java.version>1.8</java.version>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+    </properties>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.5.1</version>
-				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
-					<compilerVersion>1.8</compilerVersion>
-					<showDeprecation>true</showDeprecation>
-					<showWarnings>true</showWarnings>
-				</configuration>
-			</plugin>
-			<!--            <plugin>-->
-			<!--                <groupId>org.apache.maven.plugins</groupId>-->
-			<!--                <artifactId>maven-checkstyle-plugin</artifactId>-->
-			<!--                <version>3.1.1</version>-->
-			<!--                <dependencies>-->
-			<!--                    <dependency>-->
-			<!--                        <artifactId>checkstyle</artifactId>-->
-			<!--                        <groupId>com.puppycrawl.tools</groupId>-->
-			<!--                        <version>8.38</version>-->
-			<!--                    </dependency>-->
-			<!--                </dependencies>-->
-			<!--                <configuration>-->
-			<!--                    <configLocation>src/google_checks.xml</configLocation>-->
-			<!--                    <failsOnError>true</failsOnError>-->
-			<!--                    <failOnViolation>true</failOnViolation>-->
-			<!--                    <consoleOutput>true</consoleOutput>-->
-			<!--                    <encoding>UTF-8</encoding>-->
-			<!--                    <outputEncoding>UTF-8</outputEncoding>-->
-			<!--                </configuration>-->
-			<!--                <executions>-->
-			<!--                    <execution>-->
-			<!--                        <phase>validate</phase>-->
-			<!--                        <goals>-->
-			<!--                            <goal>check</goal>-->
-			<!--                        </goals>-->
-			<!--                    </execution>-->
-			<!--                </executions>-->
-			<!--            </plugin>-->
-			<plugin>
-				<groupId>io.spring.javaformat</groupId>
-				<artifactId>spring-javaformat-maven-plugin</artifactId>
-				<version>0.0.28</version>
-				<executions>
-					<execution>
-						<phase>validate</phase>
-						<inherited>true</inherited>
-						<goals>
-							<goal>validate</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-source-plugin</artifactId>
-				<version>3.2.1</version>
-				<!-- 绑定source插件到Maven的生命周期,并在生命周期后执行绑定的source的goal -->
-				<executions>
-					<execution>
-						<!-- 绑定source插件到Maven的生命周期 -->
-						<phase>compile</phase>
-						<!--在生命周期后执行绑定的source插件的goals -->
-						<goals>
-							<goal>jar-no-fork</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>versions-maven-plugin</artifactId>
-				<version>2.13.0</version>
-			</plugin>
-		</plugins>
-	</build>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.5.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <compilerVersion>1.8</compilerVersion>
+                    <showDeprecation>true</showDeprecation>
+                    <showWarnings>true</showWarnings>
+                </configuration>
+            </plugin>
+            <!--            <plugin>-->
+            <!--                <groupId>org.apache.maven.plugins</groupId>-->
+            <!--                <artifactId>maven-checkstyle-plugin</artifactId>-->
+            <!--                <version>3.1.1</version>-->
+            <!--                <dependencies>-->
+            <!--                    <dependency>-->
+            <!--                        <artifactId>checkstyle</artifactId>-->
+            <!--                        <groupId>com.puppycrawl.tools</groupId>-->
+            <!--                        <version>8.38</version>-->
+            <!--                    </dependency>-->
+            <!--                </dependencies>-->
+            <!--                <configuration>-->
+            <!--                    <configLocation>src/google_checks.xml</configLocation>-->
+            <!--                    <failsOnError>true</failsOnError>-->
+            <!--                    <failOnViolation>true</failOnViolation>-->
+            <!--                    <consoleOutput>true</consoleOutput>-->
+            <!--                    <encoding>UTF-8</encoding>-->
+            <!--                    <outputEncoding>UTF-8</outputEncoding>-->
+            <!--                </configuration>-->
+            <!--                <executions>-->
+            <!--                    <execution>-->
+            <!--                        <phase>validate</phase>-->
+            <!--                        <goals>-->
+            <!--                            <goal>check</goal>-->
+            <!--                        </goals>-->
+            <!--                    </execution>-->
+            <!--                </executions>-->
+            <!--            </plugin>-->
+            <plugin>
+                <groupId>io.spring.javaformat</groupId>
+                <artifactId>spring-javaformat-maven-plugin</artifactId>
+                <version>0.0.28</version>
+                <executions>
+                    <execution>
+                        <phase>validate</phase>
+                        <inherited>true</inherited>
+                        <goals>
+                            <goal>validate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.2.1</version>
+                <!-- 绑定source插件到Maven的生命周期,并在生命周期后执行绑定的source的goal -->
+                <executions>
+                    <execution>
+                        <!-- 绑定source插件到Maven的生命周期 -->
+                        <phase>compile</phase>
+                        <!--在生命周期后执行绑定的source插件的goals -->
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>versions-maven-plugin</artifactId>
+                <version>2.13.0</version>
+            </plugin>
+        </plugins>
+    </build>
 </project>

@@ -1,13 +1,12 @@
 package org.magneton.module.pay.wechat.v3.prepay;
 
-import javax.annotation.Nullable;
-
 import com.google.common.base.Preconditions;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.client.methods.HttpPost;
-import org.magneton.core.Reply;
 import org.magneton.module.pay.wechat.v3.core.WxPayContext;
 import org.slf4j.Logger;
+
+import javax.annotation.Nullable;
 
 /**
  * @author zhangmsh 2022/4/5

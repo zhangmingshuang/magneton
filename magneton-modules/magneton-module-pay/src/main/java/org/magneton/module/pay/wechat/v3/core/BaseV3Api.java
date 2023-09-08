@@ -1,10 +1,5 @@
 package org.magneton.module.pay.wechat.v3.core;
 
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-
-import javax.annotation.Nullable;
-
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.wechat.pay.contrib.apache.httpclient.auth.Signer.SignatureResult;
@@ -15,8 +10,11 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.util.EntityUtils;
-import org.magneton.core.Reply;
 import org.slf4j.Logger;
+
+import javax.annotation.Nullable;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 /**
  * @author zhangmsh 2022/6/5

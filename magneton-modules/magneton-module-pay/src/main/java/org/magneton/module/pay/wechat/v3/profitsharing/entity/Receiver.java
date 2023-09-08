@@ -1,12 +1,13 @@
 package org.magneton.module.pay.wechat.v3.profitsharing.entity;
 
-import javax.annotation.Nullable;
-import javax.annotations.Description;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.magneton.module.pay.wechat.v3.annotation.WxSecret;
 import org.magneton.module.pay.wechat.v3.core.WxReceiverType;
+
+import javax.annotation.Description;
+import javax.annotation.Nullable;
 
 /**
  * 分账接收方

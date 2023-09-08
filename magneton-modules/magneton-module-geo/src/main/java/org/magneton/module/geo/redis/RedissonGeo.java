@@ -2,10 +2,6 @@ package org.magneton.module.geo.redis;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
-import java.util.Collections;
-import java.util.Map;
-import javax.annotation.Nullable;
-import javax.annotations.Versielimiet;
 import org.magneton.foundation.MoreArrays;
 import org.magneton.module.geo.Geo;
 import org.magneton.module.geo.GeoEntry;
@@ -16,6 +12,11 @@ import org.magneton.module.geo.query.PositionArgs;
 import org.redisson.api.RGeo;
 import org.redisson.api.RedissonClient;
 import org.redisson.api.geo.GeoSearchArgs;
+
+import javax.annotation.Nullable;
+import javax.annotation.Versielimiet;
+import java.util.Collections;
+import java.util.Map;
 
 /**
  * .

@@ -1,6 +1,9 @@
 package org.magneton.foundation.reflect;
 
 import com.google.common.base.Preconditions;
+import org.magneton.foundation.ConcurrentReferenceHashMap;
+
+import javax.annotation.Nullable;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -8,10 +11,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import javax.annotation.Nullable;
-import org.magneton.foundation.ConcurrentReferenceHashMap;
 
 /**
+ * 反射工具类.
+ *
  * @author zhangmsh 2022/5/18
  * @since 1.0.0
  */
@@ -29,12 +32,12 @@ public class MoreReflection {
 	 * Cache for {@link Class#getDeclaredMethods()} plus equivalent default methods from
 	 * Java 8 based interfaces, allowing for fast iteration.
 	 */
-	private static final Map<Class<?>, Method[]> declaredMethodsCache = new ConcurrentReferenceHashMap<>(256);
+	private static final Map<Class<?>, Method[]> DECLARED_METHODS_CACHE = new ConcurrentReferenceHashMap<>(256);
 
 	/**
 	 * Cache for {@link Class#getDeclaredFields()}, allowing for fast iteration.
 	 */
-	private static final Map<Class<?>, Field[]> declaredFieldsCache = new ConcurrentReferenceHashMap<>(256);
+	private static final Map<Class<?>, Field[]> DECLARED_FIELDS_CACHE = new ConcurrentReferenceHashMap<>(256);
 
 	private MoreReflection() {
 	}

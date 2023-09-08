@@ -1,6 +1,5 @@
 package org.magneton.module.pay.wechat.v3.refund;
 
-import org.magneton.core.Reply;
 import org.magneton.module.pay.wechat.v3.core.BaseV3Api;
 import org.magneton.module.pay.wechat.v3.refund.entity.DomesticRefunds;
 import org.magneton.module.pay.wechat.v3.refund.entity.DomesticRefundsReq;

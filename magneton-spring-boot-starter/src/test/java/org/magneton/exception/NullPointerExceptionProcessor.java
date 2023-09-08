@@ -1,6 +1,6 @@
 package org.magneton.exception;
 
-import org.magneton.core.Response;
+import org.magneton.core.Result;
 import org.magneton.spring.starter.exception.ExceptionProcessor;
 import org.magneton.spring.starter.exception.ExceptionProcessorRegister;
 
@@ -15,7 +15,7 @@ class NullPointerExceptionProcessor implements ExceptionProcessor {
 
 	@Override
 	public void registerExceptionProcessor(ExceptionProcessorRegister register) {
-		register.addHandler(NullPointerException.class, e -> Response.exception().message(NULL_ERROR));
+		register.addHandler(NullPointerException.class, e -> Result.exception().message(NULL_ERROR));
 	}
 
 }

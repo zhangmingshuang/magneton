@@ -1,6 +1,5 @@
 package org.magneton.module.wechat.open.core.oauth2;
 
-import org.magneton.core.Reply;
 import org.magneton.module.wechat.open.entity.AccessTokenRes;
 import org.magneton.module.wechat.open.entity.UserInfoReq;
 import org.magneton.module.wechat.open.entity.UserInfoRes;

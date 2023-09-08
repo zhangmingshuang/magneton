@@ -1,23 +1,21 @@
 package org.magneton.spring.starter.modules.auth;
 
-import java.nio.charset.StandardCharsets;
-import java.util.UUID;
-import java.util.concurrent.TimeUnit;
-
-import javax.annotation.Nullable;
-
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Preconditions;
 import com.google.common.hash.Hashing;
 import org.magneton.module.auth.TokenAuth;
 import org.redisson.api.RBucket;
 import org.redisson.api.RedissonClient;
-
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
+
+import javax.annotation.Nullable;
+import java.nio.charset.StandardCharsets;
+import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 基于Redisson实现的TokenAuth
@@ -39,6 +37,7 @@ public class RedissonTokenAuthAutoConfiguration {
 		return new RedissonTokenAuth(redissonClient);
 	}
 
+	@SuppressWarnings("unchecked")
 	public static class RedissonTokenAuth implements TokenAuth {
 
 		private RedissonClient client;

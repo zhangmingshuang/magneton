@@ -1,6 +1,5 @@
 package org.magneton.module.wechat.miniprogram.core.auth;
 
-import org.magneton.core.Reply;
 import org.magneton.module.wechat.miniprogram.entity.MPAccessToken;
 
 /**

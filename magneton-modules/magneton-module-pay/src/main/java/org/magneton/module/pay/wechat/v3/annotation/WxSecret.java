@@ -1,8 +1,8 @@
 package org.magneton.module.pay.wechat.v3.annotation;
 
+import javax.annotation.Description;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
-import javax.annotations.Description;
 
 /**
  * 微信安全标识，表示需要加密

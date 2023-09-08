@@ -6,15 +6,9 @@ import cn.hutool.core.convert.Convert;
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.google.common.collect.Sets;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+
 import javax.annotation.Nullable;
+import java.util.*;
 
 /**
  * @author zhangmsh 2022/5/18
@@ -233,7 +227,7 @@ public class MoreCollections {
 		final List<T> result = new LinkedList<>();
 		Set<T> set = new HashSet<>(coll2);
 		for (T t : coll1) {
-			if (false == set.contains(t)) {
+			if (!set.contains(t)) {
 				result.add(t);
 			}
 		}

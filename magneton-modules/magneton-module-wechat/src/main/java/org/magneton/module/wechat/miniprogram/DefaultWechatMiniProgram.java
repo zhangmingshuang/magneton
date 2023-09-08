@@ -1,9 +1,6 @@
 package org.magneton.module.wechat.miniprogram;
 
-import java.util.Collections;
-
 import com.google.common.base.Preconditions;
-import org.magneton.core.Reply;
 import org.magneton.module.wechat.core.MemoryWechatAccessTokenCache;
 import org.magneton.module.wechat.core.Req;
 import org.magneton.module.wechat.core.WechatAccessTokenCache;
@@ -12,6 +9,8 @@ import org.magneton.module.wechat.miniprogram.core.auth.WechatMiniProgramOAuthIm
 import org.magneton.module.wechat.miniprogram.entity.MPAccessToken;
 import org.magneton.module.wechat.miniprogram.entity.MPCode2Session;
 import org.magneton.module.wechat.miniprogram.entity.MPPhoneInfo;
+
+import java.util.Collections;
 
 /**
  * @author zhangmsh 2022/5/1

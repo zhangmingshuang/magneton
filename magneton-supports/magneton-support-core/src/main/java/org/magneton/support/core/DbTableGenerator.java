@@ -1,6 +1,6 @@
 package org.magneton.support.core;
 
-import javax.annotations.ToSupport;
+import javax.annotation.ToSupport;
 
 /**
  * 自动根据数据库类型初始化表结构.

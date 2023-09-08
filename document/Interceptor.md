@@ -15,7 +15,7 @@ public class SignInterceptor implements InterceptorAdapter {
         // 定义Spring的 HandlerInterceptorAdapter 拦截器
         return new HandlerInterceptorAdapter(){
             @Override
-        public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
+        public boolean preHandle(HttpServletRequest request, HttpServletResponse result, Object handler) {
             ....
         };
     }

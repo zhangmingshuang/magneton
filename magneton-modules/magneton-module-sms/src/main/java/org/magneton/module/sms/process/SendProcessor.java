@@ -1,6 +1,5 @@
 package org.magneton.module.sms.process;
 
-import org.magneton.core.Reply;
 import org.magneton.module.sms.entity.SmsToken;
 
 /**

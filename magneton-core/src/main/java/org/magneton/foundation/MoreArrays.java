@@ -1,9 +1,9 @@
 package org.magneton.foundation;
 
+import javax.annotation.Nullable;
 import java.lang.reflect.Array;
 import java.util.Collection;
 import java.util.Objects;
-import javax.annotation.Nullable;
 
 /**
  * @author zhangmsh 2022/5/18
@@ -125,6 +125,7 @@ public class MoreArrays {
 	 * @return 空数组
 	 */
 	public static <T> T[] newArray(Class<?> componentType, int newSize) {
+		// noinspection unchecked
 		return (T[]) Array.newInstance(componentType, newSize);
 	}
 
