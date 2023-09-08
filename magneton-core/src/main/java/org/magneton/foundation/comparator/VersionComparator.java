@@ -4,6 +4,7 @@ import cn.hutool.core.text.CharPool;
 import cn.hutool.core.text.CharSequenceUtil;
 import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
+
 import java.io.Serializable;
 import java.util.Comparator;
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.List;
  * 比较两个版本的大小<br>
  * 排序时版本从小到大排序，即比较时小版本在前，大版本在后<br>
  * 支持如：1.3.20.8，6.82.20160101，8.5a/8.5c等版本形式<br>
- * 参考：https://www.cnblogs.com/shihaiming/p/6286575.html
+ * 参考：<a href="https://www.cnblogs.com/shihaiming/p/6286575.html">Java实现比较版本号</a>
  *
  * @author Looly
  * @since 4.0.2
@@ -29,13 +30,10 @@ public class VersionComparator implements Comparator<String>, Serializable {
 		return INSTANCE;
 	}
 
-	/**
-	 * 默认构造
-	 */
-	public VersionComparator() {
+	private VersionComparator() {
+		// private.
 	}
 
-	// -----------------------------------------------------------------------------------------------------
 	/**
 	 * 比较两个版本<br>
 	 * null版本排在最小：即： <pre>
@@ -50,16 +48,15 @@ public class VersionComparator implements Comparator<String>, Serializable {
 	 * </pre>
 	 * @param version1 版本1
 	 * @param version2 版本2
+	 * @return 比较结果，前者大于后者返回正数，后者大于前者返回负数，相等返回0
 	 */
 	@Override
 	public int compare(String version1, String version2) {
 		if (Objects.equal(version1, version2)) {
 			return 0;
 		}
-		if (version1 == null && version2 == null) {
-			return 0;
-		}
-		else if (version1 == null) {// null视为最小版本，排在前
+		if (version1 == null) {
+			// null视为最小版本，排在前
 			return -1;
 		}
 		else if (version2 == null) {
@@ -70,7 +67,7 @@ public class VersionComparator implements Comparator<String>, Serializable {
 		List<String> v2s = Lists.newArrayList(CharSequenceUtil.split(version2, CharPool.DOT));
 
 		int diff = 0;
-		int minLength = Math.min(v1s.size(), v2s.size());// 取最小长度值
+		int minLength = Math.min(v1s.size(), v2s.size());
 		String v1;
 		String v2;
 		for (int i = 0; i < minLength; i++) {

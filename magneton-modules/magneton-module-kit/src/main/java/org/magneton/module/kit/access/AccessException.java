@@ -1,4 +1,4 @@
-package org.magneton.foundation.access;
+package org.magneton.module.kit.access;
 
 /**
  * .

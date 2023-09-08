@@ -1,6 +1,7 @@
-package org.magneton.core.signature;
+package org.magneton.module.kit.signature;
 
 import com.google.common.base.Strings;
+
 import java.util.Arrays;
 import java.util.Map;
 

@@ -1,4 +1,4 @@
-package org.magneton.core.signature;
+package org.magneton.module.kit.signature;
 
 import java.util.Map;
 
