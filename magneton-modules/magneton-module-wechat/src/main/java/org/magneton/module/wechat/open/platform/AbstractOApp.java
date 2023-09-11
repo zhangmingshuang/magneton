@@ -1,13 +1,12 @@
 package org.magneton.module.wechat.open.platform;
 
 import com.google.common.base.Preconditions;
+import org.magneton.core.Result;
 import org.magneton.foundation.exception.BusinessException;
 import org.magneton.module.wechat.open.WechatOpenContext;
 import org.magneton.module.wechat.open.entity.AccessTokenRes;
 import org.magneton.module.wechat.open.entity.UserInfoReq;
 import org.magneton.module.wechat.open.entity.UserInfoRes;
-
-import javax.annotation.Nullable;
 
 /**
  * @author zhangmsh 2022/4/2
@@ -22,24 +21,23 @@ public class AbstractOApp implements OApp {
 	}
 
 	@Override
-	public Reply<AccessTokenRes> requestAccessTokenByCode(String code) {
-		Preconditions.checkNotNull(code);
+	public Result<AccessTokenRes> requestAccessTokenByCode(String code) {
+		Preconditions.checkNotNull(code, "code is null");
 		return this.wechatOpenContext.getOAuth().accessToken(code);
 	}
 
-	@Nullable
 	@Override
-	public AccessTokenRes getAccessTokenByOpenid(String openid) {
+	public Result<AccessTokenRes> getAccessTokenByOpenid(String openid) {
 		Preconditions.checkNotNull(openid);
-		Reply<AccessTokenRes> reply = this.wechatOpenContext.getOAuth().accessToken(openid);
-		if (!reply.isSuccess()) {
-			throw new BusinessException(String.format("get accessToken exception: %s", reply.getMessage()));
+		Result<AccessTokenRes> result = this.wechatOpenContext.getOAuth().accessToken(openid);
+		if (!result.isSuccess()) {
+			throw new BusinessException(String.format("get accessToken exception: %s", result.getMessage()));
 		}
-		return reply.getData();
+		return result;
 	}
 
 	@Override
-	public Reply<UserInfoRes> requestUserInfo(UserInfoReq userInfoReq) {
+	public Result<UserInfoRes> requestUserInfo(UserInfoReq userInfoReq) {
 		Preconditions.checkNotNull(userInfoReq);
 		return this.wechatOpenContext.getOAuth().userInfo(userInfoReq);
 	}

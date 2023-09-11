@@ -1,10 +1,10 @@
 package org.magneton.module.wechat.miniprogram.core;
 
+import cn.hutool.core.codec.Base64;
+
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
-
-import cn.hutool.core.codec.Base64;
 
 /**
  * 微信小程序Aes数据加解密辅助类
@@ -23,8 +23,8 @@ public class MPAesHelper {
 	 * @param encryptedData 已加密的数据
 	 * @param sessionKey 解密密钥
 	 * @param iv IV偏移量
-	 * @return
-	 * @throws Exception
+	 * @return 解密后的字符串
+	 * @throws Exception 异常
 	 */
 	public static String decryptForWeChatApplet(String encryptedData, String sessionKey, String iv) throws Exception {
 		byte[] decryptBytes = Base64.decode(encryptedData);
@@ -39,16 +39,15 @@ public class MPAesHelper {
 	 * @param decryptedBytes 待解密的字节数组
 	 * @param keyBytes 解密密钥字节数组
 	 * @param ivBytes IV初始化向量字节数组
-	 * @return
-	 * @throws Exception
+	 * @return 解密后的字节数组
+	 * @throws Exception 异常
 	 */
 	public static byte[] decryptByAesBytes(byte[] decryptedBytes, byte[] keyBytes, byte[] ivBytes) throws Exception {
 		SecretKeySpec key = new SecretKeySpec(keyBytes, "AES");
 		IvParameterSpec iv = new IvParameterSpec(ivBytes);
 		Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5PADDING");
 		cipher.init(Cipher.DECRYPT_MODE, key, iv);
-		byte[] outputBytes = cipher.doFinal(decryptedBytes);
-		return outputBytes;
+		return cipher.doFinal(decryptedBytes);
 	}
 
 }

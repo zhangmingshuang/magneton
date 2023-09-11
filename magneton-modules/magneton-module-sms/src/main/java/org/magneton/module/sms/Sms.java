@@ -1,9 +1,11 @@
 package org.magneton.module.sms;
 
+import org.magneton.core.Result;
+
 import javax.annotation.Nullable;
 
 /**
- * .
+ * 短信服务.
  *
  * @author zhangmsh 16/03/2022
  * @since 2.0.7
@@ -19,7 +21,7 @@ public interface Sms {
 	 * @param mobile 手机号
 	 * @return 是否发送成功
 	 */
-	default Reply<SendStatus> trySend(String mobile) {
+	default Result<SendStatus> trySend(String mobile) {
 		return this.trySend(mobile, DEFAULT_GROUP);
 	}
 
@@ -29,7 +31,14 @@ public interface Sms {
 	 * @param group 手机号分组
 	 * @return 是否发送成功
 	 */
-	Reply<SendStatus> trySend(String mobile, String group);
+	Result<SendStatus> trySend(String mobile, String group);
+
+	/**
+	 * 发送短信
+	 * @param mobile 手机号
+	 * @return 发送状态
+	 */
+	Result<SendStatus> send(String mobile);
 
 	/**
 	 * 获取下次可发送短信间隔
@@ -44,13 +53,6 @@ public interface Sms {
 	 * @return 剩余的可错误次数，如果不限制则返回-1，返回0表示没有可错误次数了，此时手机号表示为临时禁用状态{@link SendStatus#TEMPORARILY_DISABLE}。
 	 */
 	long remainErrors(String mobile);
-
-	/**
-	 * 发送短信
-	 * @param mobile 手机号
-	 * @return 发送状态
-	 */
-	Reply<SendStatus> send(String mobile);
 
 	@Nullable
 	default String token(String mobile) {

@@ -14,7 +14,7 @@ class EgoResultBodyTest {
 
 	@Test
 	void message() {
-		Result<Data> ok = Result.ok(new Data()).message("message");
+		Result<Data> ok = Result.successWith(new Data()).message("message");
 		Assertions.assertEquals("egoMessage", ok.getMessage(), "response's message not rewrite with ego");
 	}
 

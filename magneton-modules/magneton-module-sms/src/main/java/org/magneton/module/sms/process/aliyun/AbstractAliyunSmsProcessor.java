@@ -11,6 +11,7 @@ import com.google.common.base.Strings;
 import com.google.common.collect.Maps;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
+import org.magneton.core.Result;
 import org.magneton.foundation.exception.InitializationException;
 import org.magneton.module.sms.entity.SmsToken;
 import org.magneton.module.sms.process.SendProcessor;
@@ -58,7 +59,7 @@ public abstract class AbstractAliyunSmsProcessor implements SendProcessor {
 	}
 
 	@Override
-	public Reply<SmsToken> send(String mobile) {
+	public Result<SmsToken> send(String mobile) {
 		try {
 			AliyunSmsTemplate aliyunSmsTemplate = this.createTemplate(mobile,
 					this.getAliyunSmsProperty().getTemplateCode());
@@ -74,7 +75,7 @@ public abstract class AbstractAliyunSmsProcessor implements SendProcessor {
 		catch (Exception e) {
 			this.onSendException(e, mobile);
 		}
-		return Reply.fail();
+		return Result.fail();
 	}
 
 	protected SendSmsResponse doSend(SendSmsRequest sendSmsRequest) throws Exception {
@@ -86,13 +87,13 @@ public abstract class AbstractAliyunSmsProcessor implements SendProcessor {
 	 * @param sendSmsResponse 短信响应信息
 	 * @return 处理结果
 	 */
-	protected Reply<SmsToken> doSendResponseProcess(String code, SendSmsResponse sendSmsResponse, boolean isSuccess) {
+	protected Result<SmsToken> doSendResponseProcess(String code, SendSmsResponse sendSmsResponse, boolean isSuccess) {
 		if (isSuccess) {
-			return Reply.success(new SmsToken(UUID.randomUUID().toString(), code));
+			return Result.successWith(new SmsToken(UUID.randomUUID().toString(), code));
 		}
 		SendSmsResponseBody body = sendSmsResponse.getBody();
 		log.error("send sms error: {} -- {} ", body.getCode(), body.getMessage());
-		return Reply.fail();
+		return Result.fail();
 	}
 
 	protected AliyunSmsTemplate createTemplate(String mobile, String templateCode) {

@@ -1,11 +1,12 @@
 package org.magneton.spring.starter.extension.wechat;
 
 import com.google.common.base.Preconditions;
-import java.util.concurrent.TimeUnit;
-import javax.annotation.Nullable;
 import org.magneton.module.wechat.core.WechatAccessTokenCache;
 import org.redisson.api.RBucket;
 import org.redisson.api.RedissonClient;
+
+import javax.annotation.Nullable;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Redis Wechat AccessToken Cache
@@ -22,7 +23,7 @@ public class RedisWechatAccessTokenCache<T> implements WechatAccessTokenCache<T>
 	}
 
 	@Override
-	public void save(String key, T accessTokenRes) {
+	public void put(String key, T accessTokenRes) {
 		Preconditions.checkNotNull(key);
 		Preconditions.checkNotNull(accessTokenRes);
 		RBucket<T> bucket = this.getBucket(key);

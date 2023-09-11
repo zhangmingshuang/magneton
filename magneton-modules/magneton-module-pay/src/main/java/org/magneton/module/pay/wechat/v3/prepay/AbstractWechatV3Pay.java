@@ -3,6 +3,7 @@ package org.magneton.module.pay.wechat.v3.prepay;
 import com.google.common.base.Preconditions;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.client.methods.HttpPost;
+import org.magneton.core.Result;
 import org.magneton.module.pay.wechat.v3.core.WxPayContext;
 import org.slf4j.Logger;
 
@@ -34,18 +35,18 @@ public class AbstractWechatV3Pay implements WechatBaseV3Pay {
 
 	// 详见：https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_2_1.shtml
 	@Override
-	public <T> Reply<T> doPreOrder(String url, Object req, Class<T> clazz) {
+	public <T> Result<T> doPreOrder(String url, Object req, Class<T> clazz) {
 		Preconditions.checkNotNull(req);
 
 		HttpPost httpPost = this.newHttpPost(url, req);
 		// 预支付交易会话标识 prepay_id string[1,64] 预支付交易会话标识。用于后续接口调用中使用，该值有效期为2小时
 		// 示例值：wx201410272009395522657a690389285100
-		Reply<T> res = this.doRequest(httpPost, clazz);
+		Result<T> res = this.doRequest(httpPost, clazz);
 		if (!res.isSuccess()) {
-			return Reply.failMsg(res.getMessage());
+			return Result.failBy(res.getMessage());
 		}
 		T prepayData = res.getData();
-		return Reply.success(prepayData);
+		return Result.successWith(prepayData);
 	}
 
 }

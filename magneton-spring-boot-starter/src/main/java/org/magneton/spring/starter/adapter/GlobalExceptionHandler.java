@@ -28,7 +28,7 @@ public class GlobalExceptionHandler {
 	@ExceptionHandler(ProcessException.class)
 	public Result<?> processException(ProcessException e) {
 		log.error("process", e);
-		return Result.bad().message("处理异常");
+		return Result.fail().message("处理异常");
 	}
 
 }

@@ -82,7 +82,7 @@ public class WxV3PayImpl implements WxV3Pay {
 	}
 
 	@Override
-	public Reply<WxPayOrder> queryOrder(WxPayOrderQuery query) {
+	public Result<WxPayOrder> queryOrder(WxPayOrderQuery query) {
 		Type reqIdType = query.getReqIdType();
 		String url;
 		switch (reqIdType) {
@@ -99,9 +99,9 @@ public class WxV3PayImpl implements WxV3Pay {
 			throw new ProcessException("unknown reqIdType %s", reqIdType);
 		}
 		HttpGet httpGet = this.wechatBaseV3Pay.newHttpGet(url);
-		Reply<WxPayOrder> res = this.wechatBaseV3Pay.doRequest(httpGet, WxPayOrder.class);
+		Result<WxPayOrder> res = this.wechatBaseV3Pay.doRequest(httpGet, WxPayOrder.class);
 		if (!res.isSuccess()) {
-			return Reply.failMsg(res.getMessage());
+			return Result.failBy(res.getMessage());
 		}
 		return res;
 	}
@@ -163,7 +163,7 @@ public class WxV3PayImpl implements WxV3Pay {
 			return this.payContext.getObjectMapper().readValue(decryptData, WxPayNotification.class);
 		}
 		catch (Exception e) {
-			throw new ResultException(Result.bad().message(e.getMessage()));
+			throw new ResultException(Result.fail().message(e.getMessage()));
 		}
 	}
 

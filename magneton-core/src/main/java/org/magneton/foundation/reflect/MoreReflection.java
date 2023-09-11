@@ -140,7 +140,7 @@ public class MoreReflection {
 
 	private static Method[] getDeclaredMethods(Class<?> clazz, boolean defensive) {
 		Preconditions.checkNotNull(clazz, "Class must not be null");
-		Method[] result = declaredMethodsCache.get(clazz);
+		Method[] result = DECLARED_METHODS_CACHE.get(clazz);
 		if (result == null) {
 			try {
 				Method[] declaredMethods = clazz.getDeclaredMethods();
@@ -157,7 +157,7 @@ public class MoreReflection {
 				else {
 					result = declaredMethods;
 				}
-				declaredMethodsCache.put(clazz, (result.length == 0 ? EMPTY_METHOD_ARRAY : result));
+				DECLARED_METHODS_CACHE.put(clazz, (result.length == 0 ? EMPTY_METHOD_ARRAY : result));
 			}
 			catch (Throwable ex) {
 				throw new IllegalStateException("Failed to introspect Class [" + clazz.getName()
@@ -177,11 +177,11 @@ public class MoreReflection {
 	 */
 	private static Field[] getDeclaredFields(Class<?> clazz) {
 		Preconditions.checkNotNull(clazz, "Class must not be null");
-		Field[] result = declaredFieldsCache.get(clazz);
+		Field[] result = DECLARED_FIELDS_CACHE.get(clazz);
 		if (result == null) {
 			try {
 				result = clazz.getDeclaredFields();
-				declaredFieldsCache.put(clazz, (result.length == 0 ? EMPTY_FIELD_ARRAY : result));
+				DECLARED_FIELDS_CACHE.put(clazz, (result.length == 0 ? EMPTY_FIELD_ARRAY : result));
 			}
 			catch (Throwable ex) {
 				throw new IllegalStateException("Failed to introspect Class [" + clazz.getName()

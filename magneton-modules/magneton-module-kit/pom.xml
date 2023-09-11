@@ -19,5 +19,10 @@
             <artifactId>magneton-core</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.magneton</groupId>
+            <artifactId>magneton-test</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 </project>

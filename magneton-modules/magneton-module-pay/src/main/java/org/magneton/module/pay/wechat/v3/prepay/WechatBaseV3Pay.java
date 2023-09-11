@@ -1,5 +1,6 @@
 package org.magneton.module.pay.wechat.v3.prepay;
 
+import org.magneton.core.Result;
 import org.magneton.module.pay.wechat.v3.core.BaseV3Api;
 
 /**
@@ -11,6 +12,6 @@ import org.magneton.module.pay.wechat.v3.core.BaseV3Api;
  */
 public interface WechatBaseV3Pay extends BaseV3Api {
 
-	<T> Reply<T> doPreOrder(String url, Object req, Class<T> type);
+	<T> Result<T> doPreOrder(String url, Object req, Class<T> type);
 
 }

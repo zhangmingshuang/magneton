@@ -2,6 +2,7 @@ package org.magneton.module.sms;
 
 import com.google.common.base.Preconditions;
 import lombok.Getter;
+import org.magneton.core.Result;
 import org.magneton.module.sms.entity.SmsToken;
 import org.magneton.module.sms.process.SendProcessor;
 import org.magneton.module.sms.property.SmsProperty;
@@ -31,22 +32,22 @@ public abstract class AbstractSms implements Sms {
 	}
 
 	@Override
-	public Reply<SendStatus> trySend(String mobile, String group) {
+	public Result<SendStatus> trySend(String mobile, String group) {
 		Preconditions.checkNotNull(mobile);
 		Preconditions.checkNotNull(group);
 		if (!this.isMobile(mobile)) {
-			return Reply.fail(SendStatus.FAILURE, "手机号正则匹配错误");
+			return Result.failWith(SendStatus.FAILURE, "手机号正则匹配错误");
 		}
 		// 是否发送冷却时间内
 		if (this.smsProperty.getSendGapSeconds() > 0
 				&& !this.sendGapOpinion(mobile, this.smsProperty.getSendGapSeconds())) {
-			return Reply.fail(SendStatus.SEND_GAP, "两次发送时间间隔太短");
+			return Result.failWith(SendStatus.SEND_GAP, "两次发送时间间隔太短");
 		}
 		// 分组风控处理
 		boolean isGroupRisk = this.smsProperty.isGroupRisk();
 		if (isGroupRisk && !this.groupRiskOpinion(group, this.smsProperty.getGroupRiskCount(),
 				this.smsProperty.getGroupRiskInSeconds())) {
-			return Reply.fail(SendStatus.RISK, "分组存在风险");
+			return Result.failWith(SendStatus.RISK, "分组存在风险");
 		}
 		// 手机风控处理
 		// boolean isValidErrorCount = this.smsProperty.getValidErrorCount() > 0;
@@ -57,20 +58,20 @@ public abstract class AbstractSms implements Sms {
 		// }
 		// 次数上限判断
 		if (!this.mobileCountCapsOpinion(mobile, this.smsProperty.getDayCount(), this.smsProperty.getHourCount())) {
-			return Reply.fail(SendStatus.COUNT_CAPS, "发送次数达到上限");
+			return Result.failWith(SendStatus.COUNT_CAPS, "发送次数达到上限");
 		}
 		return this.send(mobile);
 	}
 
 	@Override
-	public Reply<SendStatus> send(String mobile) {
+	public Result<SendStatus> send(String mobile) {
 		Preconditions.checkNotNull(mobile);
-		Reply<SmsToken> sendResponse = this.getSendProcessor().send(mobile);
+		Result<SmsToken> sendResponse = this.getSendProcessor().send(mobile);
 		if (sendResponse.isSuccess()) {
 			this.mobileSendSuccess(mobile, sendResponse.getData());
-			return Reply.success(SendStatus.SUCCESS, "短信发送成功");
+			return Result.successWith(SendStatus.SUCCESS, "短信发送成功");
 		}
-		return Reply.fail(SendStatus.FAILURE, "短信发送失败");
+		return Result.failWith(SendStatus.FAILURE, "短信发送失败");
 	}
 
 	// protected abstract boolean temporarilyDisableOpinion(String mobile, int

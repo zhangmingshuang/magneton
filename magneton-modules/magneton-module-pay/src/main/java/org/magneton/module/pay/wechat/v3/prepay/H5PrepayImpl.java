@@ -2,6 +2,7 @@ package org.magneton.module.pay.wechat.v3.prepay;
 
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
+import org.magneton.core.Result;
 import org.magneton.module.pay.exception.AmountException;
 import org.magneton.module.pay.wechat.v3.prepay.entity.WxPayH5Prepay;
 import org.magneton.module.pay.wechat.v3.prepay.entity.WxPayH5PrepayReq;
@@ -21,7 +22,7 @@ public class H5PrepayImpl implements H5Prepay {
 	}
 
 	@Override
-	public Reply<WxPayH5Prepay> prepay(WxPayH5PrepayReq req) {
+	public Result<WxPayH5Prepay> prepay(WxPayH5PrepayReq req) {
 		Preconditions.checkNotNull(req);
 		Preconditions.checkNotNull(req.getOutTradeNo());
 		Preconditions.checkNotNull(req.getDescription());
@@ -29,12 +30,8 @@ public class H5PrepayImpl implements H5Prepay {
 		if (amount < 1) {
 			throw new AmountException(Strings.lenientFormat("amount %s less then 1", amount));
 		}
-		Reply<WxPayH5Prepay> prepayRes = this.basePay.doPreOrder("https://api.mch.weixin.qq.com/v3/pay/transactions/h5",
-				req, WxPayH5Prepay.class);
-		if (!prepayRes.isSuccess()) {
-			return prepayRes.coverage();
-		}
-		return Reply.success(prepayRes.getData());
+		return this.basePay.doPreOrder("https://api.mch.weixin.qq.com/v3/pay/transactions/h5", req,
+				WxPayH5Prepay.class);
 	}
 
 }
