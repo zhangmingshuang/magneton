@@ -4,7 +4,6 @@ import com.google.common.base.Preconditions;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import lombok.experimental.Accessors;
 import org.magneton.module.geo.GeoUnit;
 
 /**
@@ -14,7 +13,6 @@ import org.magneton.module.geo.GeoUnit;
 @Setter
 @Getter
 @ToString
-@Accessors(chain = true)
 public class MemberArgs<V> {
 
 	/**
@@ -42,10 +40,14 @@ public class MemberArgs<V> {
 	 */
 	private int count = 10;
 
-	public static <V> MemberArgs of(String name, V member) {
-		Preconditions.checkNotNull(name);
-		Preconditions.checkNotNull(member);
-		return new MemberArgs().setName(name).setMember(member);
+	public static <V> MemberArgs<V> of(String name, V member) {
+		Preconditions.checkNotNull(name, "name is null");
+		Preconditions.checkNotNull(member, "member is null");
+
+		MemberArgs<V> memberArgs = new MemberArgs<>();
+		memberArgs.setName(name);
+		memberArgs.setMember(member);
+		return memberArgs;
 	}
 
 }

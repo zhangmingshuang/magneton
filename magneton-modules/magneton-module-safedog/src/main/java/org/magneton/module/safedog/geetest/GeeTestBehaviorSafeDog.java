@@ -6,19 +6,20 @@ import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.collect.Maps;
 import com.google.common.net.MediaType;
-import java.time.Duration;
-import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.HmacAlgorithms;
 import org.apache.commons.codec.digest.HmacUtils;
 import org.magneton.module.safedog.BehaviorSafeDog;
 
+import java.time.Duration;
+import java.util.Map;
+
 /**
  * 极验行为安全狗.
+ * <p>
+ * <a href="https://docs.geetest.com/gt4/apirefer/api/server">官方文档</a>
  *
- * https://docs.geetest.com/gt4/apirefer/api/server
- *
- * @author zhangmsh 09/04/2022
+ * @author zhangmsh
  * @since 2.0.8
  */
 @Slf4j
@@ -52,7 +53,7 @@ public class GeeTestBehaviorSafeDog implements BehaviorSafeDog<GeeTestBody> {
 				.onError((e, forestRequest, forestResponse) -> log.error(String.format("request %s error", url), e))
 				.addBody(queryParams, MediaType.FORM_DATA.toString()).executeAsString();
 		if (log.isDebugEnabled()) {
-			log.debug("requestl url {} \n body:{}", url, response);
+			log.debug("request url {} \n body:{}", url, response);
 		}
 		if (!Strings.isNullOrEmpty(response)) {
 			// noinspection OverlyBroadCatchBlock
@@ -60,9 +61,7 @@ public class GeeTestBehaviorSafeDog implements BehaviorSafeDog<GeeTestBody> {
 				return "success".equalsIgnoreCase(this.objectMapper.readTree(response).get("result").asText());
 			}
 			catch (Throwable e) {
-				if (log.isDebugEnabled()) {
-					log.debug("response not a json", e);
-				}
+				throw new IllegalArgumentException(e);
 			}
 		}
 		return false;

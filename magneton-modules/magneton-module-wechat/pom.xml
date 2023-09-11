@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-	<parent>
-		<groupId>org.magneton</groupId>
-		<artifactId>magneton-modules</artifactId>
-		<version>2023.1</version>
-	</parent>
+    <parent>
+        <groupId>org.magneton</groupId>
+        <artifactId>magneton-modules</artifactId>
+        <version>M2023.9</version>
+    </parent>
 
-	<artifactId>magneton-module-wechat</artifactId>
+    <artifactId>magneton-module-wechat</artifactId>
 
-	<dependencies>
-		<dependency>
-			<groupId>org.magneton</groupId>
-			<artifactId>magneton-core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.magneton</groupId>
-			<artifactId>magneton-module-core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.magneton</groupId>
-			<artifactId>magneton-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
+    <dependencies>
+        <dependency>
+            <groupId>org.magneton</groupId>
+            <artifactId>magneton-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.magneton</groupId>
+            <artifactId>magneton-module-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.magneton</groupId>
+            <artifactId>magneton-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
 </project>
