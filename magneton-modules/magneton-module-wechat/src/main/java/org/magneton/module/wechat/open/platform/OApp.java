@@ -1,10 +1,9 @@
 package org.magneton.module.wechat.open.platform;
 
+import org.magneton.core.Result;
 import org.magneton.module.wechat.open.entity.AccessTokenRes;
 import org.magneton.module.wechat.open.entity.UserInfoReq;
 import org.magneton.module.wechat.open.entity.UserInfoRes;
-
-import javax.annotation.Nullable;
 
 /**
  * @author zhangmsh 2022/4/2
@@ -19,14 +18,13 @@ public interface OApp {
 	 * @param code Code
 	 * @return AccessToken
 	 */
-	Reply<AccessTokenRes> requestAccessTokenByCode(String code);
+	Result<AccessTokenRes> requestAccessTokenByCode(String code);
 
 	/**
 	 * @param openid 用户的Openid
 	 * @return AccessToken. 如果缓存已经失效或者不存在，则返回{@code null}
 	 */
-	@Nullable
-	AccessTokenRes getAccessTokenByOpenid(String openid);
+	Result<AccessTokenRes> getAccessTokenByOpenid(String openid);
 
 	/**
 	 * 获取用户的信息
@@ -35,6 +33,6 @@ public interface OApp {
 	 * @param userInfoReq 用户信息请求
 	 * @return 用户的信息
 	 */
-	Reply<UserInfoRes> requestUserInfo(UserInfoReq userInfoReq);
+	Result<UserInfoRes> requestUserInfo(UserInfoReq userInfoReq);
 
 }

@@ -2,6 +2,7 @@ package org.magneton.module.distributed.cache;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
+
 import java.util.List;
 
 /**
@@ -21,10 +22,10 @@ public class Entry<T> {
 		this.value = value;
 	}
 
-	public static <T> Entry of(String key, T value) {
+	public static <T> Entry<T> of(String key, T value) {
 		Preconditions.checkNotNull(key);
 		Preconditions.checkNotNull(value);
-		return new Entry(key, value);
+		return new Entry<T>(key, value);
 	}
 
 	public static <T> List<Entry<T>> of(String key1, T value1, String key2, T value2) {

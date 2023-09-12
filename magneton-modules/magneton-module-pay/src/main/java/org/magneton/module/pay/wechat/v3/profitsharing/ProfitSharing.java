@@ -1,5 +1,6 @@
 package org.magneton.module.pay.wechat.v3.profitsharing;
 
+import org.magneton.core.Result;
 import org.magneton.module.pay.wechat.v3.core.BaseV3Api;
 import org.magneton.module.pay.wechat.v3.profitsharing.entity.*;
 
@@ -26,7 +27,7 @@ public interface ProfitSharing extends BaseV3Api {
 	 * @param req 请求参数
 	 * @return 分账结果
 	 */
-	Reply<WxProfitSharingOrders> orders(WxProfitSharingOrdersReq req);
+	Result<WxProfitSharingOrders> orders(WxProfitSharingOrdersReq req);
 
 	/**
 	 * 查询分账结果
@@ -39,7 +40,7 @@ public interface ProfitSharing extends BaseV3Api {
 	 * @param query 请求参数
 	 * @return 分账结果
 	 */
-	Reply<WxProfitSharingOrderState> state(WxProfitSharingOrderStateQuery query);
+	Result<WxProfitSharingOrderState> state(WxProfitSharingOrderStateQuery query);
 
 	/**
 	 * 添加分账接收方
@@ -50,6 +51,6 @@ public interface ProfitSharing extends BaseV3Api {
 	 * @param req 请求参数AbstractSignSafeDog
 	 * @return 添加结果
 	 */
-	Reply<WxProfitSharingReceiverAdd> add(WxProfitSharingReceiverAddReq req);
+	Result<WxProfitSharingReceiverAdd> add(WxProfitSharingReceiverAddReq req);
 
 }

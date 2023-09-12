@@ -2,7 +2,9 @@ package org.magneton.core;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 import javax.annotation.Nullable;
@@ -11,18 +13,18 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * 统一的响应.
+ * 统一响应对象.
  *
  * @author zhangmsh
- * @version 1.0.0
- * @since 2020/10/19
+ * @since 1.0.0
  */
-@SuppressWarnings("rawtypes")
 @Getter
+@Setter(AccessLevel.PROTECTED)
 @ToString
+@SuppressWarnings("unchecked")
 public class Result<T> {
 
-	private boolean ok;
+	private boolean success;
 
 	/**
 	 * 响应码
@@ -54,50 +56,61 @@ public class Result<T> {
 		// private
 	}
 
-	public Result conver() {
-		return this;
+	public static <E> Result<E> success() {
+		return successWith(null);
 	}
 
-	public static Result ok() {
-		return ok(null);
-	}
-
-	public static <T> Result<T> ok(@Nullable T t) {
+	public static <E> Result<E> successWith(@Nullable E t) {
 		return valueOf(ResultCodesSupplier.getInstance().ok(), t);
 	}
 
-	public static Result bad() {
-		return bad(null);
+	public static <E> Result<E> successWith(@Nullable E data, String message, @Nullable Object... args) {
+		return successWith(data).message(message);
 	}
 
-	public static <T> Result<T> bad(T t) {
-		return valueOf(ResultCodesSupplier.getInstance().bad(), t);
+	public static <E> Result<E> okBy(String message, @Nullable Object... args) {
+		return (Result<E>) success().message(message, args);
 	}
 
-	public static Result error(String message) {
-		return bad().message(message);
+	public static <E> Result<E> fail() {
+		return failWith(null);
 	}
 
-	public static Result exception() {
+	public static <E> Result<E> failWith(E data) {
+		return valueOf(ResultCodesSupplier.getInstance().bad(), data);
+	}
+
+	public static <E> Result<E> failWith(E data, String message, @Nullable Object... args) {
+		return failWith(data).message(message, args);
+	}
+
+	public static <E> Result<E> failBy(String message, @Nullable Object... args) {
+		return (Result<E>) fail().message(message, args);
+	}
+
+	public static <E> Result<E> exception() {
 		return valueOf(ResultCodesSupplier.getInstance().exception(), null);
+	}
+
+	public static <E> Result<E> exceptionBy(String message, @Nullable Object... args) {
+		return (Result<E>) exception().message(message, args);
 	}
 
 	/**
 	 * response with body.
 	 * @param resultBody {@code ResultBody}
-	 * @param data response data.
-	 * @param <T> T
+	 * @param <E> E
 	 * @return {@code Result} of response.
 	 */
-	public static <T> Result<T> valueOf(ResultBody<T> resultBody) {
+	public static <E> Result<E> valueOf(ResultBody<E> resultBody) {
 		Preconditions.checkNotNull(resultBody, "resultBody must be not null");
 
-		T data = resultBody.data();
+		E data = resultBody.data();
 		return valueOf(resultBody, data);
 	}
 
-	private static <T> Result<T> valueOf(ResultBody<T> resultBody, T data) {
-		Result<T> result = new Result<>();
+	private static <E> Result<E> valueOf(ResultBody<E> resultBody, E data) {
+		Result<E> result = new Result<>();
 		String message = resultBody.message();
 		return result.code(resultBody.code()).message(message).data(data).timestamp(System.currentTimeMillis());
 	}
@@ -106,7 +119,7 @@ public class Result<T> {
 		Preconditions.checkNotNull(code, "code must be not null");
 
 		this.code = code;
-		this.ok = this.isOkCode(code);
+		this.success = this.isOkCode(code);
 		return this;
 	}
 
@@ -118,7 +131,12 @@ public class Result<T> {
 
 	public Result<T> message(String message, @Nullable Object... args) {
 		Preconditions.checkNotNull(message, "message must be not null");
-		this.message = String.format(message, args);
+		if (args == null || args.length < 1) {
+			this.message = message;
+		}
+		else {
+			this.message = String.format(message, args);
+		}
 		return this;
 	}
 
@@ -207,6 +225,14 @@ public class Result<T> {
 			return ((EgoResultMessage) this.data).message();
 		}
 		return this.message;
+	}
+
+	public <E> Result<E> convert(Class<E> clazz) {
+		return (Result<E>) this;
+	}
+
+	public <E> Result<E> convert() {
+		return (Result<E>) this;
 	}
 
 }

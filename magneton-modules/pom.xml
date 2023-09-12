@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-	<parent>
-		<groupId>org.magneton</groupId>
-		<artifactId>magneton-parent</artifactId>
-		<version>2023.1</version>
-		<relativePath>../magneton-parent/pom.xml</relativePath>
-	</parent>
+    <parent>
+        <groupId>org.magneton</groupId>
+        <artifactId>magneton-parent</artifactId>
+        <version>M2023.9</version>
+        <relativePath>../magneton-parent/pom.xml</relativePath>
+    </parent>
 
-	<artifactId>magneton-modules</artifactId>
-	<packaging>pom</packaging>
+    <artifactId>magneton-modules</artifactId>
+    <packaging>pom</packaging>
 
-	<modules>
-		<module>magneton-module-distributed-cache</module>
-		<module>magneton-module-distributed-lock</module>
-		<module>magneton-module-geo</module>
-		<module>magneton-module-auth</module>
-		<module>magneton-module-sms</module>
-		<module>magneton-module-statistics</module>
-		<module>magneton-module-safedog</module>
-		<module>magneton-module-oss</module>
-		<module>magneton-module-pay</module>
-		<module>magneton-module-core</module>
-		<module>magneton-module-wechat</module>
-		<module>magneton-module-im-tencent</module>
-		<module>magneton-module-algorithm</module>
+    <modules>
+        <module>magneton-module-distributed-cache</module>
+        <module>magneton-module-distributed-lock</module>
+        <module>magneton-module-geo</module>
+        <module>magneton-module-auth</module>
+        <module>magneton-module-sms</module>
+        <module>magneton-module-statistics</module>
+        <module>magneton-module-safedog</module>
+        <module>magneton-module-oss</module>
+        <module>magneton-module-pay</module>
+        <module>magneton-module-core</module>
+        <module>magneton-module-wechat</module>
+        <module>magneton-module-im-tencent</module>
+        <module>magneton-module-algorithm</module>
         <module>magneton-module-monitor</module>
         <module>magneton-module-kit</module>
     </modules>

@@ -1,5 +1,6 @@
 package org.magneton.module.wechat.miniprogram.core.auth;
 
+import org.magneton.core.Result;
 import org.magneton.module.wechat.miniprogram.entity.MPAccessToken;
 
 /**
@@ -8,6 +9,6 @@ import org.magneton.module.wechat.miniprogram.entity.MPAccessToken;
  */
 public interface WechatMiniProgramOAuth {
 
-	Reply<MPAccessToken> accessToken();
+	Result<MPAccessToken> accessToken();
 
 }

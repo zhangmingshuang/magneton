@@ -1,5 +1,6 @@
 package org.magneton.module.wechat.open.core.oauth2;
 
+import org.magneton.core.Result;
 import org.magneton.module.wechat.open.entity.AccessTokenRes;
 import org.magneton.module.wechat.open.entity.UserInfoReq;
 import org.magneton.module.wechat.open.entity.UserInfoRes;
@@ -18,13 +19,13 @@ public interface WechatOAuth {
 	 * @param userInfoReq 请求数据
 	 * @return 微信用户信息
 	 */
-	Reply<UserInfoRes> userInfo(UserInfoReq userInfoReq);
+	Result<UserInfoRes> userInfo(UserInfoReq userInfoReq);
 
 	/**
 	 * 使用用户授权的Code获取用户信息
 	 * @param code 用户授权的Code
 	 * @return 微信用户信息
 	 */
-	Reply<AccessTokenRes> accessToken(String code);
+	Result<AccessTokenRes> accessToken(String code);
 
 }

@@ -18,7 +18,6 @@ package org.magneton.module.geo;
 import com.google.common.base.Preconditions;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 /**
  * @author Nikita Koksharov
@@ -26,7 +25,6 @@ import lombok.ToString;
  */
 @Setter
 @Getter
-@ToString
 public class GeoPosition {
 
 	private final double longitude;

@@ -1,9 +1,10 @@
 package org.magneton.module.wechat.miniprogram;
 
 import com.google.common.base.Preconditions;
+import org.magneton.core.Result;
 import org.magneton.module.wechat.core.MemoryWechatAccessTokenCache;
-import org.magneton.module.wechat.core.Req;
 import org.magneton.module.wechat.core.WechatAccessTokenCache;
+import org.magneton.module.wechat.core.WxReq;
 import org.magneton.module.wechat.miniprogram.core.auth.WechatMiniProgramOAuth;
 import org.magneton.module.wechat.miniprogram.core.auth.WechatMiniProgramOAuthImpl;
 import org.magneton.module.wechat.miniprogram.entity.MPAccessToken;
@@ -20,7 +21,7 @@ public class DefaultWechatMiniProgram implements WechatMiniProgram {
 
 	private final WechatMiniProgramConfig config;
 
-	private WechatMiniProgramOAuth oauth;
+	private final WechatMiniProgramOAuth oauth;
 
 	public DefaultWechatMiniProgram(WechatMiniProgramConfig config) {
 		this(config, new MemoryWechatAccessTokenCache());
@@ -35,26 +36,26 @@ public class DefaultWechatMiniProgram implements WechatMiniProgram {
 	}
 
 	@Override
-	public Reply<MPCode2Session> code2Session(String code) {
+	public Result<MPCode2Session> code2Session(String code) {
 		Preconditions.checkNotNull(code, "code must not be null");
 		String url = String.format(
 				"https://api.weixin.qq.com/sns/jscode2session?"
 						+ "appid=%s&secret=%s&js_code=%s&grant_type=authorization_code",
 				this.config.getAppid(), this.config.getSecret(), code);
-		return Req.doGet(url, MPCode2Session.class);
+		return WxReq.doGet(url, MPCode2Session.class);
 	}
 
 	@Override
-	public Reply<MPPhoneInfo> getPhoneNumber(String code) {
+	public Result<MPPhoneInfo> getPhoneNumber(String code) {
 		Preconditions.checkNotNull(code, "code must not be null");
-		Reply<MPAccessToken> reply = this.oauth.accessToken();
+		Result<MPAccessToken> reply = this.oauth.accessToken();
 		if (!reply.isSuccess()) {
-			return Reply.fail("accessToken error").coverage();
+			return Result.failBy("accessToken error");
 		}
 		MPAccessToken mpAccessToken = reply.getData();
 		String url = String.format(" https://api.weixin.qq.com/wxa/business/getuserphonenumber?access_token=%s",
 				mpAccessToken.getAccess_token());
-		return Req.doPost(url, Collections.singletonMap("code", code), MPPhoneInfo.class);
+		return WxReq.doPost(url, Collections.singletonMap("code", code), MPPhoneInfo.class);
 	}
 
 }

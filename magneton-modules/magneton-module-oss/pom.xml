@@ -7,7 +7,7 @@
 	<parent>
 		<artifactId>magneton-modules</artifactId>
 		<groupId>org.magneton</groupId>
-		<version>2023.1</version>
+		<version>M2023.9</version>
 	</parent>
 
 	<artifactId>magneton-module-oss</artifactId>

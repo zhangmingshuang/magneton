@@ -1,6 +1,7 @@
 package org.magneton.module.pay.wechat.v3;
 
 import com.google.common.base.Strings;
+import org.magneton.core.Result;
 import org.magneton.module.pay.Pay;
 import org.magneton.module.pay.wechat.v3.prepay.AppPrepay;
 import org.magneton.module.pay.wechat.v3.prepay.H5Prepay;
@@ -64,7 +65,7 @@ public interface WxV3Pay extends Pay {
 	 * @param query 业务请求数据
 	 * @return 订单数据
 	 */
-	Reply<WxPayOrder> queryOrder(WxPayOrderQuery query);
+	Result<WxPayOrder> queryOrder(WxPayOrderQuery query);
 
 	/**
 	 * 回调处理数据校验并解析响应数据

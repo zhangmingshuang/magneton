@@ -1,8 +1,9 @@
 package org.magneton.module.wechat.miniprogram.core.auth;
 
 import com.google.common.base.Preconditions;
-import org.magneton.module.wechat.core.Req;
+import org.magneton.core.Result;
 import org.magneton.module.wechat.core.WechatAccessTokenCache;
+import org.magneton.module.wechat.core.WxReq;
 import org.magneton.module.wechat.miniprogram.WechatMiniProgramConfig;
 import org.magneton.module.wechat.miniprogram.entity.MPAccessToken;
 
@@ -29,27 +30,26 @@ public class WechatMiniProgramOAuthImpl implements WechatMiniProgramOAuth {
 	}
 
 	@Override
-	public Reply<MPAccessToken> accessToken() {
+	public Result<MPAccessToken> accessToken() {
 		MPAccessToken res = this.accessTokenFromCache();
 		if (res != null) {
-			return Reply.success(res);
+			return Result.successWith(res);
 		}
-
 		String requestUrl = String.format(
 				"https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=%s&secret=%s",
 				this.wechatMiniProgramConfig.getAppid(), this.wechatMiniProgramConfig.getSecret());
-		Reply<MPAccessToken> response = Req.doGet(requestUrl, MPAccessToken.class);
+		Result<MPAccessToken> response = WxReq.doGet(requestUrl, MPAccessToken.class);
 		if (!response.isSuccess()) {
-			return response.coverage();
+			return response;
 		}
 		MPAccessToken accessTokenRes = response.getData();
 		this.accessTokenToCache(accessTokenRes);
-		return Reply.success(accessTokenRes);
+		return Result.successWith(accessTokenRes);
 	}
 
 	private void accessTokenToCache(MPAccessToken accessTokenRes) {
 		if (this.wechatAccessTokenCache != null) {
-			this.wechatAccessTokenCache.save("min-wechat-pro", accessTokenRes);
+			this.wechatAccessTokenCache.put("min-wechat-pro", accessTokenRes);
 		}
 	}
 

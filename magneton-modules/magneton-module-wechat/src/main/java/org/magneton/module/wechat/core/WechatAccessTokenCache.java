@@ -15,8 +15,13 @@ public interface WechatAccessTokenCache<T> {
 	 * @param key cache key
 	 * @param accessToken AccessToken
 	 */
-	void save(String key, T accessToken);
+	void put(String key, T accessToken);
 
+	/**
+	 * 获取AccessToken
+	 * @param key cache key
+	 * @return AccessToken if exist otherwise null.
+	 */
 	@Nullable
 	T get(String key);
 

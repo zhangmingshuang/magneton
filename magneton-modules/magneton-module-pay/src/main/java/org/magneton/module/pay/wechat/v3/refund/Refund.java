@@ -1,5 +1,6 @@
 package org.magneton.module.pay.wechat.v3.refund;
 
+import org.magneton.core.Result;
 import org.magneton.module.pay.wechat.v3.core.BaseV3Api;
 import org.magneton.module.pay.wechat.v3.refund.entity.DomesticRefunds;
 import org.magneton.module.pay.wechat.v3.refund.entity.DomesticRefundsReq;
@@ -19,6 +20,6 @@ public interface Refund extends BaseV3Api {
 	 * @param req 请求
 	 * @return 退款数据
 	 */
-	Reply<DomesticRefunds> refund(DomesticRefundsReq req);
+	Result<DomesticRefunds> refund(DomesticRefundsReq req);
 
 }

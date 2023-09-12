@@ -4,6 +4,12 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+/**
+ * 极验验证请求体.
+ *
+ * @author zhangmsh
+ * @since 2.0.8
+ */
 @Setter
 @Getter
 @ToString
