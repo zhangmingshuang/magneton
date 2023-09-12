@@ -15,7 +15,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @since 2023.9
  */
 @Slf4j
-public class DefaultKeySorter implements KeySorter {
+public class DefaultSignKeySorter implements SignKeySorter {
 
 	@Override
 	public List<String> sort(Set<String> keys) {

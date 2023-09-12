@@ -1,8 +1,6 @@
-package org.magneton.module.kit.access;
+package org.magneton.module.safedog.access;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 
 /**
  * .
@@ -10,9 +8,12 @@ import lombok.ToString;
  * @author zhangmsh 2021/2/25
  * @since 4.0.0
  */
+@Setter
 @Getter
 @ToString
 @AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode
 public class AccessConfig {
 
 	/**

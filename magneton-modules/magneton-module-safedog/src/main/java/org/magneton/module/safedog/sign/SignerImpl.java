@@ -5,7 +5,6 @@ import com.google.common.base.Strings;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.magneton.core.Result;
-import org.magneton.module.safedog.SignSafeDog;
 
 import javax.annotation.Nullable;
 import java.util.Arrays;
@@ -21,12 +20,12 @@ import java.util.Set;
  */
 @Slf4j
 @AllArgsConstructor
-public class SignSafeDogImpl implements SignSafeDog {
+public class SignerImpl implements Signer {
 
 	/**
 	 * Key排序器
 	 */
-	private KeySorter keySorter;
+	private SignKeySorter signKeySorter;
 
 	/**
 	 * 签名生成器
@@ -72,7 +71,7 @@ public class SignSafeDogImpl implements SignSafeDog {
 				}
 			}
 		}
-		List<String> sortedKeys = this.keySorter.sort(keys);
+		List<String> sortedKeys = this.signKeySorter.sort(keys);
 		return this.signGenerator.generate(data, sortedKeys, salt);
 	}
 

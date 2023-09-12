@@ -1,8 +1,10 @@
-package org.magneton.module.kit.access;
+package org.magneton.module.safedog.access;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -15,11 +17,20 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class MemoryAccessorProcessor implements AccessorProcessor {
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	private static final Map<AccessConfig, CacheNode> CACHE_NODES = new LinkedHashMap() {
+		@Override
+		protected boolean removeEldestEntry(Map.Entry eldest) {
+			return this.size() > 4096;
+		}
+	};
+
 	private AccessConfig accessConfig;
 
 	@Override
 	public void setAccessConfig(AccessConfig accessConfig) {
 		this.accessConfig = accessConfig;
+		CACHE_NODES.computeIfAbsent(accessConfig, CacheNode::new);
 	}
 
 	@Override
@@ -27,11 +38,22 @@ public class MemoryAccessorProcessor implements AccessorProcessor {
 		return new MemoryAccessor(name, this.accessConfig);
 	}
 
+	public static class CacheNode {
+
+		private final Cache<String, AtomicInteger> errorRecords;
+
+		private final Cache<String, Long> locked;
+
+		public CacheNode(AccessConfig accessConfig) {
+			this.locked = CacheBuilder.newBuilder().expireAfterWrite(accessConfig.getLockTime(), TimeUnit.MILLISECONDS)
+					.build();
+			this.errorRecords = CacheBuilder.newBuilder()
+					.expireAfterAccess(accessConfig.getWrongTimeToForget(), TimeUnit.MILLISECONDS).build();
+		}
+
+	}
+
 	public static class MemoryAccessor implements Accessor {
-
-		private Cache<String, AtomicInteger> errorRecords;
-
-		private Cache<String, Long> locked;
 
 		private final String name;
 
@@ -40,11 +62,6 @@ public class MemoryAccessorProcessor implements AccessorProcessor {
 		public MemoryAccessor(String name, AccessConfig accessConfig) {
 			this.name = name;
 			this.accessConfig = accessConfig;
-
-			this.locked = CacheBuilder.newBuilder()
-					.expireAfterWrite(this.accessConfig.getLockTime(), TimeUnit.MILLISECONDS).build();
-			this.errorRecords = CacheBuilder.newBuilder()
-					.expireAfterAccess(this.accessConfig.getWrongTimeToForget(), TimeUnit.MILLISECONDS).build();
 		}
 
 		@Override
@@ -54,11 +71,12 @@ public class MemoryAccessorProcessor implements AccessorProcessor {
 
 		@Override
 		public long ttl() {
-			Long ttl = this.locked.getIfPresent(this.name);
+			CacheNode cacheNode = CACHE_NODES.get(this.accessConfig);
+			Long ttl = cacheNode.locked.getIfPresent(this.name);
 			long now = System.currentTimeMillis();
 			if (ttl != null && ttl <= now) {
 				// release locked.
-				this.locked.invalidate(this.name);
+				cacheNode.locked.invalidate(this.name);
 				return -1;
 			}
 			return ttl == null ? -1 : ttl - now;
@@ -66,9 +84,10 @@ public class MemoryAccessorProcessor implements AccessorProcessor {
 
 		@Override
 		public int onError() {
+			CacheNode cacheNode = CACHE_NODES.get(this.accessConfig);
 			AtomicInteger errorCount;
 			try {
-				errorCount = this.errorRecords.get(this.name, AtomicInteger::new);
+				errorCount = cacheNode.errorRecords.get(this.name, AtomicInteger::new);
 			}
 			catch (ExecutionException e) {
 				throw new AccessException("record error", e);
@@ -77,7 +96,8 @@ public class MemoryAccessorProcessor implements AccessorProcessor {
 			if (wrongs >= this.accessConfig.getNumberOfWrongs()) {
 				long lockTime = this.accessConfig.getAccessTimeCalculator().calculate(this.name, wrongs,
 						this.accessConfig);
-				this.locked.put(this.name, lockTime);
+				cacheNode.locked.put(this.name, lockTime);
+				cacheNode.errorRecords.invalidate(this.name);
 				return 0;
 			}
 			return this.accessConfig.getNumberOfWrongs() - errorCount.get();

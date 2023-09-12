@@ -3,15 +3,17 @@ package org.magneton.module.safedog;
 import org.magneton.module.safedog.sign.*;
 
 /**
+ * 签名器构造器.
+ *
  * @author zhangmsh.
  * @since 2023.9
  */
-public class SignSafeDogBuilder {
+public class SignerBuilder {
 
 	/**
 	 * Key排序器
 	 */
-	KeySorter keySorter;
+	SignKeySorter signKeySorter;
 
 	/**
 	 * 签名生成器
@@ -34,24 +36,24 @@ public class SignSafeDogBuilder {
 	 */
 	String[] requiredKeys;
 
-	public SignSafeDogBuilder keySorter(KeySorter keySorter) {
-		this.keySorter = keySorter;
+	public SignerBuilder keySorter(SignKeySorter signKeySorter) {
+		this.signKeySorter = signKeySorter;
 		return this;
 	}
 
-	public SignSafeDogBuilder signGenerator(SignGenerator signGenerator) {
+	public SignerBuilder signGenerator(SignGenerator signGenerator) {
 		this.signGenerator = signGenerator;
 		return this;
 	}
 
-	public SignSafeDogBuilder signPeriod(int signPeriod) {
+	public SignerBuilder signPeriod(int signPeriod) {
 		this.signPeriod = signPeriod;
 		return this;
 	}
 
-	public SignSafeDog build() {
-		if (this.keySorter == null) {
-			this.keySorter = new DefaultKeySorter();
+	public Signer build() {
+		if (this.signKeySorter == null) {
+			this.signKeySorter = new DefaultSignKeySorter();
 		}
 		if (this.signGenerator == null) {
 			this.signGenerator = new DefaultSignGenerator();
@@ -59,8 +61,8 @@ public class SignSafeDogBuilder {
 		if (this.signValidator == null) {
 			this.signValidator = new MemorySignValidator();
 		}
-		return new SignSafeDogImpl(this.keySorter, this.signGenerator, this.signValidator, this.signPeriod,
-                this.requiredKeys);
+		return new SignerImpl(this.signKeySorter, this.signGenerator, this.signValidator, this.signPeriod,
+				this.requiredKeys);
 	}
 
 }

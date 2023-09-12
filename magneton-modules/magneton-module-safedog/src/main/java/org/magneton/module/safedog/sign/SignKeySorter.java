@@ -9,7 +9,7 @@ import java.util.Set;
  * @author zhangmsh.
  * @since 2023.9
  */
-public interface KeySorter {
+public interface SignKeySorter {
 
 	/**
 	 * 排序.

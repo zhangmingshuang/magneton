@@ -44,11 +44,6 @@
             <version>${spock.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.spockframework</groupId>
-            <artifactId>spock-spring</artifactId>
-            <version>${spock.version}</version>
-        </dependency>
-        <dependency>
             <groupId>org.objenesis</groupId>
             <artifactId>objenesis</artifactId>
             <version>${objenesis.version}</version>

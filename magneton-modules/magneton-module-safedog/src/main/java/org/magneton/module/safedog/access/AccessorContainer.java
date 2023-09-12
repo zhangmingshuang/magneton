@@ -1,4 +1,4 @@
-package org.magneton.module.kit.access;
+package org.magneton.module.safedog.access;
 
 import javax.annotation.Nullable;
 

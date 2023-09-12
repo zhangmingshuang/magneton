@@ -1,6 +1,5 @@
-package org.magneton.module.kit.access;
+package org.magneton.module.safedog.access;
 
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 
 import java.util.concurrent.locks.ReentrantLock;
@@ -11,7 +10,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * @author zhangmsh.
  * @since 2023.1
  */
-@AllArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 public class DefaultAccessorFactory implements AccessorFactory {
 
 	private static final ReentrantLock LOCK = new ReentrantLock();

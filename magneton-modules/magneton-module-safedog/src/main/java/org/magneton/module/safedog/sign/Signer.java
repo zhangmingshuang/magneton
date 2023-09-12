@@ -1,4 +1,4 @@
-package org.magneton.module.safedog;
+package org.magneton.module.safedog.sign;
 
 import org.magneton.core.Result;
 
@@ -11,7 +11,7 @@ import java.util.Map;
  * @author zhangmsh 2022/3/20
  * @since 1.0.0
  */
-public interface SignSafeDog {
+public interface Signer {
 
 	/**
 	 * 生成数据标识

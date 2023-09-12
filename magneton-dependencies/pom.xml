@@ -17,7 +17,6 @@
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!-- 工具 -->
-        <testable.version>0.7.5</testable.version>
         <commons-lang3.version>3.12.0</commons-lang3.version>
         <lombok.version>1.18.12</lombok.version>
         <junit.version>5.7.0</junit.version>
@@ -92,11 +91,6 @@
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>${lombok.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.alibaba.testable</groupId>
-                <artifactId>testable-all</artifactId>
-                <version>${testable.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.alibaba</groupId>

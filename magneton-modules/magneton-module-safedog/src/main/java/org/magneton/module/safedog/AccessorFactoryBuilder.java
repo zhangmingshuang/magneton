@@ -1,4 +1,6 @@
-package org.magneton.module.kit.access;
+package org.magneton.module.safedog;
+
+import org.magneton.module.safedog.access.*;
 
 /**
  * Accessor factory builder.
@@ -85,6 +87,7 @@ public class AccessorFactoryBuilder {
 		if (this.accessorContainer == null) {
 			this.accessorContainer = new CachedAccessorContainer();
 		}
+
 		AccessConfig accessConfig = new AccessConfig(this.numberOfWrongs, this.wrongTimeToForget, this.lockTime,
 				this.accessTimeCalculator);
 		this.accessorProcessor.setAccessConfig(accessConfig);
