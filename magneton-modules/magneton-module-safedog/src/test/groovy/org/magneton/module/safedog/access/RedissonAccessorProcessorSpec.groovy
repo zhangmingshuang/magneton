@@ -1,5 +1,6 @@
 package org.magneton.module.safedog.access
 
+import org.mockito.Mockito
 import org.redisson.api.RAtomicLong
 import org.redisson.api.RBucket
 import org.redisson.api.RedissonClient
@@ -44,6 +45,7 @@ class RedissonAccessorProcessorSpec extends Specification {
 
         def accessConfig = new AccessConfig()
         accessConfig.setNumberOfWrongs(2)
+        accessConfig.setAccessTimeCalculator(new DefaultAccessTimeCalculator())
         def rap = new RedissonAccessorProcessor(redissonClient)
         rap.setAccessConfig(accessConfig)
 
@@ -68,6 +70,20 @@ class RedissonAccessorProcessorSpec extends Specification {
         then:
         remainError == 0
         1 * rAtomicLong.delete()
+    }
+
+    def "test on exception"() {
+        given:
+        def accessor = Mockito.mock(RedissonAccessorProcessor.RedissonAccessor)
+
+        and: "mock"
+        Mockito.when(accessor.locked()).thenThrow(RuntimeException)
+        Mockito.when(accessor.onError()).thenCallRealMethod()
+        
+        when:
+        accessor.onError()
+        then:
+        thrown(AccessException)
     }
 
 }

@@ -80,23 +80,28 @@ public class RedissonAccessorProcessor implements AccessorProcessor {
 
 		@Override
 		public int onError() {
-			RAtomicLong atomicLong = this.redissonClient.getAtomicLong(this.bizKey(":error:"));
-			if (this.locked()) {
-				return 0;
+			try {
+				if (this.locked()) {
+					return 0;
+				}
+				RAtomicLong atomicLong = this.redissonClient.getAtomicLong(this.bizKey(":error:"));
+				long wrongs = atomicLong.incrementAndGet();
+				if (wrongs == 1 || (wrongs < 6 && atomicLong.remainTimeToLive() == -1)) {
+					atomicLong.expire(this.accessConfig.getWrongTimeToForget(), TimeUnit.MILLISECONDS);
+				}
+				if (wrongs >= this.accessConfig.getNumberOfWrongs()) {
+					long lockTime = this.accessConfig.getAccessTimeCalculator().calculate(this.name, wrongs,
+							this.accessConfig);
+					RBucket<Long> bucket = this.redissonClient.getBucket(this.bizKey(":lock:"));
+					bucket.set(System.currentTimeMillis(), lockTime, TimeUnit.MILLISECONDS);
+					atomicLong.delete();
+					return 0;
+				}
+				return (int) (this.accessConfig.getNumberOfWrongs() - wrongs);
 			}
-			long wrongs = atomicLong.incrementAndGet();
-			if (wrongs == 1 || (wrongs < 6 && atomicLong.remainTimeToLive() == -1)) {
-				atomicLong.expire(this.accessConfig.getWrongTimeToForget(), TimeUnit.MILLISECONDS);
+			catch (Throwable e) {
+				throw new AccessException("processor error", e);
 			}
-			if (wrongs >= this.accessConfig.getNumberOfWrongs()) {
-				long lockTime = this.accessConfig.getAccessTimeCalculator().calculate(this.name, wrongs,
-						this.accessConfig);
-				RBucket<Long> bucket = this.redissonClient.getBucket(this.bizKey(":lock:"));
-				bucket.set(System.currentTimeMillis(), lockTime, TimeUnit.MILLISECONDS);
-				atomicLong.delete();
-				return 0;
-			}
-			return (int) (this.accessConfig.getNumberOfWrongs() - wrongs);
 		}
 
 		@Override

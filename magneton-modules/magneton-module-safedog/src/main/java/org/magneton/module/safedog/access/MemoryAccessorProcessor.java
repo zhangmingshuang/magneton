@@ -6,7 +6,6 @@ import com.google.common.cache.CacheBuilder;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -87,26 +86,25 @@ public class MemoryAccessorProcessor implements AccessorProcessor {
 
 		@Override
 		public int onError() {
-			CacheNode cacheNode = CACHE_NODES.get(this.accessConfig);
-			AtomicInteger errorCount;
 			try {
-				errorCount = cacheNode.errorRecords.get(this.name, AtomicInteger::new);
+				if (this.locked()) {
+					return 0;
+				}
+				CacheNode cacheNode = CACHE_NODES.get(this.accessConfig);
+				AtomicInteger errorCount = cacheNode.errorRecords.get(this.name, AtomicInteger::new);
+				int wrongs = errorCount.incrementAndGet();
+				if (wrongs >= this.accessConfig.getNumberOfWrongs()) {
+					long lockTime = this.accessConfig.getAccessTimeCalculator().calculate(this.name, wrongs,
+							this.accessConfig);
+					cacheNode.locked.put(this.name, System.currentTimeMillis() + lockTime);
+					cacheNode.errorRecords.invalidate(this.name);
+					return 0;
+				}
+				return this.accessConfig.getNumberOfWrongs() - errorCount.get();
 			}
-			catch (ExecutionException e) {
-				throw new AccessException("record error", e);
+			catch (Throwable e) {
+				throw new AccessException("processor error", e);
 			}
-			if (this.locked()) {
-				return 0;
-			}
-			int wrongs = errorCount.incrementAndGet();
-			if (wrongs >= this.accessConfig.getNumberOfWrongs()) {
-				long lockTime = this.accessConfig.getAccessTimeCalculator().calculate(this.name, wrongs,
-						this.accessConfig);
-				cacheNode.locked.put(this.name, System.currentTimeMillis() + lockTime);
-				cacheNode.errorRecords.invalidate(this.name);
-				return 0;
-			}
-			return this.accessConfig.getNumberOfWrongs() - errorCount.get();
 		}
 
 		@Override

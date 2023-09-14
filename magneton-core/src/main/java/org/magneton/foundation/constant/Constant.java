@@ -8,8 +8,24 @@ package org.magneton.foundation.constant;
  */
 public interface Constant {
 
+	/**
+	 * property prefix
+	 */
 	String PROPERTY_PREFIX = "magneton";
 
+	/**
+	 * property support prefix
+	 */
 	String PROPERTY_SUPPORT_PREFIX = "magneton.support";
+
+	/**
+	 * success
+	 */
+	String SUCCESS = "success";
+
+	/**
+	 * result
+	 */
+	String RESULT = "result";
 
 }
