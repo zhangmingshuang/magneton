@@ -18,6 +18,7 @@ class RedissonAccessorProcessorSpec extends Specification {
 
         def ac = new AccessConfig()
         def rap = new RedissonAccessorProcessor(rc)
+        rap.setAccessConfig(ac)
 
         and: "mock"
         def rb = Mock(RBucket)

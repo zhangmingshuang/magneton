@@ -8,7 +8,7 @@ import lombok.*;
  * @author zhangmsh 2021/2/25
  * @since 4.0.0
  */
-@Setter
+@Setter(AccessLevel.PROTECTED)
 @Getter
 @ToString
 @AllArgsConstructor
@@ -24,7 +24,7 @@ public class AccessConfig {
 	/**
 	 * 错误的遗忘时间, 单位毫秒.
 	 */
-	private int wrongTimeToForget = 5 * 60 * 1000;
+	private long wrongTimeToForget = 5 * 60 * 1000;
 
 	/**
 	 * 琐定时间，单位毫秒.

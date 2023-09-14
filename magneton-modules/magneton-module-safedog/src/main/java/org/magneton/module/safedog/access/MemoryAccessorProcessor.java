@@ -1,5 +1,6 @@
 package org.magneton.module.safedog.access;
 
+import com.google.common.base.Verify;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 
@@ -35,6 +36,8 @@ public class MemoryAccessorProcessor implements AccessorProcessor {
 
 	@Override
 	public Accessor create(String name) {
+		Verify.verifyNotNull(this.accessConfig, "accessConfig is null. please set accessConfig first.");
+
 		return new MemoryAccessor(name, this.accessConfig);
 	}
 
@@ -92,15 +95,25 @@ public class MemoryAccessorProcessor implements AccessorProcessor {
 			catch (ExecutionException e) {
 				throw new AccessException("record error", e);
 			}
+			if (this.locked()) {
+				return 0;
+			}
 			int wrongs = errorCount.incrementAndGet();
 			if (wrongs >= this.accessConfig.getNumberOfWrongs()) {
 				long lockTime = this.accessConfig.getAccessTimeCalculator().calculate(this.name, wrongs,
 						this.accessConfig);
-				cacheNode.locked.put(this.name, lockTime);
+				cacheNode.locked.put(this.name, System.currentTimeMillis() + lockTime);
 				cacheNode.errorRecords.invalidate(this.name);
 				return 0;
 			}
 			return this.accessConfig.getNumberOfWrongs() - errorCount.get();
+		}
+
+		@Override
+		public void reset() {
+			CacheNode cacheNode = CACHE_NODES.get(this.accessConfig);
+			cacheNode.locked.invalidate(this.name);
+			cacheNode.errorRecords.invalidate(this.name);
 		}
 
 	}

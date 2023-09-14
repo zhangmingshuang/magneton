@@ -9,8 +9,8 @@ package org.magneton.module.safedog.access;
 public class DefaultAccessTimeCalculator implements AccessTimeCalculator {
 
 	@Override
-	public long calculate(String name, int wrongs, AccessConfig accessConfig) {
-		return System.currentTimeMillis() + accessConfig.getLockTime();
+	public long calculate(String name, long wrongs, AccessConfig accessConfig) {
+		return accessConfig.getLockTime();
 	}
 
 }

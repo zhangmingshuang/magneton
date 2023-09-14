@@ -20,7 +20,7 @@ public class RedissonAccessorProcessor implements AccessorProcessor {
 	/**
 	 * 默认的key
 	 */
-	private static final String DEFAULT_KEY = "magneton:m:accessorProcessor";
+	private static final String DEFAULT_KEY = "magneton:m:accessor";
 
 	private final RedissonClient redissonClient;
 
@@ -49,11 +49,11 @@ public class RedissonAccessorProcessor implements AccessorProcessor {
 	public Accessor create(String name) {
 		Verify.verifyNotNull(this.accessConfig, "accessConfig is null. please set accessConfig first.");
 
-		return new RedisAccessor(name, this.accessConfig, this.redissonClient, this.key);
+		return new RedissonAccessor(name, this.accessConfig, this.redissonClient, this.key);
 	}
 
 	@AllArgsConstructor
-	public static class RedisAccessor implements Accessor {
+	public static class RedissonAccessor implements Accessor {
 
 		private final String name;
 
@@ -70,7 +70,7 @@ public class RedissonAccessorProcessor implements AccessorProcessor {
 
 		@Override
 		public long ttl() {
-			RBucket<Long> bucket = this.redissonClient.getBucket(this.key + ":lock:" + this.name);
+			RBucket<Long> bucket = this.redissonClient.getBucket(this.bizKey(":lock:"));
 			long ttl = bucket.remainTimeToLive();
 			if (ttl < 0) {
 				return -1;
@@ -80,15 +80,35 @@ public class RedissonAccessorProcessor implements AccessorProcessor {
 
 		@Override
 		public int onError() {
-			RAtomicLong atomicLong = this.redissonClient.getAtomicLong(this.key + ":error:" + this.name);
+			RAtomicLong atomicLong = this.redissonClient.getAtomicLong(this.bizKey(":error:"));
+			if (this.locked()) {
+				return 0;
+			}
 			long wrongs = atomicLong.incrementAndGet();
+			if (wrongs == 1 || (wrongs < 6 && atomicLong.remainTimeToLive() == -1)) {
+				atomicLong.expire(this.accessConfig.getWrongTimeToForget(), TimeUnit.MILLISECONDS);
+			}
 			if (wrongs >= this.accessConfig.getNumberOfWrongs()) {
-				RBucket<Long> bucket = this.redissonClient.getBucket(this.key + ":lock:" + this.name);
-				bucket.set(System.currentTimeMillis(), this.accessConfig.getLockTime(), TimeUnit.MILLISECONDS);
+				long lockTime = this.accessConfig.getAccessTimeCalculator().calculate(this.name, wrongs,
+						this.accessConfig);
+				RBucket<Long> bucket = this.redissonClient.getBucket(this.bizKey(":lock:"));
+				bucket.set(System.currentTimeMillis(), lockTime, TimeUnit.MILLISECONDS);
 				atomicLong.delete();
 				return 0;
 			}
 			return (int) (this.accessConfig.getNumberOfWrongs() - wrongs);
+		}
+
+		@Override
+		public void reset() {
+			RBucket<Long> bucket = this.redissonClient.getBucket(this.bizKey(":lock:"));
+			bucket.delete();
+			RAtomicLong atomicLong = this.redissonClient.getAtomicLong(this.bizKey(":error:"));
+			atomicLong.delete();
+		}
+
+		protected String bizKey(String biz) {
+			return this.key + biz + this.name;
 		}
 
 	}

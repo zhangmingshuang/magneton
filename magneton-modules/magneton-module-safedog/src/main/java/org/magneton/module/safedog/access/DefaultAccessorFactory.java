@@ -16,7 +16,7 @@ public class DefaultAccessorFactory implements AccessorFactory {
 	private static final ReentrantLock LOCK = new ReentrantLock();
 
 	/**
-	 * 访问器构造器.
+	 * 访问器处理器.
 	 */
 	AccessorProcessor accessorProcessor;
 

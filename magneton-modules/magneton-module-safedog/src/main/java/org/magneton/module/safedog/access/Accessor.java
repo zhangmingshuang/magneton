@@ -28,4 +28,9 @@ public interface Accessor {
 	 */
 	int onError();
 
+	/**
+	 * 重置
+	 */
+	void reset();
+
 }

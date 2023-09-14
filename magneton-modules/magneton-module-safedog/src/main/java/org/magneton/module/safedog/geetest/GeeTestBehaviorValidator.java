@@ -9,7 +9,7 @@ import com.google.common.net.MediaType;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.HmacAlgorithms;
 import org.apache.commons.codec.digest.HmacUtils;
-import org.magneton.module.safedog.BehaviorSafeDog;
+import org.magneton.module.safedog.BehaviorValidator;
 
 import java.time.Duration;
 import java.util.Map;
@@ -23,13 +23,13 @@ import java.util.Map;
  * @since 2.0.8
  */
 @Slf4j
-public class GeeTestBehaviorSafeDog implements BehaviorSafeDog<GeeTestBody> {
+public class GeeTestBehaviorValidator implements BehaviorValidator<GeeTestBody> {
 
 	private final ObjectMapper objectMapper = new ObjectMapper();
 
 	private final GeeTestBehaviorConfig config;
 
-	public GeeTestBehaviorSafeDog(GeeTestBehaviorConfig config) {
+	public GeeTestBehaviorValidator(GeeTestBehaviorConfig config) {
 		this.config = Preconditions.checkNotNull(config);
 		this.config.validate();
 	}
