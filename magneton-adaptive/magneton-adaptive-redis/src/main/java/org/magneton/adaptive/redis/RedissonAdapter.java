@@ -1,17 +1,17 @@
 package org.magneton.adaptive.redis;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import lombok.extern.slf4j.Slf4j;
+import org.magneton.foundation.MoreResources;
 import org.magneton.foundation.MoreStrings;
-import org.magneton.foundation.Resources;
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;
 import org.redisson.config.Config;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * .
@@ -145,7 +145,7 @@ public class RedissonAdapter {
 		String configFile = Strings.lenientFormat(path,
 				"classpath:" + MoreStrings.suffixIfNotNullOrEmpty(profile, "-"));
 		try {
-			File file = Resources.getFile(configFile);
+			File file = MoreResources.getFile(configFile);
 			Config config = Config.fromYAML(file);
 			log.info("using redisson config [{}]", configFile);
 			return config;

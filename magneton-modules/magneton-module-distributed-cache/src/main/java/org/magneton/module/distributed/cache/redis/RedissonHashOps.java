@@ -2,16 +2,17 @@ package org.magneton.module.distributed.cache.redis;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 import org.magneton.foundation.MoreArrays;
-import org.magneton.foundation.collection.MoreCollections;
+import org.magneton.foundation.MoreCollections;
 import org.magneton.module.distributed.cache.Entry;
 import org.magneton.module.distributed.cache.ops.HashOps;
 import org.redisson.api.RMap;
 import org.redisson.api.RedissonClient;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * .

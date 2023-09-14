@@ -2,14 +2,11 @@ package org.magneton.foundation;
 
 import cn.hutool.core.text.CharSequenceUtil;
 import com.google.common.base.Preconditions;
+
+import javax.annotation.Nullable;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.net.URLConnection;
-import javax.annotation.Nullable;
+import java.net.*;
 
 /**
  * Utility methods for resolving resource locations to files in the file system. Mainly
@@ -26,7 +23,7 @@ import javax.annotation.Nullable;
  * @author Juergen Hoeller
  * @since 1.1.5
  */
-public abstract class Resources {
+public abstract class MoreResources {
 
 	/** Pseudo URL prefix for loading from the class path: "classpath:". */
 	public static final String CLASSPATH_URL_PREFIX = "classpath:";

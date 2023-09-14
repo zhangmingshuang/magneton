@@ -1,4 +1,4 @@
-package org.magneton.foundation.util;
+package org.magneton.foundation;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

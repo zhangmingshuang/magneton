@@ -2,11 +2,11 @@ package org.magneton.foundation.image;
 
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
-import java.awt.AlphaComposite;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
+import lombok.*;
+
+import javax.annotation.Nullable;
+import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -17,18 +17,20 @@ import java.nio.file.Paths;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import javax.annotation.Nullable;
-import javax.imageio.ImageIO;
-import lombok.Builder;
 
 /**
- * .
+ * 验证码图片.
  *
  * @author zhangmsh 22/03/2022
  * @since 2.0.7
  */
 @Builder
-public class NameImage {
+public class CaptchaPicture {
+
+	/**
+	 * Chinese Pattern
+	 */
+	private static final Pattern CHINESE_PATTERN = Pattern.compile("[\\u4e00-\\u9fa5]+");
 
 	private Path outputPath;
 
@@ -66,8 +68,9 @@ public class NameImage {
 	}
 
 	public String generateImg(String userName, @Nullable String prePath, String imageName) throws IOException {
-		Preconditions.checkNotNull(userName);
-		Preconditions.checkNotNull(imageName);
+		Preconditions.checkNotNull(userName, "userName must be not null");
+		Preconditions.checkNotNull(imageName, "imageName must be not null");
+
 		int subLen = Math.max(1, isChinese(userName) ? this.subUserNameLength : this.nonChineseSubUserNameLength);
 		int nameLen = Math.min(subLen, userName.length());
 		String written = this.reverseSub ? userName.substring(userName.length() - nameLen)
@@ -138,9 +141,9 @@ public class NameImage {
 
 	/**
 	 * 图片做圆角处理
-	 * @param image
-	 * @param cornerRadius
-	 * @return
+	 * @param image the image.
+	 * @param cornerRadius 拐角半径
+	 * @return 处理后的图
 	 */
 	public BufferedImage makeRoundedCorner(BufferedImage image, int cornerRadius) {
 		int w = image.getWidth();
@@ -159,22 +162,47 @@ public class NameImage {
 
 	public interface DrawProcessor {
 
+		/**
+		 * 字体
+		 * @param written 要写入的内容
+		 * @param imageWide 图片宽
+		 * @param imageHeight 图片高
+		 * @return 字体
+		 */
 		Font font(String written, int imageWide, int imageHeight);
 
+		/**
+		 * 生成位置
+		 * @param written 要写入的内容
+		 * @param imageWide 图片宽
+		 * @param imageHeight 图片高
+		 * @param font 字体
+		 * @return 位置
+		 */
 		Point point(String written, int imageWide, int imageHeight, Font font);
 
 	}
 
 	/**
 	 * 判断字符串是否为中文
-	 * @param str
-	 * @return
+	 * @param str 待校验字符串
+	 * @return 是否为中文
 	 */
 	public static boolean isChinese(String str) {
-		String regEx = "[\\u4e00-\\u9fa5]+";
-		Pattern p = Pattern.compile(regEx);
-		Matcher m = p.matcher(str);
+		Matcher m = CHINESE_PATTERN.matcher(str);
 		return m.find();
+	}
+
+	@Setter
+	@Getter
+	@ToString
+	@AllArgsConstructor
+	public static class Point {
+
+		private int x;
+
+		private int y;
+
 	}
 
 }

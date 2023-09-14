@@ -1,11 +1,12 @@
 package org.magneton.module.distributed.cache.ops;
 
+import org.magneton.foundation.MoreArrays;
+import org.magneton.foundation.MoreCollections;
+
+import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
-import javax.annotation.Nullable;
-import org.magneton.foundation.MoreArrays;
-import org.magneton.foundation.collection.MoreCollections;
 
 /**
  * .

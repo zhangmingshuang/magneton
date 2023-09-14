@@ -1,4 +1,4 @@
-package org.magneton.foundation.exception;
+package org.magneton.foundation;
 
 import cn.hutool.core.io.FastByteArrayOutputStream;
 import cn.hutool.core.map.MapUtil;
@@ -6,6 +6,7 @@ import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.ReflectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.google.common.base.Strings;
+
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.UndeclaredThrowableException;
@@ -13,16 +14,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.magneton.foundation.MoreStrings;
 
 /**
  * 异常工具类
  *
  * @author Looly
  */
-public class Exceptions {
+public class MoreExceptions {
 
-	private Exceptions() {
+	private MoreExceptions() {
 	}
 
 	/**
@@ -47,7 +47,7 @@ public class Exceptions {
 	}
 
 	/**
-	 * 使用运行时异常包装编译异常<br>
+	 * 使用运行时异常包装编译异常
 	 * <p>
 	 * 如果传入参数已经是运行时异常，则直接返回，不再额外包装
 	 * @param throwable 异常

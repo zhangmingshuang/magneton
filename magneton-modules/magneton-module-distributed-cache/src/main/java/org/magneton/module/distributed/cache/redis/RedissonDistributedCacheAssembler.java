@@ -3,23 +3,20 @@ package org.magneton.module.distributed.cache.redis;
 import cn.hutool.core.text.CharSequenceUtil;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-import org.magneton.module.distributed.cache.DistributedCache;
-import org.magneton.module.distributed.cache.ops.HashOps;
-import org.magneton.module.distributed.cache.ops.ListOps;
-import org.magneton.module.distributed.cache.ops.SetOps;
-import org.magneton.module.distributed.cache.ops.SortedSetOps;
-import org.magneton.module.distributed.cache.ops.ValueOps;
+import org.magneton.module.distributed.cache.DistributedCacheBuilder;
+import org.magneton.module.distributed.cache.ops.*;
 import org.redisson.api.RedissonClient;
 
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
 /**
- * .
+ * 基于Redisson的分布式缓存组装器.
  *
  * @author zhangmsh 2021/6/24
  * @since 1.0.0
  */
-public class RedissonDistributedCache implements DistributedCache {
+public class RedissonDistributedCacheAssembler implements CommonOps, DistributedCacheBuilder.Assembler {
 
 	private final RedissonClient redissonClient;
 
@@ -33,7 +30,7 @@ public class RedissonDistributedCache implements DistributedCache {
 
 	private final SortedSetOps sortedSetOps;
 
-	public RedissonDistributedCache(RedissonClient redissonClient) {
+	public RedissonDistributedCacheAssembler(RedissonClient redissonClient) {
 		this.redissonClient = Preconditions.checkNotNull(redissonClient);
 		this.valueOps = new RedissonValueOps(this.redissonClient);
 		this.listOps = new RedissonListOps(this.redissonClient);
@@ -43,28 +40,33 @@ public class RedissonDistributedCache implements DistributedCache {
 	}
 
 	@Override
-	public HashOps opsForHash() {
+	public HashOps hashOps() {
 		return this.hashOps;
 	}
 
 	@Override
-	public SetOps opsForSet() {
+	public SetOps setOps() {
 		return this.setOps;
 	}
 
 	@Override
-	public SortedSetOps opsForSortedSet() {
+	public SortedSetOps sortedSetOps() {
 		return this.sortedSetOps;
 	}
 
 	@Override
-	public ListOps opsForList() {
+	public ListOps listOps() {
 		return this.listOps;
 	}
 
 	@Override
-	public ValueOps opsForValue() {
+	public ValueOps valueOps() {
 		return this.valueOps;
+	}
+
+	@Override
+	public CommonOps commonOps() {
+		return this;
 	}
 
 	@Override
@@ -93,7 +95,7 @@ public class RedissonDistributedCache implements DistributedCache {
 
 	@Override
 	public boolean exists(String key) {
-		Preconditions.checkNotNull(key, "key");
+		Preconditions.checkNotNull(key, "key must not be null");
 		return this.redissonClient.getBucket(key).isExists();
 	}
 

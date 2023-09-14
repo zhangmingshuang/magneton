@@ -1,14 +1,9 @@
-package org.magneton.foundation.util;
+package org.magneton.foundation;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import org.magneton.foundation.exception.MkdirException;
 import org.magneton.foundation.exception.WriteFileException;
+
+import java.io.*;
 
 /**
  * .

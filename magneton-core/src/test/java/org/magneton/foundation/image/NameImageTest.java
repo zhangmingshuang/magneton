@@ -12,8 +12,8 @@ import java.nio.file.Paths;
 class NameImageTest {
 
 	public static void main(String[] args) throws IOException {
-		NameImage build = NameImage.builder().cornerRadius(0).outputPath(Paths.get("D://name-image")).reverseSub(true)
-				.build();
+		CaptchaPicture build = CaptchaPicture.builder().cornerRadius(0).outputPath(Paths.get("D://name-image"))
+				.reverseSub(true).build();
 		System.out.println(build.generateImg("张明爽", "test", "zms"));
 		System.out.println(build.generateImg("zms", "en-zms"));
 	}

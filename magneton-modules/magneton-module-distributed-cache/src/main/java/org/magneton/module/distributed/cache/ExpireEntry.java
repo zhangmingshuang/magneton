@@ -2,12 +2,14 @@ package org.magneton.module.distributed.cache;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
- * .
+ * 有效期的键值.
  *
- * @author zhangmsh 2021/6/24
+ * @author zhangmsh
  * @since 1.0.0
  */
 public class ExpireEntry<T> {
@@ -34,6 +36,7 @@ public class ExpireEntry<T> {
 		Preconditions.checkNotNull(value1);
 		Preconditions.checkNotNull(key2);
 		Preconditions.checkNotNull(value2);
+
 		List<ExpireEntry<T>> list = Lists.newArrayListWithCapacity(2);
 		list.add(ExpireEntry.of(key1, value1, expire1));
 		list.add(ExpireEntry.of(key2, value2, expire2));
@@ -48,6 +51,7 @@ public class ExpireEntry<T> {
 		Preconditions.checkNotNull(value2);
 		Preconditions.checkNotNull(key3);
 		Preconditions.checkNotNull(value3);
+
 		List<ExpireEntry<T>> list = Lists.newArrayListWithCapacity(2);
 		list.add(ExpireEntry.of(key1, value1, expire1));
 		list.add(ExpireEntry.of(key2, value2, expire2));
@@ -65,6 +69,21 @@ public class ExpireEntry<T> {
 
 	public long getExpire() {
 		return this.expire;
+	}
+
+	public static class Builder<T> {
+
+		private final List<ExpireEntry<T>> entries = new ArrayList<>();
+
+		public Builder<T> of(String key, T value, long expire) {
+			this.entries.add(ExpireEntry.of(key, value, expire));
+			return this;
+		}
+
+		public List<ExpireEntry<T>> build() {
+			return this.entries;
+		}
+
 	}
 
 }

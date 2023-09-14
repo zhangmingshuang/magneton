@@ -17,32 +17,32 @@ public class AccessorFactoryBuilder {
 	/**
 	 * 允许的错误次数
 	 */
-	int numberOfWrongs = 5;
+	private int numberOfWrongs = 5;
 
 	/**
 	 * 错误的遗忘时间, 单位毫秒.
 	 */
-	int wrongTimeToForget = 5 * 60 * 1000;
+	private int wrongTimeToForget = 5 * 60 * 1000;
 
 	/**
 	 * 琐定时间，单位毫秒.
 	 */
-	long lockTime = 5 * 60 * 1000;
+	private long lockTime = 5 * 60 * 1000;
 
 	/**
 	 * 访问器处理器.
 	 */
-	AccessorProcessor accessorProcessor;
+	private AccessorProcessor accessorProcessor;
 
 	/**
 	 * 时间计算器.
 	 */
-	AccessTimeCalculator accessTimeCalculator;
+	private AccessTimeCalculator accessTimeCalculator;
 
 	/**
 	 * 访问器容器.
 	 */
-	AccessorContainer accessorContainer;
+	private AccessorContainer accessorContainer;
 
 	public AccessorFactoryBuilder numberOfWrongs(int numberOfWrongs) {
 		this.numberOfWrongs = numberOfWrongs;

@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.magneton.core.Result;
 import org.magneton.core.ResultException;
-import org.magneton.foundation.collection.MoreCollections;
+import org.magneton.foundation.MoreCollections;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;

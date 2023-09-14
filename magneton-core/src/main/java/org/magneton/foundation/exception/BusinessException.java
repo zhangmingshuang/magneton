@@ -1,6 +1,8 @@
 package org.magneton.foundation.exception;
 
 /**
+ * 业务异常
+ *
  * @author zhangmsh 2022/4/8
  * @since 1.0.0
  */

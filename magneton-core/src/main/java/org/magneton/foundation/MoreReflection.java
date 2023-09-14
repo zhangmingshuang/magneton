@@ -1,7 +1,7 @@
-package org.magneton.foundation.reflect;
+package org.magneton.foundation;
 
 import com.google.common.base.Preconditions;
-import org.magneton.foundation.ConcurrentReferenceHashMap;
+import org.magneton.foundation.collection.ConcurrentReferenceHashMap;
 
 import javax.annotation.Nullable;
 import java.lang.reflect.Field;

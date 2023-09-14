@@ -1,4 +1,4 @@
-package org.magneton.foundation.collection;
+package org.magneton.foundation;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.collection.ListUtil;
@@ -11,6 +11,8 @@ import javax.annotation.Nullable;
 import java.util.*;
 
 /**
+ * 集合工具类
+ *
  * @author zhangmsh 2022/5/18
  * @since 1.0.0
  */

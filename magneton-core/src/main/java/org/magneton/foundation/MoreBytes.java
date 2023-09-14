@@ -1,4 +1,4 @@
-package org.magneton.foundation.util;
+package org.magneton.foundation;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * @since 2020.12.30.
  */
 @SuppressWarnings({ "ALL", "java:S1659", "java:S1854", "java:S1192" })
-public class Bytes {
+public class MoreBytes {
 
 	/** default base64. */
 	private static final String C64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
@@ -28,7 +28,7 @@ public class Bytes {
 
 	private static final Map<Integer, byte[]> DECODE_TABLE_MAP = new ConcurrentHashMap<>(16);
 
-	private Bytes() {
+	private MoreBytes() {
 	}
 
 	/**
