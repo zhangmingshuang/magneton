@@ -9,7 +9,7 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * .
+ * List Operations.
  *
  * @author zhangmsh 2021/6/24
  * @since 1.0.0

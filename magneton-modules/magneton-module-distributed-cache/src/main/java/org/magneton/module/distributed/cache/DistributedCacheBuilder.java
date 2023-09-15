@@ -10,22 +10,48 @@ import org.magneton.module.distributed.cache.ops.*;
  */
 public class DistributedCacheBuilder {
 
+	/**
+	 * HashOps for Hash Operations
+	 */
 	HashOps hashOps;
 
+	/**
+	 * ListOps for List Operations
+	 */
 	ListOps listOps;
 
+	/**
+	 * SetOps for Set Operations
+	 */
 	SetOps setOps;
 
+	/**
+	 * SortedSetOps for Sorted Set Operations
+	 */
 	SortedSetOps sortedSetOps;
 
+	/**
+	 * ValueOps for Value Operations
+	 */
 	ValueOps valueOps;
 
+	/**
+	 * CommonOps for Common Operations
+	 */
 	CommonOps commonOps;
 
+	/**
+	 * 创建一个新的Builder
+	 */
 	public static DistributedCacheBuilder newBuilder() {
 		return new DistributedCacheBuilder();
 	}
 
+	/**
+	 * 创建一个新的Builder
+	 * @param assembler 组装器
+	 * @return Builder
+	 */
 	public static DistributedCacheBuilder newBuilder(Assembler assembler) {
 		DistributedCacheBuilder builder = new DistributedCacheBuilder();
 		builder.hashOps = assembler.hashOps();
@@ -91,16 +117,40 @@ public class DistributedCacheBuilder {
 
 	public interface Assembler {
 
+		/**
+		 * 获取HashOps
+		 * @return HashOps
+		 */
 		HashOps hashOps();
 
+		/**
+		 * 获取ListOps
+		 * @return ListOps
+		 */
 		ListOps listOps();
 
+		/**
+		 * 获取SetOps
+		 * @return SetOps
+		 */
 		SetOps setOps();
 
+		/**
+		 * 获取SortedSetOps
+		 * @return SortedSetOps
+		 */
 		SortedSetOps sortedSetOps();
 
+		/**
+		 * 获取ValueOps
+		 * @return ValueOps
+		 */
 		ValueOps valueOps();
 
+		/**
+		 * 获取CommonOps
+		 * @return CommonOps
+		 */
 		CommonOps commonOps();
 
 	}

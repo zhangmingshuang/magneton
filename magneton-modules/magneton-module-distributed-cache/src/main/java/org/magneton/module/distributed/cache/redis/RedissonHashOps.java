@@ -20,6 +20,7 @@ import java.util.Set;
  * @author zhangmsh 2021/6/25
  * @since 1.0.0
  */
+@SuppressWarnings("unchecked")
 public class RedissonHashOps extends AbstractRedissonOps implements HashOps {
 
 	public RedissonHashOps(RedissonClient redissonClient) {
@@ -28,29 +29,33 @@ public class RedissonHashOps extends AbstractRedissonOps implements HashOps {
 
 	@Override
 	public <V> V put(String hash, Entry<V> entry) {
-		Preconditions.checkNotNull(hash);
-		Preconditions.checkNotNull(entry);
+		Preconditions.checkNotNull(hash, "hash must be not null");
+		Preconditions.checkNotNull(entry, "hash must be not null");
+
 		return (V) this.redissonClient.getMap(hash).put(entry.getKey(), entry.getValue());
 	}
 
 	@Override
 	public <V> void put(String hash, Map<String, V> values) {
-		Preconditions.checkNotNull(hash);
-		Preconditions.checkNotNull(values);
+		Preconditions.checkNotNull(hash, "hash must be not null");
+		Preconditions.checkNotNull(values, "values must be not null");
+
 		this.redissonClient.getMap(hash).putAll(values);
 	}
 
 	@Override
 	public <V> V get(String hash, String key) {
-		Preconditions.checkNotNull(hash);
-		Preconditions.checkNotNull(key);
+		Preconditions.checkNotNull(hash, "hash must be not null");
+		Preconditions.checkNotNull(key, "key must be not null");
+
 		return (V) this.redissonClient.getMap(hash).get(key);
 	}
 
 	@Override
 	public <V> Map<String, V> get(String hash, Set<String> keys) {
-		Preconditions.checkNotNull(hash);
-		Preconditions.checkNotNull(keys);
+		Preconditions.checkNotNull(hash, "hash must be not null");
+		Preconditions.checkNotNull(keys, "key must be not null");
+
 		if (MoreCollections.isNullOrEmpty(keys)) {
 			return Collections.emptyMap();
 		}
@@ -60,15 +65,17 @@ public class RedissonHashOps extends AbstractRedissonOps implements HashOps {
 
 	@Override
 	public boolean containsKey(String hash, String key) {
-		Preconditions.checkNotNull(hash);
-		Preconditions.checkNotNull(key);
+		Preconditions.checkNotNull(hash, "hash must be not null");
+		Preconditions.checkNotNull(key, "key must be not null");
+
 		return this.redissonClient.getMap(hash).containsKey(key);
 	}
 
 	@Override
 	public long remove(String hash, String... keys) {
-		Preconditions.checkNotNull(hash);
-		Preconditions.checkNotNull(keys);
+		Preconditions.checkNotNull(hash, "hash must be not null");
+		Preconditions.checkNotNull(keys, "keys must be not null");
+
 		if (MoreArrays.isNullOrEmpty(keys)) {
 			return 0;
 		}
@@ -77,35 +84,40 @@ public class RedissonHashOps extends AbstractRedissonOps implements HashOps {
 
 	@Override
 	public long size(String hash) {
-		Preconditions.checkNotNull(hash);
+		Preconditions.checkNotNull(hash, "hash must be not null");
+
 		return this.redissonClient.getMap(hash).size();
 	}
 
 	@Override
 	public Set<String> keys(String hash) {
-		Preconditions.checkNotNull(hash);
+		Preconditions.checkNotNull(hash, "hash must be not null");
+
 		RMap<String, Object> map = this.redissonClient.getMap(hash);
 		return map.keySet();
 	}
 
 	@Override
 	public <V> List<V> values(String hash) {
-		Preconditions.checkNotNull(hash);
+		Preconditions.checkNotNull(hash, "hash must be not null");
+
 		RMap<String, V> map = this.redissonClient.getMap(hash);
 		return Lists.newArrayList(map.values());
 	}
 
 	@Override
 	public <V> Set<Map.Entry<String, V>> entrySet(String hash) {
-		Preconditions.checkNotNull(hash);
+		Preconditions.checkNotNull(hash, "hash must be not null");
+
 		RMap<String, V> map = this.redissonClient.getMap(hash);
 		return map.readAllEntrySet();
 	}
 
 	@Override
 	public long incr(String hash, String key, long incr) {
-		Preconditions.checkNotNull(hash);
-		Preconditions.checkNotNull(key);
+		Preconditions.checkNotNull(hash, "hash must be not null");
+		Preconditions.checkNotNull(key, "key must be not null");
+
 		RMap<String, Object> map = this.redissonClient.getMap(hash);
 		return (long) map.addAndGet(key, incr);
 	}

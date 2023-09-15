@@ -4,6 +4,8 @@ import java.util.Collection;
 import java.util.Set;
 
 /**
+ * Set Operations.
+ *
  * @author zhangmsh 2022/5/4
  * @since 1.0.0
  */

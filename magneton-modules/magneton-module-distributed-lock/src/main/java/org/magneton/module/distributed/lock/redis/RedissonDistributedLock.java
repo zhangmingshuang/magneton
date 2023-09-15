@@ -2,10 +2,11 @@ package org.magneton.module.distributed.lock.redis;
 
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.Lock;
 import org.magneton.module.distributed.lock.exception.LockException;
 import org.redisson.api.RedissonClient;
+
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.Lock;
 
 /**
  * {@code Redisson} distributed lock that relies on {@code Redis}.
@@ -47,20 +48,20 @@ public class RedissonDistributedLock extends AbstractDistributedLock {
 	@Override
 	public Lock getLock(String key) {
 		Preconditions.checkNotNull(key);
-		return this.redissonClient.getLock(key);
+		return this.redissonClient.getLock(this.retouchKey(key));
 	}
 
 	@Override
 	public void lock(String key) {
 		Preconditions.checkNotNull(key);
-		this.getLock(key).lock();
+		this.getLock(this.retouchKey(key)).lock();
 	}
 
 	@Override
 	public boolean tryLock(String key, long time, TimeUnit unit) {
 		Preconditions.checkNotNull(key);
 		try {
-			return this.getLock(key).tryLock(time, unit);
+			return this.getLock(this.retouchKey(key)).tryLock(time, unit);
 		}
 		catch (InterruptedException e) {
 			throw new LockException(Strings.lenientFormat("try lock %s key interrupted", key), e);
@@ -70,13 +71,13 @@ public class RedissonDistributedLock extends AbstractDistributedLock {
 	@Override
 	public boolean tryLock(String key) {
 		Preconditions.checkNotNull(key);
-		return this.getLock(key).tryLock();
+		return this.getLock(this.retouchKey(key)).tryLock();
 	}
 
 	@Override
 	public void unlock(String key) {
 		Preconditions.checkNotNull(key);
-		this.getLock(key).unlock();
+		this.getLock(this.retouchKey(key)).unlock();
 	}
 
 }

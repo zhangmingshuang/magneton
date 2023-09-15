@@ -71,14 +71,16 @@ public class RedissonDistributedCacheAssembler implements CommonOps, Distributed
 
 	@Override
 	public long ttl(String key) {
-		Preconditions.checkNotNull(key, "key");
+		Preconditions.checkNotNull(key, "key must not be null");
+
 		long ttl = this.redissonClient.getBucket(key).remainTimeToLive();
 		return ttl <= 0 ? ttl : ttl / 1000;
 	}
 
 	@Override
 	public boolean expire(String key, long expire) {
-		Preconditions.checkNotNull(key, "key");
+		Preconditions.checkNotNull(key, "key must not be null");
+
 		return this.redissonClient.getBucket(key).expire(expire, TimeUnit.SECONDS);
 	}
 
@@ -86,6 +88,7 @@ public class RedissonDistributedCacheAssembler implements CommonOps, Distributed
 	public boolean expireByOther(String key, String otherKey) {
 		Preconditions.checkNotNull(key, "key must not be null");
 		Preconditions.checkNotNull(otherKey, "otherKey must not be null");
+
 		long ttl = this.ttl(otherKey);
 		if (ttl <= 0) {
 			return false;
@@ -96,12 +99,14 @@ public class RedissonDistributedCacheAssembler implements CommonOps, Distributed
 	@Override
 	public boolean exists(String key) {
 		Preconditions.checkNotNull(key, "key must not be null");
+
 		return this.redissonClient.getBucket(key).isExists();
 	}
 
 	@Override
 	public long del(String... keys) {
-		Preconditions.checkNotNull(keys, "keys");
+		Preconditions.checkNotNull(keys, "keys must not be null");
+
 		return this.redissonClient.getKeys().unlink(keys);
 	}
 

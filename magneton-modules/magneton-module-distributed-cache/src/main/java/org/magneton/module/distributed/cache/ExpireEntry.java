@@ -2,6 +2,7 @@ package org.magneton.module.distributed.cache;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
+import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,12 +13,22 @@ import java.util.List;
  * @author zhangmsh
  * @since 1.0.0
  */
+@Getter
 public class ExpireEntry<T> {
 
+	/**
+	 * 过期时间，单位秒
+	 */
 	private final long expire;
 
+	/**
+	 * the key
+	 */
 	private final String key;
 
+	/**
+	 * the value
+	 */
 	private final T value;
 
 	public ExpireEntry(String key, T value, long expire) {
@@ -27,7 +38,7 @@ public class ExpireEntry<T> {
 	}
 
 	public static <T> ExpireEntry<T> of(String key, T value, long expire) {
-		return new ExpireEntry(key, value, expire);
+		return new ExpireEntry<T>(key, value, expire);
 	}
 
 	public static <T> List<ExpireEntry<T>> of(String key1, T value1, long expire1, String key2, T value2,
@@ -57,18 +68,6 @@ public class ExpireEntry<T> {
 		list.add(ExpireEntry.of(key2, value2, expire2));
 		list.add(ExpireEntry.of(key3, value3, expire3));
 		return list;
-	}
-
-	public String getKey() {
-		return this.key;
-	}
-
-	public T getValue() {
-		return this.value;
-	}
-
-	public long getExpire() {
-		return this.expire;
 	}
 
 	public static class Builder<T> {
