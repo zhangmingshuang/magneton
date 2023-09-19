@@ -62,7 +62,7 @@ public interface ValueOps {
 	 * @return 如果设置成功返回true，否则返回false
 	 */
 	default <V> boolean set(List<Entry<V>> entries) {
-		Preconditions.checkNotNull(entries, "entries must be not null");
+		Preconditions.checkNotNull(entries, "entries must not be null");
 
 		Map<String, V> map = Maps.newHashMapWithExpectedSize(entries.size());
 		entries.forEach(kv -> {

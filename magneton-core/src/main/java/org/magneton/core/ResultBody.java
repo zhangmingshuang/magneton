@@ -33,8 +33,8 @@ public interface ResultBody<T> {
 	 * @return response body.
 	 */
 	static <T> ResultBody<T> valueOf(String code, String message, @Nullable T data) {
-		Preconditions.checkNotNull(code, "code must be not null");
-		Preconditions.checkNotNull(message, "message must be not null");
+		Preconditions.checkNotNull(code, "code must not be null");
+		Preconditions.checkNotNull(message, "message must not be null");
 
 		return new ResultBody<T>() {
 			@Override

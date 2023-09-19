@@ -37,14 +37,14 @@ public class RequestContext {
 	@Nullable
 	@CanIgnoreReturnValue
 	public static <E> E setAndGet(E obj) {
-		Preconditions.checkNotNull(obj, "obj must be not null");
+		Preconditions.checkNotNull(obj, "obj must not be null");
 		E oldObj = (E) HOLDER.get();
 		HOLDER.set(obj);
 		return oldObj;
 	}
 
 	public static <E> void set(E obj) {
-		Preconditions.checkNotNull(obj, "obj must be not null");
+		Preconditions.checkNotNull(obj, "obj must not be null");
 		HOLDER.set(obj);
 	}
 

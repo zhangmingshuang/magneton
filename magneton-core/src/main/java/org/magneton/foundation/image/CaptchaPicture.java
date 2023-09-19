@@ -68,8 +68,8 @@ public class CaptchaPicture {
 	}
 
 	public String generateImg(String userName, @Nullable String prePath, String imageName) throws IOException {
-		Preconditions.checkNotNull(userName, "userName must be not null");
-		Preconditions.checkNotNull(imageName, "imageName must be not null");
+		Preconditions.checkNotNull(userName, "userName must not be null");
+		Preconditions.checkNotNull(imageName, "imageName must not be null");
 
 		int subLen = Math.max(1, isChinese(userName) ? this.subUserNameLength : this.nonChineseSubUserNameLength);
 		int nameLen = Math.min(subLen, userName.length());

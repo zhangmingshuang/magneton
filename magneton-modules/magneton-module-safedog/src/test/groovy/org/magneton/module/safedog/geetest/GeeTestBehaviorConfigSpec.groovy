@@ -13,7 +13,7 @@ class GeeTestBehaviorConfigSpec extends Specification {
         given:
         def cfg = new GeeTestBehaviorConfig()
 
-        when:
+        when: "validate"
         cfg.validate()
         then:
         thrown(IllegalArgumentException)

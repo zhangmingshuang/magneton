@@ -1,4 +1,4 @@
-package org.magneton.module.statistics.process;
+package org.magneton.module.statistics.pvpu;
 
 /**
  * PVUV.
@@ -12,22 +12,17 @@ package org.magneton.module.statistics.process;
 public interface PvUv {
 
 	/**
-	 * 判断是否为UV
-	 * @param group 分组
+	 * 判断是否为独立的访客
 	 * @param id UV Id
-	 * @return 如果是UV，则返回{@code true}
+	 * @return 如果目前属于UV，则返回{@code true}， 否则返回{@code false}
 	 */
-	default boolean isUv(String group, int id) {
-		return this.isUv(group, id, -1);
-	}
+	boolean isUv(String id);
 
 	/**
-	 * 判断是否为UV
-	 * @param group 分组
+	 * 如果当前为独立访客，则记录为UV
 	 * @param id UV Id
-	 * @param timeToLiveSeconds 有效欺
-	 * @return 如果是UV，则返回{@code true}
+	 * @return 如果目前属于UV，并添加成功，则返回{@code true}， 否则返回{@code false}
 	 */
-	boolean isUv(String group, int id, long timeToLiveSeconds);
+	boolean addIfIsUv(String id);
 
 }

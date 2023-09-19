@@ -24,8 +24,8 @@ public class Entry<T> {
 	}
 
 	public static <T> Entry<T> of(String key, T value) {
-		Preconditions.checkNotNull(key, "key must be not null");
-		Preconditions.checkNotNull(value, "value must be not null");
+		Preconditions.checkNotNull(key, "key must not be null");
+		Preconditions.checkNotNull(value, "value must not be null");
 
 		return new Entry<T>(key, value);
 	}

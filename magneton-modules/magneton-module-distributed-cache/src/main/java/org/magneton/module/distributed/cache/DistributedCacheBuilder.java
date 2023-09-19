@@ -95,22 +95,22 @@ public class DistributedCacheBuilder {
 
 	public DistributedCache build() {
 		if (this.hashOps == null) {
-			throw new IllegalArgumentException("hashOps must be not null");
+			throw new IllegalArgumentException("hashOps must not be null");
 		}
 		if (this.listOps == null) {
-			throw new IllegalArgumentException("listOps must be not null");
+			throw new IllegalArgumentException("listOps must not be null");
 		}
 		if (this.setOps == null) {
-			throw new IllegalArgumentException("setOps must be not null");
+			throw new IllegalArgumentException("setOps must not be null");
 		}
 		if (this.sortedSetOps == null) {
-			throw new IllegalArgumentException("sortedSetOps must be not null");
+			throw new IllegalArgumentException("sortedSetOps must not be null");
 		}
 		if (this.valueOps == null) {
-			throw new IllegalArgumentException("valueOps must be not null");
+			throw new IllegalArgumentException("valueOps must not be null");
 		}
 		if (this.commonOps == null) {
-			throw new IllegalArgumentException("commonOps must be not null");
+			throw new IllegalArgumentException("commonOps must not be null");
 		}
 		return new DistributedCacheImpl(this);
 	}

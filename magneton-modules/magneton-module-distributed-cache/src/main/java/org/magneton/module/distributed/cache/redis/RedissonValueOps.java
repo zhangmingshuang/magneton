@@ -28,7 +28,7 @@ public class RedissonValueOps extends AbstractRedissonOps implements ValueOps {
 
 	@Override
 	public <V> boolean set(Entry<V> entry) {
-		Preconditions.checkNotNull(entry, "entry must be not null");
+		Preconditions.checkNotNull(entry, "entry must not be null");
 
 		this.redissonClient.getBucket(entry.getKey()).set(entry.getValue());
 		return true;
@@ -45,7 +45,7 @@ public class RedissonValueOps extends AbstractRedissonOps implements ValueOps {
 
 	@Override
 	public <V> boolean setNx(Entry<V> entry) {
-		Preconditions.checkNotNull(entry, "entry must be not null");
+		Preconditions.checkNotNull(entry, "entry must not be null");
 
 		return this.redissonClient.getBucket(entry.getKey()).trySet(entry.getValue());
 	}
@@ -60,7 +60,7 @@ public class RedissonValueOps extends AbstractRedissonOps implements ValueOps {
 
 	@Override
 	public <V> void setEx(ExpireEntry<V> expireEntry) {
-		Preconditions.checkNotNull(expireEntry, "expireEntry must be not null");
+		Preconditions.checkNotNull(expireEntry, "expireEntry must not be null");
 
 		this.redissonClient.getBucket(expireEntry.getKey()).set(expireEntry.getValue(), expireEntry.getExpire(),
 				TimeUnit.SECONDS);
@@ -68,7 +68,7 @@ public class RedissonValueOps extends AbstractRedissonOps implements ValueOps {
 
 	@Override
 	public <V> void setEx(List<ExpireEntry<V>> expireEntries) {
-		Preconditions.checkNotNull(expireEntries, "expireEntries must be not null");
+		Preconditions.checkNotNull(expireEntries, "expireEntries must not be null");
 
 		RBatch batch = this.redissonClient.createBatch();
 		expireEntries.forEach(expireEntry -> {

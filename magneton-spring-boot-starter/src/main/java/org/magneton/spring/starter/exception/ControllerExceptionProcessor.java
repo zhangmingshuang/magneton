@@ -81,7 +81,7 @@ public class ControllerExceptionProcessor implements InitializingBean {
 	 * @throws UnsupportedOperationException if after {@code afterPropertiesSet} method.
 	 */
 	public void addExceptionProcessors(ExceptionProcessor exceptionProcessor) {
-		Preconditions.checkNotNull(exceptionProcessor, "exceptionProcessor must be not null");
+		Preconditions.checkNotNull(exceptionProcessor, "exceptionProcessor must not be null");
 		this.lock.lock();
 		try {
 			if (!this.exceptionProcessorsAddable.get()) {

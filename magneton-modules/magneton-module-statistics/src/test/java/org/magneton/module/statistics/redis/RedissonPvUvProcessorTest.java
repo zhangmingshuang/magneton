@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.magneton.adaptive.redis.RedissonAdapter;
+import org.magneton.module.statistics.pvpu.RedissonPvUvProcessor;
 
 /**
  * .
@@ -11,13 +12,13 @@ import org.magneton.adaptive.redis.RedissonAdapter;
  * @author zhangmsh 18/03/2022
  * @since 2.0.7
  */
-class RedissonStatisticsTest {
+class RedissonPvUvProcessorTest {
 
-	private static RedissonStatistics statistics;
+	private static RedissonPvUvProcessor statistics;
 
 	@BeforeAll
 	public static void init() {
-		statistics = new RedissonStatistics(RedissonAdapter.createSingleServerClient());
+		statistics = new RedissonPvUvProcessor(RedissonAdapter.createSingleServerClient());
 	}
 
 	@Test

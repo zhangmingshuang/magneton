@@ -2,7 +2,11 @@ package org.magneton.module.safedog;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.magneton.module.safedog.access.*;
+import org.magneton.module.safedog.access.Accessor;
+import org.magneton.module.safedog.access.AccessorFactory;
+import org.magneton.module.safedog.access.CachedAccessorContainer;
+import org.magneton.module.safedog.access.DefaultAccessTimeCalculator;
+import org.magneton.module.safedog.access.MemoryAccessorProcessor;
 
 /**
  * Biz test for {@link AccessorFactoryBuilder}
@@ -44,6 +48,7 @@ class AccessorFactoryBuilderTest {
 		Assertions.assertFalse(accessor.locked());
 
 		Assertions.assertDoesNotThrow(accessor::onError);
+
 	}
 
 }

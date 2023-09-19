@@ -1,9 +1,7 @@
 package org.magneton.spring.starter.modules;
 
-import org.magneton.module.statistics.Statistics;
-import org.magneton.module.statistics.redis.RedissonStatistics;
+import org.magneton.module.statistics.pvpu.RedissonPvUvProcessor;
 import org.redisson.api.RedissonClient;
-
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
@@ -22,7 +20,7 @@ public class StatisticsAutoConfiguration {
 	@Bean
 	@ConditionalOnMissingBean
 	public Statistics statistics(RedissonClient redissonClient) {
-		return new RedissonStatistics(redissonClient);
+		return new RedissonPvUvProcessor(redissonClient);
 	}
 
 }

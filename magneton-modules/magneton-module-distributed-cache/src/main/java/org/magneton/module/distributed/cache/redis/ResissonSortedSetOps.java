@@ -24,8 +24,8 @@ public class ResissonSortedSetOps extends AbstractRedissonOps implements SortedS
 
 	@Override
 	public <V> boolean add(String key, V value, double score) {
-		Preconditions.checkNotNull(key, "key must be not null");
-		Preconditions.checkNotNull(value, "value must be not null");
+		Preconditions.checkNotNull(key, "key must not be null");
+		Preconditions.checkNotNull(value, "value must not be null");
 
 		RScoredSortedSet<V> scoredSortedSet = this.redissonClient.getScoredSortedSet(key);
 		return scoredSortedSet.add(score, value);
@@ -33,8 +33,8 @@ public class ResissonSortedSetOps extends AbstractRedissonOps implements SortedS
 
 	@Override
 	public <V> int addAll(String key, Map<V, Double> values) {
-		Preconditions.checkNotNull(key, "key must be not null");
-		Preconditions.checkNotNull(values, "values must be not null");
+		Preconditions.checkNotNull(key, "key must not be null");
+		Preconditions.checkNotNull(values, "values must not be null");
 
 		RScoredSortedSet<V> scoredSortedSet = this.redissonClient.getScoredSortedSet(key);
 		return scoredSortedSet.addAll(values);
@@ -42,15 +42,14 @@ public class ResissonSortedSetOps extends AbstractRedissonOps implements SortedS
 
 	@Override
 	public <V> Collection<V> valueRange(String key, int startIndex, int endIndex) {
-		Preconditions.checkNotNull(key, "key must be not null");
-
+		Preconditions.checkNotNull(key, "key must not be null");
 		RScoredSortedSet<V> scoredSortedSet = this.redissonClient.getScoredSortedSet(key);
 		return scoredSortedSet.valueRange(startIndex, endIndex);
 	}
 
 	@Override
 	public <V> Collection<V> valueRangeReversed(String key, int startIndex, int endIndex) {
-		Preconditions.checkNotNull(key, "key must be not null");
+		Preconditions.checkNotNull(key, "key must not be null");
 
 		RScoredSortedSet<V> scoredSortedSet = this.redissonClient.getScoredSortedSet(key);
 		return scoredSortedSet.valueRangeReversed(startIndex, endIndex);
@@ -58,7 +57,7 @@ public class ResissonSortedSetOps extends AbstractRedissonOps implements SortedS
 
 	@Override
 	public <V> Map<V, Double> valueRangeWithScore(String key, int startIndex, int endIndex) {
-		Preconditions.checkNotNull(key, "key must be not null");
+		Preconditions.checkNotNull(key, "key must not be null");
 
 		RScoredSortedSet<V> scoredSortedSet = this.redissonClient.getScoredSortedSet(key);
 		Collection<ScoredEntry<V>> scoredEntries = scoredSortedSet.entryRange(startIndex, endIndex);
@@ -67,7 +66,7 @@ public class ResissonSortedSetOps extends AbstractRedissonOps implements SortedS
 
 	@Override
 	public <V> Map<V, Double> valueRangeReversedWithScore(String key, int startIndex, int endIndex) {
-		Preconditions.checkNotNull(key, "key must be not null");
+		Preconditions.checkNotNull(key, "key must not be null");
 
 		RScoredSortedSet<V> scoredSortedSet = this.redissonClient.getScoredSortedSet(key);
 		Collection<ScoredEntry<V>> scoredEntries = scoredSortedSet.entryRangeReversed(startIndex, endIndex);
@@ -77,7 +76,7 @@ public class ResissonSortedSetOps extends AbstractRedissonOps implements SortedS
 	@Override
 	public <V> Collection<V> valueRange(String key, double startScore, boolean startScoreInclusive, double endScore,
 			boolean endScoreInclusive) {
-		Preconditions.checkNotNull(key, "key must be not null");
+		Preconditions.checkNotNull(key, "key must not be null");
 
 		RScoredSortedSet<V> scoredSortedSet = this.redissonClient.getScoredSortedSet(key);
 		return scoredSortedSet.valueRange(startScore, startScoreInclusive, endScore, endScoreInclusive);
@@ -86,7 +85,7 @@ public class ResissonSortedSetOps extends AbstractRedissonOps implements SortedS
 	@Override
 	public <V> Collection<V> valueRangeReversed(String key, double startScore, boolean startScoreInclusive,
 			double endScore, boolean endScoreInclusive) {
-		Preconditions.checkNotNull(key, "key must be not null");
+		Preconditions.checkNotNull(key, "key must not be null");
 
 		RScoredSortedSet<V> scoredSortedSet = this.redissonClient.getScoredSortedSet(key);
 		return scoredSortedSet.valueRangeReversed(startScore, startScoreInclusive, endScore, endScoreInclusive);
@@ -95,7 +94,7 @@ public class ResissonSortedSetOps extends AbstractRedissonOps implements SortedS
 	@Override
 	public <V> Collection<V> valueRange(String key, double startScore, boolean startScoreInclusive, double endScore,
 			boolean endScoreInclusive, int offset, int count) {
-		Preconditions.checkNotNull(key, "key must be not null");
+		Preconditions.checkNotNull(key, "key must not be null");
 
 		RScoredSortedSet<V> scoredSortedSet = this.redissonClient.getScoredSortedSet(key);
 		return scoredSortedSet.valueRange(startScore, startScoreInclusive, endScore, endScoreInclusive, offset, count);
@@ -104,7 +103,7 @@ public class ResissonSortedSetOps extends AbstractRedissonOps implements SortedS
 	@Override
 	public <V> Collection<V> valueRangeReversed(String key, double startScore, boolean startScoreInclusive,
 			double endScore, boolean endScoreInclusive, int offset, int count) {
-		Preconditions.checkNotNull(key, "key must be not null");
+		Preconditions.checkNotNull(key, "key must not be null");
 
 		RScoredSortedSet<V> scoredSortedSet = this.redissonClient.getScoredSortedSet(key);
 		return scoredSortedSet.valueRangeReversed(startScore, startScoreInclusive, endScore, endScoreInclusive, offset,
@@ -114,7 +113,7 @@ public class ResissonSortedSetOps extends AbstractRedissonOps implements SortedS
 	@Override
 	public <V> Map<V, Double> valueRangeWithScore(String key, double startScore, boolean startScoreInclusive,
 			double endScore, boolean endScoreInclusive) {
-		Preconditions.checkNotNull(key, "key must be not null");
+		Preconditions.checkNotNull(key, "key must not be null");
 
 		RScoredSortedSet<V> scoredSortedSet = this.redissonClient.getScoredSortedSet(key);
 		Collection<ScoredEntry<V>> scoredEntries = scoredSortedSet.entryRange(startScore, startScoreInclusive, endScore,
@@ -125,7 +124,7 @@ public class ResissonSortedSetOps extends AbstractRedissonOps implements SortedS
 	@Override
 	public <V> Map<V, Double> valueRangeReversedWithScore(String key, double startScore, boolean startScoreInclusive,
 			double endScore, boolean endScoreInclusive) {
-		Preconditions.checkNotNull(key, "key must be not null");
+		Preconditions.checkNotNull(key, "key must not be null");
 
 		RScoredSortedSet<V> scoredSortedSet = this.redissonClient.getScoredSortedSet(key);
 		Collection<ScoredEntry<V>> scoredEntries = scoredSortedSet.entryRangeReversed(startScore, startScoreInclusive,
@@ -136,7 +135,7 @@ public class ResissonSortedSetOps extends AbstractRedissonOps implements SortedS
 	@Override
 	public <V> Map<V, Double> valueRangeWithScore(String key, double startScore, boolean startScoreInclusive,
 			double endScore, boolean endScoreInclusive, int offset, int count) {
-		Preconditions.checkNotNull(key, "key must be not null");
+		Preconditions.checkNotNull(key, "key must not be null");
 
 		RScoredSortedSet<V> scoredSortedSet = this.redissonClient.getScoredSortedSet(key);
 		Collection<ScoredEntry<V>> scoredEntries = scoredSortedSet.entryRange(startScore, startScoreInclusive, endScore,
@@ -147,7 +146,7 @@ public class ResissonSortedSetOps extends AbstractRedissonOps implements SortedS
 	@Override
 	public <V> Map<V, Double> valueRangeReversedWithScore(String key, double startScore, boolean startScoreInclusive,
 			double endScore, boolean endScoreInclusive, int offset, int count) {
-		Preconditions.checkNotNull(key, "key must be not null");
+		Preconditions.checkNotNull(key, "key must not be null");
 
 		RScoredSortedSet<V> scoredSortedSet = this.redissonClient.getScoredSortedSet(key);
 		Collection<ScoredEntry<V>> scoredEntries = scoredSortedSet.entryRangeReversed(startScore, startScoreInclusive,
@@ -157,8 +156,8 @@ public class ResissonSortedSetOps extends AbstractRedissonOps implements SortedS
 
 	@Override
 	public <V> List<Double> getScope(String key, List<V> values) {
-		Preconditions.checkNotNull(key, "key must be not null");
-		Preconditions.checkNotNull(values, "value must be not null");
+		Preconditions.checkNotNull(key, "key must not be null");
+		Preconditions.checkNotNull(values, "value must not be null");
 
 		RScoredSortedSet<V> scoredSortedSet = this.redissonClient.getScoredSortedSet(key);
 		return scoredSortedSet.getScore(values);
@@ -166,8 +165,8 @@ public class ResissonSortedSetOps extends AbstractRedissonOps implements SortedS
 
 	@Override
 	public <V> boolean remove(String key, V value) {
-		Preconditions.checkNotNull(key, "key must be not null");
-		Preconditions.checkNotNull(value, "value must be not null");
+		Preconditions.checkNotNull(key, "key must not be null");
+		Preconditions.checkNotNull(value, "value must not be null");
 
 		RScoredSortedSet<V> scoredSortedSet = this.redissonClient.getScoredSortedSet(key);
 		return scoredSortedSet.remove(value);
@@ -175,8 +174,8 @@ public class ResissonSortedSetOps extends AbstractRedissonOps implements SortedS
 
 	@Override
 	public <V> boolean remove(String key, Collection<V> values) {
-		Preconditions.checkNotNull(key, "key must be not null");
-		Preconditions.checkNotNull(values, "values must be not null");
+		Preconditions.checkNotNull(key, "key must not be null");
+		Preconditions.checkNotNull(values, "values must not be null");
 
 		RScoredSortedSet<V> scoredSortedSet = this.redissonClient.getScoredSortedSet(key);
 		return scoredSortedSet.removeAll(values);
@@ -184,7 +183,7 @@ public class ResissonSortedSetOps extends AbstractRedissonOps implements SortedS
 
 	@Override
 	public int removeRange(String key, int startIndex, int endIndex) {
-		Preconditions.checkNotNull(key, "key must be not null");
+		Preconditions.checkNotNull(key, "key must not be null");
 
 		RScoredSortedSet<Object> scoredSortedSet = this.redissonClient.getScoredSortedSet(key);
 		return scoredSortedSet.removeRangeByRank(startIndex, endIndex);
@@ -193,7 +192,7 @@ public class ResissonSortedSetOps extends AbstractRedissonOps implements SortedS
 	@Override
 	public int removeRangeWithScore(String key, double startScore, boolean startScoreInclusive, double endScore,
 			boolean endScoreInclusive) {
-		Preconditions.checkNotNull(key, "key must be not null");
+		Preconditions.checkNotNull(key, "key must not be null");
 
 		RScoredSortedSet<Object> scoredSortedSet = this.redissonClient.getScoredSortedSet(key);
 		return scoredSortedSet.removeRangeByScore(startScore, startScoreInclusive, endScore, endScoreInclusive);
