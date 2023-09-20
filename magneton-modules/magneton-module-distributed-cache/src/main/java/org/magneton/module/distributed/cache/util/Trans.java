@@ -1,16 +1,10 @@
 package org.magneton.module.distributed.cache.util;
 
 import com.google.common.collect.Lists;
+import org.magneton.foundation.MoreCollections;
+
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import org.magneton.foundation.collection.MoreCollections;
+import java.util.*;
 
 /**
  * .

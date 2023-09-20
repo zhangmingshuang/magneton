@@ -10,5 +10,10 @@
     </parent>
 
     <artifactId>magneton-module-monitor</artifactId>
+    <packaging>pom</packaging>
+    
+    <modules>
+        <module>magneton-module-monitor-core</module>
+    </modules>
 
 </project>

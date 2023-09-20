@@ -3,10 +3,10 @@ package org.magneton.foundation.exception;
 import com.google.common.base.Strings;
 
 /**
- * .
+ * 重复异常.
  *
  * @author zhangmsh
- * @since 2021/11/5
+ * @since 1.0.0
  */
 public class DuplicateFoundException extends RuntimeException {
 

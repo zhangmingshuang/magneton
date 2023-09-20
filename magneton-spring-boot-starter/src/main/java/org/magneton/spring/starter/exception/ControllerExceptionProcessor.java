@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.magneton.core.Result;
 import org.magneton.core.ResultException;
-import org.magneton.foundation.collection.MoreCollections;
+import org.magneton.foundation.MoreCollections;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -81,7 +81,7 @@ public class ControllerExceptionProcessor implements InitializingBean {
 	 * @throws UnsupportedOperationException if after {@code afterPropertiesSet} method.
 	 */
 	public void addExceptionProcessors(ExceptionProcessor exceptionProcessor) {
-		Preconditions.checkNotNull(exceptionProcessor, "exceptionProcessor must be not null");
+		Preconditions.checkNotNull(exceptionProcessor, "exceptionProcessor must not be null");
 		this.lock.lock();
 		try {
 			if (!this.exceptionProcessorsAddable.get()) {

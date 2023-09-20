@@ -1,22 +1,18 @@
 package org.magneton.adaptive.redis;
 
+import jdk.nashorn.internal.ir.annotations.Ignore;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.magneton.foundation.MoreReflection;
+import org.redisson.api.*;
+import org.redisson.config.ClusterServersConfig;
+import org.redisson.config.Config;
+
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
-
-import jdk.nashorn.internal.ir.annotations.Ignore;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-import org.magneton.foundation.reflect.MoreReflection;
-import org.redisson.api.RLock;
-import org.redisson.api.RRateLimiter;
-import org.redisson.api.RateIntervalUnit;
-import org.redisson.api.RateType;
-import org.redisson.api.RedissonClient;
-import org.redisson.config.ClusterServersConfig;
-import org.redisson.config.Config;
 
 /**
  * .

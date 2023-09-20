@@ -4,11 +4,11 @@ package org.magneton.core;
  * a {@code Response} process in a {@code Exception}.
  *
  * <p>
- * use to response a {@link Result} message with a {@code Expcetion} to interrupt the
+ * use to response a {@link Result} message with a {@code Exception} to interrupt the
  * process.
  *
  * <p>
- * this {@code ResponseException} should processing in a global expcetion advice.
+ * this {@code ResponseException} should be processing in a global exception advice.
  *
  * @author zhangmsh
  * @version 1.0.0
@@ -27,7 +27,7 @@ public class ResultException extends RuntimeException {
 		this.result = result;
 	}
 
-	public ResultException(ResultBody resultBody) {
+	public ResultException(ResultBody<?> resultBody) {
 		this(Result.valueOf(resultBody));
 	}
 

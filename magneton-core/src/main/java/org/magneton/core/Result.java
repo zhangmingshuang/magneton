@@ -103,7 +103,7 @@ public class Result<T> {
 	 * @return {@code Result} of response.
 	 */
 	public static <E> Result<E> valueOf(ResultBody<E> resultBody) {
-		Preconditions.checkNotNull(resultBody, "resultBody must be not null");
+		Preconditions.checkNotNull(resultBody, "resultBody must not be null");
 
 		E data = resultBody.data();
 		return valueOf(resultBody, data);
@@ -116,7 +116,7 @@ public class Result<T> {
 	}
 
 	public Result<T> code(String code) {
-		Preconditions.checkNotNull(code, "code must be not null");
+		Preconditions.checkNotNull(code, "code must not be null");
 
 		this.code = code;
 		this.success = this.isOkCode(code);
@@ -124,13 +124,13 @@ public class Result<T> {
 	}
 
 	public Result<T> message(String message) {
-		Preconditions.checkNotNull(message, "message must be not null");
+		Preconditions.checkNotNull(message, "message must not be null");
 		this.message = message;
 		return this;
 	}
 
 	public Result<T> message(String message, @Nullable Object... args) {
-		Preconditions.checkNotNull(message, "message must be not null");
+		Preconditions.checkNotNull(message, "message must not be null");
 		if (args == null || args.length < 1) {
 			this.message = message;
 		}

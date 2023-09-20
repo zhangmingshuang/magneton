@@ -1,7 +1,9 @@
 package org.magneton.foundation.exception;
 
 /**
- * @author zhangmsh 2022/5/18
+ * 创建目录异常.
+ *
+ * @author zhangmsh
  * @since 1.0.0
  */
 public class MkdirException extends RuntimeException {

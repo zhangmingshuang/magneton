@@ -2,14 +2,15 @@ package org.magneton.module.distributed.cache.ops;
 
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+import org.magneton.module.distributed.cache.Entry;
+
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import javax.annotation.Nullable;
-import org.magneton.module.distributed.cache.Entry;
 
 /**
- * .
+ * Hash Operations.
  *
  * @author zhangmsh 2021/6/25
  * @since 1.0.0

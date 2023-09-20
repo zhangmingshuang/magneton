@@ -1,12 +1,14 @@
 package org.magneton.module.distributed.cache.ops;
 
+import javax.annotation.Nullable;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import javax.annotation.Nullable;
 
 /**
+ * Sorted Set Operations.
+ *
  * @author zhangmsh 2022/5/21
  * @since 1.0.0
  */
@@ -98,6 +100,14 @@ public interface SortedSetOps {
 		return this.valueRangeWithScore(key, startScore, true, endScore, true);
 	}
 
+	/**
+	 * 获取范围内的数据, 倒序
+	 * @param key 集合名称
+	 * @param startScore 开始分数，包含的
+	 * @param endScore 结束分数，包含的
+	 * @param <V> V
+	 * @return 范围内的数据
+	 */
 	default <V> Map<V, Double> valueRangeReversedWithScore(String key, double startScore, double endScore) {
 		return this.valueRangeReversedWithScore(key, startScore, true, endScore, true);
 	}
@@ -115,6 +125,16 @@ public interface SortedSetOps {
 	<V> Collection<V> valueRange(String key, double startScore, boolean startScoreInclusive, double endScore,
 			boolean endScoreInclusive);
 
+	/**
+	 * 获取范围内的数据, 倒序
+	 * @param key 集合名称
+	 * @param startScore 开始分数
+	 * @param startScoreInclusive 是否包含开始分数
+	 * @param endScore 结束分数
+	 * @param endScoreInclusive 是否包含结束的分数
+	 * @param <V> V
+	 * @return 范围内的数据
+	 */
 	<V> Collection<V> valueRangeReversed(String key, double startScore, boolean startScoreInclusive, double endScore,
 			boolean endScoreInclusive);
 
@@ -131,6 +151,16 @@ public interface SortedSetOps {
 	<V> Map<V, Double> valueRangeWithScore(String key, double startScore, boolean startScoreInclusive, double endScore,
 			boolean endScoreInclusive);
 
+	/**
+	 * 获取范围内的数据, 倒序
+	 * @param key 集合名称
+	 * @param startScore 开始分数
+	 * @param startScoreInclusive 是否包含开始分数
+	 * @param endScore 结束分数
+	 * @param endScoreInclusive 是否包含结束的分数
+	 * @param <V> V
+	 * @return 范围内的数据
+	 */
 	<V> Map<V, Double> valueRangeReversedWithScore(String key, double startScore, boolean startScoreInclusive,
 			double endScore, boolean endScoreInclusive);
 

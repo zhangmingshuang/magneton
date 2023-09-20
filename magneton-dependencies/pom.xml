@@ -17,7 +17,6 @@
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!-- 工具 -->
-        <testable.version>0.7.5</testable.version>
         <commons-lang3.version>3.12.0</commons-lang3.version>
         <lombok.version>1.18.12</lombok.version>
         <junit.version>5.7.0</junit.version>
@@ -37,6 +36,7 @@
         <tomcat-embed-core.version>9.0.62</tomcat-embed-core.version>
         <cglib.version>3.3.0</cglib.version>
         <RoaringBitmap.version>0.9.32</RoaringBitmap.version>
+        <cron-utils.version>9.2.0</cron-utils.version>
         <!-- 框架 -->
         <spring-boot.version>2.3.4.RELEASE</spring-boot.version>
         <mybatis-spring-boot-starter.version>3.0.1</mybatis-spring-boot-starter.version>
@@ -92,11 +92,6 @@
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>${lombok.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.alibaba.testable</groupId>
-                <artifactId>testable-all</artifactId>
-                <version>${testable.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.alibaba</groupId>
