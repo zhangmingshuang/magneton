@@ -4,10 +4,11 @@ import org.magneton.core.Result;
 import org.magneton.module.sms.entity.SmsToken;
 
 /**
- * .
+ * 短信发送处理器.
  *
  * @author zhangmsh 16/03/2022
  * @since 2.0.7
+ * @see org.magneton.module.sms.process.aliyun.AbstractAliyunSmsProcessor
  */
 public interface SendProcessor {
 

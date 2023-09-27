@@ -21,8 +21,8 @@ import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
- * 阿里云验证码.
- *
+ * 阿里云验证码发送处理器.
+ * <p>
  * 详见： {@code https://next.api.aliyun.com/api/Dysmsapi/2017-05-25/SendSms}
  * {@code https://help.aliyun.com/document_detail/101346.html?spm=api-workbench.API%20Explorer.0.0.56e11e0f4Hu8Iw}
  *

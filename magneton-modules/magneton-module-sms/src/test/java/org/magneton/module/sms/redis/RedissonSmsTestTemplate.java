@@ -11,9 +11,9 @@ import org.magneton.module.sms.property.SmsProperty;
  * @author zhangmsh 2022/3/24
  * @since 1.0.0
  */
-class RedissonSmsTest {
+class RedissonSmsTestTemplate {
 
-	private static final RedissonSms SMS;
+	private static final RedissonSmsTemplate SMS;
 
 	private static final String MOBILE = "13860132592";
 
@@ -21,7 +21,8 @@ class RedissonSmsTest {
 
 	private static final SmsProperty SMS_PROPERTY = new SmsProperty();
 	static {
-		SMS = new RedissonSms(RedissonAdapter.createSingleServerClient(), new MockAliyunSendProcessor(), SMS_PROPERTY);
+		SMS = new RedissonSmsTemplate(RedissonAdapter.createSingleServerClient(), new MockAliyunSendProcessor(),
+				SMS_PROPERTY);
 	}
 
 	@BeforeEach

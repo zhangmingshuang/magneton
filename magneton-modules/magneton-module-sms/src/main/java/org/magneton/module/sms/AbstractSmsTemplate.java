@@ -13,28 +13,30 @@ import org.magneton.module.sms.property.SmsProperty;
  * @author zhangmsh 16/03/2022
  * @since 2.0.7
  */
-public abstract class AbstractSms implements Sms {
+public abstract class AbstractSmsTemplate implements SmsTemplate {
 
 	private final SendProcessor sendProcessor;
 
 	@Getter
 	private final SmsProperty smsProperty;
 
-	public AbstractSms(SendProcessor sendProcessor, SmsProperty smsProperty) {
-		this.sendProcessor = Preconditions.checkNotNull(sendProcessor);
-		this.smsProperty = Preconditions.checkNotNull(smsProperty);
+	public AbstractSmsTemplate(SendProcessor sendProcessor, SmsProperty smsProperty) {
+		this.sendProcessor = Preconditions.checkNotNull(sendProcessor, "sendProcessor must not be null");
+		this.smsProperty = Preconditions.checkNotNull(smsProperty, "smsProperty must not be null");
 	}
 
 	@Override
 	public boolean isMobile(String mobile) {
-		Preconditions.checkNotNull(mobile);
+		Preconditions.checkNotNull(mobile, "mobile must not be null");
+
 		return this.smsProperty.getMobileRegex().matcher(mobile).matches();
 	}
 
 	@Override
 	public Result<SendStatus> trySend(String mobile, String group) {
-		Preconditions.checkNotNull(mobile);
-		Preconditions.checkNotNull(group);
+		Preconditions.checkNotNull(mobile, "mobile must not be null");
+		Preconditions.checkNotNull(group, "group must not be null");
+
 		if (!this.isMobile(mobile)) {
 			return Result.failWith(SendStatus.FAILURE, "手机号正则匹配错误");
 		}
@@ -43,12 +45,14 @@ public abstract class AbstractSms implements Sms {
 				&& !this.sendGapOpinion(mobile, this.smsProperty.getSendGapSeconds())) {
 			return Result.failWith(SendStatus.SEND_GAP, "两次发送时间间隔太短");
 		}
+
 		// 分组风控处理
 		boolean isGroupRisk = this.smsProperty.isGroupRisk();
 		if (isGroupRisk && !this.groupRiskOpinion(group, this.smsProperty.getGroupRiskCount(),
 				this.smsProperty.getGroupRiskInSeconds())) {
 			return Result.failWith(SendStatus.RISK, "分组存在风险");
 		}
+
 		// 手机风控处理
 		// boolean isValidErrorCount = this.smsProperty.getValidErrorCount() > 0;
 		// if (isValidErrorCount && !this.temporarilyDisableOpinion(mobile,
@@ -56,16 +60,19 @@ public abstract class AbstractSms implements Sms {
 		// this.smsProperty.getValidErrorInSeconds())) {
 		// return Consequences.fail(SendStatus.TEMPORARILY_DISABLE, "手机号存在风险");
 		// }
+
 		// 次数上限判断
-		if (!this.mobileCountCapsOpinion(mobile, this.smsProperty.getDayCount(), this.smsProperty.getHourCount())) {
+		if (!this.mobileCountCapsOpinion(mobile, this.smsProperty.getDayLimit(), this.smsProperty.getHourLimit())) {
 			return Result.failWith(SendStatus.COUNT_CAPS, "发送次数达到上限");
 		}
+
 		return this.send(mobile);
 	}
 
 	@Override
 	public Result<SendStatus> send(String mobile) {
-		Preconditions.checkNotNull(mobile);
+		Preconditions.checkNotNull(mobile, "mobile must not be null");
+
 		Result<SmsToken> sendResponse = this.getSendProcessor().send(mobile);
 		if (sendResponse.isSuccess()) {
 			this.mobileSendSuccess(mobile, sendResponse.getData());

@@ -4,13 +4,7 @@ import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
-import java.time.Duration;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.concurrent.TimeUnit;
-import javax.annotation.Nullable;
-import org.magneton.module.sms.AbstractSms;
+import org.magneton.module.sms.AbstractSmsTemplate;
 import org.magneton.module.sms.entity.SmsToken;
 import org.magneton.module.sms.process.SendProcessor;
 import org.magneton.module.sms.property.SmsProperty;
@@ -18,19 +12,26 @@ import org.redisson.api.RAtomicLong;
 import org.redisson.api.RBucket;
 import org.redisson.api.RedissonClient;
 
+import javax.annotation.Nullable;
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.concurrent.TimeUnit;
+
 /**
- * .
+ * 基于Redisson的短信服务.
  *
  * @author zhangmsh 16/03/2022
  * @since 2.0.7
  */
-public class RedissonSms extends AbstractSms {
+public class RedissonSmsTemplate extends AbstractSmsTemplate {
 
 	private static final String KEY = "magneton:m:sms";
 
 	private final RedissonClient redissonClient;
 
-	public RedissonSms(RedissonClient redissonClient, SendProcessor sendProcessor, SmsProperty smsProperty) {
+	public RedissonSmsTemplate(RedissonClient redissonClient, SendProcessor sendProcessor, SmsProperty smsProperty) {
 		super(sendProcessor, smsProperty);
 		this.redissonClient = Preconditions.checkNotNull(redissonClient);
 	}
@@ -185,6 +186,8 @@ public class RedissonSms extends AbstractSms {
 			this.getTokenTokenCache(token).delete();
 		}
 	}
+
+	// ------------- cache provider -------------
 
 	private RAtomicLong getDayCache(String mobile) {
 		return this.redissonClient.getAtomicLong(KEY + ":day:" + mobile);

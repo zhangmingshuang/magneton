@@ -10,7 +10,7 @@ import javax.annotation.Nullable;
  * @author zhangmsh 16/03/2022
  * @since 2.0.7
  */
-public interface Sms {
+public interface SmsTemplate {
 
 	String DEFAULT_GROUP = "default";
 

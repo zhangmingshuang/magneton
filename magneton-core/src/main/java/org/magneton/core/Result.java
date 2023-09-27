@@ -109,6 +109,16 @@ public class Result<T> {
 		return valueOf(resultBody, data);
 	}
 
+	public static <E> Result<E> valueOf(String code, String message, Object... args) {
+		Result<E> result = new Result<>();
+		return result.code(code).message(message, args).timestamp(System.currentTimeMillis());
+	}
+
+	public static <E> Result<E> valueOf(E data, String code, String message, Object... args) {
+		Result<E> result = new Result<>();
+		return result.code(code).message(message, args).data(data).timestamp(System.currentTimeMillis());
+	}
+
 	private static <E> Result<E> valueOf(ResultBody<E> resultBody, E data) {
 		Result<E> result = new Result<>();
 		String message = resultBody.message();
