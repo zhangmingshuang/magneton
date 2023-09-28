@@ -85,13 +85,16 @@ public class MonitorSenders {
 			}
 			for (MonitorSender sender : this.senders) {
 				try {
-					sender.send(module);
+					if (sender.send(module)) {
+						this.postSend(sender, module);
+						break;
+					}
 				}
 				catch (Exception e) {
 					log.error(String.format("send module:%s error.", module), e);
 				}
 			}
-			this.postSend(module);
+			this.afterSend(module);
 			// todo remove会影响使用者自定义的调用方法之前的数据
 			MonitorContext.remove();
 		}
@@ -108,8 +111,12 @@ public class MonitorSenders {
 		return MonitorProcessors.getInstance().preSend(module);
 	}
 
-	protected void postSend(Module module) {
-		MonitorProcessors.getInstance().postSend(module);
+	protected void postSend(MonitorSender sender, Module module) {
+		MonitorProcessors.getInstance().postSend(sender, module);
+	}
+
+	private void afterSend(Module module) {
+		MonitorProcessors.getInstance().afterSend(module);
 	}
 
 }
