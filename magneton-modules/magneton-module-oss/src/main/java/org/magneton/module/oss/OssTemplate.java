@@ -1,8 +1,9 @@
 package org.magneton.module.oss;
 
 import com.google.common.base.Preconditions;
-import java.io.File;
+
 import javax.annotation.Nullable;
+import java.io.File;
 
 /**
  * .
@@ -10,7 +11,7 @@ import javax.annotation.Nullable;
  * @author zhangmsh 25/03/2022
  * @since 2.0.7
  */
-public interface Oss<Sts> {
+public interface OssTemplate<Sts> {
 
 	/**
 	 * 简单上传

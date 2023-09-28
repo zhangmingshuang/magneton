@@ -8,7 +8,7 @@ import javax.annotation.Nullable;
  * @author zhangmsh 25/03/2022
  * @since 2.0.7
  */
-public interface StsOss<Sts> extends Oss<Sts> {
+public interface StsOssTemplate<Sts> extends OssTemplate<Sts> {
 
 	/**
 	 * 获取STS授权

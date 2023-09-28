@@ -35,6 +35,7 @@ public interface SmsTemplate {
 
 	/**
 	 * 发送短信
+	 * @apiNote 与{@link #trySend(String)}不同的是，此方法不会进行任何风控处理，直接发送短信。
 	 * @param mobile 手机号
 	 * @return 发送状态
 	 */
@@ -45,7 +46,7 @@ public interface SmsTemplate {
 	 * @param mobile 手机号
 	 * @return 下次可以发送短信的时间间隔，单位秒。
 	 */
-	long ttl(String mobile);
+	long nextTime(String mobile);
 
 	/**
 	 * 剩余可错误次数
@@ -54,9 +55,14 @@ public interface SmsTemplate {
 	 */
 	long remainErrors(String mobile);
 
+	/**
+	 * 获取最后发送成功的Token
+	 * @param mobile 手机号
+	 * @return 最后发送成功的Token，如果Token不存在或者已经过期，则返回 {@code null}
+	 */
 	@Nullable
-	default String token(String mobile) {
-		return this.token(mobile, DEFAULT_GROUP);
+	default String getToken(String mobile) {
+		return this.getToken(mobile, DEFAULT_GROUP);
 	}
 
 	/**
@@ -66,7 +72,7 @@ public interface SmsTemplate {
 	 * @return 最后发送成功的Token，如果Token不存在或者已经过期，则返回 {@code null}
 	 */
 	@Nullable
-	String token(String mobile, String group);
+	String getToken(String mobile, String group);
 
 	/**
 	 * 校验

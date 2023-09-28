@@ -51,7 +51,7 @@ public class RedissonSmsTemplate extends AbstractSmsTemplate {
 	}
 
 	@Override
-	public long ttl(String mobile) {
+	public long nextTime(String mobile) {
 		RBucket<Long> gapBucket = this.getGapCache(mobile);
 		long remainTimeToLive = gapBucket.remainTimeToLive();
 		if (remainTimeToLive == -1) {
@@ -78,7 +78,7 @@ public class RedissonSmsTemplate extends AbstractSmsTemplate {
 
 	@Nullable
 	@Override
-	public String token(String mobile, String group) {
+	public String getToken(String mobile, String group) {
 		return this.getTokenMobileCache(Preconditions.checkNotNull(mobile)).get();
 	}
 

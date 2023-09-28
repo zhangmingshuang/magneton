@@ -38,7 +38,7 @@ class RedissonSmsTestTemplate {
 			long remainError = SMS.remainErrors(MOBILE);
 			Assertions.assertEquals(SMS_PROPERTY.getValidErrorCount(), remainError);
 			SMS.send(MOBILE);
-			token = SMS.token(MOBILE);
+			token = SMS.getToken(MOBILE);
 			SMS.validate(token, MOBILE, "errorCode");
 			remainError = SMS.remainErrors(MOBILE);
 			Assertions.assertEquals(4, remainError);

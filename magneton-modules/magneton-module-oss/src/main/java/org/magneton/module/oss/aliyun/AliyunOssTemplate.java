@@ -16,15 +16,16 @@ import com.google.common.base.Strings;
 import com.google.common.base.Verify;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
+import lombok.extern.slf4j.Slf4j;
+import org.magneton.module.oss.StsOssTemplate;
+
+import javax.annotation.Nullable;
 import java.io.File;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.concurrent.ExecutionException;
-import javax.annotation.Nullable;
-import lombok.extern.slf4j.Slf4j;
-import org.magneton.module.oss.StsOss;
 
 /**
  * .
@@ -34,7 +35,7 @@ import org.magneton.module.oss.StsOss;
  */
 @Slf4j
 @SuppressWarnings("SynchronizeOnThis")
-public class AliyunOss implements StsOss<AliyunOssSts> {
+public class AliyunOssTemplate implements StsOssTemplate<AliyunOssSts> {
 
 	private static final AliyunOssSts NIL_STS_RES = new AliyunOssSts();
 
@@ -44,7 +45,7 @@ public class AliyunOss implements StsOss<AliyunOssSts> {
 
 	private Cache<String, AliyunOssSts> stsCache;
 
-	public AliyunOss(AliyunOssConfig aliyunOssConfig) {
+	public AliyunOssTemplate(AliyunOssConfig aliyunOssConfig) {
 		this.aliyunOssConfig = aliyunOssConfig;
 		this.stsCache = CacheBuilder.newBuilder()
 				.expireAfterWrite(Duration.ofSeconds(aliyunOssConfig.getStsDurationSeconds())).maximumSize(1024)
@@ -53,7 +54,7 @@ public class AliyunOss implements StsOss<AliyunOssSts> {
 
 	protected DefaultAcsClient getClient() {
 		if (this.defaultAcsClient == null) {
-			synchronized (AliyunOss.class) {
+			synchronized (AliyunOssTemplate.class) {
 				if (this.defaultAcsClient == null) {
 					String endpoint = this.aliyunOssConfig.getEndpoint();
 					DefaultProfile.addEndpoint("", "Sts", endpoint);

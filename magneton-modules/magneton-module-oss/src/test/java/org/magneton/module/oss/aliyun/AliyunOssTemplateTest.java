@@ -1,19 +1,20 @@
 package org.magneton.module.oss.aliyun;
 
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 
 /**
  * @author zhangmsh 2022/3/25
  * @since 1.0.0
  */
-class AliyunOssTest {
+class AliyunOssTemplateTest {
 
 	@Test
 	void testTime() {
@@ -29,7 +30,7 @@ class AliyunOssTest {
 	@Test
 	void sts() {
 		AliyunOssConfig property = new AliyunOssConfig();
-		AliyunOss aliyunOss = new MockAliyunOss(property);
+		AliyunOssTemplate aliyunOss = new MockAliyunOssTemplate(property);
 		AliyunOssSts test = aliyunOss.sts("lookersci");
 		Assertions.assertNotNull(test);
 		System.out.println(test);
@@ -39,7 +40,7 @@ class AliyunOssTest {
 	void putObject() {
 		AliyunOssConfig property = new AliyunOssConfig();
 		property.setDefaultBucket("defaultBucket");
-		AliyunOss aliyunOss = new MockAliyunOss(property);
+		AliyunOssTemplate aliyunOss = new MockAliyunOssTemplate(property);
 		AliyunOssSts sts = aliyunOss.sts(null);
 
 		System.out.println("======== sts ==========");
@@ -55,7 +56,7 @@ class AliyunOssTest {
 		AliyunOssConfig property = new AliyunOssConfig();
 		property.setDefaultBucket("test");
 		property.setEndpoint("endpoint");
-		AliyunOss aliyunOss = new MockAliyunOss(property);
+		AliyunOssTemplate aliyunOss = new MockAliyunOssTemplate(property);
 		String url = aliyunOss.urlAmend("http://test.endpoint/test/a/b/1.png");
 		Assertions.assertEquals("/test/a/b/1.png", url);
 	}
@@ -65,7 +66,7 @@ class AliyunOssTest {
 		AliyunOssConfig property = new AliyunOssConfig();
 		property.setDefaultBucket("test");
 		property.setEndpoint("endpoint");
-		AliyunOss aliyunOss = new MockAliyunOss(property);
+		AliyunOssTemplate aliyunOss = new MockAliyunOssTemplate(property);
 		String url = aliyunOss.getUrl("/test/a/b/1.png");
 		Assertions.assertEquals("https://test.endpoint/test/a/b/1.png", url);
 	}

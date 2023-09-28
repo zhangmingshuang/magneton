@@ -81,9 +81,6 @@ public abstract class AbstractSmsTemplate implements SmsTemplate {
 		return Result.failWith(SendStatus.FAILURE, "短信发送失败");
 	}
 
-	// protected abstract boolean temporarilyDisableOpinion(String mobile, int
-	// validErrorCount, int validErrorInSeconds);
-
 	/**
 	 * 发送统计
 	 * @param mobile 手机号

@@ -17,7 +17,7 @@ import org.magneton.module.sms.redis.RedissonSmsTemplate;
  * @author zhangmsh 18/03/2022
  * @since 2.0.7
  */
-class AbstractAliyunSmsProcessorTestTemplate {
+class AbstractAliyunSmsProcessorTemplateTest {
 
 	private static SmsTemplate smsTemplate;
 
@@ -34,16 +34,16 @@ class AbstractAliyunSmsProcessorTestTemplate {
 		Result<SendStatus> response = smsTemplate.trySend(mobile);
 		Assertions.assertTrue(response.isSuccess());
 
-		long ttl = smsTemplate.ttl(mobile);
+		long ttl = smsTemplate.nextTime(mobile);
 		Assertions.assertTrue(ttl > 0, String.valueOf(ttl));
 
-		String token = smsTemplate.token(mobile);
+		String token = smsTemplate.getToken(mobile);
 		Assertions.assertNotNull(token);
 
-		boolean error = smsTemplate.validate(token, mobile, "error");
-		Assertions.assertFalse(error);
+		boolean success = smsTemplate.validate(token, mobile, "error");
+		Assertions.assertFalse(success);
 
-		boolean success = smsTemplate.validate(token, mobile, "123456");
+		success = smsTemplate.validate(token, mobile, "123456");
 		Assertions.assertTrue(success);
 	}
 
