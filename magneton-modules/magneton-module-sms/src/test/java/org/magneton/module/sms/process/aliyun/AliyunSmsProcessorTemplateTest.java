@@ -17,7 +17,7 @@ import org.magneton.module.sms.redis.RedissonSmsTemplate;
  * @author zhangmsh 18/03/2022
  * @since 2.0.7
  */
-class AbstractAliyunSmsProcessorTemplateTest {
+class AliyunSmsProcessorTemplateTest {
 
 	private static SmsTemplate smsTemplate;
 

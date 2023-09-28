@@ -37,7 +37,7 @@ public class RedissonSmsTemplate extends AbstractSmsTemplate {
 	}
 
 	@Override
-	protected boolean sendGapOpinion(String mobile, int sendGapSeconds) {
+	protected boolean isAllowSendInGap(String mobile, int sendGapSeconds) {
 		if (sendGapSeconds < 1) {
 			return true;
 		}
@@ -67,7 +67,7 @@ public class RedissonSmsTemplate extends AbstractSmsTemplate {
 	}
 
 	@Override
-	protected void mobileSendSuccess(String mobile, SmsToken smsToken) {
+	protected void onSendSuccess(String mobile, SmsToken smsToken) {
 		String token = Preconditions.checkNotNull(smsToken.getToken());
 		CacheToken cacheToken = new CacheToken().setMobile(Preconditions.checkNotNull(mobile))
 				.setCode(Preconditions.checkNotNull(smsToken.getCode())).setTime(System.currentTimeMillis());
@@ -132,7 +132,7 @@ public class RedissonSmsTemplate extends AbstractSmsTemplate {
 	}
 
 	@Override
-	protected boolean groupRiskOpinion(String group, int groupRiskCount, int groupRiskInSeconds) {
+	protected boolean isAllowSendByGroup(String group, int groupRiskCount, int groupRiskInSeconds) {
 		if (groupRiskCount < 1 || groupRiskInSeconds < 1) {
 			return true;
 		}
@@ -145,7 +145,7 @@ public class RedissonSmsTemplate extends AbstractSmsTemplate {
 	}
 
 	@Override
-	protected boolean mobileCountCapsOpinion(String mobile, int dayCount, int hourCount) {
+	protected boolean isAllowSendAtHour(String mobile, int hourCount) {
 		if (hourCount > 0) {
 			RAtomicLong hourAtomic = this.getHourCache(mobile);
 			long currentHourCount = hourAtomic.incrementAndGet();
@@ -156,6 +156,11 @@ public class RedissonSmsTemplate extends AbstractSmsTemplate {
 				return false;
 			}
 		}
+		return true;
+	}
+
+	@Override
+	protected boolean isAllowSendAtToday(String mobile, int dayCount) {
 		if (dayCount > 0) {
 			RAtomicLong dayAtomic = this.getDayCache(mobile);
 			long currentDayCount = dayAtomic.incrementAndGet();

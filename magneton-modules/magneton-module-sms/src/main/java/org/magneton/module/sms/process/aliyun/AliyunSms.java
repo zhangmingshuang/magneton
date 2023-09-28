@@ -1,11 +1,12 @@
 package org.magneton.module.sms.process.aliyun;
 
 import com.google.common.base.Preconditions;
-import java.util.Map;
-import javax.annotation.Nullable;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+
+import javax.annotation.Nullable;
+import java.util.Map;
 
 /**
  * .
@@ -16,7 +17,7 @@ import lombok.ToString;
 @Setter
 @Getter
 @ToString
-public class AliyunSmsTemplate {
+public class AliyunSms {
 
 	/**
 	 * 验证码
@@ -29,8 +30,8 @@ public class AliyunSmsTemplate {
 	@Nullable
 	private Map<String, String> addition;
 
-	public AliyunSmsTemplate(String code) {
-		this.code = Preconditions.checkNotNull(code);
+	public AliyunSms(String code) {
+		this.code = Preconditions.checkNotNull(code, "code must not be null");
 	}
 
 }

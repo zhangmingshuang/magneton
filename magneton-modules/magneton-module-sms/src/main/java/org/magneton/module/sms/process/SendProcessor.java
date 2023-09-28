@@ -2,13 +2,14 @@ package org.magneton.module.sms.process;
 
 import org.magneton.core.Result;
 import org.magneton.module.sms.entity.SmsToken;
+import org.magneton.module.sms.process.aliyun.AliyunSmsProcessor;
 
 /**
  * 短信发送处理器.
  *
  * @author zhangmsh 16/03/2022
  * @since 2.0.7
- * @see org.magneton.module.sms.process.aliyun.AbstractAliyunSmsProcessor
+ * @see AliyunSmsProcessor
  */
 public interface SendProcessor {
 

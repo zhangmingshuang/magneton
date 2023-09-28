@@ -30,15 +30,14 @@ import java.util.concurrent.ThreadLocalRandom;
  * @since 2.0.7
  */
 @Slf4j
-public abstract class AbstractAliyunSmsProcessor implements SendProcessor {
+@Getter
+public class AliyunSmsProcessor implements SendProcessor {
 
-	@Getter
 	private final AliyunSmsProperty aliyunSmsProperty;
 
-	@Getter
 	private Client client;
 
-	public AbstractAliyunSmsProcessor(AliyunSmsProperty aliyunSmsProperty) {
+	public AliyunSmsProcessor(AliyunSmsProperty aliyunSmsProperty) {
 		this.aliyunSmsProperty = aliyunSmsProperty;
 		this.init();
 	}
@@ -61,15 +60,14 @@ public abstract class AbstractAliyunSmsProcessor implements SendProcessor {
 	@Override
 	public Result<SmsToken> send(String mobile) {
 		try {
-			AliyunSmsTemplate aliyunSmsTemplate = this.createTemplate(mobile,
-					this.getAliyunSmsProperty().getTemplateCode());
-			SendSmsRequest sendSmsRequest = this.createSendSmsRequest(mobile, aliyunSmsTemplate);
+			AliyunSms aliyunSms = this.createTemplate(mobile, this.getAliyunSmsProperty().getTemplateCode());
+			SendSmsRequest sendSmsRequest = this.createSendSmsRequest(mobile, aliyunSms);
 			SendSmsResponse sendSmsResponse = this.doSend(sendSmsRequest);
 			if (log.isDebugEnabled()) {
 				log.debug("send to {}, response: {}", mobile, sendSmsResponse);
 			}
 			SendSmsResponseBody body = sendSmsResponse.getBody();
-			return this.doSendResponseProcess(aliyunSmsTemplate.getCode(), sendSmsResponse,
+			return this.doSendResponseProcess(aliyunSms.getCode(), sendSmsResponse,
 					"ok".equalsIgnoreCase(body.getCode()));
 		}
 		catch (Exception e) {
@@ -96,8 +94,8 @@ public abstract class AbstractAliyunSmsProcessor implements SendProcessor {
 		return Result.fail();
 	}
 
-	protected AliyunSmsTemplate createTemplate(String mobile, String templateCode) {
-		return new AliyunSmsTemplate(String.valueOf(ThreadLocalRandom.current().nextInt(1000, 9999)));
+	protected AliyunSms createTemplate(String mobile, String templateCode) {
+		return new AliyunSms(String.valueOf(ThreadLocalRandom.current().nextInt(1000, 9999)));
 	}
 
 	/**
@@ -109,16 +107,16 @@ public abstract class AbstractAliyunSmsProcessor implements SendProcessor {
 		log.error(Strings.lenientFormat("send sms %s error", mobile), e);
 	}
 
-	protected SendSmsRequest createSendSmsRequest(String mobile, AliyunSmsTemplate aliyunSmsTemplate) {
-		String templateParam = this.templateParamAmend(aliyunSmsTemplate, this.aliyunSmsProperty.getTemplateCode());
+	protected SendSmsRequest createSendSmsRequest(String mobile, AliyunSms aliyunSms) {
+		String templateParam = this.templateParamAmend(aliyunSms, this.aliyunSmsProperty.getTemplateCode());
 		return new SendSmsRequest().setSignName(this.aliyunSmsProperty.getSignName())
 				.setTemplateCode(this.aliyunSmsProperty.getTemplateCode()).setPhoneNumbers(mobile)
 				.setTemplateParam(templateParam);
 	}
 
-	protected String templateParamAmend(AliyunSmsTemplate aliyunSmsTemplate, String templateCode) {
-		String code = Preconditions.checkNotNull(aliyunSmsTemplate.getCode());
-		Map<String, String> addition = aliyunSmsTemplate.getAddition();
+	protected String templateParamAmend(AliyunSms aliyunSms, String templateCode) {
+		String code = Preconditions.checkNotNull(aliyunSms.getCode());
+		Map<String, String> addition = aliyunSms.getAddition();
 		if (addition == null) {
 			addition = Maps.newHashMapWithExpectedSize(1);
 		}

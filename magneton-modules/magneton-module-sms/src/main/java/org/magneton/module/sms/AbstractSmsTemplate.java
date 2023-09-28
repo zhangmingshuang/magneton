@@ -4,6 +4,8 @@ import com.google.common.base.Preconditions;
 import lombok.Getter;
 import org.magneton.core.Result;
 import org.magneton.module.sms.entity.SmsToken;
+import org.magneton.module.sms.monitor.FailureType;
+import org.magneton.module.sms.monitor.SmsMonitors;
 import org.magneton.module.sms.process.SendProcessor;
 import org.magneton.module.sms.property.SmsProperty;
 
@@ -38,18 +40,21 @@ public abstract class AbstractSmsTemplate implements SmsTemplate {
 		Preconditions.checkNotNull(group, "group must not be null");
 
 		if (!this.isMobile(mobile)) {
+			SmsMonitors.notifier().onFailure(mobile, FailureType.MOBILE_REGEX);
 			return Result.failWith(SendStatus.FAILURE, "手机号正则匹配错误");
 		}
 		// 是否发送冷却时间内
 		if (this.smsProperty.getSendGapSeconds() > 0
-				&& !this.sendGapOpinion(mobile, this.smsProperty.getSendGapSeconds())) {
+				&& !this.isAllowSendInGap(mobile, this.smsProperty.getSendGapSeconds())) {
+			SmsMonitors.notifier().onFailure(mobile, FailureType.SEND_GAP);
 			return Result.failWith(SendStatus.SEND_GAP, "两次发送时间间隔太短");
 		}
 
 		// 分组风控处理
 		boolean isGroupRisk = this.smsProperty.isGroupRisk();
-		if (isGroupRisk && !this.groupRiskOpinion(group, this.smsProperty.getGroupRiskCount(),
+		if (isGroupRisk && !this.isAllowSendByGroup(group, this.smsProperty.getGroupRiskCount(),
 				this.smsProperty.getGroupRiskInSeconds())) {
+			SmsMonitors.notifier().onFailure(mobile, FailureType.GROUP_RISK);
 			return Result.failWith(SendStatus.RISK, "分组存在风险");
 		}
 
@@ -62,8 +67,14 @@ public abstract class AbstractSmsTemplate implements SmsTemplate {
 		// }
 
 		// 次数上限判断
-		if (!this.mobileCountCapsOpinion(mobile, this.smsProperty.getDayLimit(), this.smsProperty.getHourLimit())) {
+		if (!this.isAllowSendAtToday(mobile, this.smsProperty.getDayLimit())) {
+			SmsMonitors.notifier().onFailure(mobile, FailureType.DAY_COUNT_CAPS);
 			return Result.failWith(SendStatus.COUNT_CAPS, "发送次数达到上限");
+		}
+		if (!this.isAllowSendAtHour(mobile, this.smsProperty.getHourLimit())) {
+			SmsMonitors.notifier().onFailure(mobile, FailureType.HOUR_COUNT_CAPS);
+			return Result.failWith(SendStatus.COUNT_CAPS, "发送次数达到上限");
+
 		}
 
 		return this.send(mobile);
@@ -75,45 +86,57 @@ public abstract class AbstractSmsTemplate implements SmsTemplate {
 
 		Result<SmsToken> sendResponse = this.getSendProcessor().send(mobile);
 		if (sendResponse.isSuccess()) {
-			this.mobileSendSuccess(mobile, sendResponse.getData());
+			this.onSendSuccess(mobile, sendResponse.getData());
+			SmsMonitors.notifier().onSuccess(mobile);
 			return Result.successWith(SendStatus.SUCCESS, "短信发送成功");
 		}
 		return Result.failWith(SendStatus.FAILURE, "短信发送失败");
 	}
 
 	/**
-	 * 发送统计
+	 * 发送成功后的处理
 	 * @param mobile 手机号
 	 * @param smsToken 此次发送成功的对应Token
 	 */
-	protected abstract void mobileSendSuccess(String mobile, SmsToken smsToken);
+	protected abstract void onSendSuccess(String mobile, SmsToken smsToken);
 
 	/**
-	 * 判断是否在发送冷却时间间隔内
+	 * 判断是否在间隔内允许发送
 	 * @param mobile 手机号
 	 * @param sendGapSeconds 时间间隔
-	 * @return 是否在冷却时间间隔内
+	 * @return 是否允许发送
 	 */
-	protected abstract boolean sendGapOpinion(String mobile, int sendGapSeconds);
+	protected abstract boolean isAllowSendInGap(String mobile, int sendGapSeconds);
 
 	/**
-	 * 判断分组是否有风险
+	 * 判断分组允许发送
 	 * @param group 分组
 	 * @param groupRiskCount 分组风控值，即单分组超过该值表示风控
 	 * @param groupRiskInSeconds 在多少秒内表示是有风险的统计
-	 * @return 是否有风险
+	 * @return 是否允许发送
 	 */
-	protected abstract boolean groupRiskOpinion(String group, int groupRiskCount, int groupRiskInSeconds);
+	protected abstract boolean isAllowSendByGroup(String group, int groupRiskCount, int groupRiskInSeconds);
 
 	/**
-	 * 判断手机号是否达到发送上限
+	 * 判断手机号在今天是否允许发送
 	 * @param mobile 手机号
 	 * @param dayCount 一天限制
-	 * @param hourCount 一小时限制
-	 * @return 是否上限
+	 * @return 是否允许发送
 	 */
-	protected abstract boolean mobileCountCapsOpinion(String mobile, int dayCount, int hourCount);
+	protected abstract boolean isAllowSendAtToday(String mobile, int dayCount);
 
+	/**
+	 * 判断手机号在一小时内是否允许发送
+	 * @param mobile 手机号
+	 * @param hourCount 一小时限制
+	 * @return 是否允许发送
+	 */
+	protected abstract boolean isAllowSendAtHour(String mobile, int hourCount);
+
+	/**
+	 * 获取发送处理器
+	 * @return 发送处理器
+	 */
 	protected SendProcessor getSendProcessor() {
 		return this.sendProcessor;
 	}
