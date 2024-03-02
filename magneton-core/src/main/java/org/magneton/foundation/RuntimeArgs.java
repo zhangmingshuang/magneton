@@ -29,13 +29,13 @@ import javax.annotation.Nullable;
  * @since 2.0.8
  */
 @ToString
-public class Arg implements Operable, Operation {
+public class RuntimeArgs implements Operable, Operation {
 
 	private String value;
 
 	private Getter getter;
 
-	private Arg(Getter getter) {
+	private RuntimeArgs(Getter getter) {
 		this.getter = Preconditions.checkNotNull(getter, "getter");
 	}
 
@@ -68,7 +68,7 @@ public class Arg implements Operable, Operation {
 	}
 
 	public static Operable from(Getter getter) {
-		return new Arg(getter);
+		return new RuntimeArgs(getter);
 	}
 
 	public static Operation env(String arg) {

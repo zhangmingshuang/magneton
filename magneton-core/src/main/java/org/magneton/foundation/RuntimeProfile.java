@@ -24,7 +24,7 @@ import lombok.extern.slf4j.Slf4j;
  * @since 1.0.2
  */
 @Slf4j
-public class Env {
+public class RuntimeProfile {
 
 	/**
 	 * 配置的PROFILE环境变量
@@ -42,12 +42,12 @@ public class Env {
 	 * @return 当前有效的profile
 	 */
 	public static String getEffectiveProfile() {
-		String profile = Arg.sys(PROFILE_KEY).get();
+		String profile = RuntimeArgs.sys(PROFILE_KEY).get();
 		log.info("get profile from env PROFILE = {}", profile);
 		if (Strings.isNullOrEmpty(profile)) {
 			// fix: 兼容旧的项目PROFILE配置
 			log.warn("get PROFILE from env but not found, try get SPRING_PROFILES_ACTIVE from env...");
-			profile = Arg.sys(SPRING_PROFILES_ACTIVE_KEY).get();
+			profile = RuntimeArgs.sys(SPRING_PROFILES_ACTIVE_KEY).get();
 			if (!Strings.isNullOrEmpty(profile)) {
 				log.info("using profile from SPRING_PROFILES_ACTIVE = {}", profile);
 			}
@@ -68,7 +68,7 @@ public class Env {
 	 */
 	public static String getEffectiveProfile(String... keys) {
 		for (String key : keys) {
-			String profile = Arg.sys(key).get();
+			String profile = RuntimeArgs.sys(key).get();
 			log.info("get profile from env {} = {}", key, profile);
 			if (!Strings.isNullOrEmpty(profile)) {
 				return profile;
