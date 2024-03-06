@@ -8,6 +8,7 @@
         <groupId>org.magneton</groupId>
         <artifactId>magneton-parent</artifactId>
         <version>M2023.9</version>
+        <relativePath>../magneton-parent/pom.xml</relativePath>
     </parent>
 
     <artifactId>magneton-core</artifactId>
@@ -16,7 +17,6 @@
         <dependency>
             <groupId>org.magneton</groupId>
             <artifactId>magneton-annotation</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>

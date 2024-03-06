@@ -10,7 +10,6 @@
     </parent>
 
     <artifactId>magneton-module-kit</artifactId>
-    <name>通用元件包</name>
     <description>用来放置一些通用的有一定业务的相关代码,比如访问控制器,签名器等</description>
 
     <dependencies>

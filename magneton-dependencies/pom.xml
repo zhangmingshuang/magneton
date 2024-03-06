@@ -79,11 +79,6 @@
                 <scope>import</scope>
             </dependency>
             <dependency>
-                <groupId>com.github.atool</groupId>
-                <artifactId>fluent-mybatis-processor</artifactId>
-                <version>${fluent-mybatis.version}</version>
-            </dependency>
-            <dependency>
                 <groupId>com.google.auto.service</groupId>
                 <artifactId>auto-service</artifactId>
                 <version>${auto-service.version}</version>
@@ -149,11 +144,6 @@
             <dependency>
                 <groupId>org.magneton</groupId>
                 <artifactId>magneton-core</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.magneton</groupId>
-                <artifactId>magneton-db-spy</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

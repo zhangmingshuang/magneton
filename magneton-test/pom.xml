@@ -8,6 +8,7 @@
         <groupId>org.magneton</groupId>
         <artifactId>magneton-parent</artifactId>
         <version>M2023.9</version>
+        <relativePath>../magneton-parent/pom.xml</relativePath>
     </parent>
 
     <artifactId>magneton-test</artifactId>

@@ -1,11 +1,11 @@
 package org.magneton.module.statistics.pvpu;
 
 /**
- * PVUV处理器
+ * UV
  *
  * @author zhangmsh.
- * @since 2023.9
+ * @since M2023.9
  */
-public interface PvUvProcessor {
+public interface UvProcessor {
 
 }
