@@ -19,6 +19,7 @@ import java.util.Map;
  * 异常工具类
  *
  * @author Looly
+ * @since 5.5.2
  */
 public class MoreExceptions {
 
