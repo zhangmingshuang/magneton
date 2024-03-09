@@ -14,6 +14,11 @@ public interface SmsTemplate {
 
 	String DEFAULT_GROUP = "default";
 
+	/**
+	 * 是否是手机号
+	 * @param mobile 手机号
+	 * @return 是否是手机号,如果是手机号，则返回 {@code true} 是，否则 {@code false} 不是。
+	 */
 	boolean isMobile(String mobile);
 
 	/**

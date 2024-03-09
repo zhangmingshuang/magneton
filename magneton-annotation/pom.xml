@@ -7,7 +7,7 @@
     <parent>
         <groupId>org.magneton</groupId>
         <artifactId>magneton</artifactId>
-        <version>M2023.9</version>
+        <version>M2024.SNAPSHOT</version>
     </parent>
 
     <artifactId>magneton-annotation</artifactId>
