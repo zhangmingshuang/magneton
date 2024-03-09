@@ -19,6 +19,8 @@ import com.google.common.base.Preconditions;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Objects;
+
 /**
  * @author Nikita Koksharov
  *
@@ -69,13 +71,10 @@ public class GeoPosition {
 			return false;
 		}
 		GeoPosition other = (GeoPosition) obj;
-		if (Double.doubleToLongBits(this.latitude) != Double.doubleToLongBits(other.latitude)) {
+		if (!Objects.equals(Double.doubleToLongBits(this.latitude), Double.doubleToLongBits(other.latitude))) {
 			return false;
 		}
-		if (Double.doubleToLongBits(this.longitude) != Double.doubleToLongBits(other.longitude)) {
-			return false;
-		}
-		return true;
+		return Objects.equals(Double.doubleToLongBits(this.longitude), Double.doubleToLongBits(other.longitude));
 	}
 
 	@Override
