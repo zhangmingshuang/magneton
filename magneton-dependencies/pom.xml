@@ -38,7 +38,7 @@
         <RoaringBitmap.version>0.9.32</RoaringBitmap.version>
         <cron-utils.version>9.2.0</cron-utils.version>
         <!-- 框架 -->
-        <spring-boot.version>2.3.4.RELEASE</spring-boot.version>
+        <spring-boot.version>2.7.18</spring-boot.version>
         <mybatis-spring-boot-starter.version>3.0.1</mybatis-spring-boot-starter.version>
         <!-- 日志 -->
         <slf4j-api.version>1.7.30</slf4j-api.version>
