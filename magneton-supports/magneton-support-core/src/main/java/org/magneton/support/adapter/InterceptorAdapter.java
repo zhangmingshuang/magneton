@@ -1,12 +1,10 @@
 package org.magneton.support.adapter;
 
-import java.util.Set;
+import com.google.common.collect.Sets;
+import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.annotation.Nullable;
-
-import com.google.common.collect.Sets;
-
-import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+import java.util.Set;
 
 /**
  * 拦截适配器.
@@ -46,6 +44,12 @@ public interface InterceptorAdapter {
 		return null;
 	}
 
+	/**
+	 * 合并地址列表
+	 * @param append 追加的地址列表
+	 * @param init 初始地址列表
+	 * @return 合并后的地址列表
+	 */
 	default Set<String> merge(@Nullable Set<String> append, String... init) {
 		Set<String> values = Sets.newHashSet(init);
 		if (append != null) {

@@ -1,7 +1,5 @@
 package org.magneton.module.geo.redis;
 
-import java.util.Map;
-import java.util.Set;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.magneton.foundation.comparator.VersionComparator;
@@ -12,6 +10,9 @@ import org.magneton.module.geo.query.PositionArgs;
 import org.redisson.api.redisnode.RedisNode;
 import org.redisson.api.redisnode.RedisNodes;
 
+import java.util.Map;
+import java.util.Set;
+
 /**
  * .
  *
@@ -21,10 +22,24 @@ import org.redisson.api.redisnode.RedisNodes;
 @SuppressWarnings("unchecked")
 class RedissonGeoTest extends TestRedisson {
 
-	private final Geo geo = new RedissonGeo(redissonClient);
+	private final Geo geo;
+
+	{
+		if (!this.isNeed()) {
+			this.geo = new RedissonGeo(redissonClient);
+		}
+		else {
+			this.geo = null;
+		}
+
+	}
 
 	@Test
 	void add() {
+		if (!this.isNeed()) {
+			System.out.println("version less . ignored.");
+			return;
+		}
 		String no1 = "xiamen software park no.1";
 		long add = this.geo.add("add", 118.188087, 24.494134, no1);
 		Assertions.assertEquals(1, add);
@@ -40,6 +55,10 @@ class RedissonGeoTest extends TestRedisson {
 
 	@Test
 	void addIfAbsent() {
+		if (!this.isNeed()) {
+			System.out.println("version less . ignored.");
+			return;
+		}
 		if (this.isIgnore()) {
 			System.out.println("version less . ignored.");
 			return;
@@ -60,6 +79,10 @@ class RedissonGeoTest extends TestRedisson {
 
 	@Test
 	void addIfExists() {
+		if (!this.isNeed()) {
+			System.out.println("version less . ignored.");
+			return;
+		}
 		if (this.isIgnore()) {
 			System.out.println("version less . ignored.");
 			return;
@@ -84,6 +107,10 @@ class RedissonGeoTest extends TestRedisson {
 
 	@Test
 	void dist() {
+		if (!this.isNeed()) {
+			System.out.println("version less . ignored.");
+			return;
+		}
 		String no1 = "xiamen software park no.1";
 		long add = this.geo.add("dist", 118.188087, 24.494134, no1);
 		Assertions.assertEquals(1, add);
@@ -98,6 +125,10 @@ class RedissonGeoTest extends TestRedisson {
 
 	@Test
 	void pos() {
+		if (!this.isNeed()) {
+			System.out.println("version less . ignored.");
+			return;
+		}
 		String no1 = "xiamen software park no.1";
 		long add = this.geo.add("pos", 118.188087, 24.494134, no1);
 		Assertions.assertEquals(1, add);
@@ -112,6 +143,10 @@ class RedissonGeoTest extends TestRedisson {
 
 	@Test
 	void radiusWithDistance() {
+		if (!this.isNeed()) {
+			System.out.println("version less . ignored.");
+			return;
+		}
 		String no1 = "xiamen software park no.1";
 		long add = this.geo.add("radiusWithDistance", 118.188087, 24.494134, no1);
 		Assertions.assertEquals(1, add);
@@ -129,6 +164,10 @@ class RedissonGeoTest extends TestRedisson {
 
 	@Test
 	void radiusWithPosition() {
+		if (!this.isNeed()) {
+			System.out.println("version less . ignored.");
+			return;
+		}
 		String no1 = "xiamen software park no.1";
 		long add = this.geo.add("radiusWithPosition", 118.188087, 24.494134, no1);
 		Assertions.assertEquals(1, add);

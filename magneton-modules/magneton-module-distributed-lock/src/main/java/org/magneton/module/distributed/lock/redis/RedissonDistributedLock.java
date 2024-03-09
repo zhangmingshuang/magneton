@@ -33,7 +33,6 @@ import java.util.concurrent.locks.Lock;
  * }</pre>
  *
  * @author zhangmsh
- * @version 1.0.0
  * @since 2021/1/7
  */
 public class RedissonDistributedLock extends AbstractDistributedLock {

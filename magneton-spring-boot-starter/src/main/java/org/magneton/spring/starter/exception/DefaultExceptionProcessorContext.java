@@ -11,7 +11,6 @@ import java.util.function.Function;
  * exception processor context.
  *
  * @author zhangmsh
- * @version 1.0.0
  * @since 2020/12/25
  */
 public class DefaultExceptionProcessorContext implements ExceptionProcessorContext {

@@ -39,10 +39,21 @@ public interface OssTemplate<Sts> {
 	 */
 	String getDomain(@Nullable String bucket);
 
+	/**
+	 * 从文件名获取URL
+	 * @param fileName 文件名
+	 * @return URL
+	 */
 	default String getUrl(String fileName) {
 		return this.getUrl(fileName, null);
 	}
 
+	/**
+	 * 从文件名获取URL
+	 * @param fileName 文件名
+	 * @param bucket Bucket
+	 * @return URL
+	 */
 	default String getUrl(String fileName, @Nullable String bucket) {
 		if (Preconditions.checkNotNull(fileName).startsWith("http")) {
 			return fileName;
@@ -54,10 +65,21 @@ public interface OssTemplate<Sts> {
 		return domain + "/" + fileName;
 	}
 
+	/**
+	 * URL修正
+	 * @param url URL
+	 * @return 修正后的URL
+	 */
 	default String urlAmend(String url) {
 		return this.urlAmend(url, null);
 	}
 
+	/**
+	 * URL修正
+	 * @param url URL
+	 * @param bucket Bucket
+	 * @return 修正后的URL
+	 */
 	default String urlAmend(String url, @Nullable String bucket) {
 		if (!Preconditions.checkNotNull(url).startsWith("http")) {
 			return url;

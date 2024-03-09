@@ -13,7 +13,6 @@ import java.util.logging.Logger;
  * 字符串工具类.
  *
  * @author zhangmsh
- * @version 1.0.0
  * @since 2020/11/13
  */
 

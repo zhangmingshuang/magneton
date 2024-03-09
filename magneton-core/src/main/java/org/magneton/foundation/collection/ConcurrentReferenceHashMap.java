@@ -453,6 +453,8 @@ public class ConcurrentReferenceHashMap<K, V> extends AbstractMap<K, V> implemen
 	 */
 	protected final class Segment extends ReentrantLock {
 
+		private static final long serialVersionUID = -2569396020564304923L;
+
 		private final ReferenceManager referenceManager;
 
 		private final int initialSize;
@@ -775,7 +777,7 @@ public class ConcurrentReferenceHashMap<K, V> extends AbstractMap<K, V> implemen
 	/**
 	 * A task that can be {@link Segment#doTask run} against a {@link Segment}.
 	 */
-	private abstract class Task<T> {
+	private class Task<T> {
 
 		private final EnumSet<TaskOption> options;
 
@@ -820,7 +822,22 @@ public class ConcurrentReferenceHashMap<K, V> extends AbstractMap<K, V> implemen
 	 */
 	private enum TaskOption {
 
-		RESTRUCTURE_BEFORE, RESTRUCTURE_AFTER, SKIP_IF_EMPTY, RESIZE
+		/**
+		 * Restructure the segment before the task is executed.
+		 */
+		RESTRUCTURE_BEFORE,
+		/**
+		 * Restructure the segment after the task is executed.
+		 */
+		RESTRUCTURE_AFTER,
+		/**
+		 * Skip the task if the segment is empty.
+		 */
+		SKIP_IF_EMPTY,
+		/**
+		 * Resize the segment before the task is executed.
+		 */
+		RESIZE
 
 	}
 
@@ -971,7 +988,14 @@ public class ConcurrentReferenceHashMap<K, V> extends AbstractMap<K, V> implemen
 	 */
 	protected enum Restructure {
 
-		WHEN_NECESSARY, NEVER
+		/**
+		 * Restructuring should be performed when necessary.
+		 */
+		WHEN_NECESSARY,
+		/**
+		 * Restructuring should not be performed.
+		 */
+		NEVER
 
 	}
 

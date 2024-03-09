@@ -10,6 +10,10 @@ import cn.hutool.core.util.IdUtil;
  */
 public interface Pay {
 
+	/**
+	 * 外部订单号.
+	 * @return 外部订单号
+	 */
 	default String outTradeNo() {
 		return IdUtil.objectId();
 	}

@@ -23,7 +23,7 @@ import java.net.*;
  * @author Juergen Hoeller
  * @since 1.1.5
  */
-public abstract class MoreResources {
+public class MoreResources {
 
 	/** Pseudo URL prefix for loading from the class path: "classpath:". */
 	public static final String CLASSPATH_URL_PREFIX = "classpath:";

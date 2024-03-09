@@ -6,7 +6,6 @@ import org.magneton.module.distributed.lock.DistributedLock;
  * 分布式锁抽象类.
  *
  * @author zhangmsh
- * @version 1.0.0
  * @since 2021/1/22
  */
 public abstract class AbstractDistributedLock implements DistributedLock {

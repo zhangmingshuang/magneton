@@ -91,8 +91,9 @@ public class MoreFiles {
 	}
 
 	private static File createDirectory(File directory) {
-		if (!directory.exists() && !directory.mkdirs())
+		if (!directory.exists() && !directory.mkdirs()) {
 			throw new MkdirException("Cannot create directory:" + directory.getAbsolutePath());
+		}
 		return directory;
 	}
 

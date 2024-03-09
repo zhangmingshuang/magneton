@@ -9,7 +9,6 @@ import java.util.concurrent.locks.Lock;
  * 分布式锁.
  *
  * @author zhangmsh
- * @version 1.0.0
  * @since 2021/1/7
  */
 public interface DistributedLock {

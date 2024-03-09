@@ -12,7 +12,6 @@ package org.magneton.core;
  * note: {@code Response.of(Obj).message(Msg)} will rewrite the message with {@code Msg}.
  *
  * @author zhangmsh
- * @version 1.0.0
  * @since 2020/10/30
  */
 public interface EgoResultMessage {

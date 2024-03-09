@@ -8,7 +8,6 @@ import org.magneton.foundation.MoreArrays;
  * .
  *
  * @author zhangmsh
- * @version 1.0.0
  * @since 2020/12/30
  */
 @SuppressWarnings({ "ALL" })

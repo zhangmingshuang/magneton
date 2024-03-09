@@ -13,8 +13,10 @@ public interface Msg {
 
 	/**
 	 * 单发单聊消息
+	 * @param batchSendMsg 批量发单聊消息
 	 * @apiNote 支持一次对最多500个用户进行单发消息。
 	 * {@code https://cloud.tencent.com/document/product/269/2282}
+	 * @return 发送结果
 	 */
 	MsgSendRes batchSendMsg(BatchSendMsg batchSendMsg);
 
