@@ -40,6 +40,10 @@ public interface SetAlgoStream<T> {
 	 */
 	void clear();
 
+	/**
+	 * 是否为空
+	 * @return true：空；false：非空
+	 */
 	boolean isEmpty();
 
 }

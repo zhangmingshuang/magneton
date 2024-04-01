@@ -8,7 +8,7 @@ import com.aliyun.dysmsapi20170525.models.SendSmsResponseBody;
  * @author zhangmsh 2022/3/24
  * @since 1.0.0
  */
-public class MockAliyunSendProcessor extends AbstractAliyunSmsProcessor {
+public class MockAliyunSendProcessor extends AliyunSmsProcessor {
 
 	public MockAliyunSendProcessor() {
 		super(mock());

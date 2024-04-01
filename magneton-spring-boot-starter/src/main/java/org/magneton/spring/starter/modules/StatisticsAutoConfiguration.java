@@ -1,6 +1,8 @@
 package org.magneton.spring.starter.modules;
 
-import org.magneton.module.statistics.pvpu.RedissonPvUvProcessor;
+import org.magneton.module.statistics.pvpu.PvUv;
+import org.magneton.module.statistics.pvpu.PvUvConfig;
+import org.magneton.module.statistics.pvpu.RedissonPvUv;
 import org.redisson.api.RedissonClient;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -14,13 +16,13 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Configuration(proxyBeanMethods = false)
-@ConditionalOnClass({ RedissonClient.class, Statistics.class })
+@ConditionalOnClass({ RedissonClient.class, PvUv.class })
 public class StatisticsAutoConfiguration {
 
 	@Bean
 	@ConditionalOnMissingBean
-	public Statistics statistics(RedissonClient redissonClient) {
-		return new RedissonPvUvProcessor(redissonClient);
+	public PvUv statistics(RedissonClient redissonClient) {
+		return new RedissonPvUv(redissonClient, new PvUvConfig());
 	}
 
 }

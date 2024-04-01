@@ -14,13 +14,13 @@
 
 package org.magneton.module.algorithm.set;
 
+import com.google.common.collect.Lists;
+
 import java.nio.file.Path;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.function.Consumer;
-
-import com.google.common.collect.Lists;
 
 /**
  * 输出Stream
@@ -81,6 +81,10 @@ public interface SetStream<T> {
 	 */
 	long size();
 
+	/**
+	 * 是否为空
+	 * @return true：空；false：非空
+	 */
 	boolean isEmpty();
 
 	/**

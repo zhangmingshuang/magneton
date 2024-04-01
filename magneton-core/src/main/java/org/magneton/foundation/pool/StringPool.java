@@ -9,6 +9,8 @@ package org.magneton.foundation.pool;
  */
 public interface StringPool {
 
+	String EMPTY = "";
+
 	/**
 	 * 字符常量：空格符 {@code ' '}
 	 */

@@ -10,7 +10,6 @@ import org.magneton.spring.starter.exception.ExceptionProcessorContext;
  * .
  *
  * @author zhangmsh
- * @version 1.0.0
  * @since 2020/12/28
  */
 class ExceptionProcessorTest {

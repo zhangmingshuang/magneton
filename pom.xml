@@ -7,7 +7,7 @@
 
     <groupId>org.magneton</groupId>
     <artifactId>magneton</artifactId>
-    <version>M2023.9</version>
+    <version>M2024.SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
@@ -57,34 +57,34 @@
                     <showWarnings>true</showWarnings>
                 </configuration>
             </plugin>
-            <!--            <plugin>-->
-            <!--                <groupId>org.apache.maven.plugins</groupId>-->
-            <!--                <artifactId>maven-checkstyle-plugin</artifactId>-->
-            <!--                <version>3.1.1</version>-->
-            <!--                <dependencies>-->
-            <!--                    <dependency>-->
-            <!--                        <artifactId>checkstyle</artifactId>-->
-            <!--                        <groupId>com.puppycrawl.tools</groupId>-->
-            <!--                        <version>8.38</version>-->
-            <!--                    </dependency>-->
-            <!--                </dependencies>-->
-            <!--                <configuration>-->
-            <!--                    <configLocation>src/google_checks.xml</configLocation>-->
-            <!--                    <failsOnError>true</failsOnError>-->
-            <!--                    <failOnViolation>true</failOnViolation>-->
-            <!--                    <consoleOutput>true</consoleOutput>-->
-            <!--                    <encoding>UTF-8</encoding>-->
-            <!--                    <outputEncoding>UTF-8</outputEncoding>-->
-            <!--                </configuration>-->
-            <!--                <executions>-->
-            <!--                    <execution>-->
-            <!--                        <phase>validate</phase>-->
-            <!--                        <goals>-->
-            <!--                            <goal>check</goal>-->
-            <!--                        </goals>-->
-            <!--                    </execution>-->
-            <!--                </executions>-->
-            <!--            </plugin>-->
+            <!--<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>3.1.1</version>
+                <dependencies>
+                    <dependency>
+                        <artifactId>checkstyle</artifactId>
+                        <groupId>com.puppycrawl.tools</groupId>
+                        <version>8.38</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <configLocation>src/google_checks.xml</configLocation>
+                    <failsOnError>true</failsOnError>
+                    <failOnViolation>true</failOnViolation>
+                    <consoleOutput>true</consoleOutput>
+                    <encoding>UTF-8</encoding>
+                    <outputEncoding>UTF-8</outputEncoding>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>-->
             <plugin>
                 <groupId>io.spring.javaformat</groupId>
                 <artifactId>spring-javaformat-maven-plugin</artifactId>

@@ -29,6 +29,16 @@ public class GeeTestBehaviorConfig {
 	private String captchaKey;
 
 	/**
+	 * 请求连接超时，单位毫秒，默认5000.
+	 */
+	private long connectTimeout = 5000;
+
+	/**
+	 * 请求读超时，单位毫秒，默认5000.
+	 */
+	private long readTimeout = 5000;
+
+	/**
 	 * validate params is expect.
 	 */
 	public void validate() {

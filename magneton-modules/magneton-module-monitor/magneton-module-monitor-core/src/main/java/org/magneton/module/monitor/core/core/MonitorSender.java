@@ -29,10 +29,10 @@ public interface MonitorSender {
 
 	/**
 	 * 发送模型
-	 * <p>
-	 * 在多个发送器实例中，会执行所有的发送器。
+	 * @apiNote 要根据顺序在多个发送器实例中，进行发送的尝试。如果发送成功，则不再继续发送。如果发送失败，继续使用下一个发送器进行发送。
 	 * @param module 模型
+	 * @return true：发送成功；false：发送失败
 	 */
-	void send(Module module);
+	boolean send(Module module);
 
 }

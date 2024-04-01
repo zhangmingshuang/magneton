@@ -3,6 +3,7 @@ package org.magneton.module.safedog.sign;
 import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
 import org.magneton.core.Result;
+import org.magneton.module.safedog.SafeDogErr;
 import org.redisson.api.RBucket;
 import org.redisson.api.RedissonClient;
 
@@ -38,18 +39,18 @@ public class RedissonSignValidator implements SignValidator {
 	}
 
 	@Override
-	public Result<Boolean> validate(String expectedSign, String actualSign, int signPeriod) {
+	public Result<Void> validate(String expectedSign, String actualSign, int signPeriod) {
 		if (signPeriod > 0) {
 			RBucket<String> signBucket = this.redissonClient.getBucket(this.key + ":" + actualSign);
 			if (signBucket.isExists()) {
-				return Result.failWith(Boolean.FALSE, "签名已经被使用过了");
+				return Result.fail(SafeDogErr.SIGN_USED);
 			}
 			signBucket.set(String.valueOf(System.currentTimeMillis()), signPeriod, TimeUnit.SECONDS);
 		}
 		if (expectedSign == null || !Objects.equal(expectedSign, actualSign)) {
-			return Result.failWith(Boolean.FALSE, "签名不一致");
+			return Result.fail(SafeDogErr.SIGN_INCONSISTENT);
 		}
-		return Result.successWith(Boolean.TRUE);
+		return Result.success();
 	}
 
 }

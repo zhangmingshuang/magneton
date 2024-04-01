@@ -6,11 +6,10 @@
     <parent>
         <groupId>org.magneton</groupId>
         <artifactId>magneton-modules</artifactId>
-        <version>M2023.9</version>
+        <version>M2024.SNAPSHOT</version>
     </parent>
 
     <artifactId>magneton-module-kit</artifactId>
-    <name>通用元件包</name>
     <description>用来放置一些通用的有一定业务的相关代码,比如访问控制器,签名器等</description>
 
     <dependencies>

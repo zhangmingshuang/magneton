@@ -6,8 +6,7 @@ import lombok.ToString;
  * .
  *
  * @author zhangmsh
- * @version 1.0.0
- * @since 2020/12/29
+ * @since 1.0.0
  */
 @SuppressWarnings({ "MissingJavadocType", "unchecked" })
 public interface ResultCodesSupplier {

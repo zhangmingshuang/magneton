@@ -2,12 +2,13 @@ package org.magneton.module.safedog.sign;
 
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
+import com.google.common.collect.Lists;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.magneton.core.Result;
+import org.magneton.module.safedog.SafeDogErr;
 
 import javax.annotation.Nullable;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -49,40 +50,37 @@ public class SignerImpl implements Signer {
 	String[] requiredKeys;
 
 	@Override
-	public String sign(Map<String, String> data, @Nullable String salt) {
+	public Result<String> sign(Map<String, String> data, @Nullable String salt) {
 		Preconditions.checkNotNull(data, "data is null");
-
 		if (log.isDebugEnabled()) {
 			log.debug("sign data: {}", data);
 		}
+
 		Set<String> keys = data.keySet();
-		if (this.requiredKeys != null && this.requiredKeys.length > 0) {
-			if (keys.isEmpty()) {
-				throw new IllegalArgumentException(
-						String.format("required key [%s] is empty", Arrays.toString(this.requiredKeys)));
-			}
-			else {
-				for (String requiredKey : this.requiredKeys) {
-					String keyValue = data.get(requiredKey);
-					if (Strings.isNullOrEmpty(keyValue)) {
-						throw new IllegalArgumentException(
-								String.format("required key [%s] is not exist or empty", requiredKey));
-					}
+		if (this.requiredKeys != null) {
+			for (String requiredKey : this.requiredKeys) {
+				List<String> missKeys = Lists.newArrayListWithCapacity(this.requiredKeys.length);
+				String keyValue = data.get(requiredKey);
+				if (Strings.isNullOrEmpty(keyValue)) {
+					missKeys.add(requiredKey);
 				}
+				return Result.fail(SafeDogErr.SIGN_REQUIRE_KEY_MISS.withArgs(missKeys));
 			}
 		}
 		List<String> sortedKeys = this.signKeySorter.sort(keys);
-		return this.signGenerator.generate(data, sortedKeys, salt);
+		return Result.successWith(this.signGenerator.generate(data, sortedKeys, salt));
 	}
 
 	@Override
-	public Result<Boolean> validate(String sign, Map<String, String> data, @Nullable String salt) {
+	public Result<Void> validate(String sign, Map<String, String> data, @Nullable String salt) {
 		Preconditions.checkNotNull(sign, "sign is null");
 		Preconditions.checkNotNull(data, "data is null");
 
-		String trulySign = this.sign(data, salt);
-
-		return this.signValidator.validate(trulySign, sign, this.signPeriod);
+		Result<String> trulySign = this.sign(data, salt);
+		if (!trulySign.isSuccess()) {
+			return trulySign.assignment();
+		}
+		return this.signValidator.validate(trulySign.getData(), sign, this.signPeriod);
 	}
 
 }

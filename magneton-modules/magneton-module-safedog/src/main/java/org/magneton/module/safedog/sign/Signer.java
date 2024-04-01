@@ -18,7 +18,7 @@ public interface Signer {
 	 * @param data 数据
 	 * @return 数据签名标识
 	 */
-	default String sign(Map<String, String> data) {
+	default Result<String> sign(Map<String, String> data) {
 		return this.sign(data, null);
 	}
 
@@ -28,7 +28,7 @@ public interface Signer {
 	 * @param salt 盐
 	 * @return 数据签名标识
 	 */
-	String sign(Map<String, String> data, @Nullable String salt);
+	Result<String> sign(Map<String, String> data, @Nullable String salt);
 
 	/**
 	 * 判断数据标识是否一至
@@ -36,7 +36,7 @@ public interface Signer {
 	 * @param data 数据
 	 * @return 是否一至， {@code true} 一至，{@code false} 不一至
 	 */
-	default Result<Boolean> validate(String sign, Map<String, String> data) {
+	default Result<Void> validate(String sign, Map<String, String> data) {
 		return this.validate(sign, data, null);
 	}
 
@@ -46,6 +46,6 @@ public interface Signer {
 	 * @param data 数据
 	 * @return 是否一至， {@code true} 一至，{@code false} 不一至
 	 */
-	Result<Boolean> validate(String sign, Map<String, String> data, @Nullable String salt);
+	Result<Void> validate(String sign, Map<String, String> data, @Nullable String salt);
 
 }

@@ -3,7 +3,7 @@ package org.magneton.adaptive.redis;
 /**
  * .
  *
- * @author zhangmsh 2022/2/10
+ * @author zhangmsh
  * @since 1.2.0
  */
 public class RedissonConfigParseException extends RuntimeException {

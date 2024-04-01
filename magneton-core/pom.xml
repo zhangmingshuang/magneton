@@ -7,7 +7,8 @@
     <parent>
         <groupId>org.magneton</groupId>
         <artifactId>magneton-parent</artifactId>
-        <version>M2023.9</version>
+        <version>M2024.SNAPSHOT</version>
+        <relativePath>../magneton-parent/pom.xml</relativePath>
     </parent>
 
     <artifactId>magneton-core</artifactId>
@@ -16,7 +17,6 @@
         <dependency>
             <groupId>org.magneton</groupId>
             <artifactId>magneton-annotation</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -90,10 +90,10 @@
         </dependency>
         <!-- 单元测试 -->
         <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>${junit.version}</version>
+            <groupId>org.magneton</groupId>
+            <artifactId>magneton-test</artifactId>
             <scope>test</scope>
         </dependency>
+
     </dependencies>
 </project>

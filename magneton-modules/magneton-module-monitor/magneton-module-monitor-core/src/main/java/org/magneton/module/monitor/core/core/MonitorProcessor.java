@@ -40,9 +40,18 @@ public interface MonitorProcessor {
 
 	/**
 	 * 后置发送处理
+	 * @param sender 此次发送成的发送器
 	 * @param module 模型
 	 */
-	default void postSend(Module module) {
+	default void postSend(MonitorSender sender, Module module) {
+
+	}
+
+	/**
+	 * 发送完成后处理
+	 * @param module 模型
+	 */
+	default void afterSend(Module module) {
 
 	}
 

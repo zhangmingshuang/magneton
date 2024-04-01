@@ -2,16 +2,17 @@ package org.magneton.foundation;
 
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.magneton.foundation.pool.StringPool;
+
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
- * .
+ * 字符串工具类.
  *
  * @author zhangmsh
- * @version 1.0.0
  * @since 2020/11/13
  */
 
@@ -23,6 +24,75 @@ public final class MoreStrings {
 
 	private MoreStrings() {
 		// private
+	}
+
+	/**
+	 * <p>
+	 * Checks if a CharSequence is empty (""), null or whitespace only.
+	 * </p>
+	 *
+	 * <p>
+	 * Whitespace is defined by {@link Character#isWhitespace(char)}.
+	 * </p>
+	 *
+	 * <pre>
+	 * StringUtils.isBlank(null)      = true
+	 * StringUtils.isBlank("")        = true
+	 * StringUtils.isBlank(" ")       = true
+	 * StringUtils.isBlank("bob")     = false
+	 * StringUtils.isBlank("  bob  ") = false
+	 * </pre>
+	 * @param cs the CharSequence to check, may be null
+	 * @return {@code true} if the CharSequence is null, empty or whitespace only
+	 * @since 2.0
+	 * @since 3.0 Changed signature from isBlank(String) to isBlank(CharSequence)
+	 */
+	public static boolean isNullOrBlank(final CharSequence cs) {
+		final int strLen = length(cs);
+		if (strLen == 0) {
+			return true;
+		}
+		for (int i = 0; i < strLen; i++) {
+			if (!Character.isWhitespace(cs.charAt(i))) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	/**
+	 * Gets a CharSequence length or {@code 0} if the CharSequence is {@code null}.
+	 * @param cs a CharSequence or {@code null}
+	 * @return CharSequence length or {@code 0} if the CharSequence is {@code null}.
+	 * @since 2.4
+	 * @since 3.0 Changed signature from length(String) to length(CharSequence)
+	 */
+	public static int length(final CharSequence cs) {
+		return cs == null ? 0 : cs.length();
+	}
+
+	/**
+	 * Checks if a CharSequence is empty ("") or null.
+	 * </p>
+	 *
+	 * <pre>
+	 * MoreStrings.isEmpty(null)      = true
+	 * MoreStrings.isEmpty("")        = true
+	 * MoreStrings.isEmpty(" ")       = false
+	 * MoreStrings.isEmpty("bob")     = false
+	 * MoreStringsg.isEmpty("  bob  ") = false
+	 * </pre>
+	 *
+	 * <p>
+	 * NOTE: This method changed in Lang version 2.0. It no longer trims the CharSequence.
+	 * That functionality is available in isBlank().
+	 * </p>
+	 * @param cs the CharSequence to check, may be null
+	 * @return {@code true} if the CharSequence is empty or null
+	 * @since 3.0 Changed signature from isEmpty(String) to isEmpty(CharSequence)
+	 */
+	public static boolean isNullOrEmpty(final CharSequence cs) {
+		return cs == null || cs.length() == 0;
 	}
 
 	/**
@@ -153,6 +223,92 @@ public final class MoreStrings {
 					"Exception during lenientFormat for " + objectToString, e);
 			return "<" + objectToString + " threw " + e.getClass().getName() + ">";
 		}
+	}
+
+	/**
+	 * 是否包含字符串
+	 * @param str 验证字符串
+	 * @param strs 字符串组
+	 * @return 包含返回true
+	 */
+	public static boolean inStringIgnoreCase(String str, String... strs) {
+		if (str != null && strs != null) {
+			for (String s : strs) {
+				if (str.equalsIgnoreCase(trim(s))) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * 去空格
+	 */
+	public static String trim(String str) {
+		return (str == null ? "" : str.trim());
+	}
+
+	/**
+	 * 截取字符串
+	 * @param str 字符串
+	 * @param start 开始
+	 * @return 结果
+	 */
+	public static String substring(final String str, int start) {
+		if (str == null) {
+			return StringPool.EMPTY;
+		}
+
+		if (start < 0) {
+			start = str.length() + start;
+		}
+
+		if (start < 0) {
+			start = 0;
+		}
+		if (start > str.length()) {
+			return StringPool.EMPTY;
+		}
+
+		return str.substring(start);
+	}
+
+	/**
+	 * 截取字符串
+	 * @param str 字符串
+	 * @param start 开始
+	 * @param end 结束
+	 * @return 结果
+	 */
+	public static String substring(final String str, int start, int end) {
+		if (str == null) {
+			return StringPool.EMPTY;
+		}
+
+		if (end < 0) {
+			end = str.length() + end;
+		}
+		if (start < 0) {
+			start = str.length() + start;
+		}
+
+		if (end > str.length()) {
+			end = str.length();
+		}
+
+		if (start > end) {
+			return StringPool.EMPTY;
+		}
+
+		if (start < 0) {
+			start = 0;
+		}
+		if (end < 0) {
+			end = 0;
+		}
+
+		return str.substring(start, end);
 	}
 
 }

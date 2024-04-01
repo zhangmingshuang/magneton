@@ -11,7 +11,6 @@ package org.magneton.core;
  * this {@code ResponseException} should be processing in a global exception advice.
  *
  * @author zhangmsh
- * @version 1.0.0
  * @since 2020/10/29
  */
 @SuppressWarnings("rawtypes")

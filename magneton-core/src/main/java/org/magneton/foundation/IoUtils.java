@@ -22,9 +22,9 @@ public class IoUtils {
 
 	/**
 	 * Gets the contents of an InputStream as a byte[].
-	 * @param input
-	 * @return
-	 * @throws IOException
+	 * @param input the InputStream to read from
+	 * @return the requested byte array
+	 * @throws IOException In case of an I/O problem
 	 */
 	public static byte[] toByteArray(final InputStream input) throws IOException {
 		final ByteArrayOutputStream output = new ByteArrayOutputStream();
@@ -39,10 +39,10 @@ public class IoUtils {
 
 	/**
 	 * Gets the contents of an InputStream as a byte[].
-	 * @param input
-	 * @param size
-	 * @return
-	 * @throws IOException
+	 * @param input the InputStream to read from
+	 * @param size the number of bytes to read from the input
+	 * @return the requested byte array
+	 * @throws IOException In case of an I/O problem
 	 */
 	public static byte[] toByteArray(final InputStream input, final int size) throws IOException {
 		if (size < 0) {
@@ -65,10 +65,10 @@ public class IoUtils {
 
 	/**
 	 * Copies bytes
-	 * @param input
-	 * @param output
-	 * @return
-	 * @throws IOException
+	 * @param input the InputStream to read from
+	 * @param output the OutputStream to write to
+	 * @return the number of bytes copied
+	 * @throws IOException In case of an I/O problem
 	 */
 	public static int copy(final InputStream input, final OutputStream output) throws IOException {
 		long count = 0;

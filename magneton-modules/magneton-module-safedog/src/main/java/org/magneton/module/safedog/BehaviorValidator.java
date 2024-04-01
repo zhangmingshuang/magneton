@@ -1,5 +1,7 @@
 package org.magneton.module.safedog;
 
+import org.magneton.core.Result;
+
 /**
  * 行为验证器.
  *
@@ -13,6 +15,6 @@ public interface BehaviorValidator<T> {
 	 * @param body 行为数据
 	 * @return true: 验证通过，false: 验证失败
 	 */
-	boolean validate(T body);
+	Result<Void> validate(T body);
 
 }

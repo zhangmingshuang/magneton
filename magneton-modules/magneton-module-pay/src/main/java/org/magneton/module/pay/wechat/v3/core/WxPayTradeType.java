@@ -11,16 +11,34 @@ import org.magneton.module.pay.core.TradeType;
  */
 public enum WxPayTradeType implements TradeType {
 
+	/**
+	 * 公众号支付
+	 */
 	JSAPI(0, "公众号支付"),
 
+	/**
+	 * 扫码支付
+	 */
 	NATIVE(1, "扫码支付"),
 
+	/**
+	 * APP支付
+	 */
 	APP(2, "APP支付"),
 
+	/**
+	 * 付款码支付
+	 */
 	MICROPAY(3, "付款码支付"),
 
+	/**
+	 * H5支付
+	 */
 	MWEB(4, "H5支付"),
 
+	/**
+	 * 刷脸支付
+	 */
 	FACEPAY(5, "刷脸支付");
 
 	private final int code;

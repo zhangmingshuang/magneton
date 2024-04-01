@@ -21,6 +21,7 @@ public interface OApp {
 	Result<AccessTokenRes> requestAccessTokenByCode(String code);
 
 	/**
+	 * 通过Openid获取AccessToken
 	 * @param openid 用户的Openid
 	 * @return AccessToken. 如果缓存已经失效或者不存在，则返回{@code null}
 	 */

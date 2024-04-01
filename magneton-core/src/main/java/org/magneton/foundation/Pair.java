@@ -4,6 +4,8 @@ import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 
 /**
+ * 键值对.
+ *
  * @author zhangmsh 2021/7/17
  * @since 1.0.0
  */

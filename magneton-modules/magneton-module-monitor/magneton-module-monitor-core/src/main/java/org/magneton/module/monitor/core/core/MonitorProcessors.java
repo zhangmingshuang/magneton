@@ -93,15 +93,26 @@ public class MonitorProcessors {
 	 * 后置发送处理
 	 * <p>
 	 * 该方法在所有的发送器发送完成后执行
+	 * @param sender 发送器
 	 * @param module 模型
 	 */
-	public void postSend(Module module) {
+	public void postSend(MonitorSender sender, Module module) {
 		Preconditions.checkNotNull(module, "module can not be null");
 		if (CollectionUtil.isEmpty(this.processors)) {
 			return;
 		}
 		for (MonitorProcessor monitorProcessor : this.processors) {
-			monitorProcessor.postSend(module);
+			monitorProcessor.postSend(sender, module);
+		}
+	}
+
+	public void afterSend(Module module) {
+		Preconditions.checkNotNull(module, "module can not be null");
+		if (CollectionUtil.isEmpty(this.processors)) {
+			return;
+		}
+		for (MonitorProcessor monitorProcessor : this.processors) {
+			monitorProcessor.afterSend(module);
 		}
 	}
 

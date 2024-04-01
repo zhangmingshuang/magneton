@@ -12,11 +12,27 @@ import org.redisson.api.RedissonClient;
  */
 public class TestRedisson {
 
-	public static final RedissonClient redissonClient = RedissonAdapter.createSingleServerClient();
+	public static RedissonClient redissonClient;
+
+	static {
+		try {
+			redissonClient = RedissonAdapter.createSingleServerClient();
+		}
+		catch (Exception e) {
+			// ignore
+			System.out.println("Error: RedissonClient not found.");
+		}
+	}
+
+	public boolean isNeed() {
+		return redissonClient != null;
+	}
 
 	@AfterAll
 	static void afterAll() {
-		redissonClient.getKeys().flushdb();
+		if (redissonClient != null) {
+			redissonClient.getKeys().flushdb();
+		}
 	}
 
 }

@@ -7,8 +7,7 @@ import org.junit.jupiter.api.Test;
  * .
  *
  * @author zhangmsh
- * @version 1.0.0
- * @since 2020/12/29
+ * @since 1.0.0
  */
 class ResultExceptionTest {
 

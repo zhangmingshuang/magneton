@@ -76,6 +76,11 @@ public class Result<T> {
 		return failWith(null);
 	}
 
+	@SuppressWarnings("rawtypes")
+	public static <E> Result<E> fail(ResultBody resultBody) {
+		return valueOf(resultBody);
+	}
+
 	public static <E> Result<E> failWith(E data) {
 		return valueOf(ResultCodesSupplier.getInstance().bad(), data);
 	}
@@ -107,6 +112,16 @@ public class Result<T> {
 
 		E data = resultBody.data();
 		return valueOf(resultBody, data);
+	}
+
+	public static <E> Result<E> valueOf(String code, String message, Object... args) {
+		Result<E> result = new Result<>();
+		return result.code(code).message(message, args).timestamp(System.currentTimeMillis());
+	}
+
+	public static <E> Result<E> valueOf(E data, String code, String message, Object... args) {
+		Result<E> result = new Result<>();
+		return result.code(code).message(message, args).data(data).timestamp(System.currentTimeMillis());
 	}
 
 	private static <E> Result<E> valueOf(ResultBody<E> resultBody, E data) {
@@ -227,12 +242,16 @@ public class Result<T> {
 		return this.message;
 	}
 
-	public <E> Result<E> convert(Class<E> clazz) {
+	public <E> Result<E> assignment(Class<E> clazz) {
 		return (Result<E>) this;
 	}
 
-	public <E> Result<E> convert() {
+	public <E> Result<E> assignment() {
 		return (Result<E>) this;
+	}
+
+	public ResultBody<T> resultBody() {
+		return ResultBody.valueOf(this.code, this.message, this.data);
 	}
 
 }

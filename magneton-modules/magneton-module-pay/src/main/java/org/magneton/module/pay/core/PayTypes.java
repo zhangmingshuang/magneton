@@ -1,19 +1,21 @@
 package org.magneton.module.pay.core;
 
-import java.util.Locale;
-
-import javax.annotation.Nullable;
-
 import org.magneton.module.pay.wechat.v3.core.WxPayTradeType;
 
+import javax.annotation.Nullable;
+import java.util.Locale;
+
 /**
- * .
+ * 支付类型.
  *
  * @author zhangmsh 30/03/2022
  * @since 2.0.7
  */
 public enum PayTypes {
 
+	/**
+	 * 微信支付.
+	 */
 	WECHAT(0, WxPayTradeType.values());
 
 	private final int code;

@@ -6,11 +6,10 @@ import org.magneton.foundation.exception.WriteFileException;
 import java.io.*;
 
 /**
- * .
+ * 文件工具类
  *
  * @author zhangmsh
- * @version 1.0.0
- * @since 2021/09/07
+ * @since 1.0.0
  */
 public class MoreFiles {
 
@@ -21,9 +20,9 @@ public class MoreFiles {
 
 	/**
 	 * Reads the contents of a file into a byte array. * The file is always closed.
-	 * @param file
-	 * @return
-	 * @throws IOException
+	 * @param file the file to read
+	 * @return the file contents or an empty byte array if the file is empty
+	 * @throws IOException in case of an I/O error
 	 */
 	public static byte[] readFileToByteArray(final File file) throws IOException {
 		try (InputStream in = openInputStream(file)) {
@@ -44,9 +43,9 @@ public class MoreFiles {
 	 * An exception is thrown if the file does not exist. An exception is thrown if the
 	 * file object exists but is a directory. An exception is thrown if the file exists
 	 * but cannot be read.
-	 * @param file
-	 * @return
-	 * @throws IOException
+	 * @param file the file to open for input, must not be {@code null}
+	 * @return a new {@link FileInputStream} for the specified file
+	 * @throws IOException if the file does not exist
 	 */
 	public static FileInputStream openInputStream(final File file) throws IOException {
 		if (file.exists()) {
@@ -65,8 +64,8 @@ public class MoreFiles {
 
 	/**
 	 * Write inputStream to file
-	 * @param file
-	 * @param inputStream
+	 * @param file the file to write to
+	 * @param inputStream the input stream
 	 */
 	public static void writeToFile(File file, InputStream inputStream) {
 		try (OutputStream outputStream = new FileOutputStream(file);) {
@@ -92,14 +91,15 @@ public class MoreFiles {
 	}
 
 	private static File createDirectory(File directory) {
-		if (!directory.exists() && !directory.mkdirs())
+		if (!directory.exists() && !directory.mkdirs()) {
 			throw new MkdirException("Cannot create directory:" + directory.getAbsolutePath());
+		}
 		return directory;
 	}
 
 	/**
 	 * delete file
-	 * @param file
+	 * @param file file
 	 */
 	@SuppressWarnings("ResultOfMethodCallIgnored")
 	public static void delete(File file) {

@@ -8,12 +8,24 @@ package org.magneton.module.pay.wechat.v3.core;
  */
 public enum WxPayStatus {
 
+	/**
+	 * 支付成功
+	 */
 	SUCCESS(0, "支付成功"),
 
+	/**
+	 * 转入退款
+	 */
 	REFUND(1, "转入退款"),
 
+	/**
+	 * 未支付
+	 */
 	NOTPAY(2, "未支付"),
 
+	/**
+	 * 已关闭
+	 */
 	CLOSED(3, "已关闭"),
 	/**
 	 * （仅付款码支付会返回）
