@@ -76,6 +76,11 @@ public class Result<T> {
 		return failWith(null);
 	}
 
+	@SuppressWarnings("rawtypes")
+	public static <E> Result<E> fail(ResultBody resultBody) {
+		return valueOf(resultBody);
+	}
+
 	public static <E> Result<E> failWith(E data) {
 		return valueOf(ResultCodesSupplier.getInstance().bad(), data);
 	}
@@ -237,12 +242,16 @@ public class Result<T> {
 		return this.message;
 	}
 
-	public <E> Result<E> convert(Class<E> clazz) {
+	public <E> Result<E> assignment(Class<E> clazz) {
 		return (Result<E>) this;
 	}
 
-	public <E> Result<E> convert() {
+	public <E> Result<E> assignment() {
 		return (Result<E>) this;
+	}
+
+	public ResultBody<T> resultBody() {
+		return ResultBody.valueOf(this.code, this.message, this.data);
 	}
 
 }

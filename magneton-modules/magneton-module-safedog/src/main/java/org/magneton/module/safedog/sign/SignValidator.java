@@ -17,6 +17,6 @@ public interface SignValidator {
 	 * @param signPeriod 签名有效期，单位秒。如果设置的值小于 {@code 1}，则不需要处理该逻辑。
 	 * @return 校验结果
 	 */
-	Result<Boolean> validate(String expectedSign, String actualSign, int signPeriod);
+	Result<Void> validate(String expectedSign, String actualSign, int signPeriod);
 
 }

@@ -24,8 +24,18 @@ public interface Constant {
 	String SUCCESS = "success";
 
 	/**
+	 * fail
+	 */
+	String FAIL = "fail";
+
+	/**
 	 * result
 	 */
 	String RESULT = "result";
+
+	/**
+	 * error
+	 */
+	String ERROR = "error";
 
 }

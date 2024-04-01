@@ -36,16 +36,31 @@ public class SignerBuilder {
 	 */
 	String[] requiredKeys;
 
+	/**
+	 * 设置Key的排序器.
+	 * @param signKeySorter Key排序器
+	 * @return this
+	 */
 	public SignerBuilder keySorter(SignKeySorter signKeySorter) {
 		this.signKeySorter = signKeySorter;
 		return this;
 	}
 
+	/**
+	 * 设置签名生成器
+	 * @param signGenerator 签名生成器
+	 * @return this
+	 */
 	public SignerBuilder signGenerator(SignGenerator signGenerator) {
 		this.signGenerator = signGenerator;
 		return this;
 	}
 
+	/**
+	 * 设置签名有效期，单位秒.
+	 * @param signPeriod 签名有效期，单位秒
+	 * @return this
+	 */
 	public SignerBuilder signPeriod(int signPeriod) {
 		this.signPeriod = signPeriod;
 		return this;
