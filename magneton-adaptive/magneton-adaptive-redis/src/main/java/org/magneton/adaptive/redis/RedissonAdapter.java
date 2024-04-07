@@ -3,11 +3,15 @@ package org.magneton.adaptive.redis;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.magneton.foundation.MoreResources;
 import org.magneton.foundation.MoreStrings;
+import org.magneton.foundation.Operation;
+import org.magneton.foundation.RuntimeArgs;
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;
 import org.redisson.config.Config;
+import org.redisson.config.SingleServerConfig;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,6 +25,10 @@ import java.io.InputStream;
  */
 @Slf4j
 public class RedissonAdapter {
+
+	public static final String REDIS_ADDRESS = "REDIS_ADDRESS";
+
+	public static final String REDIS_PASSWORD = "REDIS_PASSWORD";
 
 	private RedissonAdapter() {
 
@@ -127,7 +135,17 @@ public class RedissonAdapter {
 	 * @return 默认的单节点模式配置
 	 */
 	public static Config getDefaultSingleServerConfig() {
-		return createConfig("%sredisson-singleServerConfig.yaml");
+		Config config = createConfig("%sredisson-singleServerConfig.yaml");
+		Operation redisAddress = RuntimeArgs.sys(REDIS_ADDRESS);
+		if (!StringUtils.isBlank(redisAddress.get())) {
+			SingleServerConfig singleServerConfig = config.useSingleServer();
+			singleServerConfig.setAddress(redisAddress.get());
+			Operation redisPassword = RuntimeArgs.sys(REDIS_PASSWORD);
+			if (!Strings.isNullOrEmpty(redisPassword.get())) {
+				singleServerConfig.setPassword(redisPassword.get());
+			}
+		}
+		return config;
 	}
 
 	public static RedissonClient createSingleServerClient() {
