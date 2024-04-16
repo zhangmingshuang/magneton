@@ -73,4 +73,13 @@ public interface ResultBody<T> {
 		return null;
 	}
 
+	/**
+	 * format message.
+	 * @param args args
+	 * @return response body.
+	 */
+	default ResultBody<T> format(Object... args) {
+		return valueOf(this.code(), String.format(this.message(), args), this.data());
+	}
+
 }

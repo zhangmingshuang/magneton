@@ -13,13 +13,13 @@ import org.magneton.module.wechat.open.platform.website.WebsiteOApp;
  */
 public class DefaultWechatImplTestOpen {
 
-	private static DefaultWechatOpenImplOpen defaultWechat;
+	private static DefaultWechatOpenImpl defaultWechat;
 
 	private static WechatOpenConfig testWechatOpenConfig = new WechatOpenConfig();
 
 	@BeforeAll
 	public static void init() {
-		defaultWechat = new DefaultWechatOpenImplOpen(WechatOpenBuilder.newBuilder(testWechatOpenConfig));
+		defaultWechat = new DefaultWechatOpenImpl(WechatOpenBuilder.newBuilder(testWechatOpenConfig));
 	}
 
 	@Test

@@ -213,6 +213,11 @@
             </dependency>
             <dependency>
                 <groupId>org.magneton</groupId>
+                <artifactId>magneton-module-wechat-offiaccount</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.magneton</groupId>
                 <artifactId>magneton-spring-boot-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>

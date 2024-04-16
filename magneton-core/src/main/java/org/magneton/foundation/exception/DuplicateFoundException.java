@@ -23,4 +23,10 @@ public class DuplicateFoundException extends RuntimeException {
 		this.next = next;
 	}
 
+	public DuplicateFoundException(Object next, String message) {
+		super(message);
+		this.pre = null;
+		this.next = next;
+	}
+
 }

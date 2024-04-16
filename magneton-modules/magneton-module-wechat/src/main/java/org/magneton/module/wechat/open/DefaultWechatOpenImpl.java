@@ -9,10 +9,12 @@ import org.magneton.module.wechat.open.platform.website.DefaultWebsiteOAppImpl;
 import org.magneton.module.wechat.open.platform.website.WebsiteOApp;
 
 /**
+ * 微信开放平台
+ *
  * @author zhangmsh 2022/4/2
  * @since 1.0.0
  */
-public class DefaultWechatOpenImplOpen implements WechatOpen, WechatOpenContext {
+public class DefaultWechatOpenImpl implements WechatOpen, WechatOpenContext {
 
 	private final WechatOpenConfig wechatOpenConfig;
 
@@ -22,7 +24,7 @@ public class DefaultWechatOpenImplOpen implements WechatOpen, WechatOpenContext 
 
 	private WechatOAuth wechatOAuth;
 
-	public DefaultWechatOpenImplOpen(WechatOpenBuilder wechatOpenBuilder) {
+	public DefaultWechatOpenImpl(WechatOpenBuilder wechatOpenBuilder) {
 		this.wechatOpenConfig = Preconditions.checkNotNull(wechatOpenBuilder.getWechatConfig());
 		this.init(wechatOpenBuilder);
 	}

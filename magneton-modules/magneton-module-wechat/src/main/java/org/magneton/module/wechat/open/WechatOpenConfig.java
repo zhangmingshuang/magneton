@@ -5,6 +5,8 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
+ * 微信开放平台配置
+ *
  * @author zhangmsh 2022/4/1
  * @since 1.0.0
  */

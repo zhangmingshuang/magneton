@@ -30,6 +30,7 @@
         <module>magneton-module-algorithm</module>
         <module>magneton-module-monitor</module>
         <module>magneton-module-kit</module>
+        <module>magneton-module-wechat-offiaccount</module>
     </modules>
 
 

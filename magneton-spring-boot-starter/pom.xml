@@ -23,10 +23,6 @@
             <groupId>org.magneton</groupId>
             <artifactId>magneton-core</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.magneton</groupId>
-            <artifactId>magneton-support-core</artifactId>
-        </dependency>
         <!-- 可选功能依赖项 -->
         <dependency>
             <groupId>org.magneton</groupId>
@@ -81,6 +77,11 @@
         <dependency>
             <groupId>org.magneton</groupId>
             <artifactId>magneton-module-wechat</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.magneton</groupId>
+            <artifactId>magneton-module-wechat-offiaccount</artifactId>
             <scope>provided</scope>
         </dependency>
         <!-- 可选功能依赖项 end -->

@@ -1,4 +1,4 @@
-package org.magneton.spring.starter.modules;
+package org.magneton.spring.starter.modules.wechat;
 
 import org.magneton.module.wechat.core.WechatAccessTokenCache;
 import org.magneton.module.wechat.miniprogram.DefaultWechatMiniProgram;
@@ -15,6 +15,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 /**
+ * 微信小程序自动配置.
+ *
  * @author zhangmsh 2022/6/11
  * @since 1.0.0
  */

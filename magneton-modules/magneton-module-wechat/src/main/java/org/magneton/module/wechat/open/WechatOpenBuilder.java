@@ -1,10 +1,10 @@
 package org.magneton.module.wechat.open;
 
-import javax.annotation.Nullable;
-
 import com.google.common.base.Preconditions;
 import org.magneton.module.wechat.core.MemoryWechatAccessTokenCache;
 import org.magneton.module.wechat.core.WechatAccessTokenCache;
+
+import javax.annotation.Nullable;
 
 /**
  * @author zhangmsh 2022/4/2
@@ -31,7 +31,7 @@ public class WechatOpenBuilder {
 	}
 
 	public WechatOpen build() {
-		return new DefaultWechatOpenImplOpen(this);
+		return new DefaultWechatOpenImpl(this);
 	}
 
 	protected WechatOpenConfig getWechatConfig() {
