@@ -1,5 +1,6 @@
 package org.magneton.module.wechat.offiaccount.handler;
 
+import org.magneton.module.wechat.offiaccount.pojo.EventMsg;
 import org.magneton.module.wechat.offiaccount.pojo.InputTextMsg;
 import org.magneton.module.wechat.offiaccount.pojo.OutputTextMsg;
 
@@ -17,5 +18,11 @@ public interface MessageHandler {
 	 * @return 处理结果
 	 */
 	OutputTextMsg onTextMsg(InputTextMsg textMsg);
+
+	/**
+	 * 订阅事件.
+	 * @param baseMsg 消息
+	 */
+	void onSubscribeEvent(EventMsg baseMsg);
 
 }

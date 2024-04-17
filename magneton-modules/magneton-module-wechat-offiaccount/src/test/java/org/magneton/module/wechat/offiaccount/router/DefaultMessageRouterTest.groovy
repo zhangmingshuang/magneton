@@ -29,27 +29,21 @@ class DefaultMessageRouterTest extends Specification {
                 "  <MsgDataId>xxxx</MsgDataId>\n" +
                 "  <Idx>xxxx</Idx>\n" +
                 "</xml>";
+        and:
+        def handler = Mock(MessageHandler)
+        handler.onTextMsg(_ as InputTextMsg) >> new OutputTextMsg(content: "this is a test")
+
         when:
         def result = messageRouter.route(WxMpXmlMessage.fromXml(msg))
         then:
         result == null
 
         when: "注册处理器"
-        MessageRouterRegistry.registerMsgRoute(new TestMessageHandler())
+        MessageRouterRegistry.registerMsgRoute(handler)
         and:
         result = messageRouter.route(WxMpXmlMessage.fromXml(msg))
         then:
         result != null
         ((WxMpXmlOutTextMessage) result).getContent() == "this is a test"
-    }
-
-    public static class TestMessageHandler implements MessageHandler {
-
-        @Override
-        OutputTextMsg onTextMsg(InputTextMsg inputTextMsg) {
-            OutputTextMsg outputTextMsg = new OutputTextMsg();
-            outputTextMsg.setContent(inputTextMsg.getContent());
-            return outputTextMsg;
-        }
     }
 }

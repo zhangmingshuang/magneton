@@ -20,4 +20,10 @@ public class OutputTextMsg {
 	 */
 	private String content;
 
+	public static OutputTextMsg of(String content) {
+		OutputTextMsg outputTextMsg = new OutputTextMsg();
+		outputTextMsg.setContent(content);
+		return outputTextMsg;
+	}
+
 }

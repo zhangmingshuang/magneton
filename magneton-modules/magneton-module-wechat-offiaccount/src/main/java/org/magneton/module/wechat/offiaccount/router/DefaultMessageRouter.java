@@ -34,7 +34,6 @@ public class DefaultMessageRouter implements MessageRouter {
 				return messageProcessor.doProcess(msgHandler, inMessage);
 			}
 		}
-		String event = inMessage.getEvent();
 		return null;
 	}
 

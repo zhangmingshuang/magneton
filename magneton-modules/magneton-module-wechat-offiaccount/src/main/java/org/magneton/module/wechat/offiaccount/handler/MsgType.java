@@ -3,7 +3,7 @@ package org.magneton.module.wechat.offiaccount.handler;
 import lombok.Getter;
 
 /**
- * 消息类型.
+ * 基础消息能
  * @author zhangmsh.
  * @since 1.0.0
  */
@@ -13,7 +13,12 @@ public enum MsgType {
 	/**
 	 * 普通消息.
 	 */
-	TEXT("wechat_msg_text", new MessageProcessor.TextMessageProcessor());
+	TEXT("wechat_msg_text", new TextMessageProcessor()),
+
+	/**
+	 * 接收事件推送
+	 */
+	EVENT("wechat_msg_event", new EventMessageProcessor());
 
 	private final String code;
 

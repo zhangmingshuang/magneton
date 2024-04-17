@@ -26,8 +26,8 @@ public class BaseMsg {
 	private String toUserName;
 
 	/**
-	 * 文本消息内容
+	 * 消息创建时间 （整型）
 	 */
-	private String content;
+	private long createTime;
 
 }

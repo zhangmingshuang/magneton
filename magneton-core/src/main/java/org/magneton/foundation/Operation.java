@@ -31,6 +31,11 @@ public interface Operation {
 	@Nullable
 	String get();
 
+	default String getOrDefault(String defaultValue) {
+		String value = this.get();
+		return value == null || value.isEmpty() ? defaultValue : value;
+	}
+
 	/**
 	 * 或者
 	 * @param arg 参数

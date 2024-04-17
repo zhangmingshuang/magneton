@@ -23,6 +23,11 @@ public class InputTextMsg extends BaseMsg {
 	private Long msgId;
 
 	/**
+	 * 文本消息内容
+	 */
+	private String content;
+
+	/**
 	 * 消息的数据ID（消息如果来自文章时才有）
 	 */
 	@Nullable
@@ -33,10 +38,5 @@ public class InputTextMsg extends BaseMsg {
 	 */
 	@Nullable
 	private String idx;
-
-	/**
-	 * 消息创建时间 （整型）
-	 */
-	private long createTime;
 
 }
