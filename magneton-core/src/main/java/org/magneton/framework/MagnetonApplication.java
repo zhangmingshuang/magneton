@@ -16,11 +16,11 @@ public class MagnetonApplication {
 	private static final Map<String, Object> CONTENT = new ConcurrentHashMap<>();
 
 	public static void start() {
-		List<FrameworkApplication> priorityFrameworkApplications = FrameworkApplicationRegistry
+		List<FrameworkApplication> priorityFrameworkApplications = FrameworkApplicationRegistrar
 				.getPriorityFrameworkApplications();
 		doStart(priorityFrameworkApplications);
 
-		List<FrameworkApplication> frameworkApplications = FrameworkApplicationRegistry.getFrameworkApplications();
+		List<FrameworkApplication> frameworkApplications = FrameworkApplicationRegistrar.getFrameworkApplications();
 		doStart(frameworkApplications);
 	}
 

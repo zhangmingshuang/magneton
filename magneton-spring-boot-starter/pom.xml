@@ -85,7 +85,7 @@
         </dependency>
         <dependency>
             <groupId>org.magneton</groupId>
-            <artifactId>magneton-module-wechat-offiaccount</artifactId>
+            <artifactId>magneton-module-wechat-mp</artifactId>
             <scope>provided</scope>
         </dependency>
         <!-- 可选功能依赖项 end -->

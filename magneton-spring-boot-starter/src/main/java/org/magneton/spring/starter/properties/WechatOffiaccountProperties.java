@@ -3,9 +3,9 @@ package org.magneton.spring.starter.properties;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.magneton.module.wechat.offiaccount.config.WechatOffiaccountConfig;
+import org.magneton.module.wechat.mp.config.WechatMpConfig;
 import org.magneton.spring.starter.modules.wechat.WechatMiniProgramAutoConfiguration;
-import org.magneton.spring.starter.modules.wechat.WechatOffiaccountAutoConfiguration;
+import org.magneton.spring.starter.modules.wechat.WechatMpAutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -14,14 +14,14 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  *
  * @author zhangmsh 2022/4/3
  * @since 1.0.0
- * @see WechatOffiaccountAutoConfiguration
+ * @see WechatMpAutoConfiguration
  */
 @Setter
 @Getter
 @ToString
-@ConditionalOnClass(WechatOffiaccountConfig.class)
+@ConditionalOnClass(WechatMpConfig.class)
 @ConfigurationProperties(WechatOffiaccountProperties.PREFIX)
-public class WechatOffiaccountProperties extends WechatOffiaccountConfig {
+public class WechatOffiaccountProperties extends WechatMpConfig {
 
 	public static final String PREFIX = "magneton.module.wechat.offiaccount";
 
