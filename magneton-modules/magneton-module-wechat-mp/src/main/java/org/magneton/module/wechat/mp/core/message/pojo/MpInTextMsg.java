@@ -1,4 +1,4 @@
-package org.magneton.module.wechat.mp.core.pojo;
+package org.magneton.module.wechat.mp.core.message.pojo;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -15,7 +15,7 @@ import javax.annotation.Nullable;
 @Setter
 @Getter
 @ToString(callSuper = true)
-public class MpInTextMsg extends MpBaseMsg {
+public class MpInTextMsg extends InBaseMsg {
 
 	/**
 	 * 消息id

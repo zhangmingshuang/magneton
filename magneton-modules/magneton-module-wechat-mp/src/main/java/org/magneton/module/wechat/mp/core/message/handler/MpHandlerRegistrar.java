@@ -1,11 +1,11 @@
-package org.magneton.module.wechat.mp.core.handler;
+package org.magneton.module.wechat.mp.core.message.handler;
 
 import cn.hutool.core.collection.CollectionUtil;
 import com.google.common.base.Preconditions;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import org.magneton.foundation.exception.DuplicateFoundException;
-import org.magneton.module.wechat.mp.core.mode.Mode;
-import org.magneton.module.wechat.mp.core.mode.ModeType;
+import org.magneton.module.wechat.mp.core.message.mode.Mode;
+import org.magneton.module.wechat.mp.core.message.mode.ModeType;
 
 import javax.annotation.Nullable;
 import java.util.List;

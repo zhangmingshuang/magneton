@@ -1,4 +1,4 @@
-package org.magneton.module.wechat.mp.core.pojo;
+package org.magneton.module.wechat.mp.core.message.pojo;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -13,7 +13,12 @@ import lombok.ToString;
 @Setter
 @Getter
 @ToString
-public class MpBaseMsg {
+public class InBaseMsg {
+
+	/**
+	 * 当前请求的APPID
+	 */
+	private String appId;
 
 	/**
 	 * 发送方账号（一个OpenID）

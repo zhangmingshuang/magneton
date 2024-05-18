@@ -1,4 +1,4 @@
-package org.magneton.module.wechat.mp.core.mode;
+package org.magneton.module.wechat.mp.core.message.mode;
 
 import me.chanjar.weixin.mp.bean.message.WxMpXmlMessage;
 import org.magneton.foundation.spi.SPI;

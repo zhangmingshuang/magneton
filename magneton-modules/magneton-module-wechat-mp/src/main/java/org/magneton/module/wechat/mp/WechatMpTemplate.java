@@ -1,7 +1,8 @@
 package org.magneton.module.wechat.mp;
 
 import org.magneton.core.Result;
-import org.magneton.module.wechat.mp.core.pojo.MpMsgBody;
+import org.magneton.module.wechat.mp.core.asset.AssetManagement;
+import org.magneton.module.wechat.mp.core.message.pojo.MpMsgBody;
 
 /**
  * 微信公众号模块.
@@ -26,5 +27,12 @@ public interface WechatMpTemplate {
 	 * @return 返回消息
 	 */
 	Result<String> dispatch(String appid, MpMsgBody message);
+
+	/**
+	 * 素材管理.
+	 * @param appid appid，用来区分不同的公众号
+	 * @return 素材管理
+	 */
+	AssetManagement assetManagement(String appid);
 
 }

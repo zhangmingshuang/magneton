@@ -7,7 +7,7 @@
 	<parent>
 		<groupId>org.magneton</groupId>
 		<artifactId>magneton-modules</artifactId>
-		<version>M2024.SNAPSHOT</version>
+		<version>2024-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>magneton-module-auth</artifactId>

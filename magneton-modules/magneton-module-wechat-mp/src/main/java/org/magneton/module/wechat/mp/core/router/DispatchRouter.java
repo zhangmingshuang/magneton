@@ -20,6 +20,6 @@ public interface DispatchRouter {
 	 * @return 输出消息
 	 */
 	@Nullable
-	WxMpXmlOutMessage dispatch(String appid, WxMpXmlMessage inMessage);
+	WxMpXmlOutMessage dispatch(WxMpXmlMessage inMessage);
 
 }

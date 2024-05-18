@@ -1,7 +1,7 @@
 package org.magneton.spring.starter.modules.wechat.offiaccount;
 
-import org.magneton.module.wechat.mp.core.handler.MpHandler;
-import org.magneton.module.wechat.mp.core.handler.MpHandlerRegistrar;
+import org.magneton.module.wechat.mp.core.message.handler.MpHandler;
+import org.magneton.module.wechat.mp.core.message.handler.MpHandlerRegistrar;
 import org.magneton.module.wechat.mp.core.router.MpDispatchProcessor;
 import org.magneton.module.wechat.mp.core.router.MpDispatchProcessorRegistrar;
 import org.springframework.beans.BeansException;

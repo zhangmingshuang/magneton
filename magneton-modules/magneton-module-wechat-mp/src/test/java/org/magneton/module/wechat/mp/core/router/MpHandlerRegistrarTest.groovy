@@ -1,8 +1,8 @@
 package org.magneton.module.wechat.mp.core.router
 
-import org.magneton.module.wechat.mp.core.handler.MpHandler
-import org.magneton.module.wechat.mp.core.handler.MpHandlerRegistrar
-import org.magneton.module.wechat.mp.core.mode.StandardMsgMode
+import org.magneton.module.wechat.mp.core.message.handler.MpHandler
+import org.magneton.module.wechat.mp.core.message.handler.MpHandlerRegistrar
+import org.magneton.module.wechat.mp.core.message.mode.StandardMsgMode
 import spock.lang.Specification
 
 /**
@@ -22,7 +22,7 @@ class MpHandlerRegistrarTest extends Specification {
         then:
         MpHandlerRegistrar.getHandler(StandardMsgMode.TEXT) == handler
         MpHandlerRegistrar.getHandler(StandardMsgMode.IMAGE) == null
-        
+
         cleanup:
         MpHandlerRegistrar.unregister(handler)
     }

@@ -1,10 +1,10 @@
-package org.magneton.module.wechat.mp.core.handler;
+package org.magneton.module.wechat.mp.core.message.handler;
 
 import com.google.common.collect.Lists;
-import org.magneton.module.wechat.mp.core.mode.Mode;
-import org.magneton.module.wechat.mp.core.mode.StandardMsgMode;
-import org.magneton.module.wechat.mp.core.pojo.MpInTextMsg;
-import org.magneton.module.wechat.mp.core.pojo.MpOutTextMsg;
+import org.magneton.module.wechat.mp.core.message.mode.Mode;
+import org.magneton.module.wechat.mp.core.message.mode.StandardMsgMode;
+import org.magneton.module.wechat.mp.core.message.pojo.MpInTextMsg;
+import org.magneton.module.wechat.mp.core.message.pojo.MpOutMsg;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -32,6 +32,6 @@ public interface MpStandardMsgHandler extends MpHandler {
 	 * @param textMsg 消息
 	 * @return 处理结果
 	 */
-	MpOutTextMsg onTextMsg(MpInTextMsg textMsg);
+	MpOutMsg onTextMsg(MpInTextMsg textMsg);
 
 }

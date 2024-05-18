@@ -3,8 +3,8 @@ package org.magneton.module.wechat.mp.core.router;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.magneton.module.wechat.mp.core.mode.Mode;
-import org.magneton.module.wechat.mp.core.pojo.MpBaseMsg;
+import org.magneton.module.wechat.mp.core.message.mode.Mode;
+import org.magneton.module.wechat.mp.core.message.pojo.InBaseMsg;
 
 import java.util.Map;
 
@@ -17,7 +17,7 @@ import java.util.Map;
 @Setter
 @Getter
 @ToString(callSuper = true)
-public class MpDispatchMsg extends MpBaseMsg {
+public class MpDispatchMsg extends InBaseMsg {
 
 	private Mode mode;
 

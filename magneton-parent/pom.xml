@@ -7,7 +7,7 @@
     <parent>
         <groupId>org.magneton</groupId>
         <artifactId>magneton-dependencies</artifactId>
-        <version>M2024.SNAPSHOT</version>
+        <version>2024-SNAPSHOT</version>
         <relativePath>../magneton-dependencies/pom.xml</relativePath>
     </parent>
 

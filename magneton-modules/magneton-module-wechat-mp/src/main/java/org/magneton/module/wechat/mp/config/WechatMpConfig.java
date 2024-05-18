@@ -35,4 +35,9 @@ public class WechatMpConfig {
 	 */
 	private String aesKey;
 
+	/**
+	 * 是否校验签名
+	 */
+	private boolean signCheck = true;
+
 }

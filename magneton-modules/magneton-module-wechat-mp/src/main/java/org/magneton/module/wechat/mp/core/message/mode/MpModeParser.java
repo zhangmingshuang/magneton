@@ -1,4 +1,4 @@
-package org.magneton.module.wechat.mp.core.mode;
+package org.magneton.module.wechat.mp.core.message.mode;
 
 import com.google.auto.service.AutoService;
 import com.google.common.base.Strings;

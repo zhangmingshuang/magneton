@@ -1,4 +1,4 @@
-package org.magneton.module.wechat.mp.core.pojo;
+package org.magneton.module.wechat.mp.core.message.pojo;
 
 import lombok.Getter;
 import lombok.Setter;

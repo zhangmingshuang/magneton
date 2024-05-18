@@ -1,6 +1,6 @@
-package org.magneton.module.wechat.mp.core.mode;
+package org.magneton.module.wechat.mp.core.message.mode;
 
-import org.magneton.module.wechat.mp.core.handler.MpHandler;
+import org.magneton.module.wechat.mp.core.message.handler.MpHandler;
 
 /**
  * 模式.

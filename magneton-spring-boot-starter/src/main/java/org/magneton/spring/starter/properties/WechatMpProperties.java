@@ -20,10 +20,10 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @Getter
 @ToString
 @ConditionalOnClass(WechatMpConfig.class)
-@ConfigurationProperties(WechatOffiaccountProperties.PREFIX)
-public class WechatOffiaccountProperties extends WechatMpConfig {
+@ConfigurationProperties(WechatMpProperties.PREFIX)
+public class WechatMpProperties extends WechatMpConfig {
 
-	public static final String PREFIX = "magneton.module.wechat.offiaccount";
+	public static final String PREFIX = "magneton.module.wechat.mp";
 
 	/**
 	 * 微信小程序的appId. 用来Condition时判断需要存在这个配置才生效。

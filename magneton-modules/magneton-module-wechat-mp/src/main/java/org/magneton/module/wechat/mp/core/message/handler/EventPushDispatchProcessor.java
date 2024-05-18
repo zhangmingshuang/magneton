@@ -1,9 +1,9 @@
-package org.magneton.module.wechat.mp.core.handler;
+package org.magneton.module.wechat.mp.core.message.handler;
 
 import me.chanjar.weixin.mp.bean.message.WxMpXmlMessage;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlOutMessage;
-import org.magneton.module.wechat.mp.core.mode.Mode;
-import org.magneton.module.wechat.mp.core.pojo.MpEventMsg;
+import org.magneton.module.wechat.mp.core.message.mode.Mode;
+import org.magneton.module.wechat.mp.core.message.pojo.MpEventMsg;
 import org.magneton.module.wechat.mp.core.router.DispatchProcessor;
 
 /**
@@ -24,13 +24,14 @@ import org.magneton.module.wechat.mp.core.router.DispatchProcessor;
 public class EventPushDispatchProcessor implements DispatchProcessor {
 
 	@Override
-	public WxMpXmlOutMessage doProcess(Mode mode, MpHandler msgHandler, WxMpXmlMessage inMessage) {
+	public WxMpXmlOutMessage doProcess(String appid, Mode mode, MpHandler msgHandler, WxMpXmlMessage inMessage) {
 		String fromUser = inMessage.getFromUser();
 		String toUser = inMessage.getToUser();
 		String event = inMessage.getEvent();
 		Long createTime = inMessage.getCreateTime();
 
 		MpEventMsg mpEventMsg = new MpEventMsg();
+		mpEventMsg.setAppId(appid);
 		mpEventMsg.setSubscribe("subscribe".equals(event));
 		mpEventMsg.setFromUser(fromUser);
 		mpEventMsg.setToUser(toUser);

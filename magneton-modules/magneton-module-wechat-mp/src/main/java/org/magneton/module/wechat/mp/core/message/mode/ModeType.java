@@ -1,8 +1,8 @@
-package org.magneton.module.wechat.mp.core.mode;
+package org.magneton.module.wechat.mp.core.message.mode;
 
 import lombok.Getter;
-import org.magneton.module.wechat.mp.core.handler.EventPushDispatchProcessor;
-import org.magneton.module.wechat.mp.core.handler.StandardMsgDispatchProcessor;
+import org.magneton.module.wechat.mp.core.message.handler.EventPushDispatchProcessor;
+import org.magneton.module.wechat.mp.core.message.handler.StandardMsgDispatchProcessor;
 import org.magneton.module.wechat.mp.core.router.DispatchProcessor;
 
 /**

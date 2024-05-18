@@ -1,8 +1,8 @@
-package org.magneton.module.wechat.mp.core.mode;
+package org.magneton.module.wechat.mp.core.message.mode;
 
 import lombok.Getter;
-import org.magneton.module.wechat.mp.core.handler.MpHandler;
-import org.magneton.module.wechat.mp.core.handler.MpStandardMsgHandler;
+import org.magneton.module.wechat.mp.core.message.handler.MpHandler;
+import org.magneton.module.wechat.mp.core.message.handler.MpStandardMsgHandler;
 
 import javax.annotation.Nullable;
 

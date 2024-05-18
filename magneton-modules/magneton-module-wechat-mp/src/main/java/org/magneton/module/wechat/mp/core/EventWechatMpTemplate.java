@@ -12,7 +12,9 @@ import org.magneton.core.Result;
 import org.magneton.module.wechat.mp.WechatMpTemplate;
 import org.magneton.module.wechat.mp.config.WechatMpConfig;
 import org.magneton.module.wechat.mp.constant.Err;
-import org.magneton.module.wechat.mp.core.pojo.MpMsgBody;
+import org.magneton.module.wechat.mp.core.asset.AssetManagement;
+import org.magneton.module.wechat.mp.core.asset.MaterialAssetManagement;
+import org.magneton.module.wechat.mp.core.message.pojo.MpMsgBody;
 import org.magneton.module.wechat.mp.core.router.DefaultDispatchRouter;
 import org.magneton.module.wechat.mp.core.router.DispatchRouter;
 
@@ -23,11 +25,11 @@ import org.magneton.module.wechat.mp.core.router.DispatchRouter;
  * @since 2024
  */
 @Slf4j
-public class EventWechatMpTemplate extends MpContext implements WechatMpTemplate {
+public class EventWechatMpTemplate implements WechatMpTemplate {
 
 	private final WechatMpConfig wechatMpConfig;
 
-	private final DispatchRouter dispatchRouter = new DefaultDispatchRouter(this);
+	private final DispatchRouter dispatchRouter = new DefaultDispatchRouter();
 
 	private WxMpService wxService;
 
@@ -52,6 +54,7 @@ public class EventWechatMpTemplate extends MpContext implements WechatMpTemplate
 		if (!this.wxService.switchover(appid)) {
 			return Result.fail(Err.APPID_INVALID.format(appid));
 		}
+
 		if (this.wxService.checkSignature(timestamp, nonce, signature)) {
 			return Result.successWith(echostr);
 		}
@@ -63,19 +66,23 @@ public class EventWechatMpTemplate extends MpContext implements WechatMpTemplate
 		if (!this.wxService.switchover(appid)) {
 			return Result.fail(Err.APPID_INVALID.format(appid));
 		}
+		MpContext.setCurrentAppid(appid);
+
 		String signature = message.getSignature();
 		String timestamp = message.getTimestamp();
 		String nonce = message.getNonce();
 		String echostr = message.getEchostr();
-		if (!this.wxService.checkSignature(timestamp, nonce, signature)) {
+
+		if (this.wechatMpConfig.isSignCheck() && !this.wxService.checkSignature(timestamp, nonce, signature)) {
 			return Result.fail(Err.SIGNATURE_INVALID);
 		}
+
 		String encryptType = message.getEncryptType();
 		String requestBody = message.getRequestBody();
 		if (encryptType == null || "raw".equalsIgnoreCase(encryptType)) {
 			// 明文传输的消息
 			WxMpXmlMessage inMessage = WxMpXmlMessage.fromXml(requestBody);
-			WxMpXmlOutMessage outMessage = this.dispatchRouter.dispatch(appid, inMessage);
+			WxMpXmlOutMessage outMessage = this.dispatchRouter.dispatch(inMessage);
 			if (outMessage == null) {
 				return Result.successWith("");
 			}
@@ -87,7 +94,7 @@ public class EventWechatMpTemplate extends MpContext implements WechatMpTemplate
 			WxMpXmlMessage inMessage = WxMpXmlMessage.fromEncryptedXml(requestBody,
 					this.wxService.getWxMpConfigStorage(), timestamp, nonce, signature);
 			log.debug("\n消息解密后内容为：\n{} ", inMessage.toString());
-			WxMpXmlOutMessage outMessage = this.dispatchRouter.dispatch(appid, inMessage);
+			WxMpXmlOutMessage outMessage = this.dispatchRouter.dispatch(inMessage);
 			if (outMessage == null) {
 				return Result.successWith("");
 			}
@@ -112,6 +119,16 @@ public class EventWechatMpTemplate extends MpContext implements WechatMpTemplate
 		// 实际项目中请注意要保持单例，不要在每次请求时构造实例
 		this.wxService = new WxMpServiceImpl();
 		this.wxService.setWxMpConfigStorage(config);
+	}
+
+	// =============================== 素材管理 ===============================
+
+	@Override
+	public AssetManagement assetManagement(String appid) {
+		if (!this.wxService.switchover(appid)) {
+			throw new IllegalArgumentException(Err.APPID_INVALID.format(appid).message());
+		}
+		return new MaterialAssetManagement(this.wxService);
 	}
 
 }

@@ -37,7 +37,7 @@ public abstract class ChainNode<T extends ChainContext> {
 	 * @param end 执行链状态，如果设置为 {@code true}则表示忽略后续的执行节点。反之则继续
 	 */
 	protected void setEnd(boolean end) {
-		ChainBus.setChainData("IS_END", end);
+		this.getChainContext().setData("$IS_END", end);
 	}
 
 	/**
@@ -45,7 +45,7 @@ public abstract class ChainNode<T extends ChainContext> {
 	 * @return 如果当前执行链已结束则返回 {@code true}，反之则继续。
 	 */
 	protected boolean isEnd() {
-		return MoreObjects.firstNonNull(ChainBus.getChainContext().getData("IS_END"), Boolean.FALSE);
+		return MoreObjects.firstNonNull(this.getChainContext().getData("$IS_END"), Boolean.FALSE);
 	}
 
 	/**

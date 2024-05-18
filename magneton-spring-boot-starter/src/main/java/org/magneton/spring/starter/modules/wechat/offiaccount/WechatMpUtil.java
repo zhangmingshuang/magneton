@@ -2,7 +2,7 @@ package org.magneton.spring.starter.modules.wechat.offiaccount;
 
 import lombok.SneakyThrows;
 import org.apache.commons.lang3.StringUtils;
-import org.magneton.module.wechat.mp.core.pojo.MpMsgBody;
+import org.magneton.module.wechat.mp.core.message.pojo.MpMsgBody;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

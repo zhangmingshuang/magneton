@@ -3,11 +3,12 @@ package org.magneton.module.wechat.mp.core.mode
 import cn.hutool.json.JSONUtil
 import me.chanjar.weixin.mp.bean.message.WxMpXmlMessage
 import org.magneton.module.wechat.mp.MsgConst
+import org.magneton.module.wechat.mp.core.message.mode.EventPushMode
 import spock.lang.Specification
 import spock.lang.Unroll
 
 /**
- * Test Case For {@link EventPushMode}.
+ * Test Case For {@link org.magneton.module.wechat.mp.core.message.mode.EventPushMode}.
  * @author zhangmsh.
  * @since 2024
  */

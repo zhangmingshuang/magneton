@@ -1,10 +1,10 @@
-package org.magneton.module.wechat.mp.core.handler;
+package org.magneton.module.wechat.mp.core.message.handler;
 
 import me.chanjar.weixin.mp.bean.message.WxMpXmlMessage;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlOutMessage;
-import org.magneton.module.wechat.mp.core.mode.Mode;
-import org.magneton.module.wechat.mp.core.pojo.MpInTextMsg;
-import org.magneton.module.wechat.mp.core.pojo.MpOutTextMsg;
+import org.magneton.module.wechat.mp.core.message.mode.Mode;
+import org.magneton.module.wechat.mp.core.message.pojo.MpInTextMsg;
+import org.magneton.module.wechat.mp.core.message.pojo.MpOutMsg;
 import org.magneton.module.wechat.mp.core.router.DispatchProcessor;
 
 import java.util.Map;
@@ -18,10 +18,11 @@ import java.util.Map;
 public class StandardMsgDispatchProcessor implements DispatchProcessor {
 
 	@Override
-	public WxMpXmlOutMessage doProcess(Mode mode, MpHandler msgHandler, WxMpXmlMessage inMessage) {
+	public WxMpXmlOutMessage doProcess(String appid, Mode mode, MpHandler msgHandler, WxMpXmlMessage inMessage) {
 		Map<String, Object> allFieldsMap = inMessage.getAllFieldsMap();
 
 		MpInTextMsg mpInTextMsg = new MpInTextMsg();
+		mpInTextMsg.setAppId(appid);
 		mpInTextMsg.setMsgId(inMessage.getMsgId());
 		mpInTextMsg.setMsgDataId((String) allFieldsMap.get("MsgDataId"));
 		mpInTextMsg.setIdx((String) allFieldsMap.get("Idx"));
@@ -30,12 +31,11 @@ public class StandardMsgDispatchProcessor implements DispatchProcessor {
 		mpInTextMsg.setContent(inMessage.getContent());
 		mpInTextMsg.setCreateTime(inMessage.getCreateTime());
 
-		MpOutTextMsg mpOutTextMsg = ((MpStandardMsgHandler) msgHandler).onTextMsg(mpInTextMsg);
-		if (mpOutTextMsg == null) {
+		MpOutMsg mpOutMsg = ((MpStandardMsgHandler) msgHandler).onTextMsg(mpInTextMsg);
+		if (mpOutMsg == null) {
 			return null;
 		}
-		return WxMpXmlOutMessage.TEXT().content(mpOutTextMsg.getContent()).fromUser(inMessage.getToUser())
-				.toUser(inMessage.getFromUser()).build();
+		return mpOutMsg.toWxMpXmlOutMessage(inMessage);
 	}
 
 }

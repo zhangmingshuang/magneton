@@ -1,6 +1,6 @@
-package org.magneton.module.wechat.mp.core.handler;
+package org.magneton.module.wechat.mp.core.message.handler;
 
-import org.magneton.module.wechat.mp.core.mode.Mode;
+import org.magneton.module.wechat.mp.core.message.mode.Mode;
 
 import javax.annotation.Nullable;
 import java.util.List;

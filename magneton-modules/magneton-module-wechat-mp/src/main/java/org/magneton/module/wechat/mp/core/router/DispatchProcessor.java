@@ -2,8 +2,9 @@ package org.magneton.module.wechat.mp.core.router;
 
 import me.chanjar.weixin.mp.bean.message.WxMpXmlMessage;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlOutMessage;
-import org.magneton.module.wechat.mp.core.handler.MpHandler;
-import org.magneton.module.wechat.mp.core.mode.Mode;
+import org.magneton.module.wechat.mp.core.MpContext;
+import org.magneton.module.wechat.mp.core.message.handler.MpHandler;
+import org.magneton.module.wechat.mp.core.message.mode.Mode;
 
 /**
  * 消息助手.
@@ -20,6 +21,10 @@ public interface DispatchProcessor {
 	 * @param inMessage 输入消息
 	 * @return 输出消息
 	 */
-	WxMpXmlOutMessage doProcess(Mode mode, MpHandler msgHandler, WxMpXmlMessage inMessage);
+	WxMpXmlOutMessage doProcess(String appid, Mode mode, MpHandler msgHandler, WxMpXmlMessage inMessage);
+
+	default WxMpXmlOutMessage process(Mode msgMode, MpHandler msgHandler, WxMpXmlMessage inMessage) {
+		return this.doProcess(MpContext.currentAppid(), msgMode, msgHandler, inMessage);
+	}
 
 }

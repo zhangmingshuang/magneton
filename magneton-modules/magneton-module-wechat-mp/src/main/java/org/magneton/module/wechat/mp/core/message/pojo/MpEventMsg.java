@@ -1,4 +1,4 @@
-package org.magneton.module.wechat.mp.core.pojo;
+package org.magneton.module.wechat.mp.core.message.pojo;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -13,7 +13,7 @@ import lombok.ToString;
 @Setter
 @Getter
 @ToString(callSuper = true)
-public class MpEventMsg extends MpBaseMsg {
+public class MpEventMsg extends InBaseMsg {
 
 	/**
 	 * 订阅

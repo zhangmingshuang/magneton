@@ -5,11 +5,11 @@ import com.google.common.base.Verify;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlMessage;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlOutMessage;
 import org.magneton.module.wechat.mp.core.MpContext;
-import org.magneton.module.wechat.mp.core.handler.MpHandler;
-import org.magneton.module.wechat.mp.core.handler.MpHandlerRegistrar;
-import org.magneton.module.wechat.mp.core.mode.Mode;
-import org.magneton.module.wechat.mp.core.mode.ModeParsers;
-import org.magneton.module.wechat.mp.core.pojo.MpOutTextMsg;
+import org.magneton.module.wechat.mp.core.message.handler.MpHandler;
+import org.magneton.module.wechat.mp.core.message.handler.MpHandlerRegistrar;
+import org.magneton.module.wechat.mp.core.message.mode.Mode;
+import org.magneton.module.wechat.mp.core.message.mode.ModeParsers;
+import org.magneton.module.wechat.mp.core.message.pojo.MpOutTextMsg;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -22,14 +22,8 @@ import java.util.List;
  */
 public class DefaultDispatchRouter implements DispatchRouter {
 
-	private final MpContext mpContext;
-
-	public DefaultDispatchRouter(MpContext mpContext) {
-		this.mpContext = mpContext;
-	}
-
 	@Override
-	public WxMpXmlOutMessage dispatch(String appid, WxMpXmlMessage inMessage) {
+	public WxMpXmlOutMessage dispatch(WxMpXmlMessage inMessage) {
 		Preconditions.checkNotNull(inMessage, "inMessage must not be null.");
 
 		Mode msgMode = ModeParsers.parse(inMessage);
@@ -48,14 +42,14 @@ public class DefaultDispatchRouter implements DispatchRouter {
 				mpDispatchMsg.setFromUser(inMessage.getFromUser());
 				mpDispatchMsg.setToUser(inMessage.getToUser());
 				mpDispatchMsg.setCreateTime(inMessage.getCreateTime());
-				MpOutTextMsg preOutMessage = mpDispatchProcessor.preDispatch(appid, mpDispatchMsg);
+				MpOutTextMsg preOutMessage = mpDispatchProcessor.preDispatch(MpContext.currentAppid(), mpDispatchMsg);
 				if (preOutMessage != null) {
 					return WxMpXmlOutMessage.TEXT().content(preOutMessage.getContent()).fromUser(inMessage.getToUser())
 							.toUser(inMessage.getFromUser()).build();
 				}
 			}
 		}
-		return dispatchProcessor.doProcess(msgMode, msgHandler, inMessage);
+		return dispatchProcessor.process(msgMode, msgHandler, inMessage);
 	}
 
 	@Nullable

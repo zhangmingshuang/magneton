@@ -5,11 +5,11 @@ import me.chanjar.weixin.mp.bean.message.WxMpXmlMessage
 import me.chanjar.weixin.mp.bean.message.WxMpXmlOutTextMessage
 import org.magneton.module.wechat.mp.MsgConst
 import org.magneton.module.wechat.mp.core.MpContext
-import org.magneton.module.wechat.mp.core.handler.MpHandler
-import org.magneton.module.wechat.mp.core.handler.MpHandlerRegistrar
-import org.magneton.module.wechat.mp.core.mode.StandardMsgMode
-import org.magneton.module.wechat.mp.core.pojo.MpInTextMsg
-import org.magneton.module.wechat.mp.core.pojo.MpOutTextMsg
+import org.magneton.module.wechat.mp.core.message.handler.MpHandler
+import org.magneton.module.wechat.mp.core.message.handler.MpHandlerRegistrar
+import org.magneton.module.wechat.mp.core.message.mode.StandardMsgMode
+import org.magneton.module.wechat.mp.core.message.pojo.MpInTextMsg
+import org.magneton.module.wechat.mp.core.message.pojo.MpOutTextMsg
 import spock.lang.Specification
 
 /**

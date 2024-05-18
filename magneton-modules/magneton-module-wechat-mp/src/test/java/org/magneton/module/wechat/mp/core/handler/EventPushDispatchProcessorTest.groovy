@@ -2,11 +2,13 @@ package org.magneton.module.wechat.mp.core.handler
 
 import me.chanjar.weixin.mp.bean.message.WxMpXmlMessage
 import org.magneton.module.wechat.mp.MsgConst
-import org.magneton.module.wechat.mp.core.mode.EventPushMode
+import org.magneton.module.wechat.mp.core.message.handler.EventPushDispatchProcessor
+import org.magneton.module.wechat.mp.core.message.handler.MpHandler
+import org.magneton.module.wechat.mp.core.message.mode.EventPushMode
 import spock.lang.Specification
 
 /**
- * Test Case For {@link EventPushDispatchProcessor}.
+ * Test Case For {@link org.magneton.module.wechat.mp.core.message.handler.EventPushDispatchProcessor}.
  * @author zhangmsh.
  * @since 2020/3/4.
  */

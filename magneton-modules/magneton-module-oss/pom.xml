@@ -7,7 +7,7 @@
 	<parent>
 		<artifactId>magneton-modules</artifactId>
 		<groupId>org.magneton</groupId>
-		<version>M2024.SNAPSHOT</version>
+		<version>2024-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>magneton-module-oss</artifactId>
