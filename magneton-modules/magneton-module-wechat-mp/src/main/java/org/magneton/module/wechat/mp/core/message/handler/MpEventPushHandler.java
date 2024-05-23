@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import org.magneton.module.wechat.mp.core.message.mode.EventPushMode;
 import org.magneton.module.wechat.mp.core.message.mode.Mode;
 import org.magneton.module.wechat.mp.core.message.pojo.MpEventMsg;
+import org.magneton.module.wechat.mp.core.message.pojo.MpOutMsg;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -30,6 +31,6 @@ public interface MpEventPushHandler extends MpHandler {
 	 * 订阅事件.
 	 * @param baseMsg 消息
 	 */
-	void onSubscribeEvent(MpEventMsg baseMsg);
+	MpOutMsg onSubscribeEvent(MpEventMsg baseMsg);
 
 }
