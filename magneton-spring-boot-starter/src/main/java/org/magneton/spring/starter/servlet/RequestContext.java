@@ -48,9 +48,20 @@ public class RequestContext {
 		HOLDER.set(obj);
 	}
 
+	/**
+	 * 获取当前上下文对象
+	 * @return 如果存在则返回，否则返回null
+	 * @param <E>
+	 */
 	@Nullable
-	public static <E> E get() {
+	public static <E> E getIfPresent() {
 		return (E) HOLDER.get();
+	}
+
+	public static <E> E get() {
+		E obj = (E) HOLDER.get();
+		Preconditions.checkNotNull(obj, "request context is null");
+		return obj;
 	}
 
 	public static <K, V> Map<K, V> map() {
