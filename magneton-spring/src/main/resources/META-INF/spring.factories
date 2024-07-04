@@ -1,0 +1,8 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  org.magneton.spring.MagnetonSpringAutoConfiguration
+org.springframework.boot.SpringApplicationRunListener=\
+  org.magneton.spring.automator.FrameworkSpringBootAutomator,\
+  org.magneton.enhance.design.AutoConfigurationDesign,\
+  org.magneton.enhance.oss.aliyun.AutoConfigurationAliyunOss,\
+  org.magneton.redis.enhance.geo.AutoConfigurationGeo,\
+  org.magneton.redis.enhance.wechat.mp.AutoConfigurationWechatMp

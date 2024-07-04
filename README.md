@@ -2,18 +2,6 @@
 
 unification, simply, quickly working.
 
-# Feature
+# After 2024 Version Refactor
 
-- [Global United Response](./document/Response.md)
-- [Exception Processor](./document/Exception.md)
-
-- Security
-    - [Signature](./document/Signature.md)
-    - [Aes](./document/security/Aes.md) the **GCM** model to perform the encryption.
-    - [Accesser](./document/security/Accesser.md)
-- Distributed Lock
-    - [RedisDistributedLock](./document/locl/DistributedRedisLock.md)
-
-- Utils
-    - [NoninstanceServiceLoader](./magneton-core/src/main/java/org/magneton/core/util/NoninstanceServiceLoader.java)
-      load Class by SPI without instanaction.
+以代码依赖的逻辑，并提供代码模型选择生成能力，使得可以根据需求生成不同的基础模型代码模型。
