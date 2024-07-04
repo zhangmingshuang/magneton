@@ -14,6 +14,8 @@ import org.magneton.module.wechat.mp.config.WechatMpConfig;
 import org.magneton.module.wechat.mp.constant.Err;
 import org.magneton.module.wechat.mp.core.asset.AssetManagement;
 import org.magneton.module.wechat.mp.core.asset.MaterialAssetManagement;
+import org.magneton.module.wechat.mp.core.menu.MenuManagement;
+import org.magneton.module.wechat.mp.core.menu.MpMenuManagement;
 import org.magneton.module.wechat.mp.core.message.pojo.MpMsgBody;
 import org.magneton.module.wechat.mp.core.router.DefaultDispatchRouter;
 import org.magneton.module.wechat.mp.core.router.DispatchRouter;
@@ -32,6 +34,8 @@ public class EventWechatMpTemplate implements WechatMpTemplate {
 	private final DispatchRouter dispatchRouter = new DefaultDispatchRouter();
 
 	private WxMpService wxService;
+
+	private Context context;
 
 	public EventWechatMpTemplate(WechatMpConfig wechatMpConfig) {
 		this.wechatMpConfig = wechatMpConfig;
@@ -119,6 +123,8 @@ public class EventWechatMpTemplate implements WechatMpTemplate {
 		// 实际项目中请注意要保持单例，不要在每次请求时构造实例
 		this.wxService = new WxMpServiceImpl();
 		this.wxService.setWxMpConfigStorage(config);
+
+		this.context = new Context(this.wxService);
 	}
 
 	// =============================== 素材管理 ===============================
@@ -128,7 +134,51 @@ public class EventWechatMpTemplate implements WechatMpTemplate {
 		if (!this.wxService.switchover(appid)) {
 			throw new IllegalArgumentException(Err.APPID_INVALID.format(appid).message());
 		}
-		return new MaterialAssetManagement(this.wxService);
+		return this.context.getAssetManagement();
+	}
+
+	@Override
+	public MenuManagement menuManagement(String appid) {
+		if (!this.wxService.switchover(appid)) {
+			throw new IllegalArgumentException(Err.APPID_INVALID.format(appid).message());
+		}
+		return this.context.getMeneManagement();
+	}
+
+	private static class Context {
+
+		private final WxMpService wxService;
+
+		private AssetManagement assetManagement;
+
+		private MenuManagement menuManagement;
+
+		public Context(WxMpService wxService) {
+			this.wxService = wxService;
+		}
+
+		public AssetManagement getAssetManagement() {
+			if (this.assetManagement == null) {
+				synchronized (Context.class) {
+					if (this.assetManagement == null) {
+						this.assetManagement = new MaterialAssetManagement(this.wxService);
+					}
+				}
+			}
+			return this.assetManagement;
+		}
+
+		public MenuManagement getMeneManagement() {
+			if (this.menuManagement == null) {
+				synchronized (Context.class) {
+					if (this.menuManagement == null) {
+						this.menuManagement = new MpMenuManagement(this.wxService);
+					}
+				}
+			}
+			return this.menuManagement;
+		}
+
 	}
 
 }

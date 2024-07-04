@@ -2,6 +2,7 @@ package org.magneton.module.wechat.mp;
 
 import org.magneton.core.Result;
 import org.magneton.module.wechat.mp.core.asset.AssetManagement;
+import org.magneton.module.wechat.mp.core.menu.MenuManagement;
 import org.magneton.module.wechat.mp.core.message.pojo.MpMsgBody;
 
 /**
@@ -34,5 +35,12 @@ public interface WechatMpTemplate {
 	 * @return 素材管理
 	 */
 	AssetManagement assetManagement(String appid);
+
+	/**
+	 * 菜单管理.
+	 * @param appid appid, 用来区分不同的公众号
+	 * @return 菜单管理
+	 */
+	MenuManagement menuManagement(String appid);
 
 }

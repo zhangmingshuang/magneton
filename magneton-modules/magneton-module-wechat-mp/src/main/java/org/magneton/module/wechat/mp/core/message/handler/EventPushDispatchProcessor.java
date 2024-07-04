@@ -4,6 +4,7 @@ import me.chanjar.weixin.mp.bean.message.WxMpXmlMessage;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlOutMessage;
 import org.magneton.module.wechat.mp.core.message.mode.Mode;
 import org.magneton.module.wechat.mp.core.message.pojo.MpEventMsg;
+import org.magneton.module.wechat.mp.core.message.pojo.MpOutMsg;
 import org.magneton.module.wechat.mp.core.router.DispatchProcessor;
 
 /**
@@ -37,9 +38,11 @@ public class EventPushDispatchProcessor implements DispatchProcessor {
 		mpEventMsg.setToUser(toUser);
 		mpEventMsg.setCreateTime(createTime);
 
-		((MpEventPushHandler) msgHandler).onSubscribeEvent(mpEventMsg);
-
-		return null;
+		MpOutMsg mpOutMsg = ((MpEventPushHandler) msgHandler).onSubscribeEvent(mpEventMsg);
+		if (mpOutMsg == null) {
+			return null;
+		}
+		return mpOutMsg.toWxMpXmlOutMessage(inMessage);
 	}
 
 }
