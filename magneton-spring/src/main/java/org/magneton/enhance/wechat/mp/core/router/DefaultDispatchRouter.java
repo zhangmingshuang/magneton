@@ -44,11 +44,8 @@ public class DefaultDispatchRouter implements DispatchRouter {
 				mpDispatchMsg.setCreateTime(inMessage.getCreateTime());
 				MpOutTextMsg preOutMessage = mpDispatchProcessor.preDispatch(MpContext.currentAppid(), mpDispatchMsg);
 				if (preOutMessage != null) {
-					return WxMpXmlOutMessage.TEXT()
-						.content(preOutMessage.getContent())
-						.fromUser(inMessage.getToUser())
-						.toUser(inMessage.getFromUser())
-						.build();
+					return WxMpXmlOutMessage.TEXT().content(preOutMessage.getContent()).fromUser(inMessage.getToUser())
+							.toUser(inMessage.getFromUser()).build();
 				}
 			}
 		}
@@ -70,11 +67,8 @@ public class DefaultDispatchRouter implements DispatchRouter {
 		for (MpDispatchProcessor preProcessor : processors) {
 			MpOutTextMsg outMessage = preProcessor.preDispatch(appid, dispatchMsg);
 			if (outMessage != null) {
-				return WxMpXmlOutMessage.TEXT()
-					.content(outMessage.getContent())
-					.fromUser(inMessage.getToUser())
-					.toUser(inMessage.getFromUser())
-					.build();
+				return WxMpXmlOutMessage.TEXT().content(outMessage.getContent()).fromUser(inMessage.getToUser())
+						.toUser(inMessage.getFromUser()).build();
 			}
 		}
 		return null;

@@ -1,6 +1,6 @@
 package org.magneton.enhance.safedog.sign;
 
-import org.magneton.core.Result;
+import org.magneton.enhance.Result;
 
 /**
  * 签名校验.

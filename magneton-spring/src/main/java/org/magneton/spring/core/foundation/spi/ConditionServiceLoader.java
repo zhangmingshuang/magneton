@@ -484,7 +484,7 @@ public final class ConditionServiceLoader<S> implements Iterable<Class<S>> {
 		return new Iterator<Class<S>>() {
 
 			Iterator<Map.Entry<String, Class<S>>> knownProviders = ConditionServiceLoader.this.providers.entrySet()
-				.iterator();
+					.iterator();
 
 			@Override
 			public boolean hasNext() {
@@ -618,7 +618,7 @@ public final class ConditionServiceLoader<S> implements Iterable<Class<S>> {
 				if (this.instantiation) {
 					S p = this.service.cast(c.newInstance());
 					ConditionServiceLoader.this.providersInstance.computeIfAbsent(clazz, k -> new ArrayList<>(2))
-						.add(p);
+							.add(p);
 				}
 				return (Class<S>) c;
 			}

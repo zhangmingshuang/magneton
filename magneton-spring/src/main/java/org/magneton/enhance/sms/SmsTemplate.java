@@ -1,6 +1,6 @@
 package org.magneton.enhance.sms;
 
-import org.magneton.core.Result;
+import org.magneton.enhance.Result;
 
 import javax.annotation.Nullable;
 

@@ -9,7 +9,7 @@ import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.material.WxMpMaterial;
 import me.chanjar.weixin.mp.bean.material.WxMpMaterialUploadResult;
-import org.magneton.core.Result;
+import org.magneton.enhance.Result;
 import org.magneton.enhance.wechat.mp.core.asset.pojo.MpMaterialVoiceUploadReq;
 import org.magneton.enhance.wechat.mp.core.util.ResultUtil;
 
@@ -69,8 +69,8 @@ public class MaterialAssetManagement implements AssetManagement {
 		wxMaterial.setFile(file);
 		wxMaterial.setName(fileName);
 		try {
-			WxMpMaterialUploadResult res = this.wxService.getMaterialService()
-				.materialFileUpload(mediaType, wxMaterial);
+			WxMpMaterialUploadResult res = this.wxService.getMaterialService().materialFileUpload(mediaType,
+					wxMaterial);
 			if (ResultUtil.ok(res.getErrCode())) {
 				// 上传成功
 				return Result.successWith(res.getMediaId());

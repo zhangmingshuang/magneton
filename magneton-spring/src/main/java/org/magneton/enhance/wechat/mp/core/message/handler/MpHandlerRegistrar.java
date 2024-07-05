@@ -5,7 +5,7 @@ import com.google.common.base.Preconditions;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import org.magneton.enhance.wechat.mp.core.message.mode.Mode;
 import org.magneton.enhance.wechat.mp.core.message.mode.ModeType;
-import org.magneton.foundation.exception.DuplicateFoundException;
+import org.magneton.spring.core.exception.DuplicateFoundException;
 
 import javax.annotation.Nullable;
 import java.util.List;

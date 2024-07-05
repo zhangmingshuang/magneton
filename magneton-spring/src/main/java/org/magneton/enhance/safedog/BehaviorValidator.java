@@ -1,6 +1,6 @@
 package org.magneton.enhance.safedog;
 
-import org.magneton.core.Result;
+import org.magneton.enhance.Result;
 
 /**
  * 行为验证器.

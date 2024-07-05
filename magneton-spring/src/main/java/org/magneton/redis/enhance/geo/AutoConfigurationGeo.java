@@ -2,6 +2,7 @@ package org.magneton.redis.enhance.geo;
 
 import org.magneton.redis.enhance.geo.redis.RedissonGeo;
 import org.redisson.api.RedissonClient;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Configuration(proxyBeanMethods = false)
 @ConditionalOnClass({ RedissonClient.class, Geo.class })
+@ConditionalOnBean(RedissonClient.class)
 public class AutoConfigurationGeo {
 
 	@Bean

@@ -1,7 +1,7 @@
 package org.magneton.enhance.wechat.mp.core.router;
 
 import org.magneton.enhance.wechat.mp.core.message.pojo.MpOutTextMsg;
-import org.magneton.framework.Ordered;
+import org.springframework.core.Ordered;
 
 import javax.annotation.Nullable;
 

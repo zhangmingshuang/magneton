@@ -19,7 +19,7 @@ import lombok.Getter;
 import lombok.ToString;
 import org.magneton.enhance.design.exception.DuplicateChainException;
 import org.magneton.enhance.design.exception.ExtNotFoundException;
-import org.magneton.foundation.collection.CopyOnWriteHashMap;
+import org.magneton.foundiation.CopyOnWriteHashMap;
 
 import java.util.Comparator;
 import java.util.Map;

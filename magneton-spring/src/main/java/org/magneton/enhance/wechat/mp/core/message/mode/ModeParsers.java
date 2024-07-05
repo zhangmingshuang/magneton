@@ -2,8 +2,8 @@ package org.magneton.enhance.wechat.mp.core.message.mode;
 
 import com.google.common.collect.Lists;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlMessage;
-import org.magneton.foundation.spi.SPILoader;
-import org.magneton.framework.util.OrderUtil;
+import org.magneton.spring.core.foundation.spi.SPILoader;
+import org.magneton.spring.util.OrderUtil;
 
 import java.util.List;
 

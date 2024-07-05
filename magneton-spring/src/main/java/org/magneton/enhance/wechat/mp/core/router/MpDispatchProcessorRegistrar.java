@@ -1,6 +1,6 @@
 package org.magneton.enhance.wechat.mp.core.router;
 
-import org.magneton.framework.util.OrderUtil;
+import org.magneton.spring.util.OrderUtil;
 
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;

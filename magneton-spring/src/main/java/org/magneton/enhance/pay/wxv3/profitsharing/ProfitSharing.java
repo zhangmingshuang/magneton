@@ -1,6 +1,6 @@
 package org.magneton.enhance.pay.wxv3.profitsharing;
 
-import org.magneton.core.Result;
+import org.magneton.enhance.Result;
 import org.magneton.enhance.pay.wxv3.core.BaseV3Api;
 import org.magneton.enhance.pay.wxv3.profitsharing.entity.*;
 

@@ -1,6 +1,6 @@
 package org.magneton.enhance.sms.process;
 
-import org.magneton.core.Result;
+import org.magneton.enhance.Result;
 import org.magneton.enhance.sms.entity.SmsToken;
 import org.magneton.enhance.sms.process.aliyun.AliyunSmsProcessor;
 

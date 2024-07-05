@@ -36,7 +36,7 @@ public class AppPrepayImpl implements AppPrepay {
 			throw new AmountException(Strings.lenientFormat("amount %s less then 1", amount));
 		}
 		Result<PrepayId> wechatV3PayPreOrderRes = this.basePay
-			.doPreOrder("https://api.mch.weixin.qq.com/v3/pay/transactions/app", req, PrepayId.class);
+				.doPreOrder("https://api.mch.weixin.qq.com/v3/pay/transactions/app", req, PrepayId.class);
 		if (!wechatV3PayPreOrderRes.isSuccess()) {
 			return Result.failBy(wechatV3PayPreOrderRes.getMessage());
 		}

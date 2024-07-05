@@ -1,6 +1,6 @@
 package org.magneton.enhance.safedog.sign;
 
-import org.magneton.core.Result;
+import org.magneton.enhance.Result;
 
 import javax.annotation.Nullable;
 import java.util.Map;

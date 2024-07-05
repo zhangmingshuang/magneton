@@ -2,7 +2,7 @@ package org.magneton.enhance.sms.monitor;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
-import org.magneton.foundation.spi.SPILoader;
+import org.magneton.spring.core.foundation.spi.SPILoader;
 
 import java.util.List;
 

@@ -1,13 +1,13 @@
 package org.magneton.redis;
 
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
-import org.magneton.foundation.MoreResources;
-import org.magneton.foundation.MoreStrings;
-import org.magneton.foundation.Operation;
-import org.magneton.foundation.RuntimeArgs;
+import org.magneton.foundiation.MoreResources;
+import org.magneton.foundiation.MoreStrings;
+import org.magneton.foundiation.Operation;
+import org.magneton.foundiation.RuntimeArgs;
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;
 import org.redisson.config.Config;
@@ -37,19 +37,18 @@ public class RedissonAdapter {
 	public static RedissonClient createClient(RedissonClientType redissonClientType) {
 		Preconditions.checkNotNull(redissonClientType);
 		switch (redissonClientType) {
-			case CLUSTER:
-				return createClusterServersClient();
-			case MASTER_SLAVE:
-				return createMasterSlaveServersClient();
-			case REPLICATED:
-				return createReplicatedServersClient();
-			case SENTINEL:
-				return createSentinelServersClient();
-			case SINGLE:
-				return createSingleServerClient();
-			default:
-				throw new UnsupportedOperationException(
-						String.format("redisson %s type unsupported", redissonClientType));
+		case CLUSTER:
+			return createClusterServersClient();
+		case MASTER_SLAVE:
+			return createMasterSlaveServersClient();
+		case REPLICATED:
+			return createReplicatedServersClient();
+		case SENTINEL:
+			return createSentinelServersClient();
+		case SINGLE:
+			return createSingleServerClient();
+		default:
+			throw new UnsupportedOperationException(String.format("redisson %s type unsupported", redissonClientType));
 		}
 	}
 

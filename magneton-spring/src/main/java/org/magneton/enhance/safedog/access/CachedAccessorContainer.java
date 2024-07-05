@@ -14,10 +14,8 @@ import java.util.concurrent.TimeUnit;
  */
 public class CachedAccessorContainer implements AccessorContainer {
 
-	private final Cache<String, Accessor> accessors = CacheBuilder.newBuilder()
-		.maximumSize(1024)
-		.expireAfterWrite(5, TimeUnit.MINUTES)
-		.build();
+	private final Cache<String, Accessor> accessors = CacheBuilder.newBuilder().maximumSize(1024)
+			.expireAfterWrite(5, TimeUnit.MINUTES).build();
 
 	@Nullable
 	@Override

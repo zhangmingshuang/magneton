@@ -31,13 +31,8 @@ public class Jsr303Validator {
 		}
 		StringBuilder builder = new StringBuilder(256);
 		for (ConstraintViolation<Object> constraintViolation : constraintViolations) {
-			builder.append(constraintViolation.getPropertyPath())
-				.append(" : ")
-				.append(constraintViolation.getMessage())
-				.append("(")
-				.append(constraintViolation.getInvalidValue())
-				.append(")")
-				.append("\n");
+			builder.append(constraintViolation.getPropertyPath()).append(" : ").append(constraintViolation.getMessage())
+					.append("(").append(constraintViolation.getInvalidValue()).append(")").append("\n");
 		}
 		throw new IllegalArgumentException(builder.toString());
 	}

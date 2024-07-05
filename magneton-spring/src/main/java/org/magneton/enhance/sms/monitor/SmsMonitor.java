@@ -1,6 +1,6 @@
 package org.magneton.enhance.sms.monitor;
 
-import org.magneton.foundation.spi.SPI;
+import org.magneton.spring.core.foundation.spi.SPI;
 
 /**
  * 短信监控.

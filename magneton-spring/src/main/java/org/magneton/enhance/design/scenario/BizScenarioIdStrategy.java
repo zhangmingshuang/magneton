@@ -30,7 +30,7 @@ public class BizScenarioIdStrategy {
 
 		@Override
 		public String getId(BizScenario bizScenario) {
-			return genId(bizScenario.getBizId(), bizScenario.getUseCase(), BizScenario.DEFAULT_SCENARIO);
+			return BizScenarioId.genId(bizScenario.getBizId(), bizScenario.getUseCase(), BizScenario.DEFAULT_SCENARIO);
 		}
 
 	}
@@ -39,7 +39,8 @@ public class BizScenarioIdStrategy {
 
 		@Override
 		public String getId(BizScenario bizScenario) {
-			return genId(bizScenario.getBizId(), BizScenario.DEFAULT_USE_CASE, BizScenario.DEFAULT_SCENARIO);
+			return BizScenarioId.genId(bizScenario.getBizId(), BizScenario.DEFAULT_USE_CASE,
+					BizScenario.DEFAULT_SCENARIO);
 		}
 
 	}
@@ -48,7 +49,7 @@ public class BizScenarioIdStrategy {
 
 		@Override
 		public String getId(BizScenario bizScenario) {
-			return genId(bizScenario.getBizId(), bizScenario.getUseCase(), bizScenario.getScenario());
+			return BizScenarioId.genId(bizScenario.getBizId(), bizScenario.getUseCase(), bizScenario.getScenario());
 		}
 
 	}
@@ -57,7 +58,8 @@ public class BizScenarioIdStrategy {
 
 		@Override
 		public String getId(BizScenario bizScenario) {
-			return genId(BizScenario.DEFAULT_BIZ_ID, BizScenario.DEFAULT_USE_CASE, BizScenario.DEFAULT_SCENARIO);
+			return BizScenarioId.genId(BizScenario.DEFAULT_BIZ_ID, BizScenario.DEFAULT_USE_CASE,
+					BizScenario.DEFAULT_SCENARIO);
 		}
 
 	}

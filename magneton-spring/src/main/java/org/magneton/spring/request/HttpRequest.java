@@ -3,6 +3,7 @@ package org.magneton.spring.request;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.collect.Maps;
+import org.magneton.spring.core.exception.ProcessException;
 
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;

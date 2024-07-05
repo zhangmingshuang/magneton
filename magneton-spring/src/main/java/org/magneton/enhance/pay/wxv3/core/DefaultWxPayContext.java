@@ -117,8 +117,8 @@ public class DefaultWxPayContext implements WxPayContext {
 			throw new PrivateKeyNotFoundException(e);
 		}
 		WechatPayHttpClientBuilder builder = WechatPayHttpClientBuilder.create()
-			.withMerchant(merchantId, merchantSerialNumber, merchantPrivateKey)
-			.withValidator(this.wechatPay2Validator);
+				.withMerchant(merchantId, merchantSerialNumber, merchantPrivateKey)
+				.withValidator(this.wechatPay2Validator);
 		// 通过WechatPayHttpClientBuilder构造的HttpClient，会自动的处理签名和验签
 		this.httpClient = builder.build();
 	}

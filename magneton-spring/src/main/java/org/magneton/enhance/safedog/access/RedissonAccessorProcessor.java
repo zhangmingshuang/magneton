@@ -90,8 +90,8 @@ public class RedissonAccessorProcessor implements AccessorProcessor {
 					atomicLong.expire(this.accessConfig.getWrongTimeToForget(), TimeUnit.MILLISECONDS);
 				}
 				if (wrongs >= this.accessConfig.getNumberOfWrongs()) {
-					long lockTime = this.accessConfig.getAccessTimeCalculator()
-						.calculate(this.name, wrongs, this.accessConfig);
+					long lockTime = this.accessConfig.getAccessTimeCalculator().calculate(this.name, wrongs,
+							this.accessConfig);
 					RBucket<Long> bucket = this.redissonClient.getBucket(this.bizKey(":lock:"));
 					bucket.set(System.currentTimeMillis(), lockTime, TimeUnit.MILLISECONDS);
 					atomicLong.delete();

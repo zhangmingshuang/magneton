@@ -1,6 +1,6 @@
 package org.magneton.enhance.wechat.mp.constant;
 
-import org.magneton.core.ResultBody;
+import org.magneton.enhance.ResultBody;
 
 /**
  * 全局错误码

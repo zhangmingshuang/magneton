@@ -2,7 +2,7 @@ package org.magneton.enhance.safedog.sign;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
-import org.magneton.core.Result;
+import org.magneton.enhance.Result;
 import org.magneton.enhance.safedog.SafeDogErr;
 
 import java.util.concurrent.TimeUnit;
@@ -15,10 +15,8 @@ import java.util.concurrent.TimeUnit;
  */
 public class MemorySignValidator implements SignValidator {
 
-	private final Cache<String, Long> cache = CacheBuilder.newBuilder()
-		.expireAfterWrite(30, TimeUnit.MINUTES)
-		.maximumSize(2048)
-		.build();
+	private final Cache<String, Long> cache = CacheBuilder.newBuilder().expireAfterWrite(30, TimeUnit.MINUTES)
+			.maximumSize(2048).build();
 
 	@Override
 	public Result<Void> validate(String expectedSign, String actualSign, int signPeriod) {

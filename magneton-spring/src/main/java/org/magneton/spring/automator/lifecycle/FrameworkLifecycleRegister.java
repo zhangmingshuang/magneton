@@ -34,9 +34,11 @@ public class FrameworkLifecycleRegister {
 			Priority priority = AnnotationUtil.getAnnotation(spiFrameworkLifecycle.getClass(), Priority.class);
 			if (priority != null) {
 				PRIORITY_FRAMEWORK_APPLICATIONS.add(spiFrameworkLifecycle);
+				OrderUtil.sort(PRIORITY_FRAMEWORK_APPLICATIONS);
 			}
 			else {
 				FRAMEWORK_APPLICATIONS.add(spiFrameworkLifecycle);
+				OrderUtil.sort(FRAMEWORK_APPLICATIONS);
 			}
 		}
 	}

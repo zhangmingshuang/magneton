@@ -8,7 +8,7 @@ import me.chanjar.weixin.mp.bean.message.WxMpXmlMessage;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlOutMessage;
 import me.chanjar.weixin.mp.config.impl.WxMpDefaultConfigImpl;
 import org.apache.commons.lang3.StringUtils;
-import org.magneton.core.Result;
+import org.magneton.enhance.Result;
 import org.magneton.enhance.wechat.mp.WechatMpTemplate;
 import org.magneton.enhance.wechat.mp.config.WechatMpConfig;
 import org.magneton.enhance.wechat.mp.constant.Err;

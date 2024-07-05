@@ -1,6 +1,6 @@
 package org.magneton.enhance.wechat.mp.core.asset;
 
-import org.magneton.core.Result;
+import org.magneton.enhance.Result;
 import org.magneton.enhance.wechat.mp.core.asset.pojo.MpMaterialVoiceUploadReq;
 
 /**

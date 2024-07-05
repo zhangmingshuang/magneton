@@ -1,7 +1,7 @@
 package org.magneton.enhance.safedog;
 
 import com.google.common.base.Strings;
-import org.magneton.core.ResultBody;
+import org.magneton.enhance.ResultBody;
 
 /**
  * 模型错误代码

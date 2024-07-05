@@ -1,6 +1,6 @@
 package org.magneton.enhance.im.tencent;
 
-import org.magneton.spring.starter.extension.tencent.im.TencentImUserSignCache;
+import org.magneton.redis.enhance.im.tencent.TencentImUserSignCache;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;

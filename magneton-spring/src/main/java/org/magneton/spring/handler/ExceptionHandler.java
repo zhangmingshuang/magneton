@@ -1,12 +1,12 @@
 package org.magneton.spring.handler;
 
-import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson2.JSON;
 import com.google.common.base.Preconditions;
 import com.google.common.net.MediaType;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import org.magneton.core.Result;
-import org.magneton.core.ResultBody;
-import org.magneton.foundation.exception.ProcessException;
+import org.magneton.enhance.Result;
+import org.magneton.enhance.ResultBody;
+import org.magneton.spring.core.exception.ProcessException;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;

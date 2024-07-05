@@ -86,17 +86,17 @@ public class WxV3PayImpl implements WxV3Pay {
 		Type reqIdType = query.getReqIdType();
 		String url;
 		switch (reqIdType) {
-			case OUT_TRADE_NO:
-				url = Strings.lenientFormat(
-						"https://api.mch.weixin.qq.com/v3/pay/partner/transactions/out-trade-no/%s?mchid=%s",
-						Preconditions.checkNotNull(query.getReqId()), this.payContext.getPayConfig().getMerchantId());
-				break;
-			case TRANSACTION_ID:
-				url = Strings.lenientFormat("https://api.mch.weixin.qq.com/v3/pay/transactions/id/%s?mchid=%s",
-						Preconditions.checkNotNull(query.getReqId()), this.payContext.getPayConfig().getMerchantId());
-				break;
-			default:
-				throw new PayException("unknown reqIdType %s", reqIdType);
+		case OUT_TRADE_NO:
+			url = Strings.lenientFormat(
+					"https://api.mch.weixin.qq.com/v3/pay/partner/transactions/out-trade-no/%s?mchid=%s",
+					Preconditions.checkNotNull(query.getReqId()), this.payContext.getPayConfig().getMerchantId());
+			break;
+		case TRANSACTION_ID:
+			url = Strings.lenientFormat("https://api.mch.weixin.qq.com/v3/pay/transactions/id/%s?mchid=%s",
+					Preconditions.checkNotNull(query.getReqId()), this.payContext.getPayConfig().getMerchantId());
+			break;
+		default:
+			throw new PayException("unknown reqIdType %s", reqIdType);
 		}
 		HttpGet httpGet = this.wechatBaseV3Pay.newHttpGet(url);
 		Result<WxPayOrder> res = this.wechatBaseV3Pay.doRequest(httpGet, WxPayOrder.class);
@@ -126,7 +126,7 @@ public class WxV3PayImpl implements WxV3Pay {
 				WechatPayHttpHeaders.WECHAT_PAY_SERIAL);
 		// HTTP头Wechatpay-Timestamp 中的应答时间戳。
 		String reqWechatPayTimestamp = httpHeaders
-			.get(WechatPayHttpHeaders.WECHAT_PAY_TIMESTAMP.toLowerCase(Locale.ROOT));
+				.get(WechatPayHttpHeaders.WECHAT_PAY_TIMESTAMP.toLowerCase(Locale.ROOT));
 		Preconditions.checkArgument(!Strings.isNullOrEmpty(reqWechatPayTimestamp), "request header %s miss",
 				WechatPayHttpHeaders.WECHAT_PAY_TIMESTAMP);
 		// HTTP头Wechatpay-Nonce 中的应答随机串。
@@ -135,7 +135,7 @@ public class WxV3PayImpl implements WxV3Pay {
 				WechatPayHttpHeaders.WECHAT_PAY_NONCE);
 		// 应答签名
 		String reqWechatPaySignature = httpHeaders
-			.get(WechatPayHttpHeaders.WECHAT_PAY_SIGNATURE.toLowerCase(Locale.ROOT));
+				.get(WechatPayHttpHeaders.WECHAT_PAY_SIGNATURE.toLowerCase(Locale.ROOT));
 		Preconditions.checkArgument(!Strings.isNullOrEmpty(reqWechatPaySignature), "request header %s miss",
 				WechatPayHttpHeaders.WECHAT_PAY_SIGNATURE);
 
@@ -149,11 +149,8 @@ public class WxV3PayImpl implements WxV3Pay {
 		// wechatPaySerial, reqWechatPaySerial));
 		// }
 		NotificationRequest request = new NotificationRequest.Builder().withSerialNumber(reqWechatPaySerial)
-			.withNonce(reqWechatPayNonce)
-			.withTimestamp(reqWechatPayTimestamp)
-			.withSignature(reqWechatPaySignature)
-			.withBody(body)
-			.build();
+				.withNonce(reqWechatPayNonce).withTimestamp(reqWechatPayTimestamp).withSignature(reqWechatPaySignature)
+				.withBody(body).build();
 		NotificationHandler handler = new NotificationHandler(this.payContext.getVerifier(),
 				payConfig.getApiV3Key().getBytes(StandardCharsets.UTF_8));
 		// 验签和解析请求体

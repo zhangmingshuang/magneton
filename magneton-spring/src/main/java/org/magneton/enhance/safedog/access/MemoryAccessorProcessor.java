@@ -47,12 +47,10 @@ public class MemoryAccessorProcessor implements AccessorProcessor {
 		private final Cache<String, Long> locked;
 
 		public CacheNode(AccessConfig accessConfig) {
-			this.locked = CacheBuilder.newBuilder()
-				.expireAfterWrite(accessConfig.getLockTime(), TimeUnit.MILLISECONDS)
-				.build();
+			this.locked = CacheBuilder.newBuilder().expireAfterWrite(accessConfig.getLockTime(), TimeUnit.MILLISECONDS)
+					.build();
 			this.errorRecords = CacheBuilder.newBuilder()
-				.expireAfterAccess(accessConfig.getWrongTimeToForget(), TimeUnit.MILLISECONDS)
-				.build();
+					.expireAfterAccess(accessConfig.getWrongTimeToForget(), TimeUnit.MILLISECONDS).build();
 		}
 
 	}
@@ -96,8 +94,8 @@ public class MemoryAccessorProcessor implements AccessorProcessor {
 				AtomicInteger errorCount = cacheNode.errorRecords.get(this.name, AtomicInteger::new);
 				int wrongs = errorCount.incrementAndGet();
 				if (wrongs >= this.accessConfig.getNumberOfWrongs()) {
-					long lockTime = this.accessConfig.getAccessTimeCalculator()
-						.calculate(this.name, wrongs, this.accessConfig);
+					long lockTime = this.accessConfig.getAccessTimeCalculator().calculate(this.name, wrongs,
+							this.accessConfig);
 					cacheNode.locked.put(this.name, System.currentTimeMillis() + lockTime);
 					cacheNode.errorRecords.invalidate(this.name);
 					return 0;

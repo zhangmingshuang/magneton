@@ -70,8 +70,7 @@ public class RedissonSmsTemplate extends AbstractSmsTemplate {
 	protected void onSendSuccess(String mobile, SmsToken smsToken) {
 		String token = Preconditions.checkNotNull(smsToken.getToken());
 		CacheToken cacheToken = new CacheToken().setMobile(Preconditions.checkNotNull(mobile))
-			.setCode(Preconditions.checkNotNull(smsToken.getCode()))
-			.setTime(System.currentTimeMillis());
+				.setCode(Preconditions.checkNotNull(smsToken.getCode())).setTime(System.currentTimeMillis());
 		int periodSecond = super.getSmsProperty().getPeriodSecond();
 		this.getTokenTokenCache(token).set(cacheToken, periodSecond, TimeUnit.SECONDS);
 		this.getTokenMobileCache(mobile).set(token, periodSecond, TimeUnit.SECONDS);

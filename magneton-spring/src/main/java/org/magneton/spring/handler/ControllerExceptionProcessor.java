@@ -3,9 +3,8 @@ package org.magneton.spring.handler;
 import com.google.common.base.Preconditions;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-import org.magneton.core.Result;
-import org.magneton.core.ResultException;
-import org.magneton.foundation.MoreCollections;
+import org.magneton.enhance.Result;
+import org.magneton.enhance.ResultException;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -26,9 +25,10 @@ import java.util.concurrent.locks.ReentrantLock;
  *
  * <p>
  * this use to process all the {@code Exception}s if throwed. but, in default is only
- * {@link ResultException} processed . if want process other {@code Exception}s, using
- * {@link ExceptionProcessor} to register a processor to process a specify
- * {@code Exception}.
+ * {@link org.magneton.enhance.ResultException} processed .
+ *
+ * if want process other {@code Exception}s, using {@link ExceptionProcessor} to register
+ * a processor to process a specify {@code Exception}.
  *
  * <p>
  * simultaneously, customize a new {@code RestControllerAdvice} extend other exception
@@ -101,7 +101,7 @@ public class ControllerExceptionProcessor implements InitializingBean {
 		this.lock.lock();
 		try {
 			if (this.exceptionProcessorsAddable.compareAndSet(true, false)) {
-				if (!MoreCollections.isNullOrEmpty(this.exceptionProcessors)) {
+				if (this.exceptionProcessors != null && !this.exceptionProcessors.isEmpty()) {
 					this.exceptionProcessors.sort(
 							Comparator.comparingInt(e -> OrderUtils.getOrder(e.getClass(), Ordered.LOWEST_PRECEDENCE)));
 					this.exceptionProcessors.forEach(this.exceptionProcessorContext::registerExceptionProcessor);

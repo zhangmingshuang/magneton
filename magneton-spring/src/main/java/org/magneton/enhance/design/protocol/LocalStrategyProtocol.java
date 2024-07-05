@@ -16,7 +16,7 @@ package org.magneton.enhance.design.protocol;
 
 import com.google.auto.service.AutoService;
 import org.magneton.enhance.design.exception.MethodExecException;
-import org.magneton.foundation.spi.SPI;
+import org.magneton.spring.core.foundation.spi.SPI;
 
 import java.lang.reflect.InvocationTargetException;
 

@@ -10,10 +10,10 @@ import com.google.common.net.MediaType;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.HmacAlgorithms;
 import org.apache.commons.codec.digest.HmacUtils;
-import org.magneton.core.Result;
+import org.magneton.enhance.Result;
 import org.magneton.enhance.safedog.BehaviorValidator;
 import org.magneton.enhance.safedog.SafeDogErr;
-import org.magneton.foundation.constant.Constant;
+import org.magneton.foundiation.Constant;
 
 import java.time.Duration;
 import java.util.Map;
@@ -86,13 +86,12 @@ public class GeeTestBehaviorValidator implements BehaviorValidator<GeeTestBody> 
 
 		// noinspection UnstableApiUsage
 		String response = Forest.post(url)
-			// timeout config
-			.connectTimeout(Duration.ofMillis(this.config.getConnectTimeout()))
-			.readTimeout(Duration.ofMillis(this.config.getReadTimeout()))
-			// error process
-			.onError((e, forestRequest, forestResponse) -> log.error(String.format("request %s error", url), e))
-			.addBody(queryParams, MediaType.FORM_DATA.toString())
-			.executeAsString();
+				// timeout config
+				.connectTimeout(Duration.ofMillis(this.config.getConnectTimeout()))
+				.readTimeout(Duration.ofMillis(this.config.getReadTimeout()))
+				// error process
+				.onError((e, forestRequest, forestResponse) -> log.error(String.format("request %s error", url), e))
+				.addBody(queryParams, MediaType.FORM_DATA.toString()).executeAsString();
 
 		if (log.isDebugEnabled()) {
 			log.debug("request url {} \n body:{}", url, response);

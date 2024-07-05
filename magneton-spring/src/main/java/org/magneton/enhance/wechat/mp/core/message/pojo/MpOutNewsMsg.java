@@ -87,11 +87,8 @@ public class MpOutNewsMsg extends MpOutMsg {
 			item.setUrl(article.getUrl());
 			items.add(item);
 		}
-		return WxMpXmlOutMessage.NEWS()
-			.fromUser(inMessage.getToUser())
-			.toUser(inMessage.getFromUser())
-			.articles(items)
-			.build();
+		return WxMpXmlOutMessage.NEWS().fromUser(inMessage.getToUser()).toUser(inMessage.getFromUser()).articles(items)
+				.build();
 	}
 
 	@Setter

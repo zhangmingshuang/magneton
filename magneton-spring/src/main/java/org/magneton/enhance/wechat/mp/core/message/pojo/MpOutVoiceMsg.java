@@ -35,11 +35,8 @@ public class MpOutVoiceMsg extends MpOutMsg {
 	@Nullable
 	@Override
 	public WxMpXmlOutMessage toWxMpXmlOutMessage(WxMpXmlMessage inMessage) {
-		return WxMpXmlOutMessage.VOICE()
-			.mediaId(this.getMediaId())
-			.fromUser(inMessage.getToUser())
-			.toUser(inMessage.getFromUser())
-			.build();
+		return WxMpXmlOutMessage.VOICE().mediaId(this.getMediaId()).fromUser(inMessage.getToUser())
+				.toUser(inMessage.getFromUser()).build();
 	}
 
 }

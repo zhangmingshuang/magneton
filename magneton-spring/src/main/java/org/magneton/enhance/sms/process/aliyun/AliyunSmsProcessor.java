@@ -1,6 +1,6 @@
 package org.magneton.enhance.sms.process.aliyun;
 
-import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson2.JSON;
 import com.aliyun.dysmsapi20170525.Client;
 import com.aliyun.dysmsapi20170525.models.SendSmsRequest;
 import com.aliyun.dysmsapi20170525.models.SendSmsResponse;
@@ -11,10 +11,10 @@ import com.google.common.base.Strings;
 import com.google.common.collect.Maps;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-import org.magneton.core.Result;
+import org.magneton.enhance.Result;
+import org.magneton.enhance.sms.entity.SmsInitException;
 import org.magneton.enhance.sms.entity.SmsToken;
 import org.magneton.enhance.sms.process.SendProcessor;
-import org.magneton.foundation.exception.InitializationException;
 
 import java.util.Map;
 import java.util.UUID;
@@ -44,16 +44,16 @@ public class AliyunSmsProcessor implements SendProcessor {
 
 	protected void init() {
 		Config config = new Config()
-			// 您的AccessKey ID
-			.setAccessKeyId(this.aliyunSmsProperty.getAccessKeyId())
-			// 您的AccessKey Secret
-			.setAccessKeySecret(this.aliyunSmsProperty.getAccessKeySecret())
-			.setEndpoint(this.aliyunSmsProperty.getEndpoint());
+				// 您的AccessKey ID
+				.setAccessKeyId(this.aliyunSmsProperty.getAccessKeyId())
+				// 您的AccessKey Secret
+				.setAccessKeySecret(this.aliyunSmsProperty.getAccessKeySecret())
+				.setEndpoint(this.aliyunSmsProperty.getEndpoint());
 		try {
 			this.client = new Client(config);
 		}
 		catch (Exception e) {
-			throw new InitializationException(e);
+			throw new SmsInitException(e);
 		}
 	}
 
@@ -110,9 +110,8 @@ public class AliyunSmsProcessor implements SendProcessor {
 	protected SendSmsRequest createSendSmsRequest(String mobile, AliyunSms aliyunSms) {
 		String templateParam = this.templateParamAmend(aliyunSms, this.aliyunSmsProperty.getTemplateCode());
 		return new SendSmsRequest().setSignName(this.aliyunSmsProperty.getSignName())
-			.setTemplateCode(this.aliyunSmsProperty.getTemplateCode())
-			.setPhoneNumbers(mobile)
-			.setTemplateParam(templateParam);
+				.setTemplateCode(this.aliyunSmsProperty.getTemplateCode()).setPhoneNumbers(mobile)
+				.setTemplateParam(templateParam);
 	}
 
 	protected String templateParamAmend(AliyunSms aliyunSms, String templateCode) {

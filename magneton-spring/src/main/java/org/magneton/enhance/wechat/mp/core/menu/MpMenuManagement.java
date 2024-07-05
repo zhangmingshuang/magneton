@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.bean.menu.WxMenu;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.mp.api.WxMpService;
-import org.magneton.core.Result;
+import org.magneton.enhance.Result;
 
 /**
  * 菜单管理.

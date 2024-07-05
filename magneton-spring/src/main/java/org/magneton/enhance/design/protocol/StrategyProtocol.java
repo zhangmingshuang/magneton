@@ -14,7 +14,7 @@
 
 package org.magneton.enhance.design.protocol;
 
-import org.magneton.foundation.spi.SPI;
+import org.magneton.spring.core.foundation.spi.SPI;
 
 /**
  * 执行协议

@@ -1,6 +1,6 @@
 package org.magneton.enhance.pvuv;
 
-import org.magneton.annotation.Cleanup;
+import javax.annotation.Cleanup;
 
 /**
  * UV

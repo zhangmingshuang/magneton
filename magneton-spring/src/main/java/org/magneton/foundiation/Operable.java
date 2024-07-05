@@ -12,35 +12,21 @@
  * Any organization or individual is not allowed to reprint, publish, disclose, embezzle, sell and use it for other illegal purposes without permission!
  */
 
-package org.magneton.enhance.algorithm.set.n64;
-
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+package org.magneton.foundiation;
 
 /**
- * Bmp64ChainDataTest
+ * 可操作的
  *
- * @author zhangmsh 2022/11/7
- * @since 2.2.0
- * @see Bmp64ChainData
+ * @author zhangmsh 2022/11/17
+ * @since 1.0.0
  */
-class Bmp64ChainDataTest {
+public interface Operable {
 
-	private final Bmp64ChainData chainData = new Bmp64ChainData();
-
-	@Test
-	void contains() {
-		Assertions.assertFalse(this.chainData.contains(1L));
-
-		this.chainData.add(1L);
-		Assertions.assertTrue(this.chainData.contains(1L));
-	}
-
-	@Test
-	void add() {
-		this.chainData.add(Long.MAX_VALUE);
-		Assertions.assertTrue(this.chainData.contains(Long.MAX_VALUE));
-
-	}
+	/**
+	 * of
+	 * @param arg 参数
+	 * @return 可操作值
+	 */
+	Operation of(String arg);
 
 }

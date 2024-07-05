@@ -2,7 +2,7 @@ package org.magneton.enhance.safedog.sign;
 
 import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
-import org.magneton.core.Result;
+import org.magneton.enhance.Result;
 import org.magneton.enhance.safedog.SafeDogErr;
 import org.redisson.api.RBucket;
 import org.redisson.api.RedissonClient;

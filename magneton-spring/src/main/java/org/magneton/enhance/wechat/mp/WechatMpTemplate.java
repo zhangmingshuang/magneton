@@ -1,6 +1,6 @@
 package org.magneton.enhance.wechat.mp;
 
-import org.magneton.core.Result;
+import org.magneton.enhance.Result;
 import org.magneton.enhance.wechat.mp.core.asset.AssetManagement;
 import org.magneton.enhance.wechat.mp.core.menu.MenuManagement;
 import org.magneton.enhance.wechat.mp.core.message.pojo.MpMsgBody;

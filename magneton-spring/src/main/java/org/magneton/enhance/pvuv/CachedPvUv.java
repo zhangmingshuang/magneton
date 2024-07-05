@@ -1,7 +1,6 @@
 package org.magneton.enhance.pvuv;
 
-import org.magneton.annotation.Cleanup;
-
+import javax.annotation.Cleanup;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;

@@ -5,7 +5,7 @@ import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.magneton.core.Result;
+import org.magneton.enhance.Result;
 import org.magneton.enhance.safedog.SafeDogErr;
 
 import javax.annotation.Nullable;

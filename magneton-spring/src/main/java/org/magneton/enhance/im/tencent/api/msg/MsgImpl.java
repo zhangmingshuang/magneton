@@ -1,6 +1,6 @@
 package org.magneton.enhance.im.tencent.api.msg;
 
-import cn.hutool.http.HttpUtil;
+import com.dtflys.forest.Forest;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.extern.slf4j.Slf4j;
 import org.magneton.enhance.im.tencent.TencentIm;
@@ -44,7 +44,7 @@ public class MsgImpl implements Msg {
 			if (log.isDebugEnabled()) {
 				log.debug("batchSendMsg url: {}, data:{}", url, body);
 			}
-			String response = HttpUtil.post(url, body);
+			String response = Forest.post(url).addBody(body).setContentType("application/json").executeAsString();
 			return TencentImJson.getInstance().readValue(response, MsgSendRes.class);
 		}
 		catch (JsonProcessingException e) {

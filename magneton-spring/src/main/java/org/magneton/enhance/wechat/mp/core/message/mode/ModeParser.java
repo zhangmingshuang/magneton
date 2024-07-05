@@ -1,7 +1,7 @@
 package org.magneton.enhance.wechat.mp.core.message.mode;
 
 import me.chanjar.weixin.mp.bean.message.WxMpXmlMessage;
-import org.magneton.foundation.spi.SPI;
+import org.magneton.spring.core.foundation.spi.SPI;
 
 /**
  * 模式解析器.

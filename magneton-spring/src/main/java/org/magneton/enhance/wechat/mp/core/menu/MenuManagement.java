@@ -1,6 +1,6 @@
 package org.magneton.enhance.wechat.mp.core.menu;
 
-import org.magneton.core.Result;
+import org.magneton.enhance.Result;
 
 /**
  * 菜单管理.

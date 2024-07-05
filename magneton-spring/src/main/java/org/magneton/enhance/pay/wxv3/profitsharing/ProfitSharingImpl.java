@@ -6,7 +6,7 @@ import com.wechat.pay.contrib.apache.httpclient.constant.WechatPayHttpHeaders;
 import com.wechat.pay.contrib.apache.httpclient.util.RsaCryptoUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.client.methods.HttpPost;
-import org.magneton.core.Result;
+import org.magneton.enhance.Result;
 import org.magneton.enhance.pay.wxv3.core.WxPayContext;
 import org.magneton.enhance.pay.wxv3.profitsharing.entity.*;
 import org.slf4j.Logger;

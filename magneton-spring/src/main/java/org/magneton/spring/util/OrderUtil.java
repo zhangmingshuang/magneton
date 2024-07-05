@@ -1,6 +1,7 @@
 package org.magneton.spring.util;
 
 import org.springframework.core.Ordered;
+import org.springframework.core.annotation.OrderUtils;
 
 import java.util.List;
 
@@ -13,10 +14,7 @@ import java.util.List;
 public class OrderUtil {
 
 	private static int getOrder(Object obj) {
-		if (obj instanceof Ordered) {
-			return ((Ordered) obj).getOrder();
-		}
-		return Ordered.LOWEST_PRECEDENCE;
+		return OrderUtils.getOrder(obj.getClass(), Ordered.LOWEST_PRECEDENCE);
 	}
 
 	public static void sort(List<?> objects) {

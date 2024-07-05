@@ -19,7 +19,7 @@ import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
 import org.magneton.enhance.design.context.BosomStrategy;
-import org.magneton.foundation.spi.SPILoader;
+import org.magneton.spring.core.foundation.spi.SPILoader;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -50,7 +50,7 @@ public class GeneralStrategyProtocolExecutor implements StrategyProtocolExecutor
 		this.strategyProtocols.add(Preconditions.checkNotNull(protocol, "protocol"));
 
 		StrategyProtocolRegisterProcessor processor = BosomStrategy
-			.getOrDefault(StrategyProtocolRegisterProcessor.class, "GeneralStrategyProtocolExecutor");
+				.getOrDefault(StrategyProtocolRegisterProcessor.class, "GeneralStrategyProtocolExecutor");
 		processor.handle(this.strategyProtocols);
 	}
 

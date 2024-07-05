@@ -27,9 +27,8 @@ import org.springframework.stereotype.Component;
 /**
  * spring 工具类
  *
- * @author jinbin.zhong@nascent.cn
- * @since 1.0.0
- * @since 2.0.0 modify by zhangmsh. 强制校验是否初始化完成标识
+ * @author zhangmsh
+ * @since 2024
  */
 @Slf4j
 @Component

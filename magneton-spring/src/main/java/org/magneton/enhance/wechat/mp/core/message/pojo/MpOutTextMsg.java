@@ -32,11 +32,8 @@ public class MpOutTextMsg extends MpOutMsg {
 
 	@Override
 	public WxMpXmlOutMessage toWxMpXmlOutMessage(WxMpXmlMessage inMessage) {
-		return WxMpXmlOutMessage.TEXT()
-			.content(this.getContent())
-			.fromUser(inMessage.getToUser())
-			.toUser(inMessage.getFromUser())
-			.build();
+		return WxMpXmlOutMessage.TEXT().content(this.getContent()).fromUser(inMessage.getToUser())
+				.toUser(inMessage.getFromUser()).build();
 	}
 
 }

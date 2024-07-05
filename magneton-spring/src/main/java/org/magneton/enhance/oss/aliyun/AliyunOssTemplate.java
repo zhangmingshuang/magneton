@@ -48,9 +48,8 @@ public class AliyunOssTemplate implements StsOssTemplate<AliyunOssStsConfig> {
 	public AliyunOssTemplate(AliyunOssConfig aliyunOssConfig) {
 		this.aliyunOssConfig = aliyunOssConfig;
 		this.stsCache = CacheBuilder.newBuilder()
-			.expireAfterWrite(Duration.ofSeconds(aliyunOssConfig.getStsDurationSeconds()))
-			.maximumSize(1024)
-			.build();
+				.expireAfterWrite(Duration.ofSeconds(aliyunOssConfig.getStsDurationSeconds())).maximumSize(1024)
+				.build();
 	}
 
 	protected DefaultAcsClient getClient() {

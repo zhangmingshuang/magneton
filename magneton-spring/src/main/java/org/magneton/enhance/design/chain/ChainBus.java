@@ -17,7 +17,7 @@ package org.magneton.enhance.design.chain;
 import com.google.common.base.Preconditions;
 import org.magneton.enhance.design.exception.DuplicateChainException;
 import org.magneton.enhance.design.exception.DuplicateChainNodeException;
-import org.magneton.foundation.collection.CopyOnWriteHashMap;
+import org.magneton.foundiation.CopyOnWriteHashMap;
 
 import javax.annotation.Nullable;
 import java.util.Map;

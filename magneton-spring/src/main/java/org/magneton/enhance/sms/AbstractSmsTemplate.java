@@ -2,7 +2,7 @@ package org.magneton.enhance.sms;
 
 import com.google.common.base.Preconditions;
 import lombok.Getter;
-import org.magneton.core.Result;
+import org.magneton.enhance.Result;
 import org.magneton.enhance.sms.entity.SmsToken;
 import org.magneton.enhance.sms.monitor.FailureType;
 import org.magneton.enhance.sms.monitor.SmsMonitors;

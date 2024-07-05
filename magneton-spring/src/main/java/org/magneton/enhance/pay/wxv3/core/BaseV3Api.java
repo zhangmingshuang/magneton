@@ -36,9 +36,8 @@ public interface BaseV3Api {
 
 	default String doSign(String signStr) {
 		Preconditions.checkNotNull(signStr);
-		SignatureResult sign = this.getPayContext()
-			.getPrivateKeySigner()
-			.sign(signStr.getBytes(StandardCharsets.UTF_8));
+		SignatureResult sign = this.getPayContext().getPrivateKeySigner()
+				.sign(signStr.getBytes(StandardCharsets.UTF_8));
 		return sign.getSign();
 	}
 
