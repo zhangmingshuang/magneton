@@ -17,7 +17,7 @@ public class FrameworkLifecycleRunner {
 
 	public static void starting() {
 		List<FrameworkLifecycle> priorityFrameworkLifecycles = FrameworkLifecycleRegister
-			.getPriorityFrameworkApplications();
+				.getPriorityFrameworkApplications();
 		doStarting(priorityFrameworkLifecycles);
 
 		List<FrameworkLifecycle> frameworkLifecycles = FrameworkLifecycleRegister.getFrameworkApplications();

@@ -1,5 +1,6 @@
-package org.magneton.spring;
+package org.magneton;
 
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 /**
@@ -8,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
  * @author zhangmsh
  * @since 2024
  */
+@ComponentScan
 @Configuration(proxyBeanMethods = false)
 public class MagnetonSpringAutoConfiguration {
 

@@ -1,9 +1,9 @@
 package org.magneton.spring.automator;
 
 import org.magneton.spring.automator.lifecycle.FrameworkLifecycleRunner;
-import org.springframework.boot.ConfigurableBootstrapContext;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.SpringApplicationRunListener;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.Ordered;
 
 import javax.annotation.SpringFactories;
@@ -28,8 +28,8 @@ public class FrameworkSpringBootAutomator implements SpringApplicationRunListene
 	}
 
 	@Override
-	public void starting(ConfigurableBootstrapContext bootstrapContext) {
-		FrameworkLifecycleRunner.put(FRAMEWORK_BOOTSTRAP_CONTEXT, bootstrapContext);
+	public void contextLoaded(ConfigurableApplicationContext context) {
+		FrameworkLifecycleRunner.put(FRAMEWORK_BOOTSTRAP_CONTEXT, context);
 		FrameworkLifecycleRunner.starting();
 	}
 
