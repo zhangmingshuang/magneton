@@ -1,13 +1,13 @@
-package org.magneton.redis.enhance.geo.redis;
+package org.magneton.cache.redis.enhance.geo.redis;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
-import org.magneton.redis.enhance.geo.Geo;
-import org.magneton.redis.enhance.geo.GeoEntry;
-import org.magneton.redis.enhance.geo.GeoPosition;
-import org.magneton.redis.enhance.geo.GeoUnit;
-import org.magneton.redis.enhance.geo.query.MemberArgs;
-import org.magneton.redis.enhance.geo.query.PositionArgs;
+import org.magneton.cache.redis.enhance.geo.Geo;
+import org.magneton.cache.redis.enhance.geo.GeoEntry;
+import org.magneton.cache.redis.enhance.geo.GeoPosition;
+import org.magneton.cache.redis.enhance.geo.GeoUnit;
+import org.magneton.cache.redis.enhance.geo.query.MemberArgs;
+import org.magneton.cache.redis.enhance.geo.query.PositionArgs;
 import org.redisson.api.RGeo;
 import org.redisson.api.RedissonClient;
 import org.redisson.api.geo.GeoSearchArgs;
@@ -105,7 +105,8 @@ public class RedissonGeo implements Geo {
 		RGeo<V> geo = this.redissonClient.getGeo(args.getName());
 		GeoPosition position = args.getPosition();
 		return geo.searchWithDistance(GeoSearchArgs.from(position.getLongitude(), position.getLatitude())
-				.radius(args.getRadius(), geoUnit).count(args.getCount()));
+			.radius(args.getRadius(), geoUnit)
+			.count(args.getCount()));
 	}
 
 	@Override
@@ -129,8 +130,9 @@ public class RedissonGeo implements Geo {
 		RGeo<V> geo = this.redissonClient.getGeo(args.getName());
 		GeoPosition position = args.getPosition();
 		Map<V, org.redisson.api.GeoPosition> geoPositions = geo
-				.searchWithPosition(GeoSearchArgs.from(position.getLongitude(), position.getLatitude())
-						.radius(args.getRadius(), geoUnit).count(args.getCount()));
+			.searchWithPosition(GeoSearchArgs.from(position.getLongitude(), position.getLatitude())
+				.radius(args.getRadius(), geoUnit)
+				.count(args.getCount()));
 		return this.positionTransform(geoPositions);
 	}
 
@@ -143,19 +145,19 @@ public class RedissonGeo implements Geo {
 	private org.redisson.api.GeoUnit unitTransform(GeoUnit unit) {
 		org.redisson.api.GeoUnit geoUnit;
 		switch (unit) {
-		default:
-		case METERS:
-			geoUnit = org.redisson.api.GeoUnit.METERS;
-			break;
-		case KILOMETERS:
-			geoUnit = org.redisson.api.GeoUnit.KILOMETERS;
-			break;
-		case MILES:
-			geoUnit = org.redisson.api.GeoUnit.MILES;
-			break;
-		case FEET:
-			geoUnit = org.redisson.api.GeoUnit.FEET;
-			break;
+			default:
+			case METERS:
+				geoUnit = org.redisson.api.GeoUnit.METERS;
+				break;
+			case KILOMETERS:
+				geoUnit = org.redisson.api.GeoUnit.KILOMETERS;
+				break;
+			case MILES:
+				geoUnit = org.redisson.api.GeoUnit.MILES;
+				break;
+			case FEET:
+				geoUnit = org.redisson.api.GeoUnit.FEET;
+				break;
 		}
 		return geoUnit;
 	}

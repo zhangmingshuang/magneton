@@ -7,8 +7,10 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 /**
- * @author zhangmsh 2022/3/29
- * @since 1.0.0
+ * 框架的配置属性.
+ *
+ * @author zhangmsh
+ * @since 2024
  */
 @Setter
 @Getter
@@ -20,5 +22,10 @@ public class MagnetonProperties {
 	public static final String PREFIX = "magneton";
 
 	private boolean cachedHttpRequestWrapper = false;
+
+	/**
+	 * 缓存策略优先级，如果有redis则优先使用redis，如果没有则使用memory.
+	 */
+	private String cacheStargate = "redis,memory";
 
 }

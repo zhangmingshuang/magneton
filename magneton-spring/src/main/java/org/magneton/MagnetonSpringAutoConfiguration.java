@@ -4,7 +4,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * Spring自动配置.
+ * Spring自动配置器.
  *
  * @author zhangmsh
  * @since 2024

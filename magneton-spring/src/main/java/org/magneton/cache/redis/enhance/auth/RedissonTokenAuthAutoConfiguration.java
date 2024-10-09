@@ -1,4 +1,4 @@
-package org.magneton.redis.enhance.auth;
+package org.magneton.cache.redis.enhance.auth;
 
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Preconditions;

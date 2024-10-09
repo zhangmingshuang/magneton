@@ -1,4 +1,4 @@
-package org.magneton.redis;
+package org.magneton.cache.redis;
 
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.google.common.base.Preconditions;
@@ -18,37 +18,38 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * .
+ * Redisson工厂类，用来创建RedissonClient.
  *
  * @author zhangmsh
  * @since 1.2.0
  */
 @Slf4j
-public class RedissonAdapter {
+public class RedissonFactory {
 
 	public static final String REDIS_ADDRESS = "REDIS_ADDRESS";
 
 	public static final String REDIS_PASSWORD = "REDIS_PASSWORD";
 
-	private RedissonAdapter() {
+	private RedissonFactory() {
 
 	}
 
 	public static RedissonClient createClient(RedissonClientType redissonClientType) {
 		Preconditions.checkNotNull(redissonClientType);
 		switch (redissonClientType) {
-		case CLUSTER:
-			return createClusterServersClient();
-		case MASTER_SLAVE:
-			return createMasterSlaveServersClient();
-		case REPLICATED:
-			return createReplicatedServersClient();
-		case SENTINEL:
-			return createSentinelServersClient();
-		case SINGLE:
-			return createSingleServerClient();
-		default:
-			throw new UnsupportedOperationException(String.format("redisson %s type unsupported", redissonClientType));
+			case CLUSTER:
+				return createClusterServersClient();
+			case MASTER_SLAVE:
+				return createMasterSlaveServersClient();
+			case REPLICATED:
+				return createReplicatedServersClient();
+			case SENTINEL:
+				return createSentinelServersClient();
+			case SINGLE:
+				return createSingleServerClient();
+			default:
+				throw new UnsupportedOperationException(
+						String.format("redisson %s type unsupported", redissonClientType));
 		}
 	}
 
@@ -157,40 +158,43 @@ public class RedissonAdapter {
 	}
 
 	private static Config createConfig(String path) {
-		String profile = System.getProperty("spring.profiles.active",
-				System.getProperty("redisson.adapter.prefix", ""));
+		String redissonConfigPrefix = System.getProperty("redisson.config.prefix", "");
+		if (Strings.isNullOrEmpty(redissonConfigPrefix)) {
+			redissonConfigPrefix = System.getProperty("spring.profiles.active");
+		}
 
-		String configFile = Strings.lenientFormat(path,
-				"classpath:" + MoreStrings.suffixIfNotNullOrEmpty(profile, "-"));
+		String configFilePath = Strings.lenientFormat(path,
+				"classpath:" + MoreStrings.suffixIfNotNullOrEmpty(redissonConfigPrefix, "-"));
 		try {
-			File file = MoreResources.getFile(configFile);
+			File file = MoreResources.getFile(configFilePath);
 			Config config = Config.fromYAML(file);
-			log.info("using redisson config [{}]", configFile);
+			log.info("using redisson config [{}]", configFilePath);
 			return config;
 		}
 		catch (@SuppressWarnings("OverlyBroadCatchBlock") IOException e) {
-			log.warn("loading redisson config  [{}] but not found", configFile);
-			configFile = Strings.lenientFormat(path, "/" + MoreStrings.suffixIfNotNullOrEmpty(profile, "-"));
-			try (InputStream inputStream = RedissonAdapter.class.getResourceAsStream(configFile)) {
+			log.warn("loading redisson config  [{}] but not found", configFilePath);
+			configFilePath = Strings.lenientFormat(path,
+					"/" + MoreStrings.suffixIfNotNullOrEmpty(redissonConfigPrefix, "-"));
+			try (InputStream inputStream = RedissonFactory.class.getResourceAsStream(configFilePath)) {
 				if (inputStream == null) {
 					// noinspection ThrowCaughtLocally
-					throw new IOException(String.format("file %s not found", configFile));
+					throw new IOException(String.format("file %s not found", configFilePath));
 				}
 				Config config = Config.fromYAML(inputStream);
-				log.info("using redisson config [{}]", configFile);
+				log.info("using redisson config [{}]", configFilePath);
 				return config;
 			}
 			catch (IOException e1) {
-				log.warn("loading redisson config  [{}] but not found", configFile);
+				log.warn("loading redisson config  [{}] but not found", configFilePath);
 
-				configFile = Strings.lenientFormat(path, "/adaptive-");
-				try (InputStream inputStream = RedissonAdapter.class.getResourceAsStream(configFile)) {
+				configFilePath = Strings.lenientFormat(path, "/default-");
+				try (InputStream inputStream = RedissonFactory.class.getResourceAsStream(configFilePath)) {
 					Config config = Config.fromYAML(inputStream);
-					log.info("using redisson config [{}]", configFile);
+					log.info("using redisson config [{}]", configFilePath);
 					return config;
 				}
 				catch (IOException e2) {
-					log.warn("loading redisson config  [{}] but not found", configFile);
+					log.warn("loading redisson config  [{}] but not found", configFilePath);
 					throw new RedissonConfigParseException(e2);
 				}
 			}
