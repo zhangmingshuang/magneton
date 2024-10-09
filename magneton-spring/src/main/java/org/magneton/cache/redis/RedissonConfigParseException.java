@@ -1,4 +1,4 @@
-package org.magneton.redis;
+package org.magneton.cache.redis;
 
 /**
  * .

@@ -1,6 +1,6 @@
-package org.magneton.redis.enhance.geo;
+package org.magneton.cache.redis.enhance.geo;
 
-import org.magneton.redis.enhance.geo.redis.RedissonGeo;
+import org.magneton.cache.redis.enhance.geo.redis.RedissonGeo;
 import org.redisson.api.RedissonClient;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;

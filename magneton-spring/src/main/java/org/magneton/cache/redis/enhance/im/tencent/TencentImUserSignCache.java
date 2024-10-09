@@ -1,4 +1,4 @@
-package org.magneton.redis.enhance.im.tencent;
+package org.magneton.cache.redis.enhance.im.tencent;
 
 import com.google.common.base.Preconditions;
 import org.magneton.enhance.im.tencent.UserSignCache;

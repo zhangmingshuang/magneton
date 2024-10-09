@@ -1,12 +1,12 @@
-package org.magneton.redis.enhance.geo.query;
+package org.magneton.cache.redis.enhance.geo.query;
 
 import com.google.common.base.Preconditions;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.Accessors;
-import org.magneton.redis.enhance.geo.GeoPosition;
-import org.magneton.redis.enhance.geo.GeoUnit;
+import org.magneton.cache.redis.enhance.geo.GeoPosition;
+import org.magneton.cache.redis.enhance.geo.GeoUnit;
 
 /**
  * @author zhangmsh 2022/4/10

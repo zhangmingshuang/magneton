@@ -1,4 +1,4 @@
-package org.magneton.redis;
+package org.magneton.cache.redis;
 
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Strings;
@@ -18,12 +18,12 @@ import java.util.Locale;
  */
 @Component
 @Configuration(proxyBeanMethods = false)
-@ConditionalOnClass({ RedissonClient.class, RedissonAdapter.class })
+@ConditionalOnClass({ RedissonClient.class, RedissonFactory.class })
 public class RedissonClientAutoConfiguration {
 
 	@Bean
 	@ConditionalOnMissingBean
-	@ConditionalOnClass(RedissonAdapter.class)
+	@ConditionalOnClass(RedissonFactory.class)
 	public RedissonClient redissonClient(Environment env) {
 		String redissonClientType = System.getProperty("redisson.adapter.client.type",
 				RedissonClientType.SINGLE.name());
@@ -33,7 +33,7 @@ public class RedissonClientAutoConfiguration {
 			profile = env.getProperty("spring.profiles.active");
 			System.setProperty("redisson.adapter.prefix", MoreObjects.firstNonNull(profile, ""));
 		}
-		return RedissonAdapter.createClient(RedissonClientType.valueOf(redissonClientType.toUpperCase(Locale.ROOT)));
+		return RedissonFactory.createClient(RedissonClientType.valueOf(redissonClientType.toUpperCase(Locale.ROOT)));
 	}
 
 }

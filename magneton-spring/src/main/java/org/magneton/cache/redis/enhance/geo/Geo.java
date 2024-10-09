@@ -1,16 +1,16 @@
-package org.magneton.redis.enhance.geo;
+package org.magneton.cache.redis.enhance.geo;
 
-import org.magneton.redis.enhance.geo.query.MemberArgs;
-import org.magneton.redis.enhance.geo.query.PositionArgs;
+import org.magneton.cache.redis.enhance.geo.query.MemberArgs;
+import org.magneton.cache.redis.enhance.geo.query.PositionArgs;
 
 import javax.annotation.Nullable;
 import java.util.Map;
 
 /**
- * .
+ * GEO 操作接口
  *
- * @author zhangmsh 2022/2/11
- * @since 1.2.0
+ * @author zhangmsh
+ * @since 2024
  */
 @SuppressWarnings("unchecked")
 public interface Geo {

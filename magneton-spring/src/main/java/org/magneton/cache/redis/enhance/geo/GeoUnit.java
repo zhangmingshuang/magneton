@@ -1,4 +1,4 @@
-package org.magneton.redis.enhance.geo;
+package org.magneton.cache.redis.enhance.geo;
 
 /**
  * .
