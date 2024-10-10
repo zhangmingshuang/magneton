@@ -24,8 +24,8 @@ public class MagnetonProperties {
 	private boolean cachedHttpRequestWrapper = false;
 
 	/**
-	 * 缓存策略优先级，如果有redis则优先使用redis，如果没有则使用memory.
+	 * 缓存策略优先级，如果有redis则优先使用redisson，如果没有则使用memory.
 	 */
-	private String cacheStargate = "redis,memory";
+	private String cacheStrategy = "redisson,redisTemplate";
 
 }

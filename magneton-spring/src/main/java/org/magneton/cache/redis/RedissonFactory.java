@@ -31,7 +31,7 @@ public class RedissonFactory {
 	public static final String REDIS_PASSWORD = "REDIS_PASSWORD";
 
 	private RedissonFactory() {
-
+		// ignore
 	}
 
 	public static RedissonClient createClient(RedissonClientType redissonClientType) {
