@@ -4,6 +4,8 @@ import com.google.common.base.Strings;
 import lombok.experimental.Delegate;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.magneton.cache.MCache;
+import org.magneton.cache.NilMCahce;
 import org.magneton.cache.redis.RedisTemplateMCache;
 import org.magneton.cache.redis.RedissonMCache;
 import org.magneton.spring.properties.MagnetonProperties;
@@ -41,42 +43,45 @@ public class StrategyMCache implements MCache, InitializingBean, ApplicationCont
 	}
 
 	@Override
-	public void afterPropertiesSet() throws Exception {
-		String cacheStrategy = this.magnetonProperties.getCacheStrategy();
-		if (Strings.isNullOrEmpty(cacheStrategy)) {
-			cacheStrategy = "memory";
+	public void afterPropertiesSet() {
+		this.mCache = this.getMCache(this.magnetonProperties);
+		if (!this.mCache.usable()) {
+			log.info("关闭缓存策略");
 		}
 		else {
-			cacheStrategy = cacheStrategy.toLowerCase();
-			cacheStrategy = cacheStrategy.replace("，", ",");
+			log.info("使用缓存策略:{}", this.mCache.clientId());
 		}
+	}
+
+	protected MCache getMCache(MagnetonProperties magnetonProperties) {
+		String cacheStrategy = magnetonProperties.getCacheStrategy();
+		if (Strings.isNullOrEmpty(cacheStrategy) || "false".equalsIgnoreCase(cacheStrategy)) {
+			return new NilMCahce();
+		}
+		cacheStrategy = cacheStrategy.toLowerCase();
+		cacheStrategy = cacheStrategy.replace("，", ",");
 
 		String[] strategies = cacheStrategy.split(",");
 		for (String strategy : strategies) {
 			if (StringUtils.isBlank(strategy)) {
 				continue;
 			}
-			if (this.mCache != null) {
-				log.info("缓存策略: {}", this.mCache.clientId());
-				break;
-			}
 			try {
 				if ("redisson".equalsIgnoreCase(strategy)) {
 					RedissonClient redissonClient = this.applicationContext.getBean(RedissonClient.class);
-					this.mCache = new RedissonMCache(redissonClient);
+					return new RedissonMCache(redissonClient);
 				}
 				else if ("redisTemplate".equalsIgnoreCase(strategy)) {
+					@SuppressWarnings("rawtypes")
 					RedisTemplate redisTemplate = this.applicationContext.getBean(RedisTemplate.class);
-					this.mCache = new RedisTemplateMCache(redisTemplate);
-				}
-				else {
-					throw new IllegalArgumentException("未知的缓存策略: " + strategy);
+					return new RedisTemplateMCache(redisTemplate);
 				}
 			}
 			catch (Throwable e) {
 				// ignore
 			}
 		}
+		return new NilMCahce();
 	}
 
 }

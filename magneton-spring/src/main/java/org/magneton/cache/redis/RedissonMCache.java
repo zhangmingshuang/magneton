@@ -2,7 +2,7 @@ package org.magneton.cache.redis;
 
 import com.alibaba.fastjson2.JSON;
 import com.google.common.base.Strings;
-import org.magneton.spring.cache.MCache;
+import org.magneton.cache.MCache;
 import org.redisson.api.RBucket;
 import org.redisson.api.RedissonClient;
 
@@ -83,6 +83,16 @@ public class RedissonMCache implements MCache {
 			return;
 		}
 		this.redissonClient.getBucket(key).set(JSON.toJSONString(value));
+	}
+
+	@Override
+	public boolean exist(String key) {
+		return this.redissonClient.getBucket(key).isExists();
+	}
+
+	@Override
+	public void expire(String key, int expire) {
+		this.redissonClient.getBucket(key).expire(Duration.ofSeconds(expire));
 	}
 
 }

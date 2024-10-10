@@ -1,4 +1,4 @@
-package org.magneton.spring.cache;
+package org.magneton.cache;
 
 import javax.annotation.Nullable;
 
@@ -9,6 +9,10 @@ import javax.annotation.Nullable;
  * @since 2024
  */
 public interface MCache {
+
+	default boolean usable() {
+		return true;
+	}
 
 	String clientId();
 
@@ -34,5 +38,9 @@ public interface MCache {
 	void set(String key, @Nullable String value, int expire);
 
 	<V> void set(String key, @Nullable V value, int expire);
+
+	boolean exist(String key);
+
+	void expire(String key, int expire);
 
 }

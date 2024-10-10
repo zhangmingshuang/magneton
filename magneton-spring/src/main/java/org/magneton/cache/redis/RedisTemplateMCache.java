@@ -2,7 +2,7 @@ package org.magneton.cache.redis;
 
 import com.alibaba.fastjson2.JSON;
 import com.google.common.base.Strings;
-import org.magneton.spring.cache.MCache;
+import org.magneton.cache.MCache;
 import org.springframework.data.redis.core.RedisTemplate;
 
 import javax.annotation.Nullable;
@@ -82,6 +82,16 @@ public class RedisTemplateMCache implements MCache {
 			return;
 		}
 		this.redisTemplate.opsForValue().set(key, JSON.toJSONString(value), expire, TimeUnit.SECONDS);
+	}
+
+	@Override
+	public boolean exist(String key) {
+		return this.redisTemplate.hasKey(key);
+	}
+
+	@Override
+	public void expire(String key, int expire) {
+		this.redisTemplate.expire(key, expire, TimeUnit.SECONDS);
 	}
 
 }
