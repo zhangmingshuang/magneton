@@ -8,7 +8,7 @@ import javax.annotation.Nullable;
  * @author zhangmsh.
  * @since 1.0.0
  */
-public interface TokenAuth {
+public interface MTokenAuth {
 
 	/**
 	 * 登录并返回Token
@@ -38,10 +38,13 @@ public interface TokenAuth {
 	/**
 	 * 获取登录信息
 	 * @param token 指定Token
+	 * @param clazz 登录信息类型
 	 * @param <A> 泛型
 	 * @return 如果已经登录，则返回登录信息，否则返回null
 	 */
 	@Nullable
-	<A> A getLogin(String token);
+	<A> A getLogin(String token, Class<A> clazz);
+
+	void logout(String token);
 
 }

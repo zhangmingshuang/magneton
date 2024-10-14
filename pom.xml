@@ -7,13 +7,22 @@
 
     <groupId>org.magneton</groupId>
     <artifactId>magneton</artifactId>
-    <version>2024.7</version>
+    <version>2024.10</version>
     <packaging>pom</packaging>
 
     <modules>
         <module>magneton-test</module>
         <module>magneton-spring</module>
     </modules>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson-spring-boot-starter</artifactId>
+                <version></version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <contributors>
         <contributor>

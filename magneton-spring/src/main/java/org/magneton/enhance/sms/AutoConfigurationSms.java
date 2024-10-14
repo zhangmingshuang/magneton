@@ -5,6 +5,7 @@ import org.magneton.enhance.sms.process.aliyun.AliyunSmsProperty;
 import org.magneton.enhance.sms.property.SmsProperty;
 import org.magneton.enhance.sms.redis.RedissonSmsTemplate;
 import org.redisson.api.RedissonClient;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
@@ -34,7 +35,11 @@ public class AutoConfigurationSms {
 
 	@Bean
 	@ConditionalOnMissingBean
-	public SmsTemplate sms(RedissonClient redissonClient, SendProcessor sendProcessor, SmsProperties smsProperties) {
+	public SmsTemplate sms(RedissonClient redissonClient, @Autowired(required = false) SendProcessor sendProcessor,
+			SmsProperties smsProperties) {
+		if (sendProcessor == null) {
+			return null;
+		}
 		return new RedissonSmsTemplate(redissonClient, sendProcessor, smsProperties);
 	}
 

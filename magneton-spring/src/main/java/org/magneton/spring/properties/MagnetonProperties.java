@@ -21,11 +21,13 @@ public class MagnetonProperties {
 
 	public static final String PREFIX = "magneton";
 
+	public static final String CACHE_STRATEGY = PREFIX + ".cache-strategy";
+
 	private boolean cachedHttpRequestWrapper = false;
 
 	/**
-	 * 缓存策略优先级，如果有redis则优先使用redis，如果没有则使用memory.
+	 * 缓存策略优先级，如果有redis则优先使用redisson，如果都不支持默认关闭（也可以使用-直接关闭）
 	 */
-	private String cacheStargate = "redis,memory";
+	private String cacheStrategy = "redisson,redisTemplate";
 
 }

@@ -3,3 +3,6 @@ spring:
     url: jdbc:mysql://139.224.252.12:48806/dlip-freight
     username: root
     password: Zmj*mysql
+
+  redis:
+    password: 123456
