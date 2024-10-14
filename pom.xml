@@ -7,7 +7,7 @@
 
     <groupId>org.magneton</groupId>
     <artifactId>magneton</artifactId>
-    <version>2024.7</version>
+    <version>2024.10</version>
     <packaging>pom</packaging>
 
     <modules>

@@ -53,6 +53,7 @@ public class StrategyMCache implements MCache, InitializingBean, ApplicationCont
 		}
 	}
 
+	@SuppressWarnings("rawtypes")
 	protected MCache getMCache(MagnetonProperties magnetonProperties) {
 		String cacheStrategy = magnetonProperties.getCacheStrategy();
 		if (Strings.isNullOrEmpty(cacheStrategy) || "false".equalsIgnoreCase(cacheStrategy)) {
@@ -72,13 +73,18 @@ public class StrategyMCache implements MCache, InitializingBean, ApplicationCont
 					return new RedissonMCache(redissonClient);
 				}
 				else if ("redisTemplate".equalsIgnoreCase(strategy)) {
-					@SuppressWarnings("rawtypes")
-					RedisTemplate redisTemplate = this.applicationContext.getBean(RedisTemplate.class);
-					return new RedisTemplateMCache(redisTemplate);
+					try {
+						RedisTemplate redisTemplate = (RedisTemplate) this.applicationContext.getBean("redisTemplate");
+						return new RedisTemplateMCache(redisTemplate);
+					}
+					catch (Throwable e) {
+						RedisTemplate redisTemplate = this.applicationContext.getBean(RedisTemplate.class);
+						return new RedisTemplateMCache(redisTemplate);
+					}
 				}
 			}
 			catch (Throwable e) {
-				// ignore
+				log.debug("缓存策略:{}不可用", strategy);
 			}
 		}
 		return new NilMCahce();

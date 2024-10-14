@@ -21,7 +21,7 @@ public class MagnetonProperties {
 
 	public static final String PREFIX = "magneton";
 
-	public static final String CACHE_STRATEGY = PREFIX + ".cacheStrategy";
+	public static final String CACHE_STRATEGY = PREFIX + ".cache-strategy";
 
 	private boolean cachedHttpRequestWrapper = false;
 
