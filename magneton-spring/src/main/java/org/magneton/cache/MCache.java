@@ -3,7 +3,7 @@ package org.magneton.cache;
 import javax.annotation.Nullable;
 
 /**
- * 提供缓存的能力，内部动态切换缓存实现.
+ * 提供缓存的能力，内部动态切换缓存实现. 以便于代码解耦.
  *
  * @author zhangmsh
  * @since 2024

@@ -1,6 +1,8 @@
 package org.magneton.cache.redis;
 
 /**
+ * Redisson客户端类型.
+ *
  * @author zhangmsh 2022/3/27
  * @since 1.0.0
  */

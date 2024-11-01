@@ -28,20 +28,20 @@ public class CachedTokenAuth implements MTokenAuth {
 	}
 
 	@Override
-	public <A> String login(A obj) {
+	public <A> String login(A obj, int keepTime) {
 		Preconditions.checkNotNull(obj, "obj");
 		String token = Hashing.sha256().hashString(UUID.randomUUID().toString(), StandardCharsets.UTF_8).toString();
-		this.cache.set(token, obj, 3600);
+		this.cache.set(token, obj, keepTime);
 		return token;
 	}
 
 	@Nullable
 	@Override
-	public <A> A login(String token, A obj) {
+	public <A> A login(String token, A obj, int keepTime) {
 		Preconditions.checkNotNull(token, "token");
 		Preconditions.checkNotNull(obj, "obj");
 		A a = (A) this.cache.get(token, obj.getClass());
-		this.cache.set(token, obj, 3600);
+		this.cache.set(token, obj, keepTime);
 		return a;
 	}
 

@@ -1,7 +1,7 @@
 package org.magneton.cache.redis;
 
 /**
- * .
+ * Redisson配置解析异常.
  *
  * @author zhangmsh
  * @since 1.2.0
