@@ -37,19 +37,18 @@ public class RedissonFactory {
 	public static RedissonClient createClient(RedissonClientType redissonClientType) {
 		Preconditions.checkNotNull(redissonClientType);
 		switch (redissonClientType) {
-			case CLUSTER:
-				return createClusterServersClient();
-			case MASTER_SLAVE:
-				return createMasterSlaveServersClient();
-			case REPLICATED:
-				return createReplicatedServersClient();
-			case SENTINEL:
-				return createSentinelServersClient();
-			case SINGLE:
-				return createSingleServerClient();
-			default:
-				throw new UnsupportedOperationException(
-						String.format("redisson %s type unsupported", redissonClientType));
+		case CLUSTER:
+			return createClusterServersClient();
+		case MASTER_SLAVE:
+			return createMasterSlaveServersClient();
+		case REPLICATED:
+			return createReplicatedServersClient();
+		case SENTINEL:
+			return createSentinelServersClient();
+		case SINGLE:
+			return createSingleServerClient();
+		default:
+			throw new UnsupportedOperationException(String.format("redisson %s type unsupported", redissonClientType));
 		}
 	}
 
