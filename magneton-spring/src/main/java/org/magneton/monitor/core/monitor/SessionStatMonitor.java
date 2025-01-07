@@ -14,10 +14,10 @@
 
 package org.magneton.monitor.core.monitor;
 
-import org.magneton.monitor.core.Biz;
-import org.magneton.monitor.core.MonitorSenders;
-import org.magneton.monitor.core.module.ModuleType;
-import org.magneton.monitor.core.module.StatModule;
+import cn.nascent.tech.gaia.biz.monitor.core.Biz;
+import cn.nascent.tech.gaia.biz.monitor.core.MonitorSenders;
+import cn.nascent.tech.gaia.biz.monitor.core.module.ModuleType;
+import cn.nascent.tech.gaia.biz.monitor.core.module.StatModule;
 import com.google.common.base.Strings;
 import lombok.extern.slf4j.Slf4j;
 

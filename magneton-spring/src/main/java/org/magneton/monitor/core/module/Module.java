@@ -14,8 +14,8 @@
 
 package org.magneton.monitor.core.module;
 
-import org.magneton.monitor.core.Biz;
-import org.magneton.monitor.core.monitor.MonitorContext;
+import cn.nascent.tech.gaia.biz.monitor.core.Biz;
+import cn.nascent.tech.gaia.biz.monitor.core.monitor.MonitorContext;
 
 import javax.annotation.Nullable;
 import java.util.Map;

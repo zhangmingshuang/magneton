@@ -31,7 +31,7 @@ public interface Operation {
 	@Nullable
 	String get();
 
-	default String getOrDefault(String defaultValue) {
+	default String orDefault(String defaultValue) {
 		String value = this.get();
 		return value == null || value.isEmpty() ? defaultValue : value;
 	}

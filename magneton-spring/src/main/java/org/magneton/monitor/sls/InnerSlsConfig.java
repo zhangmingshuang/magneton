@@ -14,7 +14,6 @@
 
 package org.magneton.monitor.sls;
 
-import cn.nascent.tech.gaia.biz.log.sls.SlsConfig;
 import com.google.common.base.Strings;
 import com.google.common.collect.Maps;
 import org.magneton.monitor.SlsMonitorAutoConfiguration;

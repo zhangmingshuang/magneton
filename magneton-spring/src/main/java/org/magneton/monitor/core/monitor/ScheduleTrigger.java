@@ -14,8 +14,8 @@
 
 package org.magneton.monitor.core.monitor;
 
-import org.magneton.monitor.core.task.ScheduleTasks;
-import org.magneton.monitor.support.Switcher;
+import cn.nascent.tech.gaia.biz.monitor.core.task.ScheduleTasks;
+import cn.nascent.tech.gaia.biz.monitor.support.Switcher;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;

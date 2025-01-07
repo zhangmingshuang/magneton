@@ -17,9 +17,12 @@ package org.magneton.monitor;
 import cn.nascent.tech.gaia.annotation.SpringFactories;
 import cn.nascent.tech.gaia.foundation.RuntimeArgs;
 import com.google.common.base.Strings;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.SpringApplicationRunListener;
 import org.springframework.core.env.ConfigurableEnvironment;
+
+import javax.annotation.Nullable;
 
 /**
  * SpringBoot适配器
@@ -27,10 +30,13 @@ import org.springframework.core.env.ConfigurableEnvironment;
  * @author zhangmsh.
  * @since 1.0.0
  */
+@Slf4j
 @SpringFactories
 public class SpringBootAdapter implements SpringApplicationRunListener {
 
 	private SpringApplication application;
+
+	private static String springProfilesActive;
 
 	public SpringBootAdapter(SpringApplication application, String[] args) {
 		this.application = application;
@@ -49,6 +55,25 @@ public class SpringBootAdapter implements SpringApplicationRunListener {
 		if (Strings.isNullOrEmpty(RuntimeArgs.property("spring.application.name").get())) {
 			System.setProperty("spring.application.name", applicationName);
 		}
+		springProfilesActive = environment.getProperty("spring.profiles.active");
+	}
+
+	/**
+	 * 获取当前profile
+	 * @return 当前profile
+	 */
+	@Nullable
+	public static String getProfile() {
+		String profile = RuntimeArgs.sys("PROFILE").get();
+		if (Strings.isNullOrEmpty(profile)) {
+			// 兼容旧的项目PROFILE配置
+			profile = RuntimeArgs.sys("SPRING_PROFILES_ACTIVE").get();
+		}
+		if (Strings.isNullOrEmpty(profile)) {
+			profile = springProfilesActive;
+		}
+		return profile;
+
 	}
 
 }

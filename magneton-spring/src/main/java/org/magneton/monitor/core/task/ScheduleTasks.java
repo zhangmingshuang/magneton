@@ -15,7 +15,7 @@
 package org.magneton.monitor.core.task;
 
 import cn.hutool.core.thread.NamedThreadFactory;
-import org.magneton.monitor.core.monitor.MonitorHeartbeatMonitorTask;
+import cn.nascent.tech.gaia.biz.monitor.core.monitor.MonitorHeartbeatMonitorTask;
 import cn.nascent.tech.gaia.foundation.spi.SPILoader;
 import com.alibaba.ttl.TransmittableThreadLocal;
 import com.alibaba.ttl.threadpool.TtlExecutors;
@@ -52,7 +52,7 @@ public class ScheduleTasks {
 		@Override
 		public Thread newThread(Runnable r) {
 			Thread thread = super.newThread(r);
-			thread.setPriority(7);
+			thread.setPriority(10);
 			return thread;
 		}
 	};
@@ -104,23 +104,25 @@ public class ScheduleTasks {
 		for (ScheduleTask scheduleTask : scheduleTasks) {
 			SCHEDULE_TASKS.put(scheduleTask.taskId(), scheduleTask);
 		}
-		SERVICE = TtlExecutors.getTtlScheduledExecutorService(new ScheduledThreadPoolExecutor(1, NAMED_THREAD_FACTORY) {
+		ScheduledThreadPoolExecutor stpeService = new ScheduledThreadPoolExecutor(1, NAMED_THREAD_FACTORY) {
 			@Override
 			protected void afterExecute(Runnable r, Throwable t) {
 				TTLContext.remove();
 				super.afterExecute(r, t);
 			}
-		});
+		};
+		SERVICE = TtlExecutors.getTtlScheduledExecutorService(stpeService);
 		SERVICE.scheduleAtFixedRate(new ScheduleRunner(SCHEDULE_TASKS), INITIAL_DELAY, PERIOD, TimeUnit.MILLISECONDS);
 
-		PRIORITY_SERVICE = TtlExecutors
-				.getTtlScheduledExecutorService(new ScheduledThreadPoolExecutor(1, NAMED_THREAD_FACTORY) {
-					@Override
-					protected void afterExecute(Runnable r, Throwable t) {
-						TTLContext.remove();
-						super.afterExecute(r, t);
-					}
-				});
+		ScheduledThreadPoolExecutor stpePriorityService = new ScheduledThreadPoolExecutor(1, NAMED_THREAD_FACTORY) {
+			@Override
+			protected void afterExecute(Runnable r, Throwable t) {
+				TTLContext.remove();
+				super.afterExecute(r, t);
+			}
+		};
+		PRIORITY_SERVICE = TtlExecutors.getTtlScheduledExecutorService(stpePriorityService);
+
 		PRIORITY_SERVICE.scheduleAtFixedRate(new ScheduleRunner(Collections.singletonMap("heartbeat", HEARTBEAT_TASK)),
 				INITIAL_DELAY, PERIOD, TimeUnit.MILLISECONDS);
 

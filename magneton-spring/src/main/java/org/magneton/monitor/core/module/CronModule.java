@@ -14,7 +14,7 @@
 
 package org.magneton.monitor.core.module;
 
-import org.magneton.monitor.core.Biz;
+import cn.nascent.tech.gaia.biz.monitor.core.Biz;
 import com.google.common.collect.Maps;
 import lombok.Setter;
 import lombok.ToString;

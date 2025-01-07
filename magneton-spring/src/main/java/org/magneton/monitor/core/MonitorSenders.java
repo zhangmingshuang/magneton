@@ -14,12 +14,12 @@
 
 package org.magneton.monitor.core;
 
+import cn.nascent.tech.gaia.biz.monitor.core.module.Module;
+import cn.nascent.tech.gaia.biz.monitor.core.module.ModuleProcessors;
 import cn.nascent.tech.gaia.foundation.spi.SPILoader;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
-import org.magneton.monitor.core.module.Module;
-import org.magneton.monitor.core.module.ModuleProcessors;
 
 import java.util.List;
 

@@ -14,12 +14,12 @@
 
 package org.magneton.monitor.core.monitor;
 
-import org.magneton.monitor.core.MonitorSenders;
-import org.magneton.monitor.core.module.CronModule;
-import org.magneton.monitor.core.module.ModuleType;
-import org.magneton.monitor.core.task.ScheduleTask;
-import org.magneton.monitor.core.task.ScheduleTasks;
-import org.magneton.monitor.support.Switcher;
+import cn.nascent.tech.gaia.biz.monitor.core.MonitorSenders;
+import cn.nascent.tech.gaia.biz.monitor.core.module.CronModule;
+import cn.nascent.tech.gaia.biz.monitor.core.module.ModuleType;
+import cn.nascent.tech.gaia.biz.monitor.core.task.ScheduleTask;
+import cn.nascent.tech.gaia.biz.monitor.core.task.ScheduleTasks;
+import cn.nascent.tech.gaia.biz.monitor.support.Switcher;
 import com.google.common.base.Strings;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
@@ -122,16 +122,22 @@ public class SessionScheduleMonitorTask implements ScheduleTask {
 				cronModule.setIntervalCount(scheduleData.getCheckCount());
 
 				ScheduleTasks.TTLContext ttlContext = ScheduleTasks.TTLContext.currentThreadTtlContext();
+				// 是否中断，true表示中断上报
 				boolean isTransientBreak = ttlContext != null && ttlContext.isTransientBreak();
-				if (isTransientBreak || !scheduleData.getTrigger().isAppoint()) {
+				// 是否有委派，true表示有委派，中断上报
+				boolean isAppoint = scheduleData.getTrigger().isAppoint();
+
+				boolean needSend = !isTransientBreak && !isAppoint;
+				if (needSend) {
 					ScheduleTrigger trigger = scheduleData.getTrigger();
 					int minCheckCount = trigger.getMinCheckCount();
 					if (minCheckCount < 1) {
 						minCheckCount = trigger.getSessionScheduleMonitor().getMinCheckCount();
 					}
-					if (scheduleData.getCheckCount() > minCheckCount) {
-						MonitorSenders.getInstance().send(cronModule);
-					}
+					needSend = scheduleData.getCheckCount() > minCheckCount;
+				}
+				if (needSend) {
+					MonitorSenders.getInstance().send(cronModule);
 				}
 
 				this.schedulePool.updateCheckTime(scheduleData, this.current() + delay);
