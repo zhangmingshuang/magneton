@@ -15,7 +15,7 @@
 package org.magneton.monitor.core;
 
 import cn.hutool.core.collection.CollectionUtil;
-import org.magneton.monitor.core.module.Module;
+import cn.nascent.tech.gaia.biz.monitor.core.module.Module;
 import cn.nascent.tech.gaia.foundation.spi.SPILoader;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;

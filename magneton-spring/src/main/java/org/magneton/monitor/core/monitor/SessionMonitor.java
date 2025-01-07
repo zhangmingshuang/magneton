@@ -14,13 +14,13 @@
 
 package org.magneton.monitor.core.monitor;
 
+import cn.nascent.tech.gaia.biz.monitor.core.Biz;
+import cn.nascent.tech.gaia.biz.monitor.core.GMC;
+import cn.nascent.tech.gaia.biz.monitor.core.module.ModuleType;
+import cn.nascent.tech.gaia.biz.monitor.support.TimeWatch;
 import com.google.common.base.Strings;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-import org.magneton.monitor.core.Biz;
-import org.magneton.monitor.core.GMC;
-import org.magneton.monitor.core.module.ModuleType;
-import org.magneton.monitor.support.TimeWatch;
 
 import javax.annotation.Nullable;
 

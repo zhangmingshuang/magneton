@@ -14,14 +14,16 @@
 
 package org.magneton.monitor;
 
-import com.google.common.base.MoreObjects;
+import com.google.common.base.Strings;
 import lombok.extern.slf4j.Slf4j;
 import org.magneton.foundiation.RuntimeArgs;
 import org.magneton.foundiation.RuntimeProfile;
+import org.magneton.monitor.sls.Profiles;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.SpringFactories;
+import java.util.Locale;
 
 /**
  * sls监控自动配置
@@ -48,8 +50,7 @@ public class SlsMonitorAutoConfiguration {
 	/**
 	 * 监控开关
 	 */
-	private static final boolean ENABLE = Boolean
-		.parseBoolean(MoreObjects.firstNonNull(RuntimeArgs.sys(MONITOR_ENABLE_KEY).get(), "true"));
+	private static final boolean ENABLE = Boolean.parseBoolean(RuntimeArgs.sys(MONITOR_ENABLE_KEY).orDefault("true"));
 
 	/**
 	 * 当前有效的profile
@@ -61,7 +62,25 @@ public class SlsMonitorAutoConfiguration {
 	 * @return 当前生效的profile
 	 */
 	public static String getProfile() {
-		return PROFILE;
+		if (!Strings.isNullOrEmpty(PROFILE)) {
+			return PROFILE;
+		}
+		String profile = SpringBootAdapter.getProfile();
+		if (Strings.isNullOrEmpty(profile)) {
+			log.info("[monitor] spring.profiles.active is null, use MONITOR_ENV instead.");
+			return PROFILE;
+		}
+		profile = profile.toLowerCase(Locale.ROOT);
+		if (profile.contains("prod")) {
+			profile = Profiles.PROD;
+		}
+		else if (profile.contains("pre") || profile.contains("uat")) {
+			profile = Profiles.PRE;
+		}
+		else {
+			profile = Profiles.TEST;
+		}
+		return profile;
 	}
 
 	/**

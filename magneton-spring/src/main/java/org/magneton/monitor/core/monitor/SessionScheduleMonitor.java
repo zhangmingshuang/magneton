@@ -14,8 +14,8 @@
 
 package org.magneton.monitor.core.monitor;
 
-import org.magneton.monitor.core.Biz;
-import org.magneton.monitor.core.GMC;
+import cn.nascent.tech.gaia.biz.monitor.core.Biz;
+import cn.nascent.tech.gaia.biz.monitor.core.GMC;
 import com.google.common.base.Strings;
 import lombok.Getter;
 import lombok.Setter;

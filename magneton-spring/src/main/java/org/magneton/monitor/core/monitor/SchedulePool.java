@@ -14,9 +14,9 @@
 
 package org.magneton.monitor.core.monitor;
 
-import org.magneton.monitor.core.Biz;
-import org.magneton.monitor.core.task.ScheduleTask;
-import org.magneton.monitor.core.task.ScheduleTasks;
+import cn.nascent.tech.gaia.biz.monitor.core.Biz;
+import cn.nascent.tech.gaia.biz.monitor.core.task.ScheduleTask;
+import cn.nascent.tech.gaia.biz.monitor.core.task.ScheduleTasks;
 import com.google.common.base.Strings;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -146,6 +146,7 @@ public class SchedulePool {
 			this.getQueue().remove(updateData);
 			updateData.nextTime = nextTime;
 			updateData.checkTime = nextTime;
+			updateData.checkCount = 1;
 			this.getQueue().add(updateData);
 			return updateData;
 		});

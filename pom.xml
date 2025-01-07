@@ -13,7 +13,9 @@
     <modules>
         <module>magneton-test</module>
         <module>magneton-spring</module>
+        <module>magneton-log</module>
     </modules>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -23,6 +25,15 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.34</version>
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
 
     <contributors>
         <contributor>
