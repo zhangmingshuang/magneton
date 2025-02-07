@@ -16,6 +16,7 @@ package org.magneton.monitor.sls;
 
 import com.google.common.base.Strings;
 import com.google.common.collect.Maps;
+import org.magneton.log.SlsConfig;
 import org.magneton.monitor.SlsMonitorAutoConfiguration;
 import org.magneton.monitor.core.module.ModuleType;
 import org.springframework.stereotype.Component;
@@ -109,14 +110,14 @@ public class InnerSlsConfig {
 		slsConfig.setAccessSecret(new String(E.b(P_SK, 6)));
 
 		SlsConfig.Config tsConfig = new SlsConfig.Config();
-		tsConfig.setProject("ecrp-monitor");
-		tsConfig.setLogStore("svc-monitor");
+		tsConfig.setProject("prod-monitor");
+		tsConfig.setLogStore("service-monitor");
 		slsConfig.setProducer(tsConfig);
 
 		Map<String, SlsConfig.Config> bizProducer = Maps.newHashMapWithExpectedSize(1);
 		SlsConfig.Config tsBizConfig = new SlsConfig.Config();
-		tsBizConfig.setProject("ecrp-monitor");
-		tsBizConfig.setLogStore("biz-monitor");
+		tsBizConfig.setProject("prod-monitor");
+		tsBizConfig.setLogStore("business-monitor");
 		bizProducer.put(ModuleType.CONSUME.getType(), tsBizConfig);
 		slsConfig.setBizProducer(bizProducer);
 		this.slsConfigs.put(Profiles.PROD, slsConfig);
@@ -152,26 +153,18 @@ public class InnerSlsConfig {
 		slsConfig.setAccessSecret(new String(E.b(TS_SK, 4)));
 
 		SlsConfig.Config tsConfig = new SlsConfig.Config();
-		tsConfig.setProject("hd3-test");
-		tsConfig.setLogStore("ts-svc-monitor");
+		tsConfig.setProject("test");
+		tsConfig.setLogStore("test-monitor");
 		slsConfig.setProducer(tsConfig);
 
 		Map<String, SlsConfig.Config> bizProducer = Maps.newHashMapWithExpectedSize(1);
 		SlsConfig.Config tsBizConfig = new SlsConfig.Config();
-		tsBizConfig.setProject("hd3-test");
-		tsBizConfig.setLogStore("ts-biz-monitor");
+		tsBizConfig.setProject("test");
+		tsBizConfig.setLogStore("test-monitor");
 		bizProducer.put(ModuleType.CONSUME.getType(), tsBizConfig);
 		slsConfig.setBizProducer(bizProducer);
 		// 默认情况下，所有的模块都使用 tsConfig
 		this.slsConfigs.put("*", slsConfig);
-	}
-
-	public static void main(String[] args) {
-		char[] e = E.a("bGqWyDkzaM1RH1TOkcRthwMw875HJa".toCharArray(), 6);
-		for (char c : e) {
-			System.out.printf("'" + c + "',");
-		}
-		System.out.println(E.b(e, 6));
 	}
 
 	protected static class E {
