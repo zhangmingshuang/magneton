@@ -14,7 +14,7 @@
 
 package org.magneton.monitor.core.task;
 
-import cn.nascent.tech.gaia.annotation.SPI;
+import org.magneton.spring.core.foundation.spi.SPI;
 
 /**
  * 调度任务

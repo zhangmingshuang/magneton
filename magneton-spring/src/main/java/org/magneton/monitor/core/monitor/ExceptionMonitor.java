@@ -14,12 +14,12 @@
 
 package org.magneton.monitor.core.monitor;
 
-import cn.nascent.tech.gaia.biz.monitor.core.Biz;
-import cn.nascent.tech.gaia.biz.monitor.core.MonitorSenders;
-import cn.nascent.tech.gaia.biz.monitor.core.module.ExceptionModule;
-import cn.nascent.tech.gaia.biz.monitor.core.module.ModuleType;
 import com.google.common.base.Strings;
 import lombok.extern.slf4j.Slf4j;
+import org.magneton.monitor.core.Biz;
+import org.magneton.monitor.core.MonitorSenders;
+import org.magneton.monitor.core.module.ExceptionModule;
+import org.magneton.monitor.core.module.ModuleType;
 
 import javax.annotation.Nullable;
 

@@ -14,7 +14,7 @@
 
 package org.magneton.monitor.core.module;
 
-import cn.nascent.tech.gaia.annotation.SPI;
+import org.magneton.spring.core.foundation.spi.SPI;
 
 /**
  * 模型扩展处理器

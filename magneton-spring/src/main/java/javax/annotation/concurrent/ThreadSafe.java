@@ -25,7 +25,7 @@ import java.lang.annotation.*;
  * @see NotThreadSafe
  */
 @Documented
-@Target(ElementType.TYPE)
+@Target({ ElementType.TYPE, ElementType.METHOD, ElementType.CONSTRUCTOR, ElementType.FIELD })
 @Retention(RetentionPolicy.CLASS)
 public @interface ThreadSafe {
 

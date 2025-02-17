@@ -14,15 +14,16 @@
 
 package org.magneton.monitor;
 
-import cn.nascent.tech.gaia.annotation.SpringFactories;
-import cn.nascent.tech.gaia.foundation.RuntimeArgs;
 import com.google.common.base.Strings;
 import lombok.extern.slf4j.Slf4j;
+import org.magneton.foundiation.RuntimeArgs;
+import org.springframework.boot.ConfigurableBootstrapContext;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.SpringApplicationRunListener;
 import org.springframework.core.env.ConfigurableEnvironment;
 
 import javax.annotation.Nullable;
+import javax.annotation.SpringFactories;
 
 /**
  * SpringBoot适配器
@@ -47,7 +48,8 @@ public class SpringBootAdapter implements SpringApplicationRunListener {
 	 * @param environment the environment
 	 */
 	@Override
-	public void environmentPrepared(ConfigurableEnvironment environment) {
+	public void environmentPrepared(ConfigurableBootstrapContext bootstrapContext,
+			ConfigurableEnvironment environment) {
 		String applicationName = environment.getProperty("spring.application.name");
 		if (Strings.isNullOrEmpty(applicationName)) {
 			applicationName = this.application.getMainApplicationClass().getSimpleName();

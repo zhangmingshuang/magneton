@@ -14,15 +14,15 @@
 
 package org.magneton.monitor.core.monitor;
 
-import cn.nascent.tech.gaia.biz.monitor.core.Biz;
-import cn.nascent.tech.gaia.biz.monitor.core.task.ScheduleTask;
-import cn.nascent.tech.gaia.biz.monitor.core.task.ScheduleTasks;
 import com.google.common.base.Strings;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
+import org.magneton.monitor.core.Biz;
+import org.magneton.monitor.core.task.ScheduleTask;
+import org.magneton.monitor.core.task.ScheduleTasks;
 
 import javax.annotation.Nullable;
 import java.util.Map;
