@@ -1,6 +1,6 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   org.magneton.MagnetonSpringAutoConfiguration,\
-  org.magneton.enhance.design.AutoConfigurationDesign,\
+  org.magneton.framework.core.design.AutoConfigurationDesign,\
   org.magneton.enhance.oss.aliyun.AutoConfigurationAliyunOss,\
   org.magneton.enhance.wechat.mp.AutoConfigurationWechatMp,\
   org.magneton.cache.redis.enhance.geo.AutoConfigurationGeo

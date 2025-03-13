@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.magneton</groupId>
+        <artifactId>magneton</artifactId>
+        <version>2025.2</version>
+    </parent>
+
+    <artifactId>magneton-framework-wechat</artifactId>
+
+    <properties>
+        <weixin.java.version>4.7.0</weixin.java.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.magneton</groupId>
+            <artifactId>magneton-framework-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency><!-- 微信小程序 -->
+            <groupId>com.github.binarywang</groupId>
+            <artifactId>weixin-java-miniapp</artifactId>
+            <version>${weixin.java.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>guava</artifactId>
+                    <groupId>com.google.guava</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>slf4j-api</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+    </dependencies>
+</project>
