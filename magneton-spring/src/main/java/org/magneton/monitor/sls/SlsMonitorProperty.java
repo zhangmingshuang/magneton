@@ -14,10 +14,10 @@
 
 package org.magneton.monitor.sls;
 
-import cn.nascent.tech.gaia.biz.log.sls.SlsConfig;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.magneton.log.SlsConfig;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.NestedConfigurationProperty;
 import org.springframework.stereotype.Component;

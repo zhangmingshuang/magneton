@@ -14,9 +14,9 @@
 
 package org.magneton.monitor.core.monitor;
 
-import cn.nascent.tech.gaia.biz.monitor.core.Biz;
-import cn.nascent.tech.gaia.biz.monitor.support.Switcher;
 import lombok.extern.slf4j.Slf4j;
+import org.magneton.monitor.core.Biz;
+import org.magneton.monitor.support.Switcher;
 
 import javax.annotation.Nullable;
 import java.util.function.Supplier;

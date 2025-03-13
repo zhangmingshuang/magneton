@@ -7,21 +7,28 @@
 
     <groupId>org.magneton</groupId>
     <artifactId>magneton</artifactId>
-    <version>2024.10</version>
+    <version>2025.2</version>
     <packaging>pom</packaging>
 
     <modules>
         <module>magneton-test</module>
         <module>magneton-spring</module>
         <module>magneton-log</module>
+        <module>magneton-core</module>
+        <module>magneton-framework-core</module>
+        <module>magneton-framework-wechat</module>
+        <module>magneton-framework-redis</module>
     </modules>
+
 
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>org.redisson</groupId>
-                <artifactId>redisson-spring-boot-starter</artifactId>
-                <version></version>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>3.4.2</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -31,6 +38,7 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.18.34</version>
+            <scope>provided</scope>
             <optional>true</optional>
         </dependency>
     </dependencies>
@@ -105,7 +113,7 @@
                 <executions>
                     <execution>
                         <phase>validate</phase>
-                        <inherited>true</inherited>
+                        <inherited>false</inherited>
                         <goals>
                             <goal>validate</goal>
                         </goals>

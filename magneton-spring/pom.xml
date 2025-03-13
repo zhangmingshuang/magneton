@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.magneton</groupId>
         <artifactId>magneton</artifactId>
-        <version>2024.10</version>
+        <version>2025.2</version>
     </parent>
 
     <artifactId>magneton-spring</artifactId>
@@ -113,7 +113,11 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>transmittable-thread-local</artifactId>
+            <version>2.14.5</version>
+        </dependency>
         <!-- 开发时依赖 -->
         <dependency>
             <groupId>org.projectlombok</groupId>

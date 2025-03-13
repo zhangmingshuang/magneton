@@ -15,14 +15,14 @@
 package org.magneton.monitor.core.task;
 
 import cn.hutool.core.thread.NamedThreadFactory;
-import cn.nascent.tech.gaia.biz.monitor.core.monitor.MonitorHeartbeatMonitorTask;
-import cn.nascent.tech.gaia.foundation.spi.SPILoader;
 import com.alibaba.ttl.TransmittableThreadLocal;
 import com.alibaba.ttl.threadpool.TtlExecutors;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
+import org.magneton.monitor.core.monitor.MonitorHeartbeatMonitorTask;
+import org.magneton.spring.core.foundation.spi.SPILoader;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;

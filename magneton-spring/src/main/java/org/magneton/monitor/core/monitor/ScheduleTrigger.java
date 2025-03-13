@@ -14,12 +14,12 @@
 
 package org.magneton.monitor.core.monitor;
 
-import cn.nascent.tech.gaia.biz.monitor.core.task.ScheduleTasks;
-import cn.nascent.tech.gaia.biz.monitor.support.Switcher;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.magneton.monitor.core.task.ScheduleTasks;
+import org.magneton.monitor.support.Switcher;
 import org.springframework.scheduling.support.CronSequenceGenerator;
 
 import java.util.Date;

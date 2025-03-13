@@ -14,8 +14,8 @@
 
 package org.magneton.monitor.core;
 
-import cn.nascent.tech.gaia.annotation.SPI;
-import cn.nascent.tech.gaia.biz.monitor.core.module.Module;
+import org.magneton.monitor.core.module.Module;
+import org.magneton.spring.core.foundation.spi.SPI;
 
 /**
  * 监控发送器
